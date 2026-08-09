@@ -100,4 +100,11 @@ function emit(result: WorkerResult): void {
   process.stdout.write(serializeWorkerResult(result));
 }
 
-process.exitCode = await main();
+void main()
+  .then((exitCode) => {
+    process.exitCode = exitCode;
+  })
+  .catch((error: unknown) => {
+    emit(cliFailure("CLI_FAILURE", messageOf(error)));
+    process.exitCode = 2;
+  });

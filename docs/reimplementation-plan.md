@@ -822,6 +822,8 @@ Introduce the `sparse-headers` triplet with focused geometry negatives only afte
 
 ### M3 — Add the Python gateway and authoritative repositories
 
+**Implementation status:** Implemented provider-free on the initial macOS target. Acceptance remains subject to review of the exact implementation evidence. Production requires a deny-default Seatbelt profile that confines writes, denies process forks and network access, and is tested separately from the explicit insecure failure-drill mode. No non-macOS production sandbox is selected. M4 remains unimplemented.
+
 **Deliverables**
 
 - sandboxed worker invocation with process-tree termination;

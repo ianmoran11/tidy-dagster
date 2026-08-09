@@ -1,0 +1,34 @@
+[project]
+name = "tidy-orchestrator"
+version = "0.1.0"
+description = "Provider-free repositories and process gateway for tidy-dagster"
+requires-python = ">=3.13,<3.14"
+dependencies = []
+
+[project.scripts]
+tidy-provider-free = "tidy_orchestrator.cli:main"
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+  "pytest==8.3.5",
+  "pytest-timeout==2.3.1",
+  "ruff==0.9.10",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tidy_orchestrator"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+timeout = 60
+
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
