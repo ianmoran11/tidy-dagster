@@ -1,0 +1,241 @@
+#!/usr/bin/env python3
+"""Scoped Tailscale Serve control for only the owned Dagster HTTPS 3030 route."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+OPS = ROOT / ".dagster" / "ops"
+OWNERSHIP = OPS / "tailscale-serve-3030.json"
+HOSTNAME = "ians-mac-mini-1.taild519de.ts.net"
+PUBLIC_KEY = f"{HOSTNAME}:3030"
+UPSTREAM = "http://127.0.0.1:3030"
+TAILSCALE = "/usr/local/bin/tailscale"
+
+
+def main() -> int:
+    os.umask(0o077)
+    if len(sys.argv) != 2 or sys.argv[1] not in {"enable", "disable", "status"}:
+        print(
+            "Usage: scripts/tailscale-dagster-ui enable|disable|status", file=sys.stderr
+        )
+        return 2
+    if sys.argv[1] == "status":
+        current = read_status()
+        owned = read_ownership()
+        print(
+            json.dumps(
+                {
+                    "serve": current,
+                    "ownershipPresent": owned is not None,
+                    "ownershipMatchesCurrent": owned is not None
+                    and current == expected_with_route(owned["baseline"]),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+    return enable() if sys.argv[1] == "enable" else disable()
+
+
+def enable() -> int:
+    if not managed_local_healthy():
+        print(
+            "Refusing Serve enable: repo-managed Dagster UI status is not healthy.",
+            file=sys.stderr,
+        )
+        return 1
+    before = read_status()
+    if has_route(before) or read_ownership() is not None:
+        print(
+            "HTTPS 3030 or its ownership record already exists; no change made.",
+            file=sys.stderr,
+        )
+        return 1
+    # Persist the exact pre-change baseline before mutation. If the CLI or
+    # rollback fails ambiguously, this ownership record is retained so a later
+    # scoped recovery can verify the route instead of guessing.
+    write_ownership(before)
+    completed = subprocess.run(
+        [TAILSCALE, "serve", "--bg", "--https=3030", UPSTREAM], check=False
+    )
+    if completed.returncode:
+        if read_status() == before:
+            OWNERSHIP.unlink()
+        return completed.returncode
+    after = read_status()
+    if after != expected_with_route(before):
+        rollback = subprocess.run(
+            [TAILSCALE, "serve", "--https=3030", "off"], check=False
+        )
+        restored = rollback.returncode == 0 and read_status() == before
+        if not restored:
+            print(
+                "Serve addition was invalid; rollback did not restore the exact "
+                "baseline. Ownership record retained for scoped recovery.",
+                file=sys.stderr,
+            )
+            return 1
+        OWNERSHIP.unlink()
+        print(
+            "Serve addition was not exact; verified rollback to baseline.",
+            file=sys.stderr,
+        )
+        return 1
+    print(f"Tailnet-only Dagster UI enabled at https://{PUBLIC_KEY}/")
+    print(
+        "Warning: persistent Serve will expose any later service that reuses "
+        "local port 3030."
+    )
+    return 0
+
+
+def disable() -> int:
+    owned = read_ownership()
+    if owned is None:
+        print(
+            "Refusing disable without a complete private route ownership record.",
+            file=sys.stderr,
+        )
+        return 1
+    baseline = owned["baseline"]
+    if has_route(baseline):
+        print("Refusing stale baseline that already owns HTTPS 3030.", file=sys.stderr)
+        return 1
+    current = read_status()
+    if current == baseline:
+        OWNERSHIP.unlink()
+        print("No HTTPS 3030 route remained; consumed the verified baseline record.")
+        return 0
+    expected = expected_with_route(baseline)
+    if current != expected or not exact_owned_route(current):
+        print(
+            "Refusing disable: current 3030 route/config no longer matches "
+            "the owned addition.",
+            file=sys.stderr,
+        )
+        return 1
+    completed = subprocess.run([TAILSCALE, "serve", "--https=3030", "off"], check=False)
+    if completed.returncode:
+        return completed.returncode
+    after = read_status()
+    if after != baseline:
+        print(
+            "Scoped disable did not restore the exact saved baseline.", file=sys.stderr
+        )
+        return 1
+    OWNERSHIP.unlink()
+    print("HTTPS 3030 removed; exact pre-existing Serve baseline restored.")
+    return 0
+
+
+def read_status() -> dict[str, Any]:
+    completed = subprocess.run(
+        [TAILSCALE, "serve", "status", "--json"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    value = json.loads(completed.stdout)
+    if not isinstance(value, dict):
+        raise RuntimeError("Unexpected Tailscale Serve status shape")
+    return value
+
+
+def managed_local_healthy() -> bool:
+    completed = subprocess.run(
+        [str(ROOT / "scripts" / "dagster-ui"), "status"],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return completed.returncode == 0 and all(
+        token in completed.stdout
+        for token in (
+            "owned=true",
+            "group_live=true",
+            "loopback_listener=true",
+            "http_healthy=true",
+        )
+    )
+
+
+def has_route(status: dict[str, Any]) -> bool:
+    return "3030" in status.get("TCP", {}) or PUBLIC_KEY in status.get("Web", {})
+
+
+def expected_with_route(baseline: dict[str, Any]) -> dict[str, Any]:
+    expected = json.loads(json.dumps(baseline))
+    expected.setdefault("TCP", {})["3030"] = {"HTTPS": True}
+    expected.setdefault("Web", {})[PUBLIC_KEY] = {
+        "Handlers": {"/": {"Proxy": UPSTREAM}}
+    }
+    return expected
+
+
+def exact_owned_route(status: dict[str, Any]) -> bool:
+    return status.get("TCP", {}).get("3030") == {"HTTPS": True} and status.get(
+        "Web", {}
+    ).get(PUBLIC_KEY) == {"Handlers": {"/": {"Proxy": UPSTREAM}}}
+
+
+def baseline_digest(baseline: dict[str, Any]) -> str:
+    payload = json.dumps(
+        baseline, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode()
+    return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+
+def write_ownership(baseline: dict[str, Any]) -> None:
+    OPS.mkdir(parents=True, exist_ok=True, mode=0o700)
+    value = {
+        "schemaVersion": "tidy.tailscale-serve-ownership/v1",
+        "hostname": HOSTNAME,
+        "httpsPort": 3030,
+        "upstream": UPSTREAM,
+        "baselineDigest": baseline_digest(baseline),
+        "baseline": baseline,
+    }
+    temporary = OWNERSHIP.with_suffix(".tmp")
+    temporary.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+    temporary.chmod(0o600)
+    os.replace(temporary, OWNERSHIP)
+
+
+def read_ownership() -> dict[str, Any] | None:
+    try:
+        value = json.loads(OWNERSHIP.read_text())
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return None
+    required = {
+        "schemaVersion",
+        "hostname",
+        "httpsPort",
+        "upstream",
+        "baselineDigest",
+        "baseline",
+    }
+    if (
+        set(value) != required
+        or value["schemaVersion"] != "tidy.tailscale-serve-ownership/v1"
+        or value["hostname"] != HOSTNAME
+        or value["httpsPort"] != 3030
+        or value["upstream"] != UPSTREAM
+        or not isinstance(value["baseline"], dict)
+        or value["baselineDigest"] != baseline_digest(value["baseline"])
+    ):
+        return None
+    return value
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

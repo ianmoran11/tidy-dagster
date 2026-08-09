@@ -35,7 +35,8 @@ build/
 # Local authoritative repository and Dagster state
 .local-repository/
 .provider-free-demo/
-.dagster/
+.dagster/*
+!.dagster/dagster.yaml.example
 dagster_home/
 
 # Temporary files and logs

@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+umask 077
+if [ "$#" -ne 2 ] || [ "$1" != "--ownership-token" ] || [ -z "$2" ]; then
+  echo "repo-owned foreground launcher requires an ownership token" >&2
+  exit 2
+fi
+# The token intentionally remains in this leader's exact command line. The controller
+# records it with PID/PGID/start time and never identifies ownership by a broad name.
+OWNERSHIP_TOKEN=$2
+readonly OWNERSHIP_TOKEN
+export TIDY_DAGSTER_OWNERSHIP_TOKEN="$OWNERSHIP_TOKEN"
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+DAGSTER_HOME="$ROOT/.dagster/home"
+export DAGSTER_HOME
+export TIDY_PROJECT_ROOT="$ROOT"
+export TIDY_ARTIFACT_ROOT="${TIDY_ARTIFACT_ROOT:-$ROOT/.local-repository}"
+mkdir -p "$DAGSTER_HOME"
+if [ ! -f "$DAGSTER_HOME/dagster.yaml" ]; then
+  cp "$ROOT/.dagster/dagster.yaml.example" "$DAGSTER_HOME/dagster.yaml"
+  chmod 600 "$DAGSTER_HOME/dagster.yaml"
+fi
+cd "$ROOT"
+uv run dg dev --host 127.0.0.1 --port 3030

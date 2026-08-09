@@ -1,0 +1,450 @@
+#!/usr/bin/env python3
+"""Private repo-owned controller for the loopback-only Dagster UI."""
+
+from __future__ import annotations
+
+import contextlib
+import hashlib
+import json
+import os
+import secrets
+import signal
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+from dataclasses import dataclass
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+OPS = ROOT / ".dagster" / "ops"
+PID_FILE = OPS / "dagster-ui.pid.json"
+LOG_FILE = OPS / "dagster-ui.log"
+FOREGROUND = ROOT / "scripts" / "run-dagster-ui-foreground"
+PORT = 3030
+HOST = "127.0.0.1"
+
+
+@dataclass(frozen=True)
+class Ownership:
+    pid: int
+    pgid: int
+    token: str
+    start_time: str
+    command: str
+    foreground_digest: str
+
+
+def main() -> int:
+    os.umask(0o077)
+    if len(sys.argv) != 2 or sys.argv[1] not in {"start", "stop", "status", "restart"}:
+        print("Usage: scripts/dagster-ui start|stop|status|restart", file=sys.stderr)
+        return 2
+    command = sys.argv[1]
+    if command == "start":
+        return start()
+    if command == "stop":
+        return stop()
+    if command == "restart":
+        stopped = stop(allow_absent=True)
+        return stopped if stopped else start()
+    return status()
+
+
+def start() -> int:
+    OPS.mkdir(parents=True, exist_ok=True, mode=0o700)
+    existing = read_ownership()
+    if existing is not None:
+        if valid_owned_leader(existing) or group_exists(existing.pgid):
+            print("Dagster UI has an existing managed process group.", file=sys.stderr)
+            return 1
+        if listener_lines():
+            print(
+                "Refusing stale ownership cleanup while port remains occupied.",
+                file=sys.stderr,
+            )
+            return 1
+        PID_FILE.unlink()
+    listener = listener_lines()
+    if listener:
+        print(f"TCP {PORT} is already occupied:\n{listener}", file=sys.stderr)
+        return 1
+    for command in (["uv", "sync", "--locked"], ["npm", "run", "build"]):
+        completed = subprocess.run(command, cwd=ROOT, check=False)
+        if completed.returncode:
+            return completed.returncode
+    token = secrets.token_hex(32)
+    with LOG_FILE.open("ab", buffering=0) as log:
+        process = subprocess.Popen(
+            [str(FOREGROUND), "--ownership-token", token],
+            cwd=ROOT,
+            stdin=subprocess.DEVNULL,
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            close_fds=True,
+            start_new_session=True,
+            env=minimal_environment(),
+        )
+    ownership = capture_ownership(process.pid, token)
+    write_ownership(ownership)
+    deadline = time.monotonic() + 90
+    while time.monotonic() < deadline:
+        if process.poll() is not None or not valid_owned_leader(ownership):
+            print(f"Dagster UI exited during startup; see {LOG_FILE}", file=sys.stderr)
+            _cleanup_if_fully_gone(ownership)
+            return 1
+        if managed_healthy(ownership):
+            print(f"Dagster UI healthy at http://{HOST}:{PORT}/ (PID {process.pid}).")
+            return 0
+        if wildcard_listener():
+            terminate_owned_group(ownership)
+            print("Refused non-loopback Dagster listener.", file=sys.stderr)
+            return 1
+        time.sleep(0.25)
+    terminate_owned_group(ownership)
+    print(f"Dagster UI startup timed out; see {LOG_FILE}", file=sys.stderr)
+    return 1
+
+
+def stop(*, allow_absent: bool = False) -> int:
+    ownership = read_ownership()
+    if ownership is None:
+        if not allow_absent:
+            print("Dagster UI has no complete ownership record.")
+        return 0
+    if not valid_owned_leader(ownership):
+        if process_row(ownership.pid) is not None:
+            print("Refusing stale/reused ownership PID.", file=sys.stderr)
+            return 1
+        if group_exists(ownership.pgid) and not valid_owned_group(ownership):
+            print(
+                "Refusing unrelated live process group for stale leader.",
+                file=sys.stderr,
+            )
+            return 1
+        if not group_exists(ownership.pgid):
+            if listener_lines():
+                print(
+                    "Refusing stale ownership with an occupied listener.",
+                    file=sys.stderr,
+                )
+                return 1
+            PID_FILE.unlink()
+            return 0
+    if not terminate_owned_group(ownership):
+        print(
+            "Managed process group or listener survived stop; ownership retained.",
+            file=sys.stderr,
+        )
+        return 1
+    PID_FILE.unlink()
+    print("Dagster UI stopped; Tailscale Serve state was not changed.")
+    return 0
+
+
+def status() -> int:
+    ownership = read_ownership()
+    leader = ownership is not None and valid_owned_leader(ownership)
+    group = ownership is not None and group_exists(ownership.pgid)
+    bind = ownership is not None and managed_loopback_listener(ownership)
+    health = ownership is not None and leader and bind and healthy()
+    print(
+        f"pid={ownership.pid if ownership else 'absent'} "
+        f"pgid={ownership.pgid if ownership else 'absent'} "
+        f"owned={str(leader).lower()} group_live={str(group).lower()} "
+        f"loopback_listener={str(bind).lower()} http_healthy={str(health).lower()}"
+    )
+    if wildcard_listener():
+        print("unhealthy: wildcard/non-loopback listener detected", file=sys.stderr)
+        return 1
+    return 0 if leader and group and bind and health else 1
+
+
+def minimal_environment() -> dict[str, str]:
+    allowed = {"PATH", "TMPDIR", "LANG", "LC_ALL", "SSL_CERT_FILE"}
+    environment = {key: value for key, value in os.environ.items() if key in allowed}
+    environment.update({"HOME": str(ROOT / ".dagster" / "home"), "TZ": "UTC"})
+    return environment
+
+
+def foreground_digest() -> str:
+    return "sha256:" + hashlib.sha256(FOREGROUND.read_bytes()).hexdigest()
+
+
+def capture_ownership(pid: int, token: str) -> Ownership:
+    row = process_row(pid)
+    if row is None:
+        raise RuntimeError("Foreground process disappeared before ownership capture")
+    row_pid, pgid, uid, start_time, command = row
+    expected_fragment = f"{FOREGROUND} --ownership-token {token}"
+    if row_pid != pid or uid != os.getuid() or expected_fragment not in command:
+        raise RuntimeError(
+            "Foreground process identity did not match exact repo launcher"
+        )
+    return Ownership(pid, pgid, token, start_time, command, foreground_digest())
+
+
+def write_ownership(value: Ownership) -> None:
+    payload = {
+        "schemaVersion": "tidy.dagster-ui-ownership/v1",
+        "pid": value.pid,
+        "pgid": value.pgid,
+        "token": value.token,
+        "startTime": value.start_time,
+        "command": value.command,
+        "foregroundDigest": value.foreground_digest,
+    }
+    temporary = PID_FILE.with_suffix(".tmp")
+    temporary.write_text(json.dumps(payload, sort_keys=True) + "\n")
+    temporary.chmod(0o600)
+    os.replace(temporary, PID_FILE)
+
+
+def read_ownership() -> Ownership | None:
+    try:
+        value = json.loads(PID_FILE.read_text())
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return None
+    if (
+        set(value)
+        != {
+            "schemaVersion",
+            "pid",
+            "pgid",
+            "token",
+            "startTime",
+            "command",
+            "foregroundDigest",
+        }
+        or value.get("schemaVersion") != "tidy.dagster-ui-ownership/v1"
+    ):
+        return None
+    if not isinstance(value["pid"], int) or not isinstance(value["pgid"], int):
+        return None
+    if value["pid"] <= 1 or value["pgid"] <= 1:
+        return None
+    if not all(
+        isinstance(value[key], str) and value[key]
+        for key in ("token", "startTime", "command", "foregroundDigest")
+    ):
+        return None
+    return Ownership(
+        value["pid"],
+        value["pgid"],
+        value["token"],
+        value["startTime"],
+        value["command"],
+        value["foregroundDigest"],
+    )
+
+
+def process_row(pid: int) -> tuple[int, int, int, str, str] | None:
+    completed = subprocess.run(
+        ["ps", "-p", str(pid), "-o", "pid=,pgid=,uid=,lstart=,command="],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode or not completed.stdout.strip():
+        return None
+    fields = completed.stdout.strip().split(maxsplit=8)
+    if len(fields) != 9:
+        return None
+    try:
+        return (
+            int(fields[0]),
+            int(fields[1]),
+            int(fields[2]),
+            " ".join(fields[3:8]),
+            fields[8],
+        )
+    except ValueError:
+        return None
+
+
+def valid_owned_leader(value: Ownership) -> bool:
+    if value.foreground_digest != foreground_digest():
+        return False
+    row = process_row(value.pid)
+    return (
+        row is not None
+        and row
+        == (
+            value.pid,
+            value.pgid,
+            os.getuid(),
+            value.start_time,
+            value.command,
+        )
+        and f"{FOREGROUND} --ownership-token {value.token}" in value.command
+    )
+
+
+def group_exists(pgid: int) -> bool:
+    try:
+        os.killpg(pgid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def group_members(pgid: int) -> list[tuple[int, int]]:
+    completed = subprocess.run(
+        ["ps", "-axo", "pid=,pgid=,uid="], capture_output=True, text=True, check=False
+    )
+    members: list[tuple[int, int]] = []
+    if completed.returncode:
+        return members
+    for line in completed.stdout.splitlines():
+        fields = line.split()
+        if len(fields) == 3 and int(fields[1]) == pgid:
+            members.append((int(fields[0]), int(fields[2])))
+    return members
+
+
+def valid_owned_group(value: Ownership) -> bool:
+    members = group_members(value.pgid)
+    if not members or any(uid != os.getuid() for _pid, uid in members):
+        return False
+    marker = f"TIDY_DAGSTER_OWNERSHIP_TOKEN={value.token}"
+    root_marker = f"TIDY_PROJECT_ROOT={ROOT}"
+    for pid, _uid in members:
+        if pid == value.pid and valid_owned_leader(value):
+            continue
+        completed = subprocess.run(
+            ["ps", "eww", "-p", str(pid), "-o", "command="],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if (
+            completed.returncode
+            or marker not in completed.stdout
+            or root_marker not in completed.stdout
+        ):
+            return False
+    return True
+
+
+def terminate_owned_group(value: Ownership) -> bool:
+    if not valid_owned_leader(value) and not (
+        process_row(value.pid) is None and valid_owned_group(value)
+    ):
+        return False
+    with contextlib.suppress(ProcessLookupError):
+        os.killpg(value.pgid, signal.SIGTERM)
+    deadline = time.monotonic() + 10
+    while time.monotonic() < deadline:
+        if not group_exists(value.pgid) and not listener_lines():
+            return True
+        time.sleep(0.1)
+    members = group_members(value.pgid)
+    if any(uid != os.getuid() for _pid, uid in members):
+        return False
+    if members:
+        if not (valid_owned_leader(value) or valid_owned_group(value)):
+            return False
+        with contextlib.suppress(ProcessLookupError):
+            os.killpg(value.pgid, signal.SIGKILL)
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
+        if not group_exists(value.pgid) and not listener_lines():
+            return True
+        time.sleep(0.1)
+    return False
+
+
+def listener_lines() -> str:
+    completed = subprocess.run(
+        ["lsof", "-nP", f"-iTCP:{PORT}", "-sTCP:LISTEN"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode == 0:
+        return completed.stdout.strip()
+    if (
+        completed.returncode == 1
+        and not completed.stdout.strip()
+        and not completed.stderr.strip()
+    ):
+        return ""
+    raise RuntimeError(
+        f"lsof listener probe failed with exit {completed.returncode}: "
+        f"{completed.stderr.strip()}"
+    )
+
+
+def listener_pids() -> set[int]:
+    completed = subprocess.run(
+        ["lsof", "-nP", "-F", "p", f"-iTCP:{PORT}", "-sTCP:LISTEN"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if (
+        completed.returncode == 1
+        and not completed.stdout.strip()
+        and not completed.stderr.strip()
+    ):
+        return set()
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"lsof PID probe failed with exit {completed.returncode}: "
+            f"{completed.stderr.strip()}"
+        )
+    return {
+        int(line[1:])
+        for line in completed.stdout.splitlines()
+        if line.startswith("p") and line[1:].isdigit()
+    }
+
+
+def managed_loopback_listener(value: Ownership) -> bool:
+    pids = listener_pids()
+    if not pids or not exact_loopback_listener():
+        return False
+    members = {pid for pid, uid in group_members(value.pgid) if uid == os.getuid()}
+    return pids <= members
+
+
+def exact_loopback_listener() -> bool:
+    rows = _listener_rows(listener_lines())
+    expected = f"{HOST}:{PORT} (LISTEN)"
+    return bool(rows) and all(expected in row for row in rows)
+
+
+def wildcard_listener(lines: str | None = None) -> bool:
+    rows = _listener_rows(listener_lines() if lines is None else lines)
+    expected = f"{HOST}:{PORT} (LISTEN)"
+    return any(expected not in row for row in rows)
+
+
+def _listener_rows(value: str) -> list[str]:
+    return [
+        line for line in value.splitlines() if "(LISTEN)" in line and f":{PORT}" in line
+    ]
+
+
+def healthy() -> bool:
+    try:
+        with urllib.request.urlopen(f"http://{HOST}:{PORT}/", timeout=1) as response:
+            return 200 <= response.status < 400
+    except (urllib.error.URLError, TimeoutError):
+        return False
+
+
+def managed_healthy(value: Ownership) -> bool:
+    return valid_owned_leader(value) and managed_loopback_listener(value) and healthy()
+
+
+def _cleanup_if_fully_gone(value: Ownership) -> None:
+    if not group_exists(value.pgid) and not listener_lines():
+        PID_FILE.unlink(missing_ok=True)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

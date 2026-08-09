@@ -4,11 +4,11 @@
 
 ## Current status
 
-**M0–M3 provider-free execution is implemented; M2 is not yet accepted because summary remains unsupported.** A provider-free TypeScript worker parses and executes the three pinned synthetic fixtures (`simple-crosstab`, `sparse-headers`, and `multi-table`) through strict file manifests. It emits parsed workbook, normalized recipe, selector, geometry, full execution, and exact per-table CSV evidence.
+**M0–M4 provider-free execution and its replaceable Dagster OSS projection are implemented; M2 is not yet accepted because summary remains unsupported.** A provider-free TypeScript worker parses and executes the three pinned synthetic fixtures (`simple-crosstab`, `sparse-headers`, and `multi-table`) through strict file manifests. It emits parsed workbook, normalized recipe, selector, geometry, full execution, and exact per-table CSV evidence.
 
-M3 adds a Python-owned authoritative local repository for content, derivations, custody, append-only decisions, and compare-and-swap pointers. Its hardened POSIX gateway launches the actual TypeScript executable in private roots, enforces process and file bounds, terminates the complete process group on timeout, verifies every declared output, and publishes only a fully verified output set. The offline application runs all three fixtures twice with identical semantic derivation and output fingerprints.
+M3 adds a Python-owned authoritative local repository for content, derivations, custody, append-only decisions, and compare-and-swap pointers. Its hardened macOS production gateway launches the bundled TypeScript executable in private roots, enforces process/file/sandbox bounds, verifies every declared output, and publishes only a fully verified output set. The offline application runs all three fixtures twice with identical semantic derivation and output fingerprints.
 
-Summary is deliberately unsupported because the full reviewed TidyCell/Tidybank detector and renderer closure is not included. M4 Dagster projection is not implemented. No provider, recipe-approval, semantic-adoption, calibration, ML, ABS/research, or Sembla implementation or authority is present.
+M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Summary is deliberately unsupported because the full reviewed TidyCell/Tidybank detector and renderer closure is not included. No provider, recipe-approval, semantic-adoption, calibration, ML, ABS/research, or Sembla implementation or authority is present.
 
 Two architectural decisions were confirmed on 2026-08-09:
 
@@ -25,6 +25,7 @@ Dagster is a replaceable control-plane adapter. It must not become the sole stor
 - [Staged reimplementation plan](docs/reimplementation-plan.md)
 - [Source evidence and planning baseline](docs/source-evidence.md)
 - [M3 provider-free runtime](docs/m3-provider-free-runtime.md)
+- [M4 Dagster projection and operations](docs/m4-dagster-operations.md)
 - [ADR 0001 — staged standalone reimplementation](docs/decisions/0001-staged-standalone-reimplementation.md)
 - [ADR 0002 — deliberate polyglot boundaries](docs/decisions/0002-deliberate-polyglot-boundaries.md)
 
@@ -77,7 +78,7 @@ npm run check
 
 Build the worker with `npm run build`; the stable package bin is `tidy-domain-worker` and its wire contract is documented in [`contracts/worker/v1`](contracts/worker/v1/README.md). Fixture custody is recorded in [`fixtures/parity/source-manifest.json`](fixtures/parity/source-manifest.json). Independently executed pinned-reference bytes and their clean-checkout procedure are recorded in [`fixtures/gold/manifest.json`](fixtures/gold/manifest.json), while `fixtures/expected/*.json` remains an additional source-authored partial oracle.
 
-The Python repositories/gateway are implemented in `src/tidy_orchestrator`. A thin Dagster projection, external review authority, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
+The Python repositories/gateway and replaceable Dagster projection are implemented in `src/tidy_orchestrator`. External review authority, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
 
 ## M3 provider-free Python execution
 
@@ -97,6 +98,21 @@ uv run tidy-provider-free demo \
 The demo verifies the fixture source manifest, invokes the actual built `tidy-domain-worker`, compares every output with frozen independent-reference gold, stores immutable bytes and records under the selected repository root, and runs each fixture twice. Its JSON result records `providerCalls: 0` and `networkIsolationEnforced: true` on the required macOS production path.
 
 Production execution currently requires macOS `/usr/bin/sandbox-exec`. A generated deny-default profile limits runtime reads, permits writes only in the private run root, and denies network and process forks. The gateway also applies rlimits and process-group cleanup. The explicitly named `insecure-test-only` mode is used for portable failure drills and does not claim filesystem, detached-process, or network isolation; no non-macOS production sandbox is selected yet.
+
+## M4 Dagster UI
+
+```sh
+uv run dg check defs
+scripts/dagster-ui start
+scripts/dagster-ui status
+# After local acceptance only:
+scripts/tailscale-dagster-ui enable
+```
+
+The UI binds only to `127.0.0.1:3030`. Its tailnet-only Android URL is
+`https://ians-mac-mini-1.taild519de.ts.net:3030/`. See
+[`docs/m4-dagster-operations.md`](docs/m4-dagster-operations.md) for scoped
+enable/disable, security limits, tests, and reboot behavior.
 
 ## Permanent guardrails
 

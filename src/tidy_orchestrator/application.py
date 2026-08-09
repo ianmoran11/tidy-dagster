@@ -98,12 +98,10 @@ def _node_runtime_read_roots(node: Path) -> tuple[Path, ...]:
     return tuple(sorted(roots, key=str))
 
 
-def run_fixture_suite(
-    *,
-    repository: LocalArtifactRepository,
+def load_verified_fixture_manifests(
     project_root: Path,
-    gateway: WorkerGateway | None = None,
-) -> SuiteReplay:
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Load only the two identity-pinned fixture manifests and verify their closure."""
     project_root = project_root.resolve()
     fixture_manifest_path = (
         project_root / "fixtures" / "parity" / "source-manifest.json"
@@ -121,6 +119,18 @@ def run_fixture_suite(
         raise RuntimeError("Frozen reference-gold manifest identity is not approved")
     gold_manifest = json.loads(gold_manifest_bytes)
     _verify_gold_provenance(project_root, gold_manifest)
+    _verify_and_index_gold(project_root, gold_manifest["fixtures"])
+    return fixture_manifest, gold_manifest
+
+
+def run_fixture_suite(
+    *,
+    repository: LocalArtifactRepository,
+    project_root: Path,
+    gateway: WorkerGateway | None = None,
+) -> SuiteReplay:
+    project_root = project_root.resolve()
+    fixture_manifest, gold_manifest = load_verified_fixture_manifests(project_root)
     gold = _verify_and_index_gold(project_root, gold_manifest["fixtures"])
     names = list(_FIXTURE_ORDER)
     active_gateway = gateway or actual_worker_gateway(repository, project_root)

@@ -3,7 +3,9 @@ name = "tidy-orchestrator"
 version = "0.1.0"
 description = "Provider-free repositories and process gateway for tidy-dagster"
 requires-python = ">=3.13,<3.14"
-dependencies = []
+dependencies = [
+    "dagster==1.13.17",
+]
 
 [project.scripts]
 tidy-provider-free = "tidy_orchestrator.cli:main"
@@ -14,6 +16,8 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+  "dagster-dg-cli==1.13.17",
+  "dagster-webserver==1.13.17",
   "pytest==8.3.5",
   "pytest-timeout==2.3.1",
   "ruff==0.9.10",
@@ -25,10 +29,23 @@ packages = ["src/tidy_orchestrator"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 timeout = 60
+markers = [
+  "persistent: uses a real reopenable DAGSTER_HOME",
+  "operational: starts a real local Dagster process",
+]
+
+[tool.dg]
+directory_type = "project"
+
+[tool.dg.project]
+root_module = "tidy_orchestrator"
+code_location_target_module = "tidy_orchestrator.definitions"
+code_location_name = "tidy-dagster-provider-free"
 
 [tool.ruff]
 target-version = "py313"
 line-length = 88
+extend-include = ["scripts/dagster-ui", "scripts/tailscale-dagster-ui"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]

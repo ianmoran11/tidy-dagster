@@ -587,7 +587,7 @@ Use explicit artifact references for polyglot/large data. Use an I/O manager onl
 
 Periodically delete a disposable Dagster instance and reconstruct the declared active-cohort projection plus historical external observations from authoritative records. If authoritative state cannot be recovered, the boundary has leaked.
 
-Before M4 is accepted, run a persistent-instance integration suite using the selected instance store, daemon and executor/launcher. Exercise duplicate sensor ticks, dynamic partition add-plus-launch, process termination/recovery, queued backfills, concurrency-pool saturation and reconstruction. `execute_in_process` remains a fast smoke test, not operational proof.
+For the initial bounded M4 vertical slice, run a persistent-instance reconstruction suite plus a real daemon/executor test covering duplicate sensor evaluation, dynamic partition add-plus-launch, revision-bound run keys, control-plane restart, and run deduplication. `execute_in_process` remains a fast smoke test, not operational proof. Before any production-scale orchestration claim, add separate deterministic drills for in-flight run recovery, queued backfills, and concurrency-pool saturation; those are explicitly outside the accepted three-fixture M4 slice.
 
 ## 12. Review, approval, provider and ML boundaries
 
@@ -822,7 +822,7 @@ Introduce the `sparse-headers` triplet with focused geometry negatives only afte
 
 ### M3 — Add the Python gateway and authoritative repositories
 
-**Implementation status:** Implemented provider-free on the initial macOS target. Acceptance remains subject to review of the exact implementation evidence. Production requires a deny-default Seatbelt profile that confines writes, denies process forks and network access, and is tested separately from the explicit insecure failure-drill mode. No non-macOS production sandbox is selected. M4 remains unimplemented.
+**Implementation status:** Implemented and reviewed provider-free on the initial macOS target. Production requires a deny-default Seatbelt profile that confines writes, denies process forks and network access, and is tested separately from the explicit insecure failure-drill mode. No non-macOS production sandbox is selected.
 
 **Deliverables**
 
@@ -838,6 +838,8 @@ Introduce the `sparse-headers` triplet with focused geometry negatives only afte
 
 ### M4 — Add the minimal Dagster vertical slice
 
+**Implementation status:** Implemented provider-free with Dagster OSS 1.13.17. The real-daemon test proves sensor add-plus-launch, dispatch-bound revision/catalog tags, stable revision-aware run keys, cursor persistence, successful work-unit runs, and restart deduplication. A separate persistent-instance test proves all-work-unit and immutable-gate reconstruction from the external authoritative repository after Dagster metadata deletion. Queue/pool saturation, large backfills, daemon-run crash recovery, and HA remain explicitly unaccepted operational gaps rather than simulated claims.
+
 **Deliverables**
 
 - one code location and an explicit OSS/Dagster+ decision matrix for the pinned version;
@@ -848,7 +850,7 @@ Introduce the `sparse-headers` triplet with focused geometry negatives only afte
 - a tested bounded active-cohort partition policy; and
 - a persistent local instance using the selected instance store, daemon and executor/launcher.
 
-**Done when** the offline fixture is visible in Dagster, the persistent integration suite covers duplicate ticks, process loss, queue/pool behavior and reconstruction, and deleting Dagster metadata cannot destroy or redefine evidence.
+**Done when** the offline fixture is visible in Dagster, the persistent integration suite covers duplicate ticks, control-plane restart, authoritative reconstruction, and deletion of Dagster metadata without destroying or redefining evidence. Deterministic queue/pool saturation, large backfills, and in-flight daemon-run crash recovery remain named operational gaps for a later acceptance slice.
 
 ### Horizon roadmap — re-plan before each gate
 
@@ -1039,4 +1041,4 @@ The reimplementation is successful when:
 11. cutover and rollback work one cohort at a time; and
 12. changing Dagster, storage, provider, model, review UI or Sembla packaging does not require rewriting workbook or RecipeV01 semantics.
 
-Implementation is currently limited to the authorized M0–M4 roadmap scope. M5 and later require separate authorization. The present executable work remains an M0–M2-scoped deterministic compatibility slice and must not introduce Dagster, provider code, semantic adoption, or Sembla integration during this pass.
+Implementation is currently limited to the authorized M0–M4 provider-free roadmap scope. M5 and later require separate authorization. The executable now includes the M0–M3 deterministic/artifact runtime and the replaceable M4 Dagster projection; it still must not introduce provider dispatch, semantic adoption, calibration, or Sembla execution.
