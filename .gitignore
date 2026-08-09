@@ -1,0 +1,42 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# macOS and editors
+.DS_Store
+*.swp
+*~
+
+# Local agent artifacts
+.pi-subagents/
+
+# Node / TypeScript
+node_modules/
+coverage/
+*.tsbuildinfo
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.pyright/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Build output
+dist/
+build/
+
+# Local Dagster state
+.dagster/
+dagster_home/
+
+# Temporary files and logs
+tmp/
+.temp/
+*.log
