@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "tidy.reference-gold/v1",
+  "classification": "independent-pinned-reference-bytes",
+  "scope": "M0–M2-scoped deterministic compatibility slice",
+  "sourceAuthoredExpectedScope": "fixtures/expected/*.json remains an additional rows/non-table-cell oracle",
+  "reference": {
+    "repository": "https://github.com/ianmoran11/tidycell.git",
+    "sourceRemote": "https://github.com/ianmoran11/tidycell.git",
+    "commit": "1be6c995fa931e9860468e40490433161b0121cb",
+    "tree": "96a76a1cbc6f2da3facd31d7cdae5b05926361d3",
+    "packageLockDigest": "sha256:cddcf7bf8b871a9a5f1a5c89229e8a714893c4caedfa5a1476d823b991fc4288",
+    "license": "MIT"
+  },
+  "runner": {
+    "path": "tools/reference/runner.ts",
+    "contentDigest": "sha256:1d8261c98fc13764a215a2f8440c482b0a9a957a19504e7f61fe3e35f1c4e46f",
+    "addsOnly": "evidence serialization (five JSON layers, geometry projection from reference relationship APIs, and reference rowsToCsv output); all transformation modules import from the clean pinned checkout"
+  },
+  "toolchain": {
+    "node": "24.7.0",
+    "npm": "11.5.1",
+    "dependencies": {
+      "exceljs": "4.4.0",
+      "tsx": "4.21.0",
+      "typescript": "5.9.3",
+      "zod": "4.4.3"
+    }
+  },
+  "procedure": {
+    "command": "npm run gold:freeze:reference -- --source-repo PATH --confirm-reference-only",
+    "acquisition": "required read-only local Git mirror; resolved commit/tree verified before execution; no runtime dependency",
+    "checkout": "git clone --no-checkout from the required mirror, then sparse checkout and detached checkout of the pinned commit",
+    "install": "npm ci --ignore-scripts inside the clean sparse checkout",
+    "execution": "the pinned checkout's local tsx executes the digested reference serializer; candidate modules are never imported"
+  },
+  "serialization": "JSON.stringify(value, null, 2) plus LF; TidyCell reference rowsToCsv with recipe valueColumn",
+  "summarySupported": false,
+  "fixtures": [
+    {
+      "name": "simple-crosstab",
+      "outputs": [
+        {
+          "name": "parsed-workbook.json",
+          "relativePath": "parsed-workbook.json",
+          "contentDigest": "sha256:376fbed3d3c73a9d70c098eb47c50f0681235c94fbbf43fefc4e45f7175a1c6a",
+          "byteLength": 3517
+        },
+        {
+          "name": "normalized-recipe.json",
+          "relativePath": "normalized-recipe.json",
+          "contentDigest": "sha256:efdd555d02254b473cf220b2167d4ca00bbb3f706ecb305f0991e464ae0bb343",
+          "byteLength": 703
+        },
+        {
+          "name": "selectors.json",
+          "relativePath": "selectors.json",
+          "contentDigest": "sha256:73d4482225ac2f3aef40b4410617eb5835b36871df28df98f042a8b5eae3e1a0",
+          "byteLength": 846
+        },
+        {
+          "name": "geometry.json",
+          "relativePath": "geometry.json",
+          "contentDigest": "sha256:89529a3f8cc0de7ed91ff4571cfb5236d939b43bf611f575255898ac3be36a0e",
+          "byteLength": 2710
+        },
+        {
+          "name": "execution.json",
+          "relativePath": "execution.json",
+          "contentDigest": "sha256:f0a7225a5f967c8100bc05d177b951f2db1b41e7f807ed6a29b26d70d9c1c509",
+          "byteLength": 5434
+        },
+        {
+          "name": "tables/population_counts.csv",
+          "relativePath": "tables/population_counts.csv",
+          "contentDigest": "sha256:e6eb496e9b87345b0327ef5ee1fe77c59723366a7bbab5e2de29ff1fbc635c69",
+          "byteLength": 190
+        }
+      ]
+    },
+    {
+      "name": "sparse-headers",
+      "outputs": [
+        {
+          "name": "parsed-workbook.json",
+          "relativePath": "parsed-workbook.json",
+          "contentDigest": "sha256:8873859c53a80f1bc966ae365cfb1f6a4347df92b55052cc9060234710d27507",
+          "byteLength": 7186
+        },
+        {
+          "name": "normalized-recipe.json",
+          "relativePath": "normalized-recipe.json",
+          "contentDigest": "sha256:fe4c68399d7975646d54e1f8cf7df2cbd1e31fc98ae7a4248e997db596d36886",
+          "byteLength": 763
+        },
+        {
+          "name": "selectors.json",
+          "relativePath": "selectors.json",
+          "contentDigest": "sha256:a6685695aeedac2a26bcfe88c8ecb75da7625dae65896744fed223f7fa642283",
+          "byteLength": 1067
+        },
+        {
+          "name": "geometry.json",
+          "relativePath": "geometry.json",
+          "contentDigest": "sha256:935bc433da51b4e1ae0b1ccf2412cc28019ca8a3f15b7ee79db0937d0375e07a",
+          "byteLength": 7683
+        },
+        {
+          "name": "execution.json",
+          "relativePath": "execution.json",
+          "contentDigest": "sha256:3ec142e416aae7066d7fd75a6d5a5ddaaad8add2f2325922c6de2f94e243b566",
+          "byteLength": 19811
+        },
+        {
+          "name": "tables/quarterly_revenue.csv",
+          "relativePath": "tables/quarterly_revenue.csv",
+          "contentDigest": "sha256:2330d491e396206fcdcf7777dab1b80bd74dfbecb244d7d4798394fe79b911d6",
+          "byteLength": 563
+        }
+      ]
+    },
+    {
+      "name": "multi-table",
+      "outputs": [
+        {
+          "name": "parsed-workbook.json",
+          "relativePath": "parsed-workbook.json",
+          "contentDigest": "sha256:0c19a386bfbb7ee50d5359536d9c3956b088cc734a5b6a0fb354f2aa2a345ac7",
+          "byteLength": 8118
+        },
+        {
+          "name": "normalized-recipe.json",
+          "relativePath": "normalized-recipe.json",
+          "contentDigest": "sha256:8b275e42971ef1ac8450ba2c54aeb63d9903b7d99a8c833c3ddab8e5eef9984d",
+          "byteLength": 1283
+        },
+        {
+          "name": "selectors.json",
+          "relativePath": "selectors.json",
+          "contentDigest": "sha256:8a96fe4b6ea002ad9ba788ae04eceb4bd19abdd1e74c8b4ae8d7017bc43cdfb3",
+          "byteLength": 1621
+        },
+        {
+          "name": "geometry.json",
+          "relativePath": "geometry.json",
+          "contentDigest": "sha256:378e92301e7a830e59461b2f1c915e2b3fcd51cae8939d7aa8b19c9655650703",
+          "byteLength": 5400
+        },
+        {
+          "name": "execution.json",
+          "relativePath": "execution.json",
+          "contentDigest": "sha256:f6c7a613e05a72d6c3bcdb09cbd4f27436c01055407a4a4f0fef2b933c485738",
+          "byteLength": 11160
+        },
+        {
+          "name": "tables/population_counts.csv",
+          "relativePath": "tables/population_counts.csv",
+          "contentDigest": "sha256:7e7561709e0530d2290791489e0e21273b6fbc0ad1e654a3c0bb7e28fe6ed1a2",
+          "byteLength": 185
+        },
+        {
+          "name": "tables/product_sales.csv",
+          "relativePath": "tables/product_sales.csv",
+          "contentDigest": "sha256:8fed1bb6e3f243410f612348ef2d36358ff35599c557f2a7745efbe5645c8156",
+          "byteLength": 209
+        }
+      ]
+    }
+  ]
+}

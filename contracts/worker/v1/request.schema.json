@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/worker/v1/request.schema.json",
+  "title": "tidy.worker/v1 request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocolVersion",
+    "requestId",
+    "operation",
+    "inputs",
+    "parameters",
+    "limits"
+  ],
+  "properties": {
+    "protocolVersion": { "const": "tidy.worker/v1" },
+    "requestId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "operation": { "enum": ["health", "capabilities", "execute-recipe-v01"] },
+    "inputs": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "relativePath", "contentDigest", "byteLength"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9._-]+$"
+          },
+          "relativePath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "contentDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "byteLength": { "type": "integer", "minimum": 0, "maximum": 50000000 }
+        }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidenceProfile": {
+          "enum": ["m1-simple-v1", "m2-deterministic-parity-v1"]
+        },
+        "includeSummary": { "type": "boolean" },
+        "csvMode": { "const": "recipe-aware" }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timeoutMs",
+        "maxInputBytes",
+        "maxOutputBytes",
+        "maxOutputFiles",
+        "maxWarnings",
+        "maxWorkbookCompressedBytes",
+        "maxZipEntries",
+        "maxZipEntryUncompressedBytes",
+        "maxZipTotalUncompressedBytes",
+        "maxSheets",
+        "maxCells",
+        "maxMerges",
+        "maxMergeExpansionCells",
+        "maxSelectorCells",
+        "maxOutputRows"
+      ],
+      "properties": {
+        "timeoutMs": { "type": "integer", "minimum": 1, "maximum": 300000 },
+        "maxInputBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50000000
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50000000
+        },
+        "maxOutputFiles": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "maxWarnings": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "maxWorkbookCompressedBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 25000000
+        },
+        "maxZipEntries": { "type": "integer", "minimum": 1, "maximum": 10000 },
+        "maxZipEntryUncompressedBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50000000
+        },
+        "maxZipTotalUncompressedBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200000000
+        },
+        "maxSheets": { "type": "integer", "minimum": 1, "maximum": 256 },
+        "maxCells": { "type": "integer", "minimum": 1, "maximum": 1000000 },
+        "maxMerges": { "type": "integer", "minimum": 1, "maximum": 100000 },
+        "maxMergeExpansionCells": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "maxSelectorCells": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "maxOutputRows": { "type": "integer", "minimum": 1, "maximum": 1000000 }
+      }
+    }
+  }
+}

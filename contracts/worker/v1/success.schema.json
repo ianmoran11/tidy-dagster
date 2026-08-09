@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/worker/v1/success.schema.json",
+  "title": "tidy.worker/v1 success",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocolVersion", "requestId", "ok", "outputs", "warnings"],
+  "properties": {
+    "protocolVersion": { "const": "tidy.worker/v1" },
+    "requestId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "ok": { "const": true },
+    "outputs": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "relativePath", "contentDigest", "byteLength"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 512 },
+          "relativePath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "contentDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "byteLength": { "type": "integer", "minimum": 0, "maximum": 50000000 }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "message": { "type": "string", "maxLength": 1024 },
+          "path": { "type": "string", "maxLength": 512 }
+        }
+      }
+    }
+  }
+}

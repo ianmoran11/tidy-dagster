@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "sheet": "Population",
+  "tables": [
+    {
+      "name": "population_counts",
+      "values": {
+        "name": "value",
+        "cells": {
+          "range": "R3C3:R4C4",
+          "where": {
+            "data_type": [
+              "numeric"
+            ]
+          }
+        }
+      },
+      "headers": [
+        {
+          "name": "unit",
+          "direction": "N",
+          "cells": [
+            "R2C3",
+            "R2C4"
+          ]
+        },
+        {
+          "name": "state",
+          "direction": "W",
+          "cells": [
+            "R3C2",
+            "R4C2"
+          ]
+        }
+      ]
+    }
+  ],
+  "options": {
+    "preserve_non_table_cells": true
+  }
+}

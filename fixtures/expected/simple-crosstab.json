@@ -1,0 +1,82 @@
+{
+  "sheet": "Population",
+  "tables": [
+    {
+      "name": "population_counts",
+      "rows": [
+        {
+          "value": 123,
+          "unit": "Count",
+          "unit_source": "R2C3",
+          "state": "NSW",
+          "state_source": "R3C2",
+          "_source": {
+            "sheet": "Population",
+            "address": "R3C3",
+            "row": 3,
+            "col": 3
+          }
+        },
+        {
+          "value": 0.52,
+          "unit": "Rate",
+          "unit_source": "R2C4",
+          "state": "NSW",
+          "state_source": "R3C2",
+          "_source": {
+            "sheet": "Population",
+            "address": "R3C4",
+            "row": 3,
+            "col": 4
+          }
+        },
+        {
+          "value": 98,
+          "unit": "Count",
+          "unit_source": "R2C3",
+          "state": "VIC",
+          "state_source": "R4C2",
+          "_source": {
+            "sheet": "Population",
+            "address": "R4C3",
+            "row": 4,
+            "col": 3
+          }
+        },
+        {
+          "value": 0.48,
+          "unit": "Rate",
+          "unit_source": "R2C4",
+          "state": "VIC",
+          "state_source": "R4C2",
+          "_source": {
+            "sheet": "Population",
+            "address": "R4C4",
+            "row": 4,
+            "col": 4
+          }
+        }
+      ]
+    }
+  ],
+  "non_table_cells": [
+    {
+      "sheet": "Population",
+      "address": "R1C1",
+      "row": 1,
+      "col": 1,
+      "value": "Population counts",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    },
+    {
+      "sheet": "Population",
+      "address": "R6C1",
+      "row": 6,
+      "col": 1,
+      "value": "Source: synthetic fixture",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    }
+  ]
+}

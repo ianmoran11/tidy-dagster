@@ -1,0 +1,221 @@
+{
+  "sheet": "Population",
+  "tables": [
+    {
+      "table": "population_counts",
+      "sheet": "Population",
+      "rows": [
+        {
+          "value": 123,
+          "_source": {
+            "sheet": "Population",
+            "address": "R3C3",
+            "row": 3,
+            "col": 3
+          },
+          "unit": "Count",
+          "unit_source": "R2C3",
+          "state": "NSW",
+          "state_source": "R3C2"
+        },
+        {
+          "value": 0.52,
+          "_source": {
+            "sheet": "Population",
+            "address": "R3C4",
+            "row": 3,
+            "col": 4
+          },
+          "unit": "Rate",
+          "unit_source": "R2C4",
+          "state": "NSW",
+          "state_source": "R3C2"
+        },
+        {
+          "value": 98,
+          "_source": {
+            "sheet": "Population",
+            "address": "R4C3",
+            "row": 4,
+            "col": 3
+          },
+          "unit": "Count",
+          "unit_source": "R2C3",
+          "state": "VIC",
+          "state_source": "R4C2"
+        },
+        {
+          "value": 0.48,
+          "_source": {
+            "sheet": "Population",
+            "address": "R4C4",
+            "row": 4,
+            "col": 4
+          },
+          "unit": "Rate",
+          "unit_source": "R2C4",
+          "state": "VIC",
+          "state_source": "R4C2"
+        }
+      ],
+      "warnings": [],
+      "trace": {
+        "value_cells": [
+          {
+            "source": {
+              "sheet": "Population",
+              "address": "R3C3",
+              "row": 3,
+              "col": 3
+            },
+            "value": 123,
+            "headers": [
+              {
+                "header": "unit",
+                "direction": "N",
+                "candidates": [
+                  "R2C3"
+                ],
+                "selected": "R2C3",
+                "value": "Count",
+                "missing": false,
+                "ambiguous": false
+              },
+              {
+                "header": "state",
+                "direction": "W",
+                "candidates": [
+                  "R3C2"
+                ],
+                "selected": "R3C2",
+                "value": "NSW",
+                "missing": false,
+                "ambiguous": false
+              }
+            ]
+          },
+          {
+            "source": {
+              "sheet": "Population",
+              "address": "R3C4",
+              "row": 3,
+              "col": 4
+            },
+            "value": 0.52,
+            "headers": [
+              {
+                "header": "unit",
+                "direction": "N",
+                "candidates": [
+                  "R2C4"
+                ],
+                "selected": "R2C4",
+                "value": "Rate",
+                "missing": false,
+                "ambiguous": false
+              },
+              {
+                "header": "state",
+                "direction": "W",
+                "candidates": [
+                  "R3C2"
+                ],
+                "selected": "R3C2",
+                "value": "NSW",
+                "missing": false,
+                "ambiguous": false
+              }
+            ]
+          },
+          {
+            "source": {
+              "sheet": "Population",
+              "address": "R4C3",
+              "row": 4,
+              "col": 3
+            },
+            "value": 98,
+            "headers": [
+              {
+                "header": "unit",
+                "direction": "N",
+                "candidates": [
+                  "R2C3"
+                ],
+                "selected": "R2C3",
+                "value": "Count",
+                "missing": false,
+                "ambiguous": false
+              },
+              {
+                "header": "state",
+                "direction": "W",
+                "candidates": [
+                  "R4C2"
+                ],
+                "selected": "R4C2",
+                "value": "VIC",
+                "missing": false,
+                "ambiguous": false
+              }
+            ]
+          },
+          {
+            "source": {
+              "sheet": "Population",
+              "address": "R4C4",
+              "row": 4,
+              "col": 4
+            },
+            "value": 0.48,
+            "headers": [
+              {
+                "header": "unit",
+                "direction": "N",
+                "candidates": [
+                  "R2C4"
+                ],
+                "selected": "R2C4",
+                "value": "Rate",
+                "missing": false,
+                "ambiguous": false
+              },
+              {
+                "header": "state",
+                "direction": "W",
+                "candidates": [
+                  "R4C2"
+                ],
+                "selected": "R4C2",
+                "value": "VIC",
+                "missing": false,
+                "ambiguous": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "non_table_cells": [
+    {
+      "sheet": "Population",
+      "address": "R1C1",
+      "row": 1,
+      "col": 1,
+      "value": "Population counts",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    },
+    {
+      "sheet": "Population",
+      "address": "R6C1",
+      "row": 6,
+      "col": 1,
+      "value": "Source: synthetic fixture",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    }
+  ],
+  "warnings": []
+}

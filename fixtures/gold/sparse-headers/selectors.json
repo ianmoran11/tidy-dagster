@@ -1,0 +1,55 @@
+{
+  "sheet": "Revenue",
+  "tables": [
+    {
+      "table": "quarterly_revenue",
+      "values": {
+        "selector": "quarterly_revenue.values",
+        "addresses": [
+          "R3C2",
+          "R3C3",
+          "R3C4",
+          "R3C5",
+          "R4C2",
+          "R4C3",
+          "R4C4",
+          "R4C5",
+          "R5C2",
+          "R5C3",
+          "R5C4",
+          "R5C5",
+          "R6C2",
+          "R6C3",
+          "R6C4",
+          "R6C5"
+        ],
+        "warnings": []
+      },
+      "headers": [
+        {
+          "name": "quarter",
+          "result": {
+            "selector": "quarterly_revenue.headers.quarter",
+            "addresses": [
+              "R2C2",
+              "R2C4"
+            ],
+            "warnings": []
+          }
+        },
+        {
+          "name": "region",
+          "result": {
+            "selector": "quarterly_revenue.headers.region",
+            "addresses": [
+              "R3C1",
+              "R5C1"
+            ],
+            "warnings": []
+          }
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}

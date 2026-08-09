@@ -1,0 +1,42 @@
+{
+  "name": "tidy-dagster",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "npm@11.5.1",
+  "engines": {
+    "node": "24.7.0",
+    "npm": "11.5.1"
+  },
+  "bin": {
+    "tidy-domain-worker": "dist/apps/domain-worker/src/cli.js"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "test": "npm run build && vitest run --exclude \"dist/**\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "format:check": "prettier --check \"apps/**/*.ts\" \"scripts/**/*.{ts,mjs}\" \"tools/**/*.ts\" package.json tsconfig.json \"contracts/**/*.{md,json}\" \".github/**/*.yml\"",
+    "lint": "tsx scripts/boundary-check.ts",
+    "verify:toolchain": "tsx scripts/verify-toolchain.ts",
+    "verify:fixtures": "tsx scripts/verify-fixtures.ts && tsx scripts/verify-reference-gold.ts",
+    "gold:freeze:reference": "node scripts/freeze-reference-gold.mjs",
+    "gold:verify:reference-clean": "node scripts/freeze-reference-gold.mjs",
+    "parity:replay": "npm run build && tsx scripts/parity-replay.ts",
+    "check": "npm run verify:toolchain && npm run verify:fixtures && npm test && npm run typecheck && npm run lint && npm run format:check && npm run parity:replay"
+  },
+  "dependencies": {
+    "exceljs": "4.4.0",
+    "saxes": "6.0.0",
+    "yauzl": "3.4.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/yauzl": "3.4.0",
+    "prettier": "3.6.2",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.5"
+  }
+}

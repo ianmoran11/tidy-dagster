@@ -1,0 +1,80 @@
+{
+  "sheet": "Mixed",
+  "tables": [
+    {
+      "table": "population_counts",
+      "values": {
+        "selector": "population_counts.values",
+        "addresses": [
+          "R4C3",
+          "R4C4",
+          "R5C3",
+          "R5C4"
+        ],
+        "warnings": []
+      },
+      "headers": [
+        {
+          "name": "year",
+          "result": {
+            "selector": "population_counts.headers.year",
+            "addresses": [
+              "R3C3",
+              "R3C4"
+            ],
+            "warnings": []
+          }
+        },
+        {
+          "name": "state",
+          "result": {
+            "selector": "population_counts.headers.state",
+            "addresses": [
+              "R4C2",
+              "R5C2"
+            ],
+            "warnings": []
+          }
+        }
+      ]
+    },
+    {
+      "table": "product_sales",
+      "values": {
+        "selector": "product_sales.values",
+        "addresses": [
+          "R11C3",
+          "R11C4",
+          "R12C3",
+          "R12C4"
+        ],
+        "warnings": []
+      },
+      "headers": [
+        {
+          "name": "month",
+          "result": {
+            "selector": "product_sales.headers.month",
+            "addresses": [
+              "R10C3",
+              "R10C4"
+            ],
+            "warnings": []
+          }
+        },
+        {
+          "name": "product",
+          "result": {
+            "selector": "product_sales.headers.product",
+            "addresses": [
+              "R11C2",
+              "R12C2"
+            ],
+            "warnings": []
+          }
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}

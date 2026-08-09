@@ -1,0 +1,155 @@
+{
+  "sheet": "Mixed",
+  "tables": [
+    {
+      "name": "population_counts",
+      "rows": [
+        {
+          "count": 100,
+          "year": "2023",
+          "year_source": "R3C3",
+          "state": "NSW",
+          "state_source": "R4C2",
+          "_source": { "sheet": "Mixed", "address": "R4C3", "row": 4, "col": 3 }
+        },
+        {
+          "count": 110,
+          "year": "2024",
+          "year_source": "R3C4",
+          "state": "NSW",
+          "state_source": "R4C2",
+          "_source": { "sheet": "Mixed", "address": "R4C4", "row": 4, "col": 4 }
+        },
+        {
+          "count": 90,
+          "year": "2023",
+          "year_source": "R3C3",
+          "state": "VIC",
+          "state_source": "R5C2",
+          "_source": { "sheet": "Mixed", "address": "R5C3", "row": 5, "col": 3 }
+        },
+        {
+          "count": 95,
+          "year": "2024",
+          "year_source": "R3C4",
+          "state": "VIC",
+          "state_source": "R5C2",
+          "_source": { "sheet": "Mixed", "address": "R5C4", "row": 5, "col": 4 }
+        }
+      ]
+    },
+    {
+      "name": "product_sales",
+      "rows": [
+        {
+          "sales": 7,
+          "month": "Jan",
+          "month_source": "R10C3",
+          "product": "Widget",
+          "product_source": "R11C2",
+          "_source": {
+            "sheet": "Mixed",
+            "address": "R11C3",
+            "row": 11,
+            "col": 3
+          }
+        },
+        {
+          "sales": 8,
+          "month": "Feb",
+          "month_source": "R10C4",
+          "product": "Widget",
+          "product_source": "R11C2",
+          "_source": {
+            "sheet": "Mixed",
+            "address": "R11C4",
+            "row": 11,
+            "col": 4
+          }
+        },
+        {
+          "sales": 4,
+          "month": "Jan",
+          "month_source": "R10C3",
+          "product": "Gadget",
+          "product_source": "R12C2",
+          "_source": {
+            "sheet": "Mixed",
+            "address": "R12C3",
+            "row": 12,
+            "col": 3
+          }
+        },
+        {
+          "sales": 6,
+          "month": "Feb",
+          "month_source": "R10C4",
+          "product": "Gadget",
+          "product_source": "R12C2",
+          "_source": {
+            "sheet": "Mixed",
+            "address": "R12C4",
+            "row": 12,
+            "col": 4
+          }
+        }
+      ]
+    }
+  ],
+  "non_table_cells": [
+    {
+      "sheet": "Mixed",
+      "address": "R1C1",
+      "row": 1,
+      "col": 1,
+      "value": "Mixed sheet with two unrelated tables",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    },
+    {
+      "sheet": "Mixed",
+      "address": "R3C2",
+      "row": 3,
+      "col": 2,
+      "value": "State",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    },
+    {
+      "sheet": "Mixed",
+      "address": "R7C1",
+      "row": 7,
+      "col": 1,
+      "value": "Footnote: population values are counts.",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    },
+    {
+      "sheet": "Mixed",
+      "address": "R9C1",
+      "row": 9,
+      "col": 1,
+      "value": "Second table: product sales",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    },
+    {
+      "sheet": "Mixed",
+      "address": "R10C2",
+      "row": 10,
+      "col": 2,
+      "value": "Product",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    },
+    {
+      "sheet": "Mixed",
+      "address": "R14C1",
+      "row": 14,
+      "col": 1,
+      "value": "Source: generated multi-table fixture",
+      "data_type": "string",
+      "reason": "not_referenced_by_recipe"
+    }
+  ]
+}

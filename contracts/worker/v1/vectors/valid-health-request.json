@@ -1,0 +1,24 @@
+{
+  "protocolVersion": "tidy.worker/v1",
+  "requestId": "vector-health-1",
+  "operation": "health",
+  "inputs": [],
+  "parameters": {},
+  "limits": {
+    "timeoutMs": 30000,
+    "maxInputBytes": 20000000,
+    "maxOutputBytes": 10000000,
+    "maxOutputFiles": 100,
+    "maxWarnings": 1000,
+    "maxWorkbookCompressedBytes": 10000000,
+    "maxZipEntries": 1000,
+    "maxZipEntryUncompressedBytes": 10000000,
+    "maxZipTotalUncompressedBytes": 20000000,
+    "maxSheets": 100,
+    "maxCells": 100000,
+    "maxMerges": 10000,
+    "maxMergeExpansionCells": 100000,
+    "maxSelectorCells": 100000,
+    "maxOutputRows": 100000
+  }
+}

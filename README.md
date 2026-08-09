@@ -1,10 +1,12 @@
 # tidy-dagster
 
-`tidy-dagster` is a planning workspace for a staged, standalone reimplementation of TidyCell's spreadsheet-to-recipe pipeline and its future semantic-data and microsimulation-calibration workflow.
+`tidy-dagster` is a staged, standalone reimplementation of TidyCell's spreadsheet-to-recipe pipeline and its future semantic-data and microsimulation-calibration workflow.
 
 ## Current status
 
-**Planning only.** No application has been bootstrapped, no Git repository has been initialized, and no provider, recipe-approval, semantic-adoption, calibration, or Sembla execution authority is granted here.
+**M0–M2-scoped deterministic compatibility slice implemented; M2 is not yet accepted.** A provider-free, networkless TypeScript worker now parses and executes the three pinned synthetic fixtures (`simple-crosstab`, `sparse-headers`, and `multi-table`) through strict file manifests. It emits parsed workbook, normalized recipe, selector, geometry, full execution, and exact per-table CSV evidence. The external harness replays every fixture twice in relocated temporary roots.
+
+Summary is deliberately unsupported because this milestone does not include the full reviewed TidyCell/Tidybank detector and renderer closure. No Python, Dagster, provider, recipe-approval, semantic-adoption, calibration, ML, ABS/research, or Sembla implementation or authority is present.
 
 Two architectural decisions were confirmed on 2026-08-09:
 
@@ -44,19 +46,35 @@ source inventory
 
 The semantic and calibration stages are future gated capabilities. The current justice scaffold remains draft/provisional, calibration-role assignment remains deferred, and the Sembla justice integration is still proposed rather than implemented.
 
-## First implementation target
-
-The first executable milestone should remain provider-free:
+## Implemented provider-free slice
 
 ```text
-frozen simple-crosstab.xlsx
+three pinned synthetic workbook/recipe triplets
   → standalone TypeScript parsing
-  → frozen RecipeV01 validation and execution
-  → exact JSON and CSV parity
-  → an external fixture harness verifies local content and derivation records
+  → strict RecipeV01 validation and execution
+  → parsed/selector/geometry/execution JSON and exact table CSV
+  → external run-twice fixture harness and frozen compatibility gold
 ```
 
-Only after that slice is byte-stable should the project add sparse and multi-table fixtures, the Python repository/gateway, a thin Dagster projection, external review decisions, replayed generation, live-provider readiness, semantic contracts, or Sembla integration.
+### Commands
+
+Requires Node 24.7.x and npm.
+
+```sh
+npm ci
+npm run verify:fixtures
+npm test
+npm run typecheck
+npm run lint
+npm run format:check
+npm run parity:replay
+# or all validation after installation:
+npm run check
+```
+
+Build the worker with `npm run build`; the stable package bin is `tidy-domain-worker` and its wire contract is documented in [`contracts/worker/v1`](contracts/worker/v1/README.md). Fixture custody is recorded in [`fixtures/parity/source-manifest.json`](fixtures/parity/source-manifest.json). Independently executed pinned-reference bytes and their clean-checkout procedure are recorded in [`fixtures/gold/manifest.json`](fixtures/gold/manifest.json), while `fixtures/expected/*.json` remains an additional source-authored partial oracle.
+
+Python repositories/gateways, a thin Dagster projection, external review decisions, replayed generation, live-provider readiness, semantic contracts, and Sembla integration remain later gated milestones.
 
 ## Permanent guardrails
 

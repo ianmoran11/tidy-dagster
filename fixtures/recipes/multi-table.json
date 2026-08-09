@@ -1,0 +1,32 @@
+{
+  "version": "0.1",
+  "sheet": "Mixed",
+  "options": { "preserve_non_table_cells": true },
+  "tables": [
+    {
+      "name": "population_counts",
+      "values": {
+        "name": "count",
+        "cells": { "range": "R4C3:R5C4", "where": { "data_type": ["numeric"] } }
+      },
+      "headers": [
+        { "name": "year", "direction": "N", "cells": ["R3C3", "R3C4"] },
+        { "name": "state", "direction": "W", "cells": ["R4C2", "R5C2"] }
+      ]
+    },
+    {
+      "name": "product_sales",
+      "values": {
+        "name": "sales",
+        "cells": {
+          "range": "R11C3:R12C4",
+          "where": { "data_type": ["numeric"] }
+        }
+      },
+      "headers": [
+        { "name": "month", "direction": "N", "cells": ["R10C3", "R10C4"] },
+        { "name": "product", "direction": "W", "cells": ["R11C2", "R12C2"] }
+      ]
+    }
+  ]
+}

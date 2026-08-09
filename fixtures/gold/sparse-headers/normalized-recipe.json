@@ -1,0 +1,43 @@
+{
+  "version": "0.1",
+  "sheet": "Revenue",
+  "tables": [
+    {
+      "name": "quarterly_revenue",
+      "values": {
+        "name": "revenue",
+        "cells": {
+          "range": "R3C2:R6C5",
+          "where": {
+            "data_type": [
+              "numeric"
+            ]
+          }
+        }
+      },
+      "headers": [
+        {
+          "name": "quarter",
+          "direction": "NNW",
+          "cells": [
+            "R2C2",
+            "R2C4"
+          ],
+          "fill": "right"
+        },
+        {
+          "name": "region",
+          "direction": "WNW",
+          "cells": [
+            "R3C1",
+            "R5C1"
+          ],
+          "fill": "down"
+        }
+      ]
+    }
+  ],
+  "options": {
+    "preserve_non_table_cells": true
+  }
+}

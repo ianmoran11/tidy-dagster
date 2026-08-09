@@ -3,7 +3,7 @@
 - **Status:** Proposed implementation plan
 - **Prepared:** 2026-08-09
 - **Accepted architecture decisions:** [ADR 0001](decisions/0001-staged-standalone-reimplementation.md), [ADR 0002](decisions/0002-deliberate-polyglot-boundaries.md)
-- **Implementation authorization:** Not granted by this document
+- **Implementation authorization:** M0–M4 authorized by the user on 2026-08-09; M5 and later remain unauthorized
 
 ## 1. Executive recommendation
 
@@ -812,6 +812,8 @@ The TypeScript worker remains a pure file transform. The fixture harness may cop
 
 ### M2 — Extend deterministic parity
 
+**Acceptance status:** Not yet accepted; summary detector/renderer closure remains a separate follow-up.
+
 Introduce the `sparse-headers` triplet with focused geometry negatives only after M1 is accepted. Introduce `multi-table` only after sparse parity is stable. Complete summary prioritization/truncation, merges/styles, all relationship directions, option precedence, warning/trace ordering and exact CSV.
 
 **Done when** every declared intermediate and final artifact for all three fixtures matches exactly twice in succession without Dagster or network access.
@@ -1035,4 +1037,4 @@ The reimplementation is successful when:
 11. cutover and rollback work one cohort at a time; and
 12. changing Dagster, storage, provider, model, review UI or Sembla packaging does not require rewriting workbook or RecipeV01 semantics.
 
-The next implementation action, if separately authorized, should be **M0 only**: initialize the project, record licenses/toolchains, and freeze the `simple-crosstab` fixture custody manifest. It should not yet introduce Dagster, provider code, semantic adoption, or Sembla integration.
+Implementation is currently limited to the authorized M0–M4 roadmap scope. M5 and later require separate authorization. The present executable work remains an M0–M2-scoped deterministic compatibility slice and must not introduce Dagster, provider code, semantic adoption, or Sembla integration during this pass.

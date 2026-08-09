@@ -1,0 +1,43 @@
+{
+  "sheet": "Population",
+  "tables": [
+    {
+      "table": "population_counts",
+      "values": {
+        "selector": "population_counts.values",
+        "addresses": [
+          "R3C3",
+          "R3C4",
+          "R4C3",
+          "R4C4"
+        ],
+        "warnings": []
+      },
+      "headers": [
+        {
+          "name": "unit",
+          "result": {
+            "selector": "population_counts.headers.unit",
+            "addresses": [
+              "R2C3",
+              "R2C4"
+            ],
+            "warnings": []
+          }
+        },
+        {
+          "name": "state",
+          "result": {
+            "selector": "population_counts.headers.state",
+            "addresses": [
+              "R3C2",
+              "R4C2"
+            ],
+            "warnings": []
+          }
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}
