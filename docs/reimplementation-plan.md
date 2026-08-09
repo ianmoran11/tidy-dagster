@@ -1,9 +1,9 @@
 # Staged standalone reimplementation plan
 
-- **Status:** Proposed implementation plan
+- **Status:** Accepted staged baseline; M0-M4 implemented and the post-M4 planning baseline separately linked below
 - **Prepared:** 2026-08-09
-- **Accepted architecture decisions:** [ADR 0001](decisions/0001-staged-standalone-reimplementation.md), [ADR 0002](decisions/0002-deliberate-polyglot-boundaries.md)
-- **Implementation authorization:** M0–M4 authorized by the user on 2026-08-09; M5 and later remain unauthorized
+- **Accepted architecture decisions:** [ADR 0001](decisions/0001-staged-standalone-reimplementation.md), [ADR 0002](decisions/0002-deliberate-polyglot-boundaries.md), [ADR 0003](decisions/0003-canonical-migration-and-automated-recipe-acceptance.md)
+- **Implementation authorization:** M0-M4 are implemented. The user accepted the post-M4 direction and authorized Phase A provider-free inventory work on 2026-08-09. Later copying, porting, activation, and the maximum-USD-25 pilot remain bound to the phase gates and authorization table in the post-M4 plan; semantic adoption, publication, calibration, and Sembla remain unauthorized.
 
 ## 1. Executive recommendation
 
@@ -856,6 +856,8 @@ Introduce the `sparse-headers` triplet with focused geometry negatives only afte
 
 M5–M10 describe desired gated outcomes, not approved package layouts or settled external contracts. Before starting each milestone, revise its PRD against the then-current provider, review, semantic, calibration or Sembla authority and retain only interfaces justified by that evidence.
 
+For canonical TidyCell evidence migration, V13 ML-assisted Pi generation, workbook-specific automated acceptance, and the hard-capped first provider pilot, the accepted planning baseline is [`post-m4-canonical-migration-and-generation-plan.md`](post-m4-canonical-migration-and-generation-plan.md), governed by [ADR 0003](decisions/0003-canonical-migration-and-automated-recipe-acceptance.md). It refines the package assumptions for the still-unimplemented M5-M8 and historical-import portions of M10 without changing accepted M0-M4 behavior or M7-M8 semantic authority. Semantic adoption, calibration, public publication, and Sembla remain outside that plan.
+
 ### M5 — Add replay-only generation and review decisions
 
 **Deliverables**
@@ -981,7 +983,7 @@ Each PRD must state:
 1. Freeze the exact reference source and fixture set; never read mutable source worktrees at runtime.
 2. Prove synthetic parity before historical shadow comparisons.
 3. Replay saved provider responses rather than regenerating them.
-4. Import content, derivations and attributable approvals separately. Unverifiable legacy records remain `legacy_unverified` or pending.
+4. Import content, derivations and attributable approvals separately. For the canonical TidyCell migration governed by ADR 0003, approval snapshots use the refined `human_approved`, `legacy_approved_unattributed`, `incomplete_evidence`, and resolved/ambiguous/unresolved/conflict vocabulary; do not collapse them into the older generic `legacy_unverified` label.
 5. Reconcile durable publication and sheet identities before changing an authority pointer.
 6. Shadow-read/write first while TidyCell remains authoritative.
 7. Produce immutable discrepancy reports at every deterministic layer.
@@ -1041,4 +1043,4 @@ The reimplementation is successful when:
 11. cutover and rollback work one cohort at a time; and
 12. changing Dagster, storage, provider, model, review UI or Sembla packaging does not require rewriting workbook or RecipeV01 semantics.
 
-Implementation is currently limited to the authorized M0–M4 provider-free roadmap scope. M5 and later require separate authorization. The executable now includes the M0–M3 deterministic/artifact runtime and the replaceable M4 Dagster projection; it still must not introduce provider dispatch, semantic adoption, calibration, or Sembla execution.
+Implementation currently includes the M0-M3 deterministic/artifact runtime and the replaceable M4 Dagster projection. The accepted post-M4 plan additionally authorizes its provider-free Phase A inventory work. Evidence copying, code ports, auto-activation, and live provider dispatch remain disabled until their stated gates pass; the already-authorized live pilot may never exceed USD 25. Semantic adoption, public publication, calibration, and Sembla execution remain unauthorized.

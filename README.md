@@ -23,11 +23,13 @@ Dagster is a replaceable control-plane adapter. It must not become the sole stor
 ## Planning documents
 
 - [Staged reimplementation plan](docs/reimplementation-plan.md)
+- [Post-M4 canonical migration, generation, and automated acceptance plan](docs/post-m4-canonical-migration-and-generation-plan.md)
 - [Source evidence and planning baseline](docs/source-evidence.md)
 - [M3 provider-free runtime](docs/m3-provider-free-runtime.md)
 - [M4 Dagster projection and operations](docs/m4-dagster-operations.md)
 - [ADR 0001 — staged standalone reimplementation](docs/decisions/0001-staged-standalone-reimplementation.md)
 - [ADR 0002 — deliberate polyglot boundaries](docs/decisions/0002-deliberate-polyglot-boundaries.md)
+- [ADR 0003 — canonical migration and automated recipe acceptance](docs/decisions/0003-canonical-migration-and-automated-recipe-acceptance.md)
 
 ## Intended end-to-end path
 
