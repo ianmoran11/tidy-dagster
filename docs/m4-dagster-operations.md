@@ -117,8 +117,10 @@ scripts/dagster-ui stop
 ```
 
 `start` performs the locked sync and TypeScript build, creates private state
-under ignored `.dagster/`, launches the pinned `dg dev` command in a new
-session, and accepts success only when both HTTP health and an exact
+under ignored `.dagster/`, and forces both `DAGSTER_HOME` and `TMPDIR` into that
+repo-owned state so gRPC sockets survive the launching terminal/tool. It
+launches the pinned `dg dev` command in a new session and accepts success only
+when both HTTP health and an exact
 `127.0.0.1:3030` listener are present. It rejects occupied/wildcard ports.
 `stop` verifies the recorded PID, PGID, UID, exact command/token, OS start
 time, launcher digest, and child environment markers before signaling. Listener

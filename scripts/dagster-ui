@@ -162,9 +162,18 @@ def status() -> int:
 
 
 def minimal_environment() -> dict[str, str]:
-    allowed = {"PATH", "TMPDIR", "LANG", "LC_ALL", "SSL_CERT_FILE"}
+    allowed = {"PATH", "LANG", "LC_ALL", "SSL_CERT_FILE"}
     environment = {key: value for key, value in os.environ.items() if key in allowed}
-    environment.update({"HOME": str(ROOT / ".dagster" / "home"), "TZ": "UTC"})
+    persistent_tmp = ROOT / ".dagster" / "tmp"
+    persistent_tmp.mkdir(parents=True, exist_ok=True, mode=0o700)
+    persistent_tmp.chmod(0o700)
+    environment.update(
+        {
+            "HOME": str(ROOT / ".dagster" / "home"),
+            "TMPDIR": str(persistent_tmp),
+            "TZ": "UTC",
+        }
+    )
     return environment
 
 

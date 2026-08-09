@@ -35,6 +35,15 @@ def test_dagster_ui_status_is_safe_and_does_not_touch_tailscale() -> None:
     assert "loopback_listener=" in completed.stdout
 
 
+def test_ui_uses_repo_persistent_tmpdir(monkeypatch, tmp_path) -> None:
+    module = _load("dagster_ui_tmpdir", PROJECT / "scripts/dagster-ui")
+    monkeypatch.setattr(module, "ROOT", tmp_path)
+    monkeypatch.setenv("TMPDIR", "/ephemeral/tool-owned-directory")
+    environment = module.minimal_environment()
+    assert environment["TMPDIR"] == str(tmp_path / ".dagster" / "tmp")
+    assert Path(environment["TMPDIR"]).is_dir()
+
+
 def test_ui_refuses_stale_pid_reuse_with_unrelated_live_group(monkeypatch) -> None:
     module = _load("dagster_ui_stale", PROJECT / "scripts/dagster-ui")
     ownership = module.Ownership(41, 41, "token", "start", "exact", "digest")
