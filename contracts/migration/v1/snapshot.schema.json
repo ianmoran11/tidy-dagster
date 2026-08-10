@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration/v1/snapshot.schema.json",
+  "title": "TidyCellExportSnapshotV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "completionStatus",
+    "frozenAt",
+    "inventory",
+    "storageAssessment",
+    "storageAssessmentDigest",
+    "snapshotDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.source-export-snapshot/v1" },
+    "completionStatus": { "const": "complete" },
+    "frozenAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "inventory": {
+      "$ref": "inventory.schema.json#/$defs/inventory"
+    },
+    "storageAssessment": {
+      "$ref": "inventory.schema.json#/$defs/storageAssessment"
+    },
+    "storageAssessmentDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "snapshotDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

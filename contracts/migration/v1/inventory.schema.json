@@ -1,0 +1,383 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration/v1/inventory.schema.json",
+  "title": "TidyCellExportReportV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "inventory", "storageAssessment"],
+  "properties": {
+    "schemaVersion": { "const": "tidy.source-export-report/v1" },
+    "inventory": { "$ref": "#/$defs/inventory" },
+    "storageAssessment": { "$ref": "#/$defs/storageAssessment" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullableDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "gitObjectId": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+    },
+    "nullableGitObjectId": {
+      "oneOf": [{ "$ref": "#/$defs/gitObjectId" }, { "type": "null" }]
+    },
+    "inventory": {
+      "title": "TidyCellExportInventoryV1",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "source",
+        "policy",
+        "exporter",
+        "safety",
+        "items",
+        "itemManifestDigest",
+        "summary",
+        "inventoryDigest"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "tidy.source-export-inventory/v1" },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sourceSystem", "sourceRootId", "filesystem", "git"],
+          "properties": {
+            "sourceSystem": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "sourceRootId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "filesystem": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["deviceId", "rootInode", "rootMode"],
+              "properties": {
+                "deviceId": { "type": "integer" },
+                "rootInode": { "type": "integer", "minimum": 0 },
+                "rootMode": { "type": "integer", "minimum": 0 }
+              }
+            },
+            "git": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "available",
+                "head",
+                "tree",
+                "trackedDirty",
+                "trackedDirtyDigest"
+              ],
+              "properties": {
+                "available": { "type": "boolean" },
+                "head": { "$ref": "#/$defs/nullableGitObjectId" },
+                "tree": { "$ref": "#/$defs/nullableGitObjectId" },
+                "trackedDirty": {
+                  "oneOf": [{ "type": "boolean" }, { "type": "null" }]
+                },
+                "trackedDirtyDigest": {
+                  "$ref": "#/$defs/nullableDigest"
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "required": ["available"],
+                    "properties": { "available": { "const": true } }
+                  },
+                  "then": {
+                    "properties": {
+                      "head": { "$ref": "#/$defs/gitObjectId" },
+                      "tree": { "$ref": "#/$defs/gitObjectId" },
+                      "trackedDirty": { "type": "boolean" },
+                      "trackedDirtyDigest": { "$ref": "#/$defs/digest" }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "head": { "type": "null" },
+                      "tree": { "type": "null" },
+                      "trackedDirty": { "type": "null" },
+                      "trackedDirtyDigest": { "type": "null" }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["policyId", "contentDigest"],
+          "properties": {
+            "policyId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "contentDigest": { "$ref": "#/$defs/digest" }
+          }
+        },
+        "exporter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version", "sourceDigest", "canonicalizationAlgorithm"],
+          "properties": {
+            "version": { "const": "tidy.source-exporter/v1" },
+            "sourceDigest": { "$ref": "#/$defs/digest" },
+            "canonicalizationAlgorithm": {
+              "const": "tidy-python-sorted-json-v1"
+            }
+          }
+        },
+        "safety": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "pathPolicy",
+            "symlinkPolicy",
+            "specialFilePolicy",
+            "mutationPolicy"
+          ],
+          "properties": {
+            "pathPolicy": { "const": "relative-utf8-posix-no-dotdot-v1" },
+            "symlinkPolicy": {
+              "const": "no-follow-explicit-exclusion-only-v1"
+            },
+            "specialFilePolicy": { "const": "reject-v1" },
+            "mutationPolicy": {
+              "const": "pre-post-final-and-git-repeat-v1"
+            }
+          }
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 1000000,
+          "items": { "$ref": "#/$defs/item" }
+        },
+        "itemManifestDigest": { "$ref": "#/$defs/digest" },
+        "summary": { "$ref": "#/$defs/summary" },
+        "inventoryDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "importDisposition": {
+      "title": "ImportDispositionV1",
+      "enum": ["import", "exclude", "quarantine", "duplicate-alias"]
+    },
+    "item": {
+      "title": "ExportItemV1",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relativePath",
+        "entryType",
+        "artifactClass",
+        "disposition",
+        "ruleId",
+        "sourceMode",
+        "byteLength",
+        "contentDigest",
+        "gitState",
+        "embeddedRecords",
+        "warnings"
+      ],
+      "properties": {
+        "relativePath": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "entryType": {
+          "enum": ["file", "excluded-subtree", "excluded-symlink"]
+        },
+        "artifactClass": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "disposition": { "$ref": "#/$defs/importDisposition" },
+        "ruleId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "sourceMode": { "type": "integer", "minimum": 0 },
+        "byteLength": { "type": "integer", "minimum": 0 },
+        "contentDigest": { "$ref": "#/$defs/nullableDigest" },
+        "gitState": { "enum": ["tracked", "untracked", "ignored", "unknown"] },
+        "embeddedRecords": {
+          "type": "array",
+          "maxItems": 100000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "pointer", "valueType"],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "recipe-document",
+                  "recipe-candidate",
+                  "prompt-evidence",
+                  "provider-response-evidence"
+                ]
+              },
+              "pointer": { "type": "string", "maxLength": 8192 },
+              "valueType": {
+                "enum": [
+                  "null",
+                  "boolean",
+                  "object",
+                  "array",
+                  "string",
+                  "number",
+                  "unknown"
+                ]
+              }
+            }
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "maxItems": 1000,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["entryType"],
+            "properties": { "entryType": { "const": "file" } }
+          },
+          "then": {
+            "properties": { "contentDigest": { "$ref": "#/$defs/digest" } }
+          }
+        },
+        {
+          "if": {
+            "required": ["entryType"],
+            "properties": { "entryType": { "const": "excluded-subtree" } }
+          },
+          "then": {
+            "properties": {
+              "disposition": { "const": "exclude" },
+              "byteLength": { "const": 0 },
+              "contentDigest": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["entryType"],
+            "properties": { "entryType": { "const": "excluded-symlink" } }
+          },
+          "then": {
+            "properties": {
+              "disposition": { "const": "exclude" },
+              "contentDigest": { "$ref": "#/$defs/digest" }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["disposition"],
+            "properties": {
+              "disposition": {
+                "enum": ["import", "quarantine", "duplicate-alias"]
+              }
+            }
+          },
+          "then": {
+            "properties": { "entryType": { "const": "file" } }
+          }
+        }
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "itemCount",
+        "fileCount",
+        "excludedSubtreeCount",
+        "excludedSymlinkCount",
+        "dispositions",
+        "artifactClasses",
+        "gitStates",
+        "bytesByDisposition",
+        "uniqueImportObjects",
+        "uniqueImportBytes",
+        "embeddedRecordCount",
+        "warningCount"
+      ],
+      "properties": {
+        "itemCount": { "type": "integer", "minimum": 0 },
+        "fileCount": { "type": "integer", "minimum": 0 },
+        "excludedSubtreeCount": { "type": "integer", "minimum": 0 },
+        "excludedSymlinkCount": { "type": "integer", "minimum": 0 },
+        "dispositions": { "$ref": "#/$defs/countMap" },
+        "artifactClasses": { "$ref": "#/$defs/countMap" },
+        "gitStates": { "$ref": "#/$defs/countMap" },
+        "bytesByDisposition": { "$ref": "#/$defs/countMap" },
+        "uniqueImportObjects": { "type": "integer", "minimum": 0 },
+        "uniqueImportBytes": { "type": "integer", "minimum": 0 },
+        "embeddedRecordCount": { "type": "integer", "minimum": 0 },
+        "warningCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "countMap": {
+      "type": "object",
+      "propertyNames": { "minLength": 1, "maxLength": 128 },
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "storageAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "destinationId",
+        "deviceId",
+        "totalBytes",
+        "usedBytes",
+        "freeBytes",
+        "estimatedUniqueImportBytes",
+        "requiredFreeBytes",
+        "projectedUtilizationBasisPoints",
+        "maximumUtilizationBasisPoints",
+        "freeSpacePasses",
+        "utilizationPasses",
+        "passes"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "tidy.storage-assessment/v1" },
+        "destinationId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "deviceId": { "type": "integer" },
+        "totalBytes": { "type": "integer", "minimum": 1 },
+        "usedBytes": { "type": "integer", "minimum": 0 },
+        "freeBytes": { "type": "integer", "minimum": 0 },
+        "estimatedUniqueImportBytes": { "type": "integer", "minimum": 0 },
+        "requiredFreeBytes": { "type": "integer", "minimum": 10737418240 },
+        "projectedUtilizationBasisPoints": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "maximumUtilizationBasisPoints": { "const": 8500 },
+        "freeSpacePasses": { "type": "boolean" },
+        "utilizationPasses": { "type": "boolean" },
+        "passes": { "type": "boolean" }
+      }
+    }
+  }
+}

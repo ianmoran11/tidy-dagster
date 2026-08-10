@@ -8,7 +8,9 @@
 
 M3 adds a Python-owned authoritative local repository for content, derivations, custody, append-only decisions, and compare-and-swap pointers. Its hardened macOS production gateway launches the bundled TypeScript executable in private roots, enforces process/file/sandbox bounds, verifies every declared output, and publishes only a fully verified output set. The offline application runs all three fixtures twice with identical semantic derivation and output fingerprints.
 
-M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Summary is deliberately unsupported because the full reviewed TidyCell/Tidybank detector and renderer closure is not included. No provider, recipe-approval, semantic-adoption, calibration, ML, ABS/research, or Sembla implementation or authority is present.
+M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Summary is deliberately unsupported because the full reviewed TidyCell/Tidybank detector and renderer closure is not included.
+
+The post-M4 Phase A implementation candidate adds only a provider-free, read-only source-estate inventory/freeze boundary. Its real TidyCell inventory is deterministic, NAS-qualified, frozen, and committed behind a verified snapshot marker. The implementation is committed as a review candidate; Phase A still awaits independent review and is not yet accepted. Phase B is additionally blocked by the source host's current 98% internal-volume utilization and the absence of a reviewed NAS blob adapter. No TidyCell content object has been imported, no provider or ML operation has run, and no recipe, domain-publication, semantic, calibration, or Sembla authority has changed.
 
 Two architectural decisions were confirmed on 2026-08-09:
 
@@ -27,6 +29,7 @@ Dagster is a replaceable control-plane adapter. It must not become the sole stor
 - [Source evidence and planning baseline](docs/source-evidence.md)
 - [M3 provider-free runtime](docs/m3-provider-free-runtime.md)
 - [M4 Dagster projection and operations](docs/m4-dagster-operations.md)
+- [Phase A source inventory evidence and review gate](docs/phase-a-source-inventory.md)
 - [ADR 0001 — staged standalone reimplementation](docs/decisions/0001-staged-standalone-reimplementation.md)
 - [ADR 0002 — deliberate polyglot boundaries](docs/decisions/0002-deliberate-polyglot-boundaries.md)
 - [ADR 0003 — canonical migration and automated recipe acceptance](docs/decisions/0003-canonical-migration-and-automated-recipe-acceptance.md)
@@ -80,7 +83,7 @@ npm run check
 
 Build the worker with `npm run build`; the stable package bin is `tidy-domain-worker` and its wire contract is documented in [`contracts/worker/v1`](contracts/worker/v1/README.md). Fixture custody is recorded in [`fixtures/parity/source-manifest.json`](fixtures/parity/source-manifest.json). Independently executed pinned-reference bytes and their clean-checkout procedure are recorded in [`fixtures/gold/manifest.json`](fixtures/gold/manifest.json), while `fixtures/expected/*.json` remains an additional source-authored partial oracle.
 
-The Python repositories/gateway and replaceable Dagster projection are implemented in `src/tidy_orchestrator`. External review authority, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
+The Python repositories/gateway and replaceable Dagster projection are implemented in `src/tidy_orchestrator`. Phase A source inventory is an unaccepted provider-free candidate pending independent review. External review authority, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
 
 ## M3 provider-free Python execution
 
@@ -115,6 +118,35 @@ The UI binds only to `127.0.0.1:3030`. Its tailnet-only Android URL is
 `https://ians-mac-mini-1.taild519de.ts.net:3030/`. See
 [`docs/m4-dagster-operations.md`](docs/m4-dagster-operations.md) for scoped
 enable/disable, security limits, tests, and reboot behavior.
+
+## Phase A source inventory candidate
+
+```sh
+uv run tidy-source-export inventory \
+  --source-root /path/to/source \
+  --source-root-id source-candidate \
+  --destination-root /path/to/destination \
+  --destination-id destination-id \
+  --policy contracts/migration/v1/tidycell-source-policy.json \
+  --output .source-exports/inventory.json
+
+uv run tidy-source-export verify \
+  --input .source-exports/inventory.json
+
+uv run tidy-source-export publish \
+  --input .source-exports/snapshot.json \
+  --destination-root '/Volumes/Shared Folder/tidy-dagster'
+
+uv run tidy-source-export verify-publication \
+  --directory '/Volumes/Shared Folder/tidy-dagster/source-snapshots/sha256-...'
+```
+
+`freeze` additionally requires a canonical UTC `--frozen-at` and refuses to
+write when free-space or projected-utilization gates fail. NAS publication
+writes `COMMITTED.json` last and copies no source content. The SQLite-backed
+local repository is not authorized on SMB. See
+[`contracts/migration/v1`](contracts/migration/v1/README.md) and
+[`docs/phase-a-source-inventory.md`](docs/phase-a-source-inventory.md).
 
 ## Permanent guardrails
 

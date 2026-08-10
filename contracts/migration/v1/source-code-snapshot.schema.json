@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration/v1/source-code-snapshot.schema.json",
+  "title": "SourceCodeExportSnapshotV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "completionStatus",
+    "frozenAt",
+    "source",
+    "selection",
+    "license",
+    "exporter",
+    "itemManifestDigest",
+    "snapshotDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.source-code-export-snapshot/v1" },
+    "completionStatus": { "const": "complete" },
+    "frozenAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceSystem", "sourceRootId", "filesystem", "git"],
+      "properties": {
+        "sourceSystem": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "sourceRootId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "filesystem": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["deviceId", "rootInode", "rootMode"],
+          "properties": {
+            "deviceId": { "type": "integer" },
+            "rootInode": { "type": "integer", "minimum": 0 },
+            "rootMode": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "git": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "available",
+            "head",
+            "tree",
+            "trackedDirty",
+            "trackedDirtyDigest"
+          ],
+          "properties": {
+            "available": { "type": "boolean" },
+            "head": { "$ref": "#/$defs/nullableGitObjectId" },
+            "tree": { "$ref": "#/$defs/nullableGitObjectId" },
+            "trackedDirty": {
+              "oneOf": [{ "type": "boolean" }, { "type": "null" }]
+            },
+            "trackedDirtyDigest": { "$ref": "#/$defs/nullableDigest" }
+          },
+          "allOf": [
+            {
+              "if": {
+                "required": ["available"],
+                "properties": { "available": { "const": true } }
+              },
+              "then": {
+                "properties": {
+                  "head": { "$ref": "#/$defs/gitObjectId" },
+                  "tree": { "$ref": "#/$defs/gitObjectId" },
+                  "trackedDirty": { "type": "boolean" },
+                  "trackedDirtyDigest": { "$ref": "#/$defs/digest" }
+                }
+              },
+              "else": {
+                "properties": {
+                  "head": { "type": "null" },
+                  "tree": { "type": "null" },
+                  "trackedDirty": { "type": "null" },
+                  "trackedDirtyDigest": { "type": "null" }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["closureId", "items"],
+      "properties": {
+        "closureId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10000,
+          "items": { "$ref": "#/$defs/sourceItem" }
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdxId", "contentDigest"],
+      "properties": {
+        "spdxId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "contentDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "exporter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "sourceDigest", "canonicalizationAlgorithm"],
+      "properties": {
+        "version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "sourceDigest": { "$ref": "#/$defs/digest" },
+        "canonicalizationAlgorithm": {
+          "const": "tidy-python-sorted-json-v1"
+        }
+      }
+    },
+    "itemManifestDigest": { "$ref": "#/$defs/digest" },
+    "snapshotDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullableDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "gitObjectId": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+    },
+    "nullableGitObjectId": {
+      "oneOf": [{ "$ref": "#/$defs/gitObjectId" }, { "type": "null" }]
+    },
+    "sourceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relativePath",
+        "role",
+        "sourceMode",
+        "byteLength",
+        "contentDigest"
+      ],
+      "properties": {
+        "relativePath": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "role": {
+          "enum": [
+            "source",
+            "fixture",
+            "license",
+            "manifest",
+            "lockfile",
+            "notice"
+          ]
+        },
+        "sourceMode": { "type": "integer", "minimum": 0 },
+        "byteLength": { "type": "integer", "minimum": 0 },
+        "contentDigest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}

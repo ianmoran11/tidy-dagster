@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "tidy.source-export-policy/v1",
+  "policyId": "tidycell-canonical-estate-2026-08-09",
+  "sourceSystem": "tidycell",
+  "limits": {
+    "maxEntries": 250000,
+    "maxFileBytes": 21474836480,
+    "maxJsonScanBytes": 16777216,
+    "maxJsonDepth": 64,
+    "maxEmbeddedRecordsPerFile": 1000
+  },
+  "rules": [
+    {
+      "id": "excluded-development-subtree",
+      "priority": 10000,
+      "entryTypes": ["directory"],
+      "directoryNames": [
+        ".git",
+        ".next",
+        ".pi",
+        ".pi-subagents",
+        ".pytest_cache",
+        ".mypy_cache",
+        ".ruff_cache",
+        ".tmp",
+        ".venv",
+        "__pycache__",
+        "build",
+        "coverage",
+        "dist",
+        "htmlcov",
+        "node_modules",
+        "playwright-report",
+        "test-results"
+      ],
+      "disposition": "exclude",
+      "artifactClass": "development-subtree"
+    },
+    {
+      "id": "excluded-generated-tool-symlink",
+      "priority": 9950,
+      "entryTypes": ["symlink"],
+      "basenameGlobs": ["ltmain.sh"],
+      "disposition": "exclude",
+      "artifactClass": "generated-development-symlink"
+    },
+    {
+      "id": "excluded-secret-like-file",
+      "priority": 9900,
+      "entryTypes": ["file"],
+      "basenameGlobs": [
+        ".env",
+        ".env.*",
+        "auth.json",
+        "credentials.json",
+        "*.pem",
+        "*.key"
+      ],
+      "disposition": "exclude",
+      "artifactClass": "secret-or-local-configuration"
+    },
+    {
+      "id": "excluded-os-editor-file",
+      "priority": 9800,
+      "entryTypes": ["file"],
+      "basenameGlobs": [".DS_Store", "*.swp", "*~"],
+      "disposition": "exclude",
+      "artifactClass": "os-editor-metadata"
+    },
+    {
+      "id": "approval-registry",
+      "priority": 9500,
+      "entryTypes": ["file"],
+      "exactPaths": ["approvals.json"],
+      "disposition": "import",
+      "artifactClass": "approval-registry"
+    },
+    {
+      "id": "workbook-bytes",
+      "priority": 9400,
+      "entryTypes": ["file"],
+      "suffixes": [".xls", ".xlsx", ".xlsm", ".xlsb", ".ods"],
+      "disposition": "import",
+      "artifactClass": "workbook"
+    },
+    {
+      "id": "recipe-evidence",
+      "priority": 9300,
+      "entryTypes": ["file"],
+      "basenameGlobs": ["*recipe*.json", "*.recipe.*", "recipe.json"],
+      "disposition": "import",
+      "artifactClass": "recipe-evidence"
+    },
+    {
+      "id": "model-binary",
+      "priority": 9200,
+      "entryTypes": ["file"],
+      "suffixes": [
+        ".pkl",
+        ".pickle",
+        ".joblib",
+        ".ubj",
+        ".model",
+        ".onnx",
+        ".safetensors",
+        ".pt",
+        ".pth"
+      ],
+      "disposition": "import",
+      "artifactClass": "model-binary"
+    },
+    {
+      "id": "workbook-estate-evidence",
+      "priority": 8500,
+      "entryTypes": ["file"],
+      "pathPrefixes": ["abs-spreadsheets", "xlsx-examples"],
+      "disposition": "import",
+      "artifactClass": "workbook-estate-evidence"
+    },
+    {
+      "id": "harvest-evidence",
+      "priority": 8400,
+      "entryTypes": ["file"],
+      "pathPrefixes": ["data/harvest"],
+      "disposition": "import",
+      "artifactClass": "harvest-evidence"
+    },
+    {
+      "id": "ml-evidence",
+      "priority": 8300,
+      "entryTypes": ["file"],
+      "pathPrefixes": ["data/ml-prepass", "public/ml-prepass"],
+      "disposition": "import",
+      "artifactClass": "ml-evidence"
+    },
+    {
+      "id": "research-evidence",
+      "priority": 8200,
+      "entryTypes": ["file"],
+      "pathPrefixes": ["research-runs", "benchmark-results"],
+      "disposition": "import",
+      "artifactClass": "research-evidence"
+    },
+    {
+      "id": "catalog-evidence",
+      "priority": 8100,
+      "entryTypes": ["file"],
+      "pathPrefixes": ["data/catalog", "public/catalog"],
+      "disposition": "import",
+      "artifactClass": "catalog-evidence"
+    },
+    {
+      "id": "example-and-operation-evidence",
+      "priority": 8000,
+      "entryTypes": ["file"],
+      "pathPrefixes": ["json-examples", "operations", "fixtures"],
+      "disposition": "import",
+      "artifactClass": "example-operation-evidence"
+    },
+    {
+      "id": "generation-source-code",
+      "priority": 7000,
+      "entryTypes": ["file"],
+      "pathPrefixes": [
+        ".github",
+        ".piprd",
+        "docs",
+        "functions",
+        "ml",
+        "ontology",
+        "prds",
+        "scripts",
+        "src",
+        "test-data",
+        "tests"
+      ],
+      "disposition": "import",
+      "artifactClass": "generation-source-code"
+    },
+    {
+      "id": "generation-source-singletons",
+      "priority": 7000,
+      "entryTypes": ["file"],
+      "exactPaths": [
+        ".gitignore",
+        ".piprd-config.json",
+        ".prettierignore",
+        "LICENSE",
+        "PRM.md",
+        "README.md",
+        "abs-spreadsheet-viewer.html",
+        "auto-research.config.example.json",
+        "catalog-feature-tags.json",
+        "catalog-publication-identities.json",
+        "context.md",
+        "data-quality-monitor.html",
+        "eslint.config.mjs",
+        "next-env.d.ts",
+        "next.config.ts",
+        "package.json",
+        "package-lock.json",
+        "plan.md",
+        "playwright.config.ts",
+        "test-scraper.py",
+        "tsconfig.json",
+        "vitest.config.ts",
+        "vitest.setup.ts"
+      ],
+      "disposition": "import",
+      "artifactClass": "generation-source-code"
+    },
+    {
+      "id": "generic-tabular-evidence",
+      "priority": 6000,
+      "entryTypes": ["file"],
+      "suffixes": [".csv"],
+      "disposition": "import",
+      "artifactClass": "tabular-evidence"
+    },
+    {
+      "id": "generic-generation-json-evidence",
+      "priority": 5000,
+      "entryTypes": ["file"],
+      "basenameGlobs": [
+        "*prompt*.json",
+        "*response*.json",
+        "*result*.json",
+        "*report*.json",
+        "*metadata*.json",
+        "*manifest*.json",
+        "*index*.json"
+      ],
+      "disposition": "import",
+      "artifactClass": "generation-json-evidence"
+    }
+  ],
+  "fallbackFile": {
+    "ruleId": "not-approved-domain",
+    "disposition": "exclude",
+    "artifactClass": "unselected-source-file"
+  }
+}
