@@ -11,7 +11,13 @@ from jsonschema.exceptions import ValidationError
 from jsonschema.validators import validator_for
 from referencing import Registry, Resource
 
-from tidy_orchestrator.artifacts import canonical_json_bytes
+from tidy_orchestrator.artifacts import canonical_json_bytes, sha256_digest
+from tidy_orchestrator.legacy_approvals import (
+    ApprovalTargetCandidate,
+    ReviewerIdentityRegistry,
+    persist_fixture_legacy_approval_snapshot,
+    resolve_approval,
+)
 from tidy_orchestrator.migration_evidence import (
     persist_conservative_evidence_dispositions,
     reconcile_conservative_evidence,
@@ -132,7 +138,7 @@ def _frozen_fixture(tmp_path: Path) -> tuple[Path, Path, dict]:
                 "version": 1,
                 "approvals": [
                     {
-                        "assetId": "fixture-asset",
+                        "assetId": "asset-one",
                         "sheetName": "Table 1",
                         "approvedAt": "",
                     }
@@ -325,8 +331,66 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
         )
         == semantic_report
     )
+    approval_source_item = next(
+        item
+        for item in snapshot["inventory"]["items"]
+        if item["relativePath"] == "approvals.json"
+    )
+    approval_import_record = metadata.get_item(
+        snapshot["snapshotDigest"], "approvals.json"
+    )
+    assert approval_import_record is not None
+    digest_verifier = sha256_digest(
+        (
+            PROJECT / "apps/domain-worker/src/migration/historicalDigestRecord.ts"
+        ).read_bytes()
+    )
+    approval_snapshot = persist_fixture_legacy_approval_snapshot(
+        source_item=approval_source_item,
+        import_record=approval_import_record,
+        source_record_digests=[
+            "sha256:d4745ceb965818e2dd15c924193b7592199a75a0b781d4427aabe3e72537c6dd"
+        ],
+        digest_verifier_digest=digest_verifier,
+        frozen_at=snapshot["frozenAt"],
+        metadata=metadata,
+        blobs=blobs,
+    )
+    workbook_item = next(
+        item
+        for item in snapshot["inventory"]["items"]
+        if item["relativePath"] == "a.xlsx"
+    )
+    approval_resolution = resolve_approval(
+        approval_snapshot=approval_snapshot,
+        source_row_index=0,
+        candidates=[
+            ApprovalTargetCandidate(
+                workbook_digest=workbook_item["contentDigest"],
+                sheet_name="Table 1",
+                binding_kind="exact-workbook-digest",
+                evidence_digests=(
+                    approval_import_record["sourceItemDigest"],
+                    approval_import_record["recordId"],
+                ),
+            )
+        ],
+        reviewer_registry=ReviewerIdentityRegistry([]),
+        recipe_verification=None,
+        recorded_at=FIXED_TIME,
+        actor="phase-b-fixture-interpreter",
+    )
+    assert approval_resolution["targetStatus"] == "resolved"
+    assert approval_resolution["reviewerStatus"] == "missing"
+    assert approval_resolution["authorityState"] == "legacy_approved_unattributed"
+    metadata.add_typed_record(
+        record_id=approval_resolution["resolutionId"],
+        record_type=approval_resolution["schemaVersion"],
+        record=approval_resolution,
+    )
+
     typed_records = metadata.list_typed_records()
-    assert len(typed_records) == 5
+    assert len(typed_records) == 7
     approval_record = next(
         record
         for record in typed_records
@@ -359,6 +423,16 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
         schemas["approval-registry-evidence.schema.json"],
         registry,
         approval_record,
+    )
+    _validate(
+        schemas["legacy-approval-snapshot.schema.json"],
+        registry,
+        approval_snapshot,
+    )
+    _validate(
+        schemas["approval-resolution.schema.json"],
+        registry,
+        approval_resolution,
     )
     _validate(
         schemas["semantic-reconciliation.schema.json"],

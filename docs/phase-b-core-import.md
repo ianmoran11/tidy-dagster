@@ -105,12 +105,18 @@ and simple/rich approval rows. This is compatibility behavior, not RFC
 - authority outcomes: `human_approved`, `legacy_approved_unattributed`,
   `incomplete_evidence`, or `inactive`.
 
+A fixture-only bridge now requires the approval-registry import checkpoint and
+read-verifies its exact committed CAS bytes before constructing and storing the
+point-in-time snapshot. A synthetic simple row then resolves to one exact
+workbook candidate while remaining `legacy_approved_unattributed`; it creates no
+active or training authority.
+
 A record becomes `human_approved` only if exactly one workbook/sheet target,
 one explicitly curated reviewer label, the declared recipe digest, the
 historical verifier result, and candidate recipe evidence all agree. A simple
 legacy approval can remain `legacy_approved_unattributed`; ambiguity or conflict
 is inactive. The fixture tests do not establish any real reviewer identity or
-production approval.
+production approval, and live TypeScript row-digest dispatch is still absent.
 
 ### Conservative typed evidence dispositions
 

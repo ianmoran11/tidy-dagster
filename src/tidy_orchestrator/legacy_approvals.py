@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from .artifacts import canonical_json_bytes, domain_digest, sha256_digest
+from .migration_import import CommittedFilesystemBlobStore, MigrationRepository
 
 _DIGEST_RECORD_ALGORITHM = "tidycell-digest-record-v1"
 _DIGEST_RECORD_SOURCE_DIGEST = (
@@ -196,6 +197,81 @@ def create_legacy_approval_snapshot(
             "tidy.legacy-approval-snapshot/v1", semantic
         ),
     }
+
+
+def persist_fixture_legacy_approval_snapshot(
+    *,
+    source_item: Mapping[str, Any],
+    import_record: Mapping[str, Any],
+    source_record_digests: Sequence[str],
+    digest_verifier_digest: str,
+    frozen_at: str,
+    metadata: MigrationRepository,
+    blobs: CommittedFilesystemBlobStore,
+) -> dict[str, Any]:
+    """Bind one imported fixture registry to verified CAS bytes and store it."""
+
+    if source_item.get("artifactClass") != "approval-registry":
+        raise ApprovalResolutionError("Source item is not an approval registry")
+    expected_item_digest = domain_digest("tidy.export-item/v1", source_item)
+    expected_final_state = {
+        "import": "imported",
+        "duplicate-alias": "duplicate-alias",
+        "exclude": "excluded",
+        "quarantine": "quarantined",
+    }.get(source_item.get("disposition"))
+    expected_content_digest = source_item.get("contentDigest")
+    if (
+        source_item.get("entryType") != "file"
+        or expected_final_state is None
+        or import_record.get("schemaVersion") != "tidy.migration-import-item/v1"
+        or import_record.get("snapshotDigest") is None
+        or import_record.get("relativePath") != source_item.get("relativePath")
+        or import_record.get("artifactClass") != "approval-registry"
+        or import_record.get("classification") != "restricted"
+        or import_record.get("sourceItemDigest") != expected_item_digest
+        or import_record.get("sourceContentDigest") != expected_content_digest
+        or import_record.get("byteLength") != source_item.get("byteLength")
+        or import_record.get("sourceMode") != source_item.get("sourceMode")
+        or import_record.get("proposedDisposition") != source_item.get("disposition")
+        or import_record.get("finalState") != expected_final_state
+        or import_record.get("blobStored") is not True
+        or import_record.get("contentDigest") != expected_content_digest
+        or import_record.get("storageUri") != f"cas+sha256://{expected_content_digest}"
+    ):
+        raise ApprovalResolutionError(
+            "Imported approval registry does not bind its source item"
+        )
+    import_semantic = dict(import_record)
+    import_record_id = import_semantic.pop("recordId", None)
+    if import_record_id != domain_digest(
+        "tidy.migration-import-item/v1", import_semantic
+    ):
+        raise ApprovalResolutionError("Imported approval registry digest differs")
+    stored = metadata.get_item(
+        import_record["snapshotDigest"], import_record["relativePath"]
+    )
+    if stored != dict(import_record):
+        raise ApprovalResolutionError("Stored approval registry checkpoint differs")
+    registration = metadata.get_snapshot_registration(import_record["snapshotDigest"])
+    if registration.get("snapshotDigest") != import_record["snapshotDigest"]:
+        raise ApprovalResolutionError("Approval registry snapshot is unregistered")
+    source_bytes = blobs.read_verified(
+        _require_digest(expected_content_digest), int(source_item["byteLength"])
+    )
+    snapshot = create_legacy_approval_snapshot(
+        source_bytes=source_bytes,
+        source_record_digests=source_record_digests,
+        frozen_at=frozen_at,
+        source_snapshot_digest=import_record["snapshotDigest"],
+        digest_verifier_digest=digest_verifier_digest,
+    )
+    metadata.add_typed_record(
+        record_id=snapshot["approvalSnapshotId"],
+        record_type=snapshot["schemaVersion"],
+        record=snapshot,
+    )
+    return snapshot
 
 
 def create_recipe_digest_verification(
