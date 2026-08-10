@@ -18,9 +18,11 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
   digest over the mapping.
 - `legacy-approval-snapshot.schema.json` — an exact point-in-time observation of
   the mutable legacy registry; it never claims append-only history.
-- `reviewer-identity.schema.json` and `approval-resolution.schema.json` —
-  explicit reviewer-label curation and evidence-bearing resolved, ambiguous,
-  unresolved, or conflicting approval outcomes.
+- `reviewer-identity.schema.json`, `approval-resolution.schema.json`, and
+  `approval-domain-reconciliation.schema.json` — explicit reviewer-label
+  curation, evidence-bearing resolved/ambiguous/unresolved/conflicting outcomes,
+  and exact one-resolution-per-observed-row coverage without activation or
+  training authority.
 - `digest-record-vectors.schema.json` and
   `recipe-digest-verification.schema.json` — strict vectors plus bindings to the
   pinned historical TypeScript `digestRecord` compatibility algorithm, source,

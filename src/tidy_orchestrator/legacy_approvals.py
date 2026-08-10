@@ -211,51 +211,13 @@ def persist_fixture_legacy_approval_snapshot(
 ) -> dict[str, Any]:
     """Bind one imported fixture registry to verified CAS bytes and store it."""
 
-    if source_item.get("artifactClass") != "approval-registry":
-        raise ApprovalResolutionError("Source item is not an approval registry")
-    expected_item_digest = domain_digest("tidy.export-item/v1", source_item)
-    expected_final_state = {
-        "import": "imported",
-        "duplicate-alias": "duplicate-alias",
-        "exclude": "excluded",
-        "quarantine": "quarantined",
-    }.get(source_item.get("disposition"))
-    expected_content_digest = source_item.get("contentDigest")
-    if (
-        source_item.get("entryType") != "file"
-        or expected_final_state is None
-        or import_record.get("schemaVersion") != "tidy.migration-import-item/v1"
-        or import_record.get("snapshotDigest") is None
-        or import_record.get("relativePath") != source_item.get("relativePath")
-        or import_record.get("artifactClass") != "approval-registry"
-        or import_record.get("classification") != "restricted"
-        or import_record.get("sourceItemDigest") != expected_item_digest
-        or import_record.get("sourceContentDigest") != expected_content_digest
-        or import_record.get("byteLength") != source_item.get("byteLength")
-        or import_record.get("sourceMode") != source_item.get("sourceMode")
-        or import_record.get("proposedDisposition") != source_item.get("disposition")
-        or import_record.get("finalState") != expected_final_state
-        or import_record.get("blobStored") is not True
-        or import_record.get("contentDigest") != expected_content_digest
-        or import_record.get("storageUri") != f"cas+sha256://{expected_content_digest}"
-    ):
-        raise ApprovalResolutionError(
-            "Imported approval registry does not bind its source item"
+    _expected_item_digest, expected_content_digest = (
+        _validate_imported_approval_binding(
+            source_item=source_item,
+            import_record=import_record,
+            metadata=metadata,
         )
-    import_semantic = dict(import_record)
-    import_record_id = import_semantic.pop("recordId", None)
-    if import_record_id != domain_digest(
-        "tidy.migration-import-item/v1", import_semantic
-    ):
-        raise ApprovalResolutionError("Imported approval registry digest differs")
-    stored = metadata.get_item(
-        import_record["snapshotDigest"], import_record["relativePath"]
     )
-    if stored != dict(import_record):
-        raise ApprovalResolutionError("Stored approval registry checkpoint differs")
-    registration = metadata.get_snapshot_registration(import_record["snapshotDigest"])
-    if registration.get("snapshotDigest") != import_record["snapshotDigest"]:
-        raise ApprovalResolutionError("Approval registry snapshot is unregistered")
     source_bytes = blobs.read_verified(
         _require_digest(expected_content_digest), int(source_item["byteLength"])
     )
@@ -484,6 +446,246 @@ def resolve_approval(
         **semantic,
         "resolutionId": domain_digest("tidy.approval-resolution/v1", semantic),
     }
+
+
+def reconcile_fixture_approval_domain(
+    *,
+    source_item: Mapping[str, Any],
+    import_record: Mapping[str, Any],
+    approval_snapshot: Mapping[str, Any],
+    resolutions: Sequence[Mapping[str, Any]],
+    recorded_at: str,
+    actor: str,
+    metadata: MigrationRepository,
+) -> dict[str, Any]:
+    """Require one explicit resolution per observed fixture approval row."""
+
+    if not isinstance(actor, str) or not actor or len(actor) > 256:
+        raise ApprovalResolutionError("Approval reconciliation actor is invalid")
+    _require_utc_timestamp(recorded_at)
+    source_item_digest, source_content_digest = _validate_imported_approval_binding(
+        source_item=source_item,
+        import_record=import_record,
+        metadata=metadata,
+    )
+    snapshot = _validate_approval_snapshot(approval_snapshot)
+    if (
+        snapshot["sourceSnapshotDigest"] != import_record["snapshotDigest"]
+        or snapshot["sourceContentDigest"] != source_content_digest
+    ):
+        raise ApprovalResolutionError(
+            "Approval snapshot does not bind the imported registry"
+        )
+    stored_snapshots = {
+        record["approvalSnapshotId"]: record
+        for record in metadata.list_typed_records(
+            record_type="tidy.legacy-approval-snapshot/v1"
+        )
+    }
+    if stored_snapshots.get(snapshot["approvalSnapshotId"]) != snapshot:
+        raise ApprovalResolutionError("Stored approval snapshot differs")
+    rows = snapshot["rows"]
+    if len(resolutions) != len(rows):
+        raise ApprovalResolutionError(
+            "Every observed approval row requires one resolution"
+        )
+    stored_resolutions = {
+        record["resolutionId"]: record
+        for record in metadata.list_typed_records(
+            record_type="tidy.approval-resolution/v1"
+        )
+    }
+    by_index: dict[int, dict[str, Any]] = {}
+    for value in resolutions:
+        resolution = _validate_resolution_record(value)
+        index = resolution["sourceRowIndex"]
+        if (
+            resolution["approvalSnapshotId"] != snapshot["approvalSnapshotId"]
+            or not 0 <= index < len(rows)
+            or index in by_index
+        ):
+            raise ApprovalResolutionError(
+                "Approval resolution snapshot or row binding differs"
+            )
+        row = rows[index]
+        source_row = row["sourceRow"]
+        if (
+            resolution["sourceRecordDigest"] != row["sourceRecordDigest"]
+            or resolution["assetId"] != source_row["assetId"]
+            or resolution["sheetName"] != source_row["sheetName"]
+            or stored_resolutions.get(resolution["resolutionId"]) != resolution
+        ):
+            raise ApprovalResolutionError(
+                "Approval resolution does not bind its observed row"
+            )
+        by_index[index] = resolution
+    if set(by_index) != set(range(len(rows))):
+        raise ApprovalResolutionError("Approval resolution row coverage differs")
+
+    target_counts = {
+        name: 0 for name in ("resolved", "ambiguous", "unresolved", "conflict")
+    }
+    reviewer_counts = {name: 0 for name in ("resolved", "unresolved", "missing")}
+    authority_counts = {
+        name: 0
+        for name in (
+            "human_approved",
+            "legacy_approved_unattributed",
+            "incomplete_evidence",
+            "inactive",
+        )
+    }
+    mappings: list[dict[str, Any]] = []
+    for index in range(len(rows)):
+        resolution = by_index[index]
+        target_counts[resolution["targetStatus"]] += 1
+        reviewer_counts[resolution["reviewerStatus"]] += 1
+        authority_counts[resolution["authorityState"]] += 1
+        mappings.append(
+            {
+                "sourceRowIndex": index,
+                "sourceRecordDigest": rows[index]["sourceRecordDigest"],
+                "resolutionId": resolution["resolutionId"],
+                "targetStatus": resolution["targetStatus"],
+                "reviewerStatus": resolution["reviewerStatus"],
+                "authorityState": resolution["authorityState"],
+            }
+        )
+    semantic = {
+        "schemaVersion": "tidy.approval-domain-reconciliation/v1",
+        "sourceSnapshotDigest": import_record["snapshotDigest"],
+        "sourceItemDigest": source_item_digest,
+        "sourceContentDigest": source_content_digest,
+        "importRecordId": import_record["recordId"],
+        "approvalSnapshotId": snapshot["approvalSnapshotId"],
+        "producerDigest": _resolver_source_digest(),
+        "status": "complete-for-observed-snapshot-no-activation-authority",
+        "rowCount": len(rows),
+        "resolutionCount": len(mappings),
+        "targetStatusCounts": target_counts,
+        "reviewerStatusCounts": reviewer_counts,
+        "authorityStateCounts": authority_counts,
+        "activationAuthorized": False,
+        "trainingAuthorized": False,
+        "mappings": mappings,
+        "limitations": [
+            "legacy registry history before this snapshot may be unrecoverable",
+            "workbook acceptance manifests and output gates were not evaluated",
+            "no effective recipe pointer was read or changed",
+        ],
+        "recordedAt": recorded_at,
+        "actor": actor,
+    }
+    report = {
+        **semantic,
+        "recordId": domain_digest("tidy.approval-domain-reconciliation/v1", semantic),
+    }
+    metadata.add_typed_record(
+        record_id=report["recordId"],
+        record_type=report["schemaVersion"],
+        record=report,
+    )
+    return report
+
+
+def _validate_imported_approval_binding(
+    *,
+    source_item: Mapping[str, Any],
+    import_record: Mapping[str, Any],
+    metadata: MigrationRepository,
+) -> tuple[str, str]:
+    if source_item.get("artifactClass") != "approval-registry":
+        raise ApprovalResolutionError("Source item is not an approval registry")
+    expected_item_digest = domain_digest("tidy.export-item/v1", source_item)
+    expected_final_state = {
+        "import": "imported",
+        "duplicate-alias": "duplicate-alias",
+        "exclude": "excluded",
+        "quarantine": "quarantined",
+    }.get(source_item.get("disposition"))
+    expected_content_digest = source_item.get("contentDigest")
+    if (
+        source_item.get("entryType") != "file"
+        or expected_final_state is None
+        or not isinstance(expected_content_digest, str)
+        or import_record.get("schemaVersion") != "tidy.migration-import-item/v1"
+        or import_record.get("snapshotDigest") is None
+        or import_record.get("relativePath") != source_item.get("relativePath")
+        or import_record.get("artifactClass") != "approval-registry"
+        or import_record.get("classification") != "restricted"
+        or import_record.get("sourceItemDigest") != expected_item_digest
+        or import_record.get("sourceContentDigest") != expected_content_digest
+        or import_record.get("byteLength") != source_item.get("byteLength")
+        or import_record.get("sourceMode") != source_item.get("sourceMode")
+        or import_record.get("proposedDisposition") != source_item.get("disposition")
+        or import_record.get("finalState") != expected_final_state
+        or import_record.get("blobStored") is not True
+        or import_record.get("contentDigest") != expected_content_digest
+        or import_record.get("storageUri") != f"cas+sha256://{expected_content_digest}"
+    ):
+        raise ApprovalResolutionError(
+            "Imported approval registry does not bind its source item"
+        )
+    import_semantic = dict(import_record)
+    import_record_id = import_semantic.pop("recordId", None)
+    if import_record_id != domain_digest(
+        "tidy.migration-import-item/v1", import_semantic
+    ):
+        raise ApprovalResolutionError("Imported approval registry digest differs")
+    stored = metadata.get_item(
+        import_record["snapshotDigest"], import_record["relativePath"]
+    )
+    if stored != dict(import_record):
+        raise ApprovalResolutionError("Stored approval registry checkpoint differs")
+    registration = metadata.get_snapshot_registration(import_record["snapshotDigest"])
+    if registration.get("snapshotDigest") != import_record["snapshotDigest"]:
+        raise ApprovalResolutionError("Approval registry snapshot is unregistered")
+    return expected_item_digest, _require_digest(expected_content_digest)
+
+
+def _validate_resolution_record(value: Mapping[str, Any]) -> dict[str, Any]:
+    if value.get("schemaVersion") != "tidy.approval-resolution/v1":
+        raise ApprovalResolutionError("Approval resolution version is invalid")
+    identity = value.get("resolutionId")
+    semantic = dict(value)
+    semantic.pop("resolutionId", None)
+    if identity != domain_digest("tidy.approval-resolution/v1", semantic):
+        raise ApprovalResolutionError("Approval resolution digest differs")
+    index = value.get("sourceRowIndex")
+    if not isinstance(index, int) or isinstance(index, bool) or index < 0:
+        raise ApprovalResolutionError("Approval resolution row index is invalid")
+    target_status = value.get("targetStatus")
+    reviewer_status = value.get("reviewerStatus")
+    authority_state = value.get("authorityState")
+    if (
+        target_status not in ("resolved", "ambiguous", "unresolved", "conflict")
+        or reviewer_status not in ("resolved", "unresolved", "missing")
+        or authority_state
+        not in (
+            "human_approved",
+            "legacy_approved_unattributed",
+            "incomplete_evidence",
+            "inactive",
+        )
+    ):
+        raise ApprovalResolutionError("Approval resolution outcome is invalid")
+    if target_status == "resolved":
+        _require_digest(value.get("targetWorkbookDigest"))
+        if not isinstance(value.get("targetSheetName"), str):
+            raise ApprovalResolutionError("Resolved approval target is invalid")
+    elif (
+        value.get("targetWorkbookDigest") is not None
+        or value.get("targetSheetName") is not None
+    ):
+        raise ApprovalResolutionError("Unresolved approval target must be null")
+    if authority_state == "human_approved" and (
+        target_status != "resolved"
+        or reviewer_status != "resolved"
+        or value.get("conflictReasons")
+        or value.get("incompleteReasons")
+    ):
+        raise ApprovalResolutionError("Human approval outcome is inconsistent")
+    return dict(value)
 
 
 def _validate_approval_snapshot(value: Mapping[str, Any]) -> dict[str, Any]:

@@ -13,9 +13,11 @@ from referencing import Registry, Resource
 
 from tidy_orchestrator.artifacts import canonical_json_bytes, sha256_digest
 from tidy_orchestrator.legacy_approvals import (
+    ApprovalResolutionError,
     ApprovalTargetCandidate,
     ReviewerIdentityRegistry,
     persist_fixture_legacy_approval_snapshot,
+    reconcile_fixture_approval_domain,
     resolve_approval,
 )
 from tidy_orchestrator.migration_evidence import (
@@ -388,9 +390,47 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
         record_type=approval_resolution["schemaVersion"],
         record=approval_resolution,
     )
+    with pytest.raises(
+        ApprovalResolutionError,
+        match="Every observed approval row requires one resolution",
+    ):
+        reconcile_fixture_approval_domain(
+            source_item=approval_source_item,
+            import_record=approval_import_record,
+            approval_snapshot=approval_snapshot,
+            resolutions=[],
+            recorded_at=FIXED_TIME,
+            actor="phase-b-fixture-interpreter",
+            metadata=metadata,
+        )
+    approval_domain_report = reconcile_fixture_approval_domain(
+        source_item=approval_source_item,
+        import_record=approval_import_record,
+        approval_snapshot=approval_snapshot,
+        resolutions=[approval_resolution],
+        recorded_at=FIXED_TIME,
+        actor="phase-b-fixture-interpreter",
+        metadata=metadata,
+    )
+    assert approval_domain_report["rowCount"] == 1
+    assert approval_domain_report["resolutionCount"] == 1
+    assert approval_domain_report["targetStatusCounts"] == {
+        "resolved": 1,
+        "ambiguous": 0,
+        "unresolved": 0,
+        "conflict": 0,
+    }
+    assert approval_domain_report["authorityStateCounts"] == {
+        "human_approved": 0,
+        "legacy_approved_unattributed": 1,
+        "incomplete_evidence": 0,
+        "inactive": 0,
+    }
+    assert approval_domain_report["activationAuthorized"] is False
+    assert approval_domain_report["trainingAuthorized"] is False
 
     typed_records = metadata.list_typed_records()
-    assert len(typed_records) == 7
+    assert len(typed_records) == 8
     approval_record = next(
         record
         for record in typed_records
@@ -419,6 +459,11 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
     schemas, registry = _schemas()
     _validate(schemas["snapshot-registration.schema.json"], registry, registration)
     _validate(schemas["reconciliation.schema.json"], registry, report)
+    _validate(
+        schemas["approval-domain-reconciliation.schema.json"],
+        registry,
+        approval_domain_report,
+    )
     _validate(
         schemas["approval-registry-evidence.schema.json"],
         registry,

@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/approval-domain-reconciliation.schema.json",
+  "title": "ApprovalDomainReconciliationV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceSnapshotDigest",
+    "sourceItemDigest",
+    "sourceContentDigest",
+    "importRecordId",
+    "approvalSnapshotId",
+    "producerDigest",
+    "status",
+    "rowCount",
+    "resolutionCount",
+    "targetStatusCounts",
+    "reviewerStatusCounts",
+    "authorityStateCounts",
+    "activationAuthorized",
+    "trainingAuthorized",
+    "mappings",
+    "limitations",
+    "recordedAt",
+    "actor",
+    "recordId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.approval-domain-reconciliation/v1" },
+    "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+    "sourceItemDigest": { "$ref": "#/$defs/digest" },
+    "sourceContentDigest": { "$ref": "#/$defs/digest" },
+    "importRecordId": { "$ref": "#/$defs/digest" },
+    "approvalSnapshotId": { "$ref": "#/$defs/digest" },
+    "producerDigest": { "$ref": "#/$defs/digest" },
+    "status": {
+      "const": "complete-for-observed-snapshot-no-activation-authority"
+    },
+    "rowCount": { "type": "integer", "minimum": 0, "maximum": 100000 },
+    "resolutionCount": { "type": "integer", "minimum": 0, "maximum": 100000 },
+    "targetStatusCounts": {
+      "$ref": "#/$defs/targetStatusCounts"
+    },
+    "reviewerStatusCounts": {
+      "$ref": "#/$defs/reviewerStatusCounts"
+    },
+    "authorityStateCounts": {
+      "$ref": "#/$defs/authorityStateCounts"
+    },
+    "activationAuthorized": { "const": false },
+    "trainingAuthorized": { "const": false },
+    "mappings": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceRowIndex",
+          "sourceRecordDigest",
+          "resolutionId",
+          "targetStatus",
+          "reviewerStatus",
+          "authorityState"
+        ],
+        "properties": {
+          "sourceRowIndex": { "type": "integer", "minimum": 0 },
+          "sourceRecordDigest": { "$ref": "#/$defs/digest" },
+          "resolutionId": { "$ref": "#/$defs/digest" },
+          "targetStatus": {
+            "enum": ["resolved", "ambiguous", "unresolved", "conflict"]
+          },
+          "reviewerStatus": {
+            "enum": ["resolved", "unresolved", "missing"]
+          },
+          "authorityState": {
+            "enum": [
+              "human_approved",
+              "legacy_approved_unattributed",
+              "incomplete_evidence",
+              "inactive"
+            ]
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "const": "legacy registry history before this snapshot may be unrecoverable"
+        },
+        {
+          "const": "workbook acceptance manifests and output gates were not evaluated"
+        },
+        { "const": "no effective recipe pointer was read or changed" }
+      ],
+      "items": false
+    },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "actor": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "recordId": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "count": { "type": "integer", "minimum": 0, "maximum": 100000 },
+    "targetStatusCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolved", "ambiguous", "unresolved", "conflict"],
+      "properties": {
+        "resolved": { "$ref": "#/$defs/count" },
+        "ambiguous": { "$ref": "#/$defs/count" },
+        "unresolved": { "$ref": "#/$defs/count" },
+        "conflict": { "$ref": "#/$defs/count" }
+      }
+    },
+    "reviewerStatusCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolved", "unresolved", "missing"],
+      "properties": {
+        "resolved": { "$ref": "#/$defs/count" },
+        "unresolved": { "$ref": "#/$defs/count" },
+        "missing": { "$ref": "#/$defs/count" }
+      }
+    },
+    "authorityStateCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_approved",
+        "legacy_approved_unattributed",
+        "incomplete_evidence",
+        "inactive"
+      ],
+      "properties": {
+        "human_approved": { "$ref": "#/$defs/count" },
+        "legacy_approved_unattributed": { "$ref": "#/$defs/count" },
+        "incomplete_evidence": { "$ref": "#/$defs/count" },
+        "inactive": { "$ref": "#/$defs/count" }
+      }
+    }
+  }
+}

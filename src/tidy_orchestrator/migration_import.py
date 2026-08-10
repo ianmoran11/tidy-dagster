@@ -37,6 +37,7 @@ _MAX_SNAPSHOT_BYTES = 1024 * 1024 * 1024
 _DIGEST_PREFIX = "sha256:"
 _COPY_DISPOSITIONS = frozenset(("import", "duplicate-alias", "quarantine"))
 _TYPED_ID_FIELDS = {
+    "tidy.approval-domain-reconciliation/v1": "recordId",
     "tidy.approval-registry-evidence-import/v1": "recordId",
     "tidy.approval-resolution/v1": "resolutionId",
     "tidy.generation-evidence-import/v1": "recordId",

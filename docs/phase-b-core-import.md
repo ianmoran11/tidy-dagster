@@ -108,8 +108,10 @@ and simple/rich approval rows. This is compatibility behavior, not RFC
 A fixture-only bridge now requires the approval-registry import checkpoint and
 read-verifies its exact committed CAS bytes before constructing and storing the
 point-in-time snapshot. A synthetic simple row then resolves to one exact
-workbook candidate while remaining `legacy_approved_unattributed`; it creates no
-active or training authority.
+workbook candidate while remaining `legacy_approved_unattributed`. A separate
+approval-domain reconciliation requires exactly one stored resolution for every
+observed row and reports target, reviewer, and authority-state counts while
+explicitly setting activation and training authorization to false.
 
 A record becomes `human_approved` only if exactly one workbook/sheet target,
 one explicitly curated reviewer label, the declared recipe digest, the
@@ -148,7 +150,7 @@ table.
 - item import checkpoints;
 - source aliases and core migration reconciliation;
 - legacy approval snapshots, reviewer identities, recipe-digest verification,
-  and approval-resolution outcomes; and
+  approval-resolution outcomes, and per-row approval-domain reconciliation; and
 - conservative approval, recipe, generation, and model evidence dispositions;
   and
 - per-source-item conservative semantic reconciliation.
