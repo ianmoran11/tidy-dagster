@@ -1,7 +1,7 @@
 # Phase A source inventory
 
 - Status: frozen implementation candidate published and verified on the NAS
-- Acceptance status: committed review candidate; pending independent review
+- Review status: independent review explicitly waived for progression; not performed
 - Provider calls: zero
 - TidyCell source writes: zero
 - TidyCell content bytes imported: zero
@@ -261,24 +261,19 @@ Before the final freeze:
 - the real Dagster operational regression passed independently of this
   non-Dagster boundary.
 
-## Remaining acceptance gates
+## Review waiver and remaining gates
 
-This commit preserves the implementation candidate but does not mark Phase A
-accepted. Acceptance still requires:
-
-1. an independent code/evidence reviewer to accept the implementation, policy,
-   final snapshot, warning treatment, workbook-format disclosure, and NAS
-   publication protocol; and
-2. any review findings to be resolved in a follow-up commit without changing the
-   exporter closure bound above, or a new snapshot to be frozen if they do.
+The user explicitly waived independent Phase A review only so bounded Phase B
+implementation could begin. No review occurred, and this evidence must not be
+described as independently accepted. See ADR 0004.
 
 Bulk Phase B import remains blocked. Before importing 19.33 GiB, Phase B must:
 
-- restore safe internal free space and resolve current workstation I/O
-  contention;
-- implement and review a NAS content-blob adapter while keeping authoritative
-  SQLite metadata local, or select a separately reviewed network-safe metadata
-  store;
+- keep internal utilization at or below the safe operating target (it recovered
+  to about 83% after briefly reaching 98%);
+- independently review and explicitly promote the fixture-proven committed
+  filesystem blob adapter for bulk NAS use, or implement another reviewed
+  adapter, while keeping authoritative SQLite metadata local;
 - verify Synology server-side ACL, backup/snapshot, and at-rest-encryption policy
   for restricted evidence;
 - verify each source object against this snapshot; and

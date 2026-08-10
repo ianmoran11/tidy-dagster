@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/legacy-approval-snapshot.schema.json",
+  "title": "LegacyApprovalSnapshotV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceSnapshotDigest",
+    "sourceContentDigest",
+    "sourceVersion",
+    "digestAlgorithm",
+    "digestSourceDigest",
+    "digestVerifierDigest",
+    "frozenAt",
+    "historyCompleteness",
+    "rows",
+    "approvalSnapshotId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.legacy-approval-snapshot/v1" },
+    "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+    "sourceContentDigest": { "$ref": "#/$defs/digest" },
+    "sourceVersion": { "const": 1 },
+    "digestAlgorithm": { "const": "tidycell-digest-record-v1" },
+    "digestSourceDigest": {
+      "const": "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
+    },
+    "digestVerifierDigest": { "$ref": "#/$defs/digest" },
+    "frozenAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "historyCompleteness": { "const": "point-in-time-current-state-only" },
+    "rows": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "sourceRecordDigest", "sourceRow"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 0 },
+          "sourceRecordDigest": { "$ref": "#/$defs/digest" },
+          "sourceRow": {
+            "type": "object",
+            "required": ["assetId", "sheetName"],
+            "properties": {
+              "assetId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "sheetName": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "approvedAt": { "type": "string", "maxLength": 128 },
+              "approvedBy": { "type": "string", "maxLength": 256 },
+              "recipeDigest": { "$ref": "#/$defs/digest" },
+              "originalRecipeDigest": { "$ref": "#/$defs/digest" }
+            }
+          }
+        }
+      }
+    },
+    "approvalSnapshotId": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/recipe-evidence-import.schema.json",
+  "title": "RecipeEvidenceImportV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceSnapshotDigest",
+    "sourceItemDigest",
+    "sourceContentDigest",
+    "relativePath",
+    "sourceFinalState",
+    "blobStored",
+    "lifecycleState",
+    "active",
+    "trainingEligible",
+    "reason",
+    "producerDigest",
+    "recordedAt",
+    "actor",
+    "recordId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.recipe-evidence-import/v1" },
+    "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+    "sourceItemDigest": { "$ref": "#/$defs/digest" },
+    "sourceContentDigest": { "$ref": "#/$defs/digest" },
+    "relativePath": { "type": "string", "minLength": 1, "maxLength": 4096 },
+    "sourceFinalState": {
+      "enum": ["imported", "duplicate-alias", "excluded", "quarantined"]
+    },
+    "blobStored": { "type": "boolean" },
+    "lifecycleState": { "const": "incomplete_evidence" },
+    "active": { "const": false },
+    "trainingEligible": { "const": false },
+    "reason": {
+      "enum": [
+        "SOURCE_EXCLUDED",
+        "SOURCE_QUARANTINED",
+        "TYPED_RECIPE_PARSE_NOT_RUN"
+      ]
+    },
+    "producerDigest": { "$ref": "#/$defs/digest" },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "actor": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "recordId": { "$ref": "#/$defs/digest" }
+  },
+  "if": { "properties": { "sourceFinalState": { "const": "excluded" } } },
+  "then": { "properties": { "blobStored": { "const": false } } },
+  "else": { "properties": { "blobStored": { "const": true } } },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

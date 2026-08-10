@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/import-item.schema.json",
+  "title": "MigrationImportItemV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "snapshotDigest",
+    "importerDigest",
+    "relativePath",
+    "entryType",
+    "artifactClass",
+    "classification",
+    "proposedDisposition",
+    "finalState",
+    "sourceMode",
+    "byteLength",
+    "sourceItemDigest",
+    "sourceContentDigest",
+    "contentDigest",
+    "blobStored",
+    "storageUri",
+    "recordedAt",
+    "actor",
+    "recordId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.migration-import-item/v1" },
+    "snapshotDigest": { "$ref": "#/$defs/digest" },
+    "importerDigest": { "$ref": "#/$defs/digest" },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "entryType": { "enum": ["file", "excluded-subtree", "excluded-symlink"] },
+    "artifactClass": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "classification": { "enum": ["source-evidence", "restricted"] },
+    "proposedDisposition": {
+      "enum": ["import", "duplicate-alias", "exclude", "quarantine"]
+    },
+    "finalState": {
+      "enum": ["imported", "duplicate-alias", "excluded", "quarantined"]
+    },
+    "sourceMode": { "type": "integer", "minimum": 0 },
+    "byteLength": { "type": "integer", "minimum": 0 },
+    "sourceItemDigest": { "$ref": "#/$defs/digest" },
+    "sourceContentDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "contentDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "blobStored": { "type": "boolean" },
+    "storageUri": {
+      "oneOf": [
+        { "type": "string", "pattern": "^cas\\+sha256://sha256:[0-9a-f]{64}$" },
+        { "type": "null" }
+      ]
+    },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "actor": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "recordId": { "$ref": "#/$defs/digest" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "blobStored": { "const": true } } },
+      "then": {
+        "properties": {
+          "entryType": { "const": "file" },
+          "contentDigest": { "$ref": "#/$defs/digest" },
+          "storageUri": { "type": "string" }
+        }
+      },
+      "else": {
+        "properties": {
+          "contentDigest": { "type": "null" },
+          "storageUri": { "type": "null" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

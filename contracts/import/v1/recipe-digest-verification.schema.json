@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/recipe-digest-verification.schema.json",
+  "title": "RecipeDigestVerificationV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "algorithm",
+    "sourceDigest",
+    "declaredDigest",
+    "computedDigest",
+    "matches",
+    "recipeContentDigest",
+    "verifierDigest",
+    "verificationId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.recipe-digest-verification/v1" },
+    "algorithm": { "const": "tidycell-digest-record-v1" },
+    "sourceDigest": {
+      "const": "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
+    },
+    "declaredDigest": { "$ref": "#/$defs/digest" },
+    "computedDigest": { "$ref": "#/$defs/digest" },
+    "matches": { "type": "boolean" },
+    "recipeContentDigest": { "$ref": "#/$defs/digest" },
+    "verifierDigest": { "$ref": "#/$defs/digest" },
+    "verificationId": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

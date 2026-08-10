@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "tidycell-digest-record-vectors/v1",
+  "algorithm": "tidycell-digest-record-v1",
+  "source": {
+    "snapshotDigest": "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d",
+    "gitHead": "1be6c995fa931e9860468e40490433161b0121cb",
+    "gitTree": "96a76a1cbc6f2da3facd31d7cdae5b05926361d3",
+    "relativePath": "scripts/harvest/candidate-contract.ts",
+    "contentDigest": "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
+  },
+  "vectors": [
+    {
+      "id": "null",
+      "input": null,
+      "canonical": "null",
+      "digest": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "id": "true",
+      "input": true,
+      "canonical": "true",
+      "digest": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "id": "false",
+      "input": false,
+      "canonical": "false",
+      "digest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+    },
+    {
+      "id": "ascii",
+      "input": "hello",
+      "canonical": "\"hello\"",
+      "digest": "sha256:5aa762ae383fbb727af3c7a36d4940a5b8c40a989452d2304fc958ff3f354e7a"
+    },
+    {
+      "id": "unicode",
+      "input": "café 😀",
+      "canonical": "\"café 😀\"",
+      "digest": "sha256:89fa4ccbaa53bc2ebec0726f73beccbe1618075d3ef9e740cf34ec284b07a66e"
+    },
+    {
+      "id": "zero",
+      "input": 0,
+      "canonical": "0",
+      "digest": "sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "id": "negative",
+      "input": -12.5,
+      "canonical": "-12.5",
+      "digest": "sha256:6e734d1ba4828d18ef4d256e8820f89e30551bca8b2c5740f2ed9fc532da07de"
+    },
+    {
+      "id": "small-exponent",
+      "input": 1e-7,
+      "canonical": "1e-7",
+      "digest": "sha256:5b33e02f2c5103a05d32f6ba9cb058294452bfbf393967f68bb30c1bdcbbab22"
+    },
+    {
+      "id": "large-exponent",
+      "input": 1e21,
+      "canonical": "1e+21",
+      "digest": "sha256:241c4643fa70b1dcde1205b71be4e3bebb17e9f880c8e1a33d0ead6c27271d3c"
+    },
+    {
+      "id": "empty-array",
+      "input": [],
+      "canonical": "[]",
+      "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "id": "mixed-array",
+      "input": [1, "x", null, { "b": 2, "a": 1 }],
+      "canonical": "[1,\"x\",null,{\"a\":1,\"b\":2}]",
+      "digest": "sha256:22705f4dfa365d8f102794e6d7799523b055118520f331b950e0242aa0a655e4"
+    },
+    {
+      "id": "sorted-object",
+      "input": { "z": 0, "a": 1, "m": 2 },
+      "canonical": "{\"a\":1,\"m\":2,\"z\":0}",
+      "digest": "sha256:c36d3015784a7163bca85c476e0454d16c6b34df33d45d28cdffb3da02251e73"
+    },
+    {
+      "id": "nested",
+      "input": { "outer": { "β": "beta", "a": [3, 2, 1] }, "empty": {} },
+      "canonical": "{\"empty\":{},\"outer\":{\"a\":[3,2,1],\"β\":\"beta\"}}",
+      "digest": "sha256:559e6a5eb834e9785ce2f81ca7bed348806b66e7e20edaea99f64513486093c1"
+    },
+    {
+      "id": "unicode-keys",
+      "input": { "😀": 1, "": 2, "é": 3, "e": 4 },
+      "canonical": "{\"e\":4,\"é\":3,\"😀\":1,\"\":2}",
+      "digest": "sha256:4230e827d2047666161a2677a2eee17eef30f8501f69fb88844966451488c70e"
+    },
+    {
+      "id": "escaped",
+      "input": { "quote": "\"", "slash": "\\", "control": "\n\t" },
+      "canonical": "{\"control\":\"\\n\\t\",\"quote\":\"\\\"\",\"slash\":\"\\\\\"}",
+      "digest": "sha256:dd49c69caddc39acd82cecc8e3a6d69bea89e230de2617ae9c368fe300423d0d"
+    },
+    {
+      "id": "array-objects",
+      "input": [
+        { "b": 1, "a": 2 },
+        { "d": 3, "c": 4 }
+      ],
+      "canonical": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]",
+      "digest": "sha256:b7674d3bc235a66d417357c0c4e21e834e6d899b1535ccdd3c988e9ce73d2c3d"
+    },
+    {
+      "id": "simple-approval-row",
+      "input": {
+        "assetId": "asset-one",
+        "sheetName": "Table 1",
+        "approvedAt": ""
+      },
+      "canonical": "{\"approvedAt\":\"\",\"assetId\":\"asset-one\",\"sheetName\":\"Table 1\"}",
+      "digest": "sha256:d4745ceb965818e2dd15c924193b7592199a75a0b781d4427aabe3e72537c6dd"
+    },
+    {
+      "id": "rich-approval-row",
+      "input": {
+        "assetId": "asset-one",
+        "sheetName": "Table 1",
+        "approvedAt": "2026-08-10T09:00:00Z",
+        "approvedBy": "Ian Moran",
+        "recipeDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "harvest": {
+          "workbookContentSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "canonical": "{\"approvedAt\":\"2026-08-10T09:00:00Z\",\"approvedBy\":\"Ian Moran\",\"assetId\":\"asset-one\",\"harvest\":{\"workbookContentSha256\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"recipeDigest\":\"sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"sheetName\":\"Table 1\"}",
+      "digest": "sha256:e066f901e9cea168c0398213b98450414432542a15c34c97f7ee65ca36461712"
+    }
+  ]
+}

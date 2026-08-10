@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/approval-resolution.schema.json",
+  "title": "ApprovalResolutionV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "approvalSnapshotId",
+    "sourceRowIndex",
+    "sourceRecordDigest",
+    "assetId",
+    "sheetName",
+    "originalApprovedBy",
+    "declaredRecipeDigest",
+    "originalRecipeDigest",
+    "targetStatus",
+    "targetWorkbookDigest",
+    "targetSheetName",
+    "candidates",
+    "conflictReasons",
+    "incompleteReasons",
+    "reviewerStatus",
+    "reviewerId",
+    "recipeVerificationId",
+    "authorityState",
+    "historyCompleteness",
+    "recordedAt",
+    "actor",
+    "resolverDigest",
+    "resolutionId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.approval-resolution/v1" },
+    "approvalSnapshotId": { "$ref": "#/$defs/digest" },
+    "sourceRowIndex": { "type": "integer", "minimum": 0 },
+    "sourceRecordDigest": { "$ref": "#/$defs/digest" },
+    "assetId": { "type": "string", "minLength": 1, "maxLength": 4096 },
+    "sheetName": { "type": "string", "minLength": 1, "maxLength": 4096 },
+    "originalApprovedBy": { "$ref": "#/$defs/nullableString" },
+    "declaredRecipeDigest": { "$ref": "#/$defs/nullableDigest" },
+    "originalRecipeDigest": { "$ref": "#/$defs/nullableDigest" },
+    "targetStatus": {
+      "enum": ["resolved", "ambiguous", "unresolved", "conflict"]
+    },
+    "targetWorkbookDigest": { "$ref": "#/$defs/nullableDigest" },
+    "targetSheetName": { "$ref": "#/$defs/nullableString" },
+    "candidates": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "workbookDigest",
+          "sheetName",
+          "bindingKind",
+          "recipeDigest",
+          "evidenceDigests"
+        ],
+        "properties": {
+          "workbookDigest": { "$ref": "#/$defs/digest" },
+          "sheetName": { "type": "string", "minLength": 1, "maxLength": 4096 },
+          "bindingKind": {
+            "enum": [
+              "exact-workbook-digest",
+              "conversion-provenance",
+              "source-digest-chain",
+              "explicit-human-binding"
+            ]
+          },
+          "recipeDigest": { "$ref": "#/$defs/nullableDigest" },
+          "evidenceDigests": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10000,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/digest" }
+          }
+        }
+      }
+    },
+    "conflictReasons": { "$ref": "#/$defs/reasons" },
+    "incompleteReasons": { "$ref": "#/$defs/reasons" },
+    "reviewerStatus": { "enum": ["resolved", "unresolved", "missing"] },
+    "reviewerId": { "$ref": "#/$defs/nullableDigest" },
+    "recipeVerificationId": { "$ref": "#/$defs/nullableDigest" },
+    "authorityState": {
+      "enum": [
+        "human_approved",
+        "legacy_approved_unattributed",
+        "incomplete_evidence",
+        "inactive"
+      ]
+    },
+    "historyCompleteness": { "const": "point-in-time-current-state-only" },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "actor": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "resolverDigest": { "$ref": "#/$defs/digest" },
+    "resolutionId": { "$ref": "#/$defs/digest" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "targetStatus": { "const": "resolved" } } },
+      "then": {
+        "properties": {
+          "targetWorkbookDigest": { "$ref": "#/$defs/digest" },
+          "targetSheetName": { "type": "string", "minLength": 1 }
+        }
+      },
+      "else": {
+        "properties": {
+          "targetWorkbookDigest": { "type": "null" },
+          "targetSheetName": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "authorityState": { "const": "human_approved" } }
+      },
+      "then": {
+        "properties": {
+          "targetStatus": { "const": "resolved" },
+          "reviewerStatus": { "const": "resolved" },
+          "reviewerId": { "$ref": "#/$defs/digest" },
+          "recipeVerificationId": { "$ref": "#/$defs/digest" },
+          "conflictReasons": { "maxItems": 0 },
+          "incompleteReasons": { "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullableDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "nullableString": {
+      "oneOf": [{ "type": "string", "maxLength": 4096 }, { "type": "null" }]
+    },
+    "reasons": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+    }
+  }
+}

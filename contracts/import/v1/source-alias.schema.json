@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/source-alias.schema.json",
+  "title": "SourceAliasV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "snapshotDigest",
+    "importerDigest",
+    "relativePath",
+    "contentDigest",
+    "finalState",
+    "recordedAt",
+    "actor",
+    "aliasId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.source-alias/v1" },
+    "snapshotDigest": { "$ref": "#/$defs/digest" },
+    "importerDigest": { "$ref": "#/$defs/digest" },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "contentDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "finalState": {
+      "enum": ["imported", "duplicate-alias", "excluded", "quarantined"]
+    },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "actor": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "aliasId": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

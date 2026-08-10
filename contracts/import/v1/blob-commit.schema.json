@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/blob-commit.schema.json",
+  "title": "CommittedBlobV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contentDigest", "byteLength"],
+  "properties": {
+    "schemaVersion": { "const": "tidy.committed-blob/v1" },
+    "contentDigest": { "$ref": "#/$defs/digest" },
+    "byteLength": { "type": "integer", "minimum": 0 }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

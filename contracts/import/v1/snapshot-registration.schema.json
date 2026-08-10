@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/snapshot-registration.schema.json",
+  "title": "MigrationSnapshotRegistrationV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "snapshotDigest",
+    "inventoryDigest",
+    "itemManifestDigest",
+    "snapshotFileDigest",
+    "storageUri",
+    "importerDigest",
+    "sourceRootId",
+    "itemCount"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.migration-snapshot-registration/v1" },
+    "snapshotDigest": { "$ref": "#/$defs/digest" },
+    "inventoryDigest": { "$ref": "#/$defs/digest" },
+    "itemManifestDigest": { "$ref": "#/$defs/digest" },
+    "snapshotFileDigest": { "$ref": "#/$defs/digest" },
+    "storageUri": {
+      "type": "string",
+      "pattern": "^cas\\+sha256://sha256:[0-9a-f]{64}$"
+    },
+    "importerDigest": { "$ref": "#/$defs/digest" },
+    "sourceRootId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "itemCount": { "type": "integer", "minimum": 0 }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/reviewer-identity.schema.json",
+  "title": "ReviewerIdentityV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "displayName",
+    "acceptedLabels",
+    "curatedBy",
+    "recordedAt",
+    "reviewerId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.reviewer-identity/v1" },
+    "displayName": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "acceptedLabels": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 256 }
+    },
+    "curatedBy": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "reviewerId": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}
