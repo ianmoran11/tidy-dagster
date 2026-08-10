@@ -92,6 +92,18 @@ def _validate(name: str, value) -> None:
 
 
 def test_typed_evidence_is_stored_but_never_activated(tmp_path: Path) -> None:
+    approval_item = _item("approvals.json", "approval-registry")
+    approval = create_typed_evidence_records(
+        source_item=approval_item,
+        import_record=_import(approval_item),
+        recorded_at=TIME,
+        actor=ACTOR,
+    )[0]
+    assert approval["approvalAuthorityCreated"] is False
+    assert approval["interpretationStatus"] == "not-run"
+    assert approval["historyCompleteness"] == "point-in-time-current-state-only"
+    _validate("approval-registry-evidence.schema.json", approval)
+
     recipe_item = _item(
         "candidate.recipe.json", "recipe-evidence", disposition="quarantine"
     )
@@ -144,13 +156,13 @@ def test_typed_evidence_is_stored_but_never_activated(tmp_path: Path) -> None:
     _validate("generation-evidence.schema.json", generation)
 
     repository = MigrationRepository(tmp_path / "metadata")
-    for record in (recipe, model, generation):
+    for record in (approval, recipe, model, generation):
         repository.add_typed_record(
             record_id=record["recordId"],
             record_type=record["schemaVersion"],
             record=record,
         )
-    assert len(repository.list_typed_records()) == 3
+    assert len(repository.list_typed_records()) == 4
     with pytest.raises(ValueError, match="schemaVersion"):
         repository.add_typed_record(
             record_id=model["recordId"],

@@ -37,6 +37,7 @@ _MAX_SNAPSHOT_BYTES = 1024 * 1024 * 1024
 _DIGEST_PREFIX = "sha256:"
 _COPY_DISPOSITIONS = frozenset(("import", "duplicate-alias", "quarantine"))
 _TYPED_ID_FIELDS = {
+    "tidy.approval-registry-evidence-import/v1": "recordId",
     "tidy.approval-resolution/v1": "resolutionId",
     "tidy.generation-evidence-import/v1": "recordId",
     "tidy.legacy-approval-snapshot/v1": "approvalSnapshotId",
@@ -44,6 +45,7 @@ _TYPED_ID_FIELDS = {
     "tidy.recipe-digest-verification/v1": "verificationId",
     "tidy.recipe-evidence-import/v1": "recordId",
     "tidy.reviewer-identity/v1": "reviewerId",
+    "tidy.semantic-import-reconciliation/v1": "recordId",
 }
 _RESTRICTED_CLASSES = frozenset(
     (

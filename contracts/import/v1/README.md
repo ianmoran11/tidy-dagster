@@ -25,10 +25,15 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
   `recipe-digest-verification.schema.json` — strict vectors plus bindings to the
   pinned historical TypeScript `digestRecord` compatibility algorithm, source,
   and verifier.
-- `recipe-evidence-import.schema.json`, `generation-evidence.schema.json`, and
+- `approval-registry-evidence.schema.json`,
+  `recipe-evidence-import.schema.json`, `generation-evidence.schema.json`, and
   `model-package-disposition.schema.json` — conservative typed dispositions.
-  These records cannot activate recipes, make evidence training-eligible, load
-  a model, or interpret provider evidence.
+  These records cannot create approval authority, activate recipes, make
+  evidence training-eligible, load a model, or interpret provider evidence.
+- `semantic-reconciliation.schema.json` — a per-source-item binding from the
+  complete core reconciliation to the exact conservative typed records (or an
+  explicit `core-content-only` outcome). Its status still declares full
+  semantic import pending.
 
 ## Current authorization boundary
 
@@ -54,8 +59,9 @@ or CLI. The final TidyCell snapshot therefore cannot be copied by this slice.
 The core reconciliation report states
 `core-content-complete-semantic-import-pending`. Fixture-only groundwork now
 covers historical `digestRecord` vectors, exact reviewer-label resolution,
-legacy approval outcome states, and non-authoritative recipe/generation/model
-dispositions. No real TidyCell registry or content was processed.
+legacy approval outcome states, non-authoritative approval/recipe/generation/
+model dispositions, and complete per-item reconciliation of that conservative
+pass. No real TidyCell registry or content was processed.
 
 Phase B is not complete until the frozen estate is imported under a separately
 reviewed live authorization, typed parsers bind complete recipe and generation

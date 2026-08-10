@@ -14,6 +14,7 @@ from referencing import Registry, Resource
 from tidy_orchestrator.artifacts import canonical_json_bytes
 from tidy_orchestrator.migration_evidence import (
     persist_conservative_evidence_dispositions,
+    reconcile_conservative_evidence,
 )
 from tidy_orchestrator.migration_import import (
     BlobIntegrityError,
@@ -69,6 +70,14 @@ def _policy(tmp_path: Path) -> Path:
                 "artifactClass": "generated-development-symlink",
             },
             {
+                "id": "approval-registry",
+                "priority": 92,
+                "entryTypes": ["file"],
+                "basenameGlobs": ["approvals.json"],
+                "disposition": "import",
+                "artifactClass": "approval-registry",
+            },
+            {
                 "id": "workbook",
                 "priority": 90,
                 "entryTypes": ["file"],
@@ -117,6 +126,20 @@ def _frozen_fixture(tmp_path: Path) -> tuple[Path, Path, dict]:
     (source / "node_modules").mkdir(parents=True)
     shared = b"PK\x03\x04shared-workbook"
     (source / "a.xlsx").write_bytes(shared)
+    (source / "approvals.json").write_text(
+        json.dumps(
+            {
+                "version": 1,
+                "approvals": [
+                    {
+                        "assetId": "fixture-asset",
+                        "sheetName": "Table 1",
+                        "approvedAt": "",
+                    }
+                ],
+            }
+        )
+    )
     (source / "b.xlsx").write_bytes(shared)
     (source / "candidate.recipe.json").write_text("{malformed")
     (source / "legacy-model.pkl").write_bytes(b"not-loaded-pickle-evidence")
@@ -204,7 +227,7 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
 
     completed = importer.run()
     assert completed.complete is True
-    assert completed.recorded_items == 8
+    assert completed.recorded_items == 9
     repeated = importer.run()
     assert repeated == completed
 
@@ -214,9 +237,9 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
     assert [item["relativePath"] for item in items] == sorted(
         item["relativePath"] for item in items
     )
-    assert len(items) == len(aliases) == 8
+    assert len(items) == len(aliases) == 9
     assert Counter(item["finalState"] for item in items) == {
-        "imported": 3,
+        "imported": 4,
         "duplicate-alias": 1,
         "quarantined": 1,
         "excluded": 3,
@@ -225,11 +248,12 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
     assert by_path["a.xlsx"]["contentDigest"] == by_path["b.xlsx"]["contentDigest"]
     assert by_path["a.xlsx"]["blobStored"] is True
     assert by_path["b.xlsx"]["blobStored"] is True
+    assert by_path["approvals.json"]["classification"] == "restricted"
     assert by_path["candidate.recipe.json"]["classification"] == "restricted"
     assert by_path["legacy-model.pkl"]["classification"] == "restricted"
     assert by_path["provider-result.json"]["classification"] == "restricted"
-    assert len(contents) == 4
-    assert len(blobs.committed_digests()) == 5  # snapshot + four unique source objects
+    assert len(contents) == 5
+    assert len(blobs.committed_digests()) == 6  # snapshot + five unique source objects
 
     report = importer.reconcile()
     assert report["contentReconciliationStatus"] == "complete"
@@ -237,12 +261,20 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
     assert report["stateCounts"] == {
         "duplicate-alias": 1,
         "excluded": 3,
-        "imported": 3,
+        "imported": 4,
         "quarantined": 1,
     }
-    assert report["uniqueStoredObjects"] == 4
-    assert len(report["mappings"]) == 8
+    assert report["uniqueStoredObjects"] == 5
+    assert len(report["mappings"]) == 9
     assert metadata.get_reconciliation(report["reportDigest"]) == report
+    with pytest.raises(IncompleteMigration, match="Typed evidence differs"):
+        reconcile_conservative_evidence(
+            snapshot=snapshot,
+            metadata=metadata,
+            core_reconciliation=report,
+            recorded_at=FIXED_TIME,
+            actor="phase-b-fixture-interpreter",
+        )
 
     disposition_counts = persist_conservative_evidence_dispositions(
         snapshot=snapshot,
@@ -251,6 +283,7 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
         actor="phase-b-fixture-interpreter",
     )
     assert disposition_counts == {
+        "tidy.approval-registry-evidence-import/v1": 1,
         "tidy.generation-evidence-import/v1": 1,
         "tidy.model-package-disposition/v1": 1,
         "tidy.recipe-evidence-import/v1": 1,
@@ -264,8 +297,43 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
         )
         == disposition_counts
     )
+    semantic_report = reconcile_conservative_evidence(
+        snapshot=snapshot,
+        metadata=metadata,
+        core_reconciliation=report,
+        recorded_at=FIXED_TIME,
+        actor="phase-b-fixture-interpreter",
+    )
+    assert semantic_report["status"] == (
+        "conservative-dispositions-complete-full-semantic-import-pending"
+    )
+    assert semantic_report["sourceItemCount"] == 9
+    assert semantic_report["typedSourceItemCount"] == 4
+    assert semantic_report["typedRecordCount"] == 4
+    assert semantic_report["outcomeCounts"] == {
+        "conservative-typed-records": 4,
+        "core-content-only": 5,
+    }
+    assert len(semantic_report["mappings"]) == 9
+    assert (
+        reconcile_conservative_evidence(
+            snapshot=snapshot,
+            metadata=metadata,
+            core_reconciliation=report,
+            recorded_at=FIXED_TIME,
+            actor="phase-b-fixture-interpreter",
+        )
+        == semantic_report
+    )
     typed_records = metadata.list_typed_records()
-    assert len(typed_records) == 3
+    assert len(typed_records) == 5
+    approval_record = next(
+        record
+        for record in typed_records
+        if record["schemaVersion"] == "tidy.approval-registry-evidence-import/v1"
+    )
+    assert approval_record["approvalAuthorityCreated"] is False
+    assert approval_record["interpretationStatus"] == "not-run"
     model_record = next(
         record
         for record in typed_records
@@ -287,6 +355,16 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
     schemas, registry = _schemas()
     _validate(schemas["snapshot-registration.schema.json"], registry, registration)
     _validate(schemas["reconciliation.schema.json"], registry, report)
+    _validate(
+        schemas["approval-registry-evidence.schema.json"],
+        registry,
+        approval_record,
+    )
+    _validate(
+        schemas["semantic-reconciliation.schema.json"],
+        registry,
+        semantic_report,
+    )
     for item in items:
         _validate(schemas["import-item.schema.json"], registry, item)
     for alias in aliases:
@@ -378,8 +456,8 @@ def test_blob_before_metadata_fault_is_restartable(tmp_path: Path) -> None:
         recorded_at=FIXED_TIME,
     )
     assert resumed.run().complete is True
-    assert resumed.reconcile()["sourceItemCount"] == 8
-    assert len(CommittedFilesystemBlobStore(blobs.root).committed_digests()) == 5
+    assert resumed.reconcile()["sourceItemCount"] == 9
+    assert len(CommittedFilesystemBlobStore(blobs.root).committed_digests()) == 6
 
 
 def test_metadata_transaction_fault_rolls_back_after_blob(tmp_path: Path) -> None:

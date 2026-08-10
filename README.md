@@ -10,7 +10,7 @@ M3 adds a Python-owned authoritative local repository for content, derivations, 
 
 M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Summary is deliberately unsupported because the full reviewed TidyCell/Tidybank detector and renderer closure is not included.
 
-The post-M4 Phase A boundary has frozen and NAS-published a deterministic read-only TidyCell inventory. The user explicitly waived independent Phase A review for progression; no review occurred. A fixture-only Phase B core now proves split local-SQLite/NAS-compatible blob storage, crash-safe item checkpoints, deduplication, content reconciliation, historical approval-digest compatibility, explicit reviewer/approval outcomes, and conservative recipe/generation/model dispositions. It has no live authorization or CLI and cannot import the 44,682-item TidyCell snapshot. The internal volume has recovered to about 83% utilization, but real import remains blocked by unverified Synology security/backup settings, incomplete typed parsing/full reconciliation, and absent independent review. No TidyCell content object has been imported, no provider or ML operation has run, and no recipe, domain-publication, semantic, calibration, or Sembla authority has changed.
+The post-M4 Phase A boundary has frozen and NAS-published a deterministic read-only TidyCell inventory. The user explicitly waived independent Phase A review for progression; no review occurred. A fixture-only Phase B core now proves split local-SQLite/NAS-compatible blob storage, crash-safe item checkpoints, deduplication, content reconciliation, historical approval-digest compatibility, explicit reviewer/approval outcomes, conservative approval/recipe/generation/model dispositions, and per-item semantic-pass reconciliation. It has no live authorization or CLI and cannot import the 44,682-item TidyCell snapshot. The internal volume has recovered to about 83% utilization, but real import remains blocked by unverified Synology security/backup settings, incomplete typed parsing/full reconciliation, and absent independent review. No TidyCell content object has been imported, no provider or ML operation has run, and no recipe, domain-publication, semantic, calibration, or Sembla authority has changed.
 
 Two architectural decisions were confirmed on 2026-08-09:
 
@@ -164,8 +164,9 @@ The importer keeps SQLite metadata and blob bytes under separate non-overlapping
 roots. Blob publication uses exact digest directories and writes
 `COMMITTED.json` last, so it works without SMB hard links. Historical approval
 digests are computed only by the pinned TypeScript compatibility port. Reviewer
-labels resolve exactly; ambiguity/conflict stays inactive. Recipe/model/provider
-evidence receives conservative, non-authoritative dispositions and model bytes
+labels resolve exactly; ambiguity/conflict stays inactive. Approval/recipe/
+model/provider evidence receives conservative, non-authoritative dispositions,
+every fixture item receives an explicit semantic-pass outcome, and model bytes
 are never deserialized. The only available authorization requires source system
 `phase-b-fixture` and hard-caps execution at 1,000 items and 64 MiB. There is
 deliberately no live import command. See

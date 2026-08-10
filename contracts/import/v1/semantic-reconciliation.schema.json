@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/semantic-reconciliation.schema.json",
+  "title": "SemanticImportReconciliationV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "snapshotDigest",
+    "inventoryDigest",
+    "itemManifestDigest",
+    "coreReconciliationDigest",
+    "producerDigest",
+    "status",
+    "sourceItemCount",
+    "typedSourceItemCount",
+    "typedRecordCount",
+    "outcomeCounts",
+    "typedRecordCounts",
+    "mappings",
+    "limitations",
+    "recordedAt",
+    "actor",
+    "recordId"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.semantic-import-reconciliation/v1" },
+    "snapshotDigest": { "$ref": "#/$defs/digest" },
+    "inventoryDigest": { "$ref": "#/$defs/digest" },
+    "itemManifestDigest": { "$ref": "#/$defs/digest" },
+    "coreReconciliationDigest": { "$ref": "#/$defs/digest" },
+    "producerDigest": { "$ref": "#/$defs/digest" },
+    "status": {
+      "const": "conservative-dispositions-complete-full-semantic-import-pending"
+    },
+    "sourceItemCount": { "type": "integer", "minimum": 0, "maximum": 1000 },
+    "typedSourceItemCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "typedRecordCount": { "type": "integer", "minimum": 0, "maximum": 2000 },
+    "outcomeCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conservative-typed-records", "core-content-only"],
+      "properties": {
+        "conservative-typed-records": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "core-content-only": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      }
+    },
+    "typedRecordCounts": {
+      "type": "object",
+      "propertyNames": { "pattern": "^tidy\\.[a-z0-9.-]+/v1$" },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 1000
+      }
+    },
+    "mappings": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "relativePath",
+          "sourceItemDigest",
+          "importRecordId",
+          "artifactClass",
+          "outcome",
+          "typedRecordIds"
+        ],
+        "properties": {
+          "relativePath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "sourceItemDigest": { "$ref": "#/$defs/digest" },
+          "importRecordId": { "$ref": "#/$defs/digest" },
+          "artifactClass": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "outcome": {
+            "enum": ["conservative-typed-records", "core-content-only"]
+          },
+          "typedRecordIds": {
+            "type": "array",
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/digest" }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "outcome": { "const": "conservative-typed-records" }
+              }
+            },
+            "then": { "properties": { "typedRecordIds": { "minItems": 1 } } },
+            "else": { "properties": { "typedRecordIds": { "maxItems": 0 } } }
+          }
+        ]
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        { "const": "typed RecipeV01 parsing has not run" },
+        {
+          "const": "approval rows and reviewer identities have not been resolved"
+        },
+        { "const": "generation evidence has not been interpreted" },
+        { "const": "model packages have not been deserialized or promoted" },
+        { "const": "no effective recipe pointer was read or changed" }
+      ],
+      "items": false
+    },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "actor": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "recordId": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

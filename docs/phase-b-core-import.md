@@ -117,14 +117,21 @@ production approval.
 `src/tidy_orchestrator/migration_evidence.py` emits immutable fixture records
 that deliberately preserve non-authority:
 
+- approval registries remain uninterpreted point-in-time evidence and create no
+  approval, activation, or training authority;
 - recipe evidence is `incomplete_evidence`, inactive, and training-ineligible;
 - model binaries are `archival-unreviewed`, non-runnable, training-ineligible,
   and never deserialized; and
 - generation/prompt/response evidence is pointer-classified and marked
   restricted without putting raw prompt or response text in the typed record.
 
-The local metadata repository has an immutable generic typed-record table. It
-has no active-recipe pointer table.
+The local metadata repository has an immutable generic typed-record table. A
+separate conservative semantic reconciliation now binds every fixture source
+item to the exact current-pass typed record IDs or to an explicit
+`core-content-only` outcome. It reports
+`conservative-dispositions-complete-full-semantic-import-pending`, so it cannot
+be mistaken for complete typed import. There is still no active-recipe pointer
+table.
 
 ### Contracts
 
@@ -136,7 +143,9 @@ has no active-recipe pointer table.
 - source aliases and core migration reconciliation;
 - legacy approval snapshots, reviewer identities, recipe-digest verification,
   and approval-resolution outcomes; and
-- conservative recipe, generation, and model evidence dispositions.
+- conservative approval, recipe, generation, and model evidence dispositions;
+  and
+- per-source-item conservative semantic reconciliation.
 
 ## Fixture-only authorization
 
@@ -173,7 +182,8 @@ The fixture suite covers:
 - strict schema validation;
 - exact reviewer labels, ambiguous/unresolved/conflicting approval outcomes,
   incomplete evidence, and historical approval-row digest vectors;
-- non-runnable model and non-authoritative recipe/generation dispositions; and
+- non-runnable model plus non-authoritative approval/recipe/generation
+  dispositions and their per-item semantic reconciliation; and
 - absence of a pointer table.
 
 Results:
