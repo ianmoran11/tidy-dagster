@@ -10,7 +10,7 @@ M3 adds a Python-owned authoritative local repository for content, derivations, 
 
 M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Summary is deliberately unsupported because the full reviewed TidyCell/Tidybank detector and renderer closure is not included.
 
-The post-M4 Phase A boundary has frozen and NAS-published a deterministic read-only TidyCell inventory. The user explicitly waived independent Phase A review for progression; no review occurred. A fixture-only Phase B core now proves split local-SQLite/NAS-compatible blob storage, crash-safe item checkpoints, deduplication, content reconciliation, historical approval-digest compatibility, explicit reviewer/approval outcomes, conservative approval/recipe/generation/model dispositions, and per-item semantic-pass reconciliation. It has no live authorization or CLI and cannot import the 44,682-item TidyCell snapshot. The internal volume has recovered to about 83% utilization, but real import remains blocked by unverified Synology security/backup settings, incomplete typed parsing/full reconciliation, and absent independent review. No TidyCell content object has been imported, no provider or ML operation has run, and no recipe, domain-publication, semantic, calibration, or Sembla authority has changed.
+The post-M4 Phase A boundary has frozen and NAS-published a deterministic read-only TidyCell inventory. The user explicitly waived independent Phase A review for progression; no review occurred. A fixture-only Phase B core now proves split local-SQLite/NAS-compatible blob storage, crash-safe item checkpoints, deduplication, content reconciliation, historical approval-digest compatibility, explicit reviewer/approval outcomes, conservative approval/recipe/generation/model dispositions, and per-item semantic-pass reconciliation. A separate fixture-only Phase C scaffold can freeze and verify an explicitly selected, licensed Git source closure without copying it; it has not selected or read the real TidyCell/Tidybank closure and makes no summary-parity claim. Phase B has no live authorization or CLI and cannot import the 44,682-item TidyCell snapshot. The internal volume has recovered to about 83% utilization, but real import remains blocked by unverified Synology security/backup settings, incomplete typed parsing/full reconciliation, and absent independent review. No TidyCell content object has been imported, no provider or ML operation has run, and no recipe, domain-publication, semantic, calibration, or Sembla authority has changed.
 
 Two architectural decisions were confirmed on 2026-08-09:
 
@@ -31,6 +31,7 @@ Dagster is a replaceable control-plane adapter. It must not become the sole stor
 - [M4 Dagster projection and operations](docs/m4-dagster-operations.md)
 - [Phase A source inventory evidence and review waiver](docs/phase-a-source-inventory.md)
 - [Phase B provider-free core import](docs/phase-b-core-import.md)
+- [Phase C fixture-only source-closure scaffold](docs/phase-c-source-closure-scaffold.md)
 - [ADR 0001 — staged standalone reimplementation](docs/decisions/0001-staged-standalone-reimplementation.md)
 - [ADR 0002 — deliberate polyglot boundaries](docs/decisions/0002-deliberate-polyglot-boundaries.md)
 - [ADR 0003 — canonical migration and automated recipe acceptance](docs/decisions/0003-canonical-migration-and-automated-recipe-acceptance.md)
@@ -85,7 +86,7 @@ npm run check
 
 Build the worker with `npm run build`; the stable package bin is `tidy-domain-worker` and its wire contract is documented in [`contracts/worker/v1`](contracts/worker/v1/README.md). Fixture custody is recorded in [`fixtures/parity/source-manifest.json`](fixtures/parity/source-manifest.json). Independently executed pinned-reference bytes and their clean-checkout procedure are recorded in [`fixtures/gold/manifest.json`](fixtures/gold/manifest.json), while `fixtures/expected/*.json` remains an additional source-authored partial oracle.
 
-The Python repositories/gateway and replaceable Dagster projection are implemented in `src/tidy_orchestrator`. Phase A review was waived rather than performed. The Phase B content/semantic groundwork is fixture-only and explicitly incomplete. External review authority, live import, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
+The Python repositories/gateway and replaceable Dagster projection are implemented in `src/tidy_orchestrator`. Phase A review was waived rather than performed. The Phase B content/semantic groundwork and Phase C source-closure tooling are fixture-only and explicitly incomplete. External review authority, real source selection, live import, summary parity, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
 
 ## M3 provider-free Python execution
 
@@ -172,6 +173,20 @@ are never deserialized. The only available authorization requires source system
 deliberately no live import command. See
 [`contracts/import/v1`](contracts/import/v1/README.md) and
 [`docs/phase-b-core-import.md`](docs/phase-b-core-import.md).
+
+## Phase C fixture-only source closure
+
+```sh
+uv run pytest -q tests/test_source_code_snapshot.py
+```
+
+`FixtureSourceCodeAuthorization` permits only an explicitly selected, tracked
+synthetic Git closure of at most 100 files and 8 MiB. The no-copy freezer binds
+file roles, modes, lengths, digests, Git HEAD/tree/dirty evidence, licence, and
+its exact producer closure, then re-reads every selected file before completion.
+There is no CLI or non-fixture authorization. It does not select sibling source,
+implement summary behavior, or claim M2/Phase C parity. See
+[`docs/phase-c-source-closure-scaffold.md`](docs/phase-c-source-closure-scaffold.md).
 
 ## Permanent guardrails
 

@@ -16,8 +16,9 @@ provider, train a model, or publish outputs.
 - `snapshot.schema.json` — `TidyCellExportSnapshotV1`; freeze is refused when
   destination headroom fails.
 - `source-code-snapshot.schema.json` — `SourceCodeExportSnapshotV1` for a later
-  explicitly selected TidyCell/Tidybank code closure; this schema does not
-  authorize or perform a code import.
+  explicitly selected TidyCell/Tidybank code closure. Fixture-only no-copy
+  tooling exercises this contract but does not authorize or perform a real code
+  import.
 - `nas-commit.schema.json` — exact commit marker for publishing a verified
   snapshot to a filesystem such as SMB that does not support hard links.
 
@@ -50,6 +51,16 @@ mutation fails the run.
 The Python sorted-JSON digest is named `tidy-python-sorted-json-v1`. It is not
 RFC 8785/JCS and is not the historical TidyCell RecipeV01 `digestRecord`
 algorithm.
+
+## Fixture-only Phase C source-closure scaffold
+
+`source_code_snapshot.py` accepts only source system `phase-c-fixture`, a
+source-root-bound authorization, and an explicit tracked-file selection capped
+at 100 files/8 MiB. It hashes every selected file twice through no-follow
+root-relative descriptors and binds Git HEAD/tree, status plus exact binary
+tracked diff, roles, licence, and producer identity. It returns an in-memory
+snapshot and has no CLI or source-copy operation. Real closure selection remains
+unauthorized and Phase C parity remains incomplete.
 
 ## Safety
 

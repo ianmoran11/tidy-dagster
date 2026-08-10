@@ -189,7 +189,7 @@ The fixture suite covers:
 Results:
 
 - focused Phase B content/semantic fixtures: `23 passed`;
-- complete Python suite: `114 passed, 1 skipped`;
+- complete Python suite: `118 passed, 1 skipped`;
 - TypeScript/Vitest: `148 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
