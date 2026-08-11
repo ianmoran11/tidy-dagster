@@ -574,7 +574,7 @@ describe("strict worker protocol", () => {
     await expectCode(health, "OUTPUT_ROOT_NOT_EMPTY", roots);
   });
 
-  it("publishes parity-locked summary and compact context when requested", async () => {
+  it("publishes requested summary, compact context, and bounded region catalog", async () => {
     const fixture = await fixtureRoot();
     const workbookBytes = await readFile(
       path.join(process.cwd(), "fixtures/workbooks/simple-crosstab.xlsx"),
@@ -594,6 +594,7 @@ describe("strict worker protocol", () => {
         ...baseRequest().parameters,
         includeSummary: true,
         includeCompactContext: true,
+        includeRegionCatalog: true,
       },
     };
     request.inputs = [
@@ -604,7 +605,11 @@ describe("strict worker protocol", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) throw new Error("Expected summary execution to succeed");
     expect(result.outputs.map((output) => output.name)).toEqual(
-      expect.arrayContaining(["sheet-summary.json", "compact-context.json"]),
+      expect.arrayContaining([
+        "sheet-summary.json",
+        "compact-context.json",
+        "region-catalog.json",
+      ]),
     );
     const summary = JSON.parse(
       await readFile(path.join(fixture.output, "sheet-summary.json"), "utf8"),
@@ -632,6 +637,15 @@ describe("strict worker protocol", () => {
       ),
     );
     expect(compactContext).toEqual(contextReference.cases[1].contexts[0]);
+    const regionCatalog = JSON.parse(
+      await readFile(path.join(fixture.output, "region-catalog.json"), "utf8"),
+    );
+    expect(regionCatalog.version).toBe(
+      "semantic-region-catalog-v5-adjacent-year-aware",
+    );
+    expect(regionCatalog.sheet).toBe("Population");
+    expect(regionCatalog.candidates.length).toBeGreaterThan(0);
+    expect(regionCatalog.candidates.length).toBeLessThanOrEqual(160);
   });
 
   it("advertises the parity-locked historical summary contract", async () => {
@@ -665,6 +679,13 @@ describe("strict worker protocol", () => {
         encoding: "row-major-r1c1-json-v1",
         historicalReferenceDigest:
           "sha256:1bf6352d8379cec115896e74642dd4cefaa4bf50c21540827815055164cd8cb9",
+      });
+      expect(capabilities.regionCatalog).toEqual({
+        supported: true,
+        contract: "semantic-region-catalog-v5-adjacent-year-aware",
+        sourceOwnedTestCount: 43,
+        exactHistoricalReference: false,
+        scope: "implementation-and-copied-source-tests-only",
       });
     }
   });

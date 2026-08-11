@@ -8,6 +8,7 @@
 - Real source bytes copied into Tidy Dagster: 4,781,394 reference-only bytes
 - Summary parity: exact on four sheets across three frozen fixture workbooks
 - Compact-context parity: exact on the same four sheets
+- Formatting and role-aware catalogue: ported; 43 copied tests pass
 - Produced-CSV diagnostic behavior: ported; six copied tests pass
 - Prompt-input parity: none
 - Provider calls: zero
@@ -168,9 +169,9 @@ passes the nine copied source-owned summary tests and exactly matches all four
 frozen summary objects. The separate self-reviewed candidate parity record at
 `fixtures/reference-summary/candidate-parity-v1.json` binds candidate source
 digest
-`sha256:969431e2276ee39b64010bc71e694cb6ac4f2262af009378cbfc3992471ef700`
+`sha256:44a3a19d40cbde213f3c7dae98b24638ee4d4bdd55133eb7d3a19834db1a335b`
 and parity digest
-`sha256:06cf9377e773ffe1164c1ea1f866a74072badf296a24f6e0457974c3cce24ff1`.
+`sha256:284ab8d7ac3a171f804e23d6fe84de72a96a82e2a26c05793b3cb905ecff4e9b`.
 This establishes bounded default-option compatibility, not full Phase C parity
 or independent review. The historical reference honestly retains
 `parityEstablished: false`; the later parity record establishes only its
@@ -197,6 +198,18 @@ As with summaries, the historical reference remains provenance-only and false
 for candidate/full parity; the later self-reviewed comparison establishes only
 the explicit four-context scope.
 
+## Formatting, catalogue, and compiler increment
+
+The bounded V13-era catalogue/compilation closure is now standalone under
+`apps/domain-worker/src/catalog/`: CellRole Sketch V0.2 parsing, geometry,
+RecipeV01 compilation and equivalence proofs, SemanticTableMap V1, format-aware
+V2 candidates, and role/year-aware V5 candidates. `includeRegionCatalog: true`
+emits `region-catalog.json` without requiring a provider. All 43 copied
+historical source tests pass, including exact direction, correction,
+completeness, formatting, repeated-panel, and year-like geometry cases.
+Capabilities label this honestly as implementation plus copied-source-test
+evidence: no exact historical-reference catalogue is claimed yet.
+
 ## Produced-CSV diagnostic increment
 
 `apps/domain-worker/src/review/producedCsvSummary.ts` now carries the frozen
@@ -213,8 +226,9 @@ that integration remains a separate parity gate.
 - historical-reference candidate summary parity: `4/4` sheets exact;
 - focused compact-context behavior tests: `4 passed`;
 - historical-reference candidate compact-context parity: `4/4` exact;
+- copied V0.2/V1/V2/V5 compiler/catalogue tests: `43 passed`;
 - copied produced-CSV diagnostic tests: `6 passed`;
-- complete TypeScript/Vitest suite: `177 passed, 1 skipped`;
+- complete TypeScript/Vitest suite: `220 passed, 1 skipped`;
 - complete Python suite: `149 passed, 1 skipped`;
 - strict JSON Schemas validate discovery, self-review, copy, replay, reference,
   and scoped parity records;
@@ -230,8 +244,8 @@ This boundary does not yet:
 - authorize the copied closure as a runtime dependency;
 - prove custody of arbitrary dynamic runtime paths beyond the explicitly
   inspected fixture reads;
-- complete summary/context adversarial parity or implement formatting,
-  catalogue, produced-CSV prompt integration, and prompt-input behavior;
+- complete summary/context/catalogue adversarial parity or implement
+  produced-CSV prompt integration and prompt-input behavior;
 - create independent parity gold; or
 - expose prompt-generation behavior through the worker.
 
@@ -239,9 +253,10 @@ This boundary does not yet:
 
 ADR 0005 permitted the now-completed bounded copy after exact custody and
 implementing-agent self-review. Relocated source-owned replay and bounded default
-summary and compact-context parity now pass, and produced-CSV diagnostics are
-ported. The next step is formatting, catalogue, produced-CSV prompt integration,
-and rendered prompt-input implementation with
+summary and compact-context parity now pass; the role-aware catalogue/compiler
+and produced-CSV diagnostics are ported. The next step is exact catalogue
+reference comparison, produced-CSV prompt integration, and rendered prompt-input
+implementation with
 separately frozen references. Phase C remains incomplete until full intermediate
 and rendered-output parity, adversarial fixtures, independently refereed
 relocated parity, and all existing M0–M4 checks pass.

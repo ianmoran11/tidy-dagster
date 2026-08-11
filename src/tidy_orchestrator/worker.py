@@ -195,6 +195,7 @@ class WorkerGateway:
             "evidenceProfile",
             "includeSummary",
             "includeCompactContext",
+            "includeRegionCatalog",
             "csvMode",
         }
         supplied_parameters = dict(parameters or {})
@@ -219,6 +220,12 @@ class WorkerGateway:
         ):
             raise WorkerGatewayError(
                 "INPUT_INVALID", "INPUT_INVALID", "Invalid includeCompactContext"
+            )
+        if "includeRegionCatalog" in supplied_parameters and not isinstance(
+            supplied_parameters["includeRegionCatalog"], bool
+        ):
+            raise WorkerGatewayError(
+                "INPUT_INVALID", "INPUT_INVALID", "Invalid includeRegionCatalog"
             )
         if (
             "csvMode" in supplied_parameters

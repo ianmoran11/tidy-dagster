@@ -45,10 +45,10 @@ describe("historical source summary parity", () => {
     );
     const { parityDigest, ...paritySemantic } = parity;
     expect(domainDigest(parity.schemaVersion, paritySemantic)).toBe(
-      "sha256:06cf9377e773ffe1164c1ea1f866a74072badf296a24f6e0457974c3cce24ff1",
+      "sha256:284ab8d7ac3a171f804e23d6fe84de72a96a82e2a26c05793b3cb905ecff4e9b",
     );
     expect(parityDigest).toBe(
-      "sha256:06cf9377e773ffe1164c1ea1f866a74072badf296a24f6e0457974c3cce24ff1",
+      "sha256:284ab8d7ac3a171f804e23d6fe84de72a96a82e2a26c05793b3cb905ecff4e9b",
     );
     const currentFiles = parity.candidateFiles.map(
       (file: { relativePath: string; contentDigest: string }) => {

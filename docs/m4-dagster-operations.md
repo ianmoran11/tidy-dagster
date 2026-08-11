@@ -52,8 +52,10 @@ results; they do not establish authority from pointers or byte-string searches.
 
 M4 itself did not add recipe summaries. A later post-M4 Phase C increment now
 supports historical default sheet-summary and complete compact-context contracts
-on the frozen four-sheet fixture cohort, but M2 remains incomplete pending the
-broader option/adversarial and rendered prompt-input closure. M4 does not add providers, credentials, ML, semantic
+on the frozen four-sheet fixture cohort plus a provider-free bounded V5 region
+catalogue backed by copied source tests, but M2 remains incomplete pending exact
+catalogue-reference, broader option/adversarial, and rendered prompt-input
+closure. M4 does not add providers, credentials, ML, semantic
 adoption, calibration, justice contracts, or Sembla execution.
 
 ## Pinned OSS decision matrix

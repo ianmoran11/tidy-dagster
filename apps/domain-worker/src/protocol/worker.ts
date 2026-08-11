@@ -15,7 +15,15 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
-import { buildCompactContextSnapshot } from "../context/compactContext.js";
+import { buildSemanticCellFormattingFacts } from "../catalog/format-aware-region-catalog-v2.js";
+import {
+  buildRoleAwareSemanticRegionCatalog,
+  buildSemanticCellDataFacts,
+} from "../catalog/role-aware-region-catalog-v5.js";
+import {
+  buildCompactContextSnapshot,
+  buildCompactSemanticContext,
+} from "../context/compactContext.js";
 import { executeRecipe } from "../executor/executeRecipe.js";
 import { buildGeometryEvidence } from "../executor/geometryEvidence.js";
 import { rowsToCsv } from "../export/formatters.js";
@@ -64,6 +72,7 @@ const parametersSchema = z
       .optional(),
     includeSummary: z.boolean().optional(),
     includeCompactContext: z.boolean().optional(),
+    includeRegionCatalog: z.boolean().optional(),
     csvMode: z.literal("recipe-aware").optional(),
   })
   .strict();
@@ -230,6 +239,13 @@ async function runWorkerUnchecked(
                 historicalReferenceDigest:
                   "sha256:1bf6352d8379cec115896e74642dd4cefaa4bf50c21540827815055164cd8cb9",
               },
+              regionCatalog: {
+                supported: true,
+                contract: "semantic-region-catalog-v5-adjacent-year-aware",
+                sourceOwnedTestCount: 43,
+                exactHistoricalReference: false,
+                scope: "implementation-and-copied-source-tests-only",
+              },
               networkRequired: false,
             };
       return await publish(request, roots, [
@@ -314,6 +330,7 @@ async function runWorkerUnchecked(
       request.limits.maxOutputFiles,
       request.parameters.includeSummary === true,
       request.parameters.includeCompactContext === true,
+      request.parameters.includeRegionCatalog === true,
     );
     enforceRecipeSelectorLimit(validated.data, request.limits.maxSelectorCells);
     const parsedWorkbook = await parseWorkbook(workbookBytes);
@@ -387,6 +404,27 @@ async function runWorkerUnchecked(
             },
           ]
         : []),
+      ...(request.parameters.includeRegionCatalog === true
+        ? [
+            {
+              name: "region-catalog.json",
+              relativePath: "region-catalog.json",
+              render: () => {
+                const context = buildCompactSemanticContext(sheet);
+                const formattingFacts = buildSemanticCellFormattingFacts(
+                  sheet.cells,
+                );
+                const cellDataFacts = buildSemanticCellDataFacts(sheet.cells);
+                return jsonBytes(
+                  buildRoleAwareSemanticRegionCatalog(context, {
+                    formattingFacts,
+                    cellDataFacts,
+                  }),
+                );
+              },
+            },
+          ]
+        : []),
     ];
     execution.tables.forEach((table, index) => {
       const relativePath = csvOutputPath(table.table);
@@ -454,12 +492,14 @@ function enforceOutputDescriptorLimit(
   maxOutputFiles: number,
   includeSummary: boolean,
   includeCompactContext: boolean,
+  includeRegionCatalog: boolean,
 ): void {
   if (
     recipe.tables.length +
       5 +
       (includeSummary ? 1 : 0) +
-      (includeCompactContext ? 1 : 0) >
+      (includeCompactContext ? 1 : 0) +
+      (includeRegionCatalog ? 1 : 0) >
     maxOutputFiles
   )
     throw new ProtocolError(

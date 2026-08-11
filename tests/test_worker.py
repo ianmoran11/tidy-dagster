@@ -58,11 +58,14 @@ def test_gateway_success_publishes_only_verified_set(tmp_path: Path) -> None:
     assert repeated.output_fingerprint == result.output_fingerprint
 
 
-def test_compact_context_parameter_is_strictly_typed(tmp_path: Path) -> None:
+def test_optional_semantic_evidence_parameters_are_strictly_typed(
+    tmp_path: Path,
+) -> None:
     marker = tmp_path / "started"
     _, gateway, item = setup(tmp_path, "mark-success", "--marker", str(marker))
-    with pytest.raises(WorkerGatewayError, match="Invalid includeCompactContext"):
-        gateway.execute(inputs=[item], parameters={"includeCompactContext": "yes"})
+    for parameter in ("includeCompactContext", "includeRegionCatalog"):
+        with pytest.raises(WorkerGatewayError, match=f"Invalid {parameter}"):
+            gateway.execute(inputs=[item], parameters={parameter: "yes"})
     assert not marker.exists()
 
 
