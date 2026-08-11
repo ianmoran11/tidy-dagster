@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration-worker/v1/recipe-revision.schema.json",
+  "title": "MigrationRecipeRevisionV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "recipeSchemaVersion",
+    "historicalDigestAlgorithm",
+    "historicalDigestSourceDigest",
+    "historicalRecipeDigest",
+    "declaredRecipeDigest",
+    "digestMatches",
+    "sheetName",
+    "tableCount",
+    "lifecycleState",
+    "active",
+    "trainingEligible",
+    "normalizedRecipe"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.migration-recipe-revision/v1" },
+    "source": { "$ref": "#/$defs/source" },
+    "recipeSchemaVersion": { "const": "0.1" },
+    "historicalDigestAlgorithm": { "const": "tidycell-digest-record-v1" },
+    "historicalDigestSourceDigest": {
+      "const": "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
+    },
+    "historicalRecipeDigest": { "$ref": "#/$defs/digest" },
+    "declaredRecipeDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "digestMatches": {
+      "oneOf": [{ "type": "boolean" }, { "type": "null" }]
+    },
+    "sheetName": { "type": "string", "minLength": 1 },
+    "tableCount": { "type": "integer", "minimum": 1 },
+    "lifecycleState": { "const": "schema_valid" },
+    "active": { "const": false },
+    "trainingEligible": { "const": false },
+    "normalizedRecipe": {
+      "type": "object",
+      "required": ["version", "sheet", "tables"],
+      "properties": {
+        "version": { "const": "0.1" },
+        "sheet": { "type": "string", "minLength": 1 },
+        "tables": { "type": "array", "minItems": 1 }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "declaredRecipeDigest": { "type": "null" } },
+        "required": ["declaredRecipeDigest"]
+      },
+      "then": { "properties": { "digestMatches": { "type": "null" } } },
+      "else": { "properties": { "digestMatches": { "type": "boolean" } } }
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSnapshotDigest",
+        "sourceItemDigest",
+        "importRecordId",
+        "relativePath",
+        "sourceContentDigest",
+        "byteLength"
+      ],
+      "properties": {
+        "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+        "sourceItemDigest": { "$ref": "#/$defs/digest" },
+        "importRecordId": { "$ref": "#/$defs/digest" },
+        "relativePath": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "sourceContentDigest": { "$ref": "#/$defs/digest" },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8388608
+        }
+      }
+    }
+  }
+}

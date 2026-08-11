@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration-worker/v1/approval-row-digests.schema.json",
+  "title": "MigrationApprovalRowDigestsV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "algorithm",
+    "algorithmSourceDigest",
+    "recordCount",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.migration-approval-row-digests/v1" },
+    "source": { "$ref": "#/$defs/source" },
+    "algorithm": { "const": "tidycell-digest-record-v1" },
+    "algorithmSourceDigest": {
+      "const": "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
+    },
+    "recordCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "sourceRecordDigest"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 0, "maximum": 99999 },
+          "sourceRecordDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSnapshotDigest",
+        "sourceItemDigest",
+        "importRecordId",
+        "relativePath",
+        "sourceContentDigest",
+        "byteLength"
+      ],
+      "properties": {
+        "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+        "sourceItemDigest": { "$ref": "#/$defs/digest" },
+        "importRecordId": { "$ref": "#/$defs/digest" },
+        "relativePath": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "sourceContentDigest": { "$ref": "#/$defs/digest" },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8388608
+        }
+      }
+    }
+  }
+}

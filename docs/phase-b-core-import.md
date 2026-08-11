@@ -118,7 +118,25 @@ one explicitly curated reviewer label, the declared recipe digest, the
 historical verifier result, and candidate recipe evidence all agree. A simple
 legacy approval can remain `legacy_approved_unattributed`; ambiguity or conflict
 is inactive. The fixture tests do not establish any real reviewer identity or
-production approval, and live TypeScript row-digest dispatch is still absent.
+production approval.
+
+### Separate migration-only TypeScript worker
+
+`apps/migration-worker/` adds a dedicated provider-free executable without
+expanding the accepted production domain-worker protocol. Its strict
+`tidy.migration-worker/v1` protocol currently:
+
+- validates, normalizes, and computes the historical digest of one RecipeV01
+  document while keeping the revision inactive and training-ineligible; and
+- validates a bounded legacy approval array and emits the exact historical
+  digest of every complete source row.
+
+Every request binds the frozen snapshot, source item, import record, and source
+path. Staged inputs are no-follow, length- and digest-verified; JSON bytes,
+depth, nodes, and records are capped; roots may not overlap; and declared
+outputs publish atomically. The actual bundled executable is exercised in the
+suite. Python live dispatch and durable interpretation publication remain
+pending.
 
 ### Conservative typed evidence dispositions
 
@@ -197,8 +215,9 @@ The fixture suite covers:
 Results:
 
 - focused Phase B content/semantic fixtures: `23 passed`;
-- complete Python suite: `118 passed, 1 skipped`;
-- TypeScript/Vitest: `148 passed, 1 skipped`;
+- migration-worker contract fixtures: `2 passed`;
+- complete Python suite: `120 passed, 1 skipped`;
+- TypeScript/Vitest: `155 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
   lint, and parity replay passed.
@@ -219,18 +238,23 @@ used by any Phase B test.
 
 The following accepted Phase B work is not implemented:
 
-1. process the real frozen registry and estate under a separately reviewed live
+1. process a frozen deterministic real canary under a separately gated live
    authorization, while retaining every unresolved identity and target;
-2. parse and bind complete RecipeV01 revisions, original candidates,
-   generation attempts, raw restricted prompt/responses, model manifests, and
-   evaluation evidence rather than only conservative fixture dispositions;
-3. perform safe isolated model-package inspection/parity and licensing/corpus
-   classification without loading pickles in the orchestrator;
+2. connect the migration-only executable through the Python sandbox gateway and
+   durably bind complete RecipeV01 revisions, original candidates, generation
+   attempts, raw restricted prompt/responses, model manifests, and evaluation
+   evidence rather than only conservative fixture dispositions;
+3. preserve legacy model packages as unopened archives, as required by ADR
+   0005;
 4. perform full domain-by-domain reconciliation and prove one justified typed
-   outcome for every frozen source item and alias;
-5. verify Synology server-side ACL, encryption, and backup/snapshot controls;
-6. review and authorize a live importer and operational CLI; and
-7. run and independently review the real import.
+   outcome for every frozen canary source item and alias;
+5. verify the dedicated Synology service identity, SMB3 signing, snapshots, and
+   a successful restore drill; at-rest encryption was explicitly waived in ADR
+   0005;
+6. self-review and authorize a bounded live importer and operational CLI without
+   claiming independent review; and
+7. run and self-review the real canary. The complete 44,682-item import remains
+   separately unauthorized.
 
 The internal volume has recovered to approximately 72 GiB free (83% utilized),
 but that transient improvement does not waive the remaining storage-security and

@@ -10,10 +10,11 @@
     "npm": "11.5.1"
   },
   "bin": {
-    "tidy-domain-worker": "dist/apps/domain-worker/src/cli.js"
+    "tidy-domain-worker": "dist/apps/domain-worker/src/cli.js",
+    "tidy-migration-worker": "dist/apps/migration-worker/src/cli.js"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.json && esbuild apps/domain-worker/src/cli.ts --bundle --platform=node --format=cjs --target=node24 --outfile=dist/tidy-domain-worker.cjs --log-level=warning",
+    "build": "rm -rf dist && tsc -p tsconfig.json && esbuild apps/domain-worker/src/cli.ts --bundle --platform=node --format=cjs --target=node24 --outfile=dist/tidy-domain-worker.cjs --log-level=warning && esbuild apps/migration-worker/src/cli.ts --bundle --platform=node --format=cjs --target=node24 --outfile=dist/tidy-migration-worker.cjs --log-level=warning",
     "test": "npm run build && vitest run --exclude \"dist/**\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "format:check": "prettier --check \"apps/**/*.ts\" \"scripts/**/*.{ts,mjs}\" \"tools/**/*.ts\" package.json tsconfig.json \"contracts/**/*.{md,json}\" \".github/**/*.yml\"",

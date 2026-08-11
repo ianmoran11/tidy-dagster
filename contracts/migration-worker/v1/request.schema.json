@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration-worker/v1/request.schema.json",
+  "title": "MigrationWorkerRequestV1",
+  "oneOf": [
+    { "$ref": "#/$defs/healthRequest" },
+    { "$ref": "#/$defs/capabilitiesRequest" },
+    { "$ref": "#/$defs/approvalDigestRequest" },
+    { "$ref": "#/$defs/recipeParseRequest" }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "requestId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxInputBytes",
+        "maxOutputBytes",
+        "maxJsonDepth",
+        "maxJsonNodes",
+        "maxRecords"
+      ],
+      "properties": {
+        "maxInputBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8388608
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8388608
+        },
+        "maxJsonDepth": { "type": "integer", "minimum": 1, "maximum": 128 },
+        "maxJsonNodes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "maxRecords": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "relativePath", "contentDigest", "byteLength"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9._-]+$"
+        },
+        "relativePath": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "contentDigest": { "$ref": "#/$defs/digest" },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8388608
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSnapshotDigest",
+        "sourceItemDigest",
+        "importRecordId",
+        "relativePath"
+      ],
+      "properties": {
+        "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+        "sourceItemDigest": { "$ref": "#/$defs/digest" },
+        "importRecordId": { "$ref": "#/$defs/digest" },
+        "relativePath": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        }
+      }
+    },
+    "emptyParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "maxProperties": 0
+    },
+    "baseProperties": {
+      "protocolVersion": { "const": "tidy.migration-worker/v1" },
+      "requestId": { "$ref": "#/$defs/requestId" },
+      "limits": { "$ref": "#/$defs/limits" }
+    },
+    "healthRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "requestId",
+        "operation",
+        "inputs",
+        "parameters",
+        "limits"
+      ],
+      "properties": {
+        "protocolVersion": { "const": "tidy.migration-worker/v1" },
+        "requestId": { "$ref": "#/$defs/requestId" },
+        "operation": { "const": "health" },
+        "inputs": { "type": "array", "maxItems": 0 },
+        "parameters": { "$ref": "#/$defs/emptyParameters" },
+        "limits": { "$ref": "#/$defs/limits" }
+      }
+    },
+    "capabilitiesRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "requestId",
+        "operation",
+        "inputs",
+        "parameters",
+        "limits"
+      ],
+      "properties": {
+        "protocolVersion": { "const": "tidy.migration-worker/v1" },
+        "requestId": { "$ref": "#/$defs/requestId" },
+        "operation": { "const": "capabilities" },
+        "inputs": { "type": "array", "maxItems": 0 },
+        "parameters": { "$ref": "#/$defs/emptyParameters" },
+        "limits": { "$ref": "#/$defs/limits" }
+      }
+    },
+    "approvalDigestRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "requestId",
+        "operation",
+        "inputs",
+        "parameters",
+        "limits"
+      ],
+      "properties": {
+        "protocolVersion": { "const": "tidy.migration-worker/v1" },
+        "requestId": { "$ref": "#/$defs/requestId" },
+        "operation": { "const": "digest-legacy-approval-registry-v1" },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/input" },
+                { "properties": { "name": { "const": "registry" } } }
+              ]
+            }
+          ],
+          "items": false
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source"],
+          "properties": { "source": { "$ref": "#/$defs/source" } }
+        },
+        "limits": { "$ref": "#/$defs/limits" }
+      }
+    },
+    "recipeParseRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "requestId",
+        "operation",
+        "inputs",
+        "parameters",
+        "limits"
+      ],
+      "properties": {
+        "protocolVersion": { "const": "tidy.migration-worker/v1" },
+        "requestId": { "$ref": "#/$defs/requestId" },
+        "operation": { "const": "parse-recipe-v01" },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/input" },
+                { "properties": { "name": { "const": "recipe" } } }
+              ]
+            }
+          ],
+          "items": false
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source"],
+          "properties": {
+            "source": { "$ref": "#/$defs/source" },
+            "declaredRecipeDigest": { "$ref": "#/$defs/digest" }
+          }
+        },
+        "limits": { "$ref": "#/$defs/limits" }
+      }
+    }
+  }
+}
