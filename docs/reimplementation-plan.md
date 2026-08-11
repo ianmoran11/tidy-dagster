@@ -812,7 +812,7 @@ The TypeScript worker remains a pure file transform. The fixture harness may cop
 
 ### M2 — Extend deterministic parity
 
-**Acceptance status:** Not yet accepted; summary detector/renderer closure remains a separate follow-up.
+**Acceptance status:** Not yet accepted; default summary output now matches four frozen historical-reference sheets, while the full option/adversarial and prompt-input closure remains a separate follow-up.
 
 Introduce the `sparse-headers` triplet with focused geometry negatives only after M1 is accepted. Introduce `multi-table` only after sparse parity is stable. Complete summary prioritization/truncation, merges/styles, all relationship directions, option precedence, warning/trace ordering and exact CSV.
 

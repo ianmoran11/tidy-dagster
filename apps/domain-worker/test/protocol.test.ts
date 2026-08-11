@@ -574,7 +574,50 @@ describe("strict worker protocol", () => {
     await expectCode(health, "OUTPUT_ROOT_NOT_EMPTY", roots);
   });
 
-  it("advertises summary as unsupported", async () => {
+  it("publishes the parity-locked sheet summary when requested", async () => {
+    const fixture = await fixtureRoot();
+    const workbookBytes = await readFile(
+      path.join(process.cwd(), "fixtures/workbooks/simple-crosstab.xlsx"),
+    );
+    const recipeBytes = await readFile(
+      path.join(process.cwd(), "fixtures/recipes/simple-crosstab.json"),
+    );
+    const workbook = await writeInput(
+      fixture.input,
+      "workbook.xlsx",
+      workbookBytes,
+    );
+    const recipe = await writeInput(fixture.input, "recipe.json", recipeBytes);
+    const request = {
+      ...baseRequest(),
+      parameters: { ...baseRequest().parameters, includeSummary: true },
+    };
+    request.inputs = [
+      { name: "workbook", ...workbook },
+      { name: "recipe", ...recipe },
+    ];
+    const result = await runWorker(request, fixture.input, fixture.output);
+    expect(result.ok).toBe(true);
+    if (!result.ok) throw new Error("Expected summary execution to succeed");
+    expect(result.outputs.map((output) => output.name)).toContain(
+      "sheet-summary.json",
+    );
+    const summary = JSON.parse(
+      await readFile(path.join(fixture.output, "sheet-summary.json"), "utf8"),
+    );
+    const reference = JSON.parse(
+      await readFile(
+        path.join(
+          process.cwd(),
+          "fixtures/reference-summary/historical-v1.json",
+        ),
+        "utf8",
+      ),
+    );
+    expect(summary).toEqual(reference.cases[1].summaries[0]);
+  });
+
+  it("advertises the parity-locked historical summary contract", async () => {
     const roots = await fixtureRoot();
     const request = {
       ...baseRequest(),
@@ -584,15 +627,21 @@ describe("strict worker protocol", () => {
     };
     const result = await runWorker(request, roots.input, roots.output);
     expect(result.ok).toBe(true);
-    if (result.ok)
-      expect(
-        JSON.parse(
-          (
-            await import("node:fs/promises").then(({ readFile }) =>
-              readFile(path.join(roots.output, "capabilities.json"), "utf8"),
-            )
-          ).toString(),
-        ).summary.supported,
-      ).toBe(false);
+    if (result.ok) {
+      const capabilities = JSON.parse(
+        (
+          await import("node:fs/promises").then(({ readFile }) =>
+            readFile(path.join(roots.output, "capabilities.json"), "utf8"),
+          )
+        ).toString(),
+      );
+      expect(capabilities.summary).toEqual({
+        supported: true,
+        contract: "tidy-sheet-summary-v1",
+        options: { checked: true, allOtherOptions: "historical-defaults" },
+        historicalReferenceDigest:
+          "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
+      });
+    }
   });
 });

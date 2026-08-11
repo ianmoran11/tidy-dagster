@@ -6,7 +6,8 @@
 - Relocated copied-source replay: 117/117 source-owned tests passed
 - Overall Phase C status: incomplete
 - Real source bytes copied into Tidy Dagster: 4,781,394 reference-only bytes
-- Summary/prompt-input parity claim: none
+- Summary parity: exact on four sheets across three frozen fixture workbooks
+- Prompt-input parity: none
 - Provider calls: zero
 
 ## Purpose
@@ -139,11 +140,50 @@ Tidy Dagster's locked `node_modules` rather than installing the copied full
 TidyCell lockfile, and Tidybank has no copied source-owned summary test.
 Accordingly `parityEstablished` remains false.
 
+## Default sheet-summary parity increment
+
+The historical summary/detector/Markdown/HTML closure is now ported into
+`apps/domain-worker/src/summary/`, with candidate-block detection and selector
+decomposition retained as separate deterministic modules. The worker accepts
+`includeSummary: true` and emits `sheet-summary.json`; false/absent preserves the
+existing output set.
+
+`scripts/freeze-source-summary-reference.ts` runs only the copied historical
+source in a disposable relocation under network-denied macOS Seatbelt. It
+verifies the immutable bundle before and after, proves the copied source tree is
+unchanged, and writes the self-reviewed historical reference at
+`fixtures/reference-summary/historical-v1.json`:
+
+- reference digest
+  `sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70`;
+- three exact workbook digests and four sheet summaries;
+- default summary options with `checked: true`;
+- no candidate implementation used; and
+- no sibling runtime dependency or network access.
+
+Two repeated reference runs produced an identical record. The candidate port
+passes the nine copied source-owned summary tests and exactly matches all four
+frozen summary objects. The separate self-reviewed candidate parity record at
+`fixtures/reference-summary/candidate-parity-v1.json` binds candidate source
+digest
+`sha256:e1dc3ba9cc9fa295154261cdc1184c702c85a1128bb054819a82eca98766f546`
+and parity digest
+`sha256:0accb7a70a58f06666ef332f689f6efca0c959ec3f6422a09d816b4943366a96`.
+This establishes bounded default-option compatibility, not full Phase C parity
+or independent review. The historical reference honestly retains
+`parityEstablished: false`; the later parity record establishes only its
+explicit fixture/default-option scope without rewriting reference provenance.
+
 ## Validation
 
 - focused source-closure discovery/copy and source-export suite: `30 passed`;
-- strict JSON Schemas validate discovery, self-review, copy commit, and replay;
-- the checked-in producer digest binds the exact discovery implementation; and
+- copied summary behavior tests: `9 passed`;
+- historical-reference candidate summary parity: `4/4` sheets exact;
+- complete TypeScript/Vitest suite: `166 passed, 1 skipped`;
+- complete Python suite: `146 passed, 1 skipped`;
+- strict JSON Schemas validate discovery, self-review, copy, replay, reference,
+  and scoped parity records;
+- the checked-in producer digest binds the exact discovery implementation;
 - repeated discovery and `tidy-source-closure verify` reproduce the manifest;
 - the standalone copy verifier accepts the 140-item committed bundle; and
 - two relocated replay runs produced the same exact 117-test evidence record.
@@ -155,16 +195,17 @@ This boundary does not yet:
 - authorize the copied closure as a runtime dependency;
 - prove custody of arbitrary dynamic runtime paths beyond the explicitly
   inspected fixture reads;
-- implement detector, renderer, compact-context, formatting, catalogue, or
-  produced-CSV summary behavior;
+- complete summary option/adversarial parity or implement compact-context,
+  formatting, catalogue, produced-CSV summary, and prompt-input behavior;
 - create independent parity gold; or
-- modify the production worker protocol.
+- expose compact-context or prompt-generation behavior through the worker.
 
 ## Next Phase C gate
 
 ADR 0005 permitted the now-completed bounded copy after exact custody and
-implementing-agent self-review. The relocated source-owned replay now passes;
-the next step is deterministic reimplementation plus an independent reference
-referee for intermediate and rendered outputs. Phase C remains incomplete until
-full intermediate and rendered-output parity, adversarial fixtures,
-independently refereed relocated parity, and all existing M0–M4 checks pass.
+implementing-agent self-review. Relocated source-owned replay and bounded default
+summary parity now pass. The next step is compact-context, formatting,
+catalogue, produced-CSV summary, and rendered prompt-input implementation with
+separately frozen references. Phase C remains incomplete until full intermediate
+and rendered-output parity, adversarial fixtures, independently refereed
+relocated parity, and all existing M0–M4 checks pass.

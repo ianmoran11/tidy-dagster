@@ -309,7 +309,7 @@ Results:
 
 - focused migration gateway and import repository: `23 passed`;
 - bundled migration-worker protocol: `7 passed`;
-- complete Python suite: `144 passed, 1 skipped`;
+- complete Python suite: `146 passed, 1 skipped`;
 - TypeScript/Vitest: `155 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,

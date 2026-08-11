@@ -21,10 +21,15 @@ runner, toolchain, dependency, command, and output hashes are recorded in
 ## Tidybank
 
 Tidybank commit `6eed7df0c54a53d4680a5a0551655bf6346d4c7d`
-is MIT-licensed (Copyright (c) 2026 TidyBank contributors). No Tidybank
-summary/detector implementation is included in M0–M2, so no Tidybank code is
-redistributed here. This notice records the reviewed provenance gate and the
-reason summary parity remains unsupported.
+is MIT-licensed (Copyright (c) 2026 TidyBank contributors). The post-M4 summary
+increment includes the candidate-block detector adapted in the frozen TidyCell
+source; its source path, commit, SHA-256, detector version, and compatibility
+adaptations remain embedded in
+`apps/domain-worker/src/recipe/detectCandidateBlocks.ts`. The separately copied
+reference closure also preserves selected Tidybank summary source at pinned
+commit `c26e7f67091c414b411221af461b8ea3974c6320` with its exact MIT licence.
+Default summary parity is fixture-scoped and does not claim full prompt-input
+parity or independent review.
 
 Runtime npm dependencies retain their own license files in the lockfile
 installation. `exceljs` 4.4.0 and `zod` 4.4.3 are MIT-licensed.

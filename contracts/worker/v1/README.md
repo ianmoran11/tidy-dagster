@@ -37,6 +37,8 @@ M3 launcher and are not claimed by this M1/M2 worker.
 `execute-recipe-v01` requires exactly `workbook` and `recipe`, with
 `evidenceProfile` `m1-simple-v1` or `m2-deterministic-parity-v1`. It emits
 parsed workbook, normalized recipe, selector, geometry, execution, and exact
-recipe-aware CSV evidence. Summary remains unsupported pending the separate
-reviewed TidyCell/Tidybank detector and renderer closure; M2 is not yet
-accepted.
+recipe-aware CSV evidence. With `includeSummary: true`, it also emits
+`sheet-summary.json` using the historical default options. That output matches
+all four sheets in the three relocated historical-source reference workbooks.
+M2 remains incomplete pending broader option/adversarial coverage and the
+compact-context, catalogue, produced-CSV, and prompt-input closure.

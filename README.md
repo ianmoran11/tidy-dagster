@@ -4,13 +4,13 @@
 
 ## Current status
 
-**M0–M4 provider-free execution and its replaceable Dagster OSS projection are implemented; M2 is not yet accepted because summary remains unsupported.** A provider-free TypeScript worker parses and executes the three pinned synthetic fixtures (`simple-crosstab`, `sparse-headers`, and `multi-table`) through strict file manifests. It emits parsed workbook, normalized recipe, selector, geometry, full execution, and exact per-table CSV evidence.
+**M0–M4 provider-free execution and its replaceable Dagster OSS projection are implemented; M2 is not yet accepted, although default sheet summaries now match four frozen historical-reference sheets exactly.** A provider-free TypeScript worker parses and executes the three pinned synthetic fixtures (`simple-crosstab`, `sparse-headers`, and `multi-table`) through strict file manifests. It emits parsed workbook, normalized recipe, selector, geometry, full execution, and exact per-table CSV evidence, plus a parity-locked default sheet summary when requested.
 
 M3 adds a Python-owned authoritative local repository for content, derivations, custody, append-only decisions, and compare-and-swap pointers. Its hardened macOS production gateway launches the bundled TypeScript executable in private roots, enforces process/file/sandbox bounds, verifies every declared output, and publishes only a fully verified output set. The offline application runs all three fixtures twice with identical semantic derivation and output fingerprints.
 
-M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Summary is deliberately unsupported because the full reviewed TidyCell/Tidybank detector and renderer closure is not included.
+M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Default summary output is now supported against a relocated historical-source reference; broader summary options and the compact-context/prompt-input closure remain incomplete.
 
-The post-M4 Phase A boundary has frozen and NAS-published a deterministic read-only TidyCell inventory. Independent review did not occur; ADR 0005 now permits implementing-agent self-review while requiring that status to remain explicit. A fixture-only Phase B core proves split local-SQLite/NAS-compatible blob storage, crash-safe item checkpoints, deduplication, content reconciliation, historical approval-digest compatibility, explicit reviewer/approval outcomes, conservative approval/recipe/generation/model dispositions, and per-item semantic-pass reconciliation. A separate bounded TypeScript migration executable now parses RecipeV01 evidence and computes exact legacy approval-row digests without expanding the production worker protocol; its Python gateway binds imported CAS sources, launches under production macOS Seatbelt, and transactionally publishes inactive output custody, derivation, and reproduction authority. Real import remains absent, but a 63-item/44,084,669-byte deterministic stratified canary is now frozen from Phase A metadata with byte-copy and import authority explicitly false. A sanitized read-only NAS inspection confirms SMB 3.1.1 and local SQLite while leaving signing-required policy, dedicated service identity, snapshots, restore, and formal adapter evidence blocked. Phase C now has a self-reviewed manifest and transactionally committed repository-local reference copy for 140 exact TidyCell/Tidybank summary, prompt, dependency, licence, lockfile, and fixture items (4,781,394 bytes). A relocated, network-denied replay passes all 117 copied TidyCell source-owned tests without mutating the bundle; the copy remains explicitly non-runtime and this is not independent summary parity. Phase B has no live authorization or CLI and cannot import the 44,682-item TidyCell snapshot. The internal volume has recovered to about 83% utilization, but real import remains blocked by Synology service-identity/recovery gates and incomplete full-estate typed reconciliation. No TidyCell content object has been imported, no provider or ML operation has run, and no recipe, domain-publication, semantic, calibration, or Sembla authority has changed.
+The post-M4 Phase A boundary has frozen and NAS-published a deterministic read-only TidyCell inventory. Independent review did not occur; ADR 0005 now permits implementing-agent self-review while requiring that status to remain explicit. A fixture-only Phase B core proves split local-SQLite/NAS-compatible blob storage, crash-safe item checkpoints, deduplication, content reconciliation, historical approval-digest compatibility, explicit reviewer/approval outcomes, conservative approval/recipe/generation/model dispositions, and per-item semantic-pass reconciliation. A separate bounded TypeScript migration executable now parses RecipeV01 evidence and computes exact legacy approval-row digests without expanding the production worker protocol; its Python gateway binds imported CAS sources, launches under production macOS Seatbelt, and transactionally publishes inactive output custody, derivation, and reproduction authority. Real import remains absent, but a 63-item/44,084,669-byte deterministic stratified canary is now frozen from Phase A metadata with byte-copy and import authority explicitly false. A sanitized read-only NAS inspection confirms SMB 3.1.1 and local SQLite while leaving signing-required policy, dedicated service identity, snapshots, restore, and formal adapter evidence blocked. Phase C now has a self-reviewed manifest and transactionally committed repository-local reference copy for 140 exact TidyCell/Tidybank summary, prompt, dependency, licence, lockfile, and fixture items (4,781,394 bytes). A relocated, network-denied replay passes all 117 copied TidyCell source-owned tests without mutating the bundle. A separate historical-source harness freezes four default sheet summaries, and the standalone worker matches them exactly; this is implementing-agent compatibility evidence, not independent review or full prompt-input parity. Phase B has no live authorization or CLI and cannot import the 44,682-item TidyCell snapshot. The internal volume has recovered to about 83% utilization, but real import remains blocked by Synology service-identity/recovery gates and incomplete full-estate typed reconciliation. No TidyCell content object has been imported, no provider or ML operation has run, and no recipe, domain-publication, semantic, calibration, or Sembla authority has changed.
 
 Two architectural decisions were confirmed on 2026-08-09:
 
@@ -87,7 +87,7 @@ npm run check
 
 Build the workers with `npm run build`. The stable production package bin is `tidy-domain-worker`; its wire contract is documented in [`contracts/worker/v1`](contracts/worker/v1/README.md). The separate one-time `tidy-migration-worker` contract is documented in [`contracts/migration-worker/v1`](contracts/migration-worker/v1/README.md). Fixture custody is recorded in [`fixtures/parity/source-manifest.json`](fixtures/parity/source-manifest.json). Independently executed pinned-reference bytes and their clean-checkout procedure are recorded in [`fixtures/gold/manifest.json`](fixtures/gold/manifest.json), while `fixtures/expected/*.json` remains an additional source-authored partial oracle.
 
-The Python repositories/gateway and replaceable Dagster projection are implemented in `src/tidy_orchestrator`. Phase A review was waived rather than performed. The Phase B content/semantic groundwork and Phase C source-closure tooling are fixture-only and explicitly incomplete. External review authority, real source selection, live import, summary parity, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
+The Python repositories/gateway and replaceable Dagster projection are implemented in `src/tidy_orchestrator`. Phase A review was waived rather than performed. The Phase B content/semantic groundwork and Phase C source-closure tooling are fixture-only and explicitly incomplete. External review authority, live import, full summary/prompt parity, generation/provider dispatch, semantic contracts, and Sembla integration remain later gated milestones.
 
 ## M3 provider-free Python execution
 
@@ -175,18 +175,18 @@ deliberately no live import command. See
 [`contracts/import/v1`](contracts/import/v1/README.md) and
 [`docs/phase-b-core-import.md`](docs/phase-b-core-import.md).
 
-## Phase C fixture-only source closure
+## Phase C source closure and bounded summary parity
 
 ```sh
-uv run pytest -q tests/test_source_code_snapshot.py
+uv run pytest -q tests/test_source_code_snapshot.py tests/test_reference_summary.py
 ```
 
-`FixtureSourceCodeAuthorization` permits only an explicitly selected, tracked
-synthetic Git closure of at most 100 files and 8 MiB. The no-copy freezer binds
-file roles, modes, lengths, digests, Git HEAD/tree/dirty evidence, licence, and
-its exact producer closure, then re-reads every selected file before completion.
-There is no CLI or non-fixture authorization. It does not select sibling source,
-implement summary behavior, or claim M2/Phase C parity. See
+The original `FixtureSourceCodeAuthorization` remains as a synthetic no-copy
+scaffold. Exact repository-local custody now supersedes it for the selected real
+closure. A network-denied historical-source harness freezes default summaries
+for four fixture sheets, and the standalone worker matches those objects
+exactly. This is fixture-scoped implementing-agent evidence; complete M2/Phase C
+summary-and-prompt parity and independent review are not claimed. See
 [`docs/phase-c-source-closure-scaffold.md`](docs/phase-c-source-closure-scaffold.md).
 
 ## Permanent guardrails

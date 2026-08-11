@@ -332,7 +332,8 @@ def build_definitions(
         metadata={
             "provider_calls": 0,
             "authority": "external-content-derivation-custody-repository",
-            "summary_supported": False,
+            "summary_supported": True,
+            "summary_scope": "historical-default-fixture-parity-v1",
         },
     )
 

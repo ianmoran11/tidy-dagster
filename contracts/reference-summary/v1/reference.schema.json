@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/reference-summary/v1/reference.schema.json",
+  "title": "HistoricalSourceSummaryReferenceV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "closureManifestDigest",
+    "copyCommitDigest",
+    "referenceKind",
+    "summaryOptions",
+    "cases",
+    "sourceTreeDigestBefore",
+    "sourceTreeDigestAfter",
+    "harnessDigest",
+    "runtime",
+    "bundleVerifiedBefore",
+    "bundleVerifiedAfter",
+    "relocated",
+    "runtimeSiblingDependencyUsed",
+    "networkIsolationEnforced",
+    "candidateImplementationUsed",
+    "independentReview",
+    "parityEstablished",
+    "limitations",
+    "recordedAt",
+    "referenceDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.historical-source-summary-reference/v1" },
+    "closureManifestDigest": { "$ref": "#/$defs/digest" },
+    "copyCommitDigest": { "$ref": "#/$defs/digest" },
+    "referenceKind": { "const": "sheet-summary-default-options" },
+    "summaryOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checked", "allOtherOptions"],
+      "properties": {
+        "checked": { "const": true },
+        "allOtherOptions": { "const": "historical-defaults" }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "caseId",
+          "workbookRelativePath",
+          "workbookContentDigest",
+          "sheetCount",
+          "summaries",
+          "caseDigest"
+        ],
+        "properties": {
+          "caseId": {
+            "enum": ["multi-table", "simple-crosstab", "sparse-headers"]
+          },
+          "workbookRelativePath": {
+            "type": "string",
+            "pattern": "^fixtures/workbooks/(?:multi-table|simple-crosstab|sparse-headers)\\.xlsx$"
+          },
+          "workbookContentDigest": { "$ref": "#/$defs/digest" },
+          "sheetCount": { "type": "integer", "minimum": 1, "maximum": 32 },
+          "summaries": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "items": { "type": "object" }
+          },
+          "caseDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    "sourceTreeDigestBefore": { "$ref": "#/$defs/digest" },
+    "sourceTreeDigestAfter": { "$ref": "#/$defs/digest" },
+    "harnessDigest": { "$ref": "#/$defs/digest" },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeVersion",
+        "tsxVersion",
+        "tidyDagsterLockDigest",
+        "copiedSourceLockDigest",
+        "dependencyRuntime"
+      ],
+      "properties": {
+        "nodeVersion": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "tsxVersion": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "tidyDagsterLockDigest": { "$ref": "#/$defs/digest" },
+        "copiedSourceLockDigest": { "$ref": "#/$defs/digest" },
+        "dependencyRuntime": {
+          "const": "tidy-dagster-locked-node-modules"
+        }
+      }
+    },
+    "bundleVerifiedBefore": { "const": true },
+    "bundleVerifiedAfter": { "const": true },
+    "relocated": { "const": true },
+    "runtimeSiblingDependencyUsed": { "const": false },
+    "networkIsolationEnforced": { "const": true },
+    "candidateImplementationUsed": { "const": false },
+    "independentReview": { "const": false },
+    "parityEstablished": { "const": false },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "recordedAt": { "$ref": "#/$defs/timestamp" },
+    "referenceDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    }
+  }
+}

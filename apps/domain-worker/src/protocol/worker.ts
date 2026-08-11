@@ -24,6 +24,7 @@ import {
 } from "../recipe/resolveSelectors.js";
 import { validateRecipe } from "../recipe/schema.js";
 import type { RecipeV01 } from "../recipe/types.js";
+import { buildSheetSummary } from "../summary/buildSheetSummary.js";
 import { findRecipeSheet } from "../workbook/findRecipeSheet.js";
 import { parseWorkbook } from "../workbook/parseWorkbook.js";
 import {
@@ -211,9 +212,14 @@ async function runWorkerUnchecked(
               operations: ["health", "capabilities", "execute-recipe-v01"],
               evidenceProfiles: ["m1-simple-v1", "m2-deterministic-parity-v1"],
               summary: {
-                supported: false,
-                reason:
-                  "Full reviewed TidyCell/Tidybank summary closure is not included in M0-M2.",
+                supported: true,
+                contract: "tidy-sheet-summary-v1",
+                options: {
+                  checked: true,
+                  allOtherOptions: "historical-defaults",
+                },
+                historicalReferenceDigest:
+                  "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
               },
               networkRequired: false,
             };
@@ -226,13 +232,6 @@ async function runWorkerUnchecked(
       ]);
     }
 
-    if (request.parameters.includeSummary === true)
-      return failure(
-        request.requestId,
-        "UNSUPPORTED_CAPABILITY",
-        "protocol",
-        "Summary parity is deliberately unsupported in this milestone.",
-      );
     if (!request.parameters.evidenceProfile)
       return failure(
         request.requestId,
@@ -301,7 +300,11 @@ async function runWorkerUnchecked(
       );
 
     enforceRecipeNames(validated.data);
-    enforceOutputDescriptorLimit(validated.data, request.limits.maxOutputFiles);
+    enforceOutputDescriptorLimit(
+      validated.data,
+      request.limits.maxOutputFiles,
+      request.parameters.includeSummary === true,
+    );
     enforceRecipeSelectorLimit(validated.data, request.limits.maxSelectorCells);
     const parsedWorkbook = await parseWorkbook(workbookBytes);
     if (!parsedWorkbook.ok)
@@ -355,6 +358,16 @@ async function runWorkerUnchecked(
         relativePath: "execution.json",
         render: () => jsonBytes(execution),
       },
+      ...(request.parameters.includeSummary === true
+        ? [
+            {
+              name: "sheet-summary.json",
+              relativePath: "sheet-summary.json",
+              render: () =>
+                jsonBytes(buildSheetSummary(sheet, { checked: true })),
+            },
+          ]
+        : []),
     ];
     execution.tables.forEach((table, index) => {
       const relativePath = csvOutputPath(table.table);
@@ -420,8 +433,9 @@ function enforceRecipeNames(recipe: RecipeV01): void {
 function enforceOutputDescriptorLimit(
   recipe: RecipeV01,
   maxOutputFiles: number,
+  includeSummary: boolean,
 ): void {
-  if (recipe.tables.length + 5 > maxOutputFiles)
+  if (recipe.tables.length + 5 + (includeSummary ? 1 : 0) > maxOutputFiles)
     throw new ProtocolError(
       "OUTPUT_DESCRIPTOR_LIMIT_EXCEEDED",
       "limit",

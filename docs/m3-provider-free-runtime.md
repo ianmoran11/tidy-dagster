@@ -6,7 +6,9 @@ M3 implements the Python-owned authoritative local repository, the hardened
 POSIX gateway to the TypeScript domain worker, and the Dagster-independent
 fixture application. It does not implement Dagster, providers, ML, review
 authority, semantic contracts, calibration, justice behavior, or Sembla.
-Recipe summary remains unsupported.
+M3 itself did not implement recipe summaries. A later post-M4 Phase C increment
+now supports the historical default sheet-summary contract on the frozen
+four-sheet fixture cohort; this does not retroactively expand M3 acceptance.
 
 ## Authority and identity
 

@@ -2,21 +2,141 @@
   "schemaVersion": "tidy.ported-source-provenance/v1",
   "sourceRepository": "https://github.com/ianmoran11/tidycell.git",
   "sourceCommit": "1be6c995fa931e9860468e40490433161b0121cb",
+  "sourceSnapshotDigest": "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d",
   "license": "MIT",
   "copyright": "Copyright (c) 2026 Ian Moran",
   "files": [
-    { "sourcePath": "src/lib/address.ts", "gitBlob": "98ded11e63de4f45ab1e4890902abece841f0003", "copiedPath": "apps/domain-worker/src/address.ts", "method": "ported; notice added" },
-    { "sourcePath": "src/lib/workbook/types.ts", "gitBlob": "2900938c47870b15170124b3088252ee56fc5126", "copiedPath": "apps/domain-worker/src/workbook/types.ts", "method": "ported; notice added" },
-    { "sourcePath": "src/lib/workbook/parseWorkbook.ts", "gitBlob": "d9505b459819bccb1476070c0be43a6d154bf4a3", "copiedPath": "apps/domain-worker/src/workbook/parseWorkbook.ts", "method": "ported; standalone imports and notice added" },
-    { "sourcePath": "src/lib/workbook/findRecipeSheet.ts", "gitBlob": "93cfdf4081d9976619b88828634986886dcc8fd7", "copiedPath": "apps/domain-worker/src/workbook/findRecipeSheet.ts", "method": "ported; standalone import and notice added" },
-    { "sourcePath": "src/lib/recipe/schema.ts", "gitBlob": "c634a222eb465d13c70f96de46d39fac407470b7", "copiedPath": "apps/domain-worker/src/recipe/schema.ts", "method": "ported; standalone import and notice added" },
-    { "sourcePath": "src/lib/recipe/types.ts", "gitBlob": "98ad6e67475ee4e4dd4015313d6d342540c812bb", "copiedPath": "apps/domain-worker/src/recipe/types.ts", "method": "ported; standalone import and notice added" },
-    { "sourcePath": "src/lib/recipe/resolveSelectors.ts", "gitBlob": "4a60669db222f9b9eb78d2a8622054da3a34e4aa", "copiedPath": "apps/domain-worker/src/recipe/resolveSelectors.ts", "method": "ported; summary dependency isolated; standalone imports and notice added" },
-    { "sourcePath": "src/lib/executor/directions.ts", "gitBlob": "a8902daf7f95c4b7fb64959ece173ab9bce24a2d", "copiedPath": "apps/domain-worker/src/executor/directions.ts", "method": "ported; standalone imports and notice added" },
-    { "sourcePath": "src/lib/executor/relationshipResolution.ts", "gitBlob": "633e319190d8eaf981e28eac3644e3f02c9a2dcd", "copiedPath": "apps/domain-worker/src/executor/relationshipResolution.ts", "method": "ported; standalone imports and notice added" },
-    { "sourcePath": "src/lib/executor/types.ts", "gitBlob": "26ba69fab0c8b9ae333a5656d0baff5e6ce18663", "copiedPath": "apps/domain-worker/src/executor/types.ts", "method": "ported; standalone import and notice added" },
-    { "sourcePath": "src/lib/executor/executeRecipe.ts", "gitBlob": "380943e690c09d8925848a04a3e08d2feec24f23", "copiedPath": "apps/domain-worker/src/executor/executeRecipe.ts", "method": "ported; standalone imports and notice added" },
-    { "sourcePath": "src/lib/export/formatters.ts", "gitBlob": "55fdc0b93a62098ff5a9b94b49ede77430cbe5a2", "copiedPath": "apps/domain-worker/src/export/formatters.ts", "method": "narrow raw CSV subset reimplemented; ontology/export UI closure excluded" },
-    { "sourcePath": "src/lib/summary/buildSheetSummary.ts", "gitBlob": "67ad8ec67c612ede7cf34863b2779bd59285820b", "copiedPath": "apps/domain-worker/src/recipe/styleFingerprint.ts", "method": "only stableJson and FNV-1a hashString isolated; summary closure excluded" }
+    {
+      "sourcePath": "src/lib/address.ts",
+      "gitBlob": "98ded11e63de4f45ab1e4890902abece841f0003",
+      "copiedPath": "apps/domain-worker/src/address.ts",
+      "method": "ported; notice added"
+    },
+    {
+      "sourcePath": "src/lib/workbook/types.ts",
+      "gitBlob": "2900938c47870b15170124b3088252ee56fc5126",
+      "copiedPath": "apps/domain-worker/src/workbook/types.ts",
+      "method": "ported; notice added"
+    },
+    {
+      "sourcePath": "src/lib/workbook/parseWorkbook.ts",
+      "gitBlob": "d9505b459819bccb1476070c0be43a6d154bf4a3",
+      "copiedPath": "apps/domain-worker/src/workbook/parseWorkbook.ts",
+      "method": "ported; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/workbook/findRecipeSheet.ts",
+      "gitBlob": "93cfdf4081d9976619b88828634986886dcc8fd7",
+      "copiedPath": "apps/domain-worker/src/workbook/findRecipeSheet.ts",
+      "method": "ported; standalone import and notice added"
+    },
+    {
+      "sourcePath": "src/lib/recipe/schema.ts",
+      "gitBlob": "c634a222eb465d13c70f96de46d39fac407470b7",
+      "copiedPath": "apps/domain-worker/src/recipe/schema.ts",
+      "method": "ported; standalone import and notice added"
+    },
+    {
+      "sourcePath": "src/lib/recipe/types.ts",
+      "gitBlob": "98ad6e67475ee4e4dd4015313d6d342540c812bb",
+      "copiedPath": "apps/domain-worker/src/recipe/types.ts",
+      "method": "ported; standalone import and notice added"
+    },
+    {
+      "sourcePath": "src/lib/recipe/resolveSelectors.ts",
+      "gitBlob": "4a60669db222f9b9eb78d2a8622054da3a34e4aa",
+      "copiedPath": "apps/domain-worker/src/recipe/resolveSelectors.ts",
+      "method": "ported; summary dependency isolated; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/executor/directions.ts",
+      "gitBlob": "a8902daf7f95c4b7fb64959ece173ab9bce24a2d",
+      "copiedPath": "apps/domain-worker/src/executor/directions.ts",
+      "method": "ported; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/executor/relationshipResolution.ts",
+      "gitBlob": "633e319190d8eaf981e28eac3644e3f02c9a2dcd",
+      "copiedPath": "apps/domain-worker/src/executor/relationshipResolution.ts",
+      "method": "ported; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/executor/types.ts",
+      "gitBlob": "26ba69fab0c8b9ae333a5656d0baff5e6ce18663",
+      "copiedPath": "apps/domain-worker/src/executor/types.ts",
+      "method": "ported; standalone import and notice added"
+    },
+    {
+      "sourcePath": "src/lib/executor/executeRecipe.ts",
+      "gitBlob": "380943e690c09d8925848a04a3e08d2feec24f23",
+      "copiedPath": "apps/domain-worker/src/executor/executeRecipe.ts",
+      "method": "ported; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/export/formatters.ts",
+      "gitBlob": "55fdc0b93a62098ff5a9b94b49ede77430cbe5a2",
+      "copiedPath": "apps/domain-worker/src/export/formatters.ts",
+      "method": "narrow raw CSV subset reimplemented; ontology/export UI closure excluded"
+    },
+    {
+      "sourcePath": "src/lib/summary/buildSheetSummary.ts",
+      "gitBlob": "67ad8ec67c612ede7cf34863b2779bd59285820b",
+      "copiedPath": "apps/domain-worker/src/recipe/styleFingerprint.ts",
+      "method": "only stableJson and FNV-1a hashString isolated during the earlier narrow port"
+    },
+    {
+      "sourcePath": "src/lib/workbook/gridLimits.ts",
+      "sourceContentDigest": "sha256:230ecea5e770ec02c57dff2783e6f0cc1bad4b144bb88be60e38497ac84d6d5a",
+      "copiedPath": "apps/domain-worker/src/workbook/gridLimits.ts",
+      "method": "ported from Phase A-bound closure; notice added"
+    },
+    {
+      "sourcePath": "src/lib/recipe/decomposeSelector.ts",
+      "sourceContentDigest": "sha256:180addaaf260acfc3accfd43d42e09d6eda27af0456a8d5e28243941cf2b8663",
+      "copiedPath": "apps/domain-worker/src/recipe/decomposeSelector.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/recipe/detectCandidateBlocks.ts",
+      "sourceContentDigest": "sha256:db4a74f2d06b9442e158d4a4b39a74d48e2ec8152f0f9042229e1e8ad6f1b674",
+      "copiedPath": "apps/domain-worker/src/recipe/detectCandidateBlocks.ts",
+      "method": "ported from Phase A-bound TidyCell adaptation of pinned Tidybank detector; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/summary/buildHeaderCandidates.ts",
+      "sourceContentDigest": "sha256:c8a1b9edc3c3f8c883c2d2fc2404e5af7710378d30c31b1e9cd04a1d117d070d",
+      "copiedPath": "apps/domain-worker/src/summary/buildHeaderCandidates.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/summary/buildHtmlTable.ts",
+      "sourceContentDigest": "sha256:6153d67b6bdcaacc3bd1de7b0a9e487087baeb911d1c1ec06fe2cd714eab241c",
+      "copiedPath": "apps/domain-worker/src/summary/buildHtmlTable.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/summary/buildMarkdownTable.ts",
+      "sourceContentDigest": "sha256:8531cf011921955428cda073d3d46c28cbfa272083df8467024175c33a138552",
+      "copiedPath": "apps/domain-worker/src/summary/buildMarkdownTable.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/summary/buildSheetSummary.ts",
+      "sourceContentDigest": "sha256:94ff510e4b54d3de6dbef92461edfe52017a5d44cdf367960cca4112795f4608",
+      "copiedPath": "apps/domain-worker/src/summary/buildSheetSummary.ts",
+      "method": "full default summary implementation ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/summary/compressTableMarkdown.ts",
+      "sourceContentDigest": "sha256:1f80830fe4289561f2ec46eca0b71d2d1f0f5eab0fa4d891f3a1b83b11ee176d",
+      "copiedPath": "apps/domain-worker/src/summary/compressTableMarkdown.ts",
+      "method": "ported for the later prompt-context phase; standalone import and notice added"
+    },
+    {
+      "sourcePath": "src/lib/summary/types.ts",
+      "sourceContentDigest": "sha256:6d684630aeca10f8226aa9ed8d487909d23c6da3850fce36af04dc9a0214e3f5",
+      "copiedPath": "apps/domain-worker/src/summary/types.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    }
   ]
 }
