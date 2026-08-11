@@ -8,6 +8,7 @@
 - Real source bytes copied into Tidy Dagster: 4,781,394 reference-only bytes
 - Summary parity: exact on four sheets across three frozen fixture workbooks
 - Compact-context parity: exact on the same four sheets
+- Produced-CSV diagnostic behavior: ported; six copied tests pass
 - Prompt-input parity: none
 - Provider calls: zero
 
@@ -196,6 +197,15 @@ As with summaries, the historical reference remains provenance-only and false
 for candidate/full parity; the later self-reviewed comparison establishes only
 the explicit four-context scope.
 
+## Produced-CSV diagnostic increment
+
+`apps/domain-worker/src/review/producedCsvSummary.ts` now carries the frozen
+column-summary, duplicate-key, numeric-parse, missingness, sparse-column-pair,
+suspicious-row, and bounded prompt-sample behavior. All six copied historical
+source tests pass against the standalone port. This module remains provider-free
+and is not yet exposed as a worker output or assembled into a rendered prompt;
+that integration remains a separate parity gate.
+
 ## Validation
 
 - focused source-closure discovery/copy and source-export suite: `30 passed`;
@@ -203,7 +213,8 @@ the explicit four-context scope.
 - historical-reference candidate summary parity: `4/4` sheets exact;
 - focused compact-context behavior tests: `4 passed`;
 - historical-reference candidate compact-context parity: `4/4` exact;
-- complete TypeScript/Vitest suite: `171 passed, 1 skipped`;
+- copied produced-CSV diagnostic tests: `6 passed`;
+- complete TypeScript/Vitest suite: `177 passed, 1 skipped`;
 - complete Python suite: `149 passed, 1 skipped`;
 - strict JSON Schemas validate discovery, self-review, copy, replay, reference,
   and scoped parity records;
@@ -220,7 +231,7 @@ This boundary does not yet:
 - prove custody of arbitrary dynamic runtime paths beyond the explicitly
   inspected fixture reads;
 - complete summary/context adversarial parity or implement formatting,
-  catalogue, produced-CSV summary, and prompt-input behavior;
+  catalogue, produced-CSV prompt integration, and prompt-input behavior;
 - create independent parity gold; or
 - expose prompt-generation behavior through the worker.
 
@@ -228,8 +239,9 @@ This boundary does not yet:
 
 ADR 0005 permitted the now-completed bounded copy after exact custody and
 implementing-agent self-review. Relocated source-owned replay and bounded default
-summary and compact-context parity now pass. The next step is formatting,
-catalogue, produced-CSV summary, and rendered prompt-input implementation with
+summary and compact-context parity now pass, and produced-CSV diagnostics are
+ported. The next step is formatting, catalogue, produced-CSV prompt integration,
+and rendered prompt-input implementation with
 separately frozen references. Phase C remains incomplete until full intermediate
 and rendered-output parity, adversarial fixtures, independently refereed
 relocated parity, and all existing M0–M4 checks pass.
