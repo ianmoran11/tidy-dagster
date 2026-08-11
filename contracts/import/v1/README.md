@@ -20,6 +20,7 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
   the mutable legacy registry; it never claims append-only history and retains
   the verifier configuration plus honest production/insecure isolation state.
 - `reviewer-label-confirmation-request.schema.json`,
+  `reviewer-label-confirmation-decision.schema.json`,
   `reviewer-identity.schema.json`, `approval-resolution.schema.json`, and
   `approval-domain-reconciliation.schema.json` — a Phase A-bound exact-label
   confirmation request, explicit reviewer-label curation, evidence-bearing
@@ -80,7 +81,9 @@ legacy approval outcome states, non-authoritative approval/recipe/generation/
 model dispositions, and complete per-item reconciliation of that conservative
 pass. The real TidyCell approval registry was read only through a stable
 no-follow Phase A digest check to freeze three pending labels; it was not copied,
-imported, interpreted as identity authority, or used by tests.
+imported, or used by tests. Ian Moran then interactively confirmed all three
+exact labels in a separate identity-only decision that grants no approval,
+activation, or training authority.
 
 Phase B is not complete until the frozen estate is imported under a separately
 reviewed live authorization, typed parsers bind complete recipe and generation

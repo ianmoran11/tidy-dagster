@@ -7,9 +7,11 @@ import pytest
 
 from tidy_orchestrator.artifacts import canonical_json_bytes, domain_digest
 from tidy_orchestrator.reviewer_confirmation import (
+    DECISION_VERSION,
     LABEL_EVIDENCE_VERSION,
     SCHEMA_VERSION,
     ReviewerConfirmationError,
+    create_reviewer_confirmation_decision,
     freeze_reviewer_confirmation_request,
     write_confirmation_request,
 )
@@ -107,6 +109,42 @@ def test_output_is_canonical_and_schema_valid(tmp_path: Path) -> None:
     ).validate(record)
 
 
+def test_decision_confirms_only_selected_exact_labels(tmp_path: Path) -> None:
+    snapshot, source = _fixture(tmp_path)
+    request = freeze_reviewer_confirmation_request(
+        snapshot_path=snapshot,
+        source_root=source,
+        frozen_at=FIXED_TIME,
+    )
+    decision = create_reviewer_confirmation_decision(
+        request=request,
+        display_name="Ian Moran",
+        confirmed_labels=["Ian", "lan"],
+        curated_by="Ian Moran via interactive confirmation",
+        selected_answer="Ian and lan",
+        recorded_at="2026-08-12T04:35:00Z",
+    )
+    assert decision["reviewerIdentity"]["acceptedLabels"] == ["Ian", "lan"]
+    assert [entry["decision"] for entry in decision["decisions"]] == [
+        "left-unattributed",
+        "confirmed-human-identity",
+        "confirmed-human-identity",
+    ]
+    assert decision["reviewerIdentityAuthorized"] is True
+    assert decision["approvalAuthorityCreated"] is False
+    digest = decision.pop("decisionDigest")
+    assert domain_digest(DECISION_VERSION, decision) == digest
+    with pytest.raises(ReviewerConfirmationError, match="exact labels"):
+        create_reviewer_confirmation_decision(
+            request=request,
+            display_name="Ian Moran",
+            confirmed_labels=["ian"],
+            curated_by="Ian Moran via interactive confirmation",
+            selected_answer="invalid typo-normalized label",
+            recorded_at="2026-08-12T04:35:00Z",
+        )
+
+
 def test_frozen_real_confirmation_request_is_non_authoritative() -> None:
     record = json.loads(
         (
@@ -143,6 +181,50 @@ def test_frozen_real_confirmation_request_is_non_authoritative() -> None:
     assert record["approvalAuthorityCreated"] is False
     assert record["activationAuthorized"] is False
     assert record["trainingAuthorized"] is False
+
+
+def test_frozen_interactive_decision_confirms_all_three_exact_labels() -> None:
+    decision = json.loads(
+        (
+            ROOT / "fixtures/reviewer-confirmation/ian-moran-label-decision-v1.json"
+        ).read_text()
+    )
+    schema = json.loads(
+        (
+            ROOT
+            / "contracts/import/v1/reviewer-label-confirmation-decision.schema.json"
+        ).read_text()
+    )
+    identity_schema = json.loads(
+        (ROOT / "contracts/import/v1/reviewer-identity.schema.json").read_text()
+    )
+    jsonschema.Draft202012Validator(
+        schema, format_checker=jsonschema.FormatChecker()
+    ).validate(decision)
+    jsonschema.Draft202012Validator(
+        identity_schema, format_checker=jsonschema.FormatChecker()
+    ).validate(decision["reviewerIdentity"])
+    digest = decision.pop("decisionDigest")
+    assert digest == (
+        "sha256:c3d06cb56ddf2d955f7e016b3166abca4b7c8db24ca979106d05d3ec62a73a61"
+    )
+    assert domain_digest(DECISION_VERSION, decision) == digest
+    assert decision["requestDigest"] == (
+        "sha256:b6fca8497fcdaf2050be62b0b5322fa2aed970f4d34e8e43a89fd7148fe04df5"
+    )
+    assert decision["reviewerIdentity"]["acceptedLabels"] == ["Good", "Ian", "lan"]
+    assert decision["reviewerIdentity"]["reviewerId"] == (
+        "sha256:497aeb26fa36b5116cd3bedb7e1c1f2ed89b4825c0ed087bcc62de039794d3a8"
+    )
+    assert all(
+        entry["decision"] == "confirmed-human-identity"
+        for entry in decision["decisions"]
+    )
+    assert decision["confirmation"]["selectedAnswer"] == "All three labels"
+    assert decision["reviewerIdentityAuthorized"] is True
+    assert decision["approvalAuthorityCreated"] is False
+    assert decision["activationAuthorized"] is False
+    assert decision["trainingAuthorized"] is False
 
 
 def test_fails_closed_on_mutated_or_linked_registry(tmp_path: Path) -> None:

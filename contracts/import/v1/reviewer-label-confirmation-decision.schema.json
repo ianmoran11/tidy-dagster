@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy.example/contracts/import/v1/reviewer-label-confirmation-decision.schema.json",
+  "title": "Exact reviewer label confirmation decision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "requestDigest",
+    "sourceSnapshotDigest",
+    "sourceContentDigest",
+    "reviewerIdentity",
+    "decisions",
+    "confirmation",
+    "confirmationDigest",
+    "reviewerIdentityAuthorized",
+    "approvalAuthorityCreated",
+    "activationAuthorized",
+    "trainingAuthorized",
+    "limitations",
+    "recordedAt",
+    "decisionDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "tidy.reviewer-label-confirmation-decision/v1"
+    },
+    "requestDigest": { "$ref": "#/$defs/digest" },
+    "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+    "sourceContentDigest": { "$ref": "#/$defs/digest" },
+    "reviewerIdentity": { "$ref": "#/$defs/reviewer" },
+    "decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "exactLabel",
+          "labelEvidenceDigest",
+          "decision",
+          "reviewerId"
+        ],
+        "properties": {
+          "exactLabel": { "type": "string", "minLength": 1 },
+          "labelEvidenceDigest": { "$ref": "#/$defs/digest" },
+          "decision": {
+            "enum": ["confirmed-human-identity", "left-unattributed"]
+          },
+          "reviewerId": {
+            "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+          }
+        }
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "question", "selectedAnswer", "confirmedBy"],
+      "properties": {
+        "method": { "const": "interactive-user-confirmation" },
+        "question": {
+          "const": "Which exact historical approvedBy labels should be confirmed as identifying you, Ian Moran?"
+        },
+        "selectedAnswer": { "type": "string", "minLength": 1 },
+        "confirmedBy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "confirmationDigest": { "$ref": "#/$defs/digest" },
+    "reviewerIdentityAuthorized": { "const": true },
+    "approvalAuthorityCreated": { "const": false },
+    "activationAuthorized": { "const": false },
+    "trainingAuthorized": { "const": false },
+    "limitations": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "recordedAt": { "type": "string", "format": "date-time" },
+    "decisionDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "displayName",
+        "acceptedLabels",
+        "curatedBy",
+        "recordedAt",
+        "reviewerId"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "tidy.reviewer-identity/v1" },
+        "displayName": { "type": "string", "minLength": 1 },
+        "acceptedLabels": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "curatedBy": { "type": "string", "minLength": 1 },
+        "recordedAt": { "type": "string", "format": "date-time" },
+        "reviewerId": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}

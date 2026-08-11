@@ -16,9 +16,15 @@ from pathlib import Path
 from typing import Any
 
 from .artifacts import canonical_json_bytes, domain_digest, sha256_digest
+from .legacy_approvals import create_reviewer_identity
 
 SCHEMA_VERSION = "tidy.reviewer-label-confirmation-request/v1"
 LABEL_EVIDENCE_VERSION = "tidy.reviewer-label-evidence/v1"
+DECISION_VERSION = "tidy.reviewer-label-confirmation-decision/v1"
+CONFIRMATION_QUESTION = (
+    "Which exact historical approvedBy labels should be confirmed as identifying "
+    "you, Ian Moran?"
+)
 MAX_REGISTRY_BYTES = 2 * 1024 * 1024
 MAX_APPROVAL_ROWS = 100_000
 _TIMESTAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
@@ -151,6 +157,87 @@ def freeze_reviewer_confirmation_request(
     return {
         **semantic_record,
         "requestDigest": domain_digest(SCHEMA_VERSION, semantic_record),
+    }
+
+
+def create_reviewer_confirmation_decision(
+    *,
+    request: dict[str, Any],
+    display_name: str,
+    confirmed_labels: list[str],
+    curated_by: str,
+    selected_answer: str,
+    recorded_at: str,
+) -> dict[str, Any]:
+    if not _TIMESTAMP.fullmatch(recorded_at):
+        raise ReviewerConfirmationError("Decision time must be UTC to whole seconds")
+    request_semantic = dict(request)
+    request_digest = request_semantic.pop("requestDigest", None)
+    if request_digest != domain_digest(SCHEMA_VERSION, request_semantic):
+        raise ReviewerConfirmationError("Confirmation request digest is invalid")
+    available = {
+        entry.get("exactLabel"): entry
+        for entry in request.get("labels", [])
+        if isinstance(entry, dict) and isinstance(entry.get("exactLabel"), str)
+    }
+    labels = sorted(set(confirmed_labels))
+    if not labels or any(label not in available for label in labels):
+        raise ReviewerConfirmationError(
+            "Confirmed labels must be exact labels from the frozen request"
+        )
+    identity = create_reviewer_identity(
+        display_name=display_name,
+        accepted_labels=labels,
+        curated_by=curated_by,
+        recorded_at=recorded_at,
+    )
+    decisions = []
+    for label in sorted(available):
+        evidence = available[label]
+        confirmed = label in labels
+        decisions.append(
+            {
+                "exactLabel": label,
+                "labelEvidenceDigest": evidence["labelEvidenceDigest"],
+                "decision": (
+                    "confirmed-human-identity" if confirmed else "left-unattributed"
+                ),
+                "reviewerId": identity["reviewerId"] if confirmed else None,
+            }
+        )
+    confirmation = {
+        "method": "interactive-user-confirmation",
+        "question": CONFIRMATION_QUESTION,
+        "selectedAnswer": selected_answer,
+        "confirmedBy": display_name,
+    }
+    semantic = {
+        "schemaVersion": DECISION_VERSION,
+        "requestDigest": request_digest,
+        "sourceSnapshotDigest": request["source"]["sourceSnapshotDigest"],
+        "sourceContentDigest": request["source"]["sourceContentDigest"],
+        "reviewerIdentity": identity,
+        "decisions": decisions,
+        "confirmation": confirmation,
+        "confirmationDigest": domain_digest(
+            "tidy.reviewer-label-interactive-confirmation/v1", confirmation
+        ),
+        "reviewerIdentityAuthorized": True,
+        "approvalAuthorityCreated": False,
+        "activationAuthorized": False,
+        "trainingAuthorized": False,
+        "limitations": [
+            "This decision confirms only exact historical label-to-human "
+            "identity mappings.",
+            "Each approval still requires exact target, recipe, time, and "
+            "provenance evidence.",
+            "This decision does not activate recipes or authorize training.",
+        ],
+        "recordedAt": recorded_at,
+    }
+    return {
+        **semantic,
+        "decisionDigest": domain_digest(DECISION_VERSION, semantic),
     }
 
 

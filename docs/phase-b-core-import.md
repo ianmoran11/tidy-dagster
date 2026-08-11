@@ -127,9 +127,14 @@ Phase A through stable no-follow reads and emits
 workstation path. Request digest
 `sha256:b6fca8497fcdaf2050be62b0b5322fa2aed970f4d34e8e43a89fd7148fe04df5`
 binds 331 rows: 260 exact `Ian`, four exact `lan`, two exact `Good`, and 65
-without a label. All three exact labels remain `pending-human-confirmation`;
-none is normalized, inferred, or granted reviewer, approval, activation, or
-training authority.
+without a label. The immutable request remains provenance-only. In a separate
+interactive decision, Ian Moran selected “All three labels,” creating exact-label
+reviewer identity
+`sha256:497aeb26fa36b5116cd3bedb7e1c1f2ed89b4825c0ed087bcc62de039794d3a8`
+and decision
+`sha256:c3d06cb56ddf2d955f7e016b3166abca4b7c8db24ca979106d05d3ec62a73a61`.
+The decision normalizes nothing, leaves the 65 missing labels unattributed, and
+creates no approval, activation, or training authority.
 
 ### Separate migration-only TypeScript worker
 
@@ -319,7 +324,7 @@ Results:
 
 - focused migration gateway and import repository: `23 passed`;
 - bundled migration-worker protocol: `7 passed`;
-- complete Python suite: `156 passed, 1 skipped`;
+- complete Python suite: `158 passed, 1 skipped`;
 - TypeScript/Vitest: `155 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
@@ -342,10 +347,9 @@ no-follow read matched the frozen Phase A registry digest exactly.
 
 The following accepted Phase B work is not implemented:
 
-1. obtain an explicit human decision for each of the exact `Ian`, `lan`, and
-   `Good` reviewer labels, then process the frozen deterministic real canary
-   under a separately gated live authorization while retaining every unresolved
-   identity and target;
+1. process the frozen deterministic real canary under a separately gated live
+   authorization while retaining all 65 missing labels and every unresolved
+   target as unattributed or inactive;
 2. extend the now-integrated Python migration gateway beyond approval-row
    digests and RecipeV01 revisions to original candidates, generation attempts,
    raw restricted prompt/responses, model manifests, and evaluation evidence;
