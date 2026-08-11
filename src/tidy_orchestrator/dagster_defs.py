@@ -338,6 +338,9 @@ def build_definitions(
             "compact_context_scope": "historical-complete-fixture-parity-v1",
             "region_catalog_supported": True,
             "region_catalog_scope": "historical-default-four-catalog-parity-v1",
+            "prompt_assembly_supported": True,
+            "prompt_scope": "source-owned-fourteen-snapshot-cases-v1",
+            "prompt_output_exposed": False,
         },
     )
 

@@ -209,6 +209,60 @@
       "sourceContentDigest": "sha256:8bafca043e4f9d8f00b612599edd3027c929d6b59612576dfc74098eea9a221c",
       "copiedPath": "apps/domain-worker/src/catalog/role-aware-region-catalog-v5.ts",
       "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/llm/prompt.ts",
+      "sourceContentDigest": "sha256:ed300942c2cb7c4712164b6d4a3ec9dee5055550e528e49a39d46a5015aa3ce0",
+      "copiedPath": "apps/domain-worker/src/prompt/prompt.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/llm/candidateRangeHints.ts",
+      "sourceContentDigest": "sha256:1c88c304372db5d377643bb7ad2b0dddbaf5027f6f6d9fc0a65aa659f9528e43",
+      "copiedPath": "apps/domain-worker/src/prompt/candidateRangeHints.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/llm/promptVariants.ts",
+      "sourceContentDigest": "sha256:57bcb4f182221b3e5b14a4f624ae8cd8f842c5009054ca672e0b7c7ef33b594e",
+      "copiedPath": "apps/domain-worker/src/prompt/promptVariants.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/llm/ruleTiers.ts",
+      "sourceContentDigest": "sha256:d5b109af843aaa3005aa3b7601c92ed0fe53a2470da3f71d6dafe4695802538e",
+      "copiedPath": "apps/domain-worker/src/prompt/ruleTiers.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and type-only compatibility cast added"
+    },
+    {
+      "sourcePath": "src/lib/llm/examples.ts",
+      "sourceContentDigest": "sha256:7d99560e9ddc8e4bf6a40830c91aaf982fc1caa5045e1b745a8286a1a88d2969",
+      "copiedPath": "apps/domain-worker/src/prompt/examples.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/llm/types.ts",
+      "sourceContentDigest": "sha256:0e32ca2b5df689e78c18e272338dd87372496d1dc73807b6734d7f865d47f967",
+      "copiedPath": "apps/domain-worker/src/prompt/types.ts",
+      "method": "prompt-relevant type subset ported; runtime behavior is in the separately pinned modules"
+    },
+    {
+      "sourcePath": "src/lib/ml-prepass/promptHints.ts",
+      "sourceContentDigest": "sha256:f843cdf9a53a6c712b1bd908cd9d894616189bde8e6294624a3117828be744c8",
+      "copiedPath": "apps/domain-worker/src/prompt/ml/promptHints.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/ml-prepass/types.ts",
+      "sourceContentDigest": "sha256:37a29a04358e64f77cac45aa5c98cdc10e3c0f11c7da057832f85f837cc28ecd",
+      "copiedPath": "apps/domain-worker/src/prompt/ml/types.ts",
+      "method": "ported from Phase A-bound closure; standalone imports and notice added"
+    },
+    {
+      "sourcePath": "src/lib/ontology/promptHints.ts",
+      "sourceContentDigest": "sha256:d5357fa1e904b0a283ce5f44a77b04ba254725c3d3ed12f7f359aa7ee7467a93",
+      "copiedPath": "apps/domain-worker/src/prompt/ontology/promptHints.ts",
+      "method": "ported with its exact Phase A-bound ontology transitive closure under apps/domain-worker/src/prompt/ontology; standalone imports and notices added"
     }
   ]
 }

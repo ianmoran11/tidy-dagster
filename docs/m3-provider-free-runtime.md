@@ -9,8 +9,9 @@ authority, semantic contracts, calibration, justice behavior, or Sembla.
 M3 itself did not implement recipe summaries. A later post-M4 Phase C increment
 now supports historical default sheet-summary and complete compact-context
 contracts on the frozen four-sheet fixture cohort plus an exactly matching
-provider-free bounded V5 region catalogue backed by copied source tests; this
-does not retroactively expand M3 acceptance.
+provider-free bounded V5 region catalogue backed by copied source tests. The
+provider-free rendered prompt closure also passes all 14 copied snapshot tests;
+this does not retroactively expand M3 acceptance or authorize provider dispatch.
 
 ## Authority and identity
 

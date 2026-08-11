@@ -10,7 +10,7 @@
 - Compact-context parity: exact on the same four sheets
 - Formatting and role-aware catalogue: exact on the same four sheets; 43 copied tests pass
 - Produced-CSV diagnostic behavior: ported; six copied tests pass
-- Prompt-input parity: none
+- Rendered prompt-input parity: 14 copied source-owned cases and snapshot exact
 - Provider calls: zero
 
 ## Purpose
@@ -224,8 +224,26 @@ compatibility.
 column-summary, duplicate-key, numeric-parse, missingness, sparse-column-pair,
 suspicious-row, and bounded prompt-sample behavior. All six copied historical
 source tests pass against the standalone port. This module remains provider-free
-and is not yet exposed as a worker output or assembled into a rendered prompt;
-that integration remains a separate parity gate.
+and is not exposed as a standalone worker output.
+
+## Rendered prompt-input increment
+
+The frozen prompt assembler, candidate-range hints, variants, rule tiers,
+example loader, compact ML hints, and publication-ontology hint closure are now
+standalone under `apps/domain-worker/src/prompt/`. All 14 copied source-owned
+prompt tests pass against the exact copied snapshot bytes
+`sha256:590b27f2e3f87bc6efcf614e9e9a1c5eb6590c640a5d518aad4596628dfd612e`.
+The snapshot covers generate, repair, review, provider caching, ontology,
+candidate-range, and produced-CSV review payloads. The prompt parity record has
+candidate source digest
+`sha256:8dae7aca93c056b262c07fd0c51c350dc5dd0747a76be06903b8c8867186e67d`
+and scoped parity digest
+`sha256:8f96220e3d617ab61c315556d749ab28d57e2f1d4fd00167c2ea95dcc45e72c2`.
+
+This remains synthetic, implementing-agent self-reviewed compatibility
+evidence. Raw production prompts remain restricted, absent from ordinary
+Dagster logs, and intentionally not exposed as an ordinary worker output.
+Provider dispatch and independent review remain separate gates.
 
 ## Validation
 
@@ -237,8 +255,9 @@ that integration remains a separate parity gate.
 - copied V0.2/V1/V2/V5 compiler/catalogue tests: `43 passed`;
 - historical-reference candidate region-catalogue parity: `4/4` exact;
 - copied produced-CSV diagnostic tests: `6 passed`;
-- complete TypeScript/Vitest suite: `221 passed, 1 skipped`;
-- complete Python suite: `151 passed, 1 skipped`;
+- copied rendered prompt and exact snapshot tests: `14 passed`;
+- complete TypeScript/Vitest suite: `235 passed, 1 skipped`;
+- complete Python suite: `152 passed, 1 skipped`;
 - strict JSON Schemas validate discovery, self-review, copy, replay, reference,
   and scoped parity records;
 - the checked-in producer digest binds the exact discovery implementation;
@@ -253,8 +272,8 @@ This boundary does not yet:
 - authorize the copied closure as a runtime dependency;
 - prove custody of arbitrary dynamic runtime paths beyond the explicitly
   inspected fixture reads;
-- complete summary/context/catalogue adversarial parity or implement
-  produced-CSV prompt integration and prompt-input behavior;
+- complete summary/context/catalogue/prompt adversarial parity or expose
+  restricted production prompt evidence without an explicit custody policy;
 - create independent parity gold; or
 - expose prompt-generation behavior through the worker.
 
@@ -262,9 +281,9 @@ This boundary does not yet:
 
 ADR 0005 permitted the now-completed bounded copy after exact custody and
 implementing-agent self-review. Relocated source-owned replay and bounded default
-summary and compact-context parity now pass; the role-aware catalogue/compiler
-and produced-CSV diagnostics are ported. The next step is produced-CSV prompt
-integration and rendered prompt-input implementation with
-separately frozen references. Phase C remains incomplete until full intermediate
+summary and compact-context parity now pass; the role-aware catalogue/compiler,
+produced-CSV diagnostics, and rendered prompt assembly are ported. The next step
+is broader adversarial/option coverage plus explicit restricted prompt custody.
+Phase C remains incomplete until full intermediate
 and rendered-output parity, adversarial fixtures, independently refereed
 relocated parity, and all existing M0–M4 checks pass.

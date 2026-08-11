@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy.example/contracts/reference-prompt/v1/parity.schema.json",
+  "title": "Source-owned rendered prompt parity v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "closureManifestDigest",
+    "copyCommitDigest",
+    "sourceReplayDigest",
+    "sourceTest",
+    "sourceSnapshot",
+    "candidateSnapshot",
+    "candidateSourceDigest",
+    "candidateFiles",
+    "sourceTestCount",
+    "candidateTestCount",
+    "matchedSnapshotBytes",
+    "scope",
+    "review",
+    "recordedAt",
+    "parityDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.source-owned-prompt-parity/v1" },
+    "closureManifestDigest": { "$ref": "#/$defs/digest" },
+    "copyCommitDigest": { "$ref": "#/$defs/digest" },
+    "sourceReplayDigest": { "$ref": "#/$defs/digest" },
+    "sourceTest": { "$ref": "#/$defs/file" },
+    "sourceSnapshot": { "$ref": "#/$defs/file" },
+    "candidateSnapshot": { "$ref": "#/$defs/file" },
+    "candidateSourceDigest": { "$ref": "#/$defs/digest" },
+    "candidateFiles": {
+      "type": "array",
+      "minItems": 10,
+      "items": { "$ref": "#/$defs/file" }
+    },
+    "sourceTestCount": { "const": 14 },
+    "candidateTestCount": { "const": 14 },
+    "matchedSnapshotBytes": { "const": true },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceOwnedReplayPassed",
+        "candidateSnapshotTestsPassed",
+        "producedCsvReviewPayloadCovered",
+        "scopeParityEstablished",
+        "fullPhaseCParityEstablished"
+      ],
+      "properties": {
+        "sourceOwnedReplayPassed": { "const": true },
+        "candidateSnapshotTestsPassed": { "const": true },
+        "producedCsvReviewPayloadCovered": { "const": true },
+        "scopeParityEstablished": { "const": true },
+        "fullPhaseCParityEstablished": { "const": false }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "independent", "limitations"],
+      "properties": {
+        "method": { "const": "implementing-agent-self-review" },
+        "independent": { "const": false },
+        "limitations": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "recordedAt": { "type": "string", "format": "date-time" },
+    "parityDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relativePath", "contentDigest"],
+      "properties": {
+        "relativePath": { "type": "string", "minLength": 1 },
+        "contentDigest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}
