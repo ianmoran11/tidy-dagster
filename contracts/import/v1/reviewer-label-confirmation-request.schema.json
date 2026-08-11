@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy.example/contracts/import/v1/reviewer-label-confirmation-request.schema.json",
+  "title": "Exact reviewer label confirmation request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "approvalRowCount",
+    "labelledRowCount",
+    "missingLabelCount",
+    "nonStringLabelCount",
+    "distinctExactLabelCount",
+    "labels",
+    "reviewMethod",
+    "independentReview",
+    "reviewerAuthorityCreated",
+    "approvalAuthorityCreated",
+    "activationAuthorized",
+    "trainingAuthorized",
+    "limitations",
+    "frozenAt",
+    "requestDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.reviewer-label-confirmation-request/v1" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSnapshotDigest",
+        "inventoryDigest",
+        "relativePath",
+        "sourceContentDigest",
+        "byteLength",
+        "registryVersion"
+      ],
+      "properties": {
+        "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+        "inventoryDigest": { "$ref": "#/$defs/digest" },
+        "relativePath": { "const": "approvals.json" },
+        "sourceContentDigest": { "$ref": "#/$defs/digest" },
+        "byteLength": { "type": "integer", "minimum": 0, "maximum": 2097152 },
+        "registryVersion": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "approvalRowCount": { "type": "integer", "minimum": 0 },
+    "labelledRowCount": { "type": "integer", "minimum": 0 },
+    "missingLabelCount": { "type": "integer", "minimum": 0 },
+    "nonStringLabelCount": { "type": "integer", "minimum": 0 },
+    "distinctExactLabelCount": { "type": "integer", "minimum": 0 },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "exactLabel",
+          "occurrenceCount",
+          "firstRowIndex",
+          "lastRowIndex",
+          "occurrenceEvidenceDigest",
+          "status",
+          "confirmedHumanIdentity",
+          "humanDecisionDigest",
+          "labelEvidenceDigest"
+        ],
+        "properties": {
+          "schemaVersion": { "const": "tidy.reviewer-label-evidence/v1" },
+          "exactLabel": { "type": "string", "minLength": 1 },
+          "occurrenceCount": { "type": "integer", "minimum": 1 },
+          "firstRowIndex": { "type": "integer", "minimum": 0 },
+          "lastRowIndex": { "type": "integer", "minimum": 0 },
+          "occurrenceEvidenceDigest": { "$ref": "#/$defs/digest" },
+          "status": { "const": "pending-human-confirmation" },
+          "confirmedHumanIdentity": { "type": "null" },
+          "humanDecisionDigest": { "type": "null" },
+          "labelEvidenceDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    "reviewMethod": { "const": "implementing-agent-read-only-freeze" },
+    "independentReview": { "const": false },
+    "reviewerAuthorityCreated": { "const": false },
+    "approvalAuthorityCreated": { "const": false },
+    "activationAuthorized": { "const": false },
+    "trainingAuthorized": { "const": false },
+    "limitations": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "frozenAt": { "type": "string", "format": "date-time" },
+    "requestDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

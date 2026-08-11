@@ -257,7 +257,7 @@ Provider dispatch and independent review remain separate gates.
 - copied produced-CSV diagnostic tests: `6 passed`;
 - copied rendered prompt and exact snapshot tests: `14 passed`;
 - complete TypeScript/Vitest suite: `235 passed, 1 skipped`;
-- complete Python suite: `152 passed, 1 skipped`;
+- complete Python suite: `156 passed, 1 skipped`;
 - strict JSON Schemas validate discovery, self-review, copy, replay, reference,
   and scoped parity records;
 - the checked-in producer digest binds the exact discovery implementation;

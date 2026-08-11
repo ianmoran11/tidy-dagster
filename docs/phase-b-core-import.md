@@ -121,6 +121,16 @@ legacy approval can remain `legacy_approved_unattributed`; ambiguity or conflict
 is inactive. The fixture tests do not establish any real reviewer identity or
 production approval.
 
+A bounded read-only freeze now verifies the real `approvals.json` bytes against
+Phase A through stable no-follow reads and emits
+`fixtures/reviewer-confirmation/historical-label-request-v1.json` without any
+workstation path. Request digest
+`sha256:b6fca8497fcdaf2050be62b0b5322fa2aed970f4d34e8e43a89fd7148fe04df5`
+binds 331 rows: 260 exact `Ian`, four exact `lan`, two exact `Good`, and 65
+without a label. All three exact labels remain `pending-human-confirmation`;
+none is normalized, inferred, or granted reviewer, approval, activation, or
+training authority.
+
 ### Separate migration-only TypeScript worker
 
 `apps/migration-worker/` adds a dedicated provider-free executable without
@@ -309,7 +319,7 @@ Results:
 
 - focused migration gateway and import repository: `23 passed`;
 - bundled migration-worker protocol: `7 passed`;
-- complete Python suite: `152 passed, 1 skipped`;
+- complete Python suite: `156 passed, 1 skipped`;
 - TypeScript/Vitest: `155 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
@@ -324,15 +334,18 @@ removed. Probe content digest:
 sha256:897a120b91a857d50811eab5f04457336ae3a94455f0234535d4240b2025d5d5
 ```
 
-The Phase A snapshot still verifies after this work. No TidyCell content was
-used by any Phase B test.
+The Phase A snapshot still verifies after this work. Tests use synthetic
+registries; the real confirmation request was generated only after a stable
+no-follow read matched the frozen Phase A registry digest exactly.
 
 ## Still required for Phase B
 
 The following accepted Phase B work is not implemented:
 
-1. process the now-frozen deterministic real canary under a separately gated
-   live authorization, while retaining every unresolved identity and target;
+1. obtain an explicit human decision for each of the exact `Ian`, `lan`, and
+   `Good` reviewer labels, then process the frozen deterministic real canary
+   under a separately gated live authorization while retaining every unresolved
+   identity and target;
 2. extend the now-integrated Python migration gateway beyond approval-row
    digests and RecipeV01 revisions to original candidates, generation attempts,
    raw restricted prompt/responses, model manifests, and evaluation evidence;

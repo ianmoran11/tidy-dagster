@@ -19,11 +19,13 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
 - `legacy-approval-snapshot.schema.json` — an exact point-in-time observation of
   the mutable legacy registry; it never claims append-only history and retains
   the verifier configuration plus honest production/insecure isolation state.
-- `reviewer-identity.schema.json`, `approval-resolution.schema.json`, and
-  `approval-domain-reconciliation.schema.json` — explicit reviewer-label
-  curation, evidence-bearing resolved/ambiguous/unresolved/conflicting outcomes,
-  and exact one-resolution-per-observed-row coverage without activation or
-  training authority.
+- `reviewer-label-confirmation-request.schema.json`,
+  `reviewer-identity.schema.json`, `approval-resolution.schema.json`, and
+  `approval-domain-reconciliation.schema.json` — a Phase A-bound exact-label
+  confirmation request, explicit reviewer-label curation, evidence-bearing
+  resolved/ambiguous/unresolved/conflicting outcomes, and exact
+  one-resolution-per-observed-row coverage without activation or training
+  authority.
 - `digest-record-vectors.schema.json` and
   `recipe-digest-verification.schema.json` — strict vectors plus bindings to the
   pinned historical TypeScript `digestRecord` compatibility algorithm, source,
@@ -76,7 +78,9 @@ The core reconciliation report states
 covers historical `digestRecord` vectors, exact reviewer-label resolution,
 legacy approval outcome states, non-authoritative approval/recipe/generation/
 model dispositions, and complete per-item reconciliation of that conservative
-pass. No real TidyCell registry or content was processed.
+pass. The real TidyCell approval registry was read only through a stable
+no-follow Phase A digest check to freeze three pending labels; it was not copied,
+imported, interpreted as identity authority, or used by tests.
 
 Phase B is not complete until the frozen estate is imported under a separately
 reviewed live authorization, typed parsers bind complete recipe and generation
