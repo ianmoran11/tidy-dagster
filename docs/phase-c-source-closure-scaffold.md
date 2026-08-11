@@ -7,6 +7,7 @@
 - Overall Phase C status: incomplete
 - Real source bytes copied into Tidy Dagster: 4,781,394 reference-only bytes
 - Summary parity: exact on four sheets across three frozen fixture workbooks
+- Compact-context parity: exact on the same four sheets
 - Prompt-input parity: none
 - Provider calls: zero
 
@@ -166,21 +167,44 @@ passes the nine copied source-owned summary tests and exactly matches all four
 frozen summary objects. The separate self-reviewed candidate parity record at
 `fixtures/reference-summary/candidate-parity-v1.json` binds candidate source
 digest
-`sha256:e1dc3ba9cc9fa295154261cdc1184c702c85a1128bb054819a82eca98766f546`
+`sha256:969431e2276ee39b64010bc71e694cb6ac4f2262af009378cbfc3992471ef700`
 and parity digest
-`sha256:0accb7a70a58f06666ef332f689f6efca0c959ec3f6422a09d816b4943366a96`.
+`sha256:06cf9377e773ffe1164c1ea1f866a74072badf296a24f6e0457974c3cce24ff1`.
 This establishes bounded default-option compatibility, not full Phase C parity
 or independent review. The historical reference honestly retains
 `parityEstablished: false`; the later parity record establishes only its
 explicit fixture/default-option scope without rewriting reference provenance.
+
+## Compact complete semantic-context parity increment
+
+The copied `cell-role-compact-context-v1` implementation is now ported as
+`apps/domain-worker/src/context/compactContext.ts`. It preserves complete
+row-major coordinates, explicit blanks, bounded style boundaries, deterministic
+serialization and digesting, completeness checks, and prompt-leakage guards.
+The worker emits `compact-context.json` only when
+`includeCompactContext: true`.
+
+A separate network-denied historical-source harness freezes four contexts at
+`fixtures/reference-context/historical-v1.json` with reference digest
+`sha256:1bf6352d8379cec115896e74642dd4cefaa4bf50c21540827815055164cd8cb9`.
+Two runs produce the same record. The candidate matches all four snapshots
+exactly. Its source digest is
+`sha256:90f0a5d447c7187ef5ffb652c365f21612440aeb6b260b0ee49b875a084fc174`
+and scoped parity digest is
+`sha256:d7cc5a3905e6cb3d78d379e27e76b02b936775e0da4d3e7c5c8e3e34e834636a`.
+As with summaries, the historical reference remains provenance-only and false
+for candidate/full parity; the later self-reviewed comparison establishes only
+the explicit four-context scope.
 
 ## Validation
 
 - focused source-closure discovery/copy and source-export suite: `30 passed`;
 - copied summary behavior tests: `9 passed`;
 - historical-reference candidate summary parity: `4/4` sheets exact;
-- complete TypeScript/Vitest suite: `166 passed, 1 skipped`;
-- complete Python suite: `146 passed, 1 skipped`;
+- focused compact-context behavior tests: `4 passed`;
+- historical-reference candidate compact-context parity: `4/4` exact;
+- complete TypeScript/Vitest suite: `171 passed, 1 skipped`;
+- complete Python suite: `149 passed, 1 skipped`;
 - strict JSON Schemas validate discovery, self-review, copy, replay, reference,
   and scoped parity records;
 - the checked-in producer digest binds the exact discovery implementation;
@@ -195,16 +219,16 @@ This boundary does not yet:
 - authorize the copied closure as a runtime dependency;
 - prove custody of arbitrary dynamic runtime paths beyond the explicitly
   inspected fixture reads;
-- complete summary option/adversarial parity or implement compact-context,
-  formatting, catalogue, produced-CSV summary, and prompt-input behavior;
+- complete summary/context adversarial parity or implement formatting,
+  catalogue, produced-CSV summary, and prompt-input behavior;
 - create independent parity gold; or
-- expose compact-context or prompt-generation behavior through the worker.
+- expose prompt-generation behavior through the worker.
 
 ## Next Phase C gate
 
 ADR 0005 permitted the now-completed bounded copy after exact custody and
 implementing-agent self-review. Relocated source-owned replay and bounded default
-summary parity now pass. The next step is compact-context, formatting,
+summary and compact-context parity now pass. The next step is formatting,
 catalogue, produced-CSV summary, and rendered prompt-input implementation with
 separately frozen references. Phase C remains incomplete until full intermediate
 and rendered-output parity, adversarial fixtures, independently refereed

@@ -38,7 +38,9 @@ M3 launcher and are not claimed by this M1/M2 worker.
 `evidenceProfile` `m1-simple-v1` or `m2-deterministic-parity-v1`. It emits
 parsed workbook, normalized recipe, selector, geometry, execution, and exact
 recipe-aware CSV evidence. With `includeSummary: true`, it also emits
-`sheet-summary.json` using the historical default options. That output matches
-all four sheets in the three relocated historical-source reference workbooks.
-M2 remains incomplete pending broader option/adversarial coverage and the
-compact-context, catalogue, produced-CSV, and prompt-input closure.
+`sheet-summary.json` using the historical default options. With
+`includeCompactContext: true`, it emits the complete row-major
+`compact-context.json`. Both outputs match all four sheets in the three
+relocated historical-source reference workbooks. M2 remains incomplete pending
+broader option/adversarial coverage and the formatting, catalogue, produced-CSV,
+and rendered prompt-input closure.

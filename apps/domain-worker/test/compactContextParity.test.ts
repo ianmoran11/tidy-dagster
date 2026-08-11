@@ -2,53 +2,54 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { buildSheetSummary } from "../src/summary/buildSheetSummary.js";
+import { buildCompactContextSnapshot } from "../src/context/compactContext.js";
 import { parseWorkbook } from "../src/workbook/parseWorkbook.js";
 
-const referencePath = path.join(
-  process.cwd(),
-  "fixtures/reference-summary/historical-v1.json",
-);
-const schemaVersion = "tidy.historical-source-summary-reference/v1";
-const caseVersion = "tidy.historical-source-summary-reference-case/v1";
+const schemaVersion = "tidy.historical-source-compact-context-reference/v1";
+const caseVersion = "tidy.historical-source-compact-context-reference-case/v1";
+const expectedReferenceDigest =
+  "sha256:1bf6352d8379cec115896e74642dd4cefaa4bf50c21540827815055164cd8cb9";
 
 type ReferenceCase = {
   caseId: string;
   workbookRelativePath: string;
   workbookContentDigest: string;
-  sheetCount: number;
-  summaries: unknown[];
+  contextCount: number;
+  contexts: unknown[];
   caseDigest: string;
 };
 
-describe("historical source summary parity", () => {
-  it("matches every frozen historical summary byte-for-byte by structure", async () => {
-    const reference = JSON.parse(readFileSync(referencePath, "utf8"));
-    const semantic = { ...reference };
-    delete semantic.referenceDigest;
-    expect(domainDigest(schemaVersion, semantic)).toBe(
-      "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
+describe("historical compact-context parity", () => {
+  it("matches all four frozen historical contexts exactly", async () => {
+    const reference = JSON.parse(
+      readFileSync(
+        path.join(
+          process.cwd(),
+          "fixtures/reference-context/historical-v1.json",
+        ),
+        "utf8",
+      ),
     );
-    expect(reference.referenceDigest).toBe(
-      "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
-    );
+    const { referenceDigest, ...semantic } = reference;
+    expect(domainDigest(schemaVersion, semantic)).toBe(expectedReferenceDigest);
+    expect(referenceDigest).toBe(expectedReferenceDigest);
     expect(reference.candidateImplementationUsed).toBe(false);
     expect(reference.parityEstablished).toBe(false);
     const parity = JSON.parse(
       readFileSync(
         path.join(
           process.cwd(),
-          "fixtures/reference-summary/candidate-parity-v1.json",
+          "fixtures/reference-context/candidate-parity-v1.json",
         ),
         "utf8",
       ),
     );
     const { parityDigest, ...paritySemantic } = parity;
     expect(domainDigest(parity.schemaVersion, paritySemantic)).toBe(
-      "sha256:06cf9377e773ffe1164c1ea1f866a74072badf296a24f6e0457974c3cce24ff1",
+      "sha256:d7cc5a3905e6cb3d78d379e27e76b02b936775e0da4d3e7c5c8e3e34e834636a",
     );
     expect(parityDigest).toBe(
-      "sha256:06cf9377e773ffe1164c1ea1f866a74072badf296a24f6e0457974c3cce24ff1",
+      "sha256:d7cc5a3905e6cb3d78d379e27e76b02b936775e0da4d3e7c5c8e3e34e834636a",
     );
     const currentFiles = parity.candidateFiles.map(
       (file: { relativePath: string; contentDigest: string }) => {
@@ -60,7 +61,10 @@ describe("historical source summary parity", () => {
       },
     );
     expect(
-      domainDigest("tidy.candidate-summary-source-closure/v1", currentFiles),
+      domainDigest(
+        "tidy.candidate-compact-context-source-closure/v1",
+        currentFiles,
+      ),
     ).toBe(parity.candidateSourceDigest);
     expect(parity.referenceDigest).toBe(reference.referenceDigest);
     expect(parity.referenceCaseDigests).toEqual(
@@ -71,29 +75,23 @@ describe("historical source summary parity", () => {
       fullPhaseCParityEstablished: false,
     });
 
-    let matchedSheets = 0;
+    let matchedContexts = 0;
     for (const referenceCase of reference.cases as ReferenceCase[]) {
       const { caseDigest, ...caseSemantic } = referenceCase;
       expect(domainDigest(caseVersion, caseSemantic)).toBe(caseDigest);
-      const workbookPath = path.join(
-        process.cwd(),
-        referenceCase.workbookRelativePath,
+      const workbook = readFileSync(
+        path.join(process.cwd(), referenceCase.workbookRelativePath),
       );
-      const workbookBytes = readFileSync(workbookPath);
-      expect(sha256Bytes(workbookBytes)).toBe(
-        referenceCase.workbookContentDigest,
-      );
-      const parsed = await parseWorkbook(workbookBytes);
+      expect(sha256Bytes(workbook)).toBe(referenceCase.workbookContentDigest);
+      const parsed = await parseWorkbook(workbook);
       expect(parsed.ok).toBe(true);
       if (!parsed.ok) throw new Error("Candidate workbook parse failed");
-      const summaries = parsed.workbook.sheets.map((sheet) =>
-        buildSheetSummary(sheet, { checked: true }),
-      );
-      expect(summaries).toEqual(referenceCase.summaries);
-      expect(summaries).toHaveLength(referenceCase.sheetCount);
-      matchedSheets += summaries.length;
+      const contexts = parsed.workbook.sheets.map(buildCompactContextSnapshot);
+      expect(contexts).toEqual(referenceCase.contexts);
+      expect(contexts).toHaveLength(referenceCase.contextCount);
+      matchedContexts += contexts.length;
     }
-    expect(matchedSheets).toBe(4);
+    expect(matchedContexts).toBe(4);
   });
 });
 

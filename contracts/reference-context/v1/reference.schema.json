@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/reference-context/v1/reference.schema.json",
+  "title": "HistoricalSourceCompactContextReferenceV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "closureManifestDigest",
+    "copyCommitDigest",
+    "referenceKind",
+    "contextContract",
+    "cases",
+    "sourceTreeDigestBefore",
+    "sourceTreeDigestAfter",
+    "harnessDigest",
+    "runtime",
+    "bundleVerifiedBefore",
+    "bundleVerifiedAfter",
+    "relocated",
+    "runtimeSiblingDependencyUsed",
+    "networkIsolationEnforced",
+    "candidateImplementationUsed",
+    "independentReview",
+    "parityEstablished",
+    "limitations",
+    "recordedAt",
+    "referenceDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "tidy.historical-source-compact-context-reference/v1"
+    },
+    "closureManifestDigest": { "$ref": "#/$defs/digest" },
+    "copyCommitDigest": { "$ref": "#/$defs/digest" },
+    "referenceKind": { "const": "compact-complete-semantic-context" },
+    "contextContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "encoding"],
+      "properties": {
+        "schemaVersion": { "const": "cell-role-compact-context-v1" },
+        "encoding": { "const": "row-major-r1c1-json-v1" }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "caseId",
+          "workbookRelativePath",
+          "workbookContentDigest",
+          "contextCount",
+          "contexts",
+          "caseDigest"
+        ],
+        "properties": {
+          "caseId": {
+            "enum": ["multi-table", "simple-crosstab", "sparse-headers"]
+          },
+          "workbookRelativePath": {
+            "type": "string",
+            "pattern": "^fixtures/workbooks/(?:multi-table|simple-crosstab|sparse-headers)\\.xlsx$"
+          },
+          "workbookContentDigest": { "$ref": "#/$defs/digest" },
+          "contextCount": { "type": "integer", "minimum": 1, "maximum": 32 },
+          "contexts": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "items": { "$ref": "#/$defs/contextSnapshot" }
+          },
+          "caseDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    "sourceTreeDigestBefore": { "$ref": "#/$defs/digest" },
+    "sourceTreeDigestAfter": { "$ref": "#/$defs/digest" },
+    "harnessDigest": { "$ref": "#/$defs/digest" },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeVersion",
+        "tsxVersion",
+        "tidyDagsterLockDigest",
+        "copiedSourceLockDigest",
+        "dependencyRuntime"
+      ],
+      "properties": {
+        "nodeVersion": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "tsxVersion": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "tidyDagsterLockDigest": { "$ref": "#/$defs/digest" },
+        "copiedSourceLockDigest": { "$ref": "#/$defs/digest" },
+        "dependencyRuntime": {
+          "const": "tidy-dagster-locked-node-modules"
+        }
+      }
+    },
+    "bundleVerifiedBefore": { "const": true },
+    "bundleVerifiedAfter": { "const": true },
+    "relocated": { "const": true },
+    "runtimeSiblingDependencyUsed": { "const": false },
+    "networkIsolationEnforced": { "const": true },
+    "candidateImplementationUsed": { "const": false },
+    "independentReview": { "const": false },
+    "parityEstablished": { "const": false },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "recordedAt": { "$ref": "#/$defs/timestamp" },
+    "referenceDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "bareDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "contextSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "digest",
+        "bytes",
+        "characters",
+        "estimatedTokens",
+        "addressValueEntries",
+        "duplicateAddressValueRepresentations",
+        "serialized"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "cell-role-compact-context-v1" },
+        "digest": { "$ref": "#/$defs/bareDigest" },
+        "bytes": { "type": "integer", "minimum": 1, "maximum": 4000000 },
+        "characters": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "estimatedTokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 250000
+        },
+        "addressValueEntries": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 500000
+        },
+        "duplicateAddressValueRepresentations": { "const": 0 },
+        "serialized": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000000
+        }
+      }
+    }
+  }
+}

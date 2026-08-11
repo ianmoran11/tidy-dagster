@@ -574,7 +574,7 @@ describe("strict worker protocol", () => {
     await expectCode(health, "OUTPUT_ROOT_NOT_EMPTY", roots);
   });
 
-  it("publishes the parity-locked sheet summary when requested", async () => {
+  it("publishes parity-locked summary and compact context when requested", async () => {
     const fixture = await fixtureRoot();
     const workbookBytes = await readFile(
       path.join(process.cwd(), "fixtures/workbooks/simple-crosstab.xlsx"),
@@ -590,7 +590,11 @@ describe("strict worker protocol", () => {
     const recipe = await writeInput(fixture.input, "recipe.json", recipeBytes);
     const request = {
       ...baseRequest(),
-      parameters: { ...baseRequest().parameters, includeSummary: true },
+      parameters: {
+        ...baseRequest().parameters,
+        includeSummary: true,
+        includeCompactContext: true,
+      },
     };
     request.inputs = [
       { name: "workbook", ...workbook },
@@ -599,8 +603,8 @@ describe("strict worker protocol", () => {
     const result = await runWorker(request, fixture.input, fixture.output);
     expect(result.ok).toBe(true);
     if (!result.ok) throw new Error("Expected summary execution to succeed");
-    expect(result.outputs.map((output) => output.name)).toContain(
-      "sheet-summary.json",
+    expect(result.outputs.map((output) => output.name)).toEqual(
+      expect.arrayContaining(["sheet-summary.json", "compact-context.json"]),
     );
     const summary = JSON.parse(
       await readFile(path.join(fixture.output, "sheet-summary.json"), "utf8"),
@@ -615,6 +619,19 @@ describe("strict worker protocol", () => {
       ),
     );
     expect(summary).toEqual(reference.cases[1].summaries[0]);
+    const compactContext = JSON.parse(
+      await readFile(path.join(fixture.output, "compact-context.json"), "utf8"),
+    );
+    const contextReference = JSON.parse(
+      await readFile(
+        path.join(
+          process.cwd(),
+          "fixtures/reference-context/historical-v1.json",
+        ),
+        "utf8",
+      ),
+    );
+    expect(compactContext).toEqual(contextReference.cases[1].contexts[0]);
   });
 
   it("advertises the parity-locked historical summary contract", async () => {
@@ -641,6 +658,13 @@ describe("strict worker protocol", () => {
         options: { checked: true, allOtherOptions: "historical-defaults" },
         historicalReferenceDigest:
           "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
+      });
+      expect(capabilities.compactContext).toEqual({
+        supported: true,
+        contract: "cell-role-compact-context-v1",
+        encoding: "row-major-r1c1-json-v1",
+        historicalReferenceDigest:
+          "sha256:1bf6352d8379cec115896e74642dd4cefaa4bf50c21540827815055164cd8cb9",
       });
     }
   });

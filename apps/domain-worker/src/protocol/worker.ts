@@ -15,6 +15,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
+import { buildCompactContextSnapshot } from "../context/compactContext.js";
 import { executeRecipe } from "../executor/executeRecipe.js";
 import { buildGeometryEvidence } from "../executor/geometryEvidence.js";
 import { rowsToCsv } from "../export/formatters.js";
@@ -62,6 +63,7 @@ const parametersSchema = z
       .enum(["m1-simple-v1", "m2-deterministic-parity-v1"])
       .optional(),
     includeSummary: z.boolean().optional(),
+    includeCompactContext: z.boolean().optional(),
     csvMode: z.literal("recipe-aware").optional(),
   })
   .strict();
@@ -221,6 +223,13 @@ async function runWorkerUnchecked(
                 historicalReferenceDigest:
                   "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
               },
+              compactContext: {
+                supported: true,
+                contract: "cell-role-compact-context-v1",
+                encoding: "row-major-r1c1-json-v1",
+                historicalReferenceDigest:
+                  "sha256:1bf6352d8379cec115896e74642dd4cefaa4bf50c21540827815055164cd8cb9",
+              },
               networkRequired: false,
             };
       return await publish(request, roots, [
@@ -304,6 +313,7 @@ async function runWorkerUnchecked(
       validated.data,
       request.limits.maxOutputFiles,
       request.parameters.includeSummary === true,
+      request.parameters.includeCompactContext === true,
     );
     enforceRecipeSelectorLimit(validated.data, request.limits.maxSelectorCells);
     const parsedWorkbook = await parseWorkbook(workbookBytes);
@@ -365,6 +375,15 @@ async function runWorkerUnchecked(
               relativePath: "sheet-summary.json",
               render: () =>
                 jsonBytes(buildSheetSummary(sheet, { checked: true })),
+            },
+          ]
+        : []),
+      ...(request.parameters.includeCompactContext === true
+        ? [
+            {
+              name: "compact-context.json",
+              relativePath: "compact-context.json",
+              render: () => jsonBytes(buildCompactContextSnapshot(sheet)),
             },
           ]
         : []),
@@ -434,8 +453,15 @@ function enforceOutputDescriptorLimit(
   recipe: RecipeV01,
   maxOutputFiles: number,
   includeSummary: boolean,
+  includeCompactContext: boolean,
 ): void {
-  if (recipe.tables.length + 5 + (includeSummary ? 1 : 0) > maxOutputFiles)
+  if (
+    recipe.tables.length +
+      5 +
+      (includeSummary ? 1 : 0) +
+      (includeCompactContext ? 1 : 0) >
+    maxOutputFiles
+  )
     throw new ProtocolError(
       "OUTPUT_DESCRIPTOR_LIMIT_EXCEEDED",
       "limit",

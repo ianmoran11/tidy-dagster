@@ -191,7 +191,12 @@ class WorkerGateway:
                 "INPUT_INVALID",
                 "Input count is outside protocol bounds",
             )
-        allowed_parameters = {"evidenceProfile", "includeSummary", "csvMode"}
+        allowed_parameters = {
+            "evidenceProfile",
+            "includeSummary",
+            "includeCompactContext",
+            "csvMode",
+        }
         supplied_parameters = dict(parameters or {})
         if set(supplied_parameters) - allowed_parameters:
             raise WorkerGatewayError(
@@ -208,6 +213,12 @@ class WorkerGateway:
         ):
             raise WorkerGatewayError(
                 "INPUT_INVALID", "INPUT_INVALID", "Invalid includeSummary"
+            )
+        if "includeCompactContext" in supplied_parameters and not isinstance(
+            supplied_parameters["includeCompactContext"], bool
+        ):
+            raise WorkerGatewayError(
+                "INPUT_INVALID", "INPUT_INVALID", "Invalid includeCompactContext"
             )
         if (
             "csvMode" in supplied_parameters

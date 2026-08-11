@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/reference-context/v1/parity.schema.json",
+  "title": "CandidateCompactContextParityV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "referenceDigest",
+    "referenceCaseDigests",
+    "candidateSourceDigest",
+    "candidateFiles",
+    "comparison",
+    "scope",
+    "review",
+    "limitations",
+    "recordedAt",
+    "parityDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.candidate-compact-context-parity/v1" },
+    "referenceDigest": { "$ref": "#/$defs/digest" },
+    "referenceCaseDigests": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/digest" }
+    },
+    "candidateSourceDigest": { "$ref": "#/$defs/digest" },
+    "candidateFiles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relativePath", "contentDigest"],
+        "properties": {
+          "relativePath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^(?:apps/domain-worker/src/.+|package-lock\\.json)$"
+          },
+          "contentDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "caseCount",
+        "contextCount",
+        "matchedCaseCount",
+        "matchedContextCount"
+      ],
+      "properties": {
+        "algorithm": { "const": "exact-json-structural-equality-v1" },
+        "caseCount": { "const": 3 },
+        "contextCount": { "const": 4 },
+        "matchedCaseCount": { "const": 3 },
+        "matchedContextCount": { "const": 4 }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "referenceKind",
+        "fixtureOnly",
+        "scopeParityEstablished",
+        "fullPhaseCParityEstablished"
+      ],
+      "properties": {
+        "referenceKind": { "const": "compact-complete-semantic-context" },
+        "fixtureOnly": { "const": true },
+        "scopeParityEstablished": { "const": true },
+        "fullPhaseCParityEstablished": { "const": false }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "reviewerRole", "independentReview"],
+      "properties": {
+        "kind": { "const": "implementing-agent-self-review" },
+        "reviewerRole": { "const": "implementing-agent" },
+        "independentReview": { "const": false }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "recordedAt": { "$ref": "#/$defs/timestamp" },
+    "parityDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    }
+  }
+}
