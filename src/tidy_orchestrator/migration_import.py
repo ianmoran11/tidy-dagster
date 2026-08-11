@@ -31,7 +31,7 @@ _RECONCILIATION_VERSION = "tidy.migration-reconciliation/v1"
 _SNAPSHOT_REGISTRATION_VERSION = "tidy.migration-snapshot-registration/v1"
 _BLOB_COMMIT_VERSION = "tidy.committed-blob/v1"
 _IMPORTER_VERSION = "tidy.migration-importer/v1"
-_SCHEMA_VERSION = 2
+_SCHEMA_VERSION = 3
 _READ_CHUNK = 1024 * 1024
 _MAX_SNAPSHOT_BYTES = 1024 * 1024 * 1024
 _DIGEST_PREFIX = "sha256:"
@@ -187,6 +187,28 @@ class CommittedFilesystemBlobStore:
     def storage_uri(self, digest: str) -> str:
         _require_digest(digest)
         return f"cas+sha256://{digest}"
+
+    def publish_bytes(
+        self,
+        data: bytes,
+        *,
+        expected_digest: str,
+        expected_length: int,
+    ) -> bool:
+        """Durably publish already verified derived bytes through the same CAS path."""
+
+        if len(data) != expected_length or sha256_digest(data) != expected_digest:
+            raise BlobIntegrityError("Published bytes differ from their declaration")
+        with tempfile.TemporaryFile(dir=self.staging) as handle:
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+            handle.seek(0)
+            return self.publish_from_descriptor(
+                handle.fileno(),
+                expected_digest=expected_digest,
+                expected_length=expected_length,
+            )
 
     def publish_from_descriptor(
         self,
@@ -396,13 +418,23 @@ class MigrationRepository:
         self._fault = fault_injector
         self._migrate()
 
-    def _connect(self) -> sqlite3.Connection:
+    @contextmanager
+    def _connect(self) -> Iterator[sqlite3.Connection]:
         connection = sqlite3.connect(self.database, timeout=30, isolation_level=None)
-        connection.row_factory = sqlite3.Row
-        connection.execute("PRAGMA foreign_keys=ON")
-        connection.execute("PRAGMA journal_mode=WAL")
-        connection.execute("PRAGMA synchronous=FULL")
-        return connection
+        try:
+            connection.row_factory = sqlite3.Row
+            connection.execute("PRAGMA foreign_keys=ON")
+            connection.execute("PRAGMA journal_mode=WAL")
+            connection.execute("PRAGMA synchronous=FULL")
+            yield connection
+        finally:
+            try:
+                connection.close()
+            finally:
+                for suffix in ("", "-wal", "-shm"):
+                    path = Path(f"{self.database}{suffix}")
+                    if path.is_file() and not path.is_symlink():
+                        path.chmod(0o600)
 
     def _migrate(self) -> None:
         with self._connect() as connection:
@@ -447,6 +479,27 @@ class MigrationRepository:
                     "record_type TEXT NOT NULL, record_json BLOB NOT NULL)"
                 )
                 connection.execute("INSERT INTO schema_migrations(version) VALUES (2)")
+            if current < 3:
+                connection.execute(
+                    "CREATE TABLE migration_worker_derivations ("
+                    "derivation_id TEXT PRIMARY KEY, record_json BLOB NOT NULL)"
+                )
+                connection.execute(
+                    "CREATE TABLE migration_worker_outputs ("
+                    "record_id TEXT PRIMARY KEY, derivation_id TEXT NOT NULL "
+                    "REFERENCES migration_worker_derivations(derivation_id), "
+                    "output_index INTEGER NOT NULL CHECK(output_index >= 0), "
+                    "content_digest TEXT NOT NULL, record_json BLOB NOT NULL, "
+                    "UNIQUE(derivation_id, output_index))"
+                )
+                connection.execute(
+                    "CREATE TABLE migration_worker_reproductions ("
+                    "reproduction_key TEXT PRIMARY KEY, "
+                    "output_fingerprint TEXT NOT NULL, derivation_id TEXT NOT NULL "
+                    "UNIQUE REFERENCES migration_worker_derivations(derivation_id))"
+                )
+                connection.execute("INSERT INTO schema_migrations(version) VALUES (3)")
+            _assert_migration_schema(connection)
             connection.commit()
         os.chmod(self.database, 0o600)
 
@@ -560,18 +613,32 @@ class MigrationRepository:
             row = connection.execute(
                 "SELECT record_json FROM import_items WHERE snapshot_digest=? "
                 "AND relative_path=?",
-                (snapshot_digest, relative_path),
+                (_require_digest(snapshot_digest), relative_path),
             ).fetchone()
-        return None if row is None else json.loads(row[0])
+        if row is None:
+            return None
+        return _validate_import_item_record(
+            json.loads(row[0]),
+            snapshot_digest=snapshot_digest,
+            relative_path=relative_path,
+        )
 
     def list_items(self, snapshot_digest: str) -> tuple[dict[str, Any], ...]:
+        snapshot_id = _require_digest(snapshot_digest)
         with self._connect() as connection:
             rows = connection.execute(
-                "SELECT record_json FROM import_items WHERE snapshot_digest=? "
-                "ORDER BY relative_path",
-                (snapshot_digest,),
+                "SELECT relative_path, record_json FROM import_items "
+                "WHERE snapshot_digest=? ORDER BY relative_path",
+                (snapshot_id,),
             ).fetchall()
-        return tuple(json.loads(row[0]) for row in rows)
+        return tuple(
+            _validate_import_item_record(
+                json.loads(row[1]),
+                snapshot_digest=snapshot_id,
+                relative_path=row[0],
+            )
+            for row in rows
+        )
 
     def list_aliases(self, snapshot_digest: str) -> tuple[dict[str, Any], ...]:
         with self._connect() as connection:
@@ -621,6 +688,25 @@ class MigrationRepository:
             )
             connection.commit()
 
+    def get_typed_record(self, *, record_id: str, record_type: str) -> dict[str, Any]:
+        identity = _require_digest(record_id)
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT record_type, record_json FROM typed_records WHERE record_id=?",
+                (identity,),
+            ).fetchone()
+        if row is None:
+            raise MigrationImportError("Typed migration record was not found")
+        record = json.loads(row[1])
+        _validate_typed_record_identity(
+            record_id=identity,
+            record_type=row[0],
+            record=record,
+        )
+        if row[0] != record_type:
+            raise MigrationRecordConflict("Typed migration record has another type")
+        return record
+
     def list_typed_records(
         self,
         *,
@@ -644,6 +730,279 @@ class MigrationRepository:
             )
             records.append(record)
         return tuple(records)
+
+    def publish_migration_worker_bundle(
+        self,
+        *,
+        outputs: Sequence[Mapping[str, Any]],
+        derivation: Mapping[str, Any],
+        reproduction_key: str,
+        output_fingerprint: str,
+        blob_store: CommittedFilesystemBlobStore,
+    ) -> tuple[dict[str, Any], ...]:
+        """Publish verified worker authority atomically after durable CAS blobs."""
+
+        key = _require_digest(reproduction_key)
+        fingerprint = _require_digest(output_fingerprint)
+        derivation_id = _validate_migration_worker_derivation(derivation)
+        normalized_outputs = tuple(
+            _validate_migration_worker_output(
+                record,
+                derivation=derivation,
+                reproduction_key=key,
+                output_fingerprint=fingerprint,
+            )
+            for record in outputs
+        )
+        if not normalized_outputs:
+            raise ValueError("Migration worker publication requires output records")
+        if [record["outputIndex"] for record in normalized_outputs] != list(
+            range(len(normalized_outputs))
+        ):
+            raise ValueError("Migration worker output indexes are not canonical")
+        if [record["contentDigest"] for record in normalized_outputs] != derivation[
+            "orderedOutputDigests"
+        ]:
+            raise ValueError("Migration worker output order differs from derivation")
+        expected_reproduction = domain_digest(
+            "tidy.reproduction-key/v1",
+            {
+                "operation": derivation["operation"],
+                "contractVersion": derivation["contractVersion"],
+                "orderedInputDigests": derivation["orderedInputDigests"],
+                "configurationDigest": derivation["configurationDigest"],
+                "producerDigests": derivation["producerDigests"],
+            },
+        )
+        if expected_reproduction != key:
+            raise ValueError("Migration worker reproduction identity differs")
+        expected_fingerprint = domain_digest(
+            "tidy.output-set/v1",
+            [
+                [record["relativePath"], record["contentDigest"]]
+                for record in normalized_outputs
+            ],
+        )
+        if expected_fingerprint != fingerprint:
+            raise ValueError("Migration worker output fingerprint differs")
+        if len({record["recordId"] for record in normalized_outputs}) != len(
+            normalized_outputs
+        ):
+            raise ValueError("Migration worker output record IDs must be unique")
+        _require_separate_trees(
+            self.root,
+            blob_store.root,
+            "migration metadata and worker blob roots",
+        )
+        for record in normalized_outputs:
+            if record["storageUri"] != blob_store.storage_uri(record["contentDigest"]):
+                raise BlobIntegrityError(
+                    "Migration worker output binds another blob store"
+                )
+            blob_store.verify(record["contentDigest"], record["byteLength"])
+        with self._connect() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            try:
+                existing = connection.execute(
+                    "SELECT output_fingerprint, derivation_id "
+                    "FROM migration_worker_reproductions WHERE reproduction_key=?",
+                    (key,),
+                ).fetchone()
+                if existing is not None and (
+                    existing[0] != fingerprint or existing[1] != derivation_id
+                ):
+                    raise MigrationRecordConflict(
+                        "Migration worker reproduction changed outputs"
+                    )
+                self._insert_immutable(
+                    connection,
+                    "migration_worker_derivations",
+                    "derivation_id",
+                    derivation_id,
+                    canonical_json_bytes(derivation),
+                    (),
+                )
+                for output_index, record in enumerate(normalized_outputs):
+                    self._insert_immutable(
+                        connection,
+                        "migration_worker_outputs",
+                        "record_id",
+                        record["recordId"],
+                        canonical_json_bytes(record),
+                        (
+                            ("derivation_id", derivation_id),
+                            ("output_index", output_index),
+                            ("content_digest", record["contentDigest"]),
+                        ),
+                    )
+                if existing is None:
+                    connection.execute(
+                        "INSERT INTO migration_worker_reproductions("
+                        "reproduction_key, output_fingerprint, derivation_id) "
+                        "VALUES (?, ?, ?)",
+                        (key, fingerprint, derivation_id),
+                    )
+                self._inject("before_migration_worker_bundle_commit")
+                connection.commit()
+            except BaseException:
+                connection.rollback()
+                raise
+        return tuple(dict(record) for record in normalized_outputs)
+
+    def get_migration_worker_output(
+        self,
+        record_id: str,
+        *,
+        blob_store: CommittedFilesystemBlobStore | None = None,
+    ) -> dict[str, Any]:
+        identity = _require_digest(record_id)
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT output_index, record_json FROM migration_worker_outputs "
+                "WHERE record_id=?",
+                (identity,),
+            ).fetchone()
+        if row is None:
+            raise MigrationImportError("Migration worker output was not found")
+        record = json.loads(row[1])
+        if record.get("recordId") != identity or record.get("outputIndex") != row[0]:
+            raise MigrationRecordConflict("Migration worker output identity differs")
+        derivation = self.get_migration_worker_derivation(
+            str(record.get("derivationId"))
+        )
+        reproduction = self.get_migration_worker_reproduction(
+            str(record.get("reproductionKey"))
+        )
+        _validate_migration_worker_output(
+            record,
+            derivation=derivation,
+            reproduction_key=reproduction["reproductionKey"],
+            output_fingerprint=reproduction["outputFingerprint"],
+        )
+        index = int(record["outputIndex"])
+        if (
+            index >= len(derivation["orderedOutputDigests"])
+            or derivation["orderedOutputDigests"][index] != record["contentDigest"]
+        ):
+            raise MigrationRecordConflict(
+                "Migration worker output order differs from derivation"
+            )
+        if blob_store is not None:
+            _require_separate_trees(
+                self.root,
+                blob_store.root,
+                "migration metadata and worker blob roots",
+            )
+            if record["storageUri"] != blob_store.storage_uri(record["contentDigest"]):
+                raise BlobIntegrityError(
+                    "Migration worker output binds another blob store"
+                )
+            blob_store.verify(record["contentDigest"], record["byteLength"])
+        return record
+
+    def list_migration_worker_outputs(
+        self, *, blob_store: CommittedFilesystemBlobStore
+    ) -> tuple[dict[str, Any], ...]:
+        _require_separate_trees(
+            self.root,
+            blob_store.root,
+            "migration metadata and worker blob roots",
+        )
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT output_index, record_json FROM migration_worker_outputs "
+                "ORDER BY derivation_id, output_index"
+            ).fetchall()
+        records = tuple(json.loads(row[1]) for row in rows)
+        groups: dict[str, list[dict[str, Any]]] = {}
+        for row, record in zip(rows, records, strict=True):
+            if record.get("outputIndex") != row[0]:
+                raise MigrationRecordConflict("Migration worker output index differs")
+            groups.setdefault(str(record.get("derivationId")), []).append(record)
+        for derivation_id, outputs in groups.items():
+            derivation = self.get_migration_worker_derivation(derivation_id)
+            reproduction_key = str(outputs[0].get("reproductionKey"))
+            reproduction = self.get_migration_worker_reproduction(reproduction_key)
+            if reproduction["derivationId"] != derivation_id or any(
+                record.get("reproductionKey") != reproduction_key for record in outputs
+            ):
+                raise MigrationRecordConflict(
+                    "Migration worker output reproduction differs"
+                )
+            for record in outputs:
+                _validate_migration_worker_output(
+                    record,
+                    derivation=derivation,
+                    reproduction_key=reproduction_key,
+                    output_fingerprint=reproduction["outputFingerprint"],
+                )
+                blob_store.verify(record["contentDigest"], record["byteLength"])
+            if [record["contentDigest"] for record in outputs] != derivation[
+                "orderedOutputDigests"
+            ]:
+                raise MigrationRecordConflict(
+                    "Migration worker output order differs from derivation"
+                )
+            fingerprint = domain_digest(
+                "tidy.output-set/v1",
+                [
+                    [record["relativePath"], record["contentDigest"]]
+                    for record in outputs
+                ],
+            )
+            if fingerprint != reproduction["outputFingerprint"]:
+                raise MigrationRecordConflict(
+                    "Migration worker output fingerprint differs"
+                )
+        return records
+
+    def get_migration_worker_derivation(self, derivation_id: str) -> dict[str, Any]:
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT record_json FROM migration_worker_derivations "
+                "WHERE derivation_id=?",
+                (_require_digest(derivation_id),),
+            ).fetchone()
+        if row is None:
+            raise MigrationImportError("Migration worker derivation was not found")
+        record = json.loads(row[0])
+        _validate_migration_worker_derivation(record)
+        return record
+
+    def get_migration_worker_reproduction(
+        self, reproduction_key: str
+    ) -> dict[str, str]:
+        key = _require_digest(reproduction_key)
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT output_fingerprint, derivation_id "
+                "FROM migration_worker_reproductions WHERE reproduction_key=?",
+                (key,),
+            ).fetchone()
+        if row is None:
+            raise MigrationImportError("Migration worker reproduction was not found")
+        fingerprint = _require_digest(str(row[0]))
+        derivation_id = _require_digest(str(row[1]))
+        derivation = self.get_migration_worker_derivation(derivation_id)
+        expected = domain_digest(
+            "tidy.reproduction-key/v1",
+            {
+                "operation": derivation["operation"],
+                "contractVersion": derivation["contractVersion"],
+                "orderedInputDigests": derivation["orderedInputDigests"],
+                "configurationDigest": derivation["configurationDigest"],
+                "producerDigests": derivation["producerDigests"],
+            },
+        )
+        if expected != key:
+            raise MigrationRecordConflict(
+                "Migration worker reproduction identity differs"
+            )
+        return {
+            "reproductionKey": key,
+            "outputFingerprint": fingerprint,
+            "derivationId": derivation_id,
+        }
 
     def add_reconciliation(self, report: Mapping[str, Any]) -> None:
         wire = canonical_json_bytes(report)
@@ -1473,6 +1832,345 @@ def _stat_identity(info: os.stat_result) -> tuple[int, int, int, int, int, int]:
     )
 
 
+def _assert_migration_schema(connection: sqlite3.Connection) -> None:
+    expected_columns = {
+        "schema_migrations": ("version", "applied_at"),
+        "snapshots": (
+            "snapshot_digest",
+            "inventory_digest",
+            "item_manifest_digest",
+            "snapshot_file_digest",
+            "storage_uri",
+            "record_json",
+        ),
+        "contents": (
+            "content_digest",
+            "byte_length",
+            "storage_uri",
+            "record_json",
+        ),
+        "import_items": (
+            "snapshot_digest",
+            "relative_path",
+            "final_state",
+            "content_digest",
+            "record_json",
+        ),
+        "aliases": (
+            "alias_id",
+            "snapshot_digest",
+            "relative_path",
+            "content_digest",
+            "record_json",
+        ),
+        "reconciliations": (
+            "report_digest",
+            "snapshot_digest",
+            "record_json",
+        ),
+        "typed_records": ("record_id", "record_type", "record_json"),
+        "migration_worker_derivations": ("derivation_id", "record_json"),
+        "migration_worker_outputs": (
+            "record_id",
+            "derivation_id",
+            "output_index",
+            "content_digest",
+            "record_json",
+        ),
+        "migration_worker_reproductions": (
+            "reproduction_key",
+            "output_fingerprint",
+            "derivation_id",
+        ),
+    }
+    actual_tables = {
+        row[0]
+        for row in connection.execute(
+            "SELECT name FROM sqlite_master WHERE type='table'"
+        )
+    }
+    if not set(expected_columns).issubset(actual_tables):
+        raise MigrationImportError("Migration metadata schema is incomplete or corrupt")
+    for table, expected in expected_columns.items():
+        actual = tuple(
+            row[1] for row in connection.execute(f"PRAGMA table_info({table})")
+        )
+        if actual != expected:
+            raise MigrationImportError(
+                f"Migration metadata table {table} has unexpected columns"
+            )
+
+    def unique_indexes(table: str) -> set[tuple[str, ...]]:
+        values: set[tuple[str, ...]] = set()
+        for row in connection.execute(f"PRAGMA index_list({table})"):
+            if row[2] == 1:
+                values.add(
+                    tuple(
+                        item[2]
+                        for item in connection.execute(f"PRAGMA index_info({row[1]})")
+                    )
+                )
+        return values
+
+    if ("derivation_id", "output_index") not in unique_indexes(
+        "migration_worker_outputs"
+    ) or ("derivation_id",) not in unique_indexes("migration_worker_reproductions"):
+        raise MigrationImportError(
+            "Migration metadata worker uniqueness constraints differ"
+        )
+    output_foreign_keys = {
+        (row[3], row[2], row[4])
+        for row in connection.execute(
+            "PRAGMA foreign_key_list(migration_worker_outputs)"
+        )
+    }
+    reproduction_foreign_keys = {
+        (row[3], row[2], row[4])
+        for row in connection.execute(
+            "PRAGMA foreign_key_list(migration_worker_reproductions)"
+        )
+    }
+    expected_foreign_key = {
+        ("derivation_id", "migration_worker_derivations", "derivation_id")
+    }
+    if (
+        output_foreign_keys != expected_foreign_key
+        or reproduction_foreign_keys != expected_foreign_key
+        or connection.execute("PRAGMA foreign_key_check").fetchone() is not None
+    ):
+        raise MigrationImportError("Migration metadata foreign-key integrity differs")
+
+
+def _validate_import_item_record(
+    record: Mapping[str, Any], *, snapshot_digest: str, relative_path: str
+) -> dict[str, Any]:
+    required = {
+        "schemaVersion",
+        "snapshotDigest",
+        "importerDigest",
+        "relativePath",
+        "entryType",
+        "artifactClass",
+        "classification",
+        "proposedDisposition",
+        "finalState",
+        "sourceMode",
+        "byteLength",
+        "sourceItemDigest",
+        "sourceContentDigest",
+        "contentDigest",
+        "blobStored",
+        "storageUri",
+        "recordedAt",
+        "actor",
+        "recordId",
+    }
+    if (
+        set(record) != required
+        or record.get("schemaVersion") != _IMPORT_ITEM_VERSION
+        or record.get("snapshotDigest") != _require_digest(snapshot_digest)
+        or record.get("relativePath") != relative_path
+    ):
+        raise MigrationRecordConflict("Import item record fields differ")
+    _require_safe_relative(relative_path)
+    for field in ("importerDigest", "sourceItemDigest"):
+        _require_digest(str(record.get(field)))
+    for field in ("sourceContentDigest", "contentDigest"):
+        if record.get(field) is not None:
+            _require_digest(str(record[field]))
+    if record.get("blobStored") is True:
+        if (
+            record.get("entryType") != "file"
+            or record.get("contentDigest") is None
+            or record.get("storageUri") != f"cas+sha256://{record['contentDigest']}"
+        ):
+            raise MigrationRecordConflict("Import item blob binding differs")
+    elif (
+        record.get("contentDigest") is not None or record.get("storageUri") is not None
+    ):
+        raise MigrationRecordConflict("Unstored import item has content authority")
+    semantic = dict(record)
+    identity = _require_digest(str(semantic.pop("recordId")))
+    if domain_digest(_IMPORT_ITEM_VERSION, semantic) != identity:
+        raise MigrationRecordConflict("Import item import checkpoint identity differs")
+    return dict(record)
+
+
+def _validate_migration_worker_derivation(record: Mapping[str, Any]) -> str:
+    required = {
+        "schemaVersion",
+        "derivationId",
+        "operation",
+        "contractVersion",
+        "orderedInputDigests",
+        "configurationDigest",
+        "producerDigests",
+        "orderedOutputDigests",
+    }
+    if set(record) != required or record.get("schemaVersion") != (
+        "tidy.migration-worker-derivation/v1"
+    ):
+        raise ValueError("Migration worker derivation fields are invalid")
+    if record.get("contractVersion") != "tidy.migration-worker/v1":
+        raise ValueError("Migration worker derivation contract is invalid")
+    if record.get("operation") not in {
+        "health",
+        "capabilities",
+        "digest-legacy-approval-registry-v1",
+        "parse-recipe-v01",
+    }:
+        raise ValueError("Migration worker derivation operation is invalid")
+    for field in ("orderedInputDigests", "producerDigests", "orderedOutputDigests"):
+        values = record.get(field)
+        if not isinstance(values, list):
+            raise ValueError("Migration worker derivation digest lists are invalid")
+        for value in values:
+            _require_digest(value)
+    if (
+        len(record["orderedInputDigests"]) > 1
+        or not 1 <= len(record["producerDigests"]) <= 4
+        or not 1 <= len(record["orderedOutputDigests"]) <= 4
+    ):
+        raise ValueError("Migration worker derivation digest counts are invalid")
+    _require_digest(str(record.get("configurationDigest")))
+    semantic = {
+        "operation": record["operation"],
+        "contractVersion": record["contractVersion"],
+        "orderedInputDigests": record["orderedInputDigests"],
+        "configurationDigest": record["configurationDigest"],
+        "producerDigests": record["producerDigests"],
+        "orderedOutputDigests": record["orderedOutputDigests"],
+    }
+    identity = _require_digest(str(record.get("derivationId")))
+    if domain_digest("tidy.derivation/v1", semantic) != identity:
+        raise ValueError("Migration worker derivation identity differs")
+    return identity
+
+
+def _validate_migration_worker_output(
+    record: Mapping[str, Any],
+    *,
+    derivation: Mapping[str, Any],
+    reproduction_key: str,
+    output_fingerprint: str,
+) -> dict[str, Any]:
+    required = {
+        "schemaVersion",
+        "recordId",
+        "operation",
+        "contractVersion",
+        "source",
+        "configurationDigest",
+        "producerDigest",
+        "derivationId",
+        "reproductionKey",
+        "outputFingerprint",
+        "outputIndex",
+        "name",
+        "relativePath",
+        "artifactSchemaVersion",
+        "contentDigest",
+        "byteLength",
+        "storageUri",
+        "isolationMode",
+        "networkIsolationEnforced",
+        "active",
+        "trainingEligible",
+    }
+    if set(record) != required or record.get("schemaVersion") != (
+        "tidy.migration-worker-output/v1"
+    ):
+        raise ValueError("Migration worker output fields are invalid")
+    if record.get("contractVersion") != "tidy.migration-worker/v1":
+        raise ValueError("Migration worker output contract is invalid")
+    if (
+        record.get("derivationId") != derivation["derivationId"]
+        or record.get("operation") != derivation["operation"]
+        or record.get("configurationDigest") != derivation["configurationDigest"]
+        or record.get("producerDigest") not in derivation["producerDigests"]
+        or record.get("reproductionKey") != reproduction_key
+        or record.get("outputFingerprint") != output_fingerprint
+    ):
+        raise ValueError("Migration worker output authority binding differs")
+    for field in (
+        "configurationDigest",
+        "producerDigest",
+        "reproductionKey",
+        "outputFingerprint",
+        "contentDigest",
+    ):
+        _require_digest(str(record.get(field)))
+    if (
+        not isinstance(record.get("byteLength"), int)
+        or isinstance(record.get("byteLength"), bool)
+        or not 0 <= int(record["byteLength"]) <= 8 * 1024 * 1024
+    ):
+        raise ValueError("Migration worker output byte length is invalid")
+    if record.get("storageUri") != f"cas+sha256://{record['contentDigest']}":
+        raise ValueError("Migration worker output storage URI is invalid")
+    isolation = record.get("isolationMode")
+    if isolation not in {"macos-production", "insecure-test-only"} or record.get(
+        "networkIsolationEnforced"
+    ) is not (isolation == "macos-production"):
+        raise ValueError("Migration worker output isolation claim is invalid")
+    if record.get("active") is not False or record.get("trainingEligible") is not False:
+        raise ValueError("Migration worker output may not create active authority")
+    if (
+        not isinstance(record.get("outputIndex"), int)
+        or isinstance(record.get("outputIndex"), bool)
+        or not 0 <= int(record["outputIndex"]) <= 3
+    ):
+        raise ValueError("Migration worker output index is invalid")
+    for field, maximum in (
+        ("name", 64),
+        ("relativePath", 512),
+        ("artifactSchemaVersion", 128),
+    ):
+        value = record.get(field)
+        if not isinstance(value, str) or not 1 <= len(value) <= maximum:
+            raise ValueError("Migration worker output string field is invalid")
+    _require_safe_relative(str(record["relativePath"]))
+    source = record.get("source")
+    interpretation = record.get("operation") in {
+        "digest-legacy-approval-registry-v1",
+        "parse-recipe-v01",
+    }
+    if (source is not None) is not interpretation:
+        raise ValueError("Migration worker output source presence is invalid")
+    if source is not None:
+        if not isinstance(source, dict) or set(source) != {
+            "sourceSnapshotDigest",
+            "sourceItemDigest",
+            "importRecordId",
+            "relativePath",
+            "sourceContentDigest",
+            "byteLength",
+        }:
+            raise ValueError("Migration worker output source binding is invalid")
+        for field in (
+            "sourceSnapshotDigest",
+            "sourceItemDigest",
+            "importRecordId",
+            "sourceContentDigest",
+        ):
+            _require_digest(str(source.get(field)))
+        _require_safe_relative(str(source.get("relativePath")))
+        if (
+            not isinstance(source.get("byteLength"), int)
+            or isinstance(source.get("byteLength"), bool)
+            or not 0 <= int(source["byteLength"]) <= 8 * 1024 * 1024
+            or derivation["orderedInputDigests"] != [source["sourceContentDigest"]]
+        ):
+            raise ValueError("Migration worker output source length is invalid")
+    elif derivation["orderedInputDigests"]:
+        raise ValueError("Migration worker probe derivation has unexpected inputs")
+    semantic = dict(record)
+    identity = _require_digest(str(semantic.pop("recordId", "")))
+    if domain_digest("tidy.migration-worker-output/v1", semantic) != identity:
+        raise ValueError("Migration worker output identity differs")
+    return dict(record)
+
+
 def _validate_typed_record_identity(
     *,
     record_id: str,
@@ -1491,6 +2189,21 @@ def _validate_typed_record_identity(
         if domain_digest(record_type, semantic) != identity:
             raise ValueError("typed record identity digest differs")
     return identity
+
+
+def _require_safe_relative(value: str) -> PurePosixPath:
+    path = PurePosixPath(value)
+    if (
+        not value
+        or len(value) > 4096
+        or path.is_absolute()
+        or path.as_posix() != value
+        or any(part in ("", ".", "..") for part in path.parts)
+        or "\\" in value
+        or "\x00" in value
+    ):
+        raise ValueError("Migration worker relative path is unsafe")
+    return path
 
 
 def _require_utc_timestamp(value: str) -> str:

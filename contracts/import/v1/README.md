@@ -17,7 +17,8 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
 - `reconciliation.schema.json` — sorted item-level content reconciliation with a
   digest over the mapping.
 - `legacy-approval-snapshot.schema.json` — an exact point-in-time observation of
-  the mutable legacy registry; it never claims append-only history.
+  the mutable legacy registry; it never claims append-only history and retains
+  the verifier configuration plus honest production/insecure isolation state.
 - `reviewer-identity.schema.json`, `approval-resolution.schema.json`, and
   `approval-domain-reconciliation.schema.json` — explicit reviewer-label
   curation, evidence-bearing resolved/ambiguous/unresolved/conflicting outcomes,
@@ -26,7 +27,8 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
 - `digest-record-vectors.schema.json` and
   `recipe-digest-verification.schema.json` — strict vectors plus bindings to the
   pinned historical TypeScript `digestRecord` compatibility algorithm, source,
-  and verifier.
+  imported recipe, durable worker output, derivation, producer/configuration,
+  and honest isolation authority.
 - `approval-registry-evidence.schema.json`,
   `recipe-evidence-import.schema.json`, `generation-evidence.schema.json`, and
   `model-package-disposition.schema.json` — conservative typed dispositions.
@@ -36,6 +38,13 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
   complete core reconciliation to the exact conservative typed records (or an
   explicit `core-content-only` outcome). Its status still declares full
   semantic import pending.
+- `migration-worker-derivation.schema.json` and
+  `migration-worker-output.schema.json` — repository authority for one exact
+  sandboxed migration-worker derivation and each durable output. Output records
+  bind source, configuration, worker/gateway producers, reproduction identity,
+  CAS custody, and the honest isolation mode while forcing activation and
+  training eligibility to false. The effective normalized Seatbelt profile and
+  imported macOS `system.sb` bytes are configuration-bound.
 
 ## Current authorization boundary
 
@@ -53,7 +62,11 @@ or CLI. The final TidyCell snapshot therefore cannot be copied by this slice.
   verify and canonical `COMMITTED.json` is published last.
 - A crash may leave unreferenced committed bytes or an orphaned incomplete
   directory, but never committed metadata pointing to an uncommitted blob.
-- Retry is idempotent and verifies existing committed bytes.
+- Migration-worker outputs use the same durable-blob-first rule. Their output,
+  derivation, and reproduction rows commit in one SQLite transaction only after
+  the repository re-verifies every referenced CAS object.
+- Retry is idempotent and verifies existing committed bytes; a reproduction key
+  producing a different fingerprint or derivation fails closed.
 - No effective recipe pointer table or transition exists in this repository.
 
 ## Deliberate incomplete scope

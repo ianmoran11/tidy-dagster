@@ -28,6 +28,8 @@ _MAX_FILE_BYTES = 8 * 1024 * 1024
 _MAX_CONFIG_BYTES = 1024 * 1024
 _MAX_SNAPSHOT_BYTES = 64 * 1024 * 1024
 _MAX_GIT_OUTPUT_BYTES = 64 * 1024 * 1024
+_MAX_JSON_DEPTH = 128
+_MAX_JSON_NODES = 10_000_000
 _GIT_TIMEOUT_SECONDS = 60
 _READ_CHUNK = 1024 * 1024
 _ROLES = frozenset(("source", "fixture", "license", "manifest", "lockfile", "notice"))
@@ -57,6 +59,7 @@ class SourceClosureSourceMismatch(SourceClosureDiscoveryError):
 def discover_source_closure(request: Mapping[str, Any]) -> dict[str, Any]:
     """Discover an exact import closure and return hashes without source bytes."""
 
+    producer_before = _producer_source_digest()
     root = _strict_mapping(request, "request")
     _require_exact_keys(
         root,
@@ -121,6 +124,11 @@ def discover_source_closure(request: Mapping[str, Any]) -> dict[str, Any]:
         raise SourceClosureDiscoveryError(
             "Combined source closure exceeds request bounds"
         )
+    producer_after = _producer_source_digest()
+    if producer_before != producer_after:
+        raise SourceClosureSourceMismatch(
+            "Source-closure producer changed during discovery"
+        )
     semantic = {
         "schemaVersion": _SCHEMA_VERSION,
         "completionStatus": "complete-no-copy",
@@ -140,7 +148,7 @@ def discover_source_closure(request: Mapping[str, Any]) -> dict[str, Any]:
         },
         "producer": {
             "version": _PRODUCER_VERSION,
-            "sourceDigest": _producer_source_digest(),
+            "sourceDigest": producer_after,
             "canonicalizationAlgorithm": "tidy-python-sorted-json-v1",
         },
     }
@@ -571,11 +579,9 @@ def _git(
     *,
     max_output: int = _MAX_GIT_OUTPUT_BYTES,
 ) -> bytes:
-    executable = shutil.which("git")
-    if executable is None:
-        raise SourceClosureDiscoveryError("Git executable is unavailable")
+    executable = _git_executable()
     environment = {
-        "PATH": os.environ.get("PATH", ""),
+        "PATH": f"{executable.parent}:/usr/bin:/bin",
         "LANG": "C",
         "LC_ALL": "C",
         "TZ": "UTC",
@@ -583,7 +589,7 @@ def _git(
         "GIT_CONFIG_GLOBAL": os.devnull,
     }
     result = subprocess.run(
-        [executable, *arguments],
+        [str(executable), *arguments],
         cwd=root,
         env=environment,
         capture_output=True,
@@ -676,9 +682,19 @@ def _read_json_file(path: Path, max_bytes: int, label: str) -> dict[str, Any]:
     if len(data) > max_bytes:
         raise SourceClosureDiscoveryError(f"{label} exceeds its byte bound")
     try:
-        value = json.loads(data)
-    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        value = json.loads(
+            data.decode("utf-8", errors="strict"),
+            object_pairs_hook=_reject_duplicate_pairs,
+            parse_constant=_reject_json_constant,
+        )
+    except (
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+        ValueError,
+        RecursionError,
+    ) as error:
         raise SourceClosureDiscoveryError(f"{label} is not strict JSON") from error
+    _assert_json_limits(value, label)
     return _strict_mapping(value, label)
 
 
@@ -704,6 +720,40 @@ def _safe_relative_path(value: Any) -> str:
     ):
         raise SourceClosureDiscoveryError("Source path escapes or is not normalized")
     return value
+
+
+def _reject_duplicate_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    value: dict[str, Any] = {}
+    for key, entry in pairs:
+        if key in value:
+            raise ValueError(f"duplicate JSON key: {key}")
+        value[key] = entry
+    return value
+
+
+def _reject_json_constant(value: str) -> None:
+    raise ValueError(f"non-finite JSON constant: {value}")
+
+
+def _assert_json_limits(value: Any, label: str) -> None:
+    pending: list[tuple[Any, int]] = [(value, 1)]
+    nodes = 0
+    while pending:
+        current, depth = pending.pop()
+        nodes += 1
+        if nodes > _MAX_JSON_NODES:
+            raise SourceClosureDiscoveryError(f"{label} exceeds its JSON node limit")
+        if depth > _MAX_JSON_DEPTH:
+            raise SourceClosureDiscoveryError(f"{label} exceeds its JSON depth limit")
+        if isinstance(current, list):
+            pending.extend((entry, depth + 1) for entry in current)
+        elif isinstance(current, dict):
+            nodes += len(current)
+            if nodes > _MAX_JSON_NODES:
+                raise SourceClosureDiscoveryError(
+                    f"{label} exceeds its JSON node limit"
+                )
+            pending.extend((entry, depth + 1) for entry in current.values())
 
 
 def _strict_mapping(value: Any, label: str) -> dict[str, Any]:
@@ -758,9 +808,79 @@ def _stat_identity(value: os.stat_result) -> tuple[int, int, int, int, int]:
     )
 
 
+def _git_executable() -> Path:
+    raw = shutil.which("git")
+    if raw is None:
+        raise SourceClosureDiscoveryError("Git executable is unavailable")
+    executable = Path(raw).resolve(strict=True)
+    info = executable.lstat()
+    if not stat.S_ISREG(info.st_mode) or stat.S_ISLNK(info.st_mode):
+        raise SourceClosureDiscoveryError("Git executable is not a regular file")
+    return executable
+
+
+def _git_producer_identity() -> dict[str, str]:
+    executable = _git_executable()
+    data, _mode = _read_no_follow(
+        _validated_directory(executable.parent, "Git executable parent"),
+        executable.name,
+        max_bytes=64 * 1024 * 1024,
+    )
+    result = subprocess.run(
+        [str(executable), "--version"],
+        env={"PATH": f"{executable.parent}:/usr/bin:/bin", "LANG": "C", "LC_ALL": "C"},
+        capture_output=True,
+        timeout=10,
+        check=False,
+    )
+    if result.returncode != 0 or result.stderr or not result.stdout:
+        raise SourceClosureDiscoveryError("Git runtime identity is unavailable")
+    try:
+        version = result.stdout.decode("utf-8", errors="strict").strip()
+    except UnicodeDecodeError as error:
+        raise SourceClosureDiscoveryError("Git version is not UTF-8") from error
+    if not version or len(version) > 256:
+        raise SourceClosureDiscoveryError("Git version is invalid")
+    return {
+        "executableDigest": sha256_digest(data),
+        "version": version,
+    }
+
+
 def _producer_source_digest() -> str:
-    path = Path(__file__)
-    return sha256_digest(path.read_bytes())
+    project = Path(__file__).parents[2]
+    paths = (
+        Path(__file__),
+        Path(__file__).with_name("source_export.py"),
+        Path(__file__).with_name("artifacts.py"),
+        project / "contracts/migration/v1/source-closure-discovery.schema.json",
+        project / "contracts/migration/v1/source-closure-review.schema.json",
+        project / "pyproject.toml",
+        project / "uv.lock",
+    )
+
+    def capture() -> dict[str, Any]:
+        files: list[dict[str, str]] = []
+        for path in paths:
+            data, _mode = _read_no_follow(
+                _validated_directory(path.parent, "producer source parent"),
+                path.name,
+                max_bytes=16 * 1024 * 1024,
+            )
+            files.append(
+                {
+                    "relativePath": path.relative_to(project).as_posix(),
+                    "contentDigest": sha256_digest(data),
+                }
+            )
+        return {"files": files, "git": _git_producer_identity()}
+
+    first = capture()
+    if capture() != first:
+        raise SourceClosureSourceMismatch(
+            "Source-closure producer changed while hashing"
+        )
+    return domain_digest("tidy.source-closure-producer/v1", first)
 
 
 def write_manifest_atomic(path: Path, manifest: Mapping[str, Any]) -> None:

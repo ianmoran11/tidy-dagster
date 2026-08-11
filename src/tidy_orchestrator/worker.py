@@ -348,7 +348,9 @@ class WorkerGateway:
             ]
             environment = self._minimal_environment(home, temporary)
             producer_before = self._producer_manifest_bytes()
-            launch_command = self._sandbox_command(command, run_root)
+            launch_command, sandbox_profile_digest = self._sandbox_command(
+                command, run_root
+            )
             with stdout_path.open("wb") as stdout, stderr_path.open("wb") as stderr:
                 process = subprocess.Popen(
                     launch_command,
@@ -432,6 +434,9 @@ class WorkerGateway:
                     "operation": operation,
                     "parameters": supplied_parameters,
                     "limits": effective_limits,
+                    "sandboxMode": self.config.sandbox_mode,
+                    "networkIsolationEnforced": self.config.network_isolation_enforced,
+                    "sandboxProfileDigest": sandbox_profile_digest,
                 },
             )
             producer_digests = (
@@ -742,9 +747,11 @@ class WorkerGateway:
             }
         )
 
-    def _sandbox_command(self, command: list[str], run_root: Path) -> list[str]:
+    def _sandbox_command(
+        self, command: list[str], run_root: Path
+    ) -> tuple[list[str], str | None]:
         if self.config.sandbox_mode == "insecure-test-only":
-            return command
+            return command, None
         profile = run_root / "sandbox.sb"
         read_roots = {
             Path("/System"),
@@ -783,11 +790,13 @@ class WorkerGateway:
         profile_text = f"""(version 1)
 (deny default)
 (import \"system.sb\")
-(allow process-exec)
+(allow process-exec (literal "{_sandbox_quote(str(Path(command[0]).resolve()))}"))
 (deny process-fork)
 (allow signal (target same-sandbox))
 (allow sysctl-read)
-(allow mach-lookup)
+(allow mach-lookup
+  (global-name "com.apple.system.notification_center")
+  (global-name "com.apple.system.opendirectoryd.libinfo"))
 (allow file-read-metadata
 {metadata_clauses})
 (allow file-read*
@@ -796,8 +805,28 @@ class WorkerGateway:
 (allow file-write* (subpath \"{_sandbox_quote(str(run_root.resolve()))}\"))
 (deny network*)
 """
-        _write_private(profile, profile_text.encode(), mode=0o400)
-        return ["/usr/bin/sandbox-exec", "-f", str(profile), *command]
+        profile_bytes = profile_text.encode()
+        _write_private(profile, profile_bytes, mode=0o400)
+        normalized_profile = profile_text.replace(
+            _sandbox_quote(str(run_root.resolve())), "<RUN_ROOT>"
+        ).encode()
+        system_profile = Path("/System/Library/Sandbox/Profiles/system.sb")
+        if not system_profile.is_file():
+            raise WorkerGatewayError(
+                "SANDBOX_PROFILE_MISSING",
+                "INTEGRITY_VIOLATION",
+                "The imported macOS system Seatbelt profile was not found",
+            )
+        profile_digest = domain_digest(
+            "tidy.seatbelt-profile/v1",
+            {
+                "profileDigest": sha256_digest(normalized_profile),
+                "systemProfileDigest": sha256_digest(
+                    _read_regular_file(system_profile)
+                ),
+            },
+        )
+        return ["/usr/bin/sandbox-exec", "-f", str(profile), *command], profile_digest
 
     def _inject(self, point: str) -> None:
         if self._fault is not None:

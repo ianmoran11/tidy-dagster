@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/import/v1/migration-worker-output.schema.json",
+  "title": "MigrationWorkerOutputV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordId",
+    "operation",
+    "contractVersion",
+    "source",
+    "configurationDigest",
+    "producerDigest",
+    "derivationId",
+    "reproductionKey",
+    "outputFingerprint",
+    "outputIndex",
+    "name",
+    "relativePath",
+    "artifactSchemaVersion",
+    "contentDigest",
+    "byteLength",
+    "storageUri",
+    "isolationMode",
+    "networkIsolationEnforced",
+    "active",
+    "trainingEligible"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.migration-worker-output/v1" },
+    "recordId": { "$ref": "#/$defs/digest" },
+    "operation": {
+      "enum": [
+        "health",
+        "capabilities",
+        "digest-legacy-approval-registry-v1",
+        "parse-recipe-v01"
+      ]
+    },
+    "contractVersion": { "const": "tidy.migration-worker/v1" },
+    "source": {
+      "oneOf": [{ "$ref": "#/$defs/source" }, { "type": "null" }]
+    },
+    "configurationDigest": { "$ref": "#/$defs/digest" },
+    "producerDigest": { "$ref": "#/$defs/digest" },
+    "derivationId": { "$ref": "#/$defs/digest" },
+    "reproductionKey": { "$ref": "#/$defs/digest" },
+    "outputFingerprint": { "$ref": "#/$defs/digest" },
+    "outputIndex": { "type": "integer", "minimum": 0, "maximum": 3 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "artifactSchemaVersion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "contentDigest": { "$ref": "#/$defs/digest" },
+    "byteLength": { "type": "integer", "minimum": 0, "maximum": 8388608 },
+    "storageUri": {
+      "type": "string",
+      "pattern": "^cas\\+sha256://sha256:[0-9a-f]{64}$"
+    },
+    "isolationMode": {
+      "enum": ["macos-production", "insecure-test-only"]
+    },
+    "networkIsolationEnforced": { "type": "boolean" },
+    "active": { "const": false },
+    "trainingEligible": { "const": false }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "isolationMode": { "const": "macos-production" } },
+        "required": ["isolationMode"]
+      },
+      "then": {
+        "properties": { "networkIsolationEnforced": { "const": true } }
+      },
+      "else": {
+        "properties": { "networkIsolationEnforced": { "const": false } }
+      }
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSnapshotDigest",
+        "sourceItemDigest",
+        "importRecordId",
+        "relativePath",
+        "sourceContentDigest",
+        "byteLength"
+      ],
+      "properties": {
+        "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+        "sourceItemDigest": { "$ref": "#/$defs/digest" },
+        "importRecordId": { "$ref": "#/$defs/digest" },
+        "relativePath": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "sourceContentDigest": { "$ref": "#/$defs/digest" },
+        "byteLength": { "type": "integer", "minimum": 0, "maximum": 8388608 }
+      }
+    }
+  }
+}

@@ -59,7 +59,7 @@ The selected `tidycell-tidybank-summary-prompt-closure-v1` manifest is committed
 at `fixtures/source-closure/summary-prompt-closure-v1.discovery.json`:
 
 - manifest digest:
-  `sha256:9dc3e2e8ef4d464b82ac353a4dabd31981e7a3f4a43b0dd4ea9ef9f627bc4bee`;
+  `sha256:5ebbc33af007da70bbda676eff79d40f4c08decb38d713c0083003ff01154c3f`;
 - 138 exact items and 4,233,461 bytes;
 - 126 TidyCell items exactly matching Phase A snapshot
   `sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d`;
@@ -78,17 +78,20 @@ through the selected package manifests and lockfiles. Known dynamically read
 source-owned fixtures were inspected and included manually. Discovery hashes
 TidyCell through no-follow reads and requires every selected byte to match Phase
 A; Tidybank bytes come from immutable Git objects rather than its dirty
-worktree.
+worktree. Request, snapshot, and manifest JSON reject duplicate keys,
+non-finite values, excess depth, and excess nodes. Producer identity now binds
+the discovery, Phase A verifier, digest implementation, contracts, lock/project
+metadata, and exact Git executable/version with before/after stability checks.
 
 `summary-prompt-closure-v1.self-review.json` records implementing-agent
 self-review digest
-`sha256:8cb6dbcc45a4025ad738fc9fe65a87292a1168bfb048b33f77df575f319957cb`.
+`sha256:17e8f477ffab91708ea1649625a9c5e8b2572cf57cdc6c93d8f5de1fbb74f742`.
 It accepts the manifest only for bounded copy and parity implementation. It
 explicitly claims neither independent review nor parity.
 
 ## Validation
 
-- focused source-closure discovery/scaffold and source-export suite: `28 passed`;
+- focused source-closure discovery/scaffold and source-export suite: `29 passed`;
 - strict JSON Schemas validate the checked-in discovery and self-review;
 - the checked-in producer digest binds the exact discovery implementation; and
 - repeated discovery and `tidy-source-closure verify` reproduce the manifest

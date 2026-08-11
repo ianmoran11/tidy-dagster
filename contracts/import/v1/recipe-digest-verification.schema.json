@@ -12,6 +12,16 @@
     "computedDigest",
     "matches",
     "recipeContentDigest",
+    "sourceSnapshotDigest",
+    "sourceItemDigest",
+    "importRecordId",
+    "migrationWorkerOutputRecordId",
+    "derivationId",
+    "configurationDigest",
+    "producerDigests",
+    "verifierIsolationMode",
+    "networkIsolationEnforced",
+    "verificationAuthority",
     "verifierDigest",
     "verificationId"
   ],
@@ -25,9 +35,51 @@
     "computedDigest": { "$ref": "#/$defs/digest" },
     "matches": { "type": "boolean" },
     "recipeContentDigest": { "$ref": "#/$defs/digest" },
+    "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+    "sourceItemDigest": { "$ref": "#/$defs/digest" },
+    "importRecordId": { "$ref": "#/$defs/digest" },
+    "migrationWorkerOutputRecordId": { "$ref": "#/$defs/digest" },
+    "derivationId": { "$ref": "#/$defs/digest" },
+    "configurationDigest": { "$ref": "#/$defs/digest" },
+    "producerDigests": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/digest" }
+    },
+    "verifierIsolationMode": {
+      "enum": ["macos-production", "insecure-test-only"]
+    },
+    "networkIsolationEnforced": { "type": "boolean" },
+    "verificationAuthority": {
+      "enum": ["gateway-production", "fixture-non-authoritative"]
+    },
     "verifierDigest": { "$ref": "#/$defs/digest" },
     "verificationId": { "$ref": "#/$defs/digest" }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "verifierIsolationMode": { "const": "macos-production" }
+        },
+        "required": ["verifierIsolationMode"]
+      },
+      "then": {
+        "properties": {
+          "networkIsolationEnforced": { "const": true },
+          "verificationAuthority": { "const": "gateway-production" }
+        }
+      },
+      "else": {
+        "properties": {
+          "networkIsolationEnforced": { "const": false },
+          "verificationAuthority": { "const": "fixture-non-authoritative" }
+        }
+      }
+    }
+  ],
   "$defs": {
     "digest": {
       "type": "string",

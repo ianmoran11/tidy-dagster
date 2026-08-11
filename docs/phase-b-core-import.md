@@ -128,15 +128,55 @@ expanding the accepted production domain-worker protocol. Its strict
 
 - validates, normalizes, and computes the historical digest of one RecipeV01
   document while keeping the revision inactive and training-ineligible; and
-- validates a bounded legacy approval array and emits the exact historical
-  digest of every complete source row.
+- validates the exact bounded version-1 `{version, approvals}` legacy registry
+  and emits the historical digest of every complete approval row.
 
 Every request binds the frozen snapshot, source item, import record, and source
 path. Staged inputs are no-follow, length- and digest-verified; JSON bytes,
 depth, nodes, and records are capped; roots may not overlap; and declared
 outputs publish atomically. The actual bundled executable is exercised in the
-suite. Python live dispatch and durable interpretation publication remain
-pending.
+suite.
+
+`src/tidy_orchestrator/migration_gateway.py` now supplies the Python-owned
+execution authority that was previously missing. It accepts only a complete
+import checkpoint whose snapshot, item, record ID, path, artifact class, final
+state, content digest, and byte length all match read-verified CAS bytes. It
+stages only those bytes, launches the exact bundled executable with bounded
+process-group/resource controls, and uses macOS `/usr/bin/sandbox-exec` for the
+production factory. The Seatbelt profile denies network and writes outside the
+private run root. `insecure-test-only` remains available solely for adversarial
+unit tests and its records explicitly state that network isolation was not
+enforced. That state is retained in any derived legacy-approval snapshot and
+blocks `human_approved` authority; it is never silently upgraded.
+
+The gateway binds the Node executable, bundled worker, exact TypeScript source
+closure and historical vectors, migration schemas, package/lock/toolchain
+files, runtime version/platform, Python gateway/sandbox/repository/approval
+source, and output-custody schemas. The effective normalized Seatbelt profile
+and imported macOS `system.sb` bytes are configuration-bound; Mach lookup and
+process execution are narrowly allowlisted while network remains denied. It
+rechecks producer and source identity after execution, validates the worker
+envelope, JSON complexity limits, operation-specific artifact schema, and
+recipe-digest comparison independently, publishes output blobs durably, and
+transactionally publishes
+output custody, derivation, and reproduction rows. A divergent replay fails;
+repeated exact execution is idempotent. Recipe revisions and gateway records
+remain inactive and training-ineligible.
+
+The approval fixture now obtains its row digests from this actual executable
+and gateway before constructing the exact legacy snapshot; Python no longer
+supplies pre-recorded digests on that integration path. A valid RecipeV01
+fixture likewise enters durable custody only through the gateway. Its typed
+historical digest verification binds the imported source item, exact worker
+output record, derivation, configuration, producer set, and isolation evidence,
+and is persisted before it can contribute to approval resolution. Reviewer
+identities must also be persisted. Missing worker output, verification, reviewer
+records, or production isolation prevents `human_approved`; insecure approval
+digests are `inactive`.
+
+Broader
+original-candidate, generation, restricted provider-evidence, model-manifest,
+and evaluation parsers remain pending.
 
 ### Conservative typed evidence dispositions
 
@@ -170,8 +210,8 @@ table.
 - legacy approval snapshots, reviewer identities, recipe-digest verification,
   approval-resolution outcomes, and per-row approval-domain reconciliation; and
 - conservative approval, recipe, generation, and model evidence dispositions;
-  and
-- per-source-item conservative semantic reconciliation.
+- per-source-item conservative semantic reconciliation; and
+- migration-worker derivations and inactive durable output custody.
 
 ## Fixture-only authorization
 
@@ -214,9 +254,9 @@ The fixture suite covers:
 
 Results:
 
-- focused Phase B content/semantic fixtures: `23 passed`;
-- migration-worker contract fixtures: `2 passed`;
-- complete Python suite: `120 passed, 1 skipped`;
+- focused migration gateway and import repository: `23 passed`;
+- bundled migration-worker protocol: `7 passed`;
+- complete Python suite: `135 passed, 1 skipped`;
 - TypeScript/Vitest: `155 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
@@ -240,10 +280,9 @@ The following accepted Phase B work is not implemented:
 
 1. process a frozen deterministic real canary under a separately gated live
    authorization, while retaining every unresolved identity and target;
-2. connect the migration-only executable through the Python sandbox gateway and
-   durably bind complete RecipeV01 revisions, original candidates, generation
-   attempts, raw restricted prompt/responses, model manifests, and evaluation
-   evidence rather than only conservative fixture dispositions;
+2. extend the now-integrated Python migration gateway beyond approval-row
+   digests and RecipeV01 revisions to original candidates, generation attempts,
+   raw restricted prompt/responses, model manifests, and evaluation evidence;
 3. preserve legacy model packages as unopened archives, as required by ADR
    0005;
 4. perform full domain-by-domain reconciliation and prove one justified typed

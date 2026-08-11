@@ -8,16 +8,21 @@ implementation; Python stores and checks those results but does not reimplement 
 from __future__ import annotations
 
 import json
+import os
 import platform
+import stat
 from collections.abc import Mapping, Sequence
 from copy import deepcopy
 from dataclasses import dataclass
-from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 from .artifacts import canonical_json_bytes, domain_digest, sha256_digest
-from .migration_import import CommittedFilesystemBlobStore, MigrationRepository
+from .migration_import import (
+    CommittedFilesystemBlobStore,
+    MigrationImportError,
+    MigrationRepository,
+)
 
 _DIGEST_RECORD_ALGORITHM = "tidycell-digest-record-v1"
 _DIGEST_RECORD_SOURCE_DIGEST = (
@@ -148,9 +153,21 @@ def create_legacy_approval_snapshot(
     frozen_at: str,
     source_snapshot_digest: str,
     digest_verifier_digest: str,
+    verifier_configuration_digest: str,
+    verifier_isolation_mode: str,
+    network_isolation_enforced: bool,
 ) -> dict[str, Any]:
     _require_digest(source_snapshot_digest)
+    _require_digest(verifier_configuration_digest)
     _require_utc_timestamp(frozen_at)
+    if verifier_isolation_mode not in {"macos-production", "insecure-test-only"}:
+        raise ApprovalResolutionError("Approval verifier isolation mode is invalid")
+    if not isinstance(
+        network_isolation_enforced, bool
+    ) or network_isolation_enforced is not (
+        verifier_isolation_mode == "macos-production"
+    ):
+        raise ApprovalResolutionError("Approval verifier isolation claim is invalid")
     if len(source_bytes) > _MAX_APPROVAL_SNAPSHOT_BYTES:
         raise ApprovalResolutionError("Approval snapshot exceeds its byte limit")
     value = _strict_json(source_bytes)
@@ -187,6 +204,9 @@ def create_legacy_approval_snapshot(
         "digestAlgorithm": _DIGEST_RECORD_ALGORITHM,
         "digestSourceDigest": _DIGEST_RECORD_SOURCE_DIGEST,
         "digestVerifierDigest": _require_digest(digest_verifier_digest),
+        "verifierConfigurationDigest": verifier_configuration_digest,
+        "verifierIsolationMode": verifier_isolation_mode,
+        "networkIsolationEnforced": network_isolation_enforced,
         "frozenAt": frozen_at,
         "historyCompleteness": "point-in-time-current-state-only",
         "rows": captured,
@@ -205,6 +225,9 @@ def persist_fixture_legacy_approval_snapshot(
     import_record: Mapping[str, Any],
     source_record_digests: Sequence[str],
     digest_verifier_digest: str,
+    verifier_configuration_digest: str,
+    verifier_isolation_mode: str,
+    network_isolation_enforced: bool,
     frozen_at: str,
     metadata: MigrationRepository,
     blobs: CommittedFilesystemBlobStore,
@@ -227,6 +250,9 @@ def persist_fixture_legacy_approval_snapshot(
         frozen_at=frozen_at,
         source_snapshot_digest=import_record["snapshotDigest"],
         digest_verifier_digest=digest_verifier_digest,
+        verifier_configuration_digest=verifier_configuration_digest,
+        verifier_isolation_mode=verifier_isolation_mode,
+        network_isolation_enforced=network_isolation_enforced,
     )
     metadata.add_typed_record(
         record_id=snapshot["approvalSnapshotId"],
@@ -241,10 +267,40 @@ def create_recipe_digest_verification(
     declared_digest: str,
     computed_digest: str,
     recipe_content_digest: str,
-    verifier_digest: str,
+    source_snapshot_digest: str,
+    source_item_digest: str,
+    import_record_id: str,
+    migration_worker_output_record_id: str,
+    derivation_id: str,
+    configuration_digest: str,
+    producer_digests: Sequence[str],
+    verifier_isolation_mode: str,
+    network_isolation_enforced: bool,
 ) -> dict[str, Any]:
     declared = _require_digest(declared_digest)
     computed = _require_digest(computed_digest)
+    producers = [_require_digest(value) for value in producer_digests]
+    if not 1 <= len(producers) <= 4 or len(set(producers)) != len(producers):
+        raise ApprovalResolutionError("Recipe verifier producers are invalid")
+    if verifier_isolation_mode not in {"macos-production", "insecure-test-only"}:
+        raise ApprovalResolutionError("Recipe verifier isolation mode is invalid")
+    if network_isolation_enforced is not (
+        verifier_isolation_mode == "macos-production"
+    ):
+        raise ApprovalResolutionError("Recipe verifier isolation claim is invalid")
+    verifier_semantic = {
+        "sourceSnapshotDigest": _require_digest(source_snapshot_digest),
+        "sourceItemDigest": _require_digest(source_item_digest),
+        "importRecordId": _require_digest(import_record_id),
+        "migrationWorkerOutputRecordId": _require_digest(
+            migration_worker_output_record_id
+        ),
+        "derivationId": _require_digest(derivation_id),
+        "configurationDigest": _require_digest(configuration_digest),
+        "producerDigests": producers,
+        "verifierIsolationMode": verifier_isolation_mode,
+        "networkIsolationEnforced": network_isolation_enforced,
+    }
     semantic = {
         "schemaVersion": "tidy.recipe-digest-verification/v1",
         "algorithm": _DIGEST_RECORD_ALGORITHM,
@@ -253,7 +309,15 @@ def create_recipe_digest_verification(
         "computedDigest": computed,
         "matches": declared == computed,
         "recipeContentDigest": _require_digest(recipe_content_digest),
-        "verifierDigest": _require_digest(verifier_digest),
+        **verifier_semantic,
+        "verificationAuthority": (
+            "gateway-production"
+            if network_isolation_enforced
+            else "fixture-non-authoritative"
+        ),
+        "verifierDigest": domain_digest(
+            "tidy.migration-recipe-digest-verifier/v1", verifier_semantic
+        ),
     }
     return {
         **semantic,
@@ -269,6 +333,8 @@ def resolve_approval(
     reviewer_registry: ReviewerIdentityRegistry,
     recipe_verification: Mapping[str, Any] | None,
     recorded_at: str,
+    metadata: MigrationRepository | None = None,
+    blobs: CommittedFilesystemBlobStore | None = None,
     actor: str,
 ) -> dict[str, Any]:
     snapshot = _validate_approval_snapshot(approval_snapshot)
@@ -323,6 +389,8 @@ def resolve_approval(
     )
     conflict_reasons: list[str] = []
     incomplete_reasons: list[str] = []
+    if snapshot["networkIsolationEnforced"] is not True:
+        incomplete_reasons.append("DIGEST_VERIFIER_ISOLATION_INSUFFICIENT")
     approved_at = source_row.get("approvedAt")
     if (
         not isinstance(approved_at, str)
@@ -354,6 +422,70 @@ def resolve_approval(
                         and harvest_digest != unique_targets[0][0]
                     ):
                         conflict_reasons.append("HARVEST_WORKBOOK_DIGEST_MISMATCH")
+    if verification is not None:
+        if verification["sourceSnapshotDigest"] != snapshot["sourceSnapshotDigest"]:
+            conflict_reasons.append("RECIPE_VERIFICATION_SNAPSHOT_MISMATCH")
+        if verification["verificationAuthority"] != "gateway-production":
+            incomplete_reasons.append("RECIPE_VERIFIER_ISOLATION_INSUFFICIENT")
+        if metadata is None:
+            incomplete_reasons.append("RECIPE_VERIFICATION_NOT_PERSISTED")
+        else:
+            try:
+                persisted_verification = metadata.get_typed_record(
+                    record_id=verification["verificationId"],
+                    record_type=verification["schemaVersion"],
+                )
+            except (MigrationImportError, ValueError):
+                incomplete_reasons.append("RECIPE_VERIFICATION_NOT_PERSISTED")
+            else:
+                if persisted_verification != verification:
+                    conflict_reasons.append("RECIPE_VERIFICATION_RECORD_MISMATCH")
+                if blobs is None:
+                    incomplete_reasons.append(
+                        "RECIPE_WORKER_OUTPUT_CUSTODY_NOT_VERIFIED"
+                    )
+                    worker_output = None
+                    worker_derivation = None
+                else:
+                    try:
+                        worker_output = metadata.get_migration_worker_output(
+                            verification["migrationWorkerOutputRecordId"],
+                            blob_store=blobs,
+                        )
+                        worker_derivation = metadata.get_migration_worker_derivation(
+                            verification["derivationId"]
+                        )
+                    except (MigrationImportError, ValueError):
+                        incomplete_reasons.append("RECIPE_WORKER_OUTPUT_NOT_PERSISTED")
+                        worker_output = None
+                        worker_derivation = None
+                if worker_output is not None and worker_derivation is not None:
+                    expected_source = {
+                        "sourceSnapshotDigest": verification["sourceSnapshotDigest"],
+                        "sourceItemDigest": verification["sourceItemDigest"],
+                        "importRecordId": verification["importRecordId"],
+                        "sourceContentDigest": verification["recipeContentDigest"],
+                    }
+                    actual_source = worker_output.get("source")
+                    if (
+                        worker_output.get("operation") != "parse-recipe-v01"
+                        or worker_output.get("derivationId")
+                        != verification["derivationId"]
+                        or worker_output.get("configurationDigest")
+                        != verification["configurationDigest"]
+                        or worker_output.get("isolationMode")
+                        != verification["verifierIsolationMode"]
+                        or worker_output.get("networkIsolationEnforced")
+                        != verification["networkIsolationEnforced"]
+                        or worker_derivation.get("producerDigests")
+                        != verification["producerDigests"]
+                        or not isinstance(actual_source, dict)
+                        or any(
+                            actual_source.get(key) != expected
+                            for key, expected in expected_source.items()
+                        )
+                    ):
+                        conflict_reasons.append("RECIPE_WORKER_OUTPUT_RECORD_MISMATCH")
     if isinstance(declared_recipe, str):
         if verification is None:
             incomplete_reasons.append("RECIPE_DIGEST_NOT_VERIFIED")
@@ -389,8 +521,23 @@ def resolve_approval(
         reviewer_status = "unresolved"
     else:
         reviewer_status = "resolved"
+        if metadata is None:
+            incomplete_reasons.append("REVIEWER_IDENTITY_NOT_PERSISTED")
+        else:
+            try:
+                persisted_reviewer = metadata.get_typed_record(
+                    record_id=reviewer_identity["reviewerId"],
+                    record_type=reviewer_identity["schemaVersion"],
+                )
+            except (MigrationImportError, ValueError):
+                incomplete_reasons.append("REVIEWER_IDENTITY_NOT_PERSISTED")
+            else:
+                if persisted_reviewer != reviewer_identity:
+                    conflict_reasons.append("REVIEWER_IDENTITY_RECORD_MISMATCH")
 
-    if target_status != "resolved":
+    if conflict_reasons:
+        target_status = "conflict"
+    if snapshot["networkIsolationEnforced"] is not True or target_status != "resolved":
         authority_state = "inactive"
     elif reviewer_status != "resolved":
         authority_state = "legacy_approved_unattributed"
@@ -697,6 +844,9 @@ def _validate_approval_snapshot(value: Mapping[str, Any]) -> dict[str, Any]:
         "digestAlgorithm",
         "digestSourceDigest",
         "digestVerifierDigest",
+        "verifierConfigurationDigest",
+        "verifierIsolationMode",
+        "networkIsolationEnforced",
         "frozenAt",
         "historyCompleteness",
         "rows",
@@ -716,8 +866,14 @@ def _validate_approval_snapshot(value: Mapping[str, Any]) -> dict[str, Any]:
         "sourceSnapshotDigest",
         "sourceContentDigest",
         "digestVerifierDigest",
+        "verifierConfigurationDigest",
     ):
         _require_digest(value[name])
+    isolation_mode = value["verifierIsolationMode"]
+    if isolation_mode not in {"macos-production", "insecure-test-only"} or value[
+        "networkIsolationEnforced"
+    ] is not (isolation_mode == "macos-production"):
+        raise ApprovalResolutionError("Legacy approval isolation claim is invalid")
     _require_utc_timestamp(value["frozenAt"])
     rows = value["rows"]
     if not isinstance(rows, list) or len(rows) > _MAX_APPROVAL_ROWS:
@@ -816,6 +972,16 @@ def _validate_recipe_verification(value: Mapping[str, Any]) -> dict[str, Any]:
         "computedDigest",
         "matches",
         "recipeContentDigest",
+        "sourceSnapshotDigest",
+        "sourceItemDigest",
+        "importRecordId",
+        "migrationWorkerOutputRecordId",
+        "derivationId",
+        "configurationDigest",
+        "producerDigests",
+        "verifierIsolationMode",
+        "networkIsolationEnforced",
+        "verificationAuthority",
         "verifierDigest",
         "verificationId",
     }
@@ -831,9 +997,52 @@ def _validate_recipe_verification(value: Mapping[str, Any]) -> dict[str, Any]:
         "declaredDigest",
         "computedDigest",
         "recipeContentDigest",
+        "sourceSnapshotDigest",
+        "sourceItemDigest",
+        "importRecordId",
+        "migrationWorkerOutputRecordId",
+        "derivationId",
+        "configurationDigest",
         "verifierDigest",
     ):
         _require_digest(value[name])
+    producers = value["producerDigests"]
+    if (
+        not isinstance(producers, list)
+        or not 1 <= len(producers) <= 4
+        or len(set(producers)) != len(producers)
+    ):
+        raise ApprovalResolutionError("Recipe verification producers are invalid")
+    for producer in producers:
+        _require_digest(producer)
+    isolation_mode = value["verifierIsolationMode"]
+    network_enforced = value["networkIsolationEnforced"]
+    expected_authority = (
+        "gateway-production"
+        if isolation_mode == "macos-production" and network_enforced is True
+        else "fixture-non-authoritative"
+    )
+    if (
+        isolation_mode not in {"macos-production", "insecure-test-only"}
+        or network_enforced is not (isolation_mode == "macos-production")
+        or value["verificationAuthority"] != expected_authority
+    ):
+        raise ApprovalResolutionError("Recipe verification isolation differs")
+    verifier_semantic = {
+        "sourceSnapshotDigest": value["sourceSnapshotDigest"],
+        "sourceItemDigest": value["sourceItemDigest"],
+        "importRecordId": value["importRecordId"],
+        "migrationWorkerOutputRecordId": value["migrationWorkerOutputRecordId"],
+        "derivationId": value["derivationId"],
+        "configurationDigest": value["configurationDigest"],
+        "producerDigests": producers,
+        "verifierIsolationMode": isolation_mode,
+        "networkIsolationEnforced": network_enforced,
+    }
+    if value["verifierDigest"] != domain_digest(
+        "tidy.migration-recipe-digest-verifier/v1", verifier_semantic
+    ):
+        raise ApprovalResolutionError("Recipe verifier evidence digest differs")
     if value["matches"] is not (value["declaredDigest"] == value["computedDigest"]):
         raise ApprovalResolutionError("Recipe verification match flag differs")
     expected = domain_digest("tidy.recipe-digest-verification/v1", semantic)
@@ -855,6 +1064,24 @@ def _strict_json(data: bytes) -> dict[str, Any]:
         ) from error
     if not isinstance(value, dict):
         raise ApprovalResolutionError("Approval snapshot must be an object")
+    pending: list[tuple[Any, int]] = [(value, 1)]
+    nodes = 0
+    while pending:
+        current, depth = pending.pop()
+        nodes += 1
+        if nodes > 1_000_000 or depth > 128:
+            raise ApprovalResolutionError(
+                "Approval snapshot exceeds its JSON complexity limit"
+            )
+        if isinstance(current, list):
+            pending.extend((entry, depth + 1) for entry in current)
+        elif isinstance(current, dict):
+            nodes += len(current)
+            if nodes > 1_000_000:
+                raise ApprovalResolutionError(
+                    "Approval snapshot exceeds its JSON complexity limit"
+                )
+            pending.extend((entry, depth + 1) for entry in current.values())
     return value
 
 
@@ -871,31 +1098,62 @@ def _reject_nonfinite(value: str) -> None:
     raise ValueError(f"Non-finite JSON constant {value}")
 
 
-@lru_cache(maxsize=1)
+def _read_resolver_source(path: Path) -> bytes:
+    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
+    try:
+        before = os.fstat(descriptor)
+        if not stat.S_ISREG(before.st_mode) or before.st_size > 16 * 1024 * 1024:
+            raise ApprovalResolutionError("Approval resolver source is not bounded")
+        chunks: list[bytes] = []
+        remaining = before.st_size
+        while remaining:
+            chunk = os.read(descriptor, min(1024 * 1024, remaining))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            remaining -= len(chunk)
+        after = os.fstat(descriptor)
+        if (
+            before.st_dev,
+            before.st_ino,
+            before.st_mode,
+            before.st_size,
+            before.st_mtime_ns,
+        ) != (
+            after.st_dev,
+            after.st_ino,
+            after.st_mode,
+            after.st_size,
+            after.st_mtime_ns,
+        ) or remaining:
+            raise ApprovalResolutionError(
+                "Approval resolver source changed while reading"
+            )
+        return b"".join(chunks)
+    finally:
+        os.close(descriptor)
+
+
 def _resolver_source_digest() -> str:
     project = Path(__file__).parents[2]
-    paths = [project / "pyproject.toml", project / "uv.lock", Path(__file__)]
-    paths.extend(
-        sorted(
-            (project / "contracts/import/v1").glob("*approval*.schema.json"),
-            key=lambda path: path.name,
-        )
+    paths = (
+        project / "pyproject.toml",
+        project / "uv.lock",
+        Path(__file__),
+        project / "contracts/import/v1/approval-domain-reconciliation.schema.json",
+        project / "contracts/import/v1/approval-resolution.schema.json",
+        project / "contracts/import/v1/legacy-approval-snapshot.schema.json",
+        project / "contracts/import/v1/reviewer-identity.schema.json",
+        project / "contracts/import/v1/recipe-digest-verification.schema.json",
+        project / "contracts/import/v1/digest-record-vectors.schema.json",
+        project / "fixtures/migration/digest-record-v1.json",
     )
-    paths.extend(
-        sorted(
-            (project / "contracts/import/v1").glob("*reviewer*.schema.json"),
-            key=lambda path: path.name,
-        )
-    )
-    paths.append(project / "contracts/import/v1/recipe-digest-verification.schema.json")
-    paths.append(project / "contracts/import/v1/digest-record-vectors.schema.json")
-    paths.append(project / "fixtures/migration/digest-record-v1.json")
 
     def capture() -> list[dict[str, str]]:
         return [
             {
                 "relativePath": path.relative_to(project).as_posix(),
-                "contentDigest": sha256_digest(path.read_bytes()),
+                "contentDigest": sha256_digest(_read_resolver_source(path)),
             }
             for path in paths
         ]

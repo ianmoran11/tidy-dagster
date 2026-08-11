@@ -9,6 +9,7 @@ from jsonschema.exceptions import ValidationError
 from jsonschema.validators import validator_for
 from referencing import Registry, Resource
 
+from tidy_orchestrator.artifacts import domain_digest, sha256_digest
 from tidy_orchestrator.legacy_approvals import (
     ApprovalResolutionError,
     ApprovalTargetCandidate,
@@ -18,7 +19,10 @@ from tidy_orchestrator.legacy_approvals import (
     create_reviewer_identity,
     resolve_approval,
 )
-from tidy_orchestrator.migration_import import MigrationRepository
+from tidy_orchestrator.migration_import import (
+    CommittedFilesystemBlobStore,
+    MigrationRepository,
+)
 
 PROJECT = Path(__file__).parents[1]
 CONTRACTS = PROJECT / "contracts/import/v1"
@@ -28,6 +32,16 @@ ACTOR = "phase-b-fixture-curator"
 
 def _digest(character: str) -> str:
     return f"sha256:{character * 64}"
+
+
+def _verifier_provenance(*, production: bool = True) -> dict:
+    return {
+        "verifier_configuration_digest": _digest("5"),
+        "verifier_isolation_mode": (
+            "macos-production" if production else "insecure-test-only"
+        ),
+        "network_isolation_enforced": production,
+    }
 
 
 def _reviewer():
@@ -58,13 +72,125 @@ def _candidate(
     )
 
 
-def _verification(*, declared: str = "b", computed: str = "b"):
+def _verification(*, declared: str = "b", computed: str = "b", production: bool = True):
     return create_recipe_digest_verification(
         declared_digest=_digest(declared),
         computed_digest=_digest(computed),
         recipe_content_digest=_digest("c"),
-        verifier_digest=_digest("d"),
+        source_snapshot_digest=_digest("3"),
+        source_item_digest=_digest("6"),
+        import_record_id=_digest("7"),
+        migration_worker_output_record_id=_digest("8"),
+        derivation_id=_digest("9"),
+        configuration_digest=_digest("a"),
+        producer_digests=[_digest("d"), _digest("e")],
+        verifier_isolation_mode=(
+            "macos-production" if production else "insecure-test-only"
+        ),
+        network_isolation_enforced=production,
     )
+
+
+def _persisted_production_verification(
+    tmp_path: Path, metadata: MigrationRepository
+) -> tuple[dict, CommittedFilesystemBlobStore]:
+    blobs = CommittedFilesystemBlobStore(tmp_path / "approval-worker-blobs")
+    artifact_bytes = b"{}"
+    output_digest = sha256_digest(artifact_bytes)
+    blobs.publish_bytes(
+        artifact_bytes,
+        expected_digest=output_digest,
+        expected_length=len(artifact_bytes),
+    )
+    derivation_semantic = {
+        "operation": "parse-recipe-v01",
+        "contractVersion": "tidy.migration-worker/v1",
+        "orderedInputDigests": [_digest("c")],
+        "configurationDigest": _digest("a"),
+        "producerDigests": [_digest("d"), _digest("e")],
+        "orderedOutputDigests": [output_digest],
+    }
+    derivation = {
+        "schemaVersion": "tidy.migration-worker-derivation/v1",
+        "derivationId": domain_digest("tidy.derivation/v1", derivation_semantic),
+        **derivation_semantic,
+    }
+    reproduction_key = domain_digest(
+        "tidy.reproduction-key/v1",
+        {
+            key: derivation_semantic[key]
+            for key in (
+                "operation",
+                "contractVersion",
+                "orderedInputDigests",
+                "configurationDigest",
+                "producerDigests",
+            )
+        },
+    )
+    fingerprint = domain_digest(
+        "tidy.output-set/v1", [["recipe-revision.json", output_digest]]
+    )
+    output_semantic = {
+        "schemaVersion": "tidy.migration-worker-output/v1",
+        "operation": "parse-recipe-v01",
+        "contractVersion": "tidy.migration-worker/v1",
+        "source": {
+            "sourceSnapshotDigest": _digest("3"),
+            "sourceItemDigest": _digest("6"),
+            "importRecordId": _digest("7"),
+            "relativePath": "candidate.recipe.json",
+            "sourceContentDigest": _digest("c"),
+            "byteLength": 2,
+        },
+        "configurationDigest": _digest("a"),
+        "producerDigest": _digest("d"),
+        "derivationId": derivation["derivationId"],
+        "reproductionKey": reproduction_key,
+        "outputFingerprint": fingerprint,
+        "outputIndex": 0,
+        "name": "recipe-revision",
+        "relativePath": "recipe-revision.json",
+        "artifactSchemaVersion": "tidy.migration-recipe-revision/v1",
+        "contentDigest": output_digest,
+        "byteLength": len(artifact_bytes),
+        "storageUri": blobs.storage_uri(output_digest),
+        "isolationMode": "macos-production",
+        "networkIsolationEnforced": True,
+        "active": False,
+        "trainingEligible": False,
+    }
+    output = {
+        **output_semantic,
+        "recordId": domain_digest("tidy.migration-worker-output/v1", output_semantic),
+    }
+    metadata.publish_migration_worker_bundle(
+        outputs=[output],
+        derivation=derivation,
+        reproduction_key=reproduction_key,
+        output_fingerprint=fingerprint,
+        blob_store=blobs,
+    )
+    verification = create_recipe_digest_verification(
+        declared_digest=_digest("b"),
+        computed_digest=_digest("b"),
+        recipe_content_digest=_digest("c"),
+        source_snapshot_digest=_digest("3"),
+        source_item_digest=_digest("6"),
+        import_record_id=_digest("7"),
+        migration_worker_output_record_id=output["recordId"],
+        derivation_id=derivation["derivationId"],
+        configuration_digest=_digest("a"),
+        producer_digests=[_digest("d"), _digest("e")],
+        verifier_isolation_mode="macos-production",
+        network_isolation_enforced=True,
+    )
+    metadata.add_typed_record(
+        record_id=verification["verificationId"],
+        record_type=verification["schemaVersion"],
+        record=verification,
+    )
+    return verification, blobs
 
 
 def _rich_row(**updates):
@@ -80,17 +206,26 @@ def _rich_row(**updates):
     return value
 
 
-def _snapshot_for_row(row):
+def _snapshot_for_row(row, *, production: bool = True):
     return create_legacy_approval_snapshot(
         source_bytes=json.dumps({"version": 1, "approvals": [row]}).encode(),
         source_record_digests=[_digest("f")],
         frozen_at=FIXED_TIME,
         source_snapshot_digest=_digest("3"),
         digest_verifier_digest=_digest("4"),
+        **_verifier_provenance(production=production),
     )
 
 
-def _resolve(row, *, candidates=None, verification=None, registry=None):
+def _resolve(
+    row,
+    *,
+    candidates=None,
+    verification=None,
+    registry=None,
+    metadata=None,
+    blobs=None,
+):
     return resolve_approval(
         approval_snapshot=_snapshot_for_row(row),
         source_row_index=0,
@@ -107,6 +242,8 @@ def _resolve(row, *, candidates=None, verification=None, registry=None):
         ),
         recorded_at=FIXED_TIME,
         actor=ACTOR,
+        metadata=metadata,
+        blobs=blobs,
     )
 
 
@@ -135,14 +272,42 @@ def test_resolved_attributable_approval_requires_every_exact_binding(
 ) -> None:
     row = _rich_row()
     reviewer = _reviewer()
-    verification = _verification()
-    resolution = _resolve(row, verification=verification)
+    metadata = MigrationRepository(tmp_path / "approval-authority")
+    verification, blobs = _persisted_production_verification(tmp_path, metadata)
+    metadata.add_typed_record(
+        record_id=reviewer["reviewerId"],
+        record_type=reviewer["schemaVersion"],
+        record=reviewer,
+    )
+    resolution = _resolve(
+        row,
+        verification=verification,
+        metadata=metadata,
+        blobs=blobs,
+    )
     assert resolution["targetStatus"] == "resolved"
     assert resolution["reviewerStatus"] == "resolved"
     assert resolution["reviewerId"] == reviewer["reviewerId"]
     assert resolution["authorityState"] == "human_approved"
     assert resolution["conflictReasons"] == []
     assert resolution["incompleteReasons"] == []
+    unpersisted = _resolve(row, verification=verification)
+    assert unpersisted["authorityState"] == "incomplete_evidence"
+    assert {
+        "RECIPE_VERIFICATION_NOT_PERSISTED",
+        "REVIEWER_IDENTITY_NOT_PERSISTED",
+    }.issubset(unpersisted["incompleteReasons"])
+    insecure = resolve_approval(
+        approval_snapshot=_snapshot_for_row(row, production=False),
+        source_row_index=0,
+        candidates=[_candidate(recipe=_digest("b"))],
+        reviewer_registry=_registry(),
+        recipe_verification=verification,
+        recorded_at=FIXED_TIME,
+        actor=ACTOR,
+    )
+    assert insecure["authorityState"] == "inactive"
+    assert "DIGEST_VERIFIER_ISOLATION_INSUFFICIENT" in insecure["incompleteReasons"]
     historical = _resolve(_rich_row(originalRecipeDigest=_digest("7")))
     assert historical["declaredRecipeDigest"] == _digest("b")
     assert historical["originalRecipeDigest"] == _digest("7")
@@ -165,6 +330,7 @@ def test_resolved_attributable_approval_requires_every_exact_binding(
         frozen_at=FIXED_TIME,
         source_snapshot_digest=_digest("3"),
         digest_verifier_digest=_digest("4"),
+        **_verifier_provenance(),
     )
     assert snapshot["historyCompleteness"] == "point-in-time-current-state-only"
     assert snapshot["digestAlgorithm"] == "tidycell-digest-record-v1"
@@ -315,6 +481,7 @@ def test_snapshot_and_reviewer_registry_fail_closed() -> None:
             frozen_at=FIXED_TIME,
             source_snapshot_digest=_digest("3"),
             digest_verifier_digest=_digest("4"),
+            **_verifier_provenance(),
         )
     with pytest.raises(ApprovalResolutionError, match="Every approval row"):
         create_legacy_approval_snapshot(
@@ -323,6 +490,7 @@ def test_snapshot_and_reviewer_registry_fail_closed() -> None:
             frozen_at=FIXED_TIME,
             source_snapshot_digest=_digest("3"),
             digest_verifier_digest=_digest("4"),
+            **_verifier_provenance(),
         )
 
     first = create_reviewer_identity(

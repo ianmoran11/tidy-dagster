@@ -12,6 +12,9 @@
     "digestAlgorithm",
     "digestSourceDigest",
     "digestVerifierDigest",
+    "verifierConfigurationDigest",
+    "verifierIsolationMode",
+    "networkIsolationEnforced",
     "frozenAt",
     "historyCompleteness",
     "rows",
@@ -27,6 +30,11 @@
       "const": "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
     },
     "digestVerifierDigest": { "$ref": "#/$defs/digest" },
+    "verifierConfigurationDigest": { "$ref": "#/$defs/digest" },
+    "verifierIsolationMode": {
+      "enum": ["macos-production", "insecure-test-only"]
+    },
+    "networkIsolationEnforced": { "type": "boolean" },
     "frozenAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
     "historyCompleteness": { "const": "point-in-time-current-state-only" },
     "rows": {
@@ -64,6 +72,22 @@
     },
     "approvalSnapshotId": { "$ref": "#/$defs/digest" }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "verifierIsolationMode": { "const": "macos-production" }
+        },
+        "required": ["verifierIsolationMode"]
+      },
+      "then": {
+        "properties": { "networkIsolationEnforced": { "const": true } }
+      },
+      "else": {
+        "properties": { "networkIsolationEnforced": { "const": false } }
+      }
+    }
+  ],
   "$defs": {
     "digest": {
       "type": "string",

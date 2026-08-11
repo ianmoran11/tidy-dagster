@@ -7,9 +7,9 @@ accepted production `tidy.worker/v1` protocol.
 ## Operations
 
 - `health` and `capabilities` require no inputs.
-- `digest-legacy-approval-registry-v1` validates a bounded point-in-time legacy
-  approval array and emits the exact Phase-A-pinned TidyCell `digestRecord` for
-  every row.
+- `digest-legacy-approval-registry-v1` validates the exact bounded
+  point-in-time version-1 `{version, approvals}` legacy registry and emits the
+  Phase-A-pinned TidyCell `digestRecord` for every approval row.
 - `parse-recipe-v01` validates and normalizes one RecipeV01 document, computes
   its historical TidyCell digest, and emits an inactive, training-ineligible
   schema-valid revision artifact. An optional declared digest is compared but
@@ -22,8 +22,16 @@ enforces byte/JSON depth/node/record limits, and atomically publishes only
 declared output files.
 
 The worker has no provider, model, repository, approval, pointer, or network
-capability. Python remains responsible for authorization, sandbox launch,
-producer-bundle identity, durable custody, and reconciliation.
+capability. `MigrationWorkerGateway` in Python now performs exact imported-CAS
+source authorization, process-group and resource controls, production macOS
+Seatbelt launch, worker bundle/source/vector/contract/runtime identity, strict
+output-schema and JSON-complexity verification, independent declared-recipe-
+digest checking, durable output CAS publication, and one-transaction custody,
+derivation, and reproduction publication. The effective Seatbelt profile is
+digest-bound and uses narrow process/Mach allowlists. Insecure test mode is
+explicitly recorded as non-isolating in both worker custody and any derived
+approval snapshot. Neither mode can activate a recipe or grant training
+authority.
 
 ## Contracts
 

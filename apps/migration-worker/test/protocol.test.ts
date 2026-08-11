@@ -209,7 +209,7 @@ describe("migration-only worker protocol", () => {
     const input = await writeInput(
       root.input,
       "approvals.json",
-      rows,
+      { version: 1, approvals: rows },
       "registry",
     );
     const request = baseRequest("digest-legacy-approval-registry-v1");
@@ -267,7 +267,10 @@ describe("migration-only worker protocol", () => {
     const registry = await writeInput(
       registryRoot.input,
       "registry.json",
-      [{ assetId: "asset", sheetName: "Sheet" }],
+      {
+        version: 1,
+        approvals: [{ assetId: "asset", sheetName: "Sheet" }],
+      },
       "registry",
     );
     const registryRequest = baseRequest("digest-legacy-approval-registry-v1");
@@ -283,6 +286,23 @@ describe("migration-only worker protocol", () => {
     expect(wrongName).toMatchObject({
       ok: false,
       error: { code: "INVALID_OPERATION_INPUTS" },
+    });
+
+    const arrayRoot = await fixtureRoots();
+    const arrayInput = await writeInput(
+      arrayRoot.input,
+      "registry.json",
+      [{ assetId: "asset", sheetName: "Sheet" }],
+      "registry",
+    );
+    const arrayRequest = baseRequest("digest-legacy-approval-registry-v1");
+    arrayRequest.inputs = [arrayInput];
+    arrayRequest.parameters = { source: source("approvals.json") };
+    expect(
+      await runMigrationWorker(arrayRequest, arrayRoot.input, arrayRoot.output),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "INVALID_APPROVAL_REGISTRY" },
     });
   });
 
@@ -323,10 +343,13 @@ describe("migration-only worker protocol", () => {
     const recordInput = await writeInput(
       recordRoot.input,
       "registry.json",
-      [
-        { assetId: "one", sheetName: "S" },
-        { assetId: "two", sheetName: "S" },
-      ],
+      {
+        version: 1,
+        approvals: [
+          { assetId: "one", sheetName: "S" },
+          { assetId: "two", sheetName: "S" },
+        ],
+      },
       "registry",
     );
     const recordRequest = baseRequest("digest-legacy-approval-registry-v1");

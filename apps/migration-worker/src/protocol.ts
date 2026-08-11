@@ -403,19 +403,24 @@ function validateApprovalRegistry(
   value: unknown,
   maxRecords: number,
 ): Array<Record<string, unknown>> {
-  if (!Array.isArray(value))
+  if (
+    !isRecord(value) ||
+    Object.keys(value).sort().join(",") !== "approvals,version" ||
+    value.version !== 1 ||
+    !Array.isArray(value.approvals)
+  )
     throw new MigrationProtocolError(
       "INVALID_APPROVAL_REGISTRY",
       "parse",
-      "Approval registry must be a JSON array.",
+      "Approval registry must be the exact version-1 {version, approvals} object.",
     );
-  if (value.length > maxRecords)
+  if (value.approvals.length > maxRecords)
     throw new MigrationProtocolError(
       "RECORD_LIMIT_EXCEEDED",
       "limit",
       `Approval registry exceeds the declared ${maxRecords}-record limit.`,
     );
-  return value.map((entry, index) => {
+  return value.approvals.map((entry, index) => {
     if (!isRecord(entry))
       throw new MigrationProtocolError(
         "INVALID_APPROVAL_ROW",

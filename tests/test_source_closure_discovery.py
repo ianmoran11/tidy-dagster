@@ -11,13 +11,15 @@ import pytest
 from jsonschema.validators import validator_for
 from referencing import Registry, Resource
 
-from tidy_orchestrator.artifacts import domain_digest, sha256_digest
+from tidy_orchestrator.artifacts import domain_digest
 from tidy_orchestrator.source_closure_cli import main as source_closure_main
 from tidy_orchestrator.source_closure_discovery import (
     SourceClosureDiscoveryError,
     SourceClosureSourceMismatch,
+    _producer_source_digest,
     canonical_manifest_digest,
     discover_source_closure,
+    load_discovery_request,
     verify_source_closure,
 )
 from tidy_orchestrator.source_export import (
@@ -299,6 +301,20 @@ def test_unresolved_relative_import_and_bounds_fail_closed(tmp_path: Path) -> No
         discover_source_closure(bounded)
 
 
+def test_discovery_json_reader_rejects_duplicates_nonfinite_and_depth(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "request.json"
+    for data, message in (
+        (b'{"schemaVersion":"a","schemaVersion":"b"}', "strict JSON"),
+        (b'{"value":NaN}', "strict JSON"),
+        (b"[" * 200 + b"0" + b"]" * 200, "JSON depth limit"),
+    ):
+        path.write_bytes(data)
+        with pytest.raises(SourceClosureDiscoveryError, match=message):
+            load_discovery_request(path)
+
+
 def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> None:
     manifest = json.loads(CHECKED_MANIFEST.read_text())
     review = json.loads(CHECKED_REVIEW.read_text())
@@ -308,16 +324,14 @@ def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> 
     validator_for(review_schema)(review_schema).validate(review)
 
     assert canonical_manifest_digest(manifest) == (
-        "sha256:9dc3e2e8ef4d464b82ac353a4dabd31981e7a3f4a43b0dd4ea9ef9f627bc4bee"
+        "sha256:5ebbc33af007da70bbda676eff79d40f4c08decb38d713c0083003ff01154c3f"
     )
     assert manifest["totals"] == {
         "sourceCount": 2,
         "itemCount": 138,
         "byteLength": 4_233_461,
     }
-    assert manifest["producer"]["sourceDigest"] == sha256_digest(
-        (PROJECT / "src/tidy_orchestrator/source_closure_discovery.py").read_bytes()
-    )
+    assert manifest["producer"]["sourceDigest"] == _producer_source_digest()
     assert review["closureManifestDigest"] == manifest["manifestDigest"]
     semantic_review = dict(review)
     identity = semantic_review.pop("reviewDigest")

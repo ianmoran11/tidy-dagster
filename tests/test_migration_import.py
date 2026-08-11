@@ -354,6 +354,9 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
             "sha256:d4745ceb965818e2dd15c924193b7592199a75a0b781d4427aabe3e72537c6dd"
         ],
         digest_verifier_digest=digest_verifier,
+        verifier_configuration_digest="sha256:" + "6" * 64,
+        verifier_isolation_mode="insecure-test-only",
+        network_isolation_enforced=False,
         frozen_at=snapshot["frozenAt"],
         metadata=metadata,
         blobs=blobs,
@@ -384,7 +387,7 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
     )
     assert approval_resolution["targetStatus"] == "resolved"
     assert approval_resolution["reviewerStatus"] == "missing"
-    assert approval_resolution["authorityState"] == "legacy_approved_unattributed"
+    assert approval_resolution["authorityState"] == "inactive"
     metadata.add_typed_record(
         record_id=approval_resolution["resolutionId"],
         record_type=approval_resolution["schemaVersion"],
@@ -422,9 +425,9 @@ def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> No
     }
     assert approval_domain_report["authorityStateCounts"] == {
         "human_approved": 0,
-        "legacy_approved_unattributed": 1,
+        "legacy_approved_unattributed": 0,
         "incomplete_evidence": 0,
-        "inactive": 0,
+        "inactive": 1,
     }
     assert approval_domain_report["activationAuthorized"] is False
     assert approval_domain_report["trainingAuthorized"] is False
@@ -697,14 +700,17 @@ def test_metadata_blob_and_source_roots_must_not_overlap(tmp_path: Path) -> None
         )
 
 
-def test_v1_metadata_repository_migrates_to_immutable_typed_records(
+def test_v1_metadata_repository_migrates_to_current_authority_tables(
     tmp_path: Path,
 ) -> None:
     root = tmp_path / "metadata"
     repository = MigrationRepository(root)
     with sqlite3.connect(repository.database) as connection:
+        connection.execute("DROP TABLE migration_worker_reproductions")
+        connection.execute("DROP TABLE migration_worker_outputs")
+        connection.execute("DROP TABLE migration_worker_derivations")
         connection.execute("DROP TABLE typed_records")
-        connection.execute("DELETE FROM schema_migrations WHERE version=2")
+        connection.execute("DELETE FROM schema_migrations WHERE version >= 2")
         connection.commit()
 
     reopened = MigrationRepository(root)
@@ -732,7 +738,77 @@ def test_v1_metadata_repository_migrates_to_immutable_typed_records(
                 "SELECT version FROM schema_migrations ORDER BY version"
             )
         ]
-    assert versions == [1, 2]
+    assert versions == [1, 2, 3]
+
+
+def test_v2_metadata_repository_migrates_without_losing_typed_records(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "metadata-v2"
+    repository = MigrationRepository(root)
+    record_id = "sha256:" + "8" * 64
+    repository.add_typed_record(
+        record_id=record_id,
+        record_type="fixture-record",
+        record={
+            "schemaVersion": "fixture-record",
+            "recordId": record_id,
+            "fixture": "preserved",
+        },
+    )
+    with sqlite3.connect(repository.database) as connection:
+        connection.execute("DROP TABLE migration_worker_reproductions")
+        connection.execute("DROP TABLE migration_worker_outputs")
+        connection.execute("DROP TABLE migration_worker_derivations")
+        connection.execute("DELETE FROM schema_migrations WHERE version=3")
+        connection.commit()
+
+    reopened = MigrationRepository(root)
+    assert reopened.list_typed_records() == (
+        {
+            "fixture": "preserved",
+            "recordId": record_id,
+            "schemaVersion": "fixture-record",
+        },
+    )
+    with sqlite3.connect(reopened.database) as connection:
+        versions = [
+            row[0]
+            for row in connection.execute(
+                "SELECT version FROM schema_migrations ORDER BY version"
+            )
+        ]
+    assert versions == [1, 2, 3]
+
+
+def test_declared_current_schema_with_missing_table_fails_closed(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "metadata-corrupt"
+    repository = MigrationRepository(root)
+    with sqlite3.connect(repository.database) as connection:
+        connection.execute("DROP TABLE migration_worker_reproductions")
+        connection.commit()
+    with pytest.raises(MigrationImportError, match="incomplete or corrupt"):
+        MigrationRepository(root)
+
+
+def test_declared_current_schema_without_worker_uniqueness_fails_closed(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "metadata-weak-constraint"
+    repository = MigrationRepository(root)
+    with sqlite3.connect(repository.database) as connection:
+        connection.execute("DROP TABLE migration_worker_reproductions")
+        connection.execute(
+            "CREATE TABLE migration_worker_reproductions ("
+            "reproduction_key TEXT PRIMARY KEY, "
+            "output_fingerprint TEXT NOT NULL, derivation_id TEXT NOT NULL "
+            "REFERENCES migration_worker_derivations(derivation_id))"
+        )
+        connection.commit()
+    with pytest.raises(MigrationImportError, match="uniqueness constraints"):
+        MigrationRepository(root)
 
 
 @pytest.mark.parametrize(
