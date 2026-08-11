@@ -2,7 +2,7 @@
 
 - **Status:** Accepted staged baseline; M0-M4 implemented and the post-M4 planning baseline separately linked below
 - **Prepared:** 2026-08-09
-- **Accepted architecture decisions:** [ADR 0001](decisions/0001-staged-standalone-reimplementation.md), [ADR 0002](decisions/0002-deliberate-polyglot-boundaries.md), [ADR 0003](decisions/0003-canonical-migration-and-automated-recipe-acceptance.md)
+- **Accepted architecture decisions:** [ADR 0001](decisions/0001-staged-standalone-reimplementation.md), [ADR 0002](decisions/0002-deliberate-polyglot-boundaries.md), [ADR 0003](decisions/0003-canonical-migration-and-automated-recipe-acceptance.md), and [ADR 0005](decisions/0005-bounded-autonomy-and-canary-controls.md)
 - **Implementation authorization:** M0-M4 are implemented. The user accepted the post-M4 direction and authorized Phase A provider-free inventory work on 2026-08-09. Later copying, porting, activation, and the maximum-USD-25 pilot remain bound to the phase gates and authorization table in the post-M4 plan; semantic adoption, publication, calibration, and Sembla remain unauthorized.
 
 ## 1. Executive recommendation

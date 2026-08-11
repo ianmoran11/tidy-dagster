@@ -3,6 +3,7 @@
 - Status: accepted planning baseline; implementation remains phased and gate-bound
 - Date: 2026-08-09
 - Architectural decision: `docs/decisions/0003-canonical-migration-and-automated-recipe-acceptance.md`
+- Later operating amendment: `docs/decisions/0005-bounded-autonomy-and-canary-controls.md`
 - Baseline implementation: M0-M4 at or after `353da0573f062559bc02c75680a48290ae29b31a`
 - TidyCell source baseline observed during planning:
   - commit `1be6c995fa931e9860468e40490433161b0121cb`;

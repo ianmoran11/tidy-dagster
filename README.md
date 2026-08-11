@@ -36,6 +36,7 @@ Dagster is a replaceable control-plane adapter. It must not become the sole stor
 - [ADR 0002 — deliberate polyglot boundaries](docs/decisions/0002-deliberate-polyglot-boundaries.md)
 - [ADR 0003 — canonical migration and automated recipe acceptance](docs/decisions/0003-canonical-migration-and-automated-recipe-acceptance.md)
 - [ADR 0004 — waive Phase A review for dry Phase B work](docs/decisions/0004-waive-phase-a-review-for-dry-phase-b-work.md)
+- [ADR 0005 — bounded autonomy and canary controls](docs/decisions/0005-bounded-autonomy-and-canary-controls.md)
 
 ## Intended end-to-end path
 
