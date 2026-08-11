@@ -160,6 +160,8 @@ def test_checked_in_policy_is_strict_and_loadable() -> None:
         "nas-commit.schema.json": "NasSnapshotCommitV1",
         "policy.schema.json": "tidy.source-export-policy/v1",
         "snapshot.schema.json": "TidyCellExportSnapshotV1",
+        "source-closure-discovery.schema.json": "SourceClosureDiscoveryV1",
+        "source-closure-review.schema.json": "SourceClosureSelfReviewV1",
         "source-code-snapshot.schema.json": "SourceCodeExportSnapshotV1",
     }
     assert {path.name for path in POLICY.parent.glob("*.schema.json")} == set(

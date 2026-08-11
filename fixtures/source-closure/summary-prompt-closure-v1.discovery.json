@@ -1,0 +1,1540 @@
+{
+  "closureId": "tidycell-tidybank-summary-prompt-closure-v1",
+  "completionStatus": "complete-no-copy",
+  "frozenAt": "2026-08-11T13:16:59Z",
+  "manifestDigest": "sha256:9dc3e2e8ef4d464b82ac353a4dabd31981e7a3f4a43b0dd4ea9ef9f627bc4bee",
+  "producer": {
+    "canonicalizationAlgorithm": "tidy-python-sorted-json-v1",
+    "sourceDigest": "sha256:30a4cd72b19a95e32286fde7c93da8d32b45df76f61963b70270eacf4a51a579",
+    "version": "tidy-source-closure-discovery/v1"
+  },
+  "schemaVersion": "tidy.source-closure-discovery/v1",
+  "selectionPolicy": {
+    "algorithm": "literal-typescript-import-closure-v1",
+    "runtimeSiblingDependencyAllowed": false,
+    "sourceBytesCopied": false,
+    "unresolvedRelativeImportCount": 0
+  },
+  "sources": [
+    {
+      "authority": {
+        "gitHead": "c26e7f67091c414b411221af461b8ea3974c6320",
+        "gitTree": "6b73f893f0d1a98432251f23cbdaab435ba8dacc",
+        "phaseASnapshotDigest": null,
+        "selectedBytesMatchAuthority": true,
+        "trackedDirty": null,
+        "trackedDirtyDigest": null
+      },
+      "entrypoints": [
+        {
+          "relativePath": "src/lib/summary/buildSheetSummary.ts",
+          "role": "source"
+        }
+      ],
+      "externalImports": [],
+      "itemCount": 12,
+      "itemManifestDigest": "sha256:36a3b5be95f0f09e1ad828a05344bf43085f0b64a9aeb454480ef918faa350af",
+      "items": [
+        {
+          "byteLength": 1078,
+          "contentDigest": "sha256:f0c38e43895b9f54b60d367ae39f48c275b0f59627e7c61073ce4cb11533cf54",
+          "gitBlobId": "103c7449912d7dc1ffe8515b25c4a8e5d773a4b1",
+          "phaseADisposition": null,
+          "relativePath": "LICENSE",
+          "role": "license",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 457102,
+          "contentDigest": "sha256:2e8cf7809a08a227974acb1a905716e09e090f01011007f71a91455e806767bc",
+          "gitBlobId": "9da8bbb4966d2574948b7612e527dfadf4118d8d",
+          "phaseADisposition": null,
+          "relativePath": "package-lock.json",
+          "role": "lockfile",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 8468,
+          "contentDigest": "sha256:94d895dca6c567e428052eb2aa293540d7ca3f245ff917b7f1f795cfbad450b1",
+          "gitBlobId": "73fe8b2489e010cde1f2a07e1f723836c1830df1",
+          "phaseADisposition": null,
+          "relativePath": "package.json",
+          "role": "manifest",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 8647,
+          "contentDigest": "sha256:a8ab8614566a8d5cb5e0f263a8deee9b7d778f1af04c11a8c6465dd7536eb7a5",
+          "gitBlobId": "21ebe223f3538318c54d13a8635fa670feee003e",
+          "phaseADisposition": null,
+          "relativePath": "src/lib/address.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 5574,
+          "contentDigest": "sha256:180addaaf260acfc3accfd43d42e09d6eda27af0456a8d5e28243941cf2b8663",
+          "gitBlobId": "fad06f04db8ee4f7f7fb2a5bd5d38423132fa78a",
+          "phaseADisposition": null,
+          "relativePath": "src/lib/recipe/decomposeSelector.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 34830,
+          "contentDigest": "sha256:b7b3d3a0c399ed30a895ec1707112ebe7e0a5fa21a632d198bf120780a4adc3d",
+          "gitBlobId": "46ff3a1ac8c58d6e842b95b18dc6e15428c6e76a",
+          "phaseADisposition": null,
+          "relativePath": "src/lib/recipe/detectCandidateBlocks.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1422,
+          "contentDigest": "sha256:35a326879cff0e93afe6537bd0e523613eeaa7099c563f66c0bc99eb544bed7b",
+          "gitBlobId": "c02ae6eec6221a1e2ca5798bd6ffac5bd2e3d9e3",
+          "phaseADisposition": null,
+          "relativePath": "src/lib/recipe/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2838,
+          "contentDigest": "sha256:b671c5f9839d06d2c3fad9aced49af96a9e14c164e3aa3e79a7e193c821d4ec3",
+          "gitBlobId": "e211bc9b9300d36cb7c239001ee3e4b4f4bd8367",
+          "phaseADisposition": null,
+          "relativePath": "src/lib/summary/buildSheetSummary.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 177,
+          "contentDigest": "sha256:230ecea5e770ec02c57dff2783e6f0cc1bad4b144bb88be60e38497ac84d6d5a",
+          "gitBlobId": "188a12957e5c2af418cb1e9663e2a19d1f6d1743",
+          "phaseADisposition": null,
+          "relativePath": "src/lib/workbook/gridLimits.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1944,
+          "contentDigest": "sha256:c2c2f7f8635ed30e694567d897d947abb8861d87277ea57dc4b372cc11c7e337",
+          "gitBlobId": "8ceb057187a5b3618b49f9e9240fb6f29ce30465",
+          "phaseADisposition": null,
+          "relativePath": "src/lib/workbook/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 473,
+          "contentDigest": "sha256:4dd1208b1292b52a4238fc5c7fc03c3c7ab0fa78c6324a9b83c85e47012b93c2",
+          "gitBlobId": "94f7249d95d049c2e8a29599608720053244a237",
+          "phaseADisposition": null,
+          "relativePath": "tsconfig.json",
+          "role": "manifest",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1546,
+          "contentDigest": "sha256:8204a4981a5c9ef096d9f24cb140686440cf52101e819754de499643388ad301",
+          "gitBlobId": "a94378068620c7fd1c74156f6e463a00cab0b3ae",
+          "phaseADisposition": null,
+          "relativePath": "vitest.config.ts",
+          "role": "manifest",
+          "sourceMode": 33188
+        }
+      ],
+      "licenseDigest": "sha256:f0c38e43895b9f54b60d367ae39f48c275b0f59627e7c61073ce4cb11533cf54",
+      "lockfileDigests": [
+        "sha256:2e8cf7809a08a227974acb1a905716e09e090f01011007f71a91455e806767bc"
+      ],
+      "readMode": "git-object",
+      "sourceRootId": "tidybank-c26e7f67091c414b411221af461b8ea3974c6320",
+      "sourceSystem": "tidybank",
+      "totalBytes": 524099
+    },
+    {
+      "authority": {
+        "gitHead": "1be6c995fa931e9860468e40490433161b0121cb",
+        "gitTree": "96a76a1cbc6f2da3facd31d7cdae5b05926361d3",
+        "phaseASnapshotDigest": "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d",
+        "selectedBytesMatchAuthority": true,
+        "trackedDirty": true,
+        "trackedDirtyDigest": "sha256:3a919b64cd8e5c5d856d13eb4b2ac75c74455f5356ec7fa666b28159d21e3d8e"
+      },
+      "entrypoints": [
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/compact-context.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/compact-context.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/compiler-v02.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/compiler-v02.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/format-aware-region-catalog-v2.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/format-aware-region-catalog-v2.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/prompts-v13-role-aware-semantic-map.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/prompts-v13-role-aware-semantic-map.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/role-aware-region-catalog-v5.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/role-aware-region-catalog-v5.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/semantic-map-v1.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "scripts/experiments/cell-role-pipeline/semantic-map-v1.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "scripts/ml/ml-assisted-prompt.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "scripts/ml/ml-assisted-prompt.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "src/lib/llm/producedCsvSummary.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "src/lib/llm/producedCsvSummary.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "src/lib/llm/prompt.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "src/lib/llm/prompt.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "src/lib/recipe/detectCandidateBlocks.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "src/lib/summary/buildSheetSummary.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "src/lib/summary/buildSheetSummary.ts",
+          "role": "source"
+        },
+        {
+          "relativePath": "src/lib/summary/compressTableMarkdown.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "src/lib/workbook/parseWorkbook.test.ts",
+          "role": "fixture"
+        },
+        {
+          "relativePath": "src/lib/workbook/parseWorkbook.ts",
+          "role": "source"
+        }
+      ],
+      "externalImports": [
+        {
+          "importedBy": [
+            "src/lib/workbook/parseWorkbook.test.ts",
+            "src/lib/workbook/parseWorkbook.ts"
+          ],
+          "specifier": "exceljs"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/live-state.ts"
+          ],
+          "specifier": "node:async_hooks"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/compact-context.ts"
+          ],
+          "specifier": "node:buffer"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/provenance.ts"
+          ],
+          "specifier": "node:child_process"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/artifact-io.ts",
+            "scripts/experiments/cell-role-pipeline/live-state.ts"
+          ],
+          "specifier": "node:crypto"
+        },
+        {
+          "importedBy": [
+            "scripts/benchmark/manifest.ts",
+            "scripts/experiments/cell-role-pipeline/live-state.ts",
+            "src/lib/llm/examples.ts",
+            "src/lib/summary/buildSheetSummary.test.ts"
+          ],
+          "specifier": "node:fs"
+        },
+        {
+          "importedBy": [
+            "scripts/benchmark/utils/files.ts",
+            "scripts/experiments/cell-role-pipeline/artifact-io.ts",
+            "scripts/experiments/cell-role-pipeline/compact-context.test.ts",
+            "scripts/experiments/cell-role-pipeline/context-comparison.ts",
+            "scripts/experiments/cell-role-pipeline/live-state.ts",
+            "scripts/experiments/cell-role-pipeline/plan.ts",
+            "scripts/experiments/cell-role-pipeline/provenance.ts",
+            "scripts/harvest/path-safety.ts"
+          ],
+          "specifier": "node:fs/promises"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/live-state.ts"
+          ],
+          "specifier": "node:os"
+        },
+        {
+          "importedBy": [
+            "scripts/benchmark/manifest.ts",
+            "scripts/benchmark/utils/files.ts",
+            "scripts/experiments/cell-role-pipeline/artifact-io.ts",
+            "scripts/experiments/cell-role-pipeline/compact-context.test.ts",
+            "scripts/experiments/cell-role-pipeline/context-comparison.ts",
+            "scripts/experiments/cell-role-pipeline/evidence.ts",
+            "scripts/experiments/cell-role-pipeline/live-state.ts",
+            "scripts/experiments/cell-role-pipeline/plan.ts",
+            "scripts/experiments/cell-role-pipeline/provenance.ts",
+            "scripts/harvest/path-safety.ts",
+            "src/lib/llm/examples.ts",
+            "src/lib/summary/buildSheetSummary.test.ts"
+          ],
+          "specifier": "node:path"
+        },
+        {
+          "importedBy": ["scripts/benchmark/utils/files.ts"],
+          "specifier": "node:url"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/evidence-io.ts",
+            "scripts/experiments/cell-role-pipeline/provenance.ts"
+          ],
+          "specifier": "node:util"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/compact-context.test.ts",
+            "scripts/experiments/cell-role-pipeline/compiler-v02.test.ts",
+            "scripts/experiments/cell-role-pipeline/format-aware-region-catalog-v2.test.ts",
+            "scripts/experiments/cell-role-pipeline/prompts-v13-role-aware-semantic-map.test.ts",
+            "scripts/experiments/cell-role-pipeline/role-aware-region-catalog-v5.test.ts",
+            "scripts/experiments/cell-role-pipeline/semantic-map-v1.test.ts",
+            "scripts/ml/ml-assisted-prompt.test.ts",
+            "src/lib/llm/producedCsvSummary.test.ts",
+            "src/lib/llm/prompt.test.ts",
+            "src/lib/recipe/detectCandidateBlocks.test.ts",
+            "src/lib/summary/buildSheetSummary.test.ts",
+            "src/lib/summary/compressTableMarkdown.test.ts",
+            "src/lib/workbook/parseWorkbook.test.ts"
+          ],
+          "specifier": "vitest"
+        },
+        {
+          "importedBy": [
+            "scripts/experiments/cell-role-pipeline/compact-context.ts",
+            "scripts/experiments/cell-role-pipeline/evidence.ts",
+            "scripts/experiments/cell-role-pipeline/live-state.ts",
+            "scripts/experiments/cell-role-pipeline/plan.ts",
+            "scripts/experiments/cell-role-pipeline/role-aware-region-catalog-v5.ts",
+            "scripts/experiments/cell-role-pipeline/semantic-gold-schema.ts",
+            "scripts/experiments/cell-role-pipeline/semantic-map-v1.ts",
+            "src/lib/llm/promptVariants.ts",
+            "src/lib/ontology/publicationSchema.ts",
+            "src/lib/recipe/schema.ts",
+            "src/lib/recipe/types.ts"
+          ],
+          "specifier": "zod"
+        }
+      ],
+      "itemCount": 126,
+      "itemManifestDigest": "sha256:0d1009f7793844a12dbf56c0c8aa2e54dac6d12025d09bbc682c4951bc5e476f",
+      "items": [
+        {
+          "byteLength": 1066,
+          "contentDigest": "sha256:0eb7e3608ea8bf527dcccb3969a12609ca28d88db6de9de0e1eed38521de1715",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "LICENSE",
+          "role": "license",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 853,
+          "contentDigest": "sha256:38910e39d1717a976dc041f16e4bee6215bbbf00432f4cde7a68468aa2f6a4d2",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "fixtures/recipes/multi-table.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 471,
+          "contentDigest": "sha256:cd9bf8d3c144f46584513ccb9cf22d708c46e2e7905a9c5f2f6cf04c3fdd8359",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "fixtures/recipes/simple-crosstab.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 607,
+          "contentDigest": "sha256:4102ebd9c09f4e1ece41ae665e9099f301bb7f7ee71b2a2580dfcfe7e3818e25",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "fixtures/recipes/sparse-headers.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 7337,
+          "contentDigest": "sha256:e89b640950be64cabe90bc71c69d0a7ce664193873e483064165ecc2f8355164",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "fixtures/workbooks/multi-table.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 6558,
+          "contentDigest": "sha256:7453482b08710e46d97868aed317359fcd06303698f96e021c4a4d2f52ece85a",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "fixtures/workbooks/simple-crosstab.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 6610,
+          "contentDigest": "sha256:9cf91a692ba65c0488a8b078aa4d95206717db7e7dc12409909b347a3784d878",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "fixtures/workbooks/sparse-headers.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 29798,
+          "contentDigest": "sha256:768760e356818997f0c2cbe0510cae4cbf6dc94ec0dc008c7aa81a044d54635a",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_CORRECTIONS_2021_03_01_01.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3622,
+          "contentDigest": "sha256:bc6b875c1ad0c231115196339ec6b80d258a65c54c558262d47691eae3f8e0e2",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_CORRECTIONS_2021_03_01_01.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 12629,
+          "contentDigest": "sha256:192d1cb7a550729871793467e851b9e20ff3cfe6a3609847c14b25d631fba72c",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_CORRECTIONS_2021_03_01_01.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 29789,
+          "contentDigest": "sha256:00c6f22ed478773790eb640e18a48a6ab8f1529c054abbbb3277622d9ad4733c",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_CORRECTIONS_2024_09_01_01.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3622,
+          "contentDigest": "sha256:45fd6a4c8eb872b1a4716c4cd2d8458c4cd892df22ee3dd1d26280bb0b0cba97",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_CORRECTIONS_2024_09_01_01.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 10082,
+          "contentDigest": "sha256:5b9834a93125c319fa05324f8ef07dbd8429c5536a1aec6b8045657432ad8b6c",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_CORRECTIONS_2024_09_01_01.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 42674,
+          "contentDigest": "sha256:b7230a87eb91e12a8426435658c6294dd6e5b1f50bc474317dcbf971c5958892",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_DEFENDANTS_2022-23_00_01_05.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3321,
+          "contentDigest": "sha256:bd8a5e0e7adb346134e3784f64983bf01aa8af9ea12634f0cab1d31399eda982",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_DEFENDANTS_2022-23_00_01_05.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 13198,
+          "contentDigest": "sha256:081f42f71e08d860c47a84a30266719410504d4a30b7f8ba956ae01755dfdabd",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_DEFENDANTS_2022-23_00_01_05.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3162,
+          "contentDigest": "sha256:117c11eb53860f016a839156f87f9c07fa5c60056bbfcc99a44e1b3ffeda8132",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_FRAUD_2020-21_00_01_16.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1761,
+          "contentDigest": "sha256:36da7f98584c52bb5d44a51e860f689daa76213dfae7d95799ce1d4eb617f104",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_FRAUD_2020-21_00_01_16.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 10505,
+          "contentDigest": "sha256:794e8011ec7ed335274295910a54047cb619fbcb11dc04e001d984de4ce3b70c",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_FRAUD_2020-21_00_01_16.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 5545,
+          "contentDigest": "sha256:44dc0f23b770331b1c7b70649b304390ab0a6682d7bd2d5088564a18e5c2c2dd",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_LEGALASSISTANCE_2023-24_00_02_04.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2527,
+          "contentDigest": "sha256:026543b0c2cff56856f211bbcce22e241e2c52dfb5889d680a32aca860787533",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_LEGALASSISTANCE_2023-24_00_02_04.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 11755,
+          "contentDigest": "sha256:a06b900a452597739a739d8e194eb854a4e18cd06954cb0b3135dc19b4eeb09e",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_LEGALASSISTANCE_2023-24_00_02_04.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 30879,
+          "contentDigest": "sha256:029098efd77b8921f42f88d7e950778e91c02572f602f898e8a918640642e618",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_PRISONERS_2021_00_02_17.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3084,
+          "contentDigest": "sha256:bd8c88245f81412da10c4bd602bf8a0ffff8a45671399112eae8e6bc6bf7c8fe",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_PRISONERS_2021_00_02_17.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 11181,
+          "contentDigest": "sha256:009d6a6f5affecd483a423f9ecd3e88f8ccf5a5bc937714bee6cdc055e594eea",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_PRISONERS_2021_00_02_17.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 19586,
+          "contentDigest": "sha256:696d0af67814dc5c5e786ac1811132c9074c410a4b439d1d24a1902c4735b2cc",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/ABS_PRISONERS_2022_00_02_04.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1561,
+          "contentDigest": "sha256:af8df2b8cf904f4fda19aaa97e81b14a1d3669cfa7e7625d9022299ec1e4f696",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_PRISONERS_2022_00_02_04.expected-overlay.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2873,
+          "contentDigest": "sha256:b3df30ebb96d064ce95e77de76cdf5363aaf4562b6afb3a13089c83ab8e4cdbd",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_PRISONERS_2022_00_02_04.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 307,
+          "contentDigest": "sha256:2218722e25dd9121391fb85b9ed5048b47bf595520b0c37a2df8c927f1f2cded",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_PRISONERS_2022_00_02_04.metadata.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 11796,
+          "contentDigest": "sha256:ef687e433c90be23d182f3a6fa6d21bf7d6f93965dca5a382ff3d1e26da02f75",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/ABS_PRISONERS_2022_00_02_04.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 19589,
+          "contentDigest": "sha256:48bf7c3a6d93a574a7e5a84ff5cee0e773c6332a1b0efbb2efec917d9455ee4e",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "json-examples/AIHW_DRUGTREAT_492.csv",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2581,
+          "contentDigest": "sha256:7aa145a87a9de28b40487f8075e9ab44c17c4a49bbd65c6525198779cedef8ee",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/AIHW_DRUGTREAT_492.json",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 11978,
+          "contentDigest": "sha256:514d248824337f44f373380b645373c590b65ff3b0684590a86e36a6df440ca4",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "json-examples/AIHW_DRUGTREAT_492.xlsx",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1885757,
+          "contentDigest": "sha256:aa2a172c2a5f473f1e8cb0b3a0c501896d3cbed1def0d2dbc5c253be8820264f",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "operations/cell-role-pipeline-luna-smoke-v2.plan.json",
+          "role": "fixture",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 337283,
+          "contentDigest": "sha256:cddcf7bf8b871a9a5f1a5c89229e8a714893c4caedfa5a1476d823b991fc4288",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "package-lock.json",
+          "role": "lockfile",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 8980,
+          "contentDigest": "sha256:406ea9369599094329a4916c5df388bbb7ba2165f8c10caba5d8684a7103a642",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "package.json",
+          "role": "manifest",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1435,
+          "contentDigest": "sha256:c81ab8707659e200f20ce8e73f007de24c42b01a1c9a3079d869b8223a9ab1f5",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/benchmark/csv.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2833,
+          "contentDigest": "sha256:67501e3164cd944b78bc4bd100858fbc29e85795ba3396552073a8e7dbe18cc0",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/benchmark/manifest.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 16215,
+          "contentDigest": "sha256:5105e371fb68e59e9dd5323eddb0bfe03055b7df1dfc67c0d3a22f0196df48b1",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/benchmark/metrics/graphSimilarity.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 10431,
+          "contentDigest": "sha256:17303c30cd75b7428624777f809e7aa86f0990c0d70524a75e4f968360f14210",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/benchmark/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 718,
+          "contentDigest": "sha256:f5309c18d571f13ca3c2ae02d8ee3553e7eaec0abcba3b26b9719d4daaaedfc3",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/benchmark/utils/files.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 5157,
+          "contentDigest": "sha256:1d928c0d6a1872f44ff1ce596b6159332c582bd77851673442c7a51293c87281",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/artifact-io.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 33249,
+          "contentDigest": "sha256:5198c4b711c070de267fd86cac43c0e5aa4a35cd5eaf2aad7be8daa3aee3d49f",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/cell-role-sketch-v02.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 13843,
+          "contentDigest": "sha256:32768c833eb0165d342a3c0856d8dae30838927fbd67b2762896352b89d8014f",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/compact-context.test.ts",
+          "role": "fixture",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 16492,
+          "contentDigest": "sha256:fb909efb696f1d32c5c22b441a5b5d75d1cabecdd27112ecd2afcda3a67f5145",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/compact-context.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 14142,
+          "contentDigest": "sha256:cec20b90af8560b28293864500991a42078d3d0700e199e644c50c5625d89d91",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/compiler-v02.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 19109,
+          "contentDigest": "sha256:63caf0dd13476a8db9e8661b77cbc5605c693d12717f207424a30333503317f6",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/compiler-v02.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 4679,
+          "contentDigest": "sha256:027ae26b05dd1e44ef4c91b31f263d626c3e2bc05191b8de0e00631e1d3a5999",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/context-comparison.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2142,
+          "contentDigest": "sha256:0dc893c51e9c15580116d08802c607b191635ea3ce58c47ad114dc9b390e9eec",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/evidence-io.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 54581,
+          "contentDigest": "sha256:cf566bc6513d5f356599b575d34c59bd4fba7900d08ba5ab2b227a33856ebb45",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/evidence.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 5047,
+          "contentDigest": "sha256:800baaa8a0c3908c7755718c48b01d9746facdba266bea65c84363906dbf23a2",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/format-aware-region-catalog-v2.test.ts",
+          "role": "fixture",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 14643,
+          "contentDigest": "sha256:418c90cb8d5d53406cf51294b15a7eba44a5b991d5c5c58c72db1ead5cbb11c7",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "scripts/experiments/cell-role-pipeline/format-aware-region-catalog-v2.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 18564,
+          "contentDigest": "sha256:a3a1f3aa5263035eeb662db788175edfaacf21ccd872c74781d4ee125374e84e",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/geometry-v02.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 82794,
+          "contentDigest": "sha256:372f518632ff5e959202ca171416f3835ed02e512a27e0729be1397ec7c8b4b2",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/live-state.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 47373,
+          "contentDigest": "sha256:4394bac61c4b24bb0b8055d4e3d3d369ec0c20e11b5eff7349986fd022c109d0",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/plan.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 3888,
+          "contentDigest": "sha256:2b8611e2baa3a8c17bb885107e36d31b3468b35042eb31fcfc1a147f0b11da10",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "scripts/experiments/cell-role-pipeline/prompts-v13-role-aware-semantic-map.test.ts",
+          "role": "fixture",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 5606,
+          "contentDigest": "sha256:1bbb0d635f1b8c146c1f657505e06580b95e173593c292c1ef3644e44c4793a2",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "scripts/experiments/cell-role-pipeline/prompts-v13-role-aware-semantic-map.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 6891,
+          "contentDigest": "sha256:99a5a49448b7f8e689e5ffb975440a847280e4f7c897a56bf301243aa3694a57",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/prompts.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 7669,
+          "contentDigest": "sha256:2cc0cf11a17677f2e0d50e548e9e2435cf4072c240a3da52883b2e0a48c652f9",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/provenance.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 35146,
+          "contentDigest": "sha256:069aa220ed677a5c4c262549b025a2ead1616468a23e9cc8cad98bc1b53da6b1",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/report.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 22379,
+          "contentDigest": "sha256:c86cd0cc6a57e1e57b89f3d5ff1fbbb1f78d57ab28f3f3ee99fbe7bd818fdcf2",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "scripts/experiments/cell-role-pipeline/role-aware-region-catalog-v5.test.ts",
+          "role": "fixture",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 49878,
+          "contentDigest": "sha256:8bafca043e4f9d8f00b612599edd3027c929d6b59612576dfc74098eea9a221c",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "scripts/experiments/cell-role-pipeline/role-aware-region-catalog-v5.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 36036,
+          "contentDigest": "sha256:54fdcd4b103b692b1fbcaf5814bdf5848e51da29014f7c3445247e15cdaf002a",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/semantic-gold-drafts.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 13563,
+          "contentDigest": "sha256:df87dcc0c28389a1b348fe8455afb6dad661607c2c92fd8700f8a99f1ec03b06",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/semantic-gold-schema.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 6097,
+          "contentDigest": "sha256:cb9532bf5c72bf8840475eb3cbf6823757573f3d77e7280927d5d96eecc5b081",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/semantic-map-v1.test.ts",
+          "role": "fixture",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 25360,
+          "contentDigest": "sha256:99224ef6e65fc6b7ef054753ececdc787c3627e8f91742025a3328f5db98104d",
+          "gitBlobId": null,
+          "phaseADisposition": "duplicate-alias",
+          "relativePath": "scripts/experiments/cell-role-pipeline/semantic-map-v1.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 4550,
+          "contentDigest": "sha256:02a458ec522bf37406dd65f768ed1685c7c76fff09f9b23d43ad827ada81852e",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/types.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 17329,
+          "contentDigest": "sha256:b8dc11d0949941f39f24938d5b9b233045bda6baa5c3ad50185e2b676398a341",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/experiments/cell-role-pipeline/xml.ts",
+          "role": "source",
+          "sourceMode": 33152
+        },
+        {
+          "byteLength": 2019,
+          "contentDigest": "sha256:eaa816e04f9a37a03bc4635065910e30b6a20fd76aa155087a2243f376b2586b",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/harvest/path-safety.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1857,
+          "contentDigest": "sha256:dfd01bcfdff9449b6d6dfd718d8172ded58bc472145cb33ab92843fa4abcdfc7",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/ml/ml-assisted-prompt.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2343,
+          "contentDigest": "sha256:0cb0378b0f5018ce0ba07d09db3a3a9fb9dbdf7320c61c73275e8a1ee96214fc",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "scripts/ml/ml-assisted-prompt.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 7241,
+          "contentDigest": "sha256:496f8db5c5c58495d601bc521f226d0bc60b97942d917caee190bd38611136e9",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/address.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3679,
+          "contentDigest": "sha256:fc5d0a539d934ceb65f8e83dd6dfb37f67bcdf5662f8861d53750cbbacc42d90",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/executor/directions.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 8113,
+          "contentDigest": "sha256:2e62a14d1483053516cdfe5d9a1488a5a854a2afc06697e4d17b58ed59ee0963",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/executor/relationshipResolution.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1749,
+          "contentDigest": "sha256:0fe28f9da8f1aa7a339d393c60441a7e4a67e3dc5aa3054a92fc6d266cabd69e",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/executor/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 26904,
+          "contentDigest": "sha256:6d3d71eca7b0e480aa33e8aa7016f6c3e6bf50ce20738a1c01d7aafe4a803180",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/export/enrichment.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 9849,
+          "contentDigest": "sha256:b260325a7ae9b6c844c86eff5f287d898415c849d1d7fa8668cbf9e4d0b527f9",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/export/formatters.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 4620,
+          "contentDigest": "sha256:1c88c304372db5d377643bb7ad2b0dddbaf5027f6f6d9fc0a65aa659f9528e43",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/candidateRangeHints.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2617,
+          "contentDigest": "sha256:7d99560e9ddc8e4bf6a40830c91aaf982fc1caa5045e1b745a8286a1a88d2969",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/examples.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 12221,
+          "contentDigest": "sha256:fe3d660d6863d563628337b805b49663fdc32a5cfa144afddbdce9ad4e3facf2",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/producedCsvSummary.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 22348,
+          "contentDigest": "sha256:492b3e95e211f299577afbf23dd559d71a839391f9533ba784fa213bc34436aa",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/producedCsvSummary.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 22532,
+          "contentDigest": "sha256:942fa32a50844f92dba03d6b89d38d53b922c74587d945e892cc3d2078612ded",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/prompt.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 29643,
+          "contentDigest": "sha256:ed300942c2cb7c4712164b6d4a3ec9dee5055550e528e49a39d46a5015aa3ce0",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/prompt.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 6916,
+          "contentDigest": "sha256:57bcb4f182221b3e5b14a4f624ae8cd8f842c5009054ca672e0b7c7ef33b594e",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/promptVariants.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 16352,
+          "contentDigest": "sha256:d5b109af843aaa3005aa3b7601c92ed0fe53a2470da3f71d6dafe4695802538e",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/ruleTiers.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 8436,
+          "contentDigest": "sha256:0e32ca2b5df689e78c18e272338dd87372496d1dc73807b6734d7f865d47f967",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/llm/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 6966,
+          "contentDigest": "sha256:f843cdf9a53a6c712b1bd908cd9d894616189bde8e6294624a3117828be744c8",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ml-prepass/promptHints.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 4237,
+          "contentDigest": "sha256:37a29a04358e64f77cac45aa5c98cdc10e3c0f11c7da057832f85f837cc28ecd",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ml-prepass/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 27308,
+          "contentDigest": "sha256:44960fc22b8073aa0abdb6ec0b3e39431792a4693ce250446a262b7c22f82f97",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/canonicalValueMapping.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3040,
+          "contentDigest": "sha256:6da69e37ace3c3fd1e4bd59b6e90e602b7ec684c1a7bb44e00ccb353cabc2490",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/hierarchy/calendar.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2728,
+          "contentDigest": "sha256:271748a916b1e0b200bd2387668221a12e7a27c4839ea1055a71a4d8c9889ff3",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/hierarchy/candidates.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 387,
+          "contentDigest": "sha256:056c66c85cfdb203d3fd431501731e25a4cac04130ee30fdd189e86658b9abd4",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/hierarchy/dates.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 777,
+          "contentDigest": "sha256:bebc3162d95704ea40903a631d45db482a4d7c962b3cafd77d22d0372d2a9258",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/hierarchy/index.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3581,
+          "contentDigest": "sha256:5579c947b9eae420ee6f9fbd133914487e44b3a7af8add8bf1db38fe65ec573e",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/hierarchy/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 12392,
+          "contentDigest": "sha256:281ac4e8a422f1a70a499986b9592d608f9fbcaa1c9210df7efd179a3009e867",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/hierarchy/validation.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 30586,
+          "contentDigest": "sha256:97ef56b594c59203b23351bba810b8c9f51fac8ea6ba8d57ade80f1c76bdc7a0",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/occurrences.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 7902,
+          "contentDigest": "sha256:9b6be869aec2f6ce90ad14d2ff9b5616fbf8f6510ed7dae47046c27a87e0250d",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/overrides.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 32372,
+          "contentDigest": "sha256:d5357fa1e904b0a283ce5f44a77b04ba254725c3d3ed12f7f359aa7ee7467a93",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/promptHints.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1901,
+          "contentDigest": "sha256:543e2537587f7d22d2a2be7fdc243dc3e10f15bf0fb4b8c1ed5e5c06b382575f",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/publicationCompatibility.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 4085,
+          "contentDigest": "sha256:a2cd31bec13bdf41039219911dcb7811d91983d262a2b2eb9566e9364e57af03",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/publicationIds.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 52317,
+          "contentDigest": "sha256:360f6c8985b82be26e6c63d21f0427aebad45c3cffbd97f6e6e9f36f863448d3",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/publicationSchema.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1014,
+          "contentDigest": "sha256:d0135b8424cd969bbae8b577779a91687ddae3734cf35c551d2b661cbdd6b5b0",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2455,
+          "contentDigest": "sha256:2d4840f1732955832310bb25342595ef703cc5751f1f870e1dacd693b9cffb8d",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/ontology/valueNormalization.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 10241,
+          "contentDigest": "sha256:55fbbb4d31962e090caf44c455851d4bf93b3e985988449103c2ee68976b52d2",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/recipe/autoFix.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 5574,
+          "contentDigest": "sha256:180addaaf260acfc3accfd43d42e09d6eda27af0456a8d5e28243941cf2b8663",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/recipe/decomposeSelector.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 27733,
+          "contentDigest": "sha256:cd679624da231dac5c185709ba607702b82350543783e0269af1986ead8ccb06",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/recipe/detectCandidateBlocks.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 35922,
+          "contentDigest": "sha256:db4a74f2d06b9442e158d4a4b39a74d48e2ec8152f0f9042229e1e8ad6f1b674",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/recipe/detectCandidateBlocks.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 7744,
+          "contentDigest": "sha256:12bac95371fe8cf72efc6d0894431a01abf04342dc9115e345c5d1f25f2fcaf6",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/recipe/schema.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 880,
+          "contentDigest": "sha256:ab735afab691f99fe1c1861964c8f30513e8053b35a70270110ae2fad3f8f140",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/recipe/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1595,
+          "contentDigest": "sha256:c8a1b9edc3c3f8c883c2d2fc2404e5af7710378d30c31b1e9cd04a1d117d070d",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/buildHeaderCandidates.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 4822,
+          "contentDigest": "sha256:6153d67b6bdcaacc3bd1de7b0a9e487087baeb911d1c1ec06fe2cd714eab241c",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/buildHtmlTable.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 4249,
+          "contentDigest": "sha256:8531cf011921955428cda073d3d46c28cbfa272083df8467024175c33a138552",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/buildMarkdownTable.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 9419,
+          "contentDigest": "sha256:034c199f3cb88dfc7ed53992f430641ebdf6338b87aae1ba11c2f693ad92daec",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/buildSheetSummary.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 14986,
+          "contentDigest": "sha256:94ff510e4b54d3de6dbef92461edfe52017a5d44cdf367960cca4112795f4608",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/buildSheetSummary.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 3037,
+          "contentDigest": "sha256:e42c9ce59e4e5fb0f45460041c3585293bfaddfddcc94d089d198cf952f3a9e1",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/compressTableMarkdown.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 8066,
+          "contentDigest": "sha256:1f80830fe4289561f2ec46eca0b71d2d1f0f5eab0fa4d891f3a1b83b11ee176d",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/compressTableMarkdown.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 2080,
+          "contentDigest": "sha256:6d684630aeca10f8226aa9ed8d487909d23c6da3850fce36af04dc9a0214e3f5",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/summary/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 582,
+          "contentDigest": "sha256:53d9daeb987255e8d36b8104d6f3ac93b83aa94025177192117f950682f9ec81",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/workbook/findRecipeSheet.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 177,
+          "contentDigest": "sha256:230ecea5e770ec02c57dff2783e6f0cc1bad4b144bb88be60e38497ac84d6d5a",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/workbook/gridLimits.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 4712,
+          "contentDigest": "sha256:9dea4aa9583add32a01a78c6cf06f28cb6bd686d168097787d5469bcc50d03cd",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/workbook/parseWorkbook.test.ts",
+          "role": "fixture",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 13536,
+          "contentDigest": "sha256:44fd9ba078eadd8cc81110ceeb33c23de9b4cc4a183064d452bbdad24330ee92",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/workbook/parseWorkbook.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 1533,
+          "contentDigest": "sha256:6b9bb21dffddb7376640fa079efafa1cacd3f868d3b4860d273d7e1052a13759",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "src/lib/workbook/types.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 5371,
+          "contentDigest": "sha256:b7cd9809b8297324a61ca7950bdccf9930f7b9600020a42e36c5c6074ed0ebce",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "tests/fixtures/workspace/blockSuggestions.ts",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 9796,
+          "contentDigest": "sha256:bfa1bab009ae14d7fb9a7cf68a43cc50c15cde1da8251497a58fa5b6b987aabb",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "tests/fixtures/workspace/candidate-block-parity-v1.json",
+          "role": "source",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 655,
+          "contentDigest": "sha256:a06ee5c01708b1aec6b3150afbf9d25771f3d664c104075d549b6857369b0a51",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "tsconfig.json",
+          "role": "manifest",
+          "sourceMode": 33188
+        },
+        {
+          "byteLength": 399,
+          "contentDigest": "sha256:6bcdf20b40aff04c516328bcf570ffe57acb69d2349e10cf9ded5340b3802e5d",
+          "gitBlobId": null,
+          "phaseADisposition": "import",
+          "relativePath": "vitest.config.ts",
+          "role": "manifest",
+          "sourceMode": 33188
+        }
+      ],
+      "licenseDigest": "sha256:0eb7e3608ea8bf527dcccb3969a12609ca28d88db6de9de0e1eed38521de1715",
+      "lockfileDigests": [
+        "sha256:cddcf7bf8b871a9a5f1a5c89229e8a714893c4caedfa5a1476d823b991fc4288"
+      ],
+      "readMode": "phase-a-filesystem",
+      "sourceRootId": "tidycell-worktree-2026-08-10-phase-a-v1-final-3",
+      "sourceSystem": "tidycell",
+      "totalBytes": 3709362
+    }
+  ],
+  "totals": {
+    "byteLength": 4233461,
+    "itemCount": 138,
+    "sourceCount": 2
+  }
+}

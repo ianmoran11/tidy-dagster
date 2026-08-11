@@ -1,0 +1,81 @@
+{
+  "checks": [
+    {
+      "evidence": [
+        "sha256:9dc3e2e8ef4d464b82ac353a4dabd31981e7a3f4a43b0dd4ea9ef9f627bc4bee",
+        "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d",
+        "c26e7f67091c414b411221af461b8ea3974c6320",
+        "6b73f893f0d1a98432251f23cbdaab435ba8dacc"
+      ],
+      "id": "frozen-source-authority",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        "sha256:0d1009f7793844a12dbf56c0c8aa2e54dac6d12025d09bbc682c4951bc5e476f",
+        "sha256:36a3b5be95f0f09e1ad828a05344bf43085f0b64a9aeb454480ef918faa350af",
+        "138 exact items / 4233461 bytes"
+      ],
+      "id": "selected-bytes-match-authority",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        "sha256:0eb7e3608ea8bf527dcccb3969a12609ca28d88db6de9de0e1eed38521de1715",
+        "sha256:cddcf7bf8b871a9a5f1a5c89229e8a714893c4caedfa5a1476d823b991fc4288",
+        "sha256:f0c38e43895b9f54b60d367ae39f48c275b0f59627e7c61073ce4cb11533cf54",
+        "sha256:2e8cf7809a08a227974acb1a905716e09e090f01011007f71a91455e806767bc"
+      ],
+      "id": "licence-and-lockfile-custody",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        "literal-typescript-import-closure-v1",
+        "unresolvedRelativeImportCount=0",
+        "all external package specifiers are bound through selected package manifests and lockfiles"
+      ],
+      "id": "literal-import-closure",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        "46 fixture-role items",
+        "three summary workbook fixtures",
+        "three recipe examples",
+        "eight smoke assets plus recipes/expected CSV evidence and smoke plan"
+      ],
+      "id": "source-owned-fixture-custody",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        "completionStatus=complete-no-copy",
+        "sourceBytesCopied=false",
+        "runtimeSiblingDependencyAllowed=false"
+      ],
+      "id": "no-copy-and-no-runtime-coupling",
+      "status": "pass"
+    }
+  ],
+  "claims": {
+    "independentReview": false,
+    "parityEstablished": false,
+    "runtimeSiblingDependencyAllowed": false,
+    "sourceBytesCopied": false
+  },
+  "closureManifestDigest": "sha256:9dc3e2e8ef4d464b82ac353a4dabd31981e7a3f4a43b0dd4ea9ef9f627bc4bee",
+  "limitations": [
+    "This is implementing-agent self-review, not independent review.",
+    "Literal import discovery cannot by itself prove custody of every dynamically constructed runtime path; known source-owned fixture reads were inspected and included explicitly.",
+    "The pinned Tidybank buildSheetSummary source has no source-owned summary test entrypoint in that commit.",
+    "The selected closure has not yet been copied into or executed from Tidy Dagster.",
+    "No intermediate, rendered-output, prompt, or produced-CSV parity claim is established by this review."
+  ],
+  "reviewDigest": "sha256:8cb6dbcc45a4025ad738fc9fe65a87292a1168bfb048b33f77df575f319957cb",
+  "reviewKind": "implementing-agent-self-review",
+  "reviewedAt": "2026-08-11T13:30:00Z",
+  "reviewer": "tidy-dagster-implementing-agent",
+  "schemaVersion": "tidy.source-closure-self-review/v1",
+  "status": "accepted-for-bounded-copy-and-parity-work"
+}

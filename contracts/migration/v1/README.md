@@ -15,10 +15,12 @@ provider, train a model, or publish outputs.
   current storage assessment.
 - `snapshot.schema.json` — `TidyCellExportSnapshotV1`; freeze is refused when
   destination headroom fails.
-- `source-code-snapshot.schema.json` — `SourceCodeExportSnapshotV1` for a later
-  explicitly selected TidyCell/Tidybank code closure. Fixture-only no-copy
-  tooling exercises this contract but does not authorize or perform a real code
-  import.
+- `source-code-snapshot.schema.json` — `SourceCodeExportSnapshotV1` for the
+  fixture-only explicit source-selection scaffold.
+- `source-closure-discovery.schema.json` and
+  `source-closure-review.schema.json` — exact two-source no-copy discovery and
+  implementing-agent self-review for the pinned real TidyCell/Tidybank summary
+  and prompt closure. Neither schema claims parity or independent review.
 - `nas-commit.schema.json` — exact commit marker for publishing a verified
   snapshot to a filesystem such as SMB that does not support hard links.
 
@@ -44,8 +46,8 @@ inventory digest. A frozen snapshot binds completion status, the inventory
 digest, the storage-assessment digest, and an explicit UTC freeze time.
 
 The exporter source digest is a domain-separated closure over exact
-`artifacts.py`, `source_export.py`, `source_export_cli.py`, and all seven
-migration JSON Schema files. The closure is read before and after every scan;
+`artifacts.py`, `source_export.py`, `source_export_cli.py`, and every migration
+JSON Schema file. The closure is read before and after every scan;
 mutation fails the run.
 
 The Python sorted-JSON digest is named `tidy-python-sorted-json-v1`. It is not
@@ -61,6 +63,17 @@ root-relative descriptors and binds Git HEAD/tree, status plus exact binary
 tracked diff, roles, licence, and producer identity. It returns an in-memory
 snapshot and has no CLI or source-copy operation. Real closure selection remains
 unauthorized and Phase C parity remains incomplete.
+
+## Real no-copy source-closure discovery
+
+`tidy-source-closure` receives both source roots only through an external
+configuration. TidyCell files are no-follow read twice and must exactly match
+the frozen Phase A item length, mode, and digest. Tidybank files are read from a
+pinned immutable Git commit with `git cat-file`, not from its dirty worktree.
+Literal relative and `@/` imports are closed transitively; unresolved relative
+imports fail. External package specifiers, entrypoints, source-owned fixtures,
+licences, manifests, and lockfiles remain explicit in the output. The checked-in
+manifest contains no workstation path and copies no source bytes.
 
 ## Safety
 
@@ -123,6 +136,14 @@ uv run tidy-source-export publish \
 
 uv run tidy-source-export verify-publication \
   --directory '/Volumes/Shared Folder/tidy-dagster/source-snapshots/sha256-...'
+
+uv run tidy-source-closure discover \
+  --config /private/path/source-closure-request.json \
+  --output fixtures/source-closure/summary-prompt-closure-v1.discovery.json
+
+uv run tidy-source-closure verify \
+  --config /private/path/source-closure-request.json \
+  --manifest fixtures/source-closure/summary-prompt-closure-v1.discovery.json
 ```
 
 `inventory` reports failed headroom without failing the scan. `freeze` fails and
