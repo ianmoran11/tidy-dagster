@@ -252,6 +252,32 @@ Byte copy, canary execution, full import, provider dispatch, activation, and
 training all remain unauthorized. The selector is capped at 96 items, 64 MiB of
 source reads, 64 MiB of unique copy allocation, and 4,096 embedded records.
 
+### Read-only NAS control inspection
+
+The sanitized implementing-agent inspection at
+`fixtures/nas-readiness/phase-b-current-v1.json` has report digest
+`sha256:0515d6b98ded8206170ecba7cc2188ba58f7828c21726f500724106f34607053`.
+It made no NAS write or configuration change and stores no raw output, server
+address, account label, SID, credential, or workstation path. It found:
+
+- the mounted session currently uses SMB 3.1.1;
+- AES-128-CMAC signing is observed and supported, but neither client nor server
+  reports signing as required, so the ADR signing gate fails;
+- payload encryption is off, which ADR 0005 permits;
+- the network label matches the local interactive-user label, while dedicated,
+  non-admin, subtree-restricted service identity remains unattested;
+- snapshot enumeration failed with a sanitized `resource-busy` result, so
+  snapshot availability remains unverified rather than being claimed absent;
+- no restore procedure or successful drill evidence was provided;
+- authoritative SQLite remains on the local device, not SMB; and
+- implementation plus integrity/restart/recovery test coverage and the earlier
+  real SMB probe are present, but no formal current adapter gate record exists.
+
+`canaryImportReady` is false. The exact blockers are signing-required policy,
+dedicated service identity, snapshot evidence, restore drill, and formal adapter
+gate evidence. SMB1 negotiation capability is advertised even though the current
+session is SMB 3.1.1; no server setting was changed or inferred.
+
 ## Validation
 
 The fixture suite covers:
@@ -283,7 +309,7 @@ Results:
 
 - focused migration gateway and import repository: `23 passed`;
 - bundled migration-worker protocol: `7 passed`;
-- complete Python suite: `140 passed, 1 skipped`;
+- complete Python suite: `144 passed, 1 skipped`;
 - TypeScript/Vitest: `155 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
@@ -314,9 +340,10 @@ The following accepted Phase B work is not implemented:
    0005;
 4. perform full domain-by-domain reconciliation and prove one justified typed
    outcome for every frozen canary source item and alias;
-5. verify the dedicated Synology service identity, SMB3 signing, snapshots, and
-   a successful restore drill; at-rest encryption was explicitly waived in ADR
-   0005;
+5. replace the interactive identity with an attested dedicated non-admin
+   Synology service identity, require SMB3 signing, establish snapshot evidence,
+   and complete a successful restore drill; at-rest encryption was explicitly
+   waived in ADR 0005;
 6. self-review and authorize a bounded live importer and operational CLI without
    claiming independent review; and
 7. run and self-review the real canary. The complete 44,682-item import remains
