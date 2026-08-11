@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration-canary/v1/review.schema.json",
+  "title": "MigrationCanarySelfReviewV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "canaryManifestDigest",
+    "reviewKind",
+    "reviewerRole",
+    "independentReview",
+    "reviewedAt",
+    "decision",
+    "checks",
+    "authorizations",
+    "limitations",
+    "reviewDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.migration-canary-self-review/v1" },
+    "canaryManifestDigest": { "$ref": "#/$defs/digest" },
+    "reviewKind": { "const": "implementing-agent-self-review" },
+    "reviewerRole": { "const": "implementing-agent" },
+    "independentReview": { "const": false },
+    "reviewedAt": { "$ref": "#/$defs/timestamp" },
+    "decision": { "const": "accepted-for-gate-implementation-only" },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSnapshotBound",
+        "selectionMechanical",
+        "hardBoundsSatisfied",
+        "artifactStrataCovered",
+        "dispositionsCoveredOrAbsent",
+        "duplicateClosureCovered",
+        "warningsCovered",
+        "embeddedKindsCovered",
+        "sourceBytesCopied"
+      ],
+      "properties": {
+        "sourceSnapshotBound": { "const": true },
+        "selectionMechanical": { "const": true },
+        "hardBoundsSatisfied": { "const": true },
+        "artifactStrataCovered": { "const": true },
+        "dispositionsCoveredOrAbsent": { "const": true },
+        "duplicateClosureCovered": { "const": true },
+        "warningsCovered": { "const": true },
+        "embeddedKindsCovered": { "const": true },
+        "sourceBytesCopied": { "const": false }
+      }
+    },
+    "authorizations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementLiveImporterGates",
+        "inspectNasControlsReadOnly",
+        "copyCanaryBytes",
+        "runCanaryImport",
+        "fullImport",
+        "providerDispatch",
+        "activation",
+        "training"
+      ],
+      "properties": {
+        "implementLiveImporterGates": { "const": true },
+        "inspectNasControlsReadOnly": { "const": true },
+        "copyCanaryBytes": { "const": false },
+        "runCanaryImport": { "const": false },
+        "fullImport": { "const": false },
+        "providerDispatch": { "const": false },
+        "activation": { "const": false },
+        "training": { "const": false }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "reviewDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    }
+  }
+}

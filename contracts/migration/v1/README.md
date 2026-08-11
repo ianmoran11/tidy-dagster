@@ -2,7 +2,9 @@
 
 Phase A is a provider-free, read-only inventory boundary. It does not copy
 source bytes into the authoritative repository, move recipe pointers, call a
-provider, train a model, or publish outputs.
+provider, train a model, or publish outputs. Derived real-import canary
+contracts live under `contracts/migration-canary/v1/` so extending that boundary
+does not alter the frozen Phase A exporter source closure.
 
 ## Contracts
 

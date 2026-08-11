@@ -1,0 +1,415 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration-canary/v1/manifest.schema.json",
+  "title": "MigrationCanaryManifestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "completionStatus",
+    "canaryId",
+    "frozenAt",
+    "sourceSnapshot",
+    "selector",
+    "selectedItems",
+    "requirements",
+    "duplicateGroups",
+    "coverage",
+    "gates",
+    "limitations",
+    "selectedItemSetDigest",
+    "manifestDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.migration-canary-manifest/v1" },
+    "completionStatus": { "const": "frozen-no-copy" },
+    "canaryId": {
+      "const": "tidycell-phase-b-stratified-canary-v1"
+    },
+    "frozenAt": { "$ref": "#/$defs/timestamp" },
+    "sourceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshotDigest",
+        "inventoryDigest",
+        "itemManifestDigest",
+        "sourceRootId",
+        "snapshotFileDigest",
+        "snapshotFileBytes"
+      ],
+      "properties": {
+        "snapshotDigest": { "$ref": "#/$defs/digest" },
+        "inventoryDigest": { "$ref": "#/$defs/digest" },
+        "itemManifestDigest": { "$ref": "#/$defs/digest" },
+        "sourceRootId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "snapshotFileDigest": { "$ref": "#/$defs/digest" },
+        "snapshotFileBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 67108864
+        }
+      }
+    },
+    "selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "sourceDigest",
+        "canonicalizationAlgorithm",
+        "rankingAlgorithm",
+        "duplicateClosurePolicy",
+        "limits",
+        "quotas"
+      ],
+      "properties": {
+        "version": { "const": "tidy-migration-canary-selector/v1" },
+        "sourceDigest": { "$ref": "#/$defs/digest" },
+        "canonicalizationAlgorithm": {
+          "const": "tidy-python-sorted-json-v1"
+        },
+        "rankingAlgorithm": {
+          "const": "sha256-domain-requirement-source-item-v1"
+        },
+        "duplicateClosurePolicy": {
+          "const": "include-exact-canonical-import-v1"
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "maximumItems",
+            "maximumSourceReadBytes",
+            "maximumUniqueCopyBytes",
+            "maximumEmbeddedRecords"
+          ],
+          "properties": {
+            "maximumItems": { "const": 96 },
+            "maximumSourceReadBytes": { "const": 67108864 },
+            "maximumUniqueCopyBytes": { "const": 67108864 },
+            "maximumEmbeddedRecords": { "const": 4096 }
+          }
+        },
+        "quotas": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "regularAdmittedItemsPerObservedStratum",
+            "otherItemsPerObservedStratum",
+            "duplicateGroupBuckets",
+            "sizeBuckets"
+          ],
+          "properties": {
+            "regularAdmittedItemsPerObservedStratum": { "const": 2 },
+            "otherItemsPerObservedStratum": { "const": 1 },
+            "duplicateGroupBuckets": {
+              "type": "array",
+              "const": ["pair", "small", "large", "cross-artifact-class"]
+            },
+            "sizeBuckets": {
+              "type": "array",
+              "const": ["empty", "small", "medium", "large"]
+            }
+          }
+        }
+      }
+    },
+    "selectedItems": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 96,
+      "items": { "$ref": "#/$defs/selectedItem" }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": { "$ref": "#/$defs/requirement" }
+    },
+    "duplicateGroups": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 96,
+      "items": { "$ref": "#/$defs/duplicateGroup" }
+    },
+    "coverage": { "$ref": "#/$defs/coverage" },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceBytesCopied",
+        "importAuthorized",
+        "liveImporterImplemented",
+        "typedReconciliationComplete",
+        "nasServiceIdentityVerified",
+        "smbSigningVerified",
+        "snapshotRestoreDrillPassed",
+        "sqliteOnNasAllowed",
+        "fullImportAuthorized"
+      ],
+      "properties": {
+        "sourceBytesCopied": { "const": false },
+        "importAuthorized": { "const": false },
+        "liveImporterImplemented": { "const": false },
+        "typedReconciliationComplete": { "const": false },
+        "nasServiceIdentityVerified": { "const": false },
+        "smbSigningVerified": { "const": false },
+        "snapshotRestoreDrillPassed": { "const": false },
+        "sqliteOnNasAllowed": { "const": false },
+        "fullImportAuthorized": { "const": false }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "selectedItemSetDigest": { "$ref": "#/$defs/digest" },
+    "manifestDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullableDigest": {
+      "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "countMap": {
+      "type": "object",
+      "propertyNames": { "minLength": 1, "maxLength": 256 },
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "selectedItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relativePath",
+        "sourceItemDigest",
+        "entryType",
+        "artifactClass",
+        "disposition",
+        "ruleId",
+        "sourceMode",
+        "byteLength",
+        "contentDigest",
+        "gitState",
+        "embeddedRecordCount",
+        "embeddedRecordKinds",
+        "warnings",
+        "selectionReasons",
+        "duplicateGroupDigest",
+        "canonicalImportPath"
+      ],
+      "properties": {
+        "relativePath": { "$ref": "#/$defs/relativePath" },
+        "sourceItemDigest": { "$ref": "#/$defs/digest" },
+        "entryType": {
+          "enum": ["file", "excluded-subtree", "excluded-symlink"]
+        },
+        "artifactClass": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "disposition": {
+          "enum": ["import", "exclude", "quarantine", "duplicate-alias"]
+        },
+        "ruleId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "sourceMode": { "type": "integer", "minimum": 0 },
+        "byteLength": { "type": "integer", "minimum": 0 },
+        "contentDigest": { "$ref": "#/$defs/nullableDigest" },
+        "gitState": {
+          "enum": ["tracked", "untracked", "ignored", "unknown"]
+        },
+        "embeddedRecordCount": { "type": "integer", "minimum": 0 },
+        "embeddedRecordKinds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "recipe-document",
+              "recipe-candidate",
+              "prompt-evidence",
+              "provider-response-evidence"
+            ]
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+        },
+        "selectionReasons": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+        },
+        "duplicateGroupDigest": { "$ref": "#/$defs/nullableDigest" },
+        "canonicalImportPath": {
+          "oneOf": [{ "$ref": "#/$defs/relativePath" }, { "type": "null" }]
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirementId",
+        "kind",
+        "observedCount",
+        "targetCount",
+        "status",
+        "selectedPaths"
+      ],
+      "properties": {
+        "requirementId": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "kind": {
+          "enum": [
+            "artifact-disposition-entry",
+            "disposition-presence",
+            "warning",
+            "embedded-kind",
+            "git-state",
+            "size-bucket",
+            "duplicate-group"
+          ]
+        },
+        "observedCount": { "type": "integer", "minimum": 0 },
+        "targetCount": { "type": "integer", "minimum": 0, "maximum": 96 },
+        "status": { "enum": ["covered", "not-observed"] },
+        "selectedPaths": {
+          "type": "array",
+          "maxItems": 96,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/relativePath" }
+        }
+      }
+    },
+    "duplicateGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contentDigest",
+        "groupSizeInSnapshot",
+        "selectedMemberCount",
+        "canonicalImportPath",
+        "selectedPaths",
+        "artifactClasses",
+        "dispositions"
+      ],
+      "properties": {
+        "contentDigest": { "$ref": "#/$defs/digest" },
+        "groupSizeInSnapshot": { "type": "integer", "minimum": 2 },
+        "selectedMemberCount": { "type": "integer", "minimum": 2 },
+        "canonicalImportPath": { "$ref": "#/$defs/relativePath" },
+        "selectedPaths": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 96,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/relativePath" }
+        },
+        "artifactClasses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+        },
+        "dispositions": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["import", "duplicate-alias"] }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "itemCount",
+        "fileCount",
+        "sourceReadBytes",
+        "copyEligibleItemCount",
+        "uniqueCopyObjectCount",
+        "uniqueCopyBytes",
+        "embeddedRecordCount",
+        "countsByArtifactClass",
+        "countsByDisposition",
+        "countsByEntryType",
+        "countsByGitState",
+        "warningCounts",
+        "embeddedKindCounts",
+        "sizeBucketCounts",
+        "duplicateGroupCount",
+        "duplicateAliasCount"
+      ],
+      "properties": {
+        "itemCount": { "type": "integer", "minimum": 1, "maximum": 96 },
+        "fileCount": { "type": "integer", "minimum": 1, "maximum": 96 },
+        "sourceReadBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "copyEligibleItemCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 96
+        },
+        "uniqueCopyObjectCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 96
+        },
+        "uniqueCopyBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 67108864
+        },
+        "embeddedRecordCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4096
+        },
+        "countsByArtifactClass": { "$ref": "#/$defs/countMap" },
+        "countsByDisposition": { "$ref": "#/$defs/countMap" },
+        "countsByEntryType": { "$ref": "#/$defs/countMap" },
+        "countsByGitState": { "$ref": "#/$defs/countMap" },
+        "warningCounts": { "$ref": "#/$defs/countMap" },
+        "embeddedKindCounts": { "$ref": "#/$defs/countMap" },
+        "sizeBucketCounts": { "$ref": "#/$defs/countMap" },
+        "duplicateGroupCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 96
+        },
+        "duplicateAliasCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 96
+        }
+      }
+    }
+  }
+}

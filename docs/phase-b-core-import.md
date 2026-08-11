@@ -3,6 +3,7 @@
 - Status: core content import plus conservative semantic groundwork implemented for fixtures
 - Overall Phase B status: incomplete — live typed import and full domain reconciliation remain pending
 - Real TidyCell content copied: zero bytes
+- Real canary selection: frozen, 63 items, metadata-only
 - Live-import authorization: not implemented
 - Provider calls: zero
 - Effective recipe pointers changed: zero
@@ -225,6 +226,32 @@ There is no live-import CLI or live authorization. `MigrationImporter` requires
 
 The frozen TidyCell snapshot has 44,682 items and cannot satisfy this boundary.
 
+### Frozen real-import canary
+
+`tidy-migration-canary` now mechanically derives a bounded cohort from the exact
+Phase A snapshot without reading or copying selected source bytes. The checked-in
+`fixtures/migration-canary/phase-b-canary-v1.json` binds:
+
+- manifest digest
+  `sha256:ee072650751fa76d456ba8cf034878a2a48137b02e6e7d459cb7945cb9474139`;
+- 63 items, 61 regular files, and 44,084,669 source-read bytes;
+- 58 copy-eligible aliases/items representing 36 unique objects and 42,423,291
+  unique bytes;
+- all 17 observed artifact classes, all three observed dispositions, all entry
+  types and Git states, four size buckets, four embedded-record kinds, and all
+  four observed warning/adverse classes;
+- 22 duplicate aliases across 20 selected groups, always with their exact
+  canonical import item; and
+- pair, small, large, and cross-artifact-class duplicate-group coverage.
+
+`quarantine` is explicitly recorded as `not-observed`; it is not fabricated.
+The implementing-agent self-review digest is
+`sha256:8d761f3c697672a8f651a2c81d1a4332ea2eb8b0961550dc51bb22bdf5755bf9`.
+It permits only live-import gate implementation and read-only NAS inspection.
+Byte copy, canary execution, full import, provider dispatch, activation, and
+training all remain unauthorized. The selector is capped at 96 items, 64 MiB of
+source reads, 64 MiB of unique copy allocation, and 4,096 embedded records.
+
 ## Validation
 
 The fixture suite covers:
@@ -256,7 +283,7 @@ Results:
 
 - focused migration gateway and import repository: `23 passed`;
 - bundled migration-worker protocol: `7 passed`;
-- complete Python suite: `136 passed, 1 skipped`;
+- complete Python suite: `140 passed, 1 skipped`;
 - TypeScript/Vitest: `155 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
@@ -278,8 +305,8 @@ used by any Phase B test.
 
 The following accepted Phase B work is not implemented:
 
-1. process a frozen deterministic real canary under a separately gated live
-   authorization, while retaining every unresolved identity and target;
+1. process the now-frozen deterministic real canary under a separately gated
+   live authorization, while retaining every unresolved identity and target;
 2. extend the now-integrated Python migration gateway beyond approval-row
    digests and RecipeV01 revisions to original candidates, generation attempts,
    raw restricted prompt/responses, model manifests, and evaluation evidence;
