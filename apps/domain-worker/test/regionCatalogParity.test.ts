@@ -2,54 +2,61 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { buildSheetSummary } from "../src/summary/buildSheetSummary.js";
+import { buildSemanticCellFormattingFacts } from "../src/catalog/format-aware-region-catalog-v2.js";
+import {
+  buildRoleAwareSemanticRegionCatalog,
+  buildSemanticCellDataFacts,
+} from "../src/catalog/role-aware-region-catalog-v5.js";
+import { buildCompactSemanticContext } from "../src/context/compactContext.js";
 import { parseWorkbook } from "../src/workbook/parseWorkbook.js";
 
-const referencePath = path.join(
-  process.cwd(),
-  "fixtures/reference-summary/historical-v1.json",
-);
-const schemaVersion = "tidy.historical-source-summary-reference/v1";
-const caseVersion = "tidy.historical-source-summary-reference-case/v1";
+const referenceSchema = "tidy.historical-source-region-catalog-reference/v1";
+const caseSchema = "tidy.historical-source-region-catalog-reference-case/v1";
+const paritySchema = "tidy.candidate-region-catalog-parity/v1";
+const sourceDomain = "tidy.candidate-region-catalog-source-closure/v1";
+const referenceDigest =
+  "sha256:7632516d91c47855105d72b072df7368bf67b2167c0e74a4ab4833f6b5a954df";
 
 type ReferenceCase = {
   caseId: string;
   workbookRelativePath: string;
   workbookContentDigest: string;
-  sheetCount: number;
-  summaries: unknown[];
+  catalogCount: number;
+  catalogs: unknown[];
   caseDigest: string;
 };
 
-describe("historical source summary parity", () => {
-  it("matches every frozen historical summary byte-for-byte by structure", async () => {
-    const reference = JSON.parse(readFileSync(referencePath, "utf8"));
-    const semantic = { ...reference };
-    delete semantic.referenceDigest;
-    expect(domainDigest(schemaVersion, semantic)).toBe(
-      "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
+describe("historical source role-aware region catalogue parity", () => {
+  it("matches every frozen historical catalogue exactly", async () => {
+    const reference = JSON.parse(
+      readFileSync(
+        path.join(
+          process.cwd(),
+          "fixtures/reference-region/historical-v1.json",
+        ),
+        "utf8",
+      ),
     );
-    expect(reference.referenceDigest).toBe(
-      "sha256:0d0dca23d4f08204cbf02d6cc841fbd5ba15df32aeab92da77a0f91f5ff49c70",
+    const { referenceDigest: storedReferenceDigest, ...referenceSemantic } =
+      reference;
+    expect(domainDigest(referenceSchema, referenceSemantic)).toBe(
+      referenceDigest,
     );
+    expect(storedReferenceDigest).toBe(referenceDigest);
     expect(reference.candidateImplementationUsed).toBe(false);
     expect(reference.parityEstablished).toBe(false);
+
     const parity = JSON.parse(
       readFileSync(
         path.join(
           process.cwd(),
-          "fixtures/reference-summary/candidate-parity-v1.json",
+          "fixtures/reference-region/candidate-parity-v1.json",
         ),
         "utf8",
       ),
     );
     const { parityDigest, ...paritySemantic } = parity;
-    expect(domainDigest(parity.schemaVersion, paritySemantic)).toBe(
-      "sha256:c18a2b12f8acea488798c23123371a9d1f2d684bb713506aac50c84d452d45c4",
-    );
-    expect(parityDigest).toBe(
-      "sha256:c18a2b12f8acea488798c23123371a9d1f2d684bb713506aac50c84d452d45c4",
-    );
+    expect(domainDigest(paritySchema, paritySemantic)).toBe(parityDigest);
     const currentFiles = parity.candidateFiles.map(
       (file: { relativePath: string; contentDigest: string }) => {
         const contentDigest = sha256Bytes(
@@ -59,10 +66,10 @@ describe("historical source summary parity", () => {
         return { relativePath: file.relativePath, contentDigest };
       },
     );
-    expect(
-      domainDigest("tidy.candidate-summary-source-closure/v1", currentFiles),
-    ).toBe(parity.candidateSourceDigest);
-    expect(parity.referenceDigest).toBe(reference.referenceDigest);
+    expect(domainDigest(sourceDomain, currentFiles)).toBe(
+      parity.candidateSourceDigest,
+    );
+    expect(parity.referenceDigest).toBe(referenceDigest);
     expect(parity.referenceCaseDigests).toEqual(
       reference.cases.map((entry: ReferenceCase) => entry.caseDigest),
     );
@@ -71,29 +78,33 @@ describe("historical source summary parity", () => {
       fullPhaseCParityEstablished: false,
     });
 
-    let matchedSheets = 0;
+    let matchedCatalogs = 0;
     for (const referenceCase of reference.cases as ReferenceCase[]) {
       const { caseDigest, ...caseSemantic } = referenceCase;
-      expect(domainDigest(caseVersion, caseSemantic)).toBe(caseDigest);
-      const workbookPath = path.join(
-        process.cwd(),
-        referenceCase.workbookRelativePath,
+      expect(domainDigest(caseSchema, caseSemantic)).toBe(caseDigest);
+      const workbookBytes = readFileSync(
+        path.join(process.cwd(), referenceCase.workbookRelativePath),
       );
-      const workbookBytes = readFileSync(workbookPath);
       expect(sha256Bytes(workbookBytes)).toBe(
         referenceCase.workbookContentDigest,
       );
       const parsed = await parseWorkbook(workbookBytes);
       expect(parsed.ok).toBe(true);
       if (!parsed.ok) throw new Error("Candidate workbook parse failed");
-      const summaries = parsed.workbook.sheets.map((sheet) =>
-        buildSheetSummary(sheet, { checked: true }),
-      );
-      expect(summaries).toEqual(referenceCase.summaries);
-      expect(summaries).toHaveLength(referenceCase.sheetCount);
-      matchedSheets += summaries.length;
+      const catalogs = parsed.workbook.sheets.map((sheet) => {
+        const context = buildCompactSemanticContext(sheet);
+        return buildRoleAwareSemanticRegionCatalog(context, {
+          formattingFacts: buildSemanticCellFormattingFacts(sheet.cells),
+          cellDataFacts: buildSemanticCellDataFacts(sheet.cells),
+        });
+      });
+      expect(catalogs).toEqual(referenceCase.catalogs);
+      expect(catalogs).toHaveLength(referenceCase.catalogCount);
+      matchedCatalogs += catalogs.length;
     }
-    expect(matchedSheets).toBe(4);
+    expect(matchedCatalogs).toBe(4);
+    expect(parity.matchedCatalogCount).toBe(matchedCatalogs);
+    expect(parity.mismatchCount).toBe(0);
   });
 });
 

@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy.example/contracts/reference-region/v1/reference.schema.json",
+  "title": "Historical source role-aware region catalogue reference v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "closureManifestDigest",
+    "copyCommitDigest",
+    "referenceKind",
+    "catalogContract",
+    "cases",
+    "sourceTreeDigestBefore",
+    "sourceTreeDigestAfter",
+    "harnessDigest",
+    "runtime",
+    "bundleVerifiedBefore",
+    "bundleVerifiedAfter",
+    "relocated",
+    "runtimeSiblingDependencyUsed",
+    "networkIsolationEnforced",
+    "candidateImplementationUsed",
+    "independentReview",
+    "parityEstablished",
+    "limitations",
+    "recordedAt",
+    "referenceDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "tidy.historical-source-region-catalog-reference/v1"
+    },
+    "closureManifestDigest": { "$ref": "#/$defs/digest" },
+    "copyCommitDigest": { "$ref": "#/$defs/digest" },
+    "referenceKind": { "const": "role-aware-semantic-region-catalog" },
+    "catalogContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "maxCandidates"],
+      "properties": {
+        "version": {
+          "const": "semantic-region-catalog-v5-adjacent-year-aware"
+        },
+        "maxCandidates": { "const": 160 }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/case" }
+    },
+    "sourceTreeDigestBefore": { "$ref": "#/$defs/digest" },
+    "sourceTreeDigestAfter": { "$ref": "#/$defs/digest" },
+    "harnessDigest": { "$ref": "#/$defs/digest" },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeVersion",
+        "tsxVersion",
+        "tidyDagsterLockDigest",
+        "copiedSourceLockDigest",
+        "dependencyRuntime"
+      ],
+      "properties": {
+        "nodeVersion": { "type": "string", "minLength": 1 },
+        "tsxVersion": { "type": "string", "minLength": 1 },
+        "tidyDagsterLockDigest": { "$ref": "#/$defs/digest" },
+        "copiedSourceLockDigest": { "$ref": "#/$defs/digest" },
+        "dependencyRuntime": {
+          "const": "tidy-dagster-locked-node-modules"
+        }
+      }
+    },
+    "bundleVerifiedBefore": { "const": true },
+    "bundleVerifiedAfter": { "const": true },
+    "relocated": { "const": true },
+    "runtimeSiblingDependencyUsed": { "const": false },
+    "networkIsolationEnforced": { "const": true },
+    "candidateImplementationUsed": { "const": false },
+    "independentReview": { "const": false },
+    "parityEstablished": { "const": false },
+    "limitations": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "recordedAt": { "type": "string", "format": "date-time" },
+    "referenceDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "segments",
+        "kinds",
+        "roleHints",
+        "formatSignatures",
+        "formatting",
+        "selectedCellCount",
+        "nonblankCount",
+        "valueLikeCount",
+        "sample"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "kinds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "roleHints": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "formatSignatures": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "formatting": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "selectedCellCount": { "type": "integer", "minimum": 1 },
+        "nonblankCount": { "type": "integer", "minimum": 0 },
+        "valueLikeCount": { "type": "integer", "minimum": 0 },
+        "sample": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "sheet",
+        "candidates",
+        "omittedCandidateCount",
+        "observationPanelCount",
+        "formatFactCount",
+        "cellDataFactCount"
+      ],
+      "properties": {
+        "version": {
+          "const": "semantic-region-catalog-v5-adjacent-year-aware"
+        },
+        "sheet": { "type": "string", "minLength": 1 },
+        "candidates": {
+          "type": "array",
+          "maxItems": 160,
+          "items": { "$ref": "#/$defs/candidate" }
+        },
+        "omittedCandidateCount": { "type": "integer", "minimum": 0 },
+        "observationPanelCount": { "type": "integer", "minimum": 0 },
+        "formatFactCount": { "type": "integer", "minimum": 0 },
+        "cellDataFactCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "caseId",
+        "workbookRelativePath",
+        "workbookContentDigest",
+        "catalogCount",
+        "catalogs",
+        "caseDigest"
+      ],
+      "properties": {
+        "caseId": {
+          "enum": ["multi-table", "simple-crosstab", "sparse-headers"]
+        },
+        "workbookRelativePath": { "type": "string", "minLength": 1 },
+        "workbookContentDigest": { "$ref": "#/$defs/digest" },
+        "catalogCount": { "type": "integer", "minimum": 1 },
+        "catalogs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/catalog" }
+        },
+        "caseDigest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}

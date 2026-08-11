@@ -43,7 +43,7 @@ recipe-aware CSV evidence. With `includeSummary: true`, it also emits
 `compact-context.json`. Both outputs match all four sheets in the three
 relocated historical-source reference workbooks. With
 `includeRegionCatalog: true`, it emits the bounded provider-free V5
-`region-catalog.json`; 43 copied source-owned compiler/catalogue tests pass, but
-no exact historical catalogue reference is claimed yet. M2 remains incomplete
+`region-catalog.json`; 43 copied source-owned compiler/catalogue tests pass and
+all four historical-reference catalogues match exactly. M2 remains incomplete
 pending broader option/adversarial coverage and produced-CSV/rendered
 prompt-input integration.

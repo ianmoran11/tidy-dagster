@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy.example/contracts/reference-region/v1/parity.schema.json",
+  "title": "Candidate role-aware region catalogue parity v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "referenceDigest",
+    "referenceCaseDigests",
+    "candidateSourceDigest",
+    "candidateFiles",
+    "matchedCatalogCount",
+    "mismatchCount",
+    "scope",
+    "review",
+    "recordedAt",
+    "parityDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.candidate-region-catalog-parity/v1" },
+    "referenceDigest": { "$ref": "#/$defs/digest" },
+    "referenceCaseDigests": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/digest" }
+    },
+    "candidateSourceDigest": { "$ref": "#/$defs/digest" },
+    "candidateFiles": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relativePath", "contentDigest"],
+        "properties": {
+          "relativePath": { "type": "string", "minLength": 1 },
+          "contentDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    "matchedCatalogCount": { "const": 4 },
+    "mismatchCount": { "const": 0 },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "referenceKind",
+        "catalogVersion",
+        "caseIds",
+        "scopeParityEstablished",
+        "fullPhaseCParityEstablished"
+      ],
+      "properties": {
+        "referenceKind": { "const": "historical-source" },
+        "catalogVersion": {
+          "const": "semantic-region-catalog-v5-adjacent-year-aware"
+        },
+        "caseIds": {
+          "const": ["multi-table", "simple-crosstab", "sparse-headers"]
+        },
+        "scopeParityEstablished": { "const": true },
+        "fullPhaseCParityEstablished": { "const": false }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "independent", "limitations"],
+      "properties": {
+        "method": { "const": "implementing-agent-self-review" },
+        "independent": { "const": false },
+        "limitations": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "recordedAt": { "type": "string", "format": "date-time" },
+    "parityDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

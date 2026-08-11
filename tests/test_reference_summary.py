@@ -87,7 +87,7 @@ def test_candidate_summary_parity_record_binds_current_source() -> None:
     semantic = dict(parity)
     parity_digest = semantic.pop("parityDigest")
     assert parity_digest == (
-        "sha256:284ab8d7ac3a171f804e23d6fe84de72a96a82e2a26c05793b3cb905ecff4e9b"
+        "sha256:c18a2b12f8acea488798c23123371a9d1f2d684bb713506aac50c84d452d45c4"
     )
     assert parity_digest == domain_digest("tidy.candidate-summary-parity/v1", semantic)
     reference = json.loads(REFERENCE.read_text())

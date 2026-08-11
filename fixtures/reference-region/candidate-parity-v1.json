@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "tidy.candidate-region-catalog-parity/v1",
+  "referenceDigest": "sha256:7632516d91c47855105d72b072df7368bf67b2167c0e74a4ab4833f6b5a954df",
+  "referenceCaseDigests": [
+    "sha256:4b9948140809d01d61ed986f7f5a749ac01d1589ea30370af7aa8170473433b9",
+    "sha256:2ebac7e7b8221f8f44791a018be33bbe737358476510381839200b652e0e4853",
+    "sha256:ad4e83ac05109f3fbcfb8b34c4f996c1d778da62955c41c7b4d14d06fb28b4ea"
+  ],
+  "candidateSourceDigest": "sha256:642319362bdc654d2b37ca9ed69b3234dd9fa41b756cfabc423404e054760da4",
+  "candidateFiles": [
+    {
+      "relativePath": "apps/domain-worker/src/address.ts",
+      "contentDigest": "sha256:96f47918661401b0fea8d4e39c4c247ffe19580ff7309b5436e4623e8d56f3e4"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/context/compactContext.ts",
+      "contentDigest": "sha256:2b327fcbb21c2f876af04f801cf56f15e0ee250bae8f1cd93d9f157c03e74583"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/executor/relationshipResolution.ts",
+      "contentDigest": "sha256:3e64fa228ef0b835b85d8af6dd062c2635acdd3e2e60ff9087fbcf8d73f00395"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/recipe/schema.ts",
+      "contentDigest": "sha256:433b16cf37dab93f4070a743da6696bee261fefd34a2d841a66dcf27cbd27e0c"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/recipe/types.ts",
+      "contentDigest": "sha256:51d6758727821ab9a66a1296152e223438a80efdb199212b25fcd3b301d95518"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/workbook/types.ts",
+      "contentDigest": "sha256:e9007fcf381a92af7f347371f3c28e6f7b9085d796dc07b16ee50760a415c0a4"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/workbook/parseWorkbook.ts",
+      "contentDigest": "sha256:1d06c99a4ea7f9f630b60fa9b4f8150a4ca5541e6129df48ac95aa80807cc07b"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/types.ts",
+      "contentDigest": "sha256:d82bb1790736c38d73e636ffb0562d391250b25b449b4008028f1fcbd00b2a8f"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/semantic-gold-schema.ts",
+      "contentDigest": "sha256:0ead782472e4361b4269b1f24aa1cd208698918f410d125cda226f782e280ed9"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/cell-role-sketch-v02.ts",
+      "contentDigest": "sha256:973791b0e57eef1fa044a566faeefdbcc5591df8b8cc53f6f32d24eb79b71b34"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/compiler-v02.ts",
+      "contentDigest": "sha256:79924b56df328b89579762dff0aa0aaafba69dded3394a209385cc3acbe95388"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/geometry-v02.ts",
+      "contentDigest": "sha256:a298d6a375fbbd166d1490074ae9168202fcfa649a90ac7064cc32233f711480"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/semantic-map-v1.ts",
+      "contentDigest": "sha256:d7704cd4680d3613987d41493413db10ff777779d32e4b29e125ec7f9c5d78d4"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/format-aware-region-catalog-v2.ts",
+      "contentDigest": "sha256:bcdb4d13ff063bc1e97cc50b0ab7292ed21dd70f2a9d2fad81b686644d2e9435"
+    },
+    {
+      "relativePath": "apps/domain-worker/src/catalog/role-aware-region-catalog-v5.ts",
+      "contentDigest": "sha256:98eda0fe29f19a5fe7e41ec47f6d94ab05a9d03760790b6595484cbd9d2b8454"
+    }
+  ],
+  "matchedCatalogCount": 4,
+  "mismatchCount": 0,
+  "scope": {
+    "referenceKind": "historical-source",
+    "catalogVersion": "semantic-region-catalog-v5-adjacent-year-aware",
+    "caseIds": ["multi-table", "simple-crosstab", "sparse-headers"],
+    "scopeParityEstablished": true,
+    "fullPhaseCParityEstablished": false
+  },
+  "review": {
+    "method": "implementing-agent-self-review",
+    "independent": false,
+    "limitations": [
+      "Exact equality is limited to four catalogues from three synthetic historical-reference workbooks.",
+      "Rendered prompt parity, broad adversarial coverage, and independent review remain incomplete."
+    ]
+  },
+  "recordedAt": "2026-08-12T04:00:00Z",
+  "parityDigest": "sha256:1ff8c4be2c785745f1e2c8fbd839160da659f56c6a571911368526047b76c0a1"
+}

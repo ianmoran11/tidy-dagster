@@ -8,7 +8,7 @@
 - Real source bytes copied into Tidy Dagster: 4,781,394 reference-only bytes
 - Summary parity: exact on four sheets across three frozen fixture workbooks
 - Compact-context parity: exact on the same four sheets
-- Formatting and role-aware catalogue: ported; 43 copied tests pass
+- Formatting and role-aware catalogue: exact on the same four sheets; 43 copied tests pass
 - Produced-CSV diagnostic behavior: ported; six copied tests pass
 - Prompt-input parity: none
 - Provider calls: zero
@@ -169,9 +169,9 @@ passes the nine copied source-owned summary tests and exactly matches all four
 frozen summary objects. The separate self-reviewed candidate parity record at
 `fixtures/reference-summary/candidate-parity-v1.json` binds candidate source
 digest
-`sha256:44a3a19d40cbde213f3c7dae98b24638ee4d4bdd55133eb7d3a19834db1a335b`
+`sha256:8b9100009d4d9d137b0f696d334094602b3bb1d3c7d03c94e1a142079b204b43`
 and parity digest
-`sha256:284ab8d7ac3a171f804e23d6fe84de72a96a82e2a26c05793b3cb905ecff4e9b`.
+`sha256:c18a2b12f8acea488798c23123371a9d1f2d684bb713506aac50c84d452d45c4`.
 This establishes bounded default-option compatibility, not full Phase C parity
 or independent review. The historical reference honestly retains
 `parityEstablished: false`; the later parity record establishes only its
@@ -207,8 +207,16 @@ V2 candidates, and role/year-aware V5 candidates. `includeRegionCatalog: true`
 emits `region-catalog.json` without requiring a provider. All 43 copied
 historical source tests pass, including exact direction, correction,
 completeness, formatting, repeated-panel, and year-like geometry cases.
-Capabilities label this honestly as implementation plus copied-source-test
-evidence: no exact historical-reference catalogue is claimed yet.
+A separate network-denied relocated harness also freezes four historical
+catalogues with reference digest
+`sha256:7632516d91c47855105d72b072df7368bf67b2167c0e74a4ab4833f6b5a954df`.
+The candidate source closure digest is
+`sha256:642319362bdc654d2b37ca9ed69b3234dd9fa41b756cfabc423404e054760da4`
+and the implementing-agent self-reviewed scoped parity digest is
+`sha256:1ff8c4be2c785745f1e2c8fbd839160da659f56c6a571911368526047b76c0a1`.
+The historical record remains provenance-only and false for candidate/full
+parity; the separate candidate record establishes only exact four-catalogue
+compatibility.
 
 ## Produced-CSV diagnostic increment
 
@@ -227,9 +235,10 @@ that integration remains a separate parity gate.
 - focused compact-context behavior tests: `4 passed`;
 - historical-reference candidate compact-context parity: `4/4` exact;
 - copied V0.2/V1/V2/V5 compiler/catalogue tests: `43 passed`;
+- historical-reference candidate region-catalogue parity: `4/4` exact;
 - copied produced-CSV diagnostic tests: `6 passed`;
-- complete TypeScript/Vitest suite: `220 passed, 1 skipped`;
-- complete Python suite: `149 passed, 1 skipped`;
+- complete TypeScript/Vitest suite: `221 passed, 1 skipped`;
+- complete Python suite: `151 passed, 1 skipped`;
 - strict JSON Schemas validate discovery, self-review, copy, replay, reference,
   and scoped parity records;
 - the checked-in producer digest binds the exact discovery implementation;
@@ -254,9 +263,8 @@ This boundary does not yet:
 ADR 0005 permitted the now-completed bounded copy after exact custody and
 implementing-agent self-review. Relocated source-owned replay and bounded default
 summary and compact-context parity now pass; the role-aware catalogue/compiler
-and produced-CSV diagnostics are ported. The next step is exact catalogue
-reference comparison, produced-CSV prompt integration, and rendered prompt-input
-implementation with
+and produced-CSV diagnostics are ported. The next step is produced-CSV prompt
+integration and rendered prompt-input implementation with
 separately frozen references. Phase C remains incomplete until full intermediate
 and rendered-output parity, adversarial fixtures, independently refereed
 relocated parity, and all existing M0–M4 checks pass.

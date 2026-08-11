@@ -684,8 +684,10 @@ describe("strict worker protocol", () => {
         supported: true,
         contract: "semantic-region-catalog-v5-adjacent-year-aware",
         sourceOwnedTestCount: 43,
-        exactHistoricalReference: false,
-        scope: "implementation-and-copied-source-tests-only",
+        exactHistoricalReference: true,
+        historicalReferenceDigest:
+          "sha256:7632516d91c47855105d72b072df7368bf67b2167c0e74a4ab4833f6b5a954df",
+        scope: "historical-default-four-catalog-parity-v1",
       });
     }
   });

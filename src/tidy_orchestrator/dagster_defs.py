@@ -337,7 +337,7 @@ def build_definitions(
             "compact_context_supported": True,
             "compact_context_scope": "historical-complete-fixture-parity-v1",
             "region_catalog_supported": True,
-            "region_catalog_scope": "copied-source-tests-only-v1",
+            "region_catalog_scope": "historical-default-four-catalog-parity-v1",
         },
     )
 
