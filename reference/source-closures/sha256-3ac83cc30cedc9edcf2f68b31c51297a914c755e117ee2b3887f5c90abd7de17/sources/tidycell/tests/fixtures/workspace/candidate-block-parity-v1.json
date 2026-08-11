@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0.0",
+  "detector_version": "tidybank-candidate-blocks-v1",
+  "source_commit": "6eed7df0c54a53d4680a5a0551655bf6346d4c7d",
+  "fixtures": {
+    "Striped blocks": [
+      {
+        "range": "R7C1:R37C1",
+        "signature": {
+          "dataType": "string",
+          "bold": true,
+          "indentStep": 0,
+          "hasFill": true
+        },
+        "cellCount": 31,
+        "label": "labels sharing “region”",
+        "classification": "repeated-label-run",
+        "suggestedRole": "header",
+        "confidence": "medium",
+        "confidenceFactors": ["shared-label-stem"],
+        "evidence": "Nonblank labels share the common stem “region” along one column.",
+        "ranges": ["R7C1:R37C1"],
+        "signatureSummary": "string; bold; indent 0; fill present"
+      },
+      {
+        "range": "R7C2:R37C19",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": true
+        },
+        "cellCount": 558,
+        "label": "numeric block at rows 7–37, columns 2–19",
+        "classification": "format-partition",
+        "suggestedRole": "value",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the numeric; regular; indent 0; fill present signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R7C2:R37C19"],
+        "signatureSummary": "numeric; regular; indent 0; fill present"
+      }
+    ],
+    "Year observations": [
+      {
+        "range": "R1C2:R1C4",
+        "signature": {
+          "dataType": "numeric",
+          "bold": true,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 3,
+        "label": "year values 2017–2019",
+        "classification": "year-run",
+        "suggestedRole": "header",
+        "confidence": "medium",
+        "confidenceFactors": [
+          "annual-step",
+          "ascending-direction",
+          "adjacent-value-body"
+        ],
+        "evidence": "Year values 2017–2019 form a contiguous row run inside 1850–2100.",
+        "ranges": ["R1C2:R1C4"],
+        "signatureSummary": "numeric; bold; indent 0; no fill"
+      },
+      {
+        "range": "R2C2:R4C4",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 9,
+        "label": "numeric block at rows 2–4, columns 2–4",
+        "classification": "format-partition",
+        "suggestedRole": "value",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the numeric; regular; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R2C2:R4C4"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      },
+      {
+        "range": "R2C1:R4C1",
+        "signature": {
+          "dataType": "string",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 3,
+        "label": "row labels at rows 2–4, column 1",
+        "classification": "format-partition",
+        "suggestedRole": "unknown",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the string; regular; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R2C1:R4C1"],
+        "signatureSummary": "string; regular; indent 0; no fill"
+      },
+      {
+        "range": "R1C1:R1C1",
+        "signature": {
+          "dataType": "string",
+          "bold": true,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 1,
+        "label": "bold text block at row 1, column 1",
+        "classification": "format-partition",
+        "suggestedRole": "unknown",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the string; bold; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R1C1:R1C1"],
+        "signatureSummary": "string; bold; indent 0; no fill"
+      }
+    ],
+    "Recorded year blocks": [
+      {
+        "range": "R8C1:R18C1",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 33,
+        "label": "year values 2010–2020",
+        "classification": "year-run",
+        "suggestedRole": "header",
+        "confidence": "high",
+        "confidenceFactors": [
+          "annual-step",
+          "ascending-direction",
+          "long-run",
+          "adjacent-value-body"
+        ],
+        "evidence": "Year values 2010–2020 form a contiguous column run inside 1850–2100. This structure repeats 3 times.",
+        "ranges": ["R8C1:R18C1", "R20C1:R30C1", "R32C1:R42C1"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      },
+      {
+        "range": "R8C2:R18C3",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 22,
+        "label": "numeric block at rows 8–18, columns 2–3",
+        "classification": "format-partition",
+        "suggestedRole": "value",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the numeric; regular; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R8C2:R18C3"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      },
+      {
+        "range": "R20C2:R30C3",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 22,
+        "label": "numeric block at rows 20–30, columns 2–3",
+        "classification": "format-partition",
+        "suggestedRole": "value",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the numeric; regular; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R20C2:R30C3"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      },
+      {
+        "range": "R32C2:R42C3",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 22,
+        "label": "numeric block at rows 32–42, columns 2–3",
+        "classification": "format-partition",
+        "suggestedRole": "value",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the numeric; regular; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R32C2:R42C3"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      },
+      {
+        "range": "R44C1:R45C2",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 4,
+        "label": "numeric block at rows 44–45, columns 1–2",
+        "classification": "format-partition",
+        "suggestedRole": "value",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the numeric; regular; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R44C1:R45C2"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      },
+      {
+        "range": "R7C1:R7C3",
+        "signature": {
+          "dataType": "string",
+          "bold": true,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 3,
+        "label": "bold column labels at row 7, columns 1–3",
+        "classification": "format-partition",
+        "suggestedRole": "unknown",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the string; bold; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R7C1:R7C3"],
+        "signatureSummary": "string; bold; indent 0; no fill"
+      }
+    ],
+    "Factor-varied year blocks": [
+      {
+        "range": "R1C1:R3C1",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 6,
+        "label": "year values 2020–2010",
+        "classification": "year-run",
+        "suggestedRole": "header",
+        "confidence": "low",
+        "confidenceFactors": ["plausible-step", "descending-direction"],
+        "evidence": "Year values 2020–2010 form an evenly stepped by 5 column run inside 1850–2100. This structure repeats 2 times.",
+        "ranges": ["R1C1:R3C1", "R5C1:R7C1"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      },
+      {
+        "range": "R5C2:R7C2",
+        "signature": {
+          "dataType": "numeric",
+          "bold": false,
+          "indentStep": 0,
+          "hasFill": false
+        },
+        "cellCount": 3,
+        "label": "numeric block at rows 5–7, column 2",
+        "classification": "format-partition",
+        "suggestedRole": "value",
+        "confidence": "low",
+        "confidenceFactors": ["format-signature"],
+        "evidence": "Cells share the numeric; regular; indent 0; no fill signature; no stronger structural pattern was confirmed.",
+        "ranges": ["R5C2:R7C2"],
+        "signatureSummary": "numeric; regular; indent 0; no fill"
+      }
+    ]
+  }
+}

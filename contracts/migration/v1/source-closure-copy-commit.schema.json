@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration/v1/source-closure-copy-commit.schema.json",
+  "title": "SourceClosureCopyCommitV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "closureManifestDigest",
+    "closureManifestFileDigest",
+    "closureManifestFileBytes",
+    "selfReviewDigest",
+    "selfReviewFileDigest",
+    "selfReviewFileBytes",
+    "copyProducerDigest",
+    "copiedAt",
+    "itemCount",
+    "byteLength",
+    "bundleContentDigest",
+    "sourceBytesCopied",
+    "runtimeAuthorized",
+    "parityEstablished",
+    "commitDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.source-closure-copy-commit/v1" },
+    "closureManifestDigest": { "$ref": "#/$defs/digest" },
+    "closureManifestFileDigest": { "$ref": "#/$defs/digest" },
+    "closureManifestFileBytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8388608
+    },
+    "selfReviewDigest": { "$ref": "#/$defs/digest" },
+    "selfReviewFileDigest": { "$ref": "#/$defs/digest" },
+    "selfReviewFileBytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1048576
+    },
+    "copyProducerDigest": { "$ref": "#/$defs/digest" },
+    "copiedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "itemCount": { "type": "integer", "minimum": 1, "maximum": 1000 },
+    "byteLength": { "type": "integer", "minimum": 1, "maximum": 33554432 },
+    "bundleContentDigest": { "$ref": "#/$defs/digest" },
+    "sourceBytesCopied": { "const": true },
+    "runtimeAuthorized": { "const": false },
+    "parityEstablished": { "const": false },
+    "commitDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

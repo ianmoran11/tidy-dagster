@@ -1,0 +1,70 @@
+{
+  "version": "0.1",
+  "sheet": "Sheet1",
+  "tables": [
+    {
+      "name": "main_table",
+      "values": {
+        "name": "value",
+        "cells": "R8C2:R21C3"
+      },
+      "headers": [
+        {
+          "name": "statistic",
+          "direction": "N",
+          "cells": ["R5C2", "R5C3"],
+          ".values": ["Persons", "Proportion"]
+        },
+        {
+          "name": "variables",
+          "direction": "WNW",
+          "cells": ["R7C1", "R13C1"],
+          ".values": [
+            "How personal information was used(a)",
+            "Whether reported the incident to authority"
+          ]
+        },
+        {
+          "name": "fraud_method",
+          "direction": "W",
+          "cells": [
+            "R8C1",
+            "R9C1",
+            "R10C1",
+            "R11C1",
+            "R12C1",
+            "R14C1",
+            "R15C1",
+            "R16C1",
+            "R17C1",
+            "R18C1",
+            "R19C1",
+            "R20C1",
+            "R21C1"
+          ],
+          ".values": [
+            "To obtain money from a bank account, superannuation or investments/shares",
+            "To open accounts in your name, including phone and utilities",
+            "To apply for a loan or gain credit",
+            "To file a fraudulent tax return",
+            "Other(b)",
+            "Incident reported(c)",
+            "Bank or financial institution",
+            "Police",
+            "Government organisation or department",
+            "Social media site",
+            "Other",
+            "Incident not reported",
+            "Total(d)"
+          ]
+        },
+        {
+          "name": "unit",
+          "direction": "N",
+          "cells": ["R6C2", "R6C3"],
+          ".values": ["%", "%"]
+        }
+      ]
+    }
+  ]
+}

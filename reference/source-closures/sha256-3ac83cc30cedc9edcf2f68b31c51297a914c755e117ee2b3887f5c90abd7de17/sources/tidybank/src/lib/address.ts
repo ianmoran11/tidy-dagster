@@ -1,0 +1,323 @@
+export type CellAddress = {
+  row: number;
+  col: number;
+};
+
+export type CellRange = {
+  start: CellAddress;
+  end: CellAddress;
+};
+
+export type AddressErrorCode =
+  "EMPTY_ADDRESS" | "INVALID_CELL" | "INVALID_RANGE" | "OUT_OF_BOUNDS";
+
+const R1C1_CELL_PATTERN = /^R([1-9]\d*)C([1-9]\d*)$/;
+const A1_CELL_PATTERN = /^([A-Z]+)([1-9]\d*)$/i;
+
+export const MAX_ROW = 1_048_576;
+export const MAX_COL = 16_384;
+export const MAX_EXPANDED_RANGE_CELLS = 2_000_000;
+
+export class AddressValidationError extends Error {
+  readonly code: AddressErrorCode;
+  readonly input: string;
+
+  constructor(code: AddressErrorCode, input: string, message: string) {
+    super(message);
+    this.name = "AddressValidationError";
+    this.code = code;
+    this.input = input;
+  }
+}
+
+export function isAddressValidationError(
+  error: unknown,
+): error is AddressValidationError {
+  return error instanceof AddressValidationError;
+}
+
+/** Parse either canonical R1C1 or case-insensitive A1 notation. */
+export function parseCell(input: string): CellAddress {
+  const address = normalizeInput(input);
+  const r1c1Match = R1C1_CELL_PATTERN.exec(address);
+
+  if (r1c1Match) {
+    return parseR1C1Match(r1c1Match, input);
+  }
+
+  const a1Match = A1_CELL_PATTERN.exec(address);
+  if (a1Match) {
+    return parseA1Match(a1Match, input);
+  }
+
+  throw new AddressValidationError(
+    "INVALID_CELL",
+    input,
+    `Expected an R1C1 address like R3C4 or an A1 address like D3, received ${JSON.stringify(input)}.`,
+  );
+}
+
+export function parseA1Cell(input: string): CellAddress {
+  const address = normalizeInput(input);
+  const match = A1_CELL_PATTERN.exec(address);
+
+  if (!match) {
+    throw new AddressValidationError(
+      "INVALID_CELL",
+      input,
+      `Expected an A1 address like D3, received ${JSON.stringify(input)}.`,
+    );
+  }
+
+  return parseA1Match(match, input);
+}
+
+export function formatCell(address: CellAddress): string {
+  assertRowOrCol(address.row, "row", "row");
+  assertRowOrCol(address.col, "col", "col");
+  return `R${address.row}C${address.col}`;
+}
+
+/** Parse a canonical R1C1 range, rejecting reversed endpoints. */
+export function parseRange(input: string): CellRange {
+  const range = normalizeInput(input);
+  const parts = range.split(":");
+
+  if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
+    throw invalidRange(
+      input,
+      `Expected an R1C1 range like R3C4:R4C5, received ${JSON.stringify(input)}.`,
+    );
+  }
+
+  const startInput = parts[0];
+  const endInput = parts[1];
+  if (startInput === undefined || endInput === undefined) {
+    throw invalidRange(input, "Range must contain two endpoints.");
+  }
+
+  const start = parseR1C1Cell(startInput, input);
+  const end = parseR1C1Cell(endInput, input);
+  assertRangeOrder(start, end, input);
+  return { start, end };
+}
+
+export function parseA1Range(input: string): CellRange {
+  const range = normalizeInput(input);
+  const parts = range.split(":");
+
+  if (parts.length !== 2 || parts.some((part) => part.length === 0)) {
+    throw invalidRange(
+      input,
+      `Expected an A1 range like D3:G8, received ${JSON.stringify(input)}.`,
+    );
+  }
+
+  const startInput = parts[0];
+  const endInput = parts[1];
+  if (startInput === undefined || endInput === undefined) {
+    throw invalidRange(input, "Range must contain two endpoints.");
+  }
+
+  const start = parseA1Cell(startInput);
+  const end = parseA1Cell(endInput);
+  assertRangeOrder(start, end, input);
+  return { start, end };
+}
+
+export function formatRange(range: CellRange): string {
+  assertRangeOrder(range.start, range.end, rangeInput(range));
+  return `${formatCell(range.start)}:${formatCell(range.end)}`;
+}
+
+export function expandRange(range: CellRange): CellAddress[] {
+  const input = formatRange(range);
+  const cellCount =
+    (range.end.row - range.start.row + 1) *
+    (range.end.col - range.start.col + 1);
+
+  if (cellCount > MAX_EXPANDED_RANGE_CELLS) {
+    throw new AddressValidationError(
+      "OUT_OF_BOUNDS",
+      input,
+      `Range expands to ${cellCount} cells, which exceeds the supported maximum of ${MAX_EXPANDED_RANGE_CELLS}.`,
+    );
+  }
+
+  const addresses: CellAddress[] = [];
+  for (let row = range.start.row; row <= range.end.row; row += 1) {
+    for (let col = range.start.col; col <= range.end.col; col += 1) {
+      addresses.push({ row, col });
+    }
+  }
+  return addresses;
+}
+
+export function boundingRangeOf(addresses: string[]): CellRange {
+  const firstInput = addresses[0];
+  if (firstInput === undefined) {
+    throw new AddressValidationError(
+      "EMPTY_ADDRESS",
+      "",
+      "Cannot compute the bounding range of an empty address list.",
+    );
+  }
+
+  const first = parseCell(firstInput);
+  let minRow = first.row;
+  let maxRow = first.row;
+  let minCol = first.col;
+  let maxCol = first.col;
+
+  for (let index = 1; index < addresses.length; index += 1) {
+    const input = addresses[index];
+    if (input === undefined) {
+      continue;
+    }
+    const cell = parseCell(input);
+    minRow = Math.min(minRow, cell.row);
+    maxRow = Math.max(maxRow, cell.row);
+    minCol = Math.min(minCol, cell.col);
+    maxCol = Math.max(maxCol, cell.col);
+  }
+
+  return {
+    start: { row: minRow, col: minCol },
+    end: { row: maxRow, col: maxCol },
+  };
+}
+
+export function a1ToR1C1(input: string): string {
+  return formatCell(parseA1Cell(input));
+}
+
+export function a1RangeToR1C1(input: string): string {
+  return formatRange(parseA1Range(input));
+}
+
+function parseR1C1Cell(input: string, originalInput = input): CellAddress {
+  const address = normalizeInput(input);
+  const match = R1C1_CELL_PATTERN.exec(address);
+
+  if (!match) {
+    throw new AddressValidationError(
+      "INVALID_CELL",
+      originalInput,
+      `Expected an R1C1 address like R3C4, received ${JSON.stringify(input)}.`,
+    );
+  }
+
+  return parseR1C1Match(match, originalInput);
+}
+
+function parseR1C1Match(
+  match: RegExpExecArray,
+  originalInput: string,
+): CellAddress {
+  const row = match[1];
+  const col = match[2];
+  if (row === undefined || col === undefined) {
+    throw new AddressValidationError(
+      "INVALID_CELL",
+      originalInput,
+      `Invalid R1C1 address: ${JSON.stringify(originalInput)}.`,
+    );
+  }
+  return {
+    row: parseRowOrCol(row, "row", originalInput),
+    col: parseRowOrCol(col, "col", originalInput),
+  };
+}
+
+function parseA1Match(
+  match: RegExpExecArray,
+  originalInput: string,
+): CellAddress {
+  const letters = match[1];
+  const row = match[2];
+  if (letters === undefined || row === undefined) {
+    throw new AddressValidationError(
+      "INVALID_CELL",
+      originalInput,
+      `Invalid A1 address: ${JSON.stringify(originalInput)}.`,
+    );
+  }
+  return {
+    row: parseRowOrCol(row, "row", originalInput),
+    col: lettersToColumn(letters, originalInput),
+  };
+}
+
+function normalizeInput(input: string): string {
+  if (typeof input !== "string" || input.trim().length === 0) {
+    throw new AddressValidationError(
+      "EMPTY_ADDRESS",
+      String(input),
+      "Address input must be a non-empty string.",
+    );
+  }
+  return input.trim().toUpperCase();
+}
+
+function parseRowOrCol(
+  value: string,
+  kind: "row" | "col",
+  input: string,
+): number {
+  const parsed = Number(value);
+  assertRowOrCol(parsed, kind, input);
+  return parsed;
+}
+
+function assertRowOrCol(
+  value: number,
+  kind: "row" | "col",
+  input: string,
+): void {
+  const max = kind === "row" ? MAX_ROW : MAX_COL;
+  if (!Number.isSafeInteger(value) || value < 1 || value > max) {
+    throw new AddressValidationError(
+      "OUT_OF_BOUNDS",
+      input,
+      `${kind === "row" ? "Rows" : "Columns"} must be integers between 1 and ${max}, received ${value}.`,
+    );
+  }
+}
+
+function lettersToColumn(letters: string, input: string): number {
+  let col = 0;
+  for (const letter of letters.toUpperCase()) {
+    col = col * 26 + letter.charCodeAt(0) - 64;
+    if (col > MAX_COL) {
+      throw new AddressValidationError(
+        "OUT_OF_BOUNDS",
+        input,
+        `Column letters exceed the supported range: ${letters}.`,
+      );
+    }
+  }
+  return col;
+}
+
+function assertRangeOrder(
+  start: CellAddress,
+  end: CellAddress,
+  input: string,
+): void {
+  formatCell(start);
+  formatCell(end);
+  if (start.row > end.row || start.col > end.col) {
+    throw invalidRange(
+      input,
+      `Range start must be above and to the left of range end: ${input}.`,
+    );
+  }
+}
+
+function rangeInput(range: CellRange): string {
+  return `R${range.start.row}C${range.start.col}:R${range.end.row}C${range.end.col}`;
+}
+
+function invalidRange(input: string, message: string): AddressValidationError {
+  return new AddressValidationError("INVALID_RANGE", input, message);
+}

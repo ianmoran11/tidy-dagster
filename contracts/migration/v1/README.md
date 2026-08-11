@@ -21,6 +21,12 @@ provider, train a model, or publish outputs.
   `source-closure-review.schema.json` — exact two-source no-copy discovery and
   implementing-agent self-review for the pinned real TidyCell/Tidybank summary
   and prompt closure. Neither schema claims parity or independent review.
+- `source-closure-copy-commit.schema.json` — immutable repository-local custody
+  after reviewed discovery. It binds every copied item and evidence file while
+  explicitly denying runtime and parity authority.
+- `source-closure-replay.schema.json` — relocated, network-denied execution of
+  every copied TidyCell source-owned test. Passing remains source-owned
+  regression evidence rather than independent parity.
 - `nas-commit.schema.json` — exact commit marker for publishing a verified
   snapshot to a filesystem such as SMB that does not support hard links.
 
@@ -144,6 +150,21 @@ uv run tidy-source-closure discover \
 uv run tidy-source-closure verify \
   --config /private/path/source-closure-request.json \
   --manifest fixtures/source-closure/summary-prompt-closure-v1.discovery.json
+
+uv run tidy-source-closure-copy copy \
+  --config /private/path/source-closure-request.json \
+  --manifest fixtures/source-closure/summary-prompt-closure-v1.discovery.json \
+  --review fixtures/source-closure/summary-prompt-closure-v1.self-review.json \
+  --destination reference/source-closures/sha256-... \
+  --copied-at 2026-08-11T16:45:00Z
+
+uv run tidy-source-closure-copy verify \
+  --directory reference/source-closures/sha256-...
+
+npx tsx scripts/replay-source-closure.ts \
+  --bundle reference/source-closures/sha256-... \
+  --output fixtures/source-closure/summary-prompt-closure-v1.replay.json \
+  --recorded-at 2026-08-11T18:30:00Z
 ```
 
 `inventory` reports failed headroom without failing the scan. `freeze` fails and

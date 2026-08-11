@@ -13,6 +13,11 @@ from referencing import Registry, Resource
 
 from tidy_orchestrator.artifacts import domain_digest
 from tidy_orchestrator.source_closure_cli import main as source_closure_main
+from tidy_orchestrator.source_closure_copy import (
+    SourceClosureCopyConflict,
+    copy_source_closure,
+    verify_source_closure_copy,
+)
 from tidy_orchestrator.source_closure_discovery import (
     SourceClosureDiscoveryError,
     SourceClosureSourceMismatch,
@@ -37,6 +42,14 @@ CHECKED_MANIFEST = (
 )
 CHECKED_REVIEW = (
     PROJECT / "fixtures/source-closure/summary-prompt-closure-v1.self-review.json"
+)
+CHECKED_COPY = (
+    PROJECT
+    / "reference/source-closures"
+    / "sha256-3ac83cc30cedc9edcf2f68b31c51297a914c755e117ee2b3887f5c90abd7de17"
+)
+CHECKED_REPLAY = (
+    PROJECT / "fixtures/source-closure/summary-prompt-closure-v1.replay.json"
 )
 FROZEN_AT = "2026-08-11T01:00:00Z"
 
@@ -315,6 +328,80 @@ def test_discovery_json_reader_rejects_duplicates_nonfinite_and_depth(
             load_discovery_request(path)
 
 
+def test_reviewed_closure_copy_is_atomic_relocatable_and_tamper_evident(
+    tmp_path: Path,
+) -> None:
+    request, _tidycell, _tidybank = _request(tmp_path / "inputs")
+    manifest = discover_source_closure(request)
+    config_path = tmp_path / "request.json"
+    manifest_path = tmp_path / "manifest.json"
+    review_path = tmp_path / "review.json"
+    config_path.write_text(json.dumps(request))
+    manifest_path.write_text(json.dumps(manifest, sort_keys=True))
+    review_semantic = {
+        "schemaVersion": "tidy.source-closure-self-review/v1",
+        "closureManifestDigest": manifest["manifestDigest"],
+        "reviewKind": "implementing-agent-self-review",
+        "status": "accepted-for-bounded-copy-and-parity-work",
+        "reviewedAt": FROZEN_AT,
+        "reviewer": "tidy-dagster-implementing-agent",
+        "checks": [
+            {
+                "id": f"fixture-review-{index}",
+                "status": "pass",
+                "evidence": [manifest["manifestDigest"]],
+            }
+            for index in range(6)
+        ],
+        "claims": {
+            "independentReview": False,
+            "parityEstablished": False,
+            "runtimeSiblingDependencyAllowed": False,
+            "sourceBytesCopied": False,
+        },
+        "limitations": [
+            "fixture implementing-agent self-review",
+            "fixture parity is not established",
+            "fixture runtime is not authorized",
+        ],
+    }
+    review = {
+        **review_semantic,
+        "reviewDigest": domain_digest(
+            "tidy.source-closure-self-review/v1", review_semantic
+        ),
+    }
+    review_path.write_text(json.dumps(review, sort_keys=True))
+    destination_parent = tmp_path / "copies"
+    destination_parent.mkdir()
+    destination = destination_parent / "closure"
+    commit = copy_source_closure(
+        request_path=config_path,
+        manifest_path=manifest_path,
+        review_path=review_path,
+        destination=destination,
+        copied_at=FROZEN_AT,
+    )
+    assert commit["sourceBytesCopied"] is True
+    assert commit["runtimeAuthorized"] is False
+    assert commit["parityEstablished"] is False
+    assert commit["itemCount"] == 16
+    assert verify_source_closure_copy(destination) == commit
+    assert not any(path.is_symlink() for path in destination.rglob("*"))
+    with pytest.raises(SourceClosureCopyConflict, match="already exists"):
+        copy_source_closure(
+            request_path=config_path,
+            manifest_path=manifest_path,
+            review_path=review_path,
+            destination=destination,
+            copied_at=FROZEN_AT,
+        )
+    copied_source = destination / "sources/tidycell/src/main.ts"
+    copied_source.write_text("tampered\n")
+    with pytest.raises(SourceClosureCopyConflict, match="item differs"):
+        verify_source_closure_copy(destination)
+
+
 def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> None:
     manifest = json.loads(CHECKED_MANIFEST.read_text())
     review = json.loads(CHECKED_REVIEW.read_text())
@@ -324,12 +411,12 @@ def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> 
     validator_for(review_schema)(review_schema).validate(review)
 
     assert canonical_manifest_digest(manifest) == (
-        "sha256:5ebbc33af007da70bbda676eff79d40f4c08decb38d713c0083003ff01154c3f"
+        "sha256:3ac83cc30cedc9edcf2f68b31c51297a914c755e117ee2b3887f5c90abd7de17"
     )
     assert manifest["totals"] == {
         "sourceCount": 2,
-        "itemCount": 138,
-        "byteLength": 4_233_461,
+        "itemCount": 140,
+        "byteLength": 4_781_394,
     }
     assert manifest["producer"]["sourceDigest"] == _producer_source_digest()
     assert review["closureManifestDigest"] == manifest["manifestDigest"]
@@ -354,6 +441,51 @@ def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> 
     assert sources["tidycell"]["authority"]["phaseASnapshotDigest"] == (
         "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d"
     )
+    copied = verify_source_closure_copy(CHECKED_COPY)
+    copy_schema = json.loads(
+        (
+            PROJECT / "contracts/migration/v1/source-closure-copy-commit.schema.json"
+        ).read_text()
+    )
+    validator_for(copy_schema).check_schema(copy_schema)
+    validator_for(copy_schema)(copy_schema).validate(copied)
+    assert copied["closureManifestDigest"] == manifest["manifestDigest"]
+    assert copied["commitDigest"] == (
+        "sha256:579ca12438a6a0a89bbf54fdbb7d9c2b4f506db9c98a5f65e9d8697192e92799"
+    )
+    assert copied["runtimeAuthorized"] is False
+    assert copied["parityEstablished"] is False
+
+    replay = json.loads(CHECKED_REPLAY.read_text())
+    replay_schema = json.loads(
+        (
+            PROJECT / "contracts/migration/v1/source-closure-replay.schema.json"
+        ).read_text()
+    )
+    validator_for(replay_schema).check_schema(replay_schema)
+    validator_for(replay_schema)(replay_schema).validate(replay)
+    replay_semantic = dict(replay)
+    replay_identity = replay_semantic.pop("replayDigest")
+    assert replay_identity == domain_digest(
+        "tidy.source-closure-replay/v1", replay_semantic
+    )
+    assert replay["closureManifestDigest"] == manifest["manifestDigest"]
+    assert replay["copyCommitDigest"] == copied["commitDigest"]
+    assert replay["testFileCount"] == 13
+    assert replay["testCount"] == replay["passedTestCount"] == 117
+    assert replay["failedTestCount"] == replay["skippedTestCount"] == 0
+    assert replay["sourceTreeDigestBefore"] == replay["sourceTreeDigestAfter"]
+    assert replay["runtimeSiblingDependencyUsed"] is False
+    assert replay["networkIsolationEnforced"] is True
+    assert replay["parityEstablished"] is False
+    manifest_tests = {
+        item["relativePath"]: item["contentDigest"]
+        for item in sources["tidycell"]["items"]
+        if item["role"] == "fixture" and item["relativePath"].endswith(".test.ts")
+    }
+    assert {
+        item["relativePath"]: item["contentDigest"] for item in replay["testFiles"]
+    } == manifest_tests
 
 
 def test_cli_writes_and_verifies_manifest(tmp_path: Path, capsys) -> None:

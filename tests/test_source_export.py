@@ -160,7 +160,9 @@ def test_checked_in_policy_is_strict_and_loadable() -> None:
         "nas-commit.schema.json": "NasSnapshotCommitV1",
         "policy.schema.json": "tidy.source-export-policy/v1",
         "snapshot.schema.json": "TidyCellExportSnapshotV1",
+        "source-closure-copy-commit.schema.json": "SourceClosureCopyCommitV1",
         "source-closure-discovery.schema.json": "SourceClosureDiscoveryV1",
+        "source-closure-replay.schema.json": "SourceClosureReplayV1",
         "source-closure-review.schema.json": "SourceClosureSelfReviewV1",
         "source-code-snapshot.schema.json": "SourceCodeExportSnapshotV1",
     }
