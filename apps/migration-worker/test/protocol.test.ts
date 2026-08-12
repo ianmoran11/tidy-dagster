@@ -175,6 +175,187 @@ describe("migration-only worker protocol", () => {
     });
   });
 
+  it("profiles restricted generation evidence without reproducing raw text", async () => {
+    const root = await fixtureRoots();
+    const evidence = {
+      provider: "openrouter",
+      model: "example/model",
+      status: "complete",
+      prompt: "secret prompt body",
+      response: { content: "secret provider response" },
+      usage: { promptTokens: 12, completionTokens: 7, totalTokens: 19 },
+      candidate: recipe,
+      unrelated: "unclassified leaf",
+    };
+    const input = await writeInput(
+      root.input,
+      "generation.json",
+      evidence,
+      "generation",
+    );
+    const request = baseRequest("profile-generation-evidence-v1");
+    request.inputs = [input];
+    request.parameters = { source: source("runs/generation.json") };
+
+    const result = await runMigrationWorker(request, root.input, root.output);
+    expect(result).toMatchObject({
+      ok: true,
+      outputs: [{ name: "generation-evidence-profile" }],
+    });
+    const profile = await readOutput(
+      root.output,
+      "generation-evidence-profile.json",
+    );
+    expect(profile).toMatchObject({
+      schemaVersion: "tidy.migration-generation-evidence-profile/v1",
+      interpretationStatus: "parsed-recognized",
+      rawEvidenceRestricted: true,
+      providerDispatchAuthorized: false,
+      retryAuthorized: false,
+      approvalAuthorityCreated: false,
+      activationAuthorized: false,
+      trainingEligible: false,
+    });
+    expect(profile.restrictedElements).toEqual([
+      expect.objectContaining({
+        pointer: "/prompt",
+        kind: "restricted-prompt",
+        valueType: "string",
+      }),
+      expect.objectContaining({
+        pointer: "/response",
+        kind: "restricted-provider-response",
+        valueType: "object",
+      }),
+    ]);
+    expect(profile.recipeCandidates).toEqual([
+      {
+        pointer: "/candidate",
+        historicalRecipeDigest: tidycellDigestRecord(recipe),
+        sheetName: "Data",
+        tableCount: 1,
+      },
+    ]);
+    expect(profile.safeMetadata).toEqual([
+      { pointer: "/model", key: "model", value: "example/model" },
+      { pointer: "/provider", key: "provider", value: "openrouter" },
+      { pointer: "/status", key: "status", value: "complete" },
+      {
+        pointer: "/usage/completionTokens",
+        key: "completionTokens",
+        value: 7,
+      },
+      { pointer: "/usage/promptTokens", key: "promptTokens", value: 12 },
+      { pointer: "/usage/totalTokens", key: "totalTokens", value: 19 },
+    ]);
+    const serialized = JSON.stringify(profile);
+    expect(serialized).not.toContain("secret prompt body");
+    expect(serialized).not.toContain("secret provider response");
+    expect(profile.source).toEqual({
+      ...source("runs/generation.json"),
+      sourceContentDigest: input.contentDigest,
+      byteLength: input.byteLength,
+    });
+  });
+
+  it("normalizes restricted key separators and classifies bare chat messages", async () => {
+    const snakeRoot = await fixtureRoots();
+    const snakeEvidence = {
+      raw_prompt: "snake prompt",
+      provider_response: "snake response",
+      usage: { prompt_tokens: 3 },
+    };
+    const snakeInput = await writeInput(
+      snakeRoot.input,
+      "snake.json",
+      snakeEvidence,
+      "generation",
+    );
+    const snakeRequest = baseRequest("profile-generation-evidence-v1");
+    snakeRequest.inputs = [snakeInput];
+    snakeRequest.parameters = { source: source("runs/snake.json") };
+    const snakeResult = await runMigrationWorker(
+      snakeRequest,
+      snakeRoot.input,
+      snakeRoot.output,
+    );
+    expect(snakeResult.ok).toBe(true);
+    const snakeProfile = await readOutput(
+      snakeRoot.output,
+      "generation-evidence-profile.json",
+    );
+    expect(snakeProfile.restrictedElements).toEqual([
+      expect.objectContaining({
+        pointer: "/provider_response",
+        kind: "restricted-provider-response",
+      }),
+      expect.objectContaining({
+        pointer: "/raw_prompt",
+        kind: "restricted-prompt",
+      }),
+    ]);
+    expect(snakeProfile.safeMetadata).toEqual([
+      { pointer: "/usage/prompt_tokens", key: "prompt_tokens", value: 3 },
+    ]);
+    expect(snakeProfile.rawEvidenceRestricted).toBe(true);
+
+    const chatRoot = await fixtureRoots();
+    const messages = [
+      { role: "user", content: "bare user content" },
+      { role: "assistant", content: "bare assistant content" },
+    ];
+    const chatInput = await writeInput(
+      chatRoot.input,
+      "messages.json",
+      messages,
+      "generation",
+    );
+    const chatRequest = baseRequest("profile-generation-evidence-v1");
+    chatRequest.inputs = [chatInput];
+    chatRequest.parameters = { source: source("runs/messages.json") };
+    const chatResult = await runMigrationWorker(
+      chatRequest,
+      chatRoot.input,
+      chatRoot.output,
+    );
+    expect(chatResult.ok).toBe(true);
+    const chatProfile = await readOutput(
+      chatRoot.output,
+      "generation-evidence-profile.json",
+    );
+    expect(chatProfile.restrictedElements).toEqual([
+      expect.objectContaining({
+        pointer: "/0/content",
+        kind: "restricted-prompt",
+      }),
+      expect.objectContaining({
+        pointer: "/1/content",
+        kind: "restricted-provider-response",
+      }),
+    ]);
+    expect(JSON.stringify(chatProfile)).not.toContain("bare user content");
+    expect(JSON.stringify(chatProfile)).not.toContain("bare assistant content");
+  });
+
+  it("enforces the combined generation profile record limit", async () => {
+    const root = await fixtureRoots();
+    const input = await writeInput(
+      root.input,
+      "generation.json",
+      { prompt: "one", response: "two" },
+      "generation",
+    );
+    const request = baseRequest("profile-generation-evidence-v1");
+    request.inputs = [input];
+    request.parameters = { source: source("runs/generation.json") };
+    request.limits.maxRecords = 1;
+    const result = await runMigrationWorker(request, root.input, root.output);
+    expect(result).toMatchObject({
+      ok: false,
+      error: { code: "RECORD_LIMIT_EXCEEDED", stage: "limit" },
+    });
+  });
+
   it("reports a declared recipe digest mismatch without granting authority", async () => {
     const root = await fixtureRoots();
     const input = await writeInput(root.input, "recipe.json", recipe, "recipe");

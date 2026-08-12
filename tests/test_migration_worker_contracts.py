@@ -76,6 +76,10 @@ def test_migration_worker_contracts_are_strict_and_self_consistent() -> None:
     approval_request["operation"] = "digest-legacy-approval-registry-v1"
     approval_request["inputs"][0]["name"] = "registry"
     approval_request["parameters"].pop("declaredRecipeDigest")
+    generation_request = copy.deepcopy(recipe_request)
+    generation_request["operation"] = "profile-generation-evidence-v1"
+    generation_request["inputs"][0]["name"] = "generation"
+    generation_request["parameters"].pop("declaredRecipeDigest")
     health_request = {
         "protocolVersion": "tidy.migration-worker/v1",
         "requestId": "health",
@@ -84,7 +88,12 @@ def test_migration_worker_contracts_are_strict_and_self_consistent() -> None:
         "parameters": {},
         "limits": _limits(),
     }
-    for request in (recipe_request, approval_request, health_request):
+    for request in (
+        recipe_request,
+        approval_request,
+        generation_request,
+        health_request,
+    ):
         _validate(schemas["request.schema.json"], registry, request)
 
     invalid = copy.deepcopy(recipe_request)
@@ -169,8 +178,52 @@ def test_migration_worker_artifact_contracts_preserve_non_authority() -> None:
             ],
         },
     }
+    generation_profile = {
+        "schemaVersion": "tidy.migration-generation-evidence-profile/v1",
+        "source": source,
+        "historicalDigestAlgorithm": "tidycell-digest-record-v1",
+        "historicalDigestSourceDigest": (
+            "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
+        ),
+        "structuralValueDigest": DIGEST_A,
+        "interpretationStatus": "parsed-recognized",
+        "restrictedElements": [
+            {
+                "pointer": "/prompt",
+                "kind": "restricted-prompt",
+                "valueType": "string",
+                "valueDigest": DIGEST_B,
+                "canonicalByteLength": 42,
+            }
+        ],
+        "recipeCandidates": [],
+        "safeMetadata": [
+            {"pointer": "/provider", "key": "provider", "value": "fixture"}
+        ],
+        "totalVisitedNodes": 3,
+        "unclassifiedLeafCount": 0,
+        "rawEvidenceRestricted": True,
+        "providerDispatchAuthorized": False,
+        "retryAuthorized": False,
+        "approvalAuthorityCreated": False,
+        "activationAuthorized": False,
+        "trainingEligible": False,
+    }
     _validate(schemas["approval-row-digests.schema.json"], registry, approval_digests)
     _validate(schemas["recipe-revision.schema.json"], registry, revision)
+    _validate(
+        schemas["generation-evidence-profile.schema.json"],
+        registry,
+        generation_profile,
+    )
+    unsafe_generation = copy.deepcopy(generation_profile)
+    unsafe_generation["rawPrompt"] = "must never be emitted"
+    with pytest.raises(ValidationError):
+        _validate(
+            schemas["generation-evidence-profile.schema.json"],
+            registry,
+            unsafe_generation,
+        )
 
     unsafe = copy.deepcopy(revision)
     unsafe["active"] = True

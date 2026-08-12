@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/migration-worker/v1/generation-evidence-profile.schema.json",
+  "title": "Migration generation evidence profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "historicalDigestAlgorithm",
+    "historicalDigestSourceDigest",
+    "structuralValueDigest",
+    "interpretationStatus",
+    "restrictedElements",
+    "recipeCandidates",
+    "safeMetadata",
+    "totalVisitedNodes",
+    "unclassifiedLeafCount",
+    "rawEvidenceRestricted",
+    "providerDispatchAuthorized",
+    "retryAuthorized",
+    "approvalAuthorityCreated",
+    "activationAuthorized",
+    "trainingEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "tidy.migration-generation-evidence-profile/v1"
+    },
+    "source": { "$ref": "#/$defs/source" },
+    "historicalDigestAlgorithm": { "const": "tidycell-digest-record-v1" },
+    "historicalDigestSourceDigest": {
+      "const": "sha256:ca0f38e741ba43886f809a2c96b782cec4db3a46787eb17f655fad019464114c"
+    },
+    "structuralValueDigest": { "$ref": "#/$defs/digest" },
+    "interpretationStatus": {
+      "enum": ["parsed-recognized", "parsed-unrecognized"]
+    },
+    "restrictedElements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pointer",
+          "kind",
+          "valueType",
+          "valueDigest",
+          "canonicalByteLength"
+        ],
+        "properties": {
+          "pointer": { "$ref": "#/$defs/pointer" },
+          "kind": {
+            "enum": [
+              "restricted-prompt",
+              "restricted-provider-response",
+              "restricted-oversized-metadata"
+            ]
+          },
+          "valueType": {
+            "enum": ["null", "array", "object", "string", "number", "boolean"]
+          },
+          "valueDigest": { "$ref": "#/$defs/digest" },
+          "canonicalByteLength": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "recipeCandidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pointer",
+          "historicalRecipeDigest",
+          "sheetName",
+          "tableCount"
+        ],
+        "properties": {
+          "pointer": { "$ref": "#/$defs/pointer" },
+          "historicalRecipeDigest": { "$ref": "#/$defs/digest" },
+          "sheetName": { "type": "string", "minLength": 1 },
+          "tableCount": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "safeMetadata": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pointer", "key", "value"],
+        "properties": {
+          "pointer": { "$ref": "#/$defs/pointer" },
+          "key": { "type": "string", "minLength": 1 },
+          "value": {
+            "type": ["null", "boolean", "number", "string"]
+          }
+        }
+      }
+    },
+    "totalVisitedNodes": { "type": "integer", "minimum": 1 },
+    "unclassifiedLeafCount": { "type": "integer", "minimum": 0 },
+    "rawEvidenceRestricted": { "type": "boolean" },
+    "providerDispatchAuthorized": { "const": false },
+    "retryAuthorized": { "const": false },
+    "approvalAuthorityCreated": { "const": false },
+    "activationAuthorized": { "const": false },
+    "trainingEligible": { "const": false }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "pointer": { "type": "string", "maxLength": 4096 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSnapshotDigest",
+        "sourceItemDigest",
+        "importRecordId",
+        "relativePath",
+        "sourceContentDigest",
+        "byteLength"
+      ],
+      "properties": {
+        "sourceSnapshotDigest": { "$ref": "#/$defs/digest" },
+        "sourceItemDigest": { "$ref": "#/$defs/digest" },
+        "importRecordId": { "$ref": "#/$defs/digest" },
+        "relativePath": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "sourceContentDigest": { "$ref": "#/$defs/digest" },
+        "byteLength": { "type": "integer", "minimum": 0, "maximum": 8388608 }
+      }
+    }
+  }
+}

@@ -145,7 +145,11 @@ expanding the accepted production domain-worker protocol. Its strict
 - validates, normalizes, and computes the historical digest of one RecipeV01
   document while keeping the revision inactive and training-ineligible; and
 - validates the exact bounded version-1 `{version, approvals}` legacy registry
-  and emits the historical digest of every complete approval row.
+  and emits the historical digest of every complete approval row; and
+- profiles bounded generation JSON into digested restricted prompt/response
+  pointers, strict nested RecipeV01 candidates, and narrow scalar metadata
+  without reproducing raw restricted text. Provider dispatch, retry, approval,
+  activation, and training authority remain false.
 
 Every request binds the frozen snapshot, source item, import record, and source
 path. Staged inputs are no-follow, length- and digest-verified; JSON bytes,
@@ -181,8 +185,11 @@ remain inactive and training-ineligible.
 
 The approval fixture now obtains its row digests from this actual executable
 and gateway before constructing the exact legacy snapshot; Python no longer
-supplies pre-recorded digests on that integration path. A valid RecipeV01
-fixture likewise enters durable custody only through the gateway. Its typed
+supplies pre-recorded digests on that integration path. A valid RecipeV01 and a
+restricted generation fixture likewise enter durable custody only through the
+gateway. The generation profile excludes raw prompt/response text and retains
+only bound digests, pointers, strict candidate identities, and allowed metadata.
+The recipe's typed
 historical digest verification binds the imported source item, exact worker
 output record, derivation, configuration, producer set, and isolation evidence,
 and is persisted before it can contribute to approval resolution. Reviewer
@@ -190,9 +197,8 @@ identities must also be persisted. Missing worker output, verification, reviewer
 records, or production isolation prevents `human_approved`; insecure approval
 digests are `inactive`.
 
-Broader
-original-candidate, generation, restricted provider-evidence, model-manifest,
-and evaluation parsers remain pending.
+Broader original-candidate extraction, model-manifest, evaluation, and
+full-estate generation-profile reconciliation remain pending.
 
 ### Conservative typed evidence dispositions
 
@@ -322,10 +328,10 @@ The fixture suite covers:
 
 Results:
 
-- focused migration gateway and import repository: `23 passed`;
-- bundled migration-worker protocol: `7 passed`;
-- complete Python suite: `158 passed, 1 skipped`;
-- TypeScript/Vitest: `155 passed, 1 skipped`;
+- focused migration gateway and migration-worker contracts: `9 passed`;
+- bundled migration-worker protocol: `10 passed`;
+- complete TypeScript/Vitest suite: `238 passed, 1 skipped`;
+- complete Python suite: `159 passed, 1 skipped`;
 - real Dagster operational regression: `1 passed`;
 - Ruff, format, boundary checks, locked sync, fixture verification, typecheck,
   lint, and parity replay passed.
@@ -350,9 +356,9 @@ The following accepted Phase B work is not implemented:
 1. process the frozen deterministic real canary under a separately gated live
    authorization while retaining all 65 missing labels and every unresolved
    target as unattributed or inactive;
-2. extend the now-integrated Python migration gateway beyond approval-row
-   digests and RecipeV01 revisions to original candidates, generation attempts,
-   raw restricted prompt/responses, model manifests, and evaluation evidence;
+2. extend the now-integrated Python migration gateway beyond approval rows,
+   RecipeV01 revisions, and bounded generation profiles to original candidates,
+   model manifests, evaluation evidence, and full-estate typed reconciliation;
 3. preserve legacy model packages as unopened archives, as required by ADR
    0005;
 4. perform full domain-by-domain reconciliation and prove one justified typed

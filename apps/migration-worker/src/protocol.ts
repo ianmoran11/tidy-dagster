@@ -18,6 +18,7 @@ import { z } from "zod";
 import {
   TIDYCELL_DIGEST_RECORD_ALGORITHM,
   TIDYCELL_DIGEST_RECORD_SOURCE_DIGEST,
+  tidycellCanonicalJson,
   tidycellDigestRecord,
 } from "../../domain-worker/src/migration/historicalDigestRecord.js";
 import { validateRecipe } from "../../domain-worker/src/recipe/schema.js";
@@ -79,6 +80,7 @@ const requestSchema = z
       "capabilities",
       "digest-legacy-approval-registry-v1",
       "parse-recipe-v01",
+      "profile-generation-evidence-v1",
     ]),
     inputs: z.array(inputSchema).max(1),
     parameters: parametersSchema,
@@ -186,6 +188,7 @@ async function runMigrationWorkerUnchecked(
                 "capabilities",
                 "digest-legacy-approval-registry-v1",
                 "parse-recipe-v01",
+                "profile-generation-evidence-v1",
               ],
               historicalDigest: {
                 algorithm: TIDYCELL_DIGEST_RECORD_ALGORITHM,
@@ -248,6 +251,44 @@ async function runMigrationWorkerUnchecked(
         {
           name: "approval-row-digests",
           relativePath: "approval-row-digests.json",
+          bytes: jsonBytes(artifact),
+        },
+      ]);
+    }
+
+    if (request.operation === "profile-generation-evidence-v1") {
+      if (request.parameters.declaredRecipeDigest !== undefined)
+        throw new MigrationProtocolError(
+          "INVALID_OPERATION_PARAMETERS",
+          "protocol",
+          "Generation evidence profiling does not accept declaredRecipeDigest.",
+        );
+      const profile = profileGenerationEvidence(
+        value,
+        request.limits.maxRecords,
+      );
+      const artifact = {
+        schemaVersion: "tidy.migration-generation-evidence-profile/v1",
+        source: {
+          ...source,
+          sourceContentDigest: input.contentDigest,
+          byteLength: input.byteLength,
+        },
+        historicalDigestAlgorithm: TIDYCELL_DIGEST_RECORD_ALGORITHM,
+        historicalDigestSourceDigest: TIDYCELL_DIGEST_RECORD_SOURCE_DIGEST,
+        structuralValueDigest: tidycellDigestRecord(value),
+        ...profile,
+        rawEvidenceRestricted: profile.restrictedElements.length > 0,
+        providerDispatchAuthorized: false,
+        retryAuthorized: false,
+        approvalAuthorityCreated: false,
+        activationAuthorized: false,
+        trainingEligible: false,
+      };
+      return await publish(request, roots, [
+        {
+          name: "generation-evidence-profile",
+          relativePath: "generation-evidence-profile.json",
           bytes: jsonBytes(artifact),
         },
       ]);
@@ -330,7 +371,11 @@ function requireSingleInput(request: MigrationWorkerRequest): InputDescriptor {
     );
   const input = request.inputs[0];
   const expectedName =
-    request.operation === "parse-recipe-v01" ? "recipe" : "registry";
+    request.operation === "parse-recipe-v01"
+      ? "recipe"
+      : request.operation === "profile-generation-evidence-v1"
+        ? "generation"
+        : "registry";
   if (!input || input.name !== expectedName)
     throw new MigrationProtocolError(
       "INVALID_OPERATION_INPUTS",
@@ -470,6 +515,207 @@ function validateApprovalRegistry(
     }
     return entry;
   });
+}
+
+const PROMPT_EVIDENCE_KEYS = new Set([
+  "input",
+  "messages",
+  "prompt",
+  "rawinput",
+  "rawprompt",
+  "requestmessages",
+  "systemprompt",
+  "userprompt",
+]);
+const RESPONSE_EVIDENCE_KEYS = new Set([
+  "completion",
+  "content",
+  "output",
+  "outputtext",
+  "providerresponse",
+  "rawcompletion",
+  "rawresponse",
+  "response",
+]);
+const SAFE_GENERATION_METADATA_KEYS = new Set([
+  "completedat",
+  "completiontokens",
+  "cost",
+  "costusd",
+  "durationms",
+  "finishreason",
+  "latencyms",
+  "model",
+  "prompttokens",
+  "provider",
+  "reasoningeffort",
+  "startedat",
+  "status",
+  "totaltokens",
+]);
+
+function profileGenerationEvidence(
+  value: unknown,
+  maxRecords: number,
+): {
+  interpretationStatus: "parsed-recognized" | "parsed-unrecognized";
+  restrictedElements: Array<Record<string, unknown>>;
+  recipeCandidates: Array<Record<string, unknown>>;
+  safeMetadata: Array<Record<string, unknown>>;
+  totalVisitedNodes: number;
+  unclassifiedLeafCount: number;
+} {
+  const restrictedElements: Array<Record<string, unknown>> = [];
+  const recipeCandidates: Array<Record<string, unknown>> = [];
+  const safeMetadata: Array<Record<string, unknown>> = [];
+  let totalVisitedNodes = 0;
+  let unclassifiedLeafCount = 0;
+  const append = (
+    target: Array<Record<string, unknown>>,
+    entry: Record<string, unknown>,
+  ) => {
+    if (
+      restrictedElements.length +
+        recipeCandidates.length +
+        safeMetadata.length >=
+      maxRecords
+    )
+      throw new MigrationProtocolError(
+        "RECORD_LIMIT_EXCEEDED",
+        "limit",
+        `Generation evidence profile exceeds the declared ${maxRecords}-record limit.`,
+      );
+    target.push(entry);
+  };
+  const visit = (
+    current: unknown,
+    pointer: string,
+    key: string | null,
+  ): void => {
+    totalVisitedNodes += 1;
+    if (pointer.length > MAX_PATH_LENGTH)
+      throw new MigrationProtocolError(
+        "JSON_POINTER_LIMIT_EXCEEDED",
+        "limit",
+        "Generation evidence contains an oversized JSON pointer.",
+      );
+    if (
+      isRecord(current) &&
+      typeof current.role === "string" &&
+      "content" in current &&
+      ["assistant", "developer", "system", "user"].includes(
+        current.role.toLowerCase(),
+      )
+    ) {
+      const content = current.content;
+      const canonical = tidycellCanonicalJson(content);
+      append(restrictedElements, {
+        pointer: `${pointer}/content`,
+        kind:
+          current.role.toLowerCase() === "assistant"
+            ? "restricted-provider-response"
+            : "restricted-prompt",
+        valueType: jsonValueType(content),
+        valueDigest: tidycellDigestRecord(content),
+        canonicalByteLength: Buffer.byteLength(canonical, "utf8"),
+      });
+      return;
+    }
+    const normalizedKey =
+      key?.toLowerCase().replaceAll(/[^a-z0-9]/g, "") ?? null;
+    if (
+      normalizedKey &&
+      (PROMPT_EVIDENCE_KEYS.has(normalizedKey) ||
+        RESPONSE_EVIDENCE_KEYS.has(normalizedKey))
+    ) {
+      const canonical = tidycellCanonicalJson(current);
+      append(restrictedElements, {
+        pointer,
+        kind: PROMPT_EVIDENCE_KEYS.has(normalizedKey)
+          ? "restricted-prompt"
+          : "restricted-provider-response",
+        valueType: jsonValueType(current),
+        valueDigest: tidycellDigestRecord(current),
+        canonicalByteLength: Buffer.byteLength(canonical, "utf8"),
+      });
+      return;
+    }
+    if (
+      isRecord(current) &&
+      current.version === "0.1" &&
+      typeof current.sheet === "string" &&
+      Array.isArray(current.tables)
+    ) {
+      const parsedRecipe = validateRecipe(current);
+      if (parsedRecipe.success) {
+        append(recipeCandidates, {
+          pointer,
+          historicalRecipeDigest: tidycellDigestRecord(parsedRecipe.data),
+          sheetName: parsedRecipe.data.sheet,
+          tableCount: parsedRecipe.data.tables.length,
+        });
+        return;
+      }
+    }
+    if (normalizedKey && SAFE_GENERATION_METADATA_KEYS.has(normalizedKey)) {
+      if (
+        current === null ||
+        typeof current === "boolean" ||
+        typeof current === "number" ||
+        (typeof current === "string" && current.length <= 512)
+      ) {
+        append(safeMetadata, { pointer, key, value: current });
+      } else {
+        const canonical = tidycellCanonicalJson(current);
+        append(restrictedElements, {
+          pointer,
+          kind: "restricted-oversized-metadata",
+          valueType: jsonValueType(current),
+          valueDigest: tidycellDigestRecord(current),
+          canonicalByteLength: Buffer.byteLength(canonical, "utf8"),
+        });
+      }
+      return;
+    }
+    if (Array.isArray(current)) {
+      current.forEach((entry, index) =>
+        visit(entry, `${pointer}/${index}`, String(index)),
+      );
+      return;
+    }
+    if (isRecord(current)) {
+      for (const childKey of Object.keys(current).sort())
+        visit(
+          current[childKey],
+          `${pointer}/${escapeJsonPointer(childKey)}`,
+          childKey,
+        );
+      return;
+    }
+    unclassifiedLeafCount += 1;
+  };
+  visit(value, "", null);
+  const recognized =
+    restrictedElements.length + recipeCandidates.length + safeMetadata.length;
+  return {
+    interpretationStatus:
+      recognized > 0 ? "parsed-recognized" : "parsed-unrecognized",
+    restrictedElements,
+    recipeCandidates,
+    safeMetadata,
+    totalVisitedNodes,
+    unclassifiedLeafCount,
+  };
+}
+
+function escapeJsonPointer(value: string): string {
+  return value.replaceAll("~", "~0").replaceAll("/", "~1");
+}
+
+function jsonValueType(value: unknown): string {
+  if (value === null) return "null";
+  if (Array.isArray(value)) return "array";
+  return typeof value;
 }
 
 async function publish(

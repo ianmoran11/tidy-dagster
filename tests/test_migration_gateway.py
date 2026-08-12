@@ -65,6 +65,14 @@ def _policy(tmp_path: Path) -> Path:
                 "artifactClass": "approval-registry",
             },
             {
+                "id": "generation",
+                "priority": 95,
+                "entryTypes": ["file"],
+                "basenameGlobs": ["generation.json"],
+                "disposition": "import",
+                "artifactClass": "generation-json-evidence",
+            },
+            {
                 "id": "recipe",
                 "priority": 90,
                 "entryTypes": ["file"],
@@ -85,7 +93,7 @@ def _policy(tmp_path: Path) -> Path:
 
 
 def _fixture(
-    tmp_path: Path, *, repository_fault=None
+    tmp_path: Path, *, repository_fault=None, include_generation: bool = False
 ) -> tuple[
     dict,
     CommittedFilesystemBlobStore,
@@ -132,6 +140,20 @@ def _fixture(
             }
         )
     )
+    if include_generation:
+        (source / "generation.json").write_text(
+            json.dumps(
+                {
+                    "provider": "openrouter",
+                    "model": "example/model",
+                    "prompt": "restricted prompt",
+                    "response": "restricted response",
+                    "candidate": json.loads(
+                        (source / "candidate.recipe.json").read_text()
+                    ),
+                }
+            )
+        )
     policy = load_policy(_policy(tmp_path))
     inventory = build_inventory(
         source_root=source,
@@ -411,6 +433,64 @@ def test_actual_gateway_persists_approval_digests_and_recipe_revision(
         connection.commit()
     with pytest.raises(ValueError, match="active authority"):
         metadata.list_migration_worker_outputs(blob_store=blobs)
+
+
+def test_actual_gateway_profiles_generation_evidence_without_raw_text(
+    tmp_path: Path, migration_command: tuple[str, str]
+) -> None:
+    snapshot, blobs, metadata, _source_items = _fixture(
+        tmp_path, include_generation=True
+    )
+    gateway = _gateway(metadata, blobs, migration_command)
+    import_record = metadata.get_item(snapshot["snapshotDigest"], "generation.json")
+    assert import_record is not None
+    result = gateway.profile_imported_generation_evidence(import_record)
+    artifact = result.outputs[0].artifact
+    schema = json.loads(
+        (
+            PROJECT
+            / "contracts/migration-worker/v1/generation-evidence-profile.schema.json"
+        ).read_text()
+    )
+    validator_for(schema).check_schema(schema)
+    validator_for(schema)(schema).validate(artifact)
+    assert artifact["interpretationStatus"] == "parsed-recognized"
+    assert artifact["rawEvidenceRestricted"] is True
+    assert artifact["providerDispatchAuthorized"] is False
+    assert artifact["retryAuthorized"] is False
+    assert artifact["activationAuthorized"] is False
+    assert artifact["trainingEligible"] is False
+    assert artifact["recipeCandidates"][0]["sheetName"] == "Table 1"
+    serialized = json.dumps(artifact, sort_keys=True)
+    assert "restricted prompt" not in serialized
+    assert "restricted response" not in serialized
+    assert result.outputs[0].record["active"] is False
+    assert result.outputs[0].record["trainingEligible"] is False
+    blobs.verify(
+        result.outputs[0].content_digest,
+        result.outputs[0].record["byteLength"],
+    )
+    repeated = gateway.profile_imported_generation_evidence(import_record)
+    assert repeated.reproduction_key == result.reproduction_key
+    assert repeated.output_fingerprint == result.output_fingerprint
+
+    recipe_record = metadata.get_item(
+        snapshot["snapshotDigest"], "candidate.recipe.json"
+    )
+    assert recipe_record is not None
+    with pytest.raises(WorkerGatewayError, match="imported source authority"):
+        gateway.execute(
+            operation="profile-generation-evidence-v1",
+            inputs=[
+                GatewayInput(
+                    name="generation",
+                    content_digest=recipe_record["contentDigest"],
+                    relative_path="candidate.recipe.json",
+                    declared_byte_length=recipe_record["byteLength"],
+                )
+            ],
+            source=MigrationSourceBinding.from_import_record(recipe_record),
+        )
 
 
 def test_gateway_rejects_schema_valid_dishonest_recipe_digest_claims(

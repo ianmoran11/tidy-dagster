@@ -2018,6 +2018,7 @@ def _validate_migration_worker_derivation(record: Mapping[str, Any]) -> str:
         "capabilities",
         "digest-legacy-approval-registry-v1",
         "parse-recipe-v01",
+        "profile-generation-evidence-v1",
     }:
         raise ValueError("Migration worker derivation operation is invalid")
     for field in ("orderedInputDigests", "producerDigests", "orderedOutputDigests"):
@@ -2134,6 +2135,7 @@ def _validate_migration_worker_output(
     interpretation = record.get("operation") in {
         "digest-legacy-approval-registry-v1",
         "parse-recipe-v01",
+        "profile-generation-evidence-v1",
     }
     if (source is not None) is not interpretation:
         raise ValueError("Migration worker output source presence is invalid")

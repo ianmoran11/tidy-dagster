@@ -46,7 +46,9 @@ They do **not** authorize the real 19.33 GiB TidyCell import.
   sandboxed migration-worker derivation and each durable output. Output records
   bind source, configuration, worker/gateway producers, reproduction identity,
   CAS custody, and the honest isolation mode while forcing activation and
-  training eligibility to false. The effective normalized Seatbelt profile and
+  training eligibility to false. This now includes raw-text-free bounded
+  generation profiles with restricted-element digests and strict nested recipe
+  candidates. The effective normalized Seatbelt profile and
   imported macOS `system.sb` bytes are configuration-bound.
 
 ## Current authorization boundary
@@ -86,8 +88,9 @@ exact labels in a separate identity-only decision that grants no approval,
 activation, or training authority.
 
 Phase B is not complete until the frozen estate is imported under a separately
-reviewed live authorization, typed parsers bind complete recipe and generation
-records, every target/reviewer ambiguity is retained, and full domain
+reviewed live authorization, typed parsers and profiles cover every recipe,
+generation, model-manifest, and evaluation record, every target/reviewer
+ambiguity is retained, and full domain
 reconciliation proves that every source item has exactly one justified typed
 outcome. `human_approved` is possible only when exact target, explicit reviewer
 identity, and independently verified recipe digest all agree; the fixture path

@@ -64,14 +64,25 @@ _OPERATIONS = frozenset(
         "capabilities",
         "digest-legacy-approval-registry-v1",
         "parse-recipe-v01",
+        "profile-generation-evidence-v1",
     )
 )
-_INTERPRETATIONS = frozenset(("digest-legacy-approval-registry-v1", "parse-recipe-v01"))
+_INTERPRETATIONS = frozenset(
+    (
+        "digest-legacy-approval-registry-v1",
+        "parse-recipe-v01",
+        "profile-generation-evidence-v1",
+    )
+)
 _OPERATION_INPUTS = {
     "health": None,
     "capabilities": None,
     "digest-legacy-approval-registry-v1": ("registry", "approval-registry"),
     "parse-recipe-v01": ("recipe", "recipe-evidence"),
+    "profile-generation-evidence-v1": (
+        "generation",
+        "generation-json-evidence",
+    ),
 }
 _OPERATION_OUTPUTS = {
     "health": ("health", "health.json", "tidy.migration-worker-health/v1"),
@@ -89,6 +100,11 @@ _OPERATION_OUTPUTS = {
         "recipe-revision",
         "recipe-revision.json",
         "tidy.migration-recipe-revision/v1",
+    ),
+    "profile-generation-evidence-v1": (
+        "generation-evidence-profile",
+        "generation-evidence-profile.json",
+        "tidy.migration-generation-evidence-profile/v1",
     ),
 }
 _MAX_LIMITS = {
@@ -233,6 +249,16 @@ class MigrationWorkerGateway(WorkerGateway):
             inputs=[item],
             source=source,
             declared_recipe_digest=declared_recipe_digest,
+        )
+
+    def profile_imported_generation_evidence(
+        self, import_record: Mapping[str, Any]
+    ) -> MigrationGatewayExecution:
+        item, source = _gateway_input_from_import_record(import_record, "generation")
+        return self.execute(
+            operation="profile-generation-evidence-v1",
+            inputs=[item],
+            source=source,
         )
 
     def execute(
@@ -718,6 +744,29 @@ class MigrationWorkerGateway(WorkerGateway):
                     "INVALID_OUTPUT_ARTIFACT",
                     "INTEGRITY_VIOLATION",
                     "Migration recipe digest comparison is inconsistent",
+                )
+        if operation == "profile-generation-evidence-v1":
+            record_count = sum(
+                len(artifact[name])
+                for name in (
+                    "restrictedElements",
+                    "recipeCandidates",
+                    "safeMetadata",
+                )
+            )
+            if record_count > max_records:
+                raise WorkerGatewayError(
+                    "RECORD_LIMIT_EXCEEDED",
+                    "TOOL_INCOMPATIBLE",
+                    "Generation profile exceeds the declared record limit",
+                )
+            if artifact["rawEvidenceRestricted"] is not bool(
+                artifact["restrictedElements"]
+            ):
+                raise WorkerGatewayError(
+                    "INVALID_OUTPUT_ARTIFACT",
+                    "INTEGRITY_VIOLATION",
+                    "Generation profile restricted-evidence state is inconsistent",
                 )
         if operation == "digest-legacy-approval-registry-v1":
             records = artifact["records"]
@@ -1246,6 +1295,7 @@ def _artifact_schema(operation: str) -> dict[str, Any] | None:
     filename = {
         "digest-legacy-approval-registry-v1": "approval-row-digests.schema.json",
         "parse-recipe-v01": "recipe-revision.schema.json",
+        "profile-generation-evidence-v1": "generation-evidence-profile.schema.json",
     }.get(operation)
     if filename is None:
         return None
@@ -1303,6 +1353,7 @@ def _validate_artifact_schema(operation: str, artifact: Mapping[str, Any]) -> No
             "capabilities",
             "digest-legacy-approval-registry-v1",
             "parse-recipe-v01",
+            "profile-generation-evidence-v1",
         ]
         or artifact.get("historicalDigest")
         != {

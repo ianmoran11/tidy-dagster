@@ -6,7 +6,8 @@
     { "$ref": "#/$defs/healthRequest" },
     { "$ref": "#/$defs/capabilitiesRequest" },
     { "$ref": "#/$defs/approvalDigestRequest" },
-    { "$ref": "#/$defs/recipeParseRequest" }
+    { "$ref": "#/$defs/recipeParseRequest" },
+    { "$ref": "#/$defs/generationProfileRequest" }
   ],
   "$defs": {
     "digest": {
@@ -163,6 +164,44 @@
               "allOf": [
                 { "$ref": "#/$defs/input" },
                 { "properties": { "name": { "const": "registry" } } }
+              ]
+            }
+          ],
+          "items": false
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source"],
+          "properties": { "source": { "$ref": "#/$defs/source" } }
+        },
+        "limits": { "$ref": "#/$defs/limits" }
+      }
+    },
+    "generationProfileRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "requestId",
+        "operation",
+        "inputs",
+        "parameters",
+        "limits"
+      ],
+      "properties": {
+        "protocolVersion": { "const": "tidy.migration-worker/v1" },
+        "requestId": { "$ref": "#/$defs/requestId" },
+        "operation": { "const": "profile-generation-evidence-v1" },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/input" },
+                { "properties": { "name": { "const": "generation" } } }
               ]
             }
           ],

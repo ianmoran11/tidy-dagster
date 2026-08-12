@@ -14,6 +14,11 @@ accepted production `tidy.worker/v1` protocol.
   its historical TidyCell digest, and emits an inactive, training-ineligible
   schema-valid revision artifact. An optional declared digest is compared but
   never treated as approval.
+- `profile-generation-evidence-v1` profiles one bounded generation JSON
+  document. It emits digests and JSON pointers for restricted prompts/provider
+  responses, strict nested RecipeV01 candidates, and a narrow scalar metadata
+  allowlist; raw restricted text is never reproduced. Dispatch, retry, approval,
+  activation, and training authority are always false.
 
 Every interpretation request binds the frozen source snapshot, source item,
 import record, and original relative path. The executable re-verifies staged
@@ -39,3 +44,5 @@ authority.
 - `success.schema.json` and `error.schema.json` — bounded result envelopes.
 - `approval-row-digests.schema.json` — exact historical per-row digest output.
 - `recipe-revision.schema.json` — normalized inactive RecipeV01 revision output.
+- `generation-evidence-profile.schema.json` — non-authoritative structural
+  profile with digested restricted elements and no raw prompt/response text.

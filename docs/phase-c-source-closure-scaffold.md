@@ -256,8 +256,8 @@ Provider dispatch and independent review remain separate gates.
 - historical-reference candidate region-catalogue parity: `4/4` exact;
 - copied produced-CSV diagnostic tests: `6 passed`;
 - copied rendered prompt and exact snapshot tests: `14 passed`;
-- complete TypeScript/Vitest suite: `235 passed, 1 skipped`;
-- complete Python suite: `158 passed, 1 skipped`;
+- complete TypeScript/Vitest suite: `238 passed, 1 skipped`;
+- complete Python suite: `159 passed, 1 skipped`;
 - strict JSON Schemas validate discovery, self-review, copy, replay, reference,
   and scoped parity records;
 - the checked-in producer digest binds the exact discovery implementation;

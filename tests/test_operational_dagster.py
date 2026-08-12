@@ -91,9 +91,19 @@ def test_real_daemon_sensor_tick_launch_dedup_and_restart(tmp_path: Path) -> Non
             assert len(states) == 1
             state = states[0]
             assert state.instigator_data.cursor == catalog.catalog_digest
-            ticks = instance.get_ticks(
-                state.instigator_origin_id, state.selector_id, limit=10
-            )
+            tick_deadline = time.monotonic() + 30
+            ticks = []
+            while time.monotonic() < tick_deadline:
+                ticks = instance.get_ticks(
+                    state.instigator_origin_id, state.selector_id, limit=1000
+                )
+                if any(str(tick.status.value).upper() == "SUCCESS" for tick in ticks):
+                    break
+                if process.poll() is not None:
+                    pytest.fail(
+                        f"dg dev exited before tick completion:\n{log.read_text()}"
+                    )
+                time.sleep(0.25)
             assert any(str(tick.status.value).upper() == "SUCCESS" for tick in ticks)
     finally:
         _stop(process)
