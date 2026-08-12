@@ -108,6 +108,14 @@ The demo verifies the fixture source manifest, invokes the actual built `tidy-do
 
 Production execution currently requires macOS `/usr/bin/sandbox-exec`. A generated deny-default profile limits runtime reads, permits writes only in the private run root, and denies network and process forks. The gateway also applies rlimits and process-group cleanup. The explicitly named `insecure-test-only` mode is used for portable failure drills and does not claim filesystem, detached-process, or network isolation; no non-macOS production sandbox is selected yet.
 
+## Hobby canary MVP
+
+The exact frozen 63-item Phase B canary now runs end to end against a dedicated
+disposable NAS share while SQLite authority remains local. See
+[`docs/hobby-canary-mvp.md`](docs/hobby-canary-mvp.md) for the bounded result,
+manual-inspection report, rebuild command, and deliberately deferred production
+infrastructure.
+
 ## M4 Dagster UI
 
 ```sh

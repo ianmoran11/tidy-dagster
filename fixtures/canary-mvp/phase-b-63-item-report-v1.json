@@ -1,0 +1,72 @@
+{
+  "automaticActivationAuthorized": false,
+  "canaryManifestDigest": "sha256:ee072650751fa76d456ba8cf034878a2a48137b02e6e7d459cb7945cb9474139",
+  "canarySnapshotDigest": "sha256:09f35bf91d33879299bfde9bec3c8a5a65b327ca94e26cbd51bc4fe63ee90cb2",
+  "coreReconciliationDigest": "sha256:041aee2fde46112b11a83641be74d47015285f201604e6074a6f22271213fc22",
+  "fullImportAuthorized": false,
+  "generationProfiles": {
+    "activationAuthorized": false,
+    "eligibleSourceCount": 2,
+    "profileOutputRecordIds": [
+      "sha256:388770a5409df19133d55de94b1b0dfc4db91a0a3e1568b807969b1c8c684398",
+      "sha256:643f4f54407fc3b0d5bf38b3d45b3a7f8930e8015ff667824a9c913cf1561378"
+    ],
+    "profiledSourceCount": 2,
+    "providerDispatchAuthorized": false,
+    "rawRestrictedTextEmitted": false,
+    "restrictedElementCount": 0,
+    "retryAuthorized": false,
+    "strictRecipeCandidateCount": 0,
+    "trainingEligible": false
+  },
+  "idempotentReplayVerified": true,
+  "itemCount": 63,
+  "manualInspectionRequired": true,
+  "nasDataDisposable": true,
+  "providerDispatchAuthorized": false,
+  "rebuild": {
+    "deleteOnly": "Delete the dedicated NAS blob root contents, never the local metadata root.",
+    "rerun": "uv run python -m tidy_orchestrator.canary_mvp_cli run"
+  },
+  "recordedAt": "2026-08-12T13:52:22Z",
+  "reportDigest": "sha256:0dbdf0b0c7bc391e3e06c0b6d2f8534501795372fda049ec65a4bbcd9fe52e4d",
+  "retainedLimitations": [
+    "strict nested RecipeV01 parsing ran only where a generation profile recognized candidates",
+    "approval-row digesting and reviewer identity resolution did not run in this MVP command",
+    "generation evidence received conservative typed dispositions; only bounded generation JSON was deeply profiled",
+    "model packages were archived without deserialization or promotion",
+    "no effective recipe pointer was read or changed"
+  ],
+  "schemaVersion": "tidy.canary-mvp-report/v1",
+  "semanticReconciliationId": "sha256:31fbd3175b07709a5ff25b3388ce779d4f6ca4480b9d100519cdf7333cb19256",
+  "smbSigningRequiredExternallyVerified": true,
+  "smbVerification": {
+    "serviceIdentityLabel": "tidy-dagster",
+    "shareName": "tidy-dagster",
+    "signingAlgorithm": "AES-128-CMAC",
+    "signingOn": true,
+    "signingRequired": true,
+    "smbVersion": "SMB_3.1.1"
+  },
+  "snapshotRestoreWaived": true,
+  "sourceReadBytes": 44084737,
+  "sourceSnapshotDigest": "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d",
+  "sqliteLocal": true,
+  "stateBytes": {
+    "duplicate-alias": 703443,
+    "excluded": 958003,
+    "imported": 42423291
+  },
+  "stateCounts": { "duplicate-alias": 22, "excluded": 5, "imported": 36 },
+  "trainingAuthorized": false,
+  "typedRecordCount": 45,
+  "typedRecordCounts": {
+    "tidy.approval-registry-evidence-import/v1": 1,
+    "tidy.generation-evidence-import/v1": 38,
+    "tidy.model-package-disposition/v1": 2,
+    "tidy.recipe-evidence-import/v1": 4
+  },
+  "typedSourceItemCount": 41,
+  "uniqueStoredBytes": 42423291,
+  "uniqueStoredObjects": 36
+}

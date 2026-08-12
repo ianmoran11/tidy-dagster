@@ -24,7 +24,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
 from .artifacts import canonical_json_bytes, domain_digest, sha256_digest
-from .source_export import load_and_verify_export
+from .source_export import SourceExportError, load_and_verify_export
 
 _IMPORT_ITEM_VERSION = "tidy.migration-import-item/v1"
 _RECONCILIATION_VERSION = "tidy.migration-reconciliation/v1"
@@ -1095,13 +1095,27 @@ class MigrationImporter:
         source_root: Path,
         metadata: MigrationRepository,
         blobs: CommittedFilesystemBlobStore,
-        authorization: FixtureImportAuthorization,
+        authorization: Any,
         recorded_at: str,
         actor: str = "phase-b-fixture-importer",
         fault_injector: Callable[[str], None] | None = None,
     ) -> None:
-        snapshot, digest = load_and_verify_export(snapshot_path)
-        if snapshot["schemaVersion"] != "tidy.source-export-snapshot/v1":
+        try:
+            snapshot, digest = load_and_verify_export(snapshot_path)
+        except SourceExportError as error:
+            snapshot_bytes = _read_regular(snapshot_path, maximum=_MAX_SNAPSHOT_BYTES)
+            snapshot = _strict_json(snapshot_bytes, "source snapshot")
+            if snapshot.get("schemaVersion") != "tidy.canary-import-snapshot/v1":
+                raise MigrationImportError(
+                    "Importer requires a frozen source snapshot"
+                ) from error
+            from .canary_mvp import verify_canary_snapshot
+
+            digest = verify_canary_snapshot(snapshot)
+        if snapshot["schemaVersion"] not in (
+            "tidy.source-export-snapshot/v1",
+            "tidy.canary-import-snapshot/v1",
+        ):
             raise MigrationImportError("Importer requires a frozen source snapshot")
         if digest != snapshot["snapshotDigest"]:
             raise MigrationImportError("Snapshot identity did not verify")

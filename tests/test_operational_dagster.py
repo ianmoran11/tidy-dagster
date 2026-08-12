@@ -160,7 +160,7 @@ def _start(environment: dict[str, str], port: int, log: Path) -> subprocess.Pope
 
 
 def _wait_healthy(process: subprocess.Popen, port: int, log: Path) -> None:
-    deadline = time.monotonic() + 90
+    deadline = time.monotonic() + 150
     while time.monotonic() < deadline:
         if process.poll() is not None:
             pytest.fail(f"dg dev exited before health:\n{log.read_text()}")

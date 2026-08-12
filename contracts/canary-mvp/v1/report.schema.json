@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/canary-mvp/v1/report.schema.json",
+  "title": "CanaryMvpReportV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordedAt",
+    "canaryManifestDigest",
+    "sourceSnapshotDigest",
+    "canarySnapshotDigest",
+    "coreReconciliationDigest",
+    "semanticReconciliationId",
+    "itemCount",
+    "sourceReadBytes",
+    "stateCounts",
+    "stateBytes",
+    "uniqueStoredObjects",
+    "uniqueStoredBytes",
+    "typedRecordCounts",
+    "typedSourceItemCount",
+    "typedRecordCount",
+    "generationProfiles",
+    "idempotentReplayVerified",
+    "nasDataDisposable",
+    "sqliteLocal",
+    "smbSigningRequiredExternallyVerified",
+    "smbVerification",
+    "snapshotRestoreWaived",
+    "automaticActivationAuthorized",
+    "providerDispatchAuthorized",
+    "trainingAuthorized",
+    "fullImportAuthorized",
+    "manualInspectionRequired",
+    "retainedLimitations",
+    "rebuild",
+    "reportDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.canary-mvp-report/v1" },
+    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "canaryManifestDigest": {
+      "const": "sha256:ee072650751fa76d456ba8cf034878a2a48137b02e6e7d459cb7945cb9474139"
+    },
+    "sourceSnapshotDigest": {
+      "const": "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d"
+    },
+    "canarySnapshotDigest": { "$ref": "#/$defs/digest" },
+    "coreReconciliationDigest": { "$ref": "#/$defs/digest" },
+    "semanticReconciliationId": { "$ref": "#/$defs/digest" },
+    "itemCount": { "const": 63 },
+    "sourceReadBytes": { "type": "integer", "minimum": 1, "maximum": 67108864 },
+    "stateCounts": { "$ref": "#/$defs/countMap" },
+    "stateBytes": { "$ref": "#/$defs/countMap" },
+    "uniqueStoredObjects": { "type": "integer", "minimum": 1, "maximum": 63 },
+    "uniqueStoredBytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 67108864
+    },
+    "typedRecordCounts": { "$ref": "#/$defs/countMap" },
+    "typedSourceItemCount": { "type": "integer", "minimum": 0, "maximum": 63 },
+    "typedRecordCount": { "type": "integer", "minimum": 0, "maximum": 126 },
+    "generationProfiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligibleSourceCount",
+        "profiledSourceCount",
+        "profileOutputRecordIds",
+        "restrictedElementCount",
+        "strictRecipeCandidateCount",
+        "rawRestrictedTextEmitted",
+        "providerDispatchAuthorized",
+        "retryAuthorized",
+        "activationAuthorized",
+        "trainingEligible"
+      ],
+      "properties": {
+        "eligibleSourceCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        },
+        "profiledSourceCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        },
+        "profileOutputRecordIds": {
+          "type": "array",
+          "maxItems": 63,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/digest" }
+        },
+        "restrictedElementCount": { "type": "integer", "minimum": 0 },
+        "strictRecipeCandidateCount": { "type": "integer", "minimum": 0 },
+        "rawRestrictedTextEmitted": { "const": false },
+        "providerDispatchAuthorized": { "const": false },
+        "retryAuthorized": { "const": false },
+        "activationAuthorized": { "const": false },
+        "trainingEligible": { "const": false }
+      }
+    },
+    "idempotentReplayVerified": { "const": true },
+    "nasDataDisposable": { "const": true },
+    "sqliteLocal": { "const": true },
+    "smbSigningRequiredExternallyVerified": { "const": true },
+    "smbVerification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shareName",
+        "smbVersion",
+        "signingRequired",
+        "signingOn",
+        "signingAlgorithm",
+        "serviceIdentityLabel"
+      ],
+      "properties": {
+        "shareName": { "const": "tidy-dagster" },
+        "smbVersion": { "const": "SMB_3.1.1" },
+        "signingRequired": { "const": true },
+        "signingOn": { "const": true },
+        "signingAlgorithm": { "const": "AES-128-CMAC" },
+        "serviceIdentityLabel": { "const": "tidy-dagster" }
+      }
+    },
+    "snapshotRestoreWaived": { "const": true },
+    "automaticActivationAuthorized": { "const": false },
+    "providerDispatchAuthorized": { "const": false },
+    "trainingAuthorized": { "const": false },
+    "fullImportAuthorized": { "const": false },
+    "manualInspectionRequired": { "const": true },
+    "retainedLimitations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "rebuild": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deleteOnly", "rerun"],
+      "properties": {
+        "deleteOnly": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "rerun": {
+          "const": "uv run python -m tidy_orchestrator.canary_mvp_cli run"
+        }
+      }
+    },
+    "reportDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "countMap": {
+      "type": "object",
+      "propertyNames": { "type": "string", "minLength": 1, "maxLength": 128 },
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    }
+  }
+}
