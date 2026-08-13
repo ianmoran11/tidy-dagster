@@ -88,6 +88,27 @@ def test_replay_runs_three_real_workbooks_and_collates(tmp_path: Path) -> None:
     assert all(item["observationCount"] == 243 for item in report["workbooks"])
     assert (tmp_path / "output" / "canonical-observations.csv").is_file()
     assert (tmp_path / "output" / "canonical-observations.json").is_file()
+    rows = json.loads((tmp_path / "output" / "canonical-observations.json").read_text())
+    required_provenance = {
+        "publication_id",
+        "execution_digest",
+        "acceptance_policy_version",
+        "acceptance_policy_digest",
+        "acceptance_decision_digest",
+        "prompt_package_digest",
+        "generation_model",
+        "generation_attempt_id",
+    }
+    assert required_provenance <= set(rows[0])
+    collation = json.loads((tmp_path / "output" / "collation-report.json").read_text())
+    assert len(collation["includedWorkbooks"]) == 3
+    assert collation["excludedExceptions"] == []
+    assert collation["duplicateCanonicalKeys"] == []
+    assert collation["conflictingValues"] == []
+    assert collation["unmappedLabels"] == []
+    assert collation["missingExpectedCategories"] == []
+    assert collation["schemaFailures"] == []
+    assert collation["codeListFailures"] == []
     assert json.loads((tmp_path / "output" / "exceptions.json").read_text()) == []
     decisions = repository.list_decisions()
     assert len(decisions) == 3
@@ -382,6 +403,44 @@ def test_end_to_end_malformed_response_creates_exception_and_is_excluded(
     assert len(exceptions) == 1
     assert exceptions[0]["year"] == 2023
     assert exceptions[0]["decision"] == "exception_required"
+
+
+@pytest.mark.parametrize(
+    "code",
+    [
+        "UNKNOWN_CODE",
+        "DUPLICATE_OBSERVATION_KEY",
+        "REQUIRED_DIMENSION_MISSING",
+        "TOTAL_MISMATCH",
+        "SOURCE_CELL_REUSE",
+        "AMBIGUOUS_WARNING_OUTPUT_UNRESOLVED",
+        "EMPTY_OUTPUT",
+        "NONDETERMINISTIC_REPLAY",
+    ],
+)
+def test_each_acceptance_negative_creates_end_to_end_exception_and_exclusion(
+    tmp_path: Path, code: str
+) -> None:
+    repository = LocalArtifactRepository(tmp_path / "repository")
+    result = run_product_prototype(
+        repository=repository,
+        project_root=PROJECT,
+        cohort_path=COHORT,
+        output_root=tmp_path / "output",
+        mode="replay",
+        gateway=fake_gateway(repository),
+        recorded_at="2026-08-13T21:30:00+00:00",
+        acceptance_mutations={2023: [{"code": code, "message": "injected"}]},
+    )
+    assert result.report["acceptedWorkbookCount"] == 2
+    assert result.report["exceptionWorkbookCount"] == 1
+    assert result.report["canonicalObservationCount"] == 486
+    exceptions = json.loads((tmp_path / "output" / "exceptions.json").read_text())
+    assert exceptions[0]["decision"] == "exception_required"
+    assert code in {item["code"] for item in exceptions[0]["issues"]}
+    collation = json.loads((tmp_path / "output" / "collation-report.json").read_text())
+    assert len(collation["includedWorkbooks"]) == 2
+    assert len(collation["excludedExceptions"]) == 1
 
 
 def test_cross_workbook_conflict_is_reported() -> None:

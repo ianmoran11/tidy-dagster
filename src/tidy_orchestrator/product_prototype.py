@@ -97,7 +97,7 @@ def verify_live_evidence(
     ):
         raise ProductPrototypeError("Live evidence is not bound to current contracts")
     files = manifest.get("files")
-    if not isinstance(files, list) or len(files) != 11:
+    if not isinstance(files, list) or len(files) != 12:
         raise ProductPrototypeError("Live evidence file closure is invalid")
     declared_paths: set[str] = set()
     for entry in files:
@@ -248,7 +248,18 @@ def _verify_checked_live_recipes(
             raise ProductPrototypeError(
                 f"Checked live recipe no longer passes for {entry['year']}: {issues!r}"
             )
-        recomputed.extend(observations)
+        attempt = attempts[str(entry["year"])]
+        provenance = {
+            "publication_id": cohort["publicationId"],
+            "execution_digest": _output_digest(execution, "execution.json"),
+            "acceptance_policy_version": ACCEPTANCE_SCHEMA,
+            "acceptance_policy_digest": sha256_digest(canonical_json_bytes(contract)),
+            "acceptance_decision_digest": run_workbook["decisionId"],
+            "prompt_package_digest": run_workbook["prepareDerivationId"],
+            "generation_model": attempt["model"],
+            "generation_attempt_id": attempt["attemptId"],
+        }
+        recomputed.extend({**row, **provenance} for row in observations)
     ordered = sorted(
         recomputed,
         key=lambda row: tuple(str(row[key]) for key in contract["uniqueKey"]),
@@ -279,6 +290,7 @@ def run_product_prototype(
     live_response_root: Path | None = None,
     live_attempts: dict[int | str, dict[str, Any]] | None = None,
     provider: AuthorizedPiProvider | None = None,
+    acceptance_mutations: dict[int, list[dict[str, Any]]] | None = None,
 ) -> PrototypeRun:
     """Run the exact cohort from saved replay or freshly dispatched responses."""
     if mode not in {"replay", "live"}:
@@ -353,6 +365,7 @@ def run_product_prototype(
             contract=contract,
             prepared=prepared,
             timestamp=timestamp,
+            forced_issues=(acceptance_mutations or {}).get(int(entry["year"])),
         )
         workbook_reports.append(report[0])
         if prepared.provider_attempt is not None:
@@ -382,6 +395,12 @@ def run_product_prototype(
     cross_year_issues = _cross_year_issues(canonical_rows, contract)
     combined_csv = _canonical_csv(canonical_rows)
     combined_json = canonical_json_bytes(canonical_rows) + b"\n"
+    collation_report = _build_collation_report(
+        workbooks=workbook_reports,
+        rows=canonical_rows,
+        contract=contract,
+        cross_year_issues=cross_year_issues,
+    )
     csv_descriptor = repository.put_bytes(
         combined_csv,
         kind="canonical-collated-csv",
@@ -396,6 +415,14 @@ def run_product_prototype(
     )
     _write_output(output / "canonical-observations.csv", combined_csv)
     _write_output(output / "canonical-observations.json", combined_json)
+    collation_bytes = canonical_json_bytes(collation_report) + b"\n"
+    collation_descriptor = repository.put_bytes(
+        collation_bytes,
+        kind="product-prototype-collation-report",
+        schema_version="tidy.product-prototype-collation/v1",
+        media_type="application/json",
+    )
+    _write_output(output / "collation-report.json", collation_bytes)
 
     semantic = {
         "schemaVersion": RUN_SCHEMA,
@@ -417,6 +444,7 @@ def run_product_prototype(
         "canonicalObservationCount": len(canonical_rows),
         "canonicalCsvDigest": csv_descriptor.content_digest,
         "canonicalJsonDigest": json_descriptor.content_digest,
+        "collationReportDigest": collation_descriptor.content_digest,
         "crossYearIssues": cross_year_issues,
         "historicalReplayIsAcceptanceAuthority": False,
         "liveAttempts": provider_attempts if mode == "live" else None,
@@ -558,6 +586,7 @@ def _interpret_accept_one(
     contract: dict[str, Any],
     prepared: _PreparedWorkbook,
     timestamp: str,
+    forced_issues: list[dict[str, Any]] | None = None,
 ) -> tuple[dict[str, Any], _AcceptedWorkbook | None]:
     entry = prepared.entry
     year = int(entry["year"])
@@ -595,14 +624,18 @@ def _interpret_accept_one(
         deterministic = _execution_identity(first) == _execution_identity(second)
         execution = _output_json(repository, first, "execution.json")
         recipe = _output_json(repository, first, "normalized-recipe.json")
+        recipe_digest = _output_digest(first, "normalized-recipe.json")
+        execution_digest = _output_digest(first, "execution.json")
         observations, issues, checks = _validate_execution(
             execution=execution,
             recipe=recipe,
             contract=contract,
             entry=entry,
-            recipe_digest=_output_digest(first, "normalized-recipe.json"),
+            recipe_digest=recipe_digest,
             deterministic=deterministic,
         )
+        issues.extend(forced_issues or [])
+        issues = _deduplicate_issues(issues)
     except Exception as error:
         observations = ()
         issues = [
@@ -613,6 +646,8 @@ def _interpret_accept_one(
         ]
         checks = {"interpretation": False, "deterministicReplay": False}
         first = None
+        recipe_digest = None
+        execution_digest = None
 
     decision = "prototype_auto_accepted" if not issues else "exception_required"
     subject_id = (
@@ -637,6 +672,22 @@ def _interpret_accept_one(
         recorded_at=timestamp,
     )
     repository.append_decision(decision_record)
+    if first is not None and not issues:
+        provenance = {
+            "publication_id": "prisoners-in-australia",
+            "execution_digest": execution_digest,
+            "acceptance_policy_version": ACCEPTANCE_SCHEMA,
+            "acceptance_policy_digest": sha256_digest(canonical_json_bytes(contract)),
+            "acceptance_decision_digest": decision_record.decision_id,
+            "prompt_package_digest": prepared.prepare.derivation.derivation_id,
+            "generation_model": MODEL,
+            "generation_attempt_id": (
+                prepared.provider_attempt["attemptId"]
+                if prepared.provider_attempt is not None
+                else f"replay:{prepared.response.content_digest}"
+            ),
+        }
+        observations = tuple({**row, **provenance} for row in observations)
     report = {
         "year": year,
         "referenceDate": entry["referenceDate"],
@@ -668,9 +719,10 @@ def evaluate_execution_for_acceptance(
     entry: dict[str, Any],
     recipe_digest: str,
     deterministic: bool = True,
+    extra_issues: list[dict[str, Any]] | None = None,
 ) -> tuple[tuple[dict[str, Any], ...], list[dict[str, Any]], dict[str, bool]]:
     """Public pure acceptance evaluator used by negative contract tests."""
-    return _validate_execution(
+    rows, issues, checks = _validate_execution(
         execution=execution,
         recipe=recipe,
         contract=contract,
@@ -678,6 +730,10 @@ def evaluate_execution_for_acceptance(
         recipe_digest=recipe_digest,
         deterministic=deterministic,
     )
+    injected = list(extra_issues or [])
+    if injected:
+        issues.extend(injected)
+    return rows, _deduplicate_issues(issues), checks
 
 
 def _validate_execution(
@@ -978,6 +1034,68 @@ def _validate_totals(
     return issues
 
 
+def _build_collation_report(
+    *,
+    workbooks: list[dict[str, Any]],
+    rows: list[dict[str, Any]],
+    contract: dict[str, Any],
+    cross_year_issues: list[dict[str, Any]],
+) -> dict[str, Any]:
+    included = [
+        {
+            "year": item["year"],
+            "workbookDigest": item["workbookDigest"],
+            "rowCount": item["observationCount"],
+            "decisionId": item["decisionId"],
+        }
+        for item in workbooks
+        if item["decision"] == "prototype_auto_accepted"
+    ]
+    excluded = [item for item in workbooks if item["decision"] == "exception_required"]
+    issue_codes = {
+        issue["code"]
+        for item in workbooks
+        for issue in item.get("issues", [])
+        if isinstance(issue, dict) and isinstance(issue.get("code"), str)
+    }
+    return {
+        "schemaVersion": "tidy.product-prototype-collation/v1",
+        "includedWorkbooks": included,
+        "excludedExceptions": excluded,
+        "rowCount": len(rows),
+        "duplicateCanonicalKeys": [
+            item
+            for item in cross_year_issues
+            if item["code"] == "CROSS_WORKBOOK_DUPLICATE"
+        ],
+        "conflictingValues": [
+            item
+            for item in cross_year_issues
+            if item["code"] == "CROSS_WORKBOOK_CONFLICT"
+        ],
+        "unmappedLabels": sorted(
+            code for code in issue_codes if code == "UNKNOWN_CODE"
+        ),
+        "missingExpectedCategories": sorted(
+            code for code in issue_codes if "COVERAGE_MISSING" in code
+        ),
+        "schemaFailures": sorted(
+            code
+            for code in issue_codes
+            if code
+            in {
+                "TABLE_COUNT_INVALID",
+                "REQUIRED_DIMENSION_MISSING",
+                "ROW_COUNT_OUT_OF_BOUNDS",
+            }
+        ),
+        "codeListFailures": sorted(
+            code for code in issue_codes if code in {"UNKNOWN_CODE", "VALUE_INVALID"}
+        ),
+        "uniqueKey": contract["uniqueKey"],
+    }
+
+
 def _cross_year_issues(
     rows: list[dict[str, Any]], contract: dict[str, Any]
 ) -> list[dict[str, Any]]:
@@ -1011,6 +1129,14 @@ def _canonical_csv(rows: list[dict[str, Any]]) -> bytes:
         "source_sheet",
         "source_cell",
         "recipe_digest",
+        "publication_id",
+        "execution_digest",
+        "acceptance_policy_version",
+        "acceptance_policy_digest",
+        "acceptance_decision_digest",
+        "prompt_package_digest",
+        "generation_model",
+        "generation_attempt_id",
         "raw_jurisdiction",
         "raw_indigenous_status",
         "raw_sex",

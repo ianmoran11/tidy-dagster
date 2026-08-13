@@ -457,12 +457,21 @@ The provider-free milestone and the bounded live campaign are complete.
 - Checked live evidence:
   `fixtures/product-prototype/live-evidence/manifest.json`
 - Live evidence manifest digest:
-  `sha256:0bb5e6d78cc30c8f3e2b9aa0d91b93299e9d1e68b6103aff5a8d82021f477555`
+  `sha256:7403939709ecce83e8b970f1591f6d5ac3bd4f7ea6c4cc59008f466550d055ff`
 - Model: `openai-codex/gpt-5.6-luna`, high reasoning
 - Fresh calls: 3; corrections: 0
 - API-equivalent cost: USD 0.0197296
 - Result: 3 automatically accepted workbooks, 0 exceptions, and 729 collated
   canonical observations
+- Every canonical row carries publication, workbook, sheet, source-cell,
+  recipe, execution, acceptance-policy, decision, prompt-package, model, and
+  generation-attempt identities.
+- `collation-report.json` explicitly records inclusions, exclusions, duplicate
+  keys, conflicts, unmapped labels, missing categories, and schema/code-list
+  failures, including empty lists for clean categories.
+- All nine required negative classes are tested for structured exception
+  creation and exclusion; malformed provider output is exercised through the
+  real end-to-end interpretation path.
 - Raw prompts and provider envelopes remain restricted and are not committed as
   ordinary evidence.
 
