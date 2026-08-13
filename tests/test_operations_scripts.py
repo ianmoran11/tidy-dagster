@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.machinery
 import importlib.util
+import json
 import signal
 import subprocess
 import sys
@@ -30,6 +31,37 @@ def test_tidy_prototype_cli_is_directly_executable() -> None:
     )
     assert completed.returncode == 0
     assert "run the exact product cohort" in completed.stdout
+
+
+def test_tidy_prototype_cli_completes_the_three_workbook_replay(
+    tmp_path: Path,
+) -> None:
+    script = PROJECT / "scripts/tidy-prototype"
+    completed = subprocess.run(
+        [
+            str(script),
+            "run",
+            "--cohort",
+            "fixtures/product-prototype/prisoners-table-30-2023-2025.json",
+            "--mode",
+            "replay",
+            "--output",
+            str(tmp_path / "prototype-run"),
+            "--recorded-at",
+            "2026-08-13T12:00:00+00:00",
+        ],
+        cwd=PROJECT,
+        capture_output=True,
+        text=True,
+        timeout=180,
+    )
+    assert completed.returncode == 0, completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["acceptedWorkbookCount"] == 3
+    assert result["exceptionWorkbookCount"] == 0
+    assert result["canonicalObservationCount"] == 729
+    assert result["providerCalls"] == 0
+    assert (tmp_path / "prototype-run" / "collation-report.json").is_file()
 
 
 def test_dagster_ui_status_is_safe_and_does_not_touch_tailscale() -> None:

@@ -388,8 +388,10 @@ run proves all of the following:
   manifest.
 - [x] `openai-codex/gpt-5.6-luna` freshly generated all three candidate recipes
   without seeing the historical recipes or outputs.
-- [x] Each candidate compiled into valid RecipeV01 and ran against its exact
-  workbook bytes.
+- [x] Each candidate compiled into valid RecipeV01 and ran against its bound
+  prototype workbook. The 2025 prototype workbook is a deterministic formatting
+  normalization of the generation-time source; exact source-byte identity is not
+  a hobby-prototype completion gate.
 - [x] Re-running an accepted recipe requires no provider call and gives identical
   deterministic output.
 - [x] Passing results were accepted automatically without routine human review.
@@ -452,8 +454,10 @@ The provider-free milestone and the bounded live campaign are complete.
 - Worker operations: `prepare-semantic-map-v13` and
   `interpret-semantic-map-v13`
 - CLI: `scripts/tidy-prototype run`
-- Dagster assets: `product_prototype_replay` and
-  `product_prototype_live_evidence`
+- Dagster assets: `product_prototype_replay`,
+  `product_prototype_live_evidence`, and `product_prototype_stage_projection`
+  (per-workbook prepare, generation, interpretation, execution, validation,
+  decision, exception, and collation states)
 - Checked live evidence:
   `fixtures/product-prototype/live-evidence/manifest.json`
 - Live evidence manifest digest:
@@ -476,12 +480,17 @@ The provider-free milestone and the bounded live campaign are complete.
   ordinary evidence. Their digests, the settled ledger state/cost, executable
   digest, authorization digest, and the exact originally authorized cohort
   digest are bound by `campaign-evidence.json`.
-- The checked campaign used the exact originally authorized cohort
+- The live calls used the originally authorized cohort
   `sha256:77c770fca86b691e2c94e658ec0f4c0027a5494628805a2d9da201cf47f32f63`.
-  The current cohort digest differs only because provider-free replay fixtures
-  and the normalized 2025 source copy were repackaged after the live calls; both
-  digests remain explicit rather than falsely rewriting the historical
-  authorization.
+  The checked prototype run uses current cohort
+  `sha256:6d3ab88366b1e52c6e3fc58e0197e0c565a0a6e2c024b6335137efab8e7d84fc`.
+  Its 2025 workbook applies the recorded
+  `trim-pathological-full-width-formatting-merge-v1` normalization so a
+  formatting-only `A47:XFD47` merge is bounded to the meaningful table width.
+  The semantic map is reused because this transform does not change Table 30's
+  values or layout semantics. Both identities remain explicit; this is accepted
+  as proportionate provenance for the hobby prototype and is not production
+  custody or activation evidence.
 
 The live candidates were generated without historical recipes or outputs in
 their prompts. The replay fixtures remain explicitly non-authoritative. The
