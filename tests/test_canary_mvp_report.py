@@ -23,7 +23,10 @@ def test_checked_canary_mvp_report_is_strict_and_non_authorizing() -> None:
     digest = semantic.pop("reportDigest")
     assert digest == domain_digest("tidy.canary-mvp-report/v1", semantic)
     assert report["itemCount"] == sum(report["stateCounts"].values()) == 63
-    assert report["sourceReadBytes"] == sum(report["stateBytes"].values())
+    assert report["sourceReadBytes"] == 44_084_669
+    assert report["itemOutcomeBytes"] == sum(report["stateBytes"].values())
+    assert report["itemOutcomeBytes"] - report["sourceReadBytes"] == 68
+    assert report["failureCount"] == len(report["failures"]) == 0
     assert report["uniqueStoredBytes"] <= report["sourceReadBytes"]
     interpretations = report["interpretations"]
     assert interpretations["eligibleSourceCounts"] == {

@@ -160,7 +160,7 @@ local repository is not authorized on SMB. See
 [`contracts/migration/v1`](contracts/migration/v1/README.md) and
 [`docs/phase-a-source-inventory.md`](docs/phase-a-source-inventory.md).
 
-## Phase B fixture-only content core
+## Phase B bounded content core and live canary
 
 ```sh
 uv run pytest -q \
@@ -177,9 +177,9 @@ digests are computed only by the pinned TypeScript compatibility port. Reviewer
 labels resolve exactly; ambiguity/conflict stays inactive. Approval/recipe/
 model/provider evidence receives conservative, non-authoritative dispositions,
 every fixture item receives an explicit semantic-pass outcome, and model bytes
-are never deserialized. The only available authorization requires source system
-`phase-b-fixture` and hard-caps execution at 1,000 items and 64 MiB. There is
-deliberately no live import command. See
+are never deserialized. The general-purpose authorization remains fixture-only and hard-capped at 1,000
+items and 64 MiB. A separate operational CLI now authorizes only the exact
+63-item frozen canary and cannot widen to the full estate. See
 [`contracts/import/v1`](contracts/import/v1/README.md) and
 [`docs/phase-b-core-import.md`](docs/phase-b-core-import.md).
 

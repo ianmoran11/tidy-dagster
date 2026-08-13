@@ -1,10 +1,10 @@
 # Phase B provider-free core import
 
-- Status: core content import plus conservative semantic groundwork implemented for fixtures
-- Overall Phase B status: incomplete — live typed import and full domain reconciliation remain pending
-- Real TidyCell content copied: zero bytes
-- Real canary selection: frozen, 63 items, metadata-only
-- Live-import authorization: not implemented
+- Status: fixture core plus the exact 63-item local hobby canary implemented
+- Overall Phase B status: bounded canary complete; full-estate typed import remains pending
+- Real TidyCell canary content copied: 36 unique objects / 42,423,291 bytes
+- Real canary selection: frozen and executed, 63 item outcomes / 61 regular files
+- Live-import authorization: exact canary only; full estate remains unauthorized
 - Provider calls: zero
 - Effective recipe pointers changed: zero
 
@@ -235,10 +235,9 @@ table.
 - per-source-item conservative semantic reconciliation; and
 - migration-worker derivations and inactive durable output custody.
 
-## Fixture-only authorization
+## Fixture and exact-canary authorization
 
-There is no live-import CLI or live authorization. `MigrationImporter` requires
-`FixtureImportAuthorization`, which:
+The general importer tests use `FixtureImportAuthorization`, which:
 
 - requires source system `phase-b-fixture`;
 - permits at most 1,000 items;
@@ -246,6 +245,10 @@ There is no live-import CLI or live authorization. `MigrationImporter` requires
 - binds the exact snapshot and source-root device/inode.
 
 The frozen TidyCell snapshot has 44,682 items and cannot satisfy this boundary.
+Separately, `CanaryImportAuthorization` and `canary_mvp_cli` admit only manifest
+`sha256:ee072650751fa76d456ba8cf034878a2a48137b02e6e7d459cb7945cb9474139`,
+exactly 63 item outcomes, and no more than 64 MiB. That local CLI has run; it
+does not authorize the full estate.
 
 ### Frozen real-import canary
 
@@ -349,29 +352,19 @@ The Phase A snapshot still verifies after this work. Tests use synthetic
 registries; the real confirmation request was generated only after a stable
 no-follow read matched the frozen Phase A registry digest exactly.
 
-## Still required for Phase B
+## Still required beyond the bounded canary
 
-The following accepted Phase B work is not implemented:
+The local hobby canary is complete. Broader Phase B work remains separately
+unauthorized and is not part of that MVP:
 
-1. process the frozen deterministic real canary under a separately gated live
-   authorization while retaining all 65 missing labels and every unresolved
-   target as unattributed or inactive;
-2. extend the now-integrated Python migration gateway beyond approval rows,
+1. extend the now-integrated Python migration gateway beyond approval rows,
    RecipeV01 revisions, and bounded generation profiles to original candidates,
    model manifests, evaluation evidence, and full-estate typed reconciliation;
-3. preserve legacy model packages as unopened archives, as required by ADR
+2. preserve legacy model packages as unopened archives, as required by ADR
    0005;
-4. perform full domain-by-domain reconciliation and prove one justified typed
-   outcome for every frozen canary source item and alias;
-5. replace the interactive identity with an attested dedicated non-admin
-   Synology service identity, require SMB3 signing, establish snapshot evidence,
-   and complete a successful restore drill; at-rest encryption was explicitly
-   waived in ADR 0005;
-6. self-review and authorize a bounded live importer and operational CLI without
-   claiming independent review; and
-7. run and self-review the real canary. The complete 44,682-item import remains
-   separately unauthorized.
+3. perform full-estate domain-by-domain reconciliation and prove one justified
+   typed outcome for every source item and alias; and
+4. separately authorize the complete 44,682-item import with a backup plan.
 
-The internal volume has recovered to approximately 72 GiB free (83% utilized),
-but that transient improvement does not waive the remaining storage-security and
-semantic-import gates. SQLite-over-SMB remains unauthorized.
+NAS migration, SMB policy, snapshots, and restore drills are deferred to a
+later goal and are not dependencies of the local canary MVP.

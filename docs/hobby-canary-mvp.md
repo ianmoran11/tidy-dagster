@@ -16,19 +16,21 @@ The exact frozen Phase B canary was copied and reconciled end to end on
 - semantic reconciliation
   `sha256:50718b4e1eea98ab7f7d7e2a0399eff6b02c3cd6af6ba5fa2bb7ee07aae22021`;
 - concise report
-  `sha256:edf00f31e61092adfb69411b2dc17a2b68a2a0240d2f20898cf20f8ff2467e51`.
+  `sha256:754cfba2cc04ad4598862985df8e2754212c659f34f2f998404d2c222b613b0b`.
 
 The report is committed at
 `fixtures/canary-mvp/phase-b-63-item-report-v1.json`.
 
 ## Outcomes
 
-| Outcome         |  Items |   Source bytes |
-| --------------- | -----: | -------------: |
-| imported        |     36 |     42,423,291 |
-| duplicate alias |     22 |        703,443 |
-| excluded        |      5 |        958,003 |
-| **total**       | **63** | **44,084,737** |
+| Outcome           |  Items |   Source bytes |
+| ----------------- | -----: | -------------: |
+| imported          |     36 |     42,423,291 |
+| duplicate alias   |     22 |        703,443 |
+| excluded          |      5 |        958,003 |
+| **item outcomes** | **63** | **44,084,737** |
+
+Actual regular-file source reads total 44,084,669 bytes. The additional 68 outcome bytes describe one excluded symlink target that was verified without reading or following a file. The run recorded zero failures (`failureCount: 0`, `failures: []`).
 
 Exact source bytes were deduplicated into 36 content-addressed local objects,
 totalling 42,423,291 bytes. The frozen derived canary snapshot and seven bounded interpretation outputs

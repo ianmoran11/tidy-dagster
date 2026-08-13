@@ -14,6 +14,9 @@
     "semanticReconciliationId",
     "itemCount",
     "sourceReadBytes",
+    "itemOutcomeBytes",
+    "failureCount",
+    "failures",
     "stateCounts",
     "stateBytes",
     "uniqueStoredObjects",
@@ -65,7 +68,8 @@
     "sourceReadBytes": {
       "type": "integer",
       "minimum": 1,
-      "maximum": 67108864
+      "maximum": 67108864,
+      "const": 44084669
     },
     "stateCounts": {
       "$ref": "#/$defs/countMap"
@@ -301,6 +305,21 @@
         "trainingEligible": {
           "const": false
         }
+      }
+    },
+    "itemOutcomeBytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 67108864
+    },
+    "failureCount": {
+      "const": 0
+    },
+    "failures": {
+      "type": "array",
+      "maxItems": 63,
+      "items": {
+        "type": "object"
       }
     }
   },
