@@ -15,6 +15,9 @@
     "reasoning",
     "maximumCalls",
     "maximumCostUsd",
+    "authorizedCohortPath",
+    "authorizationEvidencePath",
+    "restrictedEnvelopeIndexPath",
     "attempts",
     "campaignDigest"
   ],
@@ -46,6 +49,13 @@
     "reasoning": { "const": "high" },
     "maximumCalls": { "const": 6 },
     "maximumCostUsd": { "const": 2.0 },
+    "authorizedCohortPath": { "const": "historical/authorized-cohort.json" },
+    "authorizationEvidencePath": {
+      "const": "historical/live-authorization.json"
+    },
+    "restrictedEnvelopeIndexPath": {
+      "const": "historical/restricted-envelope-index.json"
+    },
     "attempts": {
       "type": "object",
       "required": ["2023", "2024", "2025"],

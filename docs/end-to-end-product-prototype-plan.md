@@ -457,7 +457,7 @@ The provider-free milestone and the bounded live campaign are complete.
 - Checked live evidence:
   `fixtures/product-prototype/live-evidence/manifest.json`
 - Live evidence manifest digest:
-  `sha256:bc8d460ab6d5790860b6893cc4ce11ce83a49cfd8e9b95b789d248e32935d8a8`
+  `sha256:3348045777ba9fff77da9f4d10978b2259f1675df5bf713080720204145cf675`
 - Model: `openai-codex/gpt-5.6-luna`, high reasoning
 - Fresh calls: 3; corrections: 0
 - API-equivalent cost: USD 0.0197296

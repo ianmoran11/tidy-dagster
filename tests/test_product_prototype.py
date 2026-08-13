@@ -74,9 +74,32 @@ def test_checked_live_evidence_binds_three_fresh_luna_results(
         "sha256:77c770fca86b691e2c94e658ec0f4c0027a5494628805a2d9da201cf47f32f63"
     )
     assert campaign["currentCohortDigest"] == manifest["cohortDigest"]
+    authorized_cohort = (
+        PROJECT
+        / "fixtures"
+        / "product-prototype"
+        / "live-evidence"
+        / campaign["authorizedCohortPath"]
+    )
+    assert sha256_digest(authorized_cohort.read_bytes()) == campaign[
+        "authorizedCohortDigest"
+    ]
     assert {item["ledgerState"] for item in campaign["attempts"].values()} == {
         "settled"
     }
+    assert all(
+        item["prompt_package_digest"]
+        == campaign["attempts"][item["reference_date"][:4]]["promptDigest"]
+        for item in json.loads(
+            (
+                PROJECT
+                / "fixtures"
+                / "product-prototype"
+                / "live-evidence"
+                / "canonical-observations.json"
+            ).read_text()
+        )
+    )
 
 
 def test_replay_runs_three_real_workbooks_and_collates(tmp_path: Path) -> None:

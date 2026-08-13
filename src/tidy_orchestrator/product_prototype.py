@@ -97,7 +97,7 @@ def verify_live_evidence(
     ):
         raise ProductPrototypeError("Live evidence is not bound to current contracts")
     files = manifest.get("files")
-    if not isinstance(files, list) or len(files) != 13:
+    if not isinstance(files, list) or len(files) != 16:
         raise ProductPrototypeError("Live evidence file closure is invalid")
     declared_paths: set[str] = set()
     for entry in files:
@@ -121,6 +121,21 @@ def verify_live_evidence(
     )
     campaign_semantic = dict(campaign)
     campaign_identity = campaign_semantic.pop("campaignDigest", None)
+    authorized_cohort_path = _safe_join(
+        root, str(campaign.get("authorizedCohortPath", ""))
+    )
+    authorization_path = _safe_join(
+        root, str(campaign.get("authorizationEvidencePath", ""))
+    )
+    envelope_index_path = _safe_join(
+        root, str(campaign.get("restrictedEnvelopeIndexPath", ""))
+    )
+    authorized_cohort_bytes = authorized_cohort_path.read_bytes()
+    authorized_cohort = _load_object(authorized_cohort_bytes, "authorized cohort")
+    authorization = _load_object(authorization_path.read_bytes(), "authorization")
+    envelope_index = _load_object(
+        envelope_index_path.read_bytes(), "restricted envelope index"
+    )
     if (
         campaign_identity
         != domain_digest(
@@ -132,8 +147,22 @@ def verify_live_evidence(
         or campaign.get("maximumCalls") != 6
         or campaign.get("maximumCostUsd") != 2.0
         or campaign.get("attempts") != attempts
+        or sha256_digest(authorized_cohort_bytes)
+        != campaign.get("authorizedCohortDigest")
+        or authorization.get("authorizationDigest")
+        != campaign.get("authorizationDigest")
+        or authorization.get("cohortDigest") != campaign.get("authorizedCohortDigest")
+        or authorization.get("promptContractDigest")
+        != campaign.get("promptContractDigest")
+        or authorization.get("piExecutableDigest") != campaign.get("piExecutableDigest")
+        or envelope_index.keys() != attempts.keys()
     ):
         raise ProductPrototypeError("Live campaign evidence is invalid")
+    _verify_authorized_cohort_transition(
+        authorized=authorized_cohort,
+        current=cohort,
+        attempts=attempts,
+    )
     for workbook in run.get("workbooks", []):
         year = str(workbook.get("year"))
         attempt = attempts.get(year)
@@ -156,6 +185,11 @@ def verify_live_evidence(
             )
             or attempt.get("ledgerState") != "settled"
             or attempt.get("reservedCostUsd") != 0.5
+            or envelope_index.get(year, {}).get("attemptId") != attempt.get("attemptId")
+            or envelope_index.get(year, {}).get("promptDigest")
+            != attempt.get("promptDigest")
+            or envelope_index.get(year, {}).get("responseEnvelopeDigest")
+            != attempt.get("responseEnvelopeDigest")
         ):
             raise ProductPrototypeError("Live attempt binding is invalid")
     canonical_json_data = (root / "canonical-observations.json").read_bytes()
@@ -190,6 +224,59 @@ def verify_live_evidence(
             repository=repository,
         )
     return manifest
+
+
+def _verify_authorized_cohort_transition(
+    *,
+    authorized: dict[str, Any],
+    current: dict[str, Any],
+    attempts: dict[str, Any],
+) -> None:
+    stable_top_level = (
+        "cohortId",
+        "publicationId",
+        "tableFamilyId",
+        "generation",
+        "acceptanceContract",
+    )
+    if any(authorized.get(key) != current.get(key) for key in stable_top_level):
+        raise ProductPrototypeError("Authorized cohort semantics changed")
+    old_by_year = {str(item["year"]): item for item in authorized.get("workbooks", [])}
+    new_by_year = {str(item["year"]): item for item in current.get("workbooks", [])}
+    if (
+        old_by_year.keys() != new_by_year.keys()
+        or old_by_year.keys() != attempts.keys()
+    ):
+        raise ProductPrototypeError("Authorized cohort workbook set changed")
+    for year, old in old_by_year.items():
+        new = new_by_year[year]
+        stable_fields = ("year", "referenceDate", "path", "sheet")
+        if any(old.get(key) != new.get(key) for key in stable_fields):
+            raise ProductPrototypeError(
+                f"Authorized workbook semantics changed for {year}"
+            )
+        if year != "2025":
+            for key in ("contentDigest", "byteLength"):
+                if old.get(key) != new.get(key):
+                    raise ProductPrototypeError(
+                        f"Authorized workbook bytes changed for {year}"
+                    )
+        else:
+            original_2025 = "sha256:" + (
+                "f326cef55f707ca0d15f8fa489cadc839c498c1b8e6fa696e0c15f39ec4c8549"
+            )
+            normalized_2025 = "sha256:" + (
+                "464f80e73901ae9010d2dbbf1fc1bf37222711a3ccacc44efdbe99953aa3d263"
+            )
+            if (
+                new.get("normalization")
+                != "trim-pathological-full-width-formatting-merge-v1"
+                or old.get("contentDigest") != original_2025
+                or new.get("contentDigest") != normalized_2025
+            ):
+                raise ProductPrototypeError("2025 normalization transition is invalid")
+        if attempts[year].get("workbookDigest") != new.get("contentDigest"):
+            raise ProductPrototypeError(f"Live attempt workbook differs for {year}")
 
 
 def _verify_checked_live_recipes(
@@ -282,7 +369,7 @@ def _verify_checked_live_recipes(
             "acceptance_policy_version": ACCEPTANCE_SCHEMA,
             "acceptance_policy_digest": sha256_digest(canonical_json_bytes(contract)),
             "acceptance_decision_digest": run_workbook["decisionId"],
-            "prompt_package_digest": run_workbook["prepareDerivationId"],
+            "prompt_package_digest": attempts[str(entry["year"])]["promptDigest"],
             "generation_model": attempt["model"],
             "generation_attempt_id": attempt["attemptId"],
         }
@@ -708,7 +795,7 @@ def _interpret_accept_one(
             "acceptance_policy_version": ACCEPTANCE_SCHEMA,
             "acceptance_policy_digest": sha256_digest(canonical_json_bytes(contract)),
             "acceptance_decision_digest": decision_record.decision_id,
-            "prompt_package_digest": prepared.prepare.derivation.derivation_id,
+            "prompt_package_digest": _output_digest(prepared.prepare, "prompt.txt"),
             "generation_model": MODEL,
             "generation_attempt_id": (
                 prepared.provider_attempt["attemptId"]
