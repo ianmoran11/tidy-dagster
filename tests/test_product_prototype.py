@@ -61,6 +61,22 @@ def test_checked_live_evidence_binds_three_fresh_luna_results(
     assert manifest["acceptedWorkbookCount"] == 3
     assert manifest["canonicalObservationCount"] == 729
     assert manifest["rawPromptResponseIncluded"] is False
+    campaign = json.loads(
+        (
+            PROJECT
+            / "fixtures"
+            / "product-prototype"
+            / "live-evidence"
+            / "campaign-evidence.json"
+        ).read_text()
+    )
+    assert campaign["authorizedCohortDigest"] == (
+        "sha256:77c770fca86b691e2c94e658ec0f4c0027a5494628805a2d9da201cf47f32f63"
+    )
+    assert campaign["currentCohortDigest"] == manifest["cohortDigest"]
+    assert {item["ledgerState"] for item in campaign["attempts"].values()} == {
+        "settled"
+    }
 
 
 def test_replay_runs_three_real_workbooks_and_collates(tmp_path: Path) -> None:
@@ -405,21 +421,74 @@ def test_end_to_end_malformed_response_creates_exception_and_is_excluded(
     assert exceptions[0]["decision"] == "exception_required"
 
 
+def _mutate_pipeline_result(
+    defect: str,
+):
+    def mutate(
+        year: int,
+        execution: dict[str, Any],
+        recipe: dict[str, Any],
+        deterministic: bool,
+    ) -> tuple[dict[str, Any], dict[str, Any], bool]:
+        if year != 2023:
+            return execution, recipe, deterministic
+        rows = execution["tables"][0]["rows"]
+        if defect == "unknown-code":
+            rows[0]["Legal status"] = "Unknown status"
+        elif defect == "duplicate-key":
+            duplicate = json.loads(json.dumps(rows[0]))
+            duplicate["_source"]["address"] = "R999C1"
+            rows.append(duplicate)
+        elif defect == "missing-dimension":
+            recipe["tables"][0]["headers"] = [
+                item
+                for item in recipe["tables"][0]["headers"]
+                if "legal status" not in item["name"].lower()
+            ]
+        elif defect == "inconsistent-total":
+            rows[2][recipe["tables"][0]["values"]["name"]] = 999999
+        elif defect == "source-reuse":
+            rows[1]["_source"] = json.loads(json.dumps(rows[0]["_source"]))
+        elif defect == "ambiguous-mapping":
+            indigenous = next(
+                item["name"]
+                for item in recipe["tables"][0]["headers"]
+                if "indigenous" in item["name"].lower()
+            )
+            rows[0][indigenous] = "Unknown status"
+            execution["warnings"] = [
+                {
+                    "code": "AMBIGUOUS_HEADER",
+                    "address": rows[0]["_source"]["address"],
+                    "message": "Multiple candidates.",
+                }
+            ]
+        elif defect == "empty-output":
+            execution["tables"][0]["rows"] = []
+        elif defect == "nondeterministic":
+            deterministic = False
+        else:
+            raise AssertionError(defect)
+        return execution, recipe, deterministic
+
+    return mutate
+
+
 @pytest.mark.parametrize(
-    "code",
+    ("defect", "code"),
     [
-        "UNKNOWN_CODE",
-        "DUPLICATE_OBSERVATION_KEY",
-        "REQUIRED_DIMENSION_MISSING",
-        "TOTAL_MISMATCH",
-        "SOURCE_CELL_REUSE",
-        "AMBIGUOUS_WARNING_OUTPUT_UNRESOLVED",
-        "EMPTY_OUTPUT",
-        "NONDETERMINISTIC_REPLAY",
+        ("unknown-code", "UNKNOWN_CODE"),
+        ("duplicate-key", "DUPLICATE_OBSERVATION_KEY"),
+        ("missing-dimension", "REQUIRED_DIMENSION_MISSING"),
+        ("inconsistent-total", "TOTAL_MISMATCH"),
+        ("source-reuse", "SOURCE_CELL_REUSE"),
+        ("ambiguous-mapping", "AMBIGUOUS_WARNING_OUTPUT_UNRESOLVED"),
+        ("empty-output", "EMPTY_OUTPUT"),
+        ("nondeterministic", "NONDETERMINISTIC_REPLAY"),
     ],
 )
 def test_each_acceptance_negative_creates_end_to_end_exception_and_exclusion(
-    tmp_path: Path, code: str
+    tmp_path: Path, defect: str, code: str
 ) -> None:
     repository = LocalArtifactRepository(tmp_path / "repository")
     result = run_product_prototype(
@@ -430,7 +499,7 @@ def test_each_acceptance_negative_creates_end_to_end_exception_and_exclusion(
         mode="replay",
         gateway=fake_gateway(repository),
         recorded_at="2026-08-13T21:30:00+00:00",
-        acceptance_mutations={2023: [{"code": code, "message": "injected"}]},
+        acceptance_execution_mutator=_mutate_pipeline_result(defect),
     )
     assert result.report["acceptedWorkbookCount"] == 2
     assert result.report["exceptionWorkbookCount"] == 1

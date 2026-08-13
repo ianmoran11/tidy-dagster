@@ -97,7 +97,7 @@ def verify_live_evidence(
     ):
         raise ProductPrototypeError("Live evidence is not bound to current contracts")
     files = manifest.get("files")
-    if not isinstance(files, list) or len(files) != 12:
+    if not isinstance(files, list) or len(files) != 13:
         raise ProductPrototypeError("Live evidence file closure is invalid")
     declared_paths: set[str] = set()
     for entry in files:
@@ -116,6 +116,24 @@ def verify_live_evidence(
         raise ProductPrototypeError("Live evidence contains undeclared files")
     run = _load_object((root / "run.json").read_bytes(), "live run")
     attempts = _load_object((root / "attempts.json").read_bytes(), "live attempts")
+    campaign = _load_object(
+        (root / "campaign-evidence.json").read_bytes(), "live campaign evidence"
+    )
+    campaign_semantic = dict(campaign)
+    campaign_identity = campaign_semantic.pop("campaignDigest", None)
+    if (
+        campaign_identity
+        != domain_digest(
+            "tidy.product-prototype-live-campaign-evidence/v1", campaign_semantic
+        )
+        or campaign.get("currentCohortDigest") != manifest.get("cohortDigest")
+        or campaign.get("model") != MODEL
+        or campaign.get("reasoning") != "high"
+        or campaign.get("maximumCalls") != 6
+        or campaign.get("maximumCostUsd") != 2.0
+        or campaign.get("attempts") != attempts
+    ):
+        raise ProductPrototypeError("Live campaign evidence is invalid")
     for workbook in run.get("workbooks", []):
         year = str(workbook.get("year"))
         attempt = attempts.get(year)
@@ -129,6 +147,15 @@ def verify_live_evidence(
             != sha256_digest((root / year / "normalized-recipe.json").read_bytes())
             or attempt.get("workbookDigest") != workbook.get("workbookDigest")
             or attempt.get("interpretationOperation") != "interpret-semantic-map-v13"
+            or not re.fullmatch(
+                r"sha256:[0-9a-f]{64}", str(attempt.get("promptDigest"))
+            )
+            or not re.fullmatch(
+                r"sha256:[0-9a-f]{64}",
+                str(attempt.get("responseEnvelopeDigest")),
+            )
+            or attempt.get("ledgerState") != "settled"
+            or attempt.get("reservedCostUsd") != 0.5
         ):
             raise ProductPrototypeError("Live attempt binding is invalid")
     canonical_json_data = (root / "canonical-observations.json").read_bytes()
@@ -290,7 +317,7 @@ def run_product_prototype(
     live_response_root: Path | None = None,
     live_attempts: dict[int | str, dict[str, Any]] | None = None,
     provider: AuthorizedPiProvider | None = None,
-    acceptance_mutations: dict[int, list[dict[str, Any]]] | None = None,
+    acceptance_execution_mutator: Any | None = None,
 ) -> PrototypeRun:
     """Run the exact cohort from saved replay or freshly dispatched responses."""
     if mode not in {"replay", "live"}:
@@ -365,7 +392,7 @@ def run_product_prototype(
             contract=contract,
             prepared=prepared,
             timestamp=timestamp,
-            forced_issues=(acceptance_mutations or {}).get(int(entry["year"])),
+            execution_mutator=acceptance_execution_mutator,
         )
         workbook_reports.append(report[0])
         if prepared.provider_attempt is not None:
@@ -586,7 +613,7 @@ def _interpret_accept_one(
     contract: dict[str, Any],
     prepared: _PreparedWorkbook,
     timestamp: str,
-    forced_issues: list[dict[str, Any]] | None = None,
+    execution_mutator: Any | None = None,
 ) -> tuple[dict[str, Any], _AcceptedWorkbook | None]:
     entry = prepared.entry
     year = int(entry["year"])
@@ -624,6 +651,10 @@ def _interpret_accept_one(
         deterministic = _execution_identity(first) == _execution_identity(second)
         execution = _output_json(repository, first, "execution.json")
         recipe = _output_json(repository, first, "normalized-recipe.json")
+        if execution_mutator is not None:
+            execution, recipe, deterministic = execution_mutator(
+                year, execution, recipe, deterministic
+            )
         recipe_digest = _output_digest(first, "normalized-recipe.json")
         execution_digest = _output_digest(first, "execution.json")
         observations, issues, checks = _validate_execution(
@@ -634,8 +665,6 @@ def _interpret_accept_one(
             recipe_digest=recipe_digest,
             deterministic=deterministic,
         )
-        issues.extend(forced_issues or [])
-        issues = _deduplicate_issues(issues)
     except Exception as error:
         observations = ()
         issues = [

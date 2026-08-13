@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/product-prototype/v1/live-campaign-evidence.schema.json",
+  "title": "Tidy product prototype live campaign evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "authorizedCohortDigest",
+    "currentCohortDigest",
+    "authorizationDigest",
+    "promptContractDigest",
+    "piExecutableDigest",
+    "model",
+    "reasoning",
+    "maximumCalls",
+    "maximumCostUsd",
+    "attempts",
+    "campaignDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "tidy.product-prototype-live-campaign-evidence/v1"
+    },
+    "authorizedCohortDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "currentCohortDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "authorizationDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "promptContractDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "piExecutableDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "model": { "const": "openai-codex/gpt-5.6-luna" },
+    "reasoning": { "const": "high" },
+    "maximumCalls": { "const": 6 },
+    "maximumCostUsd": { "const": 2.0 },
+    "attempts": {
+      "type": "object",
+      "required": ["2023", "2024", "2025"],
+      "additionalProperties": false
+    },
+    "campaignDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

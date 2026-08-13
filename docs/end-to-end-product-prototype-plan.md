@@ -457,7 +457,7 @@ The provider-free milestone and the bounded live campaign are complete.
 - Checked live evidence:
   `fixtures/product-prototype/live-evidence/manifest.json`
 - Live evidence manifest digest:
-  `sha256:7403939709ecce83e8b970f1591f6d5ac3bd4f7ea6c4cc59008f466550d055ff`
+  `sha256:bc8d460ab6d5790860b6893cc4ce11ce83a49cfd8e9b95b789d248e32935d8a8`
 - Model: `openai-codex/gpt-5.6-luna`, high reasoning
 - Fresh calls: 3; corrections: 0
 - API-equivalent cost: USD 0.0197296
@@ -473,7 +473,15 @@ The provider-free milestone and the bounded live campaign are complete.
   creation and exclusion; malformed provider output is exercised through the
   real end-to-end interpretation path.
 - Raw prompts and provider envelopes remain restricted and are not committed as
-  ordinary evidence.
+  ordinary evidence. Their digests, the settled ledger state/cost, executable
+  digest, authorization digest, and the exact originally authorized cohort
+  digest are bound by `campaign-evidence.json`.
+- The checked campaign used the exact originally authorized cohort
+  `sha256:77c770fca86b691e2c94e658ec0f4c0027a5494628805a2d9da201cf47f32f63`.
+  The current cohort digest differs only because provider-free replay fixtures
+  and the normalized 2025 source copy were repackaged after the live calls; both
+  digests remain explicit rather than falsely rewriting the historical
+  authorization.
 
 The live candidates were generated without historical recipes or outputs in
 their prompts. The replay fixtures remain explicitly non-authoritative. The
