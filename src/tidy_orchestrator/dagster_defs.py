@@ -24,7 +24,9 @@ from dagster import (
     sensor,
 )
 
+from .application import actual_worker_gateway
 from .artifacts import LocalArtifactRepository
+from .product_prototype import run_product_prototype, verify_live_evidence
 from .work_units import (
     MAX_ACTIVE_WORK_UNITS,
     PROCESSING_PROFILE_DIGEST,
@@ -54,6 +56,140 @@ class TidyRuntimeResource(ConfigurableResource):
 
     def project(self) -> Path:
         return Path(self.project_root).resolve()
+
+
+@asset(
+    name="product_prototype_live_evidence",
+    description=(
+        "Checked safe projection of the three fresh Luna generations and accepted "
+        "canonical 2023-2025 dataset; raw restricted provider evidence is omitted."
+    ),
+    group_name="product_prototype",
+    code_version="tidy.product-prototype-live-evidence/v1",
+)
+def product_prototype_live_evidence(
+    runtime: TidyRuntimeResource,
+) -> MaterializeResult:
+    repository = runtime.repository()
+    manifest = verify_live_evidence(
+        runtime.project(),
+        gateway=actual_worker_gateway(repository, runtime.project()),
+        repository=repository,
+    )
+    return MaterializeResult(
+        metadata={
+            "manifest_digest": manifest["manifestDigest"],
+            "run_digest": manifest["runDigest"],
+            "provider_calls": manifest["providerCalls"],
+            "api_equivalent_usd": manifest["apiEquivalentUsd"],
+            "accepted_workbooks": manifest["acceptedWorkbookCount"],
+            "canonical_observations": manifest["canonicalObservationCount"],
+            "raw_prompt_response_included": False,
+        },
+        data_version=DataVersion(manifest["manifestDigest"]),
+    )
+
+
+@asset_check(asset=product_prototype_live_evidence, name="fresh_luna_completion")
+def product_prototype_live_evidence_check(
+    runtime: TidyRuntimeResource,
+) -> AssetCheckResult:
+    repository = runtime.repository()
+    manifest = verify_live_evidence(
+        runtime.project(),
+        gateway=actual_worker_gateway(repository, runtime.project()),
+        repository=repository,
+    )
+    return AssetCheckResult(
+        passed=(
+            manifest["providerCalls"] == 3
+            and manifest["acceptedWorkbookCount"] == 3
+            and manifest["exceptionWorkbookCount"] == 0
+            and manifest["canonicalObservationCount"] == 729
+            and manifest["rawPromptResponseIncluded"] is False
+        ),
+        metadata={
+            "manifest_digest": manifest["manifestDigest"],
+            "run_digest": manifest["runDigest"],
+            "model": manifest["model"],
+            "reasoning": manifest["reasoning"],
+            "provider_calls": manifest["providerCalls"],
+        },
+    )
+
+
+@asset(
+    name="product_prototype_replay",
+    description=(
+        "Provider-free replay of the three-workbook product cohort, including "
+        "automatic acceptance, exceptions, and canonical collation."
+    ),
+    group_name="product_prototype",
+    code_version="tidy.product-prototype-run/v1",
+)
+def product_prototype_replay(
+    runtime: TidyRuntimeResource,
+) -> MaterializeResult:
+    result = run_product_prototype(
+        repository=runtime.repository(),
+        project_root=runtime.project(),
+        cohort_path=(
+            runtime.project()
+            / "fixtures"
+            / "product-prototype"
+            / "prisoners-table-30-2023-2025.json"
+        ),
+        output_root=runtime.project() / ".product-prototype" / "dagster-replay",
+        mode="replay",
+    )
+    report = result.report
+    return MaterializeResult(
+        metadata={
+            "run_digest": report["runDigest"],
+            "mode": report["mode"],
+            "provider_calls": report["providerCalls"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "canonical_observations": report["canonicalObservationCount"],
+            "artifact_uri": f"artifact://{result.run.content_digest}",
+        },
+        data_version=DataVersion(result.run.content_digest),
+    )
+
+
+@asset_check(asset=product_prototype_replay, name="automatic_acceptance_and_collation")
+def product_prototype_replay_check(
+    runtime: TidyRuntimeResource,
+) -> AssetCheckResult:
+    result = run_product_prototype(
+        repository=runtime.repository(),
+        project_root=runtime.project(),
+        cohort_path=(
+            runtime.project()
+            / "fixtures"
+            / "product-prototype"
+            / "prisoners-table-30-2023-2025.json"
+        ),
+        output_root=runtime.project() / ".product-prototype" / "dagster-replay",
+        mode="replay",
+    )
+    report = result.report
+    passed = (
+        report["acceptedWorkbookCount"] >= 2
+        and report["canonicalObservationCount"] > 0
+        and report["crossYearIssues"] == []
+        and report["providerCalls"] == 0
+    )
+    return AssetCheckResult(
+        passed=passed,
+        metadata={
+            "run_digest": report["runDigest"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "canonical_observations": report["canonicalObservationCount"],
+            "provider_calls": report["providerCalls"],
+        },
+    )
 
 
 @asset(
@@ -243,6 +379,25 @@ def active_projection_check(
     )
 
 
+product_prototype_live_evidence_job = define_asset_job(
+    "product_prototype_live_evidence_job",
+    selection=AssetSelection.assets(product_prototype_live_evidence),
+    description="Verify and project the checked fresh-Luna product evidence.",
+    tags={"provider_calls": "3", "mode": "checked-live-evidence"},
+)
+
+
+product_prototype_replay_job = define_asset_job(
+    "product_prototype_replay_job",
+    selection=AssetSelection.assets(product_prototype_replay),
+    description=(
+        "Provider-free end-to-end replay, automatic acceptance, exception routing, "
+        "and canonical collation for the three-workbook product cohort."
+    ),
+    tags={"provider_calls": "0", "mode": "replay"},
+)
+
+
 project_work_unit_job = define_asset_job(
     "project_provider_free_work_unit",
     selection=AssetSelection.assets(
@@ -312,17 +467,25 @@ def build_definitions(
     ).resolve()
     return Definitions(
         assets=[
+            product_prototype_live_evidence,
+            product_prototype_replay,
             source_catalog_snapshot,
             verified_fixture_inputs_index,
             recipe_execution_evidence_index,
             active_work_unit_projection,
         ],
         asset_checks=[
+            product_prototype_live_evidence_check,
+            product_prototype_replay_check,
             verified_fixture_inputs_check,
             recipe_execution_check,
             active_projection_check,
         ],
-        jobs=[project_work_unit_job],
+        jobs=[
+            product_prototype_live_evidence_job,
+            product_prototype_replay_job,
+            project_work_unit_job,
+        ],
         sensors=[provider_free_work_unit_sensor],
         resources={
             "runtime": TidyRuntimeResource(
@@ -341,6 +504,9 @@ def build_definitions(
             "prompt_assembly_supported": True,
             "prompt_scope": "source-owned-fourteen-snapshot-cases-v1",
             "prompt_output_exposed": False,
+            "product_prototype_replay_supported": True,
+            "product_prototype_live_evidence_supported": True,
+            "product_prototype_live_generation_authorized": False,
         },
     )
 

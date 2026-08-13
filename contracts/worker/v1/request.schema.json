@@ -15,7 +15,15 @@
   "properties": {
     "protocolVersion": { "const": "tidy.worker/v1" },
     "requestId": { "type": "string", "minLength": 1, "maxLength": 128 },
-    "operation": { "enum": ["health", "capabilities", "execute-recipe-v01"] },
+    "operation": {
+      "enum": [
+        "health",
+        "capabilities",
+        "execute-recipe-v01",
+        "prepare-semantic-map-v13",
+        "interpret-semantic-map-v13"
+      ]
+    },
     "inputs": {
       "type": "array",
       "maxItems": 8,
@@ -53,7 +61,9 @@
         "includeSummary": { "type": "boolean" },
         "includeCompactContext": { "type": "boolean" },
         "includeRegionCatalog": { "type": "boolean" },
-        "csvMode": { "const": "recipe-aware" }
+        "csvMode": { "const": "recipe-aware" },
+        "sheet": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "correction": { "type": "boolean" }
       }
     },
     "limits": {

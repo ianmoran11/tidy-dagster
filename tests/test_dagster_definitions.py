@@ -16,6 +16,10 @@ from tidy_orchestrator.dagster_defs import (
     TidyRuntimeResource,
     active_work_unit_projection,
     build_definitions,
+    product_prototype_live_evidence,
+    product_prototype_live_evidence_check,
+    product_prototype_replay,
+    product_prototype_replay_check,
     provider_free_work_unit_sensor,
     recipe_execution_evidence_index,
     verified_fixture_inputs_index,
@@ -37,6 +41,31 @@ from tidy_orchestrator.work_units import (
 )
 
 PROJECT = Path(__file__).parents[1]
+
+
+def test_definitions_include_provider_free_product_prototype_projection(
+    tmp_path: Path,
+) -> None:
+    definitions = build_definitions(
+        project_root=PROJECT, repository_root=tmp_path / "repository"
+    )
+    Definitions.validate_loadable(definitions)
+    assert product_prototype_replay.key.to_user_string() == "product_prototype_replay"
+    assert product_prototype_live_evidence.key.to_user_string() == (
+        "product_prototype_live_evidence"
+    )
+    assert product_prototype_live_evidence_check.check_key.name == (
+        "fresh_luna_completion"
+    )
+    assert product_prototype_replay_check.check_key.name == (
+        "automatic_acceptance_and_collation"
+    )
+    assert definitions.metadata["product_prototype_replay_supported"].value is True
+    assert definitions.metadata["product_prototype_live_evidence_supported"].value
+    assert (
+        definitions.metadata["product_prototype_live_generation_authorized"].value
+        is False
+    )
 
 
 def test_definitions_load_identity_and_share_one_partition_definition(
@@ -258,6 +287,43 @@ def test_sensor_rejects_union_over_one_thousand_existing_keys(tmp_path: Path) ->
         )
         with pytest.raises(RuntimeError, match="Existing plus discovered"):
             provider_free_work_unit_sensor._raw_fn(context)
+
+
+def test_product_prototype_live_evidence_dagster_job_passes() -> None:
+    definitions = build_definitions(project_root=PROJECT)
+    result = definitions.resolve_job_def(
+        "product_prototype_live_evidence_job"
+    ).execute_in_process()
+    assert result.success
+    assert {
+        event.asset_key.to_user_string()
+        for event in result.get_asset_materialization_events()
+    } == {"product_prototype_live_evidence"}
+    evaluations = result.get_asset_check_evaluations()
+    assert len(evaluations) == 1
+    assert evaluations[0].passed
+
+
+def test_product_prototype_dagster_job_materializes_and_passes_check(
+    tmp_path: Path,
+) -> None:
+    subprocess.run(
+        ["npm", "run", "build"], cwd=PROJECT, check=True, capture_output=True
+    )
+    definitions = build_definitions(
+        project_root=PROJECT, repository_root=tmp_path / "repository"
+    )
+    result = definitions.resolve_job_def(
+        "product_prototype_replay_job"
+    ).execute_in_process()
+    assert result.success
+    assert {
+        event.asset_key.to_user_string()
+        for event in result.get_asset_materialization_events()
+    } == {"product_prototype_replay"}
+    evaluations = result.get_asset_check_evaluations()
+    assert len(evaluations) == 1
+    assert evaluations[0].passed
 
 
 def test_run_rejects_recipe_revision_changed_after_dispatch(tmp_path: Path) -> None:

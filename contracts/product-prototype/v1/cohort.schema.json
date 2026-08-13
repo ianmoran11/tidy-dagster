@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/product-prototype/v1/cohort.schema.json",
+  "title": "Tidy product prototype cohort v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "cohortId",
+    "publicationId",
+    "tableFamilyId",
+    "generation",
+    "acceptanceContract",
+    "workbooks"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.product-prototype-cohort/v1" },
+    "cohortId": { "type": "string", "minLength": 1 },
+    "publicationId": { "type": "string", "minLength": 1 },
+    "tableFamilyId": { "type": "string", "minLength": 1 },
+    "acceptanceContract": { "type": "string", "minLength": 1 },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model",
+        "reasoning",
+        "promptContract",
+        "maximumCalls",
+        "maximumCostUsd",
+        "correctionPolicy"
+      ],
+      "properties": {
+        "provider": { "const": "openai-codex" },
+        "model": { "const": "openai-codex/gpt-5.6-luna" },
+        "reasoning": { "const": "high" },
+        "promptContract": {
+          "const": "cell-role-semantic-map-v13-adjacent-year-aware"
+        },
+        "maximumCalls": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "maximumCostUsd": { "type": "number", "exclusiveMinimum": 0 },
+        "correctionPolicy": {
+          "const": "one-pre-execution-compilation-correction-only"
+        }
+      }
+    },
+    "workbooks": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "year",
+          "referenceDate",
+          "path",
+          "contentDigest",
+          "byteLength",
+          "sheet",
+          "replayResponse"
+        ],
+        "properties": {
+          "year": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+          "referenceDate": { "type": "string", "format": "date" },
+          "path": { "type": "string", "minLength": 1 },
+          "contentDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "byteLength": { "type": "integer", "minimum": 1 },
+          "sheet": { "type": "string", "minLength": 1 },
+          "normalization": {
+            "const": "trim-pathological-full-width-formatting-merge-v1"
+          },
+          "replayResponse": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "contentDigest",
+              "byteLength",
+              "historicalModel",
+              "acceptanceAuthority"
+            ],
+            "properties": {
+              "path": { "type": "string", "minLength": 1 },
+              "contentDigest": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "byteLength": { "type": "integer", "minimum": 1 },
+              "historicalModel": { "type": "string", "minLength": 1 },
+              "acceptanceAuthority": { "const": false }
+            }
+          }
+        }
+      }
+    }
+  }
+}

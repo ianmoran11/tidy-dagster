@@ -1,5 +1,31 @@
 # tidy-dagster
 
+## End-to-end spreadsheet product prototype
+
+The replay-first product slice processes the exact *Prisoners in Australia*
+Table 30 cohort for 2023–2025 through V13 preparation, saved-response
+interpretation, RecipeV01 compilation and execution, automatic table-family
+acceptance, exception routing, and canonical cross-year collation:
+
+```sh
+npm run build
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-30-2023-2025.json \
+  --mode replay \
+  --output .product-prototype/replay
+```
+
+The live model is pinned to `openai-codex/gpt-5.6-luna` with high reasoning.
+The checked live campaign made three calls for USD 0.0197296, compiled and
+executed all three fresh candidates, automatically accepted 2023–2025, and
+collated 729 canonical observations. Safe checked evidence is under
+`fixtures/product-prototype/live-evidence/`; raw prompts and provider envelopes
+remain restricted under the ignored `.product-prototype/` root. Replay makes
+zero provider calls and explicitly treats its historical responses as
+non-authoritative integration fixtures. See
+[`docs/end-to-end-product-prototype-plan.md`](docs/end-to-end-product-prototype-plan.md).
+
+
 `tidy-dagster` is a staged, standalone reimplementation of TidyCell's spreadsheet-to-recipe pipeline and its future semantic-data and microsimulation-calibration workflow.
 
 ## Current status
@@ -10,7 +36,7 @@ M3 adds a Python-owned authoritative local repository for content, derivations, 
 
 M4 adds one Dagster 1.13.17 code location, a shared dynamic work-unit partition topology, immutable gate mirrors, a default sensor, persistent-instance reconstruction, and repo-owned loopback/Tailscale operations. Dagster remains an operational projection rather than evidence authority. Default summary, compact-context, and V5 role-aware catalogue outputs are supported against relocated historical-source references. The catalogue/compiler also passes 43 copied tests, and 14 copied rendered-prompt tests match the exact source-owned snapshot; broader adversarial options and restricted production-prompt custody remain incomplete.
 
-The post-M4 Phase A boundary froze a deterministic read-only TidyCell inventory; its implementing-agent review status remains explicit. Phase B now has a narrow live CLI authorization for exactly the frozen 63-item canary—never the 44,682-item estate. The local MVP imported all 63 item outcomes into separate disposable CAS and SQLite authority trees, produced complete content reconciliation, and ran every applicable bounded interpretation: 331 approval-row digests, four schema-valid inactive RecipeV01 revisions, and two restricted generation profiles without raw prompt/response output. The bounded TypeScript migration worker runs under macOS Seatbelt, and its Python gateway transactionally publishes inactive custody, derivation, and reproduction authority. No provider, ML, activation, training, legacy-model deserialization, full-estate import, or source-of-truth cutover occurred; unresolved approval targets and reviewer evidence remain non-authoritative. NAS migration is deferred and is not an MVP dependency. Phase C separately retains the self-reviewed 140-item TidyCell/Tidybank source closure and relocated network-denied replay (117 copied source-owned tests), plus scoped summary, compact-context, region-catalogue, compiler, produced-CSV, and rendered-prompt parity evidence. These remain implementing-agent compatibility evidence rather than independent broad production parity.
+The post-M4 Phase A boundary froze a deterministic read-only TidyCell inventory; its implementing-agent review status remains explicit. Phase B now has a narrow live CLI authorization for exactly the frozen 63-item canary—never the 44,682-item estate. The local migration and custody pilot imported all 63 item outcomes into separate disposable CAS and SQLite authority trees, produced complete content reconciliation, and ran every applicable bounded interpretation: 331 approval-row digests, four schema-valid inactive RecipeV01 revisions, and two restricted generation profiles without raw prompt/response output. The bounded TypeScript migration worker runs under macOS Seatbelt, and its Python gateway transactionally publishes inactive custody, derivation, and reproduction authority. No provider, ML, activation, training, legacy-model deserialization, full-estate import, or source-of-truth cutover occurred; unresolved approval targets and reviewer evidence remain non-authoritative. NAS migration is deferred and is not a dependency of this local pilot. Phase C separately retains the self-reviewed 140-item TidyCell/Tidybank source closure and relocated network-denied replay (117 copied source-owned tests), plus scoped summary, compact-context, region-catalogue, compiler, produced-CSV, and rendered-prompt parity evidence. These remain implementing-agent compatibility evidence rather than independent broad production parity.
 
 Two architectural decisions were confirmed on 2026-08-09:
 
@@ -108,7 +134,7 @@ The demo verifies the fixture source manifest, invokes the actual built `tidy-do
 
 Production execution currently requires macOS `/usr/bin/sandbox-exec`. A generated deny-default profile limits runtime reads, permits writes only in the private run root, and denies network and process forks. The gateway also applies rlimits and process-group cleanup. The explicitly named `insecure-test-only` mode is used for portable failure drills and does not claim filesystem, detached-process, or network isolation; no non-macOS production sandbox is selected yet.
 
-## Hobby canary MVP
+## Migration and custody canary
 
 The exact frozen 63-item Phase B canary now runs end to end in dedicated local
 disposable blob and SQLite authority trees with no NAS dependency. See

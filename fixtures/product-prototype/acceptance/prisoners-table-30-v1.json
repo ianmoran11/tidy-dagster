@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-australia-table-30-v1",
+  "tableFamilyId": "prisoners-by-jurisdiction-indigenous-status-sex-legal-status",
+  "measure": {
+    "id": "prisoner-count",
+    "unitId": "person",
+    "numeric": true,
+    "minimum": 0
+  },
+  "requiredDimensions": [
+    "jurisdiction",
+    "indigenous_status",
+    "sex",
+    "legal_status"
+  ],
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "indigenous_status_id",
+    "sex_id",
+    "legal_status_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 200,
+    "maximumRows": 300,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "NSW",
+      "VIC",
+      "QLD",
+      "SA",
+      "WA",
+      "TAS",
+      "NT",
+      "ACT",
+      "AUS"
+    ],
+    "indigenousStatuses": ["INDIGENOUS", "NON_INDIGENOUS", "TOTAL"],
+    "sexes": ["MALE", "FEMALE", "PERSONS"],
+    "legalStatuses": ["SENTENCED", "UNSENTENCED", "TOTAL"]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "NSW": "NSW",
+      "New South Wales": "NSW",
+      "Vic": "VIC",
+      "Vic.": "VIC",
+      "Victoria": "VIC",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "Queensland": "QLD",
+      "SA": "SA",
+      "South Australia": "SA",
+      "WA": "WA",
+      "Western Australia": "WA",
+      "Tas": "TAS",
+      "Tas.": "TAS",
+      "Tasmania": "TAS",
+      "NT": "NT",
+      "Northern Territory": "NT",
+      "ACT": "ACT",
+      "Australian Capital Territory": "ACT",
+      "Aust.": "AUS",
+      "Australia": "AUS"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "INDIGENOUS",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "NON-INDIGENOUS": "NON_INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "TOTAL": "TOTAL",
+      "Total": "TOTAL",
+      "Total (d)": "TOTAL"
+    },
+    "sex": {
+      "Males": "MALE",
+      "Females": "FEMALE",
+      "Persons": "PERSONS",
+      "Persons (c)": "PERSONS"
+    },
+    "legal_status": {
+      "Sentenced": "SENTENCED",
+      "Unsentenced": "UNSENTENCED",
+      "Total": "TOTAL",
+      "Total (b)": "TOTAL"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "legal_status",
+      "totalCode": "TOTAL",
+      "componentCodes": ["SENTENCED", "UNSENTENCED"],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 10,
+      "maximumUnmodelledResidual": 300
+    },
+    {
+      "dimension": "sex",
+      "totalCode": "PERSONS",
+      "componentCodes": ["MALE", "FEMALE"],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 10,
+      "maximumUnmodelledResidual": 300
+    },
+    {
+      "dimension": "indigenous_status",
+      "totalCode": "TOTAL",
+      "componentCodes": ["INDIGENOUS", "NON_INDIGENOUS"],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 10,
+      "maximumUnmodelledResidual": 300
+    }
+  ],
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "indigenous_status",
+      "requireCanonicalOutputEquivalence": true
+    }
+  ],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

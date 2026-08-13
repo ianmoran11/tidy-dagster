@@ -1,6 +1,6 @@
 # Phase B provider-free core import
 
-- Status: fixture core plus the exact 63-item local hobby canary implemented
+- Status: fixture core plus the exact 63-item local migration/custody canary implemented
 - Overall Phase B status: bounded canary complete; full-estate typed import remains pending
 - Real TidyCell canary content copied: 36 unique objects / 42,423,291 bytes
 - Real canary selection: frozen and executed, 63 item outcomes / 61 regular files
@@ -354,8 +354,8 @@ no-follow read matched the frozen Phase A registry digest exactly.
 
 ## Still required beyond the bounded canary
 
-The local hobby canary is complete. Broader Phase B work remains separately
-unauthorized and is not part of that MVP:
+The local migration/custody canary is complete. Broader Phase B work remains
+separately unauthorized and is not part of that pilot:
 
 1. extend the now-integrated Python migration gateway beyond approval rows,
    RecipeV01 revisions, and bounded generation profiles to original candidates,
@@ -367,4 +367,4 @@ unauthorized and is not part of that MVP:
 4. separately authorize the complete 44,682-item import with a backup plan.
 
 NAS migration, SMB policy, snapshots, and restore drills are deferred to a
-later goal and are not dependencies of the local canary MVP.
+later goal and are not dependencies of the local migration/custody canary.

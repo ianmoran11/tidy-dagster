@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-table-30-2023-2025",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "prisoners-by-jurisdiction-indigenous-status-sex-legal-status",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-table-30-v1.json",
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023.xlsx",
+      "contentDigest": "sha256:59afcaf8a0c52a2754f75954ce5821611ee735f329d90d0e4b80c3dead0827af",
+      "byteLength": 335227,
+      "sheet": "Table_30",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-2023.response.txt",
+        "contentDigest": "sha256:b763910da16b43a59c7ce6e783766721b0169504e6ec2a9eb903b270b9a87485",
+        "byteLength": 1012,
+        "historicalModel": "checked-live-semantic-map-replay-fixture",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024.xlsx",
+      "contentDigest": "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+      "byteLength": 279279,
+      "sheet": "Table 30",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-2024.response.txt",
+        "contentDigest": "sha256:6ccf5f88cb0e8d431290e9135ab0b7ba2d2a073e842a0871a40d38786d6d5a21",
+        "byteLength": 993,
+        "historicalModel": "checked-live-semantic-map-replay-fixture",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025.xlsx",
+      "contentDigest": "sha256:464f80e73901ae9010d2dbbf1fc1bf37222711a3ccacc44efdbe99953aa3d263",
+      "byteLength": 169943,
+      "sheet": "Table 30",
+      "normalization": "trim-pathological-full-width-formatting-merge-v1",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-2025.response.txt",
+        "contentDigest": "sha256:365b13cbb9dea458834bb5b2f114ea32e9b58f2f8d97110bf8bb473703f7877c",
+        "byteLength": 1017,
+        "historicalModel": "checked-live-semantic-map-replay-fixture",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

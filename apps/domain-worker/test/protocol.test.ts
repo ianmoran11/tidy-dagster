@@ -18,6 +18,7 @@ import {
   runWorker,
   serializeWorkerResult,
 } from "../src/protocol/worker.js";
+import { runPrototypeAwareWorker } from "../src/protocol/prototypeSchema.js";
 
 const roots: string[] = [];
 afterEach(async () =>
@@ -26,17 +27,24 @@ afterEach(async () =>
   ),
 );
 
-function baseRequest() {
+function baseRequest(): {
+  protocolVersion: string;
+  requestId: string;
+  operation: string;
+  inputs: Array<{
+    name: string;
+    relativePath: string;
+    contentDigest: string;
+    byteLength: number;
+  }>;
+  parameters: Record<string, unknown>;
+  limits: Record<string, number>;
+} {
   return {
     protocolVersion: "tidy.worker/v1",
     requestId: "negative-test",
     operation: "execute-recipe-v01",
-    inputs: [] as Array<{
-      name: string;
-      relativePath: string;
-      contentDigest: string;
-      byteLength: number;
-    }>,
+    inputs: [],
     parameters: {
       evidenceProfile: "m2-deterministic-parity-v1",
       csvMode: "recipe-aware",
@@ -125,7 +133,11 @@ async function expectWorkbookCode(
     { name: "workbook", ...workbook },
     { name: "recipe", ...recipe },
   ];
-  request.limits = { ...request.limits, ...limitOverrides };
+  request.limits = Object.fromEntries(
+    Object.entries({ ...request.limits, ...limitOverrides }).filter(
+      (entry): entry is [string, number] => typeof entry[1] === "number",
+    ),
+  );
   await expectCode(request, code, roots);
   expect(await readdir(roots.output)).toEqual([]);
 }
@@ -208,6 +220,182 @@ describe("strict worker protocol", () => {
     expect(
       Buffer.byteLength(serializeWorkerResult(oversized), "utf8"),
     ).toBeLessThanOrEqual(MAX_RESPONSE_ENVELOPE_BYTES);
+  });
+
+  it("prepares and interprets a semantic-map V13 work unit", async () => {
+    const workbookBytes = await xlsxWithStructure({ cells: 2 });
+    const prepareRoots = await fixtureRoot();
+    const workbook = await writeInput(
+      prepareRoots.input,
+      "workbook.xlsx",
+      workbookBytes,
+    );
+    const prepare = baseRequest();
+    prepare.operation = "prepare-semantic-map-v13";
+    prepare.inputs = [{ name: "workbook", ...workbook }];
+    prepare.parameters = { sheet: "Data" };
+    const prepared = await runPrototypeAwareWorker(
+      prepare,
+      prepareRoots.input,
+      prepareRoots.output,
+    );
+    expect(prepared).toMatchObject({
+      ok: true,
+      outputs: expect.arrayContaining([
+        expect.objectContaining({ relativePath: "prompt.txt" }),
+        expect.objectContaining({ relativePath: "region-catalog.json" }),
+      ]),
+    });
+    expect(
+      await readFile(path.join(prepareRoots.output, "prompt.txt"), "utf8"),
+    ).toContain("cell-role-semantic-map-v13-adjacent-year-aware");
+
+    const catalog = JSON.parse(
+      await readFile(
+        path.join(prepareRoots.output, "region-catalog.json"),
+        "utf8",
+      ),
+    ) as {
+      candidates: Array<{ id: string; roleHints: string[] }>;
+    };
+    const observations = catalog.candidates.find((candidate) =>
+      candidate.roleHints.includes("observations"),
+    );
+    expect(observations).toBeDefined();
+
+    const interpretRoots = await fixtureRoot();
+    const interpretWorkbook = await writeInput(
+      interpretRoots.input,
+      "workbook.xlsx",
+      workbookBytes,
+    );
+    const semanticMap = await writeInput(
+      interpretRoots.input,
+      "semantic-map.json",
+      JSON.stringify({
+        version: "semantic-table-map-v1",
+        table: {
+          name: "observations",
+          values: { name: "value", regions: [observations!.id] },
+          dimensions: [
+            {
+              name: "row",
+              memberRegions: [observations!.id],
+              direction: "W",
+            },
+          ],
+        },
+      }),
+    );
+    const interpret = baseRequest();
+    interpret.operation = "interpret-semantic-map-v13";
+    interpret.inputs = [
+      { name: "workbook", ...interpretWorkbook },
+      { name: "semantic-map", ...semanticMap },
+    ];
+    interpret.parameters = { sheet: "Data" };
+    const interpreted = await runPrototypeAwareWorker(
+      interpret,
+      interpretRoots.input,
+      interpretRoots.output,
+    );
+    expect(interpreted.ok).toBe(false);
+    if (!interpreted.ok) expect(interpreted.error.stage).toBe("semantic-map");
+  });
+
+  it("executes a valid semantic map into RecipeV01 evidence", async () => {
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet("Data");
+    sheet.getCell("A1").value = "category";
+    sheet.getCell("B1").value = "Count";
+    sheet.getCell("A2").value = "A";
+    sheet.getCell("B2").value = 7;
+    const bytes = Buffer.from(await workbook.xlsx.writeBuffer());
+    const prepareRoots = await fixtureRoot();
+    const workbookInput = await writeInput(
+      prepareRoots.input,
+      "workbook.xlsx",
+      bytes,
+    );
+    const prepare = baseRequest();
+    prepare.operation = "prepare-semantic-map-v13";
+    prepare.inputs = [{ name: "workbook", ...workbookInput }];
+    prepare.parameters = { sheet: "Data" };
+    const prepared = await runPrototypeAwareWorker(
+      prepare,
+      prepareRoots.input,
+      prepareRoots.output,
+    );
+    expect(prepared.ok).toBe(true);
+    const catalog = JSON.parse(
+      await readFile(
+        path.join(prepareRoots.output, "region-catalog.json"),
+        "utf8",
+      ),
+    ) as {
+      candidates: Array<{
+        id: string;
+        segments: string[];
+        roleHints: string[];
+      }>;
+    };
+    const observations = catalog.candidates.find((candidate) =>
+      candidate.roleHints.includes("observations"),
+    )!;
+    const rowHeader = catalog.candidates.find(
+      (candidate) =>
+        candidate.roleHints.includes("direct-row-candidate") &&
+        candidate.segments.includes("R2C1:R2C1"),
+    )!;
+    expect(observations).toBeDefined();
+    expect(rowHeader).toBeDefined();
+
+    const interpretRoots = await fixtureRoot();
+    const interpretWorkbook = await writeInput(
+      interpretRoots.input,
+      "workbook.xlsx",
+      bytes,
+    );
+    const map = await writeInput(
+      interpretRoots.input,
+      "semantic-map.json",
+      JSON.stringify({
+        version: "semantic-table-map-v1",
+        table: {
+          name: "counts",
+          values: { name: "count", regions: [observations.id] },
+          dimensions: [
+            {
+              name: "category",
+              memberRegions: [rowHeader.id],
+              direction: "W",
+            },
+          ],
+        },
+      }),
+    );
+    const request = baseRequest();
+    request.operation = "interpret-semantic-map-v13";
+    request.inputs = [
+      { name: "workbook", ...interpretWorkbook },
+      { name: "semantic-map", ...map },
+    ];
+    request.parameters = { sheet: "Data" };
+    const result = await runPrototypeAwareWorker(
+      request,
+      interpretRoots.input,
+      interpretRoots.output,
+    );
+    expect(result.ok).toBe(true);
+    const execution = JSON.parse(
+      await readFile(
+        path.join(interpretRoots.output, "execution.json"),
+        "utf8",
+      ),
+    );
+    expect(execution.tables[0].rows).toEqual([
+      expect.objectContaining({ count: 7, category: "A" }),
+    ]);
   });
 
   it.each([

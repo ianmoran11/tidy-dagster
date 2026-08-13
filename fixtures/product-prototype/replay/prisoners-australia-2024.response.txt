@@ -1,0 +1,48 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoners by Indigenous status, sex, legal status, and state or territory, 2024",
+    "values": {
+      "name": "Number of prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "State or territory",
+        "memberRegions": [
+          "region-013",
+          "region-019"
+        ],
+        "direction": "N",
+        "captionHints": []
+      },
+      {
+        "name": "Indigenous status",
+        "memberRegions": [
+          "region-014"
+        ],
+        "direction": "NNW",
+        "captionHints": []
+      },
+      {
+        "name": "Sex",
+        "memberRegions": [
+          "region-020"
+        ],
+        "direction": "WNW",
+        "captionHints": []
+      },
+      {
+        "name": "Legal status",
+        "memberRegions": [
+          "region-011",
+          "region-012"
+        ],
+        "direction": "W",
+        "captionHints": []
+      }
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-# Frozen 63-item local hobby canary MVP
+# Frozen 63-item local migration and custody pilot
 
 ## Result
 
@@ -43,7 +43,7 @@ Conservative typed disposition records were created locally. Every applicable se
 No model binary was opened or deserialized. No provider was called. No recipe
 was activated and no effective pointer moved.
 
-## Hobby boundary
+## Pilot boundary
 
 The disposable blobs live under the dedicated local `.canary-mvp-local/blobs` tree. SQLite authority, worker staging, and immutable records live separately under `.canary-mvp-local/metadata`; checked report output is copied from `.canary-mvp-local/evidence`. The run has no NAS, SMB, service-account, network, provider, or credential dependency.
 

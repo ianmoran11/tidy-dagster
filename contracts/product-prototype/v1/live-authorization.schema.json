@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/product-prototype/v1/live-authorization.schema.json",
+  "title": "Tidy product prototype live authorization v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "cohortDigest",
+    "promptContractDigest",
+    "provider",
+    "model",
+    "reasoning",
+    "maximumCalls",
+    "maximumCostUsd",
+    "maximumAttemptCostUsd",
+    "timeoutSeconds",
+    "piExecutable",
+    "piExecutableDigest",
+    "workUnits",
+    "expiresAt",
+    "approvedBy",
+    "authorizationDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "tidy.product-prototype-live-authorization/v1"
+    },
+    "cohortDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "promptContractDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "provider": { "const": "openai-codex" },
+    "model": { "const": "openai-codex/gpt-5.6-luna" },
+    "reasoning": { "const": "high" },
+    "maximumCalls": { "const": 6 },
+    "maximumCostUsd": { "const": 2.0 },
+    "maximumAttemptCostUsd": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 2.0
+    },
+    "timeoutSeconds": { "type": "integer", "minimum": 1, "maximum": 900 },
+    "piExecutable": { "type": "string", "minLength": 1 },
+    "piExecutableDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "workUnits": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "expiresAt": { "type": "string", "format": "date-time" },
+    "approvedBy": { "type": "string", "minLength": 1 },
+    "authorizationDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

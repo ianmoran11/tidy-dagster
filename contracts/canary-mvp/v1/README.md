@@ -1,4 +1,4 @@
-# Hobby canary MVP v1
+# Local migration and custody canary v1
 
 `report.schema.json` describes the bounded end-to-end result for the exact frozen
 63-item canary. The canary copies at most 64 MiB into a dedicated disposable
@@ -6,7 +6,7 @@ local blob tree while retaining SQLite and authority evidence in a separate
 local tree. It has no NAS, SMB, service-account, network, or credential
 dependency.
 
-This MVP does not authorize the full import, provider dispatch, automatic
+This pilot does not authorize the full import, provider dispatch, automatic
 activation, model training, or a source-of-truth cutover.
 
 Run from the repository root with empty project-controlled local directories:

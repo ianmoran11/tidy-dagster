@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 import { constants as fsConstants } from "node:fs";
 import { open } from "node:fs/promises";
-import {
-  runWorker,
-  serializeWorkerResult,
-  type WorkerResult,
-} from "./protocol/worker.js";
+import { serializeWorkerResult } from "./protocol/worker.js";
+import type { WorkerResult } from "./protocol/prototypeRuntime.js";
+import { runPrototypeAwareWorker } from "./protocol/prototypeSchema.js";
 
 const MAX_REQUEST_ENVELOPE_BYTES = 65_536;
 const MAX_ARGUMENT_LENGTH = 4_096;
@@ -42,7 +40,11 @@ async function main(): Promise<number> {
   }
 
   try {
-    const result = await runWorker(raw, args.inputRoot, args.outputRoot);
+    const result = await runPrototypeAwareWorker(
+      raw,
+      args.inputRoot,
+      args.outputRoot,
+    );
     emit(result);
     return result.ok ? 0 : 1;
   } catch (error) {

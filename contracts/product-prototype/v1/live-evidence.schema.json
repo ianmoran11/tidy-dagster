@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidy-dagster.invalid/contracts/product-prototype/v1/live-evidence.schema.json",
+  "title": "Tidy product prototype safe live evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "cohortDigest",
+    "acceptanceContractDigest",
+    "model",
+    "reasoning",
+    "providerCalls",
+    "apiEquivalentUsd",
+    "acceptedWorkbookCount",
+    "exceptionWorkbookCount",
+    "canonicalObservationCount",
+    "runDigest",
+    "rawPromptResponseIncluded",
+    "restrictedEvidenceRoot",
+    "files",
+    "manifestDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "tidy.product-prototype-live-evidence/v1" },
+    "cohortDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "acceptanceContractDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "model": { "const": "openai-codex/gpt-5.6-luna" },
+    "reasoning": { "const": "high" },
+    "providerCalls": { "const": 3 },
+    "apiEquivalentUsd": { "type": "number", "minimum": 0, "maximum": 2 },
+    "acceptedWorkbookCount": { "const": 3 },
+    "exceptionWorkbookCount": { "const": 0 },
+    "canonicalObservationCount": { "const": 729 },
+    "runDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "rawPromptResponseIncluded": { "const": false },
+    "restrictedEvidenceRoot": { "type": "string", "minLength": 1 },
+    "files": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "contentDigest", "byteLength"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "contentDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "byteLength": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "manifestDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eu
+exec uv run python -m tidy_orchestrator.product_prototype_cli "$@"

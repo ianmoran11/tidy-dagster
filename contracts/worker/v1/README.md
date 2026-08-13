@@ -44,6 +44,18 @@ recipe-aware CSV evidence. With `includeSummary: true`, it also emits
 relocated historical-source reference workbooks. With
 `includeRegionCatalog: true`, it emits the bounded provider-free V5
 `region-catalog.json`; 43 copied source-owned compiler/catalogue tests pass and
-all four historical-reference catalogues match exactly. M2 remains incomplete
-pending broader option/adversarial coverage and produced-CSV/rendered
-prompt-input integration.
+all four historical-reference catalogues match exactly.
+
+`prepare-semantic-map-v13` requires exactly one `workbook` input and a pinned
+`sheet` parameter. It emits the sheet summary, complete compact context, V5
+role-aware region catalogue, and the rendered V13 semantic-map prompt. It does
+not call a provider.
+
+`interpret-semantic-map-v13` requires exact `workbook` and `semantic-map`
+inputs plus the same `sheet` parameter. It strictly parses and compiles the map,
+executes the resulting RecipeV01, and emits normalized recipe, selector,
+geometry, execution, and recipe-aware CSV evidence. These operations keep
+provider dispatch outside the network-denied deterministic worker.
+
+M2 remains incomplete pending broader option/adversarial coverage and
+produced-CSV/rendered prompt-input integration.

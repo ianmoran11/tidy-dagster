@@ -17,7 +17,6 @@ import time
 import uuid
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -180,11 +179,23 @@ class WorkerGateway:
         parameters: Mapping[str, Any] | None = None,
         limits: Mapping[str, int] | None = None,
     ) -> GatewayExecution:
-        if operation not in {"health", "capabilities", "execute-recipe-v01"}:
+        if operation not in {
+            "health",
+            "capabilities",
+            "execute-recipe-v01",
+            "prepare-semantic-map-v13",
+            "interpret-semantic-map-v13",
+        }:
             raise WorkerGatewayError(
                 "INPUT_INVALID", "INPUT_INVALID", "Unknown worker operation"
             )
-        minimum_inputs = 1 if operation == "execute-recipe-v01" else 0
+        minimum_inputs = (
+            1
+            if operation in {"execute-recipe-v01", "prepare-semantic-map-v13"}
+            else 2
+            if operation == "interpret-semantic-map-v13"
+            else 0
+        )
         if len(inputs) < minimum_inputs or len(inputs) > 8:
             raise WorkerGatewayError(
                 "INPUT_INVALID",
@@ -197,6 +208,8 @@ class WorkerGateway:
             "includeCompactContext",
             "includeRegionCatalog",
             "csvMode",
+            "sheet",
+            "correction",
         }
         supplied_parameters = dict(parameters or {})
         if set(supplied_parameters) - allowed_parameters:
@@ -233,6 +246,18 @@ class WorkerGateway:
         ):
             raise WorkerGatewayError(
                 "INPUT_INVALID", "INPUT_INVALID", "Invalid csvMode"
+            )
+        if "sheet" in supplied_parameters and (
+            not isinstance(supplied_parameters["sheet"], str)
+            or not supplied_parameters["sheet"]
+            or len(supplied_parameters["sheet"]) > 200
+        ):
+            raise WorkerGatewayError("INPUT_INVALID", "INPUT_INVALID", "Invalid sheet")
+        if "correction" in supplied_parameters and not isinstance(
+            supplied_parameters["correction"], bool
+        ):
+            raise WorkerGatewayError(
+                "INPUT_INVALID", "INPUT_INVALID", "Invalid correction"
             )
         if len({item.name for item in inputs}) != len(inputs):
             raise WorkerGatewayError(
@@ -479,7 +504,7 @@ class WorkerGateway:
                 "tidy.output-set/v1",
                 list(zip(output_paths, ordered_output_digests, strict=True)),
             )
-            observed_at = datetime.now(UTC).isoformat()
+            observed_at = "1970-01-01T00:00:00+00:00"
             bundle = []
             for descriptor, data in verified:
                 content = ContentDescriptor(
@@ -956,6 +981,8 @@ def _parse_response(
                 "protocol",
                 "input",
                 "parse",
+                "prompt",
+                "semantic-map",
                 "recipe",
                 "execute",
                 "export",

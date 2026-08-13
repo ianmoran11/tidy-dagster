@@ -23,6 +23,15 @@ def _load(name: str, path: Path) -> ModuleType:
     return module
 
 
+def test_tidy_prototype_cli_is_directly_executable() -> None:
+    script = PROJECT / "scripts/tidy-prototype"
+    completed = subprocess.run(
+        [str(script), "--help"], cwd=PROJECT, capture_output=True, text=True
+    )
+    assert completed.returncode == 0
+    assert "run the exact product cohort" in completed.stdout
+
+
 def test_dagster_ui_status_is_safe_and_does_not_touch_tailscale() -> None:
     script = PROJECT / "scripts/dagster-ui"
     source = script.read_text()
