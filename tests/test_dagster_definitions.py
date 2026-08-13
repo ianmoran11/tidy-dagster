@@ -312,9 +312,8 @@ def test_product_prototype_stage_projection_dagster_job_passes() -> None:
     assert len(evaluations) == 1
     assert evaluations[0].passed
     materialization = result.get_asset_materialization_events()[0]
-    stage_names = materialization.event_specific_data.materialization.metadata[
-        "stage_names"
-    ].value
+    metadata = materialization.event_specific_data.materialization.metadata
+    stage_names = metadata["stage_names"].value
     assert stage_names == [
         "prepare",
         "generation",
@@ -325,6 +324,16 @@ def test_product_prototype_stage_projection_dagster_job_passes() -> None:
         "exception",
         "collation",
     ]
+    stages = metadata["workbook_stages"].data
+    assert len(stages) == 3
+    assert all(stage["validation"]["status"] == "passed" for stage in stages)
+    assert all(
+        stage["decision"]["status"] == "prototype_auto_accepted" for stage in stages
+    )
+    assert all(
+        stage["exception"] == {"required": False, "issues": []} for stage in stages
+    )
+    assert metadata["collation_report"].data["rowCount"] == 729
 
 
 def test_product_prototype_live_evidence_dagster_job_passes() -> None:

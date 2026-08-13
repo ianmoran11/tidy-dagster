@@ -186,6 +186,10 @@ def product_prototype_stage_projection(
     return MaterializeResult(
         metadata={
             "projection_digest": projection_digest,
+            "run_digest": run["runDigest"],
+            "projection": projection,
+            "workbook_stages": stages,
+            "collation_report": collation,
             "workbook_stage_count": len(stages),
             "exception_count": len(collation["excludedExceptions"]),
             "collated_rows": collation["rowCount"],
