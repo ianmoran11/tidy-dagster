@@ -25,21 +25,32 @@ def test_checked_canary_mvp_report_is_strict_and_non_authorizing() -> None:
     assert report["itemCount"] == sum(report["stateCounts"].values()) == 63
     assert report["sourceReadBytes"] == sum(report["stateBytes"].values())
     assert report["uniqueStoredBytes"] <= report["sourceReadBytes"]
-    assert report["generationProfiles"] == {
-        "eligibleSourceCount": 2,
-        "profiledSourceCount": 2,
-        "profileOutputRecordIds": [
-            "sha256:388770a5409df19133d55de94b1b0dfc4db91a0a3e1568b807969b1c8c684398",
-            "sha256:643f4f54407fc3b0d5bf38b3d45b3a7f8930e8015ff667824a9c913cf1561378",
-        ],
-        "restrictedElementCount": 0,
-        "strictRecipeCandidateCount": 0,
-        "rawRestrictedTextEmitted": False,
-        "providerDispatchAuthorized": False,
-        "retryAuthorized": False,
-        "activationAuthorized": False,
-        "trainingEligible": False,
+    interpretations = report["interpretations"]
+    assert interpretations["eligibleSourceCounts"] == {
+        "approval-registry": 1,
+        "generation-json-evidence": 2,
+        "recipe-evidence": 4,
     }
+    assert interpretations["approvalRegistry"]["interpretedSourceCount"] == 1
+    assert interpretations["approvalRegistry"]["rowCount"] == 331
+    assert len(interpretations["approvalRegistry"]["sourceContentDigests"]) == 1
+    assert len(interpretations["approvalRegistry"]["workerOutputContentDigests"]) == 1
+    assert interpretations["approvalRegistry"]["approvalAuthorityCreated"] is False
+    assert interpretations["approvalRegistry"]["targetsResolved"] is False
+    assert interpretations["recipes"]["interpretedSourceCount"] == 4
+    assert interpretations["recipes"]["schemaValidCount"] == 4
+    assert len(interpretations["recipes"]["workerOutputContentDigests"]) == 4
+    assert interpretations["recipes"]["active"] is False
+    assert interpretations["generationProfiles"]["profiledSourceCount"] == 2
+    assert len(interpretations["generationProfiles"]["workerOutputContentDigests"]) == 2
+    assert interpretations["generationProfiles"]["rawRestrictedTextEmitted"] is False
+    assert interpretations["providerDispatchAuthorized"] is False
+    assert interpretations["retryAuthorized"] is False
+    assert interpretations["activationAuthorized"] is False
+    assert interpretations["trainingEligible"] is False
+    assert report["localBlobDataDisposable"] is True
+    assert report["sqliteLocal"] is True
+    assert report["nasRequired"] is False
     assert report["automaticActivationAuthorized"] is False
     assert report["providerDispatchAuthorized"] is False
     assert report["trainingAuthorized"] is False

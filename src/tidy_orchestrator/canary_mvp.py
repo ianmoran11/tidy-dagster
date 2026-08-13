@@ -16,7 +16,10 @@ from .migration_evidence import (
     persist_conservative_evidence_dispositions,
     reconcile_conservative_evidence,
 )
-from .migration_gateway import actual_migration_worker_gateway
+from .migration_gateway import (
+    actual_migration_worker_gateway,
+    persist_imported_legacy_approval_snapshot,
+)
 from .migration_import import (
     CommittedFilesystemBlobStore,
     ImportAuthorizationError,
@@ -190,8 +193,8 @@ def build_canary_snapshot(
         "manifestDigest": _CANARY_MANIFEST_DIGEST,
         "sourceSnapshotDigest": _SOURCE_SNAPSHOT_DIGEST,
         "selectedItemSetDigest": manifest["selectedItemSetDigest"],
-        "disposableNasData": True,
-        "snapshotRestoreWaived": True,
+        "disposableLocalBlobData": True,
+        "nasRequired": False,
         "fullImportAuthorized": False,
         "providerDispatchAuthorized": False,
         "activationAuthorized": False,
@@ -264,8 +267,8 @@ def verify_canary_snapshot(snapshot: Mapping[str, Any]) -> str:
         "manifestDigest": _CANARY_MANIFEST_DIGEST,
         "sourceSnapshotDigest": _SOURCE_SNAPSHOT_DIGEST,
         "selectedItemSetDigest": canary.get("selectedItemSetDigest"),
-        "disposableNasData": True,
-        "snapshotRestoreWaived": True,
+        "disposableLocalBlobData": True,
+        "nasRequired": False,
         "fullImportAuthorized": False,
         "providerDispatchAuthorized": False,
         "activationAuthorized": False,
@@ -294,7 +297,6 @@ def run_canary_mvp(
     blob_root: Path,
     output_root: Path,
     recorded_at: str,
-    smb_verifier: Mapping[str, Any],
 ) -> dict[str, Any]:
     """Import, conservatively type, reconcile, verify, and report the canary."""
 
@@ -308,16 +310,21 @@ def run_canary_mvp(
     blob_root = _safe_directory(blob_root, "blob root")
     output_root.mkdir(mode=0o700, parents=True, exist_ok=True)
     output_root = _safe_directory(output_root, "output root")
-    if metadata_root.lstat().st_dev != source_root.lstat().st_dev:
-        raise CanaryMvpError("SQLite authority must remain on the local filesystem")
-    if blob_root.lstat().st_dev == source_root.lstat().st_dev:
-        raise CanaryMvpError("Canary blobs must use the dedicated NAS filesystem")
-    if any(
-        _overlap(blob_root, local)
-        for local in (source_root, metadata_root, output_root)
+    local_device = source_root.lstat().st_dev
+    if (
+        metadata_root.lstat().st_dev != local_device
+        or blob_root.lstat().st_dev != local_device
+        or output_root.lstat().st_dev != local_device
     ):
-        raise CanaryMvpError("Canary NAS blobs overlap a local authority tree")
-    smb_evidence = _validate_smb_verifier(smb_verifier)
+        raise CanaryMvpError("Canary storage must remain on the local workstation")
+    if any(
+        _overlap(left, right)
+        for index, left in enumerate(
+            (source_root, metadata_root, blob_root, output_root)
+        )
+        for right in (source_root, metadata_root, blob_root, output_root)[index + 1 :]
+    ):
+        raise CanaryMvpError("Canary source, authority, blob, and output trees overlap")
 
     snapshot = build_canary_snapshot(
         source_snapshot=source_snapshot,
@@ -355,10 +362,11 @@ def run_canary_mvp(
         recorded_at=recorded_at,
         actor="tidy-canary-mvp-interpreter",
     )
-    generation_profiles = _profile_generation_evidence(
+    interpretations = _interpret_available_evidence(
         snapshot=snapshot,
         metadata=metadata,
         blobs=blobs,
+        recorded_at=recorded_at,
     )
     semantic = reconcile_conservative_evidence(
         snapshot=snapshot,
@@ -366,6 +374,7 @@ def run_canary_mvp(
         core_reconciliation=core,
         recorded_at=recorded_at,
         actor="tidy-canary-mvp-interpreter",
+        completed_interpretations=interpretations["eligibleSourceCounts"],
     )
     # A second exact run is the restart/idempotence check over real NAS blobs.
     repeated = importer.run()
@@ -390,38 +399,30 @@ def run_canary_mvp(
         "typedRecordCounts": typed_counts,
         "typedSourceItemCount": semantic["typedSourceItemCount"],
         "typedRecordCount": semantic["typedRecordCount"],
-        "generationProfiles": generation_profiles,
+        "interpretations": interpretations,
         "idempotentReplayVerified": True,
-        "nasDataDisposable": True,
+        "localBlobDataDisposable": True,
         "sqliteLocal": True,
-        "smbSigningRequiredExternallyVerified": True,
-        "smbVerification": smb_evidence,
-        "snapshotRestoreWaived": True,
+        "nasRequired": False,
         "automaticActivationAuthorized": False,
         "providerDispatchAuthorized": False,
         "trainingAuthorized": False,
         "fullImportAuthorized": False,
         "manualInspectionRequired": True,
         "retainedLimitations": [
+            "recipe parsing establishes schema-valid inactive revisions, not approval",
             (
-                "strict nested RecipeV01 parsing ran only where a generation "
-                "profile recognized candidates"
+                "approval rows were digested but targets and unresolved reviewers "
+                "remain unresolved"
             ),
-            (
-                "approval-row digesting and reviewer identity resolution did "
-                "not run in this MVP command"
-            ),
-            (
-                "generation evidence received conservative typed dispositions; "
-                "only bounded generation JSON was deeply profiled"
-            ),
+            "generation profiling emits bounded metadata and no raw restricted text",
             "model packages were archived without deserialization or promotion",
             "no effective recipe pointer was read or changed",
         ],
         "rebuild": {
             "deleteOnly": (
-                "Delete the dedicated NAS blob root contents, never the local "
-                "metadata root."
+                "Delete only the dedicated local blob root contents; retain the "
+                "separate metadata root when preserving the audit trail."
             ),
             "rerun": "uv run python -m tidy_orchestrator.canary_mvp_cli run",
         },
@@ -444,64 +445,103 @@ def run_canary_mvp(
     return report
 
 
-def _profile_generation_evidence(
+def _interpret_available_evidence(
     *,
     snapshot: Mapping[str, Any],
     metadata: MigrationRepository,
     blobs: CommittedFilesystemBlobStore,
+    recorded_at: str,
 ) -> dict[str, Any]:
-    candidates = [
+    eligible = [
         item
         for item in snapshot["inventory"]["items"]
-        if item["artifactClass"] == "generation-json-evidence"
-        and item["disposition"] in ("import", "duplicate-alias")
+        if item["disposition"] in ("import", "duplicate-alias")
+        and item["artifactClass"]
+        in ("approval-registry", "recipe-evidence", "generation-json-evidence")
     ]
     gateway = actual_migration_worker_gateway(
         metadata, blobs, Path(__file__).parents[2]
     )
-    profile_ids: list[str] = []
+    approval_rows = 0
+    approval_output_digests: list[str] = []
+    approval_snapshot_digests: list[str] = []
+    recipe_output_digests: list[str] = []
+    valid_recipes = 0
+    generation_output_digests: list[str] = []
     restricted_count = 0
     recipe_candidate_count = 0
-    for item in candidates:
+    for item in eligible:
         import_record = metadata.get_item(
             snapshot["snapshotDigest"], item["relativePath"]
         )
         if import_record is None:
-            raise CanaryMvpError("Generation profile source import is missing")
-        execution = gateway.profile_imported_generation_evidence(import_record)
-        if len(execution.outputs) != 1:
-            raise CanaryMvpError("Generation profile produced an unexpected output set")
-        output = execution.outputs[0]
-        artifact = output.artifact
-        profile_ids.append(str(output.record["recordId"]))
-        restricted_count += len(artifact["restrictedElements"])
-        recipe_candidate_count += len(artifact["recipeCandidates"])
+            raise CanaryMvpError("Interpretation source import is missing")
+        artifact_class = item["artifactClass"]
+        if artifact_class == "approval-registry":
+            result = persist_imported_legacy_approval_snapshot(
+                gateway=gateway,
+                source_item=item,
+                import_record=import_record,
+                frozen_at=recorded_at,
+            )
+            approval_snapshot_digests.append(
+                str(result.approval_snapshot["sourceContentDigest"])
+            )
+            approval_output_digests.append(
+                str(result.execution.outputs[0].record["contentDigest"])
+            )
+            approval_rows += len(result.approval_snapshot["rows"])
+        elif artifact_class == "recipe-evidence":
+            execution = gateway.parse_imported_recipe(import_record)
+            if len(execution.outputs) != 1:
+                raise CanaryMvpError("Recipe parse produced an unexpected output set")
+            recipe_output_digests.append(
+                str(execution.outputs[0].record["contentDigest"])
+            )
+            valid_recipes += execution.outputs[0].artifact["lifecycleState"] == (
+                "schema_valid"
+            )
+        else:
+            execution = gateway.profile_imported_generation_evidence(import_record)
+            if len(execution.outputs) != 1:
+                raise CanaryMvpError(
+                    "Generation profile produced an unexpected output set"
+                )
+            output = execution.outputs[0]
+            artifact = output.artifact
+            generation_output_digests.append(str(output.record["contentDigest"]))
+            restricted_count += len(artifact["restrictedElements"])
+            recipe_candidate_count += len(artifact["recipeCandidates"])
+    counts = Counter(item["artifactClass"] for item in eligible)
     return {
-        "eligibleSourceCount": len(candidates),
-        "profiledSourceCount": len(profile_ids),
-        "profileOutputRecordIds": profile_ids,
-        "restrictedElementCount": restricted_count,
-        "strictRecipeCandidateCount": recipe_candidate_count,
-        "rawRestrictedTextEmitted": False,
+        "eligibleSourceCounts": dict(sorted(counts.items())),
+        "approvalRegistry": {
+            "interpretedSourceCount": len(approval_snapshot_digests),
+            "rowCount": approval_rows,
+            "sourceContentDigests": approval_snapshot_digests,
+            "workerOutputContentDigests": approval_output_digests,
+            "approvalAuthorityCreated": False,
+            "targetsResolved": False,
+        },
+        "recipes": {
+            "interpretedSourceCount": len(recipe_output_digests),
+            "schemaValidCount": valid_recipes,
+            "workerOutputContentDigests": recipe_output_digests,
+            "active": False,
+            "trainingEligible": False,
+        },
+        "generationProfiles": {
+            "profiledSourceCount": len(generation_output_digests),
+            "workerOutputContentDigests": generation_output_digests,
+            "restrictedElementCount": restricted_count,
+            "strictRecipeCandidateCount": recipe_candidate_count,
+            "rawRestrictedTextEmitted": False,
+        },
         "providerDispatchAuthorized": False,
         "retryAuthorized": False,
         "activationAuthorized": False,
         "trainingEligible": False,
     }
-
-
-def _validate_smb_verifier(value: Mapping[str, Any]) -> dict[str, Any]:
-    required = {
-        "shareName": "tidy-dagster",
-        "smbVersion": "SMB_3.1.1",
-        "signingRequired": True,
-        "signingOn": True,
-        "signingAlgorithm": "AES-128-CMAC",
-        "serviceIdentityLabel": "tidy-dagster",
-    }
-    if dict(value) != required:
-        raise CanaryMvpError("SMB verification does not satisfy the canary gate")
-    return dict(required)
 
 
 def _validate_manifest_snapshot(
@@ -591,28 +631,20 @@ def _summary(items: list[dict[str, Any]]) -> dict[str, Any]:
 
 def _storage_assessment(items: list[dict[str, Any]], blob_root: Path) -> dict[str, Any]:
     statvfs = os.statvfs(blob_root)
-    total = statvfs.f_blocks * statvfs.f_frsize
     free = statvfs.f_bavail * statvfs.f_frsize
-    used = total - free
     required = _summary(items)["uniqueCopyBytes"]
     reserve = 10 * 1024**3
     required_free = required * 2 + reserve
-    projected = used + required
-    utilization = 0 if total == 0 else (projected * 10_000) // total
+    passes = free >= required_free
+    # Volatile free-space counters are checked before effects but intentionally
+    # excluded from the frozen snapshot identity, so identical source bytes and
+    # policy rebuild to identical authority records on the same workstation.
     return {
-        "destinationId": "tidy-dagster-disposable-canary-nas-v1",
-        "filesystemDeviceId": blob_root.lstat().st_dev,
+        "destinationId": "tidy-dagster-disposable-local-canary-v1",
         "uniqueCopyBytes": required,
-        "totalBytes": total,
-        "usedBytes": used,
-        "freeBytes": free,
         "requiredFreeBytes": required_free,
-        "projectedUsedBytes": projected,
-        "projectedUtilizationBasisPoints": utilization,
-        "maxUtilizationBasisPoints": 8500,
-        "passesAllocationGate": free >= required_free,
-        "passesUtilizationGate": utilization <= 8500,
-        "passes": free >= required_free and utilization <= 8500,
+        "passesAllocationGate": passes,
+        "passes": passes,
     }
 
 

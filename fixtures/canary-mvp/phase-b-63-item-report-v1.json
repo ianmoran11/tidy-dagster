@@ -1,54 +1,75 @@
 {
   "automaticActivationAuthorized": false,
   "canaryManifestDigest": "sha256:ee072650751fa76d456ba8cf034878a2a48137b02e6e7d459cb7945cb9474139",
-  "canarySnapshotDigest": "sha256:09f35bf91d33879299bfde9bec3c8a5a65b327ca94e26cbd51bc4fe63ee90cb2",
-  "coreReconciliationDigest": "sha256:041aee2fde46112b11a83641be74d47015285f201604e6074a6f22271213fc22",
+  "canarySnapshotDigest": "sha256:7fda956b0b924ff5fbc337c151fb07b1e4563efad8b3fdfec174e0614bd3e824",
+  "coreReconciliationDigest": "sha256:e36187d4137d0a7e184f7584103412ac9dad0f04cf846041596bfaf89991b64c",
   "fullImportAuthorized": false,
-  "generationProfiles": {
+  "idempotentReplayVerified": true,
+  "interpretations": {
     "activationAuthorized": false,
-    "eligibleSourceCount": 2,
-    "profileOutputRecordIds": [
-      "sha256:388770a5409df19133d55de94b1b0dfc4db91a0a3e1568b807969b1c8c684398",
-      "sha256:643f4f54407fc3b0d5bf38b3d45b3a7f8930e8015ff667824a9c913cf1561378"
-    ],
-    "profiledSourceCount": 2,
+    "approvalRegistry": {
+      "approvalAuthorityCreated": false,
+      "interpretedSourceCount": 1,
+      "rowCount": 331,
+      "sourceContentDigests": [
+        "sha256:1ed827cd9c9ae6211539e12f775e213a3766d65445ffa01f88ae5b9231279b40"
+      ],
+      "targetsResolved": false,
+      "workerOutputContentDigests": [
+        "sha256:806c6a2bb6ba470d58f66eb7d61cb75e4324bc1ba6b422346ba3985681bd6d42"
+      ]
+    },
+    "eligibleSourceCounts": {
+      "approval-registry": 1,
+      "generation-json-evidence": 2,
+      "recipe-evidence": 4
+    },
+    "generationProfiles": {
+      "profiledSourceCount": 2,
+      "rawRestrictedTextEmitted": false,
+      "restrictedElementCount": 0,
+      "strictRecipeCandidateCount": 0,
+      "workerOutputContentDigests": [
+        "sha256:f3938270222f5d899afb9cda33fd4014e3c4e09e20493cd14d897cf136da4cd7",
+        "sha256:b2a0fda5c3c6dc905d3418f19eafcf0c60881b9bbf5624e18ab7924fa9bd193d"
+      ]
+    },
     "providerDispatchAuthorized": false,
-    "rawRestrictedTextEmitted": false,
-    "restrictedElementCount": 0,
+    "recipes": {
+      "active": false,
+      "interpretedSourceCount": 4,
+      "schemaValidCount": 4,
+      "trainingEligible": false,
+      "workerOutputContentDigests": [
+        "sha256:6d6c582ccc1c93138bfa6fac48dcf720777d8c30ce4c981ae60c8e1ad0026e7d",
+        "sha256:46f4674338b6b62eb4404debf139552df1c952f0418caa7a776bd7918b3694d4",
+        "sha256:220c04774ed40b14ec6b0caa1aab854030b8f52b25b87ea6f890f48f5d8cd4e9",
+        "sha256:e2f00194fc85db99934929f1aff5ad99506b44767128bfc540c9adf804f06e16"
+      ]
+    },
     "retryAuthorized": false,
-    "strictRecipeCandidateCount": 0,
     "trainingEligible": false
   },
-  "idempotentReplayVerified": true,
   "itemCount": 63,
+  "localBlobDataDisposable": true,
   "manualInspectionRequired": true,
-  "nasDataDisposable": true,
+  "nasRequired": false,
   "providerDispatchAuthorized": false,
   "rebuild": {
-    "deleteOnly": "Delete the dedicated NAS blob root contents, never the local metadata root.",
+    "deleteOnly": "Delete only the dedicated local blob root contents; retain the separate metadata root when preserving the audit trail.",
     "rerun": "uv run python -m tidy_orchestrator.canary_mvp_cli run"
   },
-  "recordedAt": "2026-08-12T13:52:22Z",
-  "reportDigest": "sha256:0dbdf0b0c7bc391e3e06c0b6d2f8534501795372fda049ec65a4bbcd9fe52e4d",
+  "recordedAt": "2026-08-13T10:00:00Z",
+  "reportDigest": "sha256:108be57c4ef180371fded6e4f65cd7301a07e96efa818a00e7e734033b46fb8c",
   "retainedLimitations": [
-    "strict nested RecipeV01 parsing ran only where a generation profile recognized candidates",
-    "approval-row digesting and reviewer identity resolution did not run in this MVP command",
-    "generation evidence received conservative typed dispositions; only bounded generation JSON was deeply profiled",
+    "recipe parsing establishes schema-valid inactive revisions, not approval",
+    "approval rows were digested but targets and unresolved reviewers remain unresolved",
+    "generation profiling emits bounded metadata and no raw restricted text",
     "model packages were archived without deserialization or promotion",
     "no effective recipe pointer was read or changed"
   ],
   "schemaVersion": "tidy.canary-mvp-report/v1",
-  "semanticReconciliationId": "sha256:31fbd3175b07709a5ff25b3388ce779d4f6ca4480b9d100519cdf7333cb19256",
-  "smbSigningRequiredExternallyVerified": true,
-  "smbVerification": {
-    "serviceIdentityLabel": "tidy-dagster",
-    "shareName": "tidy-dagster",
-    "signingAlgorithm": "AES-128-CMAC",
-    "signingOn": true,
-    "signingRequired": true,
-    "smbVersion": "SMB_3.1.1"
-  },
-  "snapshotRestoreWaived": true,
+  "semanticReconciliationId": "sha256:19496be401d99481464313c97e5a5edfeba6b0ee03f2f12e25d9fb0f02ffd470",
   "sourceReadBytes": 44084737,
   "sourceSnapshotDigest": "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d",
   "sqliteLocal": true,

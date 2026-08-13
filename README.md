@@ -110,8 +110,8 @@ Production execution currently requires macOS `/usr/bin/sandbox-exec`. A generat
 
 ## Hobby canary MVP
 
-The exact frozen 63-item Phase B canary now runs end to end against a dedicated
-disposable NAS share while SQLite authority remains local. See
+The exact frozen 63-item Phase B canary now runs end to end in dedicated local
+disposable blob and SQLite authority trees with no NAS dependency. See
 [`docs/hobby-canary-mvp.md`](docs/hobby-canary-mvp.md) for the bounded result,
 manual-inspection report, rebuild command, and deliberately deferred production
 infrastructure.

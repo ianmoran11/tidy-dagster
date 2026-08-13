@@ -21,13 +21,11 @@
     "typedRecordCounts",
     "typedSourceItemCount",
     "typedRecordCount",
-    "generationProfiles",
+    "interpretations",
     "idempotentReplayVerified",
-    "nasDataDisposable",
+    "localBlobDataDisposable",
     "sqliteLocal",
-    "smbSigningRequiredExternallyVerified",
-    "smbVerification",
-    "snapshotRestoreWaived",
+    "nasRequired",
     "automaticActivationAuthorized",
     "providerDispatchAuthorized",
     "trainingAuthorized",
@@ -38,127 +36,290 @@
     "reportDigest"
   ],
   "properties": {
-    "schemaVersion": { "const": "tidy.canary-mvp-report/v1" },
-    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "schemaVersion": {
+      "const": "tidy.canary-mvp-report/v1"
+    },
+    "recordedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
     "canaryManifestDigest": {
       "const": "sha256:ee072650751fa76d456ba8cf034878a2a48137b02e6e7d459cb7945cb9474139"
     },
     "sourceSnapshotDigest": {
       "const": "sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d"
     },
-    "canarySnapshotDigest": { "$ref": "#/$defs/digest" },
-    "coreReconciliationDigest": { "$ref": "#/$defs/digest" },
-    "semanticReconciliationId": { "$ref": "#/$defs/digest" },
-    "itemCount": { "const": 63 },
-    "sourceReadBytes": { "type": "integer", "minimum": 1, "maximum": 67108864 },
-    "stateCounts": { "$ref": "#/$defs/countMap" },
-    "stateBytes": { "$ref": "#/$defs/countMap" },
-    "uniqueStoredObjects": { "type": "integer", "minimum": 1, "maximum": 63 },
+    "canarySnapshotDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "coreReconciliationDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "semanticReconciliationId": {
+      "$ref": "#/$defs/digest"
+    },
+    "itemCount": {
+      "const": 63
+    },
+    "sourceReadBytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 67108864
+    },
+    "stateCounts": {
+      "$ref": "#/$defs/countMap"
+    },
+    "stateBytes": {
+      "$ref": "#/$defs/countMap"
+    },
+    "uniqueStoredObjects": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 63
+    },
     "uniqueStoredBytes": {
       "type": "integer",
       "minimum": 1,
       "maximum": 67108864
     },
-    "typedRecordCounts": { "$ref": "#/$defs/countMap" },
-    "typedSourceItemCount": { "type": "integer", "minimum": 0, "maximum": 63 },
-    "typedRecordCount": { "type": "integer", "minimum": 0, "maximum": 126 },
-    "generationProfiles": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "eligibleSourceCount",
-        "profiledSourceCount",
-        "profileOutputRecordIds",
-        "restrictedElementCount",
-        "strictRecipeCandidateCount",
-        "rawRestrictedTextEmitted",
-        "providerDispatchAuthorized",
-        "retryAuthorized",
-        "activationAuthorized",
-        "trainingEligible"
-      ],
-      "properties": {
-        "eligibleSourceCount": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 63
-        },
-        "profiledSourceCount": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 63
-        },
-        "profileOutputRecordIds": {
-          "type": "array",
-          "maxItems": 63,
-          "uniqueItems": true,
-          "items": { "$ref": "#/$defs/digest" }
-        },
-        "restrictedElementCount": { "type": "integer", "minimum": 0 },
-        "strictRecipeCandidateCount": { "type": "integer", "minimum": 0 },
-        "rawRestrictedTextEmitted": { "const": false },
-        "providerDispatchAuthorized": { "const": false },
-        "retryAuthorized": { "const": false },
-        "activationAuthorized": { "const": false },
-        "trainingEligible": { "const": false }
-      }
+    "typedRecordCounts": {
+      "$ref": "#/$defs/countMap"
     },
-    "idempotentReplayVerified": { "const": true },
-    "nasDataDisposable": { "const": true },
-    "sqliteLocal": { "const": true },
-    "smbSigningRequiredExternallyVerified": { "const": true },
-    "smbVerification": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "shareName",
-        "smbVersion",
-        "signingRequired",
-        "signingOn",
-        "signingAlgorithm",
-        "serviceIdentityLabel"
-      ],
-      "properties": {
-        "shareName": { "const": "tidy-dagster" },
-        "smbVersion": { "const": "SMB_3.1.1" },
-        "signingRequired": { "const": true },
-        "signingOn": { "const": true },
-        "signingAlgorithm": { "const": "AES-128-CMAC" },
-        "serviceIdentityLabel": { "const": "tidy-dagster" }
-      }
+    "typedSourceItemCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 63
     },
-    "snapshotRestoreWaived": { "const": true },
-    "automaticActivationAuthorized": { "const": false },
-    "providerDispatchAuthorized": { "const": false },
-    "trainingAuthorized": { "const": false },
-    "fullImportAuthorized": { "const": false },
-    "manualInspectionRequired": { "const": true },
+    "typedRecordCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 126
+    },
+    "idempotentReplayVerified": {
+      "const": true
+    },
+    "sqliteLocal": {
+      "const": true
+    },
+    "automaticActivationAuthorized": {
+      "const": false
+    },
+    "providerDispatchAuthorized": {
+      "const": false
+    },
+    "trainingAuthorized": {
+      "const": false
+    },
+    "fullImportAuthorized": {
+      "const": false
+    },
+    "manualInspectionRequired": {
+      "const": true
+    },
     "retainedLimitations": {
       "type": "array",
       "minItems": 1,
       "maxItems": 20,
       "uniqueItems": true,
-      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
     },
     "rebuild": {
       "type": "object",
       "additionalProperties": false,
       "required": ["deleteOnly", "rerun"],
       "properties": {
-        "deleteOnly": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "deleteOnly": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
         "rerun": {
           "const": "uv run python -m tidy_orchestrator.canary_mvp_cli run"
         }
       }
     },
-    "reportDigest": { "$ref": "#/$defs/digest" }
+    "reportDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "localBlobDataDisposable": {
+      "const": true
+    },
+    "nasRequired": {
+      "const": false
+    },
+    "interpretations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligibleSourceCounts",
+        "approvalRegistry",
+        "recipes",
+        "generationProfiles",
+        "providerDispatchAuthorized",
+        "retryAuthorized",
+        "activationAuthorized",
+        "trainingEligible"
+      ],
+      "properties": {
+        "eligibleSourceCounts": {
+          "$ref": "#/$defs/countMap"
+        },
+        "approvalRegistry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "interpretedSourceCount",
+            "rowCount",
+            "sourceContentDigests",
+            "workerOutputContentDigests",
+            "approvalAuthorityCreated",
+            "targetsResolved"
+          ],
+          "properties": {
+            "interpretedSourceCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 63
+            },
+            "rowCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "approvalAuthorityCreated": {
+              "const": false
+            },
+            "targetsResolved": {
+              "const": false
+            },
+            "sourceContentDigests": {
+              "type": "array",
+              "maxItems": 63,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/digest"
+              }
+            },
+            "workerOutputContentDigests": {
+              "type": "array",
+              "maxItems": 63,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/digest"
+              }
+            }
+          }
+        },
+        "recipes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "interpretedSourceCount",
+            "schemaValidCount",
+            "workerOutputContentDigests",
+            "active",
+            "trainingEligible"
+          ],
+          "properties": {
+            "interpretedSourceCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 63
+            },
+            "schemaValidCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 63
+            },
+            "active": {
+              "const": false
+            },
+            "trainingEligible": {
+              "const": false
+            },
+            "workerOutputContentDigests": {
+              "type": "array",
+              "maxItems": 63,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/digest"
+              }
+            }
+          }
+        },
+        "generationProfiles": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profiledSourceCount",
+            "workerOutputContentDigests",
+            "restrictedElementCount",
+            "strictRecipeCandidateCount",
+            "rawRestrictedTextEmitted"
+          ],
+          "properties": {
+            "profiledSourceCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 63
+            },
+            "restrictedElementCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "strictRecipeCandidateCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rawRestrictedTextEmitted": {
+              "const": false
+            },
+            "workerOutputContentDigests": {
+              "type": "array",
+              "maxItems": 63,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/digest"
+              }
+            }
+          }
+        },
+        "providerDispatchAuthorized": {
+          "const": false
+        },
+        "retryAuthorized": {
+          "const": false
+        },
+        "activationAuthorized": {
+          "const": false
+        },
+        "trainingEligible": {
+          "const": false
+        }
+      }
+    }
   },
   "$defs": {
-    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
     "countMap": {
       "type": "object",
-      "propertyNames": { "type": "string", "minLength": 1, "maxLength": 128 },
-      "additionalProperties": { "type": "integer", "minimum": 0 }
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
     }
   }
 }

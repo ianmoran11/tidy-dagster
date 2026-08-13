@@ -9,7 +9,6 @@ from tidy_orchestrator.artifacts import canonical_json_bytes, domain_digest
 from tidy_orchestrator.canary_mvp import (
     CanaryImportAuthorization,
     CanaryMvpError,
-    _validate_smb_verifier,
     build_canary_snapshot,
     verify_canary_snapshot,
 )
@@ -138,8 +137,8 @@ def test_canary_snapshot_is_exact_and_authority_is_narrow(
         "manifestDigest": CANARY_DIGEST,
         "sourceSnapshotDigest": SOURCE_DIGEST,
         "selectedItemSetDigest": manifest["selectedItemSetDigest"],
-        "disposableNasData": True,
-        "snapshotRestoreWaived": True,
+        "disposableLocalBlobData": True,
+        "nasRequired": False,
         "fullImportAuthorized": False,
         "providerDispatchAuthorized": False,
         "activationAuthorized": False,
@@ -158,21 +157,6 @@ def test_canary_snapshot_is_exact_and_authority_is_narrow(
     )
     with pytest.raises(ImportAuthorizationError, match="bounds"):
         authorization.validate(altered, source)
-
-
-def test_smb_verifier_requires_dedicated_signed_session() -> None:
-    valid = {
-        "shareName": "tidy-dagster",
-        "smbVersion": "SMB_3.1.1",
-        "signingRequired": True,
-        "signingOn": True,
-        "signingAlgorithm": "AES-128-CMAC",
-        "serviceIdentityLabel": "tidy-dagster",
-    }
-    assert _validate_smb_verifier(valid) == valid
-    invalid = dict(valid, serviceIdentityLabel="ian")
-    with pytest.raises(CanaryMvpError, match="SMB verification"):
-        _validate_smb_verifier(invalid)
 
 
 def test_canary_snapshot_rejects_authority_tamper(

@@ -24,22 +24,45 @@
     "recordId"
   ],
   "properties": {
-    "schemaVersion": { "const": "tidy.semantic-import-reconciliation/v1" },
-    "snapshotDigest": { "$ref": "#/$defs/digest" },
-    "inventoryDigest": { "$ref": "#/$defs/digest" },
-    "itemManifestDigest": { "$ref": "#/$defs/digest" },
-    "coreReconciliationDigest": { "$ref": "#/$defs/digest" },
-    "producerDigest": { "$ref": "#/$defs/digest" },
-    "status": {
-      "const": "conservative-dispositions-complete-full-semantic-import-pending"
+    "schemaVersion": {
+      "const": "tidy.semantic-import-reconciliation/v1"
     },
-    "sourceItemCount": { "type": "integer", "minimum": 0, "maximum": 1000 },
+    "snapshotDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "inventoryDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "itemManifestDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "coreReconciliationDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "producerDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "status": {
+      "enum": [
+        "conservative-dispositions-complete-full-semantic-import-pending",
+        "applicable-interpretations-complete-manual-review-required"
+      ]
+    },
+    "sourceItemCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
     "typedSourceItemCount": {
       "type": "integer",
       "minimum": 0,
       "maximum": 1000
     },
-    "typedRecordCount": { "type": "integer", "minimum": 0, "maximum": 2000 },
+    "typedRecordCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2000
+    },
     "outcomeCounts": {
       "type": "object",
       "additionalProperties": false,
@@ -59,7 +82,9 @@
     },
     "typedRecordCounts": {
       "type": "object",
-      "propertyNames": { "pattern": "^tidy\\.[a-z0-9.-]+/v1$" },
+      "propertyNames": {
+        "pattern": "^tidy\\.[a-z0-9.-]+/v1$"
+      },
       "additionalProperties": {
         "type": "integer",
         "minimum": 1,
@@ -86,8 +111,12 @@
             "minLength": 1,
             "maxLength": 4096
           },
-          "sourceItemDigest": { "$ref": "#/$defs/digest" },
-          "importRecordId": { "$ref": "#/$defs/digest" },
+          "sourceItemDigest": {
+            "$ref": "#/$defs/digest"
+          },
+          "importRecordId": {
+            "$ref": "#/$defs/digest"
+          },
           "artifactClass": {
             "type": "string",
             "minLength": 1,
@@ -100,18 +129,34 @@
             "type": "array",
             "maxItems": 2,
             "uniqueItems": true,
-            "items": { "$ref": "#/$defs/digest" }
+            "items": {
+              "$ref": "#/$defs/digest"
+            }
           }
         },
         "allOf": [
           {
             "if": {
               "properties": {
-                "outcome": { "const": "conservative-typed-records" }
+                "outcome": {
+                  "const": "conservative-typed-records"
+                }
               }
             },
-            "then": { "properties": { "typedRecordIds": { "minItems": 1 } } },
-            "else": { "properties": { "typedRecordIds": { "maxItems": 0 } } }
+            "then": {
+              "properties": {
+                "typedRecordIds": {
+                  "minItems": 1
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "typedRecordIds": {
+                  "maxItems": 0
+                }
+              }
+            }
           }
         ]
       }
@@ -120,20 +165,25 @@
       "type": "array",
       "minItems": 5,
       "maxItems": 5,
-      "prefixItems": [
-        { "const": "typed RecipeV01 parsing has not run" },
-        {
-          "const": "approval rows and reviewer identities have not been resolved"
-        },
-        { "const": "generation evidence has not been interpreted" },
-        { "const": "model packages have not been deserialized or promoted" },
-        { "const": "no effective recipe pointer was read or changed" }
-      ],
-      "items": false
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
     },
-    "recordedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
-    "actor": { "type": "string", "minLength": 1, "maxLength": 256 },
-    "recordId": { "$ref": "#/$defs/digest" }
+    "recordedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "recordId": {
+      "$ref": "#/$defs/digest"
+    }
   },
   "$defs": {
     "digest": {

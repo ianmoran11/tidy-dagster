@@ -85,6 +85,7 @@ def reconcile_conservative_evidence(
     core_reconciliation: Mapping[str, Any],
     recorded_at: str,
     actor: str,
+    completed_interpretations: Mapping[str, int] | None = None,
 ) -> dict[str, Any]:
     """Bind every source item to this pass without claiming semantic completion."""
 
@@ -177,6 +178,46 @@ def reconcile_conservative_evidence(
     if not set(records_by_item).issubset(expected_source_digests):
         raise MigrationEvidenceError("Typed evidence references an unknown source item")
 
+    completed = dict(completed_interpretations or {})
+    allowed_completed = {
+        "approval-registry": 1,
+        "generation-json-evidence": 2,
+        "recipe-evidence": 4,
+    }
+    if set(completed) - set(allowed_completed) or any(
+        not isinstance(value, int)
+        or isinstance(value, bool)
+        or value < 0
+        or value > allowed_completed[name]
+        for name, value in completed.items()
+    ):
+        raise MigrationEvidenceError("Completed interpretation counts are invalid")
+    limitations = [
+        (
+            "typed RecipeV01 parsing ran for every selected recipe source; "
+            "activation remains disabled"
+            if completed.get("recipe-evidence") == 4
+            else "typed RecipeV01 parsing has not run"
+        ),
+        (
+            "approval rows were digested; targets and unresolved reviewers "
+            "remain unresolved"
+            if completed.get("approval-registry") == 1
+            else "approval rows and reviewer identities have not been resolved"
+        ),
+        (
+            "bounded generation profiling ran for every selected generation JSON source"
+            if completed.get("generation-json-evidence") == 2
+            else "generation evidence has not been interpreted"
+        ),
+        "model packages have not been deserialized or promoted",
+        "no effective recipe pointer was read or changed",
+    ]
+    status = (
+        "applicable-interpretations-complete-manual-review-required"
+        if completed == allowed_completed
+        else "conservative-dispositions-complete-full-semantic-import-pending"
+    )
     semantic = {
         "schemaVersion": _SEMANTIC_RECONCILIATION,
         "snapshotDigest": snapshot["snapshotDigest"],
@@ -184,20 +225,14 @@ def reconcile_conservative_evidence(
         "itemManifestDigest": snapshot["inventory"]["itemManifestDigest"],
         "coreReconciliationDigest": core_reconciliation["reportDigest"],
         "producerDigest": producer_digest,
-        "status": ("conservative-dispositions-complete-full-semantic-import-pending"),
+        "status": status,
         "sourceItemCount": len(source_items),
         "typedSourceItemCount": outcome_counts["conservative-typed-records"],
         "typedRecordCount": sum(typed_record_counts.values()),
         "outcomeCounts": outcome_counts,
         "typedRecordCounts": dict(sorted(typed_record_counts.items())),
         "mappings": mappings,
-        "limitations": [
-            "typed RecipeV01 parsing has not run",
-            "approval rows and reviewer identities have not been resolved",
-            "generation evidence has not been interpreted",
-            "model packages have not been deserialized or promoted",
-            "no effective recipe pointer was read or changed",
-        ],
+        "limitations": limitations,
         "recordedAt": recorded_at,
         "actor": actor,
     }
