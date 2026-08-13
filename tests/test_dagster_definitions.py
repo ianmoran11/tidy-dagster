@@ -20,6 +20,8 @@ from tidy_orchestrator.dagster_defs import (
     product_prototype_live_evidence_check,
     product_prototype_replay,
     product_prototype_replay_check,
+    product_prototype_stage_projection,
+    product_prototype_stage_projection_check,
     provider_free_work_unit_sensor,
     recipe_execution_evidence_index,
     verified_fixture_inputs_index,
@@ -51,6 +53,12 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
     Definitions.validate_loadable(definitions)
     assert product_prototype_replay.key.to_user_string() == "product_prototype_replay"
+    assert product_prototype_stage_projection.key.to_user_string() == (
+        "product_prototype_stage_projection"
+    )
+    assert product_prototype_stage_projection_check.check_key.name == (
+        "all_stages_projected"
+    )
     assert product_prototype_live_evidence.key.to_user_string() == (
         "product_prototype_live_evidence"
     )
@@ -62,6 +70,7 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
     assert definitions.metadata["product_prototype_replay_supported"].value is True
     assert definitions.metadata["product_prototype_live_evidence_supported"].value
+    assert definitions.metadata["product_prototype_stage_projection_supported"].value
     assert (
         definitions.metadata["product_prototype_live_generation_authorized"].value
         is False
@@ -287,6 +296,35 @@ def test_sensor_rejects_union_over_one_thousand_existing_keys(tmp_path: Path) ->
         )
         with pytest.raises(RuntimeError, match="Existing plus discovered"):
             provider_free_work_unit_sensor._raw_fn(context)
+
+
+def test_product_prototype_stage_projection_dagster_job_passes() -> None:
+    definitions = build_definitions(project_root=PROJECT)
+    result = definitions.resolve_job_def(
+        "product_prototype_stage_projection_job"
+    ).execute_in_process()
+    assert result.success
+    assert {
+        event.asset_key.to_user_string()
+        for event in result.get_asset_materialization_events()
+    } == {"product_prototype_stage_projection"}
+    evaluations = result.get_asset_check_evaluations()
+    assert len(evaluations) == 1
+    assert evaluations[0].passed
+    materialization = result.get_asset_materialization_events()[0]
+    stage_names = materialization.event_specific_data.materialization.metadata[
+        "stage_names"
+    ].value
+    assert stage_names == [
+        "prepare",
+        "generation",
+        "interpretation",
+        "execution",
+        "validation",
+        "decision",
+        "exception",
+        "collation",
+    ]
 
 
 def test_product_prototype_live_evidence_dagster_job_passes() -> None:

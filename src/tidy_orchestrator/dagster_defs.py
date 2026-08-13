@@ -1,5 +1,6 @@
 """Replaceable Dagster projection for the provider-free authoritative runtime."""
 
+import json
 import os
 from pathlib import Path
 
@@ -25,7 +26,7 @@ from dagster import (
 )
 
 from .application import actual_worker_gateway
-from .artifacts import LocalArtifactRepository
+from .artifacts import LocalArtifactRepository, domain_digest
 from .product_prototype import run_product_prototype, verify_live_evidence
 from .work_units import (
     MAX_ACTIVE_WORK_UNITS,
@@ -115,6 +116,110 @@ def product_prototype_live_evidence_check(
             "reasoning": manifest["reasoning"],
             "provider_calls": manifest["providerCalls"],
         },
+    )
+
+
+@asset(
+    name="product_prototype_stage_projection",
+    description=(
+        "Per-workbook prepare, generation, interpretation, execution, validation, "
+        "decision, exception, and collation state from checked authoritative evidence."
+    ),
+    group_name="product_prototype",
+    code_version="tidy.product-prototype-stage-projection/v1",
+)
+def product_prototype_stage_projection(
+    runtime: TidyRuntimeResource,
+) -> MaterializeResult:
+    root = runtime.project() / "fixtures" / "product-prototype" / "live-evidence"
+    run = json.loads((root / "run.json").read_text())
+    collation = json.loads((root / "collation-report.json").read_text())
+    attempts = json.loads((root / "attempts.json").read_text())
+    stages = []
+    for workbook in run["workbooks"]:
+        year = str(workbook["year"])
+        stages.append(
+            {
+                "year": workbook["year"],
+                "prepare": {
+                    "status": "complete",
+                    "derivationId": workbook["prepareDerivationId"],
+                },
+                "generation": {
+                    "status": "complete",
+                    "attemptId": attempts[year]["attemptId"],
+                    "model": attempts[year]["model"],
+                },
+                "interpretation": {
+                    "status": "complete",
+                    "derivationId": workbook["interpretDerivationId"],
+                },
+                "execution": {
+                    "status": "complete",
+                    "observationCount": workbook["observationCount"],
+                },
+                "validation": {
+                    "status": "passed"
+                    if all(workbook["checks"].values())
+                    else "failed",
+                    "checks": workbook["checks"],
+                },
+                "decision": {
+                    "status": workbook["decision"],
+                    "decisionId": workbook["decisionId"],
+                },
+                "exception": {
+                    "required": workbook["decision"] == "exception_required",
+                    "issues": workbook["issues"],
+                },
+            }
+        )
+    projection = {
+        "schemaVersion": "tidy.product-prototype-stage-projection/v1",
+        "stages": stages,
+        "collation": collation,
+        "runDigest": run["runDigest"],
+    }
+    projection_digest = domain_digest(
+        "tidy.product-prototype-stage-projection/v1", projection
+    )
+    return MaterializeResult(
+        metadata={
+            "projection_digest": projection_digest,
+            "workbook_stage_count": len(stages),
+            "exception_count": len(collation["excludedExceptions"]),
+            "collated_rows": collation["rowCount"],
+            "stage_names": [
+                "prepare",
+                "generation",
+                "interpretation",
+                "execution",
+                "validation",
+                "decision",
+                "exception",
+                "collation",
+            ],
+        },
+        data_version=DataVersion(projection_digest),
+    )
+
+
+@asset_check(asset=product_prototype_stage_projection, name="all_stages_projected")
+def product_prototype_stage_projection_check(
+    runtime: TidyRuntimeResource,
+) -> AssetCheckResult:
+    root = runtime.project() / "fixtures" / "product-prototype" / "live-evidence"
+    run = json.loads((root / "run.json").read_text())
+    passed = all(
+        item["prepareDerivationId"]
+        and item["interpretDerivationId"]
+        and all(item["checks"].values())
+        and item["decision"] in {"prototype_auto_accepted", "exception_required"}
+        for item in run["workbooks"]
+    )
+    return AssetCheckResult(
+        passed=passed,
+        metadata={"workbook_stage_count": len(run["workbooks"])},
     )
 
 
@@ -379,6 +484,14 @@ def active_projection_check(
     )
 
 
+product_prototype_stage_projection_job = define_asset_job(
+    "product_prototype_stage_projection_job",
+    selection=AssetSelection.assets(product_prototype_stage_projection),
+    description="Project every product-prototype stage and exception state.",
+    tags={"mode": "checked-stage-projection"},
+)
+
+
 product_prototype_live_evidence_job = define_asset_job(
     "product_prototype_live_evidence_job",
     selection=AssetSelection.assets(product_prototype_live_evidence),
@@ -467,6 +580,7 @@ def build_definitions(
     ).resolve()
     return Definitions(
         assets=[
+            product_prototype_stage_projection,
             product_prototype_live_evidence,
             product_prototype_replay,
             source_catalog_snapshot,
@@ -475,6 +589,7 @@ def build_definitions(
             active_work_unit_projection,
         ],
         asset_checks=[
+            product_prototype_stage_projection_check,
             product_prototype_live_evidence_check,
             product_prototype_replay_check,
             verified_fixture_inputs_check,
@@ -482,6 +597,7 @@ def build_definitions(
             active_projection_check,
         ],
         jobs=[
+            product_prototype_stage_projection_job,
             product_prototype_live_evidence_job,
             product_prototype_replay_job,
             project_work_unit_job,
@@ -506,6 +622,7 @@ def build_definitions(
             "prompt_output_exposed": False,
             "product_prototype_replay_supported": True,
             "product_prototype_live_evidence_supported": True,
+            "product_prototype_stage_projection_supported": True,
             "product_prototype_live_generation_authorized": False,
         },
     )
