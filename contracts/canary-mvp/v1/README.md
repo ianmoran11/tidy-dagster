@@ -20,7 +20,8 @@ uv run python -m tidy_orchestrator.canary_mvp_cli run \
 ```
 
 The command verifies the frozen source and canary manifest, imports exact source
-bytes into content-addressed `COMMITTED.json` objects, writes local checkpoints,
+bytes into content-addressed `COMMITTED.json` objects, restores missing blobs
+from those digest-bound sources when retained metadata is reused, writes local checkpoints,
 creates conservative typed dispositions, executes every applicable bounded
 approval/RecipeV01/generation interpretation, performs core and semantic
 reconciliation, and repeats the import to prove idempotence. Approval targets

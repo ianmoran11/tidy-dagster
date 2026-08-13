@@ -1209,7 +1209,15 @@ class MigrationImporter:
                         and isinstance(content_digest, str)
                         and content_digest in verified_blobs
                     )
-                    self._verify_existing_item(existing, item, verify_blob=verify_blob)
+                    self._verify_existing_item(existing, item, verify_blob=False)
+                    if verify_blob and existing.get("blobStored") is True:
+                        assert isinstance(content_digest, str)
+                        with source.open_regular(item) as descriptor:
+                            self.blobs.publish_from_descriptor(
+                                descriptor,
+                                expected_digest=content_digest,
+                                expected_length=int(existing["byteLength"]),
+                            )
                     if existing.get("blobStored") is True:
                         verified_blobs.add(str(content_digest))
                     continue

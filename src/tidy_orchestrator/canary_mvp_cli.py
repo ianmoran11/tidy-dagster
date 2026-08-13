@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import UTC, datetime
 from pathlib import Path
 
 from .canary_mvp import CanaryMvpError, run_canary_mvp
@@ -31,7 +30,11 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--metadata-root", type=Path, required=True)
     run.add_argument("--blob-root", type=Path, required=True)
     run.add_argument("--output-root", type=Path, required=True)
-    run.add_argument("--recorded-at")
+    run.add_argument(
+        "--recorded-at",
+        default="2026-08-13T10:00:00Z",
+        help="immutable evidence time (defaults to the checked local MVP run)",
+    )
     return parser
 
 
@@ -39,9 +42,7 @@ def main(argv: list[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     if arguments.command != "run":
         raise AssertionError("unreachable")
-    recorded_at = arguments.recorded_at or datetime.now(UTC).strftime(
-        "%Y-%m-%dT%H:%M:%SZ"
-    )
+    recorded_at = arguments.recorded_at
     try:
         report = run_canary_mvp(
             source_snapshot_path=arguments.source_snapshot,

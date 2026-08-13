@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import shutil
 import sqlite3
 from collections import Counter
 from pathlib import Path
@@ -222,6 +223,38 @@ def _schemas() -> tuple[dict[str, dict], Registry]:
 
 def _validate(schema: dict, registry: Registry, value) -> None:
     validator_for(schema)(schema, registry=registry).validate(value)
+
+
+def test_deleted_disposable_blob_tree_rebuilds_from_retained_authority(
+    tmp_path: Path,
+) -> None:
+    _source, _snapshot_path, snapshot, blobs, metadata, importer = _importer(tmp_path)
+    assert importer.run().complete
+    expected = importer.reconcile()
+    expected_digests = blobs.committed_digests()
+    assert expected_digests
+
+    # Simulate the documented operation: discard only disposable blob bytes,
+    # keep SQLite authority, recreate the empty tree, and run the same command.
+    shutil.rmtree(blobs.root)
+    rebuilt_blobs = CommittedFilesystemBlobStore(blobs.root)
+    authorization = FixtureImportAuthorization.create(
+        snapshot=snapshot,
+        source_root=_source,
+    )
+    rebuilt = MigrationImporter(
+        snapshot_path=_snapshot_path,
+        source_root=_source,
+        metadata=metadata,
+        blobs=rebuilt_blobs,
+        authorization=authorization,
+        recorded_at=FIXED_TIME,
+    )
+    assert rebuilt.run().complete
+    assert rebuilt.reconcile() == expected
+    assert rebuilt_blobs.committed_digests() == expected_digests
+    assert not tuple(rebuilt_blobs.staging.iterdir())
+    assert not tuple(rebuilt_blobs.orphaned.iterdir())
 
 
 def test_fixture_import_is_split_idempotent_and_reconciled(tmp_path: Path) -> None:

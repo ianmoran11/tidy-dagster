@@ -12,11 +12,11 @@ The exact frozen Phase B canary was copied and reconciled end to end on
 - derived 63-item import snapshot
   `sha256:7fda956b0b924ff5fbc337c151fb07b1e4563efad8b3fdfec174e0614bd3e824`;
 - core reconciliation
-  `sha256:e36187d4137d0a7e184f7584103412ac9dad0f04cf846041596bfaf89991b64c`;
+  `sha256:5b322226dac14f511ffdd374a161b1803ba3088ecb3fc41b61f67c66de1d51d7`;
 - semantic reconciliation
-  `sha256:19496be401d99481464313c97e5a5edfeba6b0ee03f2f12e25d9fb0f02ffd470`;
+  `sha256:50718b4e1eea98ab7f7d7e2a0399eff6b02c3cd6af6ba5fa2bb7ee07aae22021`;
 - concise report
-  `sha256:108be57c4ef180371fded6e4f65cd7301a07e96efa818a00e7e734033b46fb8c`.
+  `sha256:edf00f31e61092adfb69411b2dc17a2b68a2a0240d2f20898cf20f8ff2467e51`.
 
 The report is committed at
 `fixtures/canary-mvp/phase-b-63-item-report-v1.json`.
@@ -51,7 +51,7 @@ The complete 44,682-item import, NAS migration, backups, provider spend, automat
 
 The run is deliberately manual-inspection-only. Applicable canary interpretation is complete, but approval target/reviewer uncertainty, archived models, and the absence of any effective recipe-pointer change intentionally prevent activation or stronger authority claims.
 
-To discard only disposable bytes, delete the contents of `.canary-mvp-local/blobs`. Never delete `.canary-mvp-local/metadata` when retaining the local audit trail. To rebuild locally, recreate an empty blob directory and run:
+To discard only disposable bytes, delete the contents of `.canary-mvp-local/blobs`. Never delete `.canary-mvp-local/metadata` when retaining the local audit trail. The importer reconstructs every missing source and derived CAS object from digest-bound source bytes while reusing the immutable local authority records. To rebuild the deleted blob tree, recreate the empty directory and run:
 
 ```sh
 uv run python -m tidy_orchestrator.canary_mvp_cli run \
