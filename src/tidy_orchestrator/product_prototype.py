@@ -460,7 +460,7 @@ def run_product_prototype(
     accepted: list[_AcceptedWorkbook] = []
     workbook_reports: list[dict[str, Any]] = []
     provider_attempts: dict[str, dict[str, Any]] = {}
-    for entry in cohort["workbooks"]:
+    for workbook_index, entry in enumerate(cohort["workbooks"]):
         prepared = _prepare_one(
             repository=repository,
             gateway=active_gateway,
@@ -472,6 +472,7 @@ def run_product_prototype(
             live_response_root=live_response_root,
             provider=provider,
             live_attempt=_attempt_for_year(live_attempts, int(entry["year"])),
+            dispatch_ordinal=2 * workbook_index + 1,
         )
         report = _interpret_accept_one(
             repository=repository,
@@ -496,7 +497,8 @@ def run_product_prototype(
         )
         generation = cohort["generation"]
         if (
-            set(provider_attempts) != {"2023", "2024", "2025"}
+            set(provider_attempts)
+            != {str(item["year"]) for item in cohort["workbooks"]}
             or total_calls > int(generation["maximumCalls"])
             or total_cost > float(generation["maximumCostUsd"])
         ):
@@ -602,6 +604,7 @@ def _prepare_one(
     live_response_root: Path | None,
     provider: AuthorizedPiProvider | None,
     live_attempt: dict[str, Any] | None,
+    dispatch_ordinal: int,
 ) -> _PreparedWorkbook:
     workbook_path = _safe_join(base, str(entry["path"]))
     workbook_bytes = workbook_path.read_bytes()
@@ -660,11 +663,10 @@ def _prepare_one(
         prompt = repository.read_bytes_verified(
             _output_digest(prepare, "prompt.txt")
         ).decode("utf-8")
-        ordinal = 2 * [2023, 2024, 2025].index(int(entry["year"])) + 1
         dispatched = provider.dispatch(
             prompt=prompt,
             work_unit_id=str(entry["year"]),
-            ordinal=ordinal,
+            ordinal=dispatch_ordinal,
         )
         response_bytes = dispatched.content.encode("utf-8")
         response_path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -796,7 +798,16 @@ def _interpret_accept_one(
             "acceptance_policy_digest": sha256_digest(canonical_json_bytes(contract)),
             "acceptance_decision_digest": decision_record.decision_id,
             "prompt_package_digest": _output_digest(prepared.prepare, "prompt.txt"),
-            "generation_model": MODEL,
+            "generation_model": (
+                prepared.provider_attempt["model"]
+                if prepared.provider_attempt is not None
+                else (
+                    MODEL
+                    if entry["replayResponse"]["historicalModel"]
+                    == "checked-live-semantic-map-replay-fixture"
+                    else entry["replayResponse"]["historicalModel"]
+                )
+            ),
             "generation_attempt_id": (
                 prepared.provider_attempt["attemptId"]
                 if prepared.provider_attempt is not None
@@ -1360,24 +1371,28 @@ def _validate_cohort(value: dict[str, Any]) -> None:
     }
     if set(value) != required or value.get("schemaVersion") != COHORT_SCHEMA:
         raise ProductPrototypeError("Cohort manifest shape/version is invalid")
+    workbooks = value.get("workbooks")
+    if not isinstance(workbooks, list) or not 2 <= len(workbooks) <= 12:
+        raise ProductPrototypeError("Cohort must bind between two and twelve workbooks")
+    years = [item.get("year") for item in workbooks if isinstance(item, dict)]
+    if (
+        len(years) != len(workbooks)
+        or any(not isinstance(year, int) for year in years)
+        or years != sorted(set(years))
+    ):
+        raise ProductPrototypeError("Cohort years must be unique and increasing")
     generation = value.get("generation")
     if not isinstance(generation, dict) or (
         generation.get("provider") != "openai-codex"
         or generation.get("model") != MODEL
         or generation.get("reasoning") != "high"
         or generation.get("promptContract") != PROMPT_CONTRACT
-        or generation.get("maximumCalls") != 6
+        or generation.get("maximumCalls") != 2 * len(workbooks)
         or generation.get("maximumCostUsd") != 2.0
         or generation.get("correctionPolicy")
         != "one-pre-execution-compilation-correction-only"
     ):
         raise ProductPrototypeError("Generation policy is not the pinned Luna policy")
-    workbooks = value.get("workbooks")
-    if not isinstance(workbooks, list) or len(workbooks) != 3:
-        raise ProductPrototypeError("Cohort must bind exactly three workbooks")
-    years = [item.get("year") for item in workbooks if isinstance(item, dict)]
-    if years != [2023, 2024, 2025]:
-        raise ProductPrototypeError("Cohort years must be exactly 2023, 2024, 2025")
     for entry in workbooks:
         if not isinstance(entry, dict) or set(entry) not in (
             {

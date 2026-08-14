@@ -5,12 +5,14 @@ import shutil
 from pathlib import Path
 from typing import Any
 
+import jsonschema
 import pytest
 
 from tidy_orchestrator.artifacts import LocalArtifactRepository, sha256_digest
 from tidy_orchestrator.product_prototype import (
     ProductPrototypeError,
     _cross_year_issues,
+    _validate_cohort,
     evaluate_execution_for_acceptance,
     run_product_prototype,
     verify_live_evidence,
@@ -20,6 +22,9 @@ from tidy_orchestrator.worker import GatewayConfig, WorkerGateway
 PROJECT = Path(__file__).parents[1]
 COHORT = (
     PROJECT / "fixtures" / "product-prototype" / "prisoners-table-30-2023-2025.json"
+)
+EXPANDED_COHORT = (
+    PROJECT / "fixtures" / "product-prototype" / "prisoners-table-30-2021-2025.json"
 )
 CONTRACT = json.loads(
     (
@@ -81,9 +86,10 @@ def test_checked_live_evidence_binds_three_fresh_luna_results(
         / "live-evidence"
         / campaign["authorizedCohortPath"]
     )
-    assert sha256_digest(authorized_cohort.read_bytes()) == campaign[
-        "authorizedCohortDigest"
-    ]
+    assert (
+        sha256_digest(authorized_cohort.read_bytes())
+        == campaign["authorizedCohortDigest"]
+    )
     assert {item["ledgerState"] for item in campaign["attempts"].values()} == {
         "settled"
     }
@@ -139,6 +145,7 @@ def test_replay_runs_three_real_workbooks_and_collates(tmp_path: Path) -> None:
         "generation_attempt_id",
     }
     assert required_provenance <= set(rows[0])
+    assert {row["generation_model"] for row in rows} == {"openai-codex/gpt-5.6-luna"}
     collation = json.loads((tmp_path / "output" / "collation-report.json").read_text())
     assert len(collation["includedWorkbooks"]) == 3
     assert collation["excludedExceptions"] == []
@@ -152,6 +159,79 @@ def test_replay_runs_three_real_workbooks_and_collates(tmp_path: Path) -> None:
     decisions = repository.list_decisions()
     assert len(decisions) == 3
     assert {item.decision_type for item in decisions} == {"prototype_auto_accepted"}
+
+
+def test_replay_extends_table_30_to_five_years(tmp_path: Path) -> None:
+    repository = LocalArtifactRepository(tmp_path / "repository")
+    result = run_product_prototype(
+        repository=repository,
+        project_root=PROJECT,
+        cohort_path=EXPANDED_COHORT,
+        output_root=tmp_path / "output",
+        mode="replay",
+        gateway=fake_gateway(repository),
+        recorded_at="2026-08-14T03:00:00+00:00",
+    )
+    report = result.report
+    assert report["providerCalls"] == 0
+    assert report["acceptedWorkbookCount"] == 5
+    assert report["exceptionWorkbookCount"] == 0
+    assert report["canonicalObservationCount"] == 1215
+    assert report["crossYearIssues"] == []
+    assert [item["year"] for item in report["workbooks"]] == list(range(2021, 2026))
+    assert all(item["observationCount"] == 243 for item in report["workbooks"])
+    rows = json.loads((tmp_path / "output" / "canonical-observations.json").read_text())
+    assert {row["reference_date"] for row in rows} == {
+        f"{year}-06-30" for year in range(2021, 2026)
+    }
+    assert {row["generation_model"] for row in rows} == {
+        "openai-codex/gpt-5.6-sol",
+        "openai-codex/gpt-5.6-luna",
+    }
+    collation = json.loads((tmp_path / "output" / "collation-report.json").read_text())
+    assert len(collation["includedWorkbooks"]) == 5
+    assert collation["rowCount"] == 1215
+    assert collation["excludedExceptions"] == []
+
+
+def test_cohort_requires_increasing_years_and_matching_call_ceiling() -> None:
+    cohort = json.loads(EXPANDED_COHORT.read_text())
+    _validate_cohort(cohort)
+    duplicate = json.loads(EXPANDED_COHORT.read_text())
+    duplicate["workbooks"][1]["year"] = 2021
+    with pytest.raises(ProductPrototypeError, match="unique and increasing"):
+        _validate_cohort(duplicate)
+    wrong_ceiling = json.loads(EXPANDED_COHORT.read_text())
+    wrong_ceiling["generation"]["maximumCalls"] = 6
+    with pytest.raises(ProductPrototypeError, match="pinned Luna policy"):
+        _validate_cohort(wrong_ceiling)
+
+
+def test_five_year_evidence_manifest_binds_committed_outputs() -> None:
+    cohort = json.loads(EXPANDED_COHORT.read_text())
+    cohort_schema = json.loads(
+        (
+            PROJECT / "contracts" / "product-prototype" / "v1" / "cohort.schema.json"
+        ).read_text()
+    )
+    jsonschema.Draft202012Validator(
+        cohort_schema,
+        format_checker=jsonschema.FormatChecker(),
+    ).validate(cohort)
+    root = PROJECT / "fixtures" / "product-prototype" / "five-year-evidence"
+    manifest = json.loads((root / "manifest.json").read_text())
+    assert manifest["cohortDigest"] == sha256_digest(EXPANDED_COHORT.read_bytes())
+    for item in manifest["files"]:
+        content = (root / item["path"]).read_bytes()
+        assert len(content) == item["byteLength"]
+        assert sha256_digest(content) == item["contentDigest"]
+    run = json.loads((root / "run.json").read_text())
+    assert run["runDigest"] == manifest["runDigest"]
+    assert run["acceptedWorkbookCount"] == 5
+    assert run["exceptionWorkbookCount"] == 0
+    assert run["canonicalObservationCount"] == 1215
+    assert run["crossYearIssues"] == []
+    assert json.loads((root / "exceptions.json").read_text()) == []
 
 
 def test_replay_is_byte_deterministic(tmp_path: Path) -> None:

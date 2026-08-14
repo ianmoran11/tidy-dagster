@@ -2,23 +2,27 @@
 
 ## End-to-end spreadsheet product prototype
 
-The replay-first product slice processes the exact *Prisoners in Australia*
-Table 30 cohort for 2023–2025 through V13 preparation, saved-response
-interpretation, RecipeV01 compilation and execution, automatic table-family
-acceptance, exception routing, and canonical cross-year collation:
+The replay-first product slice processes the *Prisoners in Australia* Table 30
+cohort for 2021–2025 through V13 preparation, saved-response interpretation,
+RecipeV01 compilation and execution, automatic table-family acceptance,
+exception routing, and canonical cross-year collation:
 
 ```sh
 npm run build
 scripts/tidy-prototype run \
-  --cohort fixtures/product-prototype/prisoners-table-30-2023-2025.json \
+  --cohort fixtures/product-prototype/prisoners-table-30-2021-2025.json \
   --mode replay \
-  --output .product-prototype/replay
+  --output .product-prototype/five-year-replay
 ```
 
 The live model is pinned to `openai-codex/gpt-5.6-luna` with high reasoning.
 The checked live campaign made three calls for USD 0.0197296, compiled and
 executed all three fresh candidates, automatically accepted 2023–2025, and
-collated 729 canonical observations. Safe checked evidence is under
+collated 729 canonical observations. The provider-free expansion reuses
+non-authoritative historical semantic-map responses for 2021–2022 and the
+checked Luna responses for 2023–2025; the independent acceptance contract, not
+the saved responses, accepts all five workbooks into 1,215 observations. Safe
+checked evidence for the original live campaign is under
 `fixtures/product-prototype/live-evidence/`; raw prompts and provider envelopes
 remain restricted under the ignored `.product-prototype/` root. Replay makes
 zero provider calls and explicitly treats its historical responses as

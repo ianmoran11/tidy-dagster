@@ -230,15 +230,16 @@ def product_prototype_stage_projection_check(
 @asset(
     name="product_prototype_replay",
     description=(
-        "Provider-free replay of the three-workbook product cohort, including "
-        "automatic acceptance, exceptions, and canonical collation."
+        "Provider-free replay of the five-workbook 2021-2025 Table 30 cohort, "
+        "including automatic acceptance, exceptions, and canonical collation."
     ),
     group_name="product_prototype",
-    code_version="tidy.product-prototype-run/v1",
+    code_version="tidy.product-prototype-run/v2",
 )
 def product_prototype_replay(
     runtime: TidyRuntimeResource,
 ) -> MaterializeResult:
+    output_root = runtime.project() / ".product-prototype" / "dagster-five-year-replay"
     result = run_product_prototype(
         repository=runtime.repository(),
         project_root=runtime.project(),
@@ -246,9 +247,9 @@ def product_prototype_replay(
             runtime.project()
             / "fixtures"
             / "product-prototype"
-            / "prisoners-table-30-2023-2025.json"
+            / "prisoners-table-30-2021-2025.json"
         ),
-        output_root=runtime.project() / ".product-prototype" / "dagster-replay",
+        output_root=output_root,
         mode="replay",
     )
     report = result.report
@@ -260,6 +261,8 @@ def product_prototype_replay(
             "accepted_workbooks": report["acceptedWorkbookCount"],
             "exception_workbooks": report["exceptionWorkbookCount"],
             "canonical_observations": report["canonicalObservationCount"],
+            "workbooks": report["workbooks"],
+            "collation_report_path": str(output_root / "collation-report.json"),
             "artifact_uri": f"artifact://{result.run.content_digest}",
         },
         data_version=DataVersion(result.run.content_digest),
@@ -270,24 +273,38 @@ def product_prototype_replay(
 def product_prototype_replay_check(
     runtime: TidyRuntimeResource,
 ) -> AssetCheckResult:
-    result = run_product_prototype(
-        repository=runtime.repository(),
-        project_root=runtime.project(),
-        cohort_path=(
-            runtime.project()
-            / "fixtures"
-            / "product-prototype"
-            / "prisoners-table-30-2023-2025.json"
-        ),
-        output_root=runtime.project() / ".product-prototype" / "dagster-replay",
-        mode="replay",
+    output_root = runtime.project() / ".product-prototype" / "dagster-five-year-replay"
+    try:
+        report = json.loads((output_root / "run.json").read_text())
+        collation = json.loads((output_root / "collation-report.json").read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        return AssetCheckResult(
+            passed=False,
+            metadata={"error": f"Expanded replay evidence is unavailable: {error}"},
+        )
+    clean_collation_fields = (
+        "excludedExceptions",
+        "duplicateCanonicalKeys",
+        "conflictingValues",
+        "unmappedLabels",
+        "missingExpectedCategories",
+        "schemaFailures",
+        "codeListFailures",
     )
-    report = result.report
     passed = (
-        report["acceptedWorkbookCount"] >= 2
-        and report["canonicalObservationCount"] > 0
+        report["acceptedWorkbookCount"] == 5
+        and report["exceptionWorkbookCount"] == 0
+        and report["canonicalObservationCount"] == 1215
         and report["crossYearIssues"] == []
         and report["providerCalls"] == 0
+        and [item["year"] for item in report["workbooks"]] == list(range(2021, 2026))
+        and all(
+            item["decision"] == "prototype_auto_accepted"
+            and all(item["checks"].values())
+            for item in report["workbooks"]
+        )
+        and collation["rowCount"] == 1215
+        and all(collation[field] == [] for field in clean_collation_fields)
     )
     return AssetCheckResult(
         passed=passed,
@@ -509,9 +526,9 @@ product_prototype_replay_job = define_asset_job(
     selection=AssetSelection.assets(product_prototype_replay),
     description=(
         "Provider-free end-to-end replay, automatic acceptance, exception routing, "
-        "and canonical collation for the three-workbook product cohort."
+        "and canonical collation for the five-workbook 2021-2025 cohort."
     ),
-    tags={"provider_calls": "0", "mode": "replay"},
+    tags={"provider_calls": "0", "mode": "replay", "years": "2021-2025"},
 )
 
 
@@ -625,6 +642,7 @@ def build_definitions(
             "prompt_scope": "source-owned-fourteen-snapshot-cases-v1",
             "prompt_output_exposed": False,
             "product_prototype_replay_supported": True,
+            "product_prototype_replay_scope": "prisoners-table-30-2021-2025",
             "product_prototype_live_evidence_supported": True,
             "product_prototype_stage_projection_supported": True,
             "product_prototype_live_generation_authorized": False,

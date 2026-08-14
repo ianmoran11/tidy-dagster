@@ -33,7 +33,7 @@ def test_tidy_prototype_cli_is_directly_executable() -> None:
     assert "run the exact product cohort" in completed.stdout
 
 
-def test_tidy_prototype_cli_completes_the_three_workbook_replay(
+def test_tidy_prototype_cli_completes_the_five_workbook_replay(
     tmp_path: Path,
 ) -> None:
     script = PROJECT / "scripts/tidy-prototype"
@@ -42,7 +42,7 @@ def test_tidy_prototype_cli_completes_the_three_workbook_replay(
             str(script),
             "run",
             "--cohort",
-            "fixtures/product-prototype/prisoners-table-30-2023-2025.json",
+            "fixtures/product-prototype/prisoners-table-30-2021-2025.json",
             "--mode",
             "replay",
             "--output",
@@ -57,9 +57,9 @@ def test_tidy_prototype_cli_completes_the_three_workbook_replay(
     )
     assert completed.returncode == 0, completed.stderr
     result = json.loads(completed.stdout)
-    assert result["acceptedWorkbookCount"] == 3
+    assert result["acceptedWorkbookCount"] == 5
     assert result["exceptionWorkbookCount"] == 0
-    assert result["canonicalObservationCount"] == 729
+    assert result["canonicalObservationCount"] == 1215
     assert result["providerCalls"] == 0
     assert (tmp_path / "prototype-run" / "collation-report.json").is_file()
 

@@ -69,6 +69,9 @@ def test_definitions_include_provider_free_product_prototype_projection(
         "automatic_acceptance_and_collation"
     )
     assert definitions.metadata["product_prototype_replay_supported"].value is True
+    assert definitions.metadata["product_prototype_replay_scope"].value == (
+        "prisoners-table-30-2021-2025"
+    )
     assert definitions.metadata["product_prototype_live_evidence_supported"].value
     assert definitions.metadata["product_prototype_stage_projection_supported"].value
     assert (
@@ -364,10 +367,15 @@ def test_product_prototype_dagster_job_materializes_and_passes_check(
         "product_prototype_replay_job"
     ).execute_in_process()
     assert result.success
-    assert {
-        event.asset_key.to_user_string()
-        for event in result.get_asset_materialization_events()
-    } == {"product_prototype_replay"}
+    materializations = result.get_asset_materialization_events()
+    assert {event.asset_key.to_user_string() for event in materializations} == {
+        "product_prototype_replay"
+    }
+    metadata = materializations[0].event_specific_data.materialization.metadata
+    assert metadata["accepted_workbooks"].value == 5
+    assert metadata["exception_workbooks"].value == 0
+    assert metadata["canonical_observations"].value == 1215
+    assert len(metadata["workbooks"].data) == 5
     evaluations = result.get_asset_check_evaluations()
     assert len(evaluations) == 1
     assert evaluations[0].passed

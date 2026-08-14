@@ -1,9 +1,11 @@
 # Product prototype contracts
 
-`tidy.product-prototype-cohort/v1` binds the three-workbook Table 30 cohort,
-its exact source bytes and sheets, the independent table-family acceptance
-contract, the V13 prompt contract, and `openai-codex/gpt-5.6-luna` with high
-reasoning and hard call/cost ceilings.
+`tidy.product-prototype-cohort/v1` binds an ordered cohort of two to twelve
+related workbooks, their source bytes and sheets, the independent table-family
+acceptance contract, the V13 prompt contract, and
+`openai-codex/gpt-5.6-luna` with high reasoning and hard call/cost ceilings.
+The original live milestone remains the three-workbook 2023-2025 cohort; the
+provider-free expansion adds 2021 and 2022 to form a five-workbook replay.
 
 Replay responses are non-authoritative integration fixtures. They may exercise
 the provider-free interpretation path, but they do not determine acceptance and
@@ -20,7 +22,7 @@ The runnable entrypoint is:
 
 ```sh
 scripts/tidy-prototype run \
-  --cohort fixtures/product-prototype/prisoners-table-30-2023-2025.json \
+  --cohort fixtures/product-prototype/prisoners-table-30-2021-2025.json \
   --mode replay \
-  --output .product-prototype/replay
+  --output .product-prototype/five-year-replay
 ```

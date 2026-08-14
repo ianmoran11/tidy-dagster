@@ -504,3 +504,29 @@ live-run authorization then bound the cohort, V13 prompt contract, Pi executable
 Luna/high settings, six-call ceiling, USD 2 ceiling, work units, and expiry.
 Three normal calls completed; no correction slot was used. The checked evidence
 above is the result of that separately authorized campaign.
+
+## 12. Five-year provider-free expansion
+
+The first post-prototype expansion adds the matching 2021 and 2022 Table 30
+workbooks without altering the original three-workbook live campaign. The
+expanded cohort is
+`fixtures/product-prototype/prisoners-table-30-2021-2025.json`.
+
+The 2021 and 2022 semantic-map responses are existing Sol/high research
+artifacts; the 2023–2025 responses remain the checked Luna replay fixtures.
+Every response is explicitly non-authoritative. The same deterministic worker
+and human-authored Table 30 acceptance contract decide whether each year enters
+the combined output. No new provider call was made for this expansion.
+
+The checked replay at `fixtures/product-prototype/five-year-evidence/` records:
+
+- five automatically accepted workbooks and zero exceptions;
+- 243 canonical observations per year and 1,215 observations overall;
+- no duplicate keys, conflicts, missing categories, unmapped labels, schema
+  failures, code-list failures, or cross-year issues; and
+- run digest
+  `sha256:8a40f31314de3a2ddfe12343085aced377b84379e03c1c5f17211f5440c564bd`.
+
+The standalone CLI and `product_prototype_replay` Dagster asset now use the
+five-year cohort. The original checked live-evidence and stage-projection assets
+remain unchanged so historical live claims are not rewritten.
