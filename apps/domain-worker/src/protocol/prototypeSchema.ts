@@ -9,7 +9,7 @@ import {
 import { runWorker } from "./worker.js";
 
 const MAX_OUTPUT_DESCRIPTORS = 10_000;
-const MAX_WARNING_DESCRIPTORS = 10_000;
+const MAX_WARNING_DESCRIPTORS = 20_000;
 import { interpretSemanticMapV13, prepareSemanticMapV13 } from "./prototype.js";
 
 const digest = z.string().regex(/^sha256:[0-9a-f]{64}$/);

@@ -29,6 +29,29 @@ ACCEPTANCE_SCHEMA = "tidy.table-family-acceptance/v1"
 RUN_SCHEMA = "tidy.product-prototype-run/v1"
 MODEL = "openai-codex/gpt-5.6-luna"
 PROMPT_CONTRACT = "cell-role-semantic-map-v13-adjacent-year-aware"
+DEFAULT_PROTOTYPE_MAX_WARNINGS = 10_000
+
+_DIMENSION_FIELDS = {
+    "jurisdiction": "jurisdiction_id",
+    "indigenous_status": "indigenous_status_id",
+    "sex": "sex_id",
+    "legal_status": "legal_status_id",
+    "age_group": "age_group_id",
+}
+_EXPECTED_CATEGORY_FIELDS = {
+    "jurisdiction": "jurisdictions",
+    "indigenous_status": "indigenousStatuses",
+    "sex": "sexes",
+    "legal_status": "legalStatuses",
+    "age_group": "ageGroups",
+}
+_DIMENSION_HEADER_PATTERNS = {
+    "jurisdiction": re.compile(r"state|territory|jurisdiction|reporting column", re.I),
+    "indigenous_status": re.compile(r"indigenous", re.I),
+    "sex": re.compile(r"\bsex\b", re.I),
+    "legal_status": re.compile(r"legal status", re.I),
+    "age_group": re.compile(r"\bage\b", re.I),
+}
 
 
 class ProductPrototypeError(RuntimeError):
@@ -340,7 +363,7 @@ def _verify_checked_live_recipes(
                 f"Checked live recipe identity changed for {entry['year']}"
             )
         recipe_json = _load_object(recipe_bytes, "checked live recipe")
-        observations, issues, _checks = _validate_execution(
+        observations, issues, _checks, _selection = _validate_execution(
             execution=execution_json,
             recipe=recipe_json,
             contract=contract,
@@ -378,7 +401,7 @@ def _verify_checked_live_recipes(
         recomputed,
         key=lambda row: tuple(str(row[key]) for key in contract["uniqueKey"]),
     )
-    if ordered != committed_rows or _canonical_csv(ordered) != committed_csv:
+    if ordered != committed_rows or _canonical_csv(ordered, contract) != committed_csv:
         raise ProductPrototypeError(
             "Committed canonical dataset differs from checked live recipe replay"
         )
@@ -431,6 +454,7 @@ def run_product_prototype(
     contract_bytes = contract_path.read_bytes()
     contract = _load_object(contract_bytes, "acceptance contract")
     _validate_contract(contract, cohort)
+    worker_limits = _cohort_worker_limits(cohort)
     timestamp = recorded_at or datetime.now(UTC).isoformat()
 
     cohort_descriptor = _store_source(
@@ -473,6 +497,7 @@ def run_product_prototype(
             provider=provider,
             live_attempt=_attempt_for_year(live_attempts, int(entry["year"])),
             dispatch_ordinal=2 * workbook_index + 1,
+            worker_limits=worker_limits,
         )
         report = _interpret_accept_one(
             repository=repository,
@@ -481,6 +506,7 @@ def run_product_prototype(
             prepared=prepared,
             timestamp=timestamp,
             execution_mutator=acceptance_execution_mutator,
+            worker_limits=worker_limits,
         )
         workbook_reports.append(report[0])
         if prepared.provider_attempt is not None:
@@ -509,7 +535,7 @@ def run_product_prototype(
         key=lambda row: tuple(str(row[key]) for key in contract["uniqueKey"]),
     )
     cross_year_issues = _cross_year_issues(canonical_rows, contract)
-    combined_csv = _canonical_csv(canonical_rows)
+    combined_csv = _canonical_csv(canonical_rows, contract)
     combined_json = canonical_json_bytes(canonical_rows) + b"\n"
     collation_report = _build_collation_report(
         workbooks=workbook_reports,
@@ -605,6 +631,7 @@ def _prepare_one(
     provider: AuthorizedPiProvider | None,
     live_attempt: dict[str, Any] | None,
     dispatch_ordinal: int,
+    worker_limits: dict[str, int],
 ) -> _PreparedWorkbook:
     workbook_path = _safe_join(base, str(entry["path"]))
     workbook_bytes = workbook_path.read_bytes()
@@ -657,7 +684,7 @@ def _prepare_one(
         operation="prepare-semantic-map-v13",
         inputs=(GatewayInput("workbook", workbook.content_digest, "workbook.xlsx"),),
         parameters={"sheet": entry["sheet"]},
-        limits={"maxWarnings": 10_000},
+        limits=worker_limits,
     )
     if provider is not None:
         prompt = repository.read_bytes_verified(
@@ -703,10 +730,14 @@ def _interpret_accept_one(
     prepared: _PreparedWorkbook,
     timestamp: str,
     execution_mutator: Any | None = None,
+    worker_limits: dict[str, int] | None = None,
 ) -> tuple[dict[str, Any], _AcceptedWorkbook | None]:
     entry = prepared.entry
     year = int(entry["year"])
     try:
+        effective_limits = worker_limits or {
+            "maxWarnings": DEFAULT_PROTOTYPE_MAX_WARNINGS
+        }
         first = gateway.execute(
             operation="interpret-semantic-map-v13",
             inputs=(
@@ -720,7 +751,7 @@ def _interpret_accept_one(
                 ),
             ),
             parameters={"sheet": entry["sheet"]},
-            limits={"maxWarnings": 10_000},
+            limits=effective_limits,
         )
         second = gateway.execute(
             operation="interpret-semantic-map-v13",
@@ -735,7 +766,7 @@ def _interpret_accept_one(
                 ),
             ),
             parameters={"sheet": entry["sheet"]},
-            limits={"maxWarnings": 10_000},
+            limits=effective_limits,
         )
         deterministic = _execution_identity(first) == _execution_identity(second)
         execution = _output_json(repository, first, "execution.json")
@@ -746,7 +777,7 @@ def _interpret_accept_one(
             )
         recipe_digest = _output_digest(first, "normalized-recipe.json")
         execution_digest = _output_digest(first, "execution.json")
-        observations, issues, checks = _validate_execution(
+        observations, issues, checks, selection = _validate_execution(
             execution=execution,
             recipe=recipe,
             contract=contract,
@@ -763,6 +794,7 @@ def _interpret_accept_one(
             }
         ]
         checks = {"interpretation": False, "deterministicReplay": False}
+        selection = {"rawRowCount": 0, "excludedRowCount": 0}
         first = None
         recipe_digest = None
         execution_digest = None
@@ -826,6 +858,8 @@ def _interpret_accept_one(
         ),
         "decision": decision,
         "decisionId": decision_record.decision_id,
+        "rawObservationCount": selection["rawRowCount"],
+        "excludedObservationCount": selection["excludedRowCount"],
         "observationCount": len(observations),
         "checks": checks,
         "issues": issues,
@@ -849,7 +883,7 @@ def evaluate_execution_for_acceptance(
     extra_issues: list[dict[str, Any]] | None = None,
 ) -> tuple[tuple[dict[str, Any], ...], list[dict[str, Any]], dict[str, bool]]:
     """Public pure acceptance evaluator used by negative contract tests."""
-    rows, issues, checks = _validate_execution(
+    rows, issues, checks, _selection = _validate_execution(
         execution=execution,
         recipe=recipe,
         contract=contract,
@@ -871,7 +905,12 @@ def _validate_execution(
     entry: dict[str, Any],
     recipe_digest: str,
     deterministic: bool,
-) -> tuple[tuple[dict[str, Any], ...], list[dict[str, Any]], dict[str, bool]]:
+) -> tuple[
+    tuple[dict[str, Any], ...],
+    list[dict[str, Any]],
+    dict[str, bool],
+    dict[str, int],
+]:
     issues: list[dict[str, Any]] = []
     checks: dict[str, bool] = {
         "interpretation": True,
@@ -879,23 +918,27 @@ def _validate_execution(
         "nonEmpty": False,
         "rowBounds": False,
         "requiredDimensions": False,
+        "rowSelection": False,
         "codelists": False,
         "uniqueKeys": False,
         "sourceCellUniqueness": False,
         "totalEquations": False,
         "warningAllowlist": False,
+        "coverage": False,
     }
+    selection = {"rawRowCount": 0, "excludedRowCount": 0}
     if not deterministic:
         issues.append(_issue("NONDETERMINISTIC_REPLAY", "Repeated outputs differ."))
     tables = execution.get("tables")
     if not isinstance(tables, list) or len(tables) != 1:
         issues.append(_issue("TABLE_COUNT_INVALID", "Expected exactly one table."))
-        return (), issues, checks
+        return (), issues, checks, selection
     table = tables[0]
     rows = table.get("rows") if isinstance(table, dict) else None
     if not isinstance(rows, list) or not rows:
         issues.append(_issue("EMPTY_OUTPUT", "Execution produced no observations."))
-        return (), issues, checks
+        return (), issues, checks, selection
+    selection["rawRowCount"] = len(rows)
     checks["nonEmpty"] = True
     minimum = int(contract["expected"]["minimumRows"])
     maximum = int(contract["expected"]["maximumRows"])
@@ -904,7 +947,10 @@ def _validate_execution(
         issues.append(_issue("ROW_COUNT_OUT_OF_BOUNDS", f"Observed {len(rows)} rows."))
 
     names = _resolve_output_names(recipe, contract)
-    checks["requiredDimensions"] = len(names) == 5
+    checks["requiredDimensions"] = set(names) == {
+        "measure",
+        *contract["requiredDimensions"],
+    }
     if not checks["requiredDimensions"]:
         issues.append(
             _issue(
@@ -913,7 +959,7 @@ def _validate_execution(
                 "dimensions.",
             )
         )
-        return (), issues, checks
+        return (), issues, checks, selection
 
     canonical: list[dict[str, Any]] = []
     keys: set[tuple[str, ...]] = set()
@@ -921,6 +967,10 @@ def _validate_execution(
     codelists_ok = True
     keys_ok = True
     source_ok = True
+    excluded_codes = {
+        dimension: set(codes)
+        for dimension, codes in contract.get("excludedDimensionCodes", {}).items()
+    }
     for row in rows:
         if not isinstance(row, dict):
             codelists_ok = False
@@ -946,15 +996,17 @@ def _validate_execution(
                 code = "UNKNOWN"
             mapped[dimension] = code
         value = row.get(names["measure"])
+        if any(
+            mapped.get(dimension) in codes
+            for dimension, codes in excluded_codes.items()
+        ):
+            selection["excludedRowCount"] += 1
+            continue
         if isinstance(value, bool) or not isinstance(value, int | float) or value < 0:
             codelists_ok = False
-            issues.append(_issue("VALUE_INVALID", f"Invalid count value {value!r}."))
+            issues.append(_issue("VALUE_INVALID", f"Invalid measure value {value!r}."))
         observation = {
             "reference_date": entry["referenceDate"],
-            "jurisdiction_id": mapped["jurisdiction"],
-            "indigenous_status_id": mapped["indigenous_status"],
-            "sex_id": mapped["sex"],
-            "legal_status_id": mapped["legal_status"],
             "measure_id": contract["measure"]["id"],
             "unit_id": contract["measure"]["unitId"],
             "value": value,
@@ -963,17 +1015,29 @@ def _validate_execution(
             "source_sheet": entry["sheet"],
             "source_cell": address,
             "recipe_digest": recipe_digest,
-            "raw_jurisdiction": row.get(names["jurisdiction"]),
-            "raw_indigenous_status": row.get(names["indigenous_status"]),
-            "raw_sex": row.get(names["sex"]),
-            "raw_legal_status": row.get(names["legal_status"]),
         }
+        for dimension in contract["requiredDimensions"]:
+            observation[_DIMENSION_FIELDS[dimension]] = mapped[dimension]
+            observation[f"raw_{dimension}"] = row.get(names[dimension])
         key = tuple(str(observation[field]) for field in contract["uniqueKey"])
         if key in keys:
             keys_ok = False
             issues.append(_issue("DUPLICATE_OBSERVATION_KEY", repr(key)))
         keys.add(key)
         canonical.append(observation)
+    expected = contract["expected"]
+    minimum_excluded = int(expected.get("minimumExcludedRows", 0))
+    maximum_excluded = int(expected.get("maximumExcludedRows", 0))
+    checks["rowSelection"] = (
+        minimum_excluded <= selection["excludedRowCount"] <= maximum_excluded
+    )
+    if not checks["rowSelection"]:
+        issues.append(
+            _issue(
+                "ROW_SELECTION_OUT_OF_BOUNDS",
+                f"Excluded {selection['excludedRowCount']} auxiliary rows.",
+            )
+        )
     coverage_issues = _validate_expected_coverage(canonical, contract)
     checks["coverage"] = not coverage_issues
     issues.extend(coverage_issues)
@@ -998,7 +1062,7 @@ def _validate_execution(
     )
     checks["warningAllowlist"] = not warning_issues
     issues.extend(warning_issues)
-    return tuple(canonical), _deduplicate_issues(issues), checks
+    return tuple(canonical), _deduplicate_issues(issues), checks, selection
 
 
 def _resolve_output_names(
@@ -1011,19 +1075,14 @@ def _resolve_output_names(
     except (KeyError, IndexError, TypeError):
         return {}
     resolved: dict[str, str] = {"measure": value}
-    patterns = {
-        "jurisdiction": re.compile(r"state|territory|jurisdiction", re.I),
-        "indigenous_status": re.compile(r"indigenous", re.I),
-        "sex": re.compile(r"\bsex\b", re.I),
-        "legal_status": re.compile(r"legal status", re.I),
-    }
-    for dimension, pattern in patterns.items():
+    for dimension in contract["requiredDimensions"]:
+        pattern = _DIMENSION_HEADER_PATTERNS.get(dimension)
+        if pattern is None:
+            return {}
         matches = [name for name in headers if pattern.search(name)]
         if len(matches) != 1:
             return {}
         resolved[dimension] = matches[0]
-    if set(contract["requiredDimensions"]) - set(resolved):
-        return {}
     return resolved
 
 
@@ -1040,10 +1099,10 @@ def _validate_expected_coverage(
 ) -> list[dict[str, Any]]:
     expected = contract["expected"]
     required = {
-        "jurisdiction_id": set(expected["jurisdictions"]),
-        "indigenous_status_id": set(expected["indigenousStatuses"]),
-        "sex_id": set(expected["sexes"]),
-        "legal_status_id": set(expected["legalStatuses"]),
+        _DIMENSION_FIELDS[dimension]: set(
+            expected[_EXPECTED_CATEGORY_FIELDS[dimension]]
+        )
+        for dimension in contract["requiredDimensions"]
     }
     issues: list[dict[str, Any]] = []
     for field, wanted in required.items():
@@ -1119,12 +1178,10 @@ def _validate_totals(
 ) -> list[dict[str, Any]]:
     issues: list[dict[str, Any]] = []
     field_by_dimension = {
-        "jurisdiction": "jurisdiction_id",
-        "indigenous_status": "indigenous_status_id",
-        "sex": "sex_id",
-        "legal_status": "legal_status_id",
+        dimension: _DIMENSION_FIELDS[dimension]
+        for dimension in contract["requiredDimensions"]
     }
-    dimensions = tuple(field_by_dimension)
+    dimensions = tuple(contract["requiredDimensions"])
     for equation in contract["totalEquations"]:
         dimension = equation["dimension"]
         field = field_by_dimension[dimension]
@@ -1172,6 +1229,8 @@ def _build_collation_report(
         {
             "year": item["year"],
             "workbookDigest": item["workbookDigest"],
+            "rawRowCount": item.get("rawObservationCount", item["observationCount"]),
+            "excludedRowCount": item.get("excludedObservationCount", 0),
             "rowCount": item["observationCount"],
             "decisionId": item["decisionId"],
         }
@@ -1189,6 +1248,7 @@ def _build_collation_report(
         "schemaVersion": "tidy.product-prototype-collation/v1",
         "includedWorkbooks": included,
         "excludedExceptions": excluded,
+        "excludedDimensionCodes": contract.get("excludedDimensionCodes", {}),
         "rowCount": len(rows),
         "duplicateCanonicalKeys": [
             item
@@ -1214,6 +1274,7 @@ def _build_collation_report(
                 "TABLE_COUNT_INVALID",
                 "REQUIRED_DIMENSION_MISSING",
                 "ROW_COUNT_OUT_OF_BOUNDS",
+                "ROW_SELECTION_OUT_OF_BOUNDS",
             }
         ),
         "codeListFailures": sorted(
@@ -1241,13 +1302,11 @@ def _cross_year_issues(
     return _deduplicate_issues(issues)
 
 
-def _canonical_csv(rows: list[dict[str, Any]]) -> bytes:
+def _canonical_csv(rows: list[dict[str, Any]], contract: dict[str, Any]) -> bytes:
+    dimensions = list(contract["requiredDimensions"])
     fields = [
         "reference_date",
-        "jurisdiction_id",
-        "indigenous_status_id",
-        "sex_id",
-        "legal_status_id",
+        *[_DIMENSION_FIELDS[dimension] for dimension in dimensions],
         "measure_id",
         "unit_id",
         "value",
@@ -1264,10 +1323,7 @@ def _canonical_csv(rows: list[dict[str, Any]]) -> bytes:
         "prompt_package_digest",
         "generation_model",
         "generation_attempt_id",
-        "raw_jurisdiction",
-        "raw_indigenous_status",
-        "raw_sex",
-        "raw_legal_status",
+        *[f"raw_{dimension}" for dimension in dimensions],
     ]
     output = io.StringIO(newline="")
     writer = csv.DictWriter(output, fieldnames=fields, lineterminator="\n")
@@ -1369,8 +1425,12 @@ def _validate_cohort(value: dict[str, Any]) -> None:
         "acceptanceContract",
         "workbooks",
     }
-    if set(value) != required or value.get("schemaVersion") != COHORT_SCHEMA:
+    if (
+        not required <= set(value) <= required | {"workerLimits"}
+        or value.get("schemaVersion") != COHORT_SCHEMA
+    ):
         raise ProductPrototypeError("Cohort manifest shape/version is invalid")
+    _cohort_worker_limits(value)
     workbooks = value.get("workbooks")
     if not isinstance(workbooks, list) or not 2 <= len(workbooks) <= 12:
         raise ProductPrototypeError("Cohort must bind between two and twelve workbooks")
@@ -1440,6 +1500,20 @@ def _validate_cohort(value: dict[str, Any]) -> None:
             raise ProductPrototypeError("Replay response must be non-authoritative")
 
 
+def _cohort_worker_limits(cohort: dict[str, Any]) -> dict[str, int]:
+    raw = cohort.get("workerLimits", {})
+    if not isinstance(raw, dict) or set(raw) - {"maxWarnings"}:
+        raise ProductPrototypeError("Cohort worker limits are invalid")
+    maximum_warnings = raw.get("maxWarnings", DEFAULT_PROTOTYPE_MAX_WARNINGS)
+    if (
+        isinstance(maximum_warnings, bool)
+        or not isinstance(maximum_warnings, int)
+        or not 1 <= maximum_warnings <= 20_000
+    ):
+        raise ProductPrototypeError("Cohort maxWarnings is outside protocol bounds")
+    return {"maxWarnings": maximum_warnings}
+
+
 def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     required = {
         "schemaVersion",
@@ -1455,42 +1529,108 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "automaticAcceptance",
         "trainingEligibility",
     }
-    dimensions = ["jurisdiction", "indigenous_status", "sex", "legal_status"]
+    optional = {"excludedDimensionCodes"}
+    dimensions = value.get("requiredDimensions")
     expected = value.get("expected")
     aliases = value.get("aliases")
     equations = value.get("totalEquations")
+    exclusions = value.get("excludedDimensionCodes", {})
+    measure = value.get("measure")
     if (
-        set(value) != required
+        not required <= set(value) <= required | optional
         or value.get("schemaVersion") != ACCEPTANCE_SCHEMA
         or value.get("tableFamilyId") != cohort.get("tableFamilyId")
         or value.get("automaticAcceptance") is not True
         or value.get("trainingEligibility") is not False
-        or value.get("requiredDimensions") != dimensions
-        or not isinstance(value.get("uniqueKey"), list)
+        or not isinstance(dimensions, list)
+        or not dimensions
+        or len(dimensions) != len(set(dimensions))
+        or any(item not in _DIMENSION_FIELDS for item in dimensions)
+        or value.get("uniqueKey")
+        != [
+            "reference_date",
+            *[_DIMENSION_FIELDS[item] for item in dimensions],
+            "measure_id",
+        ]
         or not isinstance(expected, dict)
         or not isinstance(aliases, dict)
         or set(aliases) != set(dimensions)
-        or not all(isinstance(aliases[item], dict) for item in dimensions)
+        or not all(
+            isinstance(aliases[item], dict)
+            and aliases[item]
+            and all(
+                isinstance(raw, str) and isinstance(code, str)
+                for raw, code in aliases[item].items()
+            )
+            for item in dimensions
+        )
+        or not isinstance(exclusions, dict)
+        or not set(exclusions) <= set(dimensions)
+        or any(
+            not isinstance(codes, list)
+            or not codes
+            or any(not isinstance(code, str) for code in codes)
+            or not set(codes) <= set(aliases[dimension].values())
+            for dimension, codes in exclusions.items()
+        )
+        or not isinstance(measure, dict)
+        or measure.get("numeric") is not True
+        or measure.get("minimum") != 0
+        or not isinstance(measure.get("id"), str)
+        or not isinstance(measure.get("unitId"), str)
         or not isinstance(equations, list)
         or not equations
         or any(
             not isinstance(item, dict)
             or item.get("dimension") not in dimensions
             or item.get("check") != "components-must-not-exceed-total-beyond-rounding"
+            or not isinstance(item.get("totalCode"), str)
+            or not isinstance(item.get("componentCodes"), list)
+            or not item["componentCodes"]
+            or any(not isinstance(code, str) for code in item["componentCodes"])
+            or isinstance(item.get("componentExcessTolerance"), bool)
             or not isinstance(item.get("componentExcessTolerance"), int | float)
+            or isinstance(item.get("maximumUnmodelledResidual"), bool)
             or not isinstance(item.get("maximumUnmodelledResidual"), int | float)
             for item in equations
         )
-        or set(expected)
-        != {
-            "minimumRows",
-            "maximumRows",
-            "sourceColumns",
-            "jurisdictions",
-            "indigenousStatuses",
-            "sexes",
-            "legalStatuses",
-        }
+        or not isinstance(value.get("allowedExecutionWarnings"), list)
+    ):
+        raise ProductPrototypeError("Acceptance contract is incompatible")
+    expected_keys = {
+        "minimumRows",
+        "maximumRows",
+        "sourceColumns",
+        *[_EXPECTED_CATEGORY_FIELDS[item] for item in dimensions],
+    }
+    if exclusions:
+        expected_keys |= {"minimumExcludedRows", "maximumExcludedRows"}
+    if (
+        set(expected) != expected_keys
+        or isinstance(expected.get("minimumRows"), bool)
+        or not isinstance(expected.get("minimumRows"), int)
+        or isinstance(expected.get("maximumRows"), bool)
+        or not isinstance(expected.get("maximumRows"), int)
+        or not 0 < expected["minimumRows"] <= expected["maximumRows"]
+        or not isinstance(expected.get("sourceColumns"), dict)
+        or set(expected["sourceColumns"]) != {"minimum", "maximum"}
+        or any(
+            not isinstance(expected[_EXPECTED_CATEGORY_FIELDS[item]], list)
+            or not expected[_EXPECTED_CATEGORY_FIELDS[item]]
+            or len(expected[_EXPECTED_CATEGORY_FIELDS[item]])
+            != len(set(expected[_EXPECTED_CATEGORY_FIELDS[item]]))
+            for item in dimensions
+        )
+        or (
+            exclusions
+            and (
+                not isinstance(expected.get("minimumExcludedRows"), int)
+                or not isinstance(expected.get("maximumExcludedRows"), int)
+                or not 0
+                <= expected["minimumExcludedRows"]
+                <= expected["maximumExcludedRows"]
+            )
+        )
     ):
         raise ProductPrototypeError("Acceptance contract is incompatible")
 

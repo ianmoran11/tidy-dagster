@@ -319,6 +319,112 @@ def product_prototype_replay_check(
 
 
 @asset(
+    name="product_prototype_age_replay",
+    description=(
+        "Provider-free replay of the five-workbook 2021-2025 Table 21 cohort, "
+        "producing canonical prisoner counts by jurisdiction, Indigenous status, "
+        "sex, and age group."
+    ),
+    group_name="product_prototype",
+    code_version="tidy.product-prototype-age-run/v1",
+)
+def product_prototype_age_replay(
+    runtime: TidyRuntimeResource,
+) -> MaterializeResult:
+    output_root = (
+        runtime.project() / ".product-prototype" / "dagster-table-21-five-year-replay"
+    )
+    result = run_product_prototype(
+        repository=runtime.repository(),
+        project_root=runtime.project(),
+        cohort_path=(
+            runtime.project()
+            / "fixtures"
+            / "product-prototype"
+            / "prisoners-table-21-2021-2025.json"
+        ),
+        output_root=output_root,
+        mode="replay",
+    )
+    report = result.report
+    return MaterializeResult(
+        metadata={
+            "run_digest": report["runDigest"],
+            "mode": report["mode"],
+            "provider_calls": report["providerCalls"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "raw_observations": sum(
+                item["rawObservationCount"] for item in report["workbooks"]
+            ),
+            "excluded_auxiliary_observations": sum(
+                item["excludedObservationCount"] for item in report["workbooks"]
+            ),
+            "canonical_observations": report["canonicalObservationCount"],
+            "workbooks": report["workbooks"],
+            "collation_report_path": str(output_root / "collation-report.json"),
+            "artifact_uri": f"artifact://{result.run.content_digest}",
+        },
+        data_version=DataVersion(result.run.content_digest),
+    )
+
+
+@asset_check(asset=product_prototype_age_replay, name="age_acceptance_and_collation")
+def product_prototype_age_replay_check(
+    runtime: TidyRuntimeResource,
+) -> AssetCheckResult:
+    output_root = (
+        runtime.project() / ".product-prototype" / "dagster-table-21-five-year-replay"
+    )
+    try:
+        report = json.loads((output_root / "run.json").read_text())
+        collation = json.loads((output_root / "collation-report.json").read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        return AssetCheckResult(
+            passed=False,
+            metadata={"error": f"Table 21 replay evidence is unavailable: {error}"},
+        )
+    clean_collation_fields = (
+        "excludedExceptions",
+        "duplicateCanonicalKeys",
+        "conflictingValues",
+        "unmappedLabels",
+        "missingExpectedCategories",
+        "schemaFailures",
+        "codeListFailures",
+    )
+    passed = (
+        report["acceptedWorkbookCount"] == 5
+        and report["exceptionWorkbookCount"] == 0
+        and report["canonicalObservationCount"] == 5265
+        and report["crossYearIssues"] == []
+        and report["providerCalls"] == 0
+        and [item["year"] for item in report["workbooks"]] == list(range(2021, 2026))
+        and sum(item["rawObservationCount"] for item in report["workbooks"]) == 6732
+        and sum(item["excludedObservationCount"] for item in report["workbooks"])
+        == 1467
+        and all(
+            item["decision"] == "prototype_auto_accepted"
+            and item["observationCount"] == 1053
+            and all(item["checks"].values())
+            for item in report["workbooks"]
+        )
+        and collation["rowCount"] == 5265
+        and all(collation[field] == [] for field in clean_collation_fields)
+    )
+    return AssetCheckResult(
+        passed=passed,
+        metadata={
+            "run_digest": report["runDigest"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "canonical_observations": report["canonicalObservationCount"],
+            "provider_calls": report["providerCalls"],
+        },
+    )
+
+
+@asset(
     name="source_catalog_snapshot",
     description=(
         "Unpartitioned observation of the identity-pinned active fixture catalog."
@@ -532,6 +638,22 @@ product_prototype_replay_job = define_asset_job(
 )
 
 
+product_prototype_age_replay_job = define_asset_job(
+    "product_prototype_age_replay_job",
+    selection=AssetSelection.assets(product_prototype_age_replay),
+    description=(
+        "Provider-free Table 21 replay and canonical prisoner-count collation by "
+        "jurisdiction, Indigenous status, sex, and age group for 2021-2025."
+    ),
+    tags={
+        "provider_calls": "0",
+        "mode": "replay",
+        "years": "2021-2025",
+        "table": "21",
+    },
+)
+
+
 project_work_unit_job = define_asset_job(
     "project_provider_free_work_unit",
     selection=AssetSelection.assets(
@@ -604,6 +726,7 @@ def build_definitions(
             product_prototype_stage_projection,
             product_prototype_live_evidence,
             product_prototype_replay,
+            product_prototype_age_replay,
             source_catalog_snapshot,
             verified_fixture_inputs_index,
             recipe_execution_evidence_index,
@@ -613,6 +736,7 @@ def build_definitions(
             product_prototype_stage_projection_check,
             product_prototype_live_evidence_check,
             product_prototype_replay_check,
+            product_prototype_age_replay_check,
             verified_fixture_inputs_check,
             recipe_execution_check,
             active_projection_check,
@@ -621,6 +745,7 @@ def build_definitions(
             product_prototype_stage_projection_job,
             product_prototype_live_evidence_job,
             product_prototype_replay_job,
+            product_prototype_age_replay_job,
             project_work_unit_job,
         ],
         sensors=[provider_free_work_unit_sensor],
@@ -643,6 +768,8 @@ def build_definitions(
             "prompt_output_exposed": False,
             "product_prototype_replay_supported": True,
             "product_prototype_replay_scope": "prisoners-table-30-2021-2025",
+            "product_prototype_age_replay_supported": True,
+            "product_prototype_age_replay_scope": "prisoners-table-21-2021-2025",
             "product_prototype_live_evidence_supported": True,
             "product_prototype_stage_projection_supported": True,
             "product_prototype_live_generation_authorized": False,

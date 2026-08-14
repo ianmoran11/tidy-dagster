@@ -26,6 +26,9 @@ COHORT = (
 EXPANDED_COHORT = (
     PROJECT / "fixtures" / "product-prototype" / "prisoners-table-30-2021-2025.json"
 )
+AGE_COHORT = (
+    PROJECT / "fixtures" / "product-prototype" / "prisoners-table-21-2021-2025.json"
+)
 CONTRACT = json.loads(
     (
         PROJECT
@@ -194,6 +197,75 @@ def test_replay_extends_table_30_to_five_years(tmp_path: Path) -> None:
     assert collation["excludedExceptions"] == []
 
 
+def test_replay_tidies_table_21_age_counts_for_five_years(tmp_path: Path) -> None:
+    repository = LocalArtifactRepository(tmp_path / "repository")
+    result = run_product_prototype(
+        repository=repository,
+        project_root=PROJECT,
+        cohort_path=AGE_COHORT,
+        output_root=tmp_path / "output",
+        mode="replay",
+        gateway=fake_gateway(repository),
+        recorded_at="2026-08-14T06:00:00+00:00",
+    )
+    report = result.report
+    assert report["providerCalls"] == 0
+    assert report["acceptedWorkbookCount"] == 5
+    assert report["exceptionWorkbookCount"] == 0
+    assert report["canonicalObservationCount"] == 5265
+    assert report["crossYearIssues"] == []
+    assert [item["rawObservationCount"] for item in report["workbooks"]] == [
+        1332,
+        1350,
+        1350,
+        1350,
+        1350,
+    ]
+    assert [item["excludedObservationCount"] for item in report["workbooks"]] == [
+        279,
+        297,
+        297,
+        297,
+        297,
+    ]
+    assert all(item["observationCount"] == 1053 for item in report["workbooks"])
+    assert all(
+        item["decision"] == "prototype_auto_accepted" for item in report["workbooks"]
+    )
+    assert all(all(item["checks"].values()) for item in report["workbooks"])
+    rows = json.loads((tmp_path / "output" / "canonical-observations.json").read_text())
+    assert len(rows) == 5265
+    assert {row["age_group_id"] for row in rows} == {
+        "AGE_18_OR_YOUNGER",
+        "AGE_19",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS",
+        "TOTAL",
+    }
+    assert all("legal_status_id" not in row for row in rows)
+    assert {row["generation_model"] for row in rows} == {"openai-codex/gpt-5.6-sol"}
+    assert all(
+        row["raw_jurisdiction"] not in {"Imprisonment rate", "Imprisonment rate (b)"}
+        and row["raw_age_group"] not in {"Mean age (years)", "Median age (years)"}
+        for row in rows
+    )
+    collation = json.loads((tmp_path / "output" / "collation-report.json").read_text())
+    assert collation["rowCount"] == 5265
+    assert collation["excludedDimensionCodes"] == {
+        "jurisdiction": ["IMPRISONMENT_RATE"],
+        "age_group": ["MEAN_AGE", "MEDIAN_AGE"],
+    }
+    assert collation["excludedExceptions"] == []
+
+
 def test_cohort_requires_increasing_years_and_matching_call_ceiling() -> None:
     cohort = json.loads(EXPANDED_COHORT.read_text())
     _validate_cohort(cohort)
@@ -205,6 +277,11 @@ def test_cohort_requires_increasing_years_and_matching_call_ceiling() -> None:
     wrong_ceiling["generation"]["maximumCalls"] = 6
     with pytest.raises(ProductPrototypeError, match="pinned Luna policy"):
         _validate_cohort(wrong_ceiling)
+    age_cohort = json.loads(AGE_COHORT.read_text())
+    _validate_cohort(age_cohort)
+    age_cohort["workerLimits"]["maxWarnings"] = 20_001
+    with pytest.raises(ProductPrototypeError, match="outside protocol bounds"):
+        _validate_cohort(age_cohort)
 
 
 def test_five_year_evidence_manifest_binds_committed_outputs() -> None:
@@ -231,6 +308,35 @@ def test_five_year_evidence_manifest_binds_committed_outputs() -> None:
     assert run["exceptionWorkbookCount"] == 0
     assert run["canonicalObservationCount"] == 1215
     assert run["crossYearIssues"] == []
+    assert json.loads((root / "exceptions.json").read_text()) == []
+
+
+def test_table_21_evidence_manifest_binds_committed_outputs() -> None:
+    cohort = json.loads(AGE_COHORT.read_text())
+    cohort_schema = json.loads(
+        (
+            PROJECT / "contracts" / "product-prototype" / "v1" / "cohort.schema.json"
+        ).read_text()
+    )
+    jsonschema.Draft202012Validator(
+        cohort_schema,
+        format_checker=jsonschema.FormatChecker(),
+    ).validate(cohort)
+    root = PROJECT / "fixtures" / "product-prototype" / "table-21-five-year-evidence"
+    manifest = json.loads((root / "manifest.json").read_text())
+    assert manifest["cohortDigest"] == sha256_digest(AGE_COHORT.read_bytes())
+    for item in manifest["files"]:
+        content = (root / item["path"]).read_bytes()
+        assert len(content) == item["byteLength"]
+        assert sha256_digest(content) == item["contentDigest"]
+    run = json.loads((root / "run.json").read_text())
+    assert run["runDigest"] == manifest["runDigest"]
+    assert run["acceptedWorkbookCount"] == 5
+    assert run["exceptionWorkbookCount"] == 0
+    assert run["canonicalObservationCount"] == 5265
+    assert run["crossYearIssues"] == []
+    assert sum(item["rawObservationCount"] for item in run["workbooks"]) == 6732
+    assert sum(item["excludedObservationCount"] for item in run["workbooks"]) == 1467
     assert json.loads((root / "exceptions.json").read_text()) == []
 
 

@@ -15,10 +15,23 @@ scripts/tidy-prototype run \
   --output .product-prototype/five-year-replay
 ```
 
+A second provider-free cohort processes Table 21 for the same five years,
+producing prisoner counts by jurisdiction, Indigenous status, sex, and age
+group. It excludes the separately measured imprisonment-rate column and the
+mean/median age summary rows under an explicit contract, leaving 5,265 accepted
+count observations:
+
+```sh
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-21-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-21-five-year-replay
+```
+
 The live model is pinned to `openai-codex/gpt-5.6-luna` with high reasoning.
 The checked live campaign made three calls for USD 0.0197296, compiled and
 executed all three fresh candidates, automatically accepted 2023–2025, and
-collated 729 canonical observations. The provider-free expansion reuses
+collated 729 canonical observations. The Table 30 provider-free expansion reuses
 non-authoritative historical semantic-map responses for 2021–2022 and the
 checked Luna responses for 2023–2025; the independent acceptance contract, not
 the saved responses, accepts all five workbooks into 1,215 observations. Safe

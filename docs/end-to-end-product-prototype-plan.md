@@ -530,3 +530,34 @@ The checked replay at `fixtures/product-prototype/five-year-evidence/` records:
 The standalone CLI and `product_prototype_replay` Dagster asset now use the
 five-year cohort. The original checked live-evidence and stage-projection assets
 remain unchanged so historical live claims are not rewritten.
+
+## 13. Five-year Table 21 age expansion
+
+The next provider-free product slice processes Table 21 for 2021–2025:
+prisoner counts by jurisdiction, Indigenous status, sex, and age group. The
+cohort is `fixtures/product-prototype/prisoners-table-21-2021-2025.json`; all
+five replay responses are existing Sol/high artifacts and remain
+non-authoritative.
+
+Table 21 contains three kinds of values in one grid. The independent
+`acceptance/prisoners-table-21-v1.json` contract deliberately accepts only
+prisoner counts. It maps and checks every dimension, then excludes the
+imprisonment-rate column and the mean/median age summary rows. Those exclusions
+are explicit in the cohort evidence rather than silently discarded.
+
+The checked replay at
+`fixtures/product-prototype/table-21-five-year-evidence/` records:
+
+- 6,732 deterministic raw values;
+- 1,467 explicitly excluded auxiliary rate or age-summary values;
+- 5,265 canonical prisoner counts (1,053 per year);
+- five automatically accepted workbooks, zero exceptions, and zero cross-year
+  issues; and
+- run digest
+  `sha256:231de80ca4925e6784d9bf81c2bbf8615c8ce41aac52237211bedce31140c4f6`.
+
+The cohort raises only the bounded warning-descriptor ceiling from 10,000 to
+20,000 because the conservative pre-execution upper bound for this larger table
+exceeds the original limit; actual executions emitted no warnings. The
+standalone CLI and the replaceable `product_prototype_age_replay` Dagster asset
+both expose this run without making provider calls.

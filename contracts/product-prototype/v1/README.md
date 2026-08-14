@@ -6,6 +6,9 @@ acceptance contract, the V13 prompt contract, and
 `openai-codex/gpt-5.6-luna` with high reasoning and hard call/cost ceilings.
 The original live milestone remains the three-workbook 2023-2025 cohort; the
 provider-free expansion adds 2021 and 2022 to form a five-workbook replay.
+An optional cohort-level `workerLimits.maxWarnings` supports larger but still
+bounded tables; Table 21 uses 20,000 because its conservative warning upper
+bound exceeds the original 10,000 limit.
 
 Replay responses are non-authoritative integration fixtures. They may exercise
 the provider-free interpretation path, but they do not determine acceptance and
@@ -25,4 +28,16 @@ scripts/tidy-prototype run \
   --cohort fixtures/product-prototype/prisoners-table-30-2021-2025.json \
   --mode replay \
   --output .product-prototype/five-year-replay
+```
+
+The Table 21 age cohort uses
+`acceptance/prisoners-table-21-v1.json`. Its explicit selection policy excludes
+imprisonment-rate and mean/median-age auxiliary cells before validating 5,265
+canonical prisoner counts:
+
+```sh
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-21-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-21-five-year-replay
 ```

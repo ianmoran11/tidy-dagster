@@ -118,7 +118,7 @@ _PROTOCOL_MAX_LIMITS: dict[str, int] = {
     "maxInputBytes": 50_000_000,
     "maxOutputBytes": 50_000_000,
     "maxOutputFiles": 10_000,
-    "maxWarnings": 10_000,
+    "maxWarnings": 20_000,
     "maxWorkbookCompressedBytes": 25_000_000,
     "maxZipEntries": 10_000,
     "maxZipEntryUncompressedBytes": 50_000_000,
@@ -936,7 +936,7 @@ def _parse_response(
                 "TOOL_INCOMPATIBLE",
                 "Worker declared too many outputs",
             )
-        if len(value["warnings"]) > min(max_warnings, 10_000):
+        if len(value["warnings"]) > min(max_warnings, 20_000):
             raise WorkerGatewayError(
                 "WARNING_LIMIT_EXCEEDED",
                 "TOOL_INCOMPATIBLE",

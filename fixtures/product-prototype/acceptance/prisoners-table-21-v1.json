@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-australia-table-21-v1",
+  "tableFamilyId": "prisoners-by-jurisdiction-indigenous-status-sex-age",
+  "measure": {
+    "id": "prisoner-count",
+    "unitId": "person",
+    "numeric": true,
+    "minimum": 0
+  },
+  "requiredDimensions": [
+    "jurisdiction",
+    "indigenous_status",
+    "sex",
+    "age_group"
+  ],
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "indigenous_status_id",
+    "sex_id",
+    "age_group_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1300,
+    "maximumRows": 1400,
+    "minimumExcludedRows": 270,
+    "maximumExcludedRows": 310,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "NSW",
+      "VIC",
+      "QLD",
+      "SA",
+      "WA",
+      "TAS",
+      "NT",
+      "ACT",
+      "AUS"
+    ],
+    "indigenousStatuses": ["INDIGENOUS", "NON_INDIGENOUS", "TOTAL"],
+    "sexes": ["MALE", "FEMALE", "PERSONS"],
+    "ageGroups": [
+      "AGE_18_OR_YOUNGER",
+      "AGE_19",
+      "AGE_20_24",
+      "AGE_25_29",
+      "AGE_30_34",
+      "AGE_35_39",
+      "AGE_40_44",
+      "AGE_45_49",
+      "AGE_50_54",
+      "AGE_55_59",
+      "AGE_60_64",
+      "AGE_65_PLUS",
+      "TOTAL"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "NSW": "NSW",
+      "New South Wales": "NSW",
+      "Vic": "VIC",
+      "Vic.": "VIC",
+      "Victoria": "VIC",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "Queensland": "QLD",
+      "SA": "SA",
+      "South Australia": "SA",
+      "WA": "WA",
+      "Western Australia": "WA",
+      "Tas": "TAS",
+      "Tas.": "TAS",
+      "Tasmania": "TAS",
+      "NT": "NT",
+      "Northern Territory": "NT",
+      "ACT": "ACT",
+      "Australian Capital Territory": "ACT",
+      "Aust.": "AUS",
+      "Australia": "AUS",
+      "Imprisonment rate": "IMPRISONMENT_RATE",
+      "Imprisonment rate (b)": "IMPRISONMENT_RATE"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "INDIGENOUS",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "NON-INDIGENOUS": "NON_INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "TOTAL": "TOTAL",
+      "Total": "TOTAL",
+      "Total (e)": "TOTAL"
+    },
+    "sex": {
+      "MALES": "MALE",
+      "Males": "MALE",
+      "FEMALES": "FEMALE",
+      "Females": "FEMALE",
+      "PERSONS": "PERSONS",
+      "Persons": "PERSONS",
+      "Persons (d)": "PERSONS"
+    },
+    "age_group": {
+      "18 years": "AGE_18_OR_YOUNGER",
+      "18 years (c)": "AGE_18_OR_YOUNGER",
+      "19 years": "AGE_19",
+      "20–24 years": "AGE_20_24",
+      "25–29 years": "AGE_25_29",
+      "30–34 years": "AGE_30_34",
+      "35–39 years": "AGE_35_39",
+      "40–44 years": "AGE_40_44",
+      "45–49 years": "AGE_45_49",
+      "50–54 years": "AGE_50_54",
+      "55–59 years": "AGE_55_59",
+      "60–64 years": "AGE_60_64",
+      "65 years and over": "AGE_65_PLUS",
+      "Total": "TOTAL",
+      "TOTAL": "TOTAL",
+      "Mean age (years)": "MEAN_AGE",
+      "Median age (years)": "MEDIAN_AGE"
+    }
+  },
+  "excludedDimensionCodes": {
+    "jurisdiction": ["IMPRISONMENT_RATE"],
+    "age_group": ["MEAN_AGE", "MEDIAN_AGE"]
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30
+    },
+    {
+      "dimension": "sex",
+      "totalCode": "PERSONS",
+      "componentCodes": ["MALE", "FEMALE"],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30
+    },
+    {
+      "dimension": "indigenous_status",
+      "totalCode": "TOTAL",
+      "componentCodes": ["INDIGENOUS", "NON_INDIGENOUS"],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 10,
+      "maximumUnmodelledResidual": 300
+    },
+    {
+      "dimension": "age_group",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "AGE_18_OR_YOUNGER",
+        "AGE_19",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

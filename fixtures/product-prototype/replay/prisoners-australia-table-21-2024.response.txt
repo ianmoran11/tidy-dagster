@@ -1,0 +1,48 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoners by Indigenous status, sex, age and state or territory, 2024",
+    "values": {
+      "name": "prisoner count, age statistic, or imprisonment rate",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state, territory, or national measure",
+        "memberRegions": [
+          "region-012"
+        ],
+        "direction": "N",
+        "captionHints": []
+      },
+      {
+        "name": "age group or summary statistic",
+        "memberRegions": [
+          "region-011"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-032"
+        ]
+      },
+      {
+        "name": "Indigenous status",
+        "memberRegions": [
+          "region-013"
+        ],
+        "direction": "WNW",
+        "captionHints": []
+      },
+      {
+        "name": "sex",
+        "memberRegions": [
+          "region-018"
+        ],
+        "direction": "WNW",
+        "captionHints": []
+      }
+    ]
+  }
+}

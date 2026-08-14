@@ -67,7 +67,7 @@ const workerResultSchema = z.union([
       requestId: z.string().min(1).max(MAX_REQUEST_ID_LENGTH),
       ok: z.literal(true),
       outputs: z.array(outputDescriptorSchema).max(10_000),
-      warnings: z.array(warningDescriptorSchema).max(10_000),
+      warnings: z.array(warningDescriptorSchema).max(20_000),
     })
     .strict(),
   z

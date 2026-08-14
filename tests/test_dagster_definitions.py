@@ -16,6 +16,8 @@ from tidy_orchestrator.dagster_defs import (
     TidyRuntimeResource,
     active_work_unit_projection,
     build_definitions,
+    product_prototype_age_replay,
+    product_prototype_age_replay_check,
     product_prototype_live_evidence,
     product_prototype_live_evidence_check,
     product_prototype_replay,
@@ -53,6 +55,12 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
     Definitions.validate_loadable(definitions)
     assert product_prototype_replay.key.to_user_string() == "product_prototype_replay"
+    assert product_prototype_age_replay.key.to_user_string() == (
+        "product_prototype_age_replay"
+    )
+    assert product_prototype_age_replay_check.check_key.name == (
+        "age_acceptance_and_collation"
+    )
     assert product_prototype_stage_projection.key.to_user_string() == (
         "product_prototype_stage_projection"
     )
@@ -71,6 +79,10 @@ def test_definitions_include_provider_free_product_prototype_projection(
     assert definitions.metadata["product_prototype_replay_supported"].value is True
     assert definitions.metadata["product_prototype_replay_scope"].value == (
         "prisoners-table-30-2021-2025"
+    )
+    assert definitions.metadata["product_prototype_age_replay_supported"].value
+    assert definitions.metadata["product_prototype_age_replay_scope"].value == (
+        "prisoners-table-21-2021-2025"
     )
     assert definitions.metadata["product_prototype_live_evidence_supported"].value
     assert definitions.metadata["product_prototype_stage_projection_supported"].value
@@ -375,6 +387,35 @@ def test_product_prototype_dagster_job_materializes_and_passes_check(
     assert metadata["accepted_workbooks"].value == 5
     assert metadata["exception_workbooks"].value == 0
     assert metadata["canonical_observations"].value == 1215
+    assert len(metadata["workbooks"].data) == 5
+    evaluations = result.get_asset_check_evaluations()
+    assert len(evaluations) == 1
+    assert evaluations[0].passed
+
+
+def test_product_prototype_age_dagster_job_materializes_and_passes_check(
+    tmp_path: Path,
+) -> None:
+    subprocess.run(
+        ["npm", "run", "build"], cwd=PROJECT, check=True, capture_output=True
+    )
+    definitions = build_definitions(
+        project_root=PROJECT, repository_root=tmp_path / "repository"
+    )
+    result = definitions.resolve_job_def(
+        "product_prototype_age_replay_job"
+    ).execute_in_process()
+    assert result.success
+    materializations = result.get_asset_materialization_events()
+    assert {event.asset_key.to_user_string() for event in materializations} == {
+        "product_prototype_age_replay"
+    }
+    metadata = materializations[0].event_specific_data.materialization.metadata
+    assert metadata["accepted_workbooks"].value == 5
+    assert metadata["exception_workbooks"].value == 0
+    assert metadata["raw_observations"].value == 6732
+    assert metadata["excluded_auxiliary_observations"].value == 1467
+    assert metadata["canonical_observations"].value == 5265
     assert len(metadata["workbooks"].data) == 5
     evaluations = result.get_asset_check_evaluations()
     assert len(evaluations) == 1

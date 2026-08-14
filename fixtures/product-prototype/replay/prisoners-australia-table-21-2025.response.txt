@@ -1,0 +1,53 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoner statistics by Indigenous status, sex, age and state or territory, 2025",
+    "values": {
+      "name": "reported prisoner statistic",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "age group or summary statistic",
+        "memberRegions": [
+          "region-011"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-050"
+        ]
+      },
+      {
+        "name": "state, territory or measure",
+        "memberRegions": [
+          "region-012"
+        ],
+        "direction": "N",
+        "captionHints": []
+      },
+      {
+        "name": "Indigenous status",
+        "memberRegions": [
+          "region-014"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-050"
+        ]
+      },
+      {
+        "name": "sex",
+        "memberRegions": [
+          "region-015",
+          "region-013"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-050"
+        ]
+      }
+    ]
+  }
+}
