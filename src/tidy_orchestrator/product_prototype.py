@@ -37,6 +37,7 @@ _DIMENSION_FIELDS = {
     "sex": "sex_id",
     "legal_status": "legal_status_id",
     "age_group": "age_group_id",
+    "country_of_birth": "country_of_birth_id",
 }
 _EXPECTED_CATEGORY_FIELDS = {
     "jurisdiction": "jurisdictions",
@@ -44,6 +45,7 @@ _EXPECTED_CATEGORY_FIELDS = {
     "sex": "sexes",
     "legal_status": "legalStatuses",
     "age_group": "ageGroups",
+    "country_of_birth": "countriesOfBirth",
 }
 _DIMENSION_HEADER_PATTERNS = {
     "jurisdiction": re.compile(r"state|territory|jurisdiction|reporting column", re.I),
@@ -51,6 +53,7 @@ _DIMENSION_HEADER_PATTERNS = {
     "sex": re.compile(r"\bsex\b", re.I),
     "legal_status": re.compile(r"legal status", re.I),
     "age_group": re.compile(r"\bage\b", re.I),
+    "country_of_birth": re.compile(r"country.{0,8}birth|birthplace", re.I),
 }
 
 
@@ -982,8 +985,10 @@ def _validate_execution(
         elif address:
             source_cells.add(address)
         mapped: dict[str, str] = {}
+        raw_dimensions: dict[str, Any] = {}
         for dimension in contract["requiredDimensions"]:
-            raw = row.get(names[dimension])
+            raw = _output_dimension_value(row, names[dimension])
+            raw_dimensions[dimension] = raw
             code = _map_alias(contract, dimension, raw)
             if code is None:
                 codelists_ok = False
@@ -1002,15 +1007,30 @@ def _validate_execution(
         ):
             selection["excludedRowCount"] += 1
             continue
-        if isinstance(value, bool) or not isinstance(value, int | float) or value < 0:
+        measure = _select_measure(contract, mapped)
+        if measure is None:
+            codelists_ok = False
+            issues.append(
+                _issue(
+                    "MEASURE_SELECTION_INVALID",
+                    f"No unique measure rule accepts mapped dimensions {mapped!r}.",
+                )
+            )
+            continue
+        selection_rule = measure.get("selection", {})
+        for dimension, code in selection_rule.get("dimensionOverrides", {}).items():
+            mapped[dimension] = code
+        normalized_value, value_status = _normalize_measure_value(value, measure)
+        if value_status is None:
             codelists_ok = False
             issues.append(_issue("VALUE_INVALID", f"Invalid measure value {value!r}."))
+            continue
         observation = {
             "reference_date": entry["referenceDate"],
-            "measure_id": contract["measure"]["id"],
-            "unit_id": contract["measure"]["unitId"],
-            "value": value,
-            "value_status": "observed",
+            "measure_id": measure["id"],
+            "unit_id": measure["unitId"],
+            "value": normalized_value,
+            "value_status": value_status,
             "source_workbook_digest": entry["contentDigest"],
             "source_sheet": entry["sheet"],
             "source_cell": address,
@@ -1018,7 +1038,7 @@ def _validate_execution(
         }
         for dimension in contract["requiredDimensions"]:
             observation[_DIMENSION_FIELDS[dimension]] = mapped[dimension]
-            observation[f"raw_{dimension}"] = row.get(names[dimension])
+            observation[f"raw_{dimension}"] = raw_dimensions[dimension]
         key = tuple(str(observation[field]) for field in contract["uniqueKey"])
         if key in keys:
             keys_ok = False
@@ -1038,7 +1058,7 @@ def _validate_execution(
                 f"Excluded {selection['excludedRowCount']} auxiliary rows.",
             )
         )
-    coverage_issues = _validate_expected_coverage(canonical, contract)
+    coverage_issues = _validate_expected_coverage(canonical, contract, entry)
     checks["coverage"] = not coverage_issues
     issues.extend(coverage_issues)
     checks["codelists"] = codelists_ok
@@ -1067,15 +1087,28 @@ def _validate_execution(
 
 def _resolve_output_names(
     recipe: dict[str, Any], contract: dict[str, Any]
-) -> dict[str, str]:
+) -> dict[str, Any]:
     try:
         table = recipe["tables"][0]
         headers = [str(item["name"]) for item in table["headers"]]
         value = str(table["values"]["name"])
     except (KeyError, IndexError, TypeError):
         return {}
-    resolved: dict[str, str] = {"measure": value}
+    resolved: dict[str, Any] = {"measure": value}
+    configured = contract.get("dimensionHeaders", {})
     for dimension in contract["requiredDimensions"]:
+        patterns = configured.get(dimension)
+        if patterns is not None:
+            matches: list[str] = []
+            for raw_pattern in patterns:
+                pattern = re.compile(raw_pattern, re.I)
+                for name in headers:
+                    if pattern.fullmatch(name) and name not in matches:
+                        matches.append(name)
+            if not matches:
+                return {}
+            resolved[dimension] = matches[0] if len(matches) == 1 else tuple(matches)
+            continue
         pattern = _DIMENSION_HEADER_PATTERNS.get(dimension)
         if pattern is None:
             return {}
@@ -1086,6 +1119,60 @@ def _resolve_output_names(
     return resolved
 
 
+def _output_dimension_value(row: dict[str, Any], names: Any) -> Any:
+    candidates = names if isinstance(names, tuple) else (names,)
+    for name in candidates:
+        value = row.get(name)
+        if isinstance(value, str) and value.strip():
+            return value
+        if value is not None:
+            return value
+    return None
+
+
+def _contract_measures(contract: dict[str, Any]) -> tuple[dict[str, Any], ...]:
+    single = contract.get("measure")
+    if isinstance(single, dict):
+        return (single,)
+    measures = contract.get("measures")
+    if not isinstance(measures, list):
+        return ()
+    return tuple(item for item in measures if isinstance(item, dict))
+
+
+def _select_measure(
+    contract: dict[str, Any], mapped: dict[str, str]
+) -> dict[str, Any] | None:
+    measures = _contract_measures(contract)
+    if len(measures) == 1 and "selection" not in measures[0]:
+        return measures[0]
+    matches = []
+    for measure in measures:
+        selection = measure.get("selection")
+        if not isinstance(selection, dict):
+            continue
+        if mapped.get(selection.get("dimension")) in selection.get("codes", []):
+            matches.append(measure)
+    return matches[0] if len(matches) == 1 else None
+
+
+def _normalize_measure_value(
+    value: Any, measure: dict[str, Any]
+) -> tuple[int | float | None, str | None]:
+    if (
+        not isinstance(value, bool)
+        and isinstance(value, int | float)
+        and value >= float(measure["minimum"])
+    ):
+        return value, "observed"
+    if isinstance(value, str):
+        normalized = " ".join(value.strip().split())
+        status = measure.get("missingValues", {}).get(normalized)
+        if isinstance(status, str):
+            return None, status
+    return None, None
+
+
 def _map_alias(contract: dict[str, Any], dimension: str, raw: Any) -> str | None:
     if not isinstance(raw, str):
         return None
@@ -1094,18 +1181,42 @@ def _map_alias(contract: dict[str, Any], dimension: str, raw: Any) -> str | None
     return aliases.get(normalized)
 
 
-def _validate_expected_coverage(
-    rows: list[dict[str, Any]], contract: dict[str, Any]
-) -> list[dict[str, Any]]:
+def _expected_categories(
+    contract: dict[str, Any], dimension: str, year: int
+) -> set[str]:
     expected = contract["expected"]
+    field = _EXPECTED_CATEGORY_FIELDS[dimension]
+    by_year = expected.get(f"{field}ByYear")
+    values = by_year[str(year)] if isinstance(by_year, dict) else expected[field]
+    return set(values)
+
+
+def _measure_expected_categories(
+    measure: dict[str, Any], dimension: str, year: int, fallback: set[str]
+) -> set[str]:
+    by_year = measure.get("expectedDimensionsByYear", {})
+    year_value = by_year.get(str(year), {}) if isinstance(by_year, dict) else {}
+    if isinstance(year_value, dict) and dimension in year_value:
+        return set(year_value[dimension])
+    configured = measure.get("expectedDimensions", {})
+    if isinstance(configured, dict) and dimension in configured:
+        return set(configured[dimension])
+    return fallback
+
+
+def _validate_expected_coverage(
+    rows: list[dict[str, Any]],
+    contract: dict[str, Any],
+    entry: dict[str, Any],
+) -> list[dict[str, Any]]:
+    year = int(entry["year"])
     required = {
-        _DIMENSION_FIELDS[dimension]: set(
-            expected[_EXPECTED_CATEGORY_FIELDS[dimension]]
-        )
+        dimension: _expected_categories(contract, dimension, year)
         for dimension in contract["requiredDimensions"]
     }
     issues: list[dict[str, Any]] = []
-    for field, wanted in required.items():
+    for dimension, wanted in required.items():
+        field = _DIMENSION_FIELDS[dimension]
         observed = {str(row[field]) for row in rows}
         if observed != wanted:
             issues.append(
@@ -1115,16 +1226,43 @@ def _validate_expected_coverage(
                     f"unexpected={sorted(observed - wanted)!r}",
                 )
             )
-    expected_count = 1
-    for values in required.values():
-        expected_count *= len(values)
-    if len(rows) != expected_count:
+    measures = _contract_measures(contract)
+    wanted_measure_ids = {measure["id"] for measure in measures}
+    observed_measure_ids = {str(row["measure_id"]) for row in rows}
+    if observed_measure_ids != wanted_measure_ids:
         issues.append(
             _issue(
-                "EXPECTED_COMBINATION_COVERAGE_MISSING",
-                f"Expected {expected_count} category combinations; got {len(rows)}.",
+                "EXPECTED_MEASURE_COVERAGE_MISSING",
+                "measure_id: "
+                f"missing={sorted(wanted_measure_ids - observed_measure_ids)!r}; "
+                f"unexpected={sorted(observed_measure_ids - wanted_measure_ids)!r}",
             )
         )
+    for measure in measures:
+        measure_rows = [row for row in rows if row["measure_id"] == measure["id"]]
+        expected_count = 1
+        for dimension, fallback in required.items():
+            wanted = _measure_expected_categories(measure, dimension, year, fallback)
+            field = _DIMENSION_FIELDS[dimension]
+            observed = {str(row[field]) for row in measure_rows}
+            if observed != wanted:
+                issues.append(
+                    _issue(
+                        "EXPECTED_MEASURE_CATEGORY_COVERAGE_MISSING",
+                        f"{measure['id']} {field}: "
+                        f"missing={sorted(wanted - observed)!r}; "
+                        f"unexpected={sorted(observed - wanted)!r}",
+                    )
+                )
+            expected_count *= len(wanted)
+        if len(measure_rows) != expected_count:
+            issues.append(
+                _issue(
+                    "EXPECTED_COMBINATION_COVERAGE_MISSING",
+                    f"{measure['id']}: expected {expected_count} category "
+                    f"combinations; got {len(measure_rows)}.",
+                )
+            )
     return issues
 
 
@@ -1132,7 +1270,7 @@ def _validate_warning_rules(
     warnings: list[Any],
     rules: list[Any],
     rows: list[Any],
-    names: dict[str, str],
+    names: dict[str, Any],
     contract: dict[str, Any],
 ) -> list[dict[str, Any]]:
     issues: list[dict[str, Any]] = []
@@ -1161,7 +1299,11 @@ def _validate_warning_rules(
             issues.append(_issue("WARNING_RULE_INVALID", repr(rule)))
             continue
         row = by_address.get(warning.get("address"))
-        raw = row.get(names.get(dimension, "")) if isinstance(row, dict) else None
+        raw = (
+            _output_dimension_value(row, names.get(dimension, ""))
+            if isinstance(row, dict)
+            else None
+        )
         if _map_alias(contract, dimension, raw) is None:
             issues.append(
                 _issue(
@@ -1182,12 +1324,21 @@ def _validate_totals(
         for dimension in contract["requiredDimensions"]
     }
     dimensions = tuple(contract["requiredDimensions"])
+    all_measure_ids = {measure["id"] for measure in _contract_measures(contract)}
     for equation in contract["totalEquations"]:
         dimension = equation["dimension"]
         field = field_by_dimension[dimension]
-        others = [field_by_dimension[item] for item in dimensions if item != dimension]
+        others = [
+            *[field_by_dimension[item] for item in dimensions if item != dimension],
+            "measure_id",
+        ]
+        measure_ids = set(equation.get("measureIds", all_measure_ids))
         groups: dict[tuple[Any, ...], dict[str, float]] = {}
         for row in rows:
+            if row["measure_id"] not in measure_ids or not isinstance(
+                row["value"], int | float
+            ):
+                continue
             key = tuple(row[item] for item in others)
             groups.setdefault(key, {})[str(row[field])] = float(row["value"])
         for key, values in groups.items():
@@ -1514,12 +1665,20 @@ def _cohort_worker_limits(cohort: dict[str, Any]) -> dict[str, int]:
     return {"maxWarnings": maximum_warnings}
 
 
+def _valid_string_list(value: Any) -> bool:
+    return (
+        isinstance(value, list)
+        and bool(value)
+        and all(isinstance(item, str) and item for item in value)
+        and len(value) == len(set(value))
+    )
+
+
 def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     required = {
         "schemaVersion",
         "contractId",
         "tableFamilyId",
-        "measure",
         "requiredDimensions",
         "uniqueKey",
         "expected",
@@ -1529,15 +1688,22 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "automaticAcceptance",
         "trainingEligibility",
     }
-    optional = {"excludedDimensionCodes"}
+    optional = {
+        "measure",
+        "measures",
+        "excludedDimensionCodes",
+        "dimensionHeaders",
+    }
     dimensions = value.get("requiredDimensions")
     expected = value.get("expected")
     aliases = value.get("aliases")
     equations = value.get("totalEquations")
     exclusions = value.get("excludedDimensionCodes", {})
-    measure = value.get("measure")
+    headers = value.get("dimensionHeaders", {})
+    keys = set(value)
     if (
-        not required <= set(value) <= required | optional
+        not required <= keys <= required | optional
+        or ("measure" in value) == ("measures" in value)
         or value.get("schemaVersion") != ACCEPTANCE_SCHEMA
         or value.get("tableFamilyId") != cohort.get("tableFamilyId")
         or value.get("automaticAcceptance") is not True
@@ -1559,52 +1725,215 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
             isinstance(aliases[item], dict)
             and aliases[item]
             and all(
-                isinstance(raw, str) and isinstance(code, str)
+                isinstance(raw, str) and raw and isinstance(code, str) and code
                 for raw, code in aliases[item].items()
             )
             for item in dimensions
         )
+        or not isinstance(headers, dict)
+        or not set(headers) <= set(dimensions)
+        or any(not _valid_string_list(patterns) for patterns in headers.values())
         or not isinstance(exclusions, dict)
         or not set(exclusions) <= set(dimensions)
         or any(
-            not isinstance(codes, list)
-            or not codes
-            or any(not isinstance(code, str) for code in codes)
+            not _valid_string_list(codes)
             or not set(codes) <= set(aliases[dimension].values())
             for dimension, codes in exclusions.items()
-        )
-        or not isinstance(measure, dict)
-        or measure.get("numeric") is not True
-        or measure.get("minimum") != 0
-        or not isinstance(measure.get("id"), str)
-        or not isinstance(measure.get("unitId"), str)
-        or not isinstance(equations, list)
-        or not equations
-        or any(
-            not isinstance(item, dict)
-            or item.get("dimension") not in dimensions
-            or item.get("check") != "components-must-not-exceed-total-beyond-rounding"
-            or not isinstance(item.get("totalCode"), str)
-            or not isinstance(item.get("componentCodes"), list)
-            or not item["componentCodes"]
-            or any(not isinstance(code, str) for code in item["componentCodes"])
-            or isinstance(item.get("componentExcessTolerance"), bool)
-            or not isinstance(item.get("componentExcessTolerance"), int | float)
-            or isinstance(item.get("maximumUnmodelledResidual"), bool)
-            or not isinstance(item.get("maximumUnmodelledResidual"), int | float)
-            for item in equations
         )
         or not isinstance(value.get("allowedExecutionWarnings"), list)
     ):
         raise ProductPrototypeError("Acceptance contract is incompatible")
-    expected_keys = {
-        "minimumRows",
-        "maximumRows",
-        "sourceColumns",
-        *[_EXPECTED_CATEGORY_FIELDS[item] for item in dimensions],
+    try:
+        for patterns in headers.values():
+            for pattern in patterns:
+                re.compile(pattern, re.I)
+    except re.error as error:
+        raise ProductPrototypeError(
+            "Acceptance contract has an invalid dimension-header pattern"
+        ) from error
+
+    measures = _contract_measures(value)
+    configured_measures = value.get("measures")
+    if "measures" in value and (
+        not isinstance(configured_measures, list)
+        or len(measures) != len(configured_measures)
+    ):
+        raise ProductPrototypeError("Acceptance contract measures are invalid")
+    allowed_measure_keys = {
+        "id",
+        "unitId",
+        "numeric",
+        "minimum",
+        "selection",
+        "expectedDimensions",
+        "expectedDimensionsByYear",
+        "missingValues",
     }
+    years = {str(item["year"]) for item in cohort["workbooks"]}
+    alias_codes = {
+        dimension: set(aliases[dimension].values()) for dimension in dimensions
+    }
+    raw_measure_ids = [measure.get("id") for measure in measures]
+    if (
+        not measures
+        or not all(isinstance(item, str) for item in raw_measure_ids)
+        or len(set(raw_measure_ids)) != len(measures)
+        or any(
+            not isinstance(measure, dict)
+            or not {"id", "unitId", "numeric", "minimum"}
+            <= set(measure)
+            <= allowed_measure_keys
+            or not isinstance(measure.get("id"), str)
+            or not measure["id"]
+            or not isinstance(measure.get("unitId"), str)
+            or not measure["unitId"]
+            or measure.get("numeric") is not True
+            or isinstance(measure.get("minimum"), bool)
+            or not isinstance(measure.get("minimum"), int | float)
+            or measure["minimum"] < 0
+            for measure in measures
+        )
+    ):
+        raise ProductPrototypeError("Acceptance contract measures are invalid")
+    allowed_missing_statuses = {"not_applicable", "not_available", "suppressed"}
+    for measure in measures:
+        missing = measure.get("missingValues", {})
+        expected_dimensions = measure.get("expectedDimensions", {})
+        expected_by_year = measure.get("expectedDimensionsByYear", {})
+        if (
+            not isinstance(missing, dict)
+            or any(
+                not isinstance(raw, str)
+                or not raw
+                or status not in allowed_missing_statuses
+                for raw, status in missing.items()
+            )
+            or not isinstance(expected_dimensions, dict)
+            or not set(expected_dimensions) <= set(dimensions)
+            or any(
+                not _valid_string_list(codes)
+                or not set(codes) <= alias_codes[dimension]
+                for dimension, codes in expected_dimensions.items()
+            )
+            or not isinstance(expected_by_year, dict)
+            or not set(expected_by_year) <= years
+        ):
+            raise ProductPrototypeError("Acceptance measure coverage is invalid")
+        for year, configured in expected_by_year.items():
+            if (
+                year not in years
+                or not isinstance(configured, dict)
+                or not set(configured) <= set(dimensions)
+                or any(
+                    not _valid_string_list(codes)
+                    or not set(codes) <= alias_codes[dimension]
+                    for dimension, codes in configured.items()
+                )
+            ):
+                raise ProductPrototypeError("Acceptance measure coverage is invalid")
+
+    if len(measures) > 1:
+        selections = [measure.get("selection") for measure in measures]
+        if any(
+            not isinstance(selection, dict)
+            or set(selection) != {"dimension", "codes", "dimensionOverrides"}
+            or selection.get("dimension") not in dimensions
+            or not _valid_string_list(selection.get("codes"))
+            or not set(selection["codes"]) <= alias_codes[selection["dimension"]]
+            or not isinstance(selection.get("dimensionOverrides"), dict)
+            or not set(selection["dimensionOverrides"]) <= set(dimensions)
+            or any(
+                code not in alias_codes[dimension]
+                for dimension, code in selection["dimensionOverrides"].items()
+            )
+            for selection in selections
+        ):
+            raise ProductPrototypeError("Acceptance measure selection is invalid")
+        selection_dimensions = {selection["dimension"] for selection in selections}
+        selected_codes = [set(selection["codes"]) for selection in selections]
+        if len(selection_dimensions) != 1 or any(
+            left & right
+            for index, left in enumerate(selected_codes)
+            for right in selected_codes[index + 1 :]
+        ):
+            raise ProductPrototypeError("Acceptance measure selection overlaps")
+    elif "selection" in measures[0]:
+        raise ProductPrototypeError("A single measure must not need selection")
+
+    measure_ids = {measure["id"] for measure in measures}
+    if (
+        not isinstance(equations, list)
+        or not equations
+        or any(
+            not isinstance(item, dict)
+            or not {
+                "dimension",
+                "totalCode",
+                "componentCodes",
+                "check",
+                "componentExcessTolerance",
+                "maximumUnmodelledResidual",
+            }
+            <= set(item)
+            <= {
+                "dimension",
+                "totalCode",
+                "componentCodes",
+                "check",
+                "componentExcessTolerance",
+                "maximumUnmodelledResidual",
+                "measureIds",
+            }
+            or item.get("dimension") not in dimensions
+            or item.get("check") != "components-must-not-exceed-total-beyond-rounding"
+            or item.get("totalCode")
+            not in alias_codes.get(item.get("dimension"), set())
+            or not _valid_string_list(item.get("componentCodes"))
+            or not set(item["componentCodes"])
+            <= alias_codes.get(item["dimension"], set())
+            or isinstance(item.get("componentExcessTolerance"), bool)
+            or not isinstance(item.get("componentExcessTolerance"), int | float)
+            or isinstance(item.get("maximumUnmodelledResidual"), bool)
+            or not isinstance(item.get("maximumUnmodelledResidual"), int | float)
+            or (
+                "measureIds" in item
+                and (
+                    not _valid_string_list(item["measureIds"])
+                    or not set(item["measureIds"]) <= measure_ids
+                )
+            )
+            for item in equations
+        )
+    ):
+        raise ProductPrototypeError("Acceptance total equations are invalid")
+
+    expected_keys = {"minimumRows", "maximumRows", "sourceColumns"}
+    for dimension in dimensions:
+        field = _EXPECTED_CATEGORY_FIELDS[dimension]
+        present = [key for key in (field, f"{field}ByYear") if key in expected]
+        if len(present) != 1:
+            raise ProductPrototypeError("Acceptance category coverage is invalid")
+        expected_keys.add(present[0])
+        configured = expected[present[0]]
+        if present[0].endswith("ByYear"):
+            if (
+                not isinstance(configured, dict)
+                or set(configured) != years
+                or any(
+                    not _valid_string_list(codes)
+                    or not set(codes) <= alias_codes[dimension]
+                    for codes in configured.values()
+                )
+            ):
+                raise ProductPrototypeError("Acceptance category coverage is invalid")
+        elif (
+            not _valid_string_list(configured)
+            or not set(configured) <= alias_codes[dimension]
+        ):
+            raise ProductPrototypeError("Acceptance category coverage is invalid")
     if exclusions:
         expected_keys |= {"minimumExcludedRows", "maximumExcludedRows"}
+    source_columns = expected.get("sourceColumns")
     if (
         set(expected) != expected_keys
         or isinstance(expected.get("minimumRows"), bool)
@@ -1612,19 +1941,20 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or isinstance(expected.get("maximumRows"), bool)
         or not isinstance(expected.get("maximumRows"), int)
         or not 0 < expected["minimumRows"] <= expected["maximumRows"]
-        or not isinstance(expected.get("sourceColumns"), dict)
-        or set(expected["sourceColumns"]) != {"minimum", "maximum"}
+        or not isinstance(source_columns, dict)
+        or set(source_columns) != {"minimum", "maximum"}
         or any(
-            not isinstance(expected[_EXPECTED_CATEGORY_FIELDS[item]], list)
-            or not expected[_EXPECTED_CATEGORY_FIELDS[item]]
-            or len(expected[_EXPECTED_CATEGORY_FIELDS[item]])
-            != len(set(expected[_EXPECTED_CATEGORY_FIELDS[item]]))
-            for item in dimensions
+            isinstance(source_columns.get(key), bool)
+            or not isinstance(source_columns.get(key), int)
+            for key in ("minimum", "maximum")
         )
+        or not 1 <= source_columns["minimum"] <= source_columns["maximum"]
         or (
             exclusions
             and (
-                not isinstance(expected.get("minimumExcludedRows"), int)
+                isinstance(expected.get("minimumExcludedRows"), bool)
+                or not isinstance(expected.get("minimumExcludedRows"), int)
+                or isinstance(expected.get("maximumExcludedRows"), bool)
                 or not isinstance(expected.get("maximumExcludedRows"), int)
                 or not 0
                 <= expected["minimumExcludedRows"]

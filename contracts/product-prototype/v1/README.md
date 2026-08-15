@@ -41,3 +41,17 @@ scripts/tidy-prototype run \
   --mode replay \
   --output .product-prototype/table-21-five-year-replay
 ```
+
+The Table 22 country-of-birth contract demonstrates explicit multi-measure
+selection. Jurisdiction columns become `prisoner-count` observations in persons;
+the separately labelled rate column becomes
+`imprisonment-rate-country-of-birth` at national jurisdiction in persons per
+100,000 adult population for that country of birth. Published `na`/`n.a` cells
+are retained as `not_applicable` rather than coerced or dropped:
+
+```sh
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-22-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-22-five-year-replay
+```

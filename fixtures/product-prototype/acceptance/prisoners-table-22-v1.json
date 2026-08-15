@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-australia-table-22-v1",
+  "tableFamilyId": "prisoners-by-country-of-birth-and-jurisdiction",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "dimension": "jurisdiction",
+        "codes": ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT", "AUS"],
+        "dimensionOverrides": {}
+      },
+      "expectedDimensions": {},
+      "expectedDimensionsByYear": {},
+      "missingValues": {}
+    },
+    {
+      "id": "imprisonment-rate-country-of-birth",
+      "unitId": "persons-per-100000-adult-population-country-of-birth",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "dimension": "jurisdiction",
+        "codes": ["IMPRISONMENT_RATE"],
+        "dimensionOverrides": {
+          "jurisdiction": "AUS"
+        }
+      },
+      "expectedDimensions": {
+        "jurisdiction": ["AUS"]
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "country_of_birth": [
+            "AFGHANISTAN", "AUSTRALIA", "CHINA", "EGYPT", "FIJI", "GERMANY",
+            "GREECE", "HONG_KONG", "INDIA", "IRAN", "IRAQ", "IRELAND",
+            "ITALY", "KENYA", "SOUTH_KOREA", "LEBANON", "MALAYSIA",
+            "NEW_ZEALAND", "PAPUA_NEW_GUINEA", "PHILIPPINES", "SAMOA",
+            "SOMALIA", "SOUTH_AFRICA", "SRI_LANKA", "SUDAN", "THAILAND",
+            "TONGA", "TOTAL", "OVERSEAS_BORN_TOTAL", "TURKIYE",
+            "UNITED_KINGDOM", "UNITED_STATES", "VIETNAM"
+          ]
+        }
+      },
+      "missingValues": {
+        "n.a": "not_applicable",
+        "na": "not_applicable"
+      }
+    }
+  ],
+  "requiredDimensions": ["jurisdiction", "country_of_birth"],
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "country_of_birth_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 330,
+    "maximumRows": 360,
+    "sourceColumns": {
+      "minimum": 10,
+      "maximum": 10
+    },
+    "jurisdictions": ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT", "AUS"],
+    "countriesOfBirthByYear": {
+      "2021": [
+        "AFGHANISTAN", "AUSTRALIA", "CHINA", "EGYPT", "FIJI", "GERMANY",
+        "GREECE", "HONG_KONG", "INDIA", "IRAN", "IRAQ", "IRELAND",
+        "ITALY", "KENYA", "SOUTH_KOREA", "LEBANON", "MALAYSIA",
+        "NEW_ZEALAND", "OTHER", "PAPUA_NEW_GUINEA", "PHILIPPINES", "SAMOA",
+        "SOMALIA", "SOUTH_AFRICA", "SRI_LANKA", "SUDAN", "THAILAND",
+        "TONGA", "TOTAL", "OVERSEAS_BORN_TOTAL", "TURKIYE",
+        "UNITED_KINGDOM", "UNITED_STATES", "VIETNAM"
+      ],
+      "2022": [
+        "AFGHANISTAN", "AUSTRALIA", "CHINA", "EGYPT", "FIJI", "GERMANY",
+        "HONG_KONG", "INDIA", "IRAN", "IRAQ", "IRELAND", "ITALY", "KENYA",
+        "SOUTH_KOREA", "LEBANON", "MALAYSIA", "NEW_ZEALAND", "OTHER",
+        "PAKISTAN", "PAPUA_NEW_GUINEA", "PHILIPPINES", "SAMOA", "SOMALIA",
+        "SOUTH_AFRICA", "SRI_LANKA", "SUDAN", "THAILAND", "TONGA", "TOTAL",
+        "OVERSEAS_BORN_TOTAL", "TURKIYE", "UNITED_KINGDOM", "UNITED_STATES",
+        "VIETNAM"
+      ],
+      "2023": [
+        "AFGHANISTAN", "AUSTRALIA", "CHINA", "EGYPT", "FIJI", "GERMANY",
+        "GREECE", "HONG_KONG", "INDIA", "IRAN", "IRAQ", "IRELAND", "ITALY",
+        "KENYA", "SOUTH_KOREA", "LEBANON", "MALAYSIA", "NEW_ZEALAND", "OTHER",
+        "PAKISTAN", "PAPUA_NEW_GUINEA", "PHILIPPINES", "SAMOA", "SOMALIA",
+        "SOUTH_AFRICA", "SRI_LANKA", "SUDAN", "THAILAND", "TONGA", "TOTAL",
+        "OVERSEAS_BORN_TOTAL", "TURKIYE", "UNITED_KINGDOM", "UNITED_STATES",
+        "VIETNAM"
+      ],
+      "2024": [
+        "AFGHANISTAN", "AUSTRALIA", "CHINA", "EGYPT", "FIJI", "GERMANY",
+        "GREECE", "HONG_KONG", "INDIA", "IRAN", "IRAQ", "IRELAND", "ITALY",
+        "KENYA", "LEBANON", "MALAYSIA", "NEW_ZEALAND", "OTHER", "PAKISTAN",
+        "PAPUA_NEW_GUINEA", "PHILIPPINES", "SAMOA", "SOMALIA", "SOUTH_AFRICA",
+        "SRI_LANKA", "SUDAN", "THAILAND", "TONGA", "TOTAL",
+        "OVERSEAS_BORN_TOTAL", "TURKIYE", "UNITED_KINGDOM", "UNITED_STATES",
+        "VIETNAM"
+      ],
+      "2025": [
+        "AFGHANISTAN", "AUSTRALIA", "CHINA", "EGYPT", "FIJI", "GERMANY",
+        "GREECE", "HONG_KONG", "INDIA", "IRAN", "IRAQ", "IRELAND", "ITALY",
+        "KENYA", "LEBANON", "MALAYSIA", "NEW_ZEALAND", "OTHER", "PAKISTAN",
+        "PAPUA_NEW_GUINEA", "PHILIPPINES", "SAMOA", "SOMALIA", "SOUTH_AFRICA",
+        "SRI_LANKA", "SUDAN", "THAILAND", "TONGA", "TOTAL",
+        "OVERSEAS_BORN_TOTAL", "TURKIYE", "UNITED_KINGDOM", "UNITED_STATES",
+        "VIETNAM"
+      ]
+    }
+  },
+  "dimensionHeaders": {
+    "country_of_birth": [
+      "selected overseas country of birth",
+      "selected country of birth",
+      "country of birth",
+      "country-of-birth category"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "NSW": "NSW",
+      "Vic.": "VIC",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "SA": "SA",
+      "WA": "WA",
+      "Tas.": "TAS",
+      "NT": "NT",
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "Imprisonment rate": "IMPRISONMENT_RATE",
+      "Imprisonment rate (b)": "IMPRISONMENT_RATE"
+    },
+    "country_of_birth": {
+      "Afghanistan": "AFGHANISTAN",
+      "Australia": "AUSTRALIA",
+      "China": "CHINA",
+      "China (e)": "CHINA",
+      "Egypt": "EGYPT",
+      "Fiji": "FIJI",
+      "Germany": "GERMANY",
+      "Greece": "GREECE",
+      "Hong Kong": "HONG_KONG",
+      "Hong Kong (f)": "HONG_KONG",
+      "India": "INDIA",
+      "Iran": "IRAN",
+      "Iraq": "IRAQ",
+      "Ireland": "IRELAND",
+      "Italy": "ITALY",
+      "Kenya": "KENYA",
+      "Korea, Republic of (South)": "SOUTH_KOREA",
+      "Lebanon": "LEBANON",
+      "Malaysia": "MALAYSIA",
+      "New Zealand": "NEW_ZEALAND",
+      "Other": "OTHER",
+      "Pakistan": "PAKISTAN",
+      "Papua New Guinea": "PAPUA_NEW_GUINEA",
+      "Philippines": "PHILIPPINES",
+      "Samoa": "SAMOA",
+      "Somalia": "SOMALIA",
+      "South Africa": "SOUTH_AFRICA",
+      "Sri Lanka": "SRI_LANKA",
+      "Sudan": "SUDAN",
+      "Sudan (d)": "SUDAN",
+      "Thailand": "THAILAND",
+      "Tonga": "TONGA",
+      "Total": "TOTAL",
+      "Total (g)": "TOTAL",
+      "Total overseas born": "OVERSEAS_BORN_TOTAL",
+      "Turkey": "TURKIYE",
+      "Türkiye": "TURKIYE",
+      "United Kingdom": "UNITED_KINGDOM",
+      "United Kingdom (c)": "UNITED_KINGDOM",
+      "United States of America": "UNITED_STATES",
+      "Vietnam": "VIETNAM"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30,
+      "measureIds": ["prisoner-count"]
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

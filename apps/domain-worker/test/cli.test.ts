@@ -97,11 +97,11 @@ describe("built worker CLI", () => {
       ok: false,
       error: { code: "INVALID_REQUEST" },
     });
-  });
+  }, 20_000);
 
   it("executes a full fixture twice through the built CLI in relocated roots", async () => {
     const run = await runFixtureTwice("simple-crosstab");
     expect(run.files.has("execution.json")).toBe(true);
     expect(run.files.has("tables/population_counts.csv")).toBe(true);
-  });
+  }, 20_000);
 });

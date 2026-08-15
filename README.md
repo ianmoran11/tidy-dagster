@@ -28,6 +28,18 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-21-five-year-replay
 ```
 
+Table 22 adds a third provider-free five-year cohort covering selected country
+of birth by jurisdiction. Its 1,709 canonical observations retain 1,539
+prisoner counts and 170 national imprisonment rates as separate measures and
+units, including four explicitly `not_applicable` published rate cells:
+
+```sh
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-22-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-22-five-year-replay
+```
+
 The live model is pinned to `openai-codex/gpt-5.6-luna` with high reasoning.
 The checked live campaign made three calls for USD 0.0197296, compiled and
 executed all three fresh candidates, automatically accepted 2023–2025, and
@@ -44,7 +56,7 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects the two five-year cohorts as ten sheet-assets
+A minimal read-only page projects the three five-year cohorts as 15 sheet-assets
 across five physical workbooks. It derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The page is not

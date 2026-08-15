@@ -565,8 +565,8 @@ both expose this run without making provider calls.
 ## 14. Minimal data-asset status projection
 
 `Tidy Data Asset Status` is a deliberately read-only consumer of the checked
-Table 21 and Table 30 evidence. The explicit registry at
-`fixtures/product-prototype/data-asset-status-v1.json` selects ten sheet-assets
+Table 21, Table 22, and Table 30 evidence. The explicit registry at
+`fixtures/product-prototype/data-asset-status-v1.json` selects 15 sheet-assets
 across five shared physical workbooks. For each sheet it derives independent
 `Identified`, `On disk`, `Tidied`, `Canonicalised`, and `Integrated` facts and a
 separate automated-check result. Missing current source custody does not erase
@@ -581,3 +581,29 @@ exactly scoped Tailscale Serve route can expose the same page to the Tailnet.
 Dagster links remain operational conveniences, not evidence authority. CI runs
 the deterministic snapshot drift check, and neither page generation nor serving
 makes provider calls.
+
+## 15. Five-year Table 22 country-of-birth expansion
+
+The third provider-free product cohort processes Table 22 for 2021–2025 using
+five existing recipe-valid Sol/high responses. The human-authored contract
+coalesces the historical header variants into a canonical country-of-birth
+dimension and preserves year-specific country coverage without inventing absent
+categories.
+
+Unlike the earlier single-measure contracts, Table 22 keeps both published
+measures:
+
+- 1,539 jurisdiction-level prisoner counts in persons; and
+- 170 national country-of-birth imprisonment rates per 100,000 adult population
+  for that country of birth.
+
+The four published `na`/`n.a` rate cells are represented by null values with
+`not_applicable` status. The blank 2021 `OTHER` rate cell is not synthesized.
+All five sheets passed deterministic replay, code-list, coverage, uniqueness,
+total, warning, and collation checks, producing 1,709 canonical observations,
+zero exceptions, zero cross-year issues, and zero provider calls. Checked
+evidence is at `fixtures/product-prototype/table-22-five-year-evidence/`, with
+run digest
+`sha256:faed294328690572ebfa475cbc700fa8c3f9927b00fe3eeefda53e71986ad0f0`.
+The standalone CLI, `product_prototype_country_replay` Dagster asset, and the
+status page all project this cohort without becoming evidence authority.

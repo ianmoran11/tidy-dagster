@@ -1188,7 +1188,7 @@ footer dl {{ margin-top:10px; }}
 {_detail_item("Integrated", "The workbook/sheet decision appears in checked collation evidence.")}
 {_detail_item("Checks", "Pass, Issues, or No evidence; cohort-wide issues appear above their rows.")}
 </dl>
-<p>10 sheet-assets may share five physical workbooks. Source normalisation is shown only in evidence details where explicitly recorded. Historical downstream evidence remains visible if current on-disk custody later fails.</p>
+<p>{len(assets)} sheet-assets may share {status.physical_workbook_count} physical workbooks. Source normalisation is shown only in evidence details where explicitly recorded. Historical downstream evidence remains visible if current on-disk custody later fails.</p>
 <p>Local: <code>http://{_e(status.host)}:{status.port}/</code> · Tailnet: <code>https://{_e(status.tailnet_hostname)}:{status.tailnet_https_port}/</code></p>
 </footer>
 </main>

@@ -21,11 +21,11 @@ from tidy_orchestrator.data_asset_status import (
 PROJECT = Path(__file__).parents[1]
 
 
-def test_current_dashboard_reports_ten_clean_sheet_assets() -> None:
+def test_current_dashboard_reports_fifteen_clean_sheet_assets() -> None:
     status = build_dashboard(PROJECT)
     assert status.title == "Tidy Data Asset Status"
-    assert len(status.cohorts) == 2
-    assert len(status.assets) == 10
+    assert len(status.cohorts) == 3
+    assert len(status.assets) == 15
     assert status.physical_workbook_count == 5
     assert {asset.year for asset in status.assets} == set(range(2021, 2026))
     assert all(
@@ -33,15 +33,18 @@ def test_current_dashboard_reports_ten_clean_sheet_assets() -> None:
     )
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
-    assert sum(asset.canonical_count or 0 for asset in status.assets) == 6480
+    assert sum(asset.canonical_count or 0 for asset in status.assets) == 8189
     table_21 = [asset for asset in status.assets if "Table 21" in asset.cohort_label]
+    table_22 = [asset for asset in status.assets if "Table 22" in asset.cohort_label]
     table_30 = [asset for asset in status.assets if "Table 30" in asset.cohort_label]
     assert [asset.canonical_count for asset in table_21] == [1053] * 5
+    assert [asset.canonical_count for asset in table_22] == [340, 340, 350, 340, 339]
     assert [asset.canonical_count for asset in table_30] == [243] * 5
     assert sum(asset.excluded_count or 0 for asset in table_21) == 1467
     normalized = [asset for asset in status.assets if asset.normalization]
     assert {(asset.year, asset.sheet) for asset in normalized} == {
         (2025, "Table 21"),
+        (2025, "Table 22"),
         (2025, "Table 30"),
     }
     live = [asset for asset in status.assets if asset.live_evidence_path]
@@ -55,8 +58,8 @@ def test_current_dashboard_reports_ten_clean_sheet_assets() -> None:
 def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None:
     rendered = render_dashboard(build_dashboard(PROJECT)).decode()
     assert rendered.startswith("<!doctype html>")
-    assert rendered.count('class="asset-pair"') == 10
-    assert rendered.count('class="detail-toggle"') == 10
+    assert rendered.count('class="asset-pair"') == 15
+    assert rendered.count('class="detail-toggle"') == 15
     assert all(
         value in rendered
         for value in (
@@ -68,8 +71,9 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'class="sort"',
             "Automated checks",
             "Flagged issues",
-            "10 sheet-assets across 5 physical workbooks",
+            "15 sheet-assets across 5 physical workbooks",
             "product_prototype_age_replay",
+            "product_prototype_country_replay",
             "product_prototype_replay",
         )
     )

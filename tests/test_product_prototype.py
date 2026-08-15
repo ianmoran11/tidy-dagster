@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shutil
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +14,7 @@ from tidy_orchestrator.product_prototype import (
     ProductPrototypeError,
     _cross_year_issues,
     _validate_cohort,
+    _validate_contract,
     evaluate_execution_for_acceptance,
     run_product_prototype,
     verify_live_evidence,
@@ -28,6 +30,9 @@ EXPANDED_COHORT = (
 )
 AGE_COHORT = (
     PROJECT / "fixtures" / "product-prototype" / "prisoners-table-21-2021-2025.json"
+)
+COUNTRY_COHORT = (
+    PROJECT / "fixtures" / "product-prototype" / "prisoners-table-22-2021-2025.json"
 )
 CONTRACT = json.loads(
     (
@@ -266,6 +271,93 @@ def test_replay_tidies_table_21_age_counts_for_five_years(tmp_path: Path) -> Non
     assert collation["excludedExceptions"] == []
 
 
+def test_replay_tidies_table_22_counts_and_rates_for_five_years(
+    tmp_path: Path,
+) -> None:
+    repository = LocalArtifactRepository(tmp_path / "repository")
+    result = run_product_prototype(
+        repository=repository,
+        project_root=PROJECT,
+        cohort_path=COUNTRY_COHORT,
+        output_root=tmp_path / "output",
+        mode="replay",
+        gateway=fake_gateway(repository),
+        recorded_at="2026-08-15T04:00:00+00:00",
+    )
+    report = result.report
+    assert report["providerCalls"] == 0
+    assert report["acceptedWorkbookCount"] == 5
+    assert report["exceptionWorkbookCount"] == 0
+    assert report["canonicalObservationCount"] == 1709
+    assert report["crossYearIssues"] == []
+    assert [item["rawObservationCount"] for item in report["workbooks"]] == [
+        339,
+        340,
+        350,
+        340,
+        340,
+    ]
+    assert all(item["excludedObservationCount"] == 0 for item in report["workbooks"])
+    assert all(all(item["checks"].values()) for item in report["workbooks"])
+    rows = json.loads((tmp_path / "output" / "canonical-observations.json").read_text())
+    assert Counter(row["measure_id"] for row in rows) == {
+        "prisoner-count": 1539,
+        "imprisonment-rate-country-of-birth": 170,
+    }
+    assert {(row["measure_id"], row["unit_id"]) for row in rows} == {
+        ("prisoner-count", "person"),
+        (
+            "imprisonment-rate-country-of-birth",
+            "persons-per-100000-adult-population-country-of-birth",
+        ),
+    }
+    rate_rows = [
+        row for row in rows if row["measure_id"] == "imprisonment-rate-country-of-birth"
+    ]
+    assert {row["jurisdiction_id"] for row in rate_rows} == {"AUS"}
+    not_applicable = [row for row in rate_rows if row["value_status"] != "observed"]
+    assert {
+        (
+            row["reference_date"][:4],
+            row["country_of_birth_id"],
+            row["value"],
+            row["value_status"],
+        )
+        for row in not_applicable
+    } == {
+        ("2022", "OTHER", None, "not_applicable"),
+        ("2023", "OTHER", None, "not_applicable"),
+        ("2024", "OTHER", None, "not_applicable"),
+        ("2025", "OTHER", None, "not_applicable"),
+    }
+    assert not any(
+        row["reference_date"].startswith("2021")
+        and row["country_of_birth_id"] == "OTHER"
+        for row in rate_rows
+    )
+    assert {row["generation_model"] for row in rows} == {"openai-codex/gpt-5.6-sol"}
+    assert all(
+        "age_group_id" not in row and "legal_status_id" not in row for row in rows
+    )
+    collation = json.loads((tmp_path / "output" / "collation-report.json").read_text())
+    assert collation["rowCount"] == 1709
+    assert collation["excludedExceptions"] == []
+    assert collation["duplicateCanonicalKeys"] == []
+    assert collation["conflictingValues"] == []
+
+
+def test_table_22_measure_rules_are_disjoint() -> None:
+    cohort = json.loads(COUNTRY_COHORT.read_text())
+    contract_path = (
+        PROJECT / "fixtures/product-prototype/acceptance/prisoners-table-22-v1.json"
+    )
+    contract = json.loads(contract_path.read_text())
+    _validate_contract(contract, cohort)
+    contract["measures"][1]["selection"]["codes"] = ["AUS"]
+    with pytest.raises(ProductPrototypeError, match="selection overlaps"):
+        _validate_contract(contract, cohort)
+
+
 def test_cohort_requires_increasing_years_and_matching_call_ceiling() -> None:
     cohort = json.loads(EXPANDED_COHORT.read_text())
     _validate_cohort(cohort)
@@ -337,6 +429,44 @@ def test_table_21_evidence_manifest_binds_committed_outputs() -> None:
     assert run["crossYearIssues"] == []
     assert sum(item["rawObservationCount"] for item in run["workbooks"]) == 6732
     assert sum(item["excludedObservationCount"] for item in run["workbooks"]) == 1467
+    assert json.loads((root / "exceptions.json").read_text()) == []
+
+
+def test_table_22_evidence_manifest_binds_committed_outputs() -> None:
+    cohort = json.loads(COUNTRY_COHORT.read_text())
+    cohort_schema = json.loads(
+        (
+            PROJECT / "contracts" / "product-prototype" / "v1" / "cohort.schema.json"
+        ).read_text()
+    )
+    jsonschema.Draft202012Validator(
+        cohort_schema,
+        format_checker=jsonschema.FormatChecker(),
+    ).validate(cohort)
+    root = PROJECT / "fixtures/product-prototype/table-22-five-year-evidence"
+    manifest = json.loads((root / "manifest.json").read_text())
+    assert manifest["cohortDigest"] == sha256_digest(COUNTRY_COHORT.read_bytes())
+    for item in manifest["files"]:
+        content = (root / item["path"]).read_bytes()
+        assert len(content) == item["byteLength"]
+        assert sha256_digest(content) == item["contentDigest"]
+    run = json.loads((root / "run.json").read_text())
+    contract = (
+        PROJECT / "fixtures/product-prototype/acceptance/prisoners-table-22-v1.json"
+    )
+    assert run["runDigest"] == manifest["runDigest"]
+    assert run["acceptanceContractDigest"] == sha256_digest(contract.read_bytes())
+    assert run["acceptedWorkbookCount"] == 5
+    assert run["exceptionWorkbookCount"] == 0
+    assert run["canonicalObservationCount"] == 1709
+    assert run["crossYearIssues"] == []
+    rows = json.loads((root / "canonical-observations.json").read_text())
+    assert sum(row["measure_id"] == "prisoner-count" for row in rows) == 1539
+    assert (
+        sum(row["measure_id"] == "imprisonment-rate-country-of-birth" for row in rows)
+        == 170
+    )
+    assert sum(row["value_status"] == "not_applicable" for row in rows) == 4
     assert json.loads((root / "exceptions.json").read_text()) == []
 
 
