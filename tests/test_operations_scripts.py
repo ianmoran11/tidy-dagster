@@ -355,3 +355,112 @@ def test_foreground_launcher_is_exact_loopback_and_tokenized() -> None:
     assert "uv run dg dev --host 127.0.0.1 --port 3030" in source
     assert "--ownership-token" in source
     assert "0.0.0.0" not in source
+
+
+def test_data_status_cli_is_executable_and_snapshot_is_current() -> None:
+    script = PROJECT / "scripts/tidy-data-status"
+    help_result = subprocess.run(
+        [str(script), "--help"], cwd=PROJECT, capture_output=True, text=True
+    )
+    assert help_result.returncode == 0
+    assert "Tidy Data Asset Status" in help_result.stdout
+    check_result = subprocess.run(
+        [str(script), "check"], cwd=PROJECT, capture_output=True, text=True
+    )
+    assert check_result.returncode == 0, check_result.stderr
+    assert "matches evidence" in check_result.stdout
+
+
+def test_data_status_tailnet_addition_is_exact(monkeypatch, tmp_path) -> None:
+    module = _load(
+        "tailscale_data_status_add",
+        PROJECT / "src/tidy_orchestrator/data_asset_status_tailnet.py",
+    )
+    monkeypatch.setattr(module, "OPS", tmp_path)
+    monkeypatch.setattr(module, "OWNERSHIP", tmp_path / "ownership.json")
+    monkeypatch.setattr(module, "local_healthy", lambda: True)
+    monkeypatch.setattr(module, "read_ownership", lambda: None)
+    baseline = {"TCP": {"3030": {"HTTPS": True}}, "Web": {"dagster": {}}}
+    statuses = iter([baseline, module.with_owned_route(baseline)])
+    monkeypatch.setattr(module, "read_status", lambda: next(statuses))
+    calls = []
+    monkeypatch.setattr(
+        module.subprocess,
+        "run",
+        lambda command, **_kwargs: calls.append(command)
+        or SimpleNamespace(returncode=0),
+    )
+    assert module.enable() == 0
+    assert calls == [
+        [module.TAILSCALE, "serve", "--bg", "--https=3031", module.UPSTREAM]
+    ]
+    assert module.OWNERSHIP.is_file()
+
+
+def test_data_status_tailnet_disable_preserves_new_unrelated_routes(
+    monkeypatch, tmp_path
+) -> None:
+    module = _load(
+        "tailscale_data_status_disable",
+        PROJECT / "src/tidy_orchestrator/data_asset_status_tailnet.py",
+    )
+    monkeypatch.setattr(module, "OPS", tmp_path)
+    monkeypatch.setattr(module, "OWNERSHIP", tmp_path / "ownership.json")
+    original = {"TCP": {"3030": {"HTTPS": True}}, "Web": {"dagster": {}}}
+    module.write_ownership(original)
+    changed = {
+        "TCP": {"3030": {"HTTPS": True}, "8443": {"HTTPS": True}},
+        "Web": {"dagster": {}, "other": {}},
+    }
+    current = module.with_owned_route(changed)
+    expected = module.without_owned_route(current)
+    statuses = iter([current, expected])
+    monkeypatch.setattr(module, "read_status", lambda: next(statuses))
+    calls = []
+    monkeypatch.setattr(
+        module.subprocess,
+        "run",
+        lambda command, **_kwargs: calls.append(command)
+        or SimpleNamespace(returncode=0),
+    )
+    assert module.disable() == 0
+    assert calls == [[module.TAILSCALE, "serve", "--https=3031", "off"]]
+    assert not module.OWNERSHIP.exists()
+
+
+def test_data_status_tailnet_refuses_replaced_route(monkeypatch, tmp_path) -> None:
+    module = _load(
+        "tailscale_data_status_refuse",
+        PROJECT / "src/tidy_orchestrator/data_asset_status_tailnet.py",
+    )
+    monkeypatch.setattr(module, "OPS", tmp_path)
+    monkeypatch.setattr(module, "OWNERSHIP", tmp_path / "ownership.json")
+    baseline = {"TCP": {}, "Web": {}}
+    module.write_ownership(baseline)
+    replaced = module.with_owned_route(baseline)
+    replaced["Web"][module.PUBLIC_KEY]["Handlers"]["/"]["Proxy"] = (
+        "http://127.0.0.1:9999"
+    )
+    monkeypatch.setattr(module, "read_status", lambda: replaced)
+    calls = []
+    monkeypatch.setattr(
+        module.subprocess,
+        "run",
+        lambda *args, **kwargs: calls.append((args, kwargs)),
+    )
+    assert module.disable() == 1
+    assert calls == []
+
+
+def test_data_status_tailnet_script_is_scoped_and_non_public() -> None:
+    source = (
+        PROJECT / "src/tidy_orchestrator/data_asset_status_tailnet.py"
+    ).read_text()
+    wrapper = (PROJECT / "scripts/tailscale-data-status-ui").read_text()
+    assert "tidy_orchestrator.data_asset_status_tailnet" in wrapper
+    assert '"--https=3031"' in source
+    assert '"off"' in source
+    assert "http://127.0.0.1:3031" in source
+    assert "funnel" not in source.lower()
+    assert "serve reset" not in source.lower()
+    assert "0.0.0.0" not in source

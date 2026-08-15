@@ -24,7 +24,8 @@
     "gold:freeze:reference": "node scripts/freeze-reference-gold.mjs",
     "gold:verify:reference-clean": "node scripts/freeze-reference-gold.mjs",
     "parity:replay": "npm run build && tsx scripts/parity-replay.ts",
-    "check": "npm run verify:toolchain && npm run verify:fixtures && npm test && npm run typecheck && npm run lint && npm run format:check && npm run parity:replay"
+    "status:check": "PYTHONPATH=src python3 -m tidy_orchestrator.data_asset_status_cli check",
+    "check": "npm run verify:toolchain && npm run verify:fixtures && npm test && npm run typecheck && npm run lint && npm run format:check && npm run parity:replay && npm run status:check"
   },
   "dependencies": {
     "exceljs": "4.4.0",

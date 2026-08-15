@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "tidy.data-asset-status-registry/v1",
+  "title": "Tidy Data Asset Status",
+  "recordedAt": "2026-08-14T08:00:00+00:00",
+  "outputPath": "docs/data-asset-status/index.html",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 3031,
+    "tailnetHostname": "ians-mac-mini-1.taild519de.ts.net",
+    "tailnetHttpsPort": 3031,
+    "dagsterPort": 3030
+  },
+  "cohorts": [
+    {
+      "cohortId": "prisoners-australia-table-21-2021-2025",
+      "label": "Prisoners in Australia — Table 21 (age)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-21-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-21-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_age_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-table-30-2021-2025",
+      "label": "Prisoners in Australia — Table 30 (legal status)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-30-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_replay",
+      "liveEvidence": {
+        "manifestPath": "fixtures/product-prototype/live-evidence/manifest.json",
+        "years": [2023, 2024, 2025]
+      }
+    }
+  ]
+}

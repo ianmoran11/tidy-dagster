@@ -42,6 +42,36 @@ zero provider calls and explicitly treats its historical responses as
 non-authoritative integration fixtures. See
 [`docs/end-to-end-product-prototype-plan.md`](docs/end-to-end-product-prototype-plan.md).
 
+### Tidy Data Asset Status
+
+A minimal read-only page projects the two five-year cohorts as ten sheet-assets
+across five physical workbooks. It derives `Identified`, `On disk`, `Tidied`,
+`Canonicalised`, `Integrated`, and automated-check status directly from the
+checked cohort, run, canonical-output, and collation evidence. The page is not
+an evidence authority and exposes no run, approval, or editing controls.
+
+The deterministic committed snapshot is
+[`docs/data-asset-status/index.html`](docs/data-asset-status/index.html). Refresh,
+verify, or serve it in the foreground with:
+
+```sh
+scripts/tidy-data-status refresh
+scripts/tidy-data-status check
+scripts/tidy-data-status serve
+```
+
+Serving binds only to `http://127.0.0.1:3031/`. In another terminal, explicitly
+manage the separate tailnet-only route with:
+
+```sh
+scripts/tailscale-data-status-ui enable
+scripts/tailscale-data-status-ui status
+scripts/tailscale-data-status-ui disable
+```
+
+The Tailnet URL is
+`https://ians-mac-mini-1.taild519de.ts.net:3031/`. It has no application-level
+authentication and relies on the Tailnet identity boundary.
 
 `tidy-dagster` is a staged, standalone reimplementation of TidyCell's spreadsheet-to-recipe pipeline and its future semantic-data and microsimulation-calibration workflow.
 

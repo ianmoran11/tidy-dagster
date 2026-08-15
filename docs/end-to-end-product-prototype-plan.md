@@ -561,3 +561,23 @@ The cohort raises only the bounded warning-descriptor ceiling from 10,000 to
 exceeds the original limit; actual executions emitted no warnings. The
 standalone CLI and the replaceable `product_prototype_age_replay` Dagster asset
 both expose this run without making provider calls.
+
+## 14. Minimal data-asset status projection
+
+`Tidy Data Asset Status` is a deliberately read-only consumer of the checked
+Table 21 and Table 30 evidence. The explicit registry at
+`fixtures/product-prototype/data-asset-status-v1.json` selects ten sheet-assets
+across five shared physical workbooks. For each sheet it derives independent
+`Identified`, `On disk`, `Tidied`, `Canonicalised`, and `Integrated` facts and a
+separate automated-check result. Missing current source custody does not erase
+historical processing evidence; it creates a visible contradiction instead.
+
+Python standard-library code generates the self-contained, deterministic
+snapshot at `docs/data-asset-status/index.html`. Vanilla JavaScript supplies
+sorting, core filters, text search, and inline evidence details without adding
+a frontend framework or API. The tiny foreground server exposes only `/`,
+`/index.html`, and `/healthz` on `127.0.0.1:3031`; a separately controlled,
+exactly scoped Tailscale Serve route can expose the same page to the Tailnet.
+Dagster links remain operational conveniences, not evidence authority. CI runs
+the deterministic snapshot drift check, and neither page generation nor serving
+makes provider calls.

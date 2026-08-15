@@ -185,3 +185,32 @@ launch provider-free runs. Keep grants narrow, never enable Funnel, and do not
 put workbook bytes, cell values, secrets, credentials, or provider data in
 Dagster metadata/logs. The Mac must be awake, online, connected to Tailscale,
 and running the local UI; Android must also be connected to the tailnet.
+
+## Separate read-only data-status page
+
+The product evidence has a smaller interface that does not share Dagster's
+process or authority model. Generate or verify its committed snapshot with
+`scripts/tidy-data-status refresh|check`, then serve it in the foreground:
+
+```sh
+scripts/tidy-data-status serve
+# Local browser: http://127.0.0.1:3031/
+```
+
+The server binds only to loopback and exposes only `/`, `/index.html`, and
+`/healthz`. In another terminal, manage the tailnet route explicitly:
+
+```sh
+scripts/tailscale-data-status-ui enable
+scripts/tailscale-data-status-ui status
+# Tailnet browser: https://ians-mac-mini-1.taild519de.ts.net:3031/
+scripts/tailscale-data-status-ui disable
+```
+
+The helper adds or removes only the exact owned HTTPS 3031 proxy and preserves
+unrelated current Serve routes. It refuses replaced routes and never invokes
+Funnel, reset, or whole-configuration replacement. The route persists after the
+foreground server exits, so disable it explicitly when the page should no
+longer be reachable. Like Dagster, this page relies on Tailnet identity rather
+than application authentication; unlike Dagster, it has no run or mutation
+controls.
