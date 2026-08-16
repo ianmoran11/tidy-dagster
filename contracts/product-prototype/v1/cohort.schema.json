@@ -79,7 +79,10 @@
           "byteLength": { "type": "integer", "minimum": 1 },
           "sheet": { "type": "string", "minLength": 1 },
           "normalization": {
-            "const": "trim-pathological-full-width-formatting-merge-v1"
+            "enum": [
+              "trim-pathological-full-width-formatting-merge-v1",
+              "trim-pathological-styled-blank-cells-v1"
+            ]
           },
           "replayResponse": {
             "type": "object",

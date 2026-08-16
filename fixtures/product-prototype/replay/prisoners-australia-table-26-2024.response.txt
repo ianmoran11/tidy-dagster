@@ -1,0 +1,42 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Sentenced prisoners by Indigenous status, aggregate sentence length, and state or territory, 2024",
+    "values": {
+      "name": "prisoner count or sentence-length summary value",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state or territory",
+        "memberRegions": [
+          "region-006"
+        ],
+        "direction": "N",
+        "captionHints": []
+      },
+      {
+        "name": "aggregate sentence length or summary statistic",
+        "memberRegions": [
+          "region-005"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-020"
+        ]
+      },
+      {
+        "name": "Indigenous status",
+        "memberRegions": [
+          "region-007"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-020"
+        ]
+      }
+    ]
+  }
+}

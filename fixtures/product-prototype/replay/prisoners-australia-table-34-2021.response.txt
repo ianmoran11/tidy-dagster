@@ -1,0 +1,47 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoners by state or territory, sex and prison location, 2021",
+    "values": {
+      "name": "Number of prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "State or territory",
+        "memberRegions": [
+          "region-021"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-050"
+        ]
+      },
+      {
+        "name": "Sex",
+        "memberRegions": [
+          "region-024"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-050"
+        ]
+      },
+      {
+        "name": "Prison location or total category",
+        "memberRegions": [
+          "region-018",
+          "region-019",
+          "region-020",
+          "region-022"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-050"
+        ]
+      }
+    ]
+  }
+}

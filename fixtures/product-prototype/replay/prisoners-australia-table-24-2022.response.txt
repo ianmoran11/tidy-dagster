@@ -1,0 +1,45 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Sentenced prisoners by geographic area, most serious offence, and aggregate sentence measure",
+    "values": {
+      "name": "sentenced prisoner aggregate sentence value",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "geographic area",
+        "memberRegions": [
+          "region-012"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-038"
+        ]
+      },
+      {
+        "name": "most serious offence",
+        "memberRegions": [
+          "region-011",
+          "region-013"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-038"
+        ]
+      },
+      {
+        "name": "aggregate sentence measure",
+        "memberRegions": [
+          "region-014"
+        ],
+        "direction": "N",
+        "captionHints": [
+          "region-015"
+        ]
+      }
+    ]
+  }
+}

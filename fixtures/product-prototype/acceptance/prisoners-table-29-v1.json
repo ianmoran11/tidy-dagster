@@ -1,0 +1,305 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-table-29-v1",
+  "tableFamilyId": "prisoners-by-indigenous-status-sex-and-prior-imprisonment",
+  "measure": {
+    "id": "prisoner-count",
+    "unitId": "person",
+    "numeric": true,
+    "minimum": 0,
+    "expectedDimensionsByYear": {
+      "2021": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "prior_imprisonment_status": [
+          "NO_PRIOR_IMPRISONMENT",
+          "PRIOR_IMPRISONMENT",
+          "TOTAL"
+        ]
+      },
+      "2022": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "prior_imprisonment_status": [
+          "NO_PRIOR_IMPRISONMENT",
+          "PRIOR_IMPRISONMENT",
+          "TOTAL"
+        ]
+      },
+      "2023": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "prior_imprisonment_status": [
+          "NO_PRIOR_IMPRISONMENT",
+          "PRIOR_IMPRISONMENT",
+          "TOTAL"
+        ]
+      },
+      "2024": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "prior_imprisonment_status": [
+          "NO_PRIOR_IMPRISONMENT",
+          "PRIOR_IMPRISONMENT",
+          "TOTAL"
+        ]
+      },
+      "2025": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "prior_imprisonment_status": [
+          "NO_PRIOR_IMPRISONMENT",
+          "PRIOR_IMPRISONMENT",
+          "TOTAL"
+        ]
+      }
+    }
+  },
+  "requiredDimensions": [
+    "jurisdiction",
+    "indigenous_status",
+    "sex",
+    "prior_imprisonment_status"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "prior_imprisonment_status": [
+      "prior imprisonment status"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "indigenous_status_id",
+    "sex_id",
+    "prior_imprisonment_status_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 243,
+    "maximumRows": 243,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "indigenousStatuses": [
+      "INDIGENOUS",
+      "NON_INDIGENOUS",
+      "TOTAL"
+    ],
+    "sexes": [
+      "FEMALE",
+      "MALE",
+      "PERSONS"
+    ],
+    "priorImprisonmentStatuses": [
+      "NO_PRIOR_IMPRISONMENT",
+      "PRIOR_IMPRISONMENT",
+      "TOTAL"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "INDIGENOUS",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "NON-INDIGENOUS": "NON_INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "TOTAL": "TOTAL",
+      "Total": "TOTAL",
+      "Total (e)": "TOTAL"
+    },
+    "sex": {
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "Persons": "PERSONS",
+      "Persons (d)": "PERSONS"
+    },
+    "prior_imprisonment_status": {
+      "No prior imprisonment": "NO_PRIOR_IMPRISONMENT",
+      "Prior imprisonment": "PRIOR_IMPRISONMENT",
+      "Total": "TOTAL",
+      "Total (c)": "TOTAL"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100
+    },
+    {
+      "dimension": "indigenous_status",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 500
+    },
+    {
+      "dimension": "sex",
+      "totalCode": "PERSONS",
+      "componentCodes": [
+        "MALE",
+        "FEMALE"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100
+    },
+    {
+      "dimension": "prior_imprisonment_status",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "PRIOR_IMPRISONMENT",
+        "NO_PRIOR_IMPRISONMENT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

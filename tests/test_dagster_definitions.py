@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
@@ -12,6 +13,10 @@ from tidy_orchestrator.artifacts import LocalArtifactRepository, domain_digest
 from tidy_orchestrator.dagster_defs import (
     EXPECTED_CATALOG_TAG,
     EXPECTED_RECIPE_TAG,
+    LARGE_BATCH_ASSETS,
+    LARGE_BATCH_CHECKS,
+    LARGE_BATCH_JOBS,
+    LARGE_BATCH_REGISTRY,
     WORK_UNIT_PARTITIONS,
     TidyRuntimeResource,
     active_work_unit_projection,
@@ -126,6 +131,45 @@ def test_definitions_include_provider_free_product_prototype_projection(
         definitions.metadata["product_prototype_live_generation_authorized"].value
         is False
     )
+
+
+def test_definitions_include_sixty_worksheet_batch() -> None:
+    definitions = build_definitions(project_root=PROJECT)
+    Definitions.validate_loadable(definitions)
+    assert LARGE_BATCH_REGISTRY.worksheet_count == 60
+    assert len(LARGE_BATCH_REGISTRY.entries) == 12
+    assert len(LARGE_BATCH_ASSETS) == 12
+    assert len(LARGE_BATCH_CHECKS) == 12
+    assert len(LARGE_BATCH_JOBS) == 12
+    assert definitions.metadata["product_prototype_large_batch_supported"].value
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 60
+    assert {asset.key.to_user_string() for asset in LARGE_BATCH_ASSETS} == {
+        spec.dagster_asset for spec in LARGE_BATCH_REGISTRY.entries
+    }
+    assert {
+        definitions.resolve_job_def(spec.dagster_job).name
+        for spec in LARGE_BATCH_REGISTRY.entries
+    } == {spec.dagster_job for spec in LARGE_BATCH_REGISTRY.entries}
+    assert (
+        definitions.resolve_job_def("product_prototype_large_batch_replay_job").name
+        == "product_prototype_large_batch_replay_job"
+    )
+
+
+def test_build_definitions_uses_requested_project_registry(tmp_path: Path) -> None:
+    registry_path = tmp_path / "fixtures/product-prototype/large-batch-assets-v1.json"
+    registry_path.parent.mkdir(parents=True)
+    registry = json.loads(
+        (PROJECT / "fixtures/product-prototype/large-batch-assets-v1.json").read_text()
+    )
+    registry["batchId"] = "alternate-sixty-worksheets-v1"
+    registry_path.write_text(json.dumps(registry))
+    definitions = build_definitions(project_root=tmp_path)
+    assert (
+        definitions.metadata["product_prototype_large_batch_id"].value
+        == "alternate-sixty-worksheets-v1"
+    )
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 60
 
 
 def test_definitions_load_identity_and_share_one_partition_definition(
@@ -521,6 +565,36 @@ def test_product_prototype_offence_pair_dagster_jobs_materialize_and_pass_checks
     assert metadata["canonical_observations"].value == expected_count
     assert metadata["published_total_observations"].value == 45
     assert len(metadata["workbooks"].data) == 5
+    evaluations = result.get_asset_check_evaluations()
+    assert len(evaluations) == 1
+    assert evaluations[0].passed
+
+
+@pytest.mark.timeout(120)
+def test_large_batch_dagster_asset_materializes_and_passes_check(
+    tmp_path: Path,
+) -> None:
+    subprocess.run(
+        ["npm", "run", "build"], cwd=PROJECT, check=True, capture_output=True
+    )
+    spec = next(
+        item for item in LARGE_BATCH_REGISTRY.entries if item.family_id == "table-32"
+    )
+    definitions = build_definitions(
+        project_root=PROJECT, repository_root=tmp_path / "repository"
+    )
+    result = definitions.resolve_job_def(spec.dagster_job).execute_in_process()
+    assert result.success
+    materializations = result.get_asset_materialization_events()
+    assert {event.asset_key.to_user_string() for event in materializations} == {
+        spec.dagster_asset
+    }
+    metadata = materializations[0].event_specific_data.materialization.metadata
+    assert metadata["batch_id"].value == LARGE_BATCH_REGISTRY.batch_id
+    assert metadata["accepted_workbooks"].value == 5
+    assert metadata["exception_workbooks"].value == 0
+    assert metadata["canonical_observations"].value == 693
+    assert metadata["provider_calls"].value == 0
     evaluations = result.get_asset_check_evaluations()
     assert len(evaluations) == 1
     assert evaluations[0].passed

@@ -1,0 +1,53 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Sentenced prisoners by state or territory, reference period, and sentence measure",
+    "values": {
+      "name": "sentenced prisoner statistic",
+      "regions": [
+        "region-010"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state or territory",
+        "memberRegions": [
+          "region-039",
+          "region-031"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-040"
+        ]
+      },
+      {
+        "name": "reference period",
+        "memberRegions": [
+          "region-030"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-040"
+        ]
+      },
+      {
+        "name": "sentence measure",
+        "memberRegions": [
+          "region-032"
+        ],
+        "direction": "NNW",
+        "captionHints": [
+          "region-038"
+        ]
+      },
+      {
+        "name": "unit",
+        "memberRegions": [
+          "region-033"
+        ],
+        "direction": "N",
+        "captionHints": []
+      }
+    ]
+  }
+}

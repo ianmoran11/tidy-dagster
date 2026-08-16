@@ -503,10 +503,16 @@ def _load_evidence(
                 ):
                     malformed += 1
                     continue
+                publication_date = row.get(
+                    "publication_vintage_date", row["reference_date"]
+                )
+                if not isinstance(publication_date, str) or not publication_date:
+                    malformed += 1
+                    continue
                 key = (
                     row["source_workbook_digest"],
                     row["source_sheet"],
-                    row["reference_date"],
+                    publication_date,
                 )
                 canonical_counts[key] = canonical_counts.get(key, 0) + 1
             if malformed:

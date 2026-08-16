@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-table-33-v1",
+  "tableFamilyId": "prisoners-by-sex-security-classification-and-jurisdiction",
+  "measure": {
+    "id": "prisoner-count",
+    "unitId": "person",
+    "numeric": true,
+    "minimum": 0,
+    "expectedDimensionsByYear": {
+      "2021": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "security_classification": [
+          "MAXIMUM",
+          "MEDIUM",
+          "MINIMUM",
+          "TOTAL",
+          "UNCLASSIFIED"
+        ]
+      },
+      "2022": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "security_classification": [
+          "MAXIMUM",
+          "MEDIUM",
+          "MINIMUM",
+          "TOTAL",
+          "UNCLASSIFIED"
+        ]
+      },
+      "2023": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "security_classification": [
+          "MAXIMUM",
+          "MEDIUM",
+          "MINIMUM",
+          "TOTAL",
+          "UNCLASSIFIED"
+        ]
+      },
+      "2024": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "security_classification": [
+          "MAXIMUM",
+          "MEDIUM",
+          "MINIMUM",
+          "TOTAL",
+          "UNCLASSIFIED"
+        ]
+      },
+      "2025": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "sex": [
+          "FEMALE",
+          "MALE",
+          "PERSONS"
+        ],
+        "security_classification": [
+          "MAXIMUM",
+          "MEDIUM",
+          "MINIMUM",
+          "TOTAL",
+          "UNCLASSIFIED"
+        ]
+      }
+    }
+  },
+  "requiredDimensions": [
+    "jurisdiction",
+    "sex",
+    "security_classification"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory",
+      "state/territory"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "security_classification": [
+      "security classification"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "sex_id",
+    "security_classification_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 135,
+    "maximumRows": 135,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "sexes": [
+      "FEMALE",
+      "MALE",
+      "PERSONS"
+    ],
+    "securityClassifications": [
+      "MAXIMUM",
+      "MEDIUM",
+      "MINIMUM",
+      "TOTAL",
+      "UNCLASSIFIED"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "AUSTRALIA": "AUS",
+      "AUSTRALIAN CAPITAL TERRITORY": "ACT",
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "NEW SOUTH WALES": "NSW",
+      "NORTHERN TERRITORY": "NT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "QUEENSLAND": "QLD",
+      "Queensland": "QLD",
+      "SOUTH AUSTRALIA": "SA",
+      "South Australia": "SA",
+      "TASMANIA": "TAS",
+      "Tasmania": "TAS",
+      "VICTORIA": "VIC",
+      "Victoria": "VIC",
+      "WESTERN AUSTRALIA": "WA",
+      "Western Australia": "WA"
+    },
+    "sex": {
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "Persons": "PERSONS",
+      "Persons (b)": "PERSONS"
+    },
+    "security_classification": {
+      "Maximum": "MAXIMUM",
+      "Medium": "MEDIUM",
+      "Minimum": "MINIMUM",
+      "Total": "TOTAL",
+      "Unclassified": "UNCLASSIFIED"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100
+    },
+    {
+      "dimension": "sex",
+      "totalCode": "PERSONS",
+      "componentCodes": [
+        "MALE",
+        "FEMALE"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100
+    },
+    {
+      "dimension": "security_classification",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "MAXIMUM",
+        "MEDIUM",
+        "MINIMUM",
+        "UNCLASSIFIED"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

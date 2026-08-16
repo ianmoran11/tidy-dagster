@@ -77,3 +77,30 @@ scripts/tidy-prototype run \
   --mode replay \
   --output .product-prototype/table-31-five-year-replay
 ```
+
+The 60-worksheet batch extends the same v1 contract without weakening existing
+cohorts:
+
+- multi-measure selection may use an AND conjunction across several dimensions;
+- a measure can declare applicable publication years plus reviewed annual
+  combination counts and exact combination-set digests for intentionally
+  non-Cartesian tables;
+- a table without a valid arithmetic identity must explicitly set
+  `totalValidation: not_applicable`; an unmarked empty equation list fails;
+- Table 27 declares `referenceDateDimension` and
+  `preservePublicationVintage`, making publication vintage and row-level
+  observation date separate canonical key fields; and
+- cohort normalization now also recognizes
+  `trim-pathological-styled-blank-cells-v1`, which trims out-of-range styled
+  blanks and pathological merge/column formatting while refusing to remove
+  cell values or formulas.
+
+The batch registry is
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 12
+contracts pins exact annual dimensions, measure applicability, value statuses,
+combination counts, and source-header variants. Verification remains
+provider-free:
+
+```sh
+scripts/tidy-prototype-batch verify
+```

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-table-26-2021-2025",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "sentenced-prisoners-by-indigenous-status-and-aggregate-sentence",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-table-26-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-batch-normalized.xlsx",
+      "contentDigest": "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+      "byteLength": 309532,
+      "sheet": "Table_26",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-26-2021.response.txt",
+        "contentDigest": "sha256:1191b57f4e859738564c4398f6a25a1f388fb5d8541f36f6d17d4688007eb708",
+        "byteLength": 975,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "contentDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "byteLength": 327530,
+      "sheet": "Table_26",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-26-2022.response.txt",
+        "contentDigest": "sha256:bf821b0e6eb969e6cff992614bac8d027afa90f6193523782ee5f872f61b3d6f",
+        "byteLength": 622,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "contentDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "byteLength": 302509,
+      "sheet": "Table_26",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-26-2023.response.txt",
+        "contentDigest": "sha256:cd02a23c1272873defee9465fdf1482d46a570bd29da4b79862ac5c7455f1a35",
+        "byteLength": 967,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024.xlsx",
+      "contentDigest": "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+      "byteLength": 279279,
+      "sheet": "Table 26",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-26-2024.response.txt",
+        "contentDigest": "sha256:9e49853f015c45d5b3e3912359863a9bf5cea74692c3fb941d625ee6d84d8da1",
+        "byteLength": 932,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-batch-normalized.xlsx",
+      "contentDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+      "byteLength": 169355,
+      "sheet": "Table 26",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-26-2025.response.txt",
+        "contentDigest": "sha256:f41b36a354b588682b5def1b17dd407f5302ca558aee21957cbfc208c610fc59",
+        "byteLength": 912,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

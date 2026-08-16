@@ -59,6 +59,26 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
+A checked large-batch expansion adds 12 semantic five-year cohorts—60 more
+worksheet-assets—covering selected characteristics, Indigenous status by
+offence/charge, sentence and expected-time statistics, prior imprisonment,
+remand duration, security classification, prison location, and court level.
+All 60 worksheets were automatically accepted into 19,648 canonical
+observations with zero exceptions, cross-year issues, or provider calls. Table
+27 preserves publication vintage and observation period separately; 40
+published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
+historical maps were replaced by checked human-authored adjacent-year maps,
+which remain non-authoritative. Source/derived workbook digests, byte lengths,
+retained ranges, and the exact normalization script digest are closed in
+`fixtures/product-prototype/batch-workbook-normalization-v1.json`.
+
+```sh
+scripts/tidy-prototype-batch verify
+scripts/tidy-prototype-batch run \
+  --output .product-prototype/large-batch-replay \
+  --concurrency 3
+```
+
 The live model is pinned to `openai-codex/gpt-5.6-luna` with high reasoning.
 The checked live campaign made three calls for USD 0.0197296, compiled and
 executed all three fresh candidates, automatically accepted 2023–2025, and
@@ -75,8 +95,10 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects the five five-year cohorts as 25 sheet-assets
-across five physical workbooks. It derives `Identified`, `On disk`, `Tidied`,
+A minimal read-only page projects 17 five-year cohorts as 85 sheet-assets
+across nine checked workbook byte identities: five base annual workbooks and
+four deterministic formatting-trim derivatives used by the large batch. It
+derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The page is not
 an evidence authority and exposes no run, approval, or editing controls.

@@ -1,0 +1,425 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
+  "batchId": "prisoners-australia-sixty-worksheets-v1",
+  "recordedAt": "2026-08-15T09:30:00+00:00",
+  "worksheetCount": 60,
+  "providerCalls": 0,
+  "entries": [
+    {
+      "familyId": "selected-characteristics",
+      "label": "Prisoners in Australia \u2014 selected characteristics",
+      "cohortPath": "fixtures/product-prototype/prisoners-selected-characteristics-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/selected-characteristics-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_selected_characteristics_replay",
+      "dagsterJob": "product_prototype_selected_characteristics_replay_job",
+      "outputDirectory": "dagster-selected-characteristics-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        243,
+        243,
+        243,
+        243,
+        288
+      ],
+      "expectedCanonicalCount": 1260,
+      "expectedMeasureCounts": {
+        "mean-age": 45,
+        "median-age": 225,
+        "prisoner-count": 495,
+        "prisoner-proportion": 495
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1260
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "indigenous-offence",
+      "label": "Prisoners in Australia \u2014 Indigenous status and offence/charge",
+      "cohortPath": "fixtures/product-prototype/prisoners-indigenous-offence-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/indigenous-offence-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_indigenous_offence_replay",
+      "dagsterJob": "product_prototype_indigenous_offence_replay_job",
+      "outputDirectory": "dagster-indigenous-offence-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        486,
+        486,
+        486,
+        486,
+        486
+      ],
+      "expectedCanonicalCount": 2430,
+      "expectedMeasureCounts": {
+        "prisoner-count": 2430
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2430
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-24",
+      "label": "Prisoners in Australia \u2014 Table 24 (aggregate sentence by offence)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-24-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-24-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_24_replay",
+      "dagsterJob": "product_prototype_table_24_replay_job",
+      "outputDirectory": "dagster-table-24-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        459,
+        459,
+        459,
+        459,
+        459
+      ],
+      "expectedCanonicalCount": 2295,
+      "expectedMeasureCounts": {
+        "mean-years": 765,
+        "median-years": 765,
+        "prisoner-count": 765
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2275,
+        "suppressed": 20
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-25",
+      "label": "Prisoners in Australia \u2014 Table 25 (expected time by offence)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-25-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-25-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_25_replay",
+      "dagsterJob": "product_prototype_table_25_replay_job",
+      "outputDirectory": "dagster-table-25-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        459,
+        459,
+        459,
+        459,
+        459
+      ],
+      "expectedCanonicalCount": 2295,
+      "expectedMeasureCounts": {
+        "mean-years": 765,
+        "median-years": 765,
+        "prisoner-count": 765
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2275,
+        "suppressed": 20
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-26",
+      "label": "Prisoners in Australia \u2014 Table 26 (aggregate sentence by Indigenous status)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-26-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-26-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_26_replay",
+      "dagsterJob": "product_prototype_table_26_replay_job",
+      "outputDirectory": "dagster-table-26-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        378,
+        378,
+        378,
+        378,
+        378
+      ],
+      "expectedCanonicalCount": 1890,
+      "expectedMeasureCounts": {
+        "mean-years": 135,
+        "median-years": 135,
+        "prisoner-count": 1620
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1890
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-27",
+      "label": "Prisoners in Australia \u2014 Table 27 (aggregate sentence vintages)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-27-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-27-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_27_replay",
+      "dagsterJob": "product_prototype_table_27_replay_job",
+      "outputDirectory": "dagster-table-27-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        693,
+        693,
+        693,
+        693,
+        630
+      ],
+      "expectedCanonicalCount": 3402,
+      "expectedMeasureCounts": {
+        "median-aggregate-sentence-length": 486,
+        "sentence-share-1-to-under-5-years": 486,
+        "sentence-share-10-years-plus": 486,
+        "sentence-share-5-to-under-10-years": 486,
+        "sentence-share-under-1-year": 486,
+        "share-sentenced-in-last-12-months": 486,
+        "total-sentenced-prisoners": 486
+      },
+      "expectedValueStatusCounts": {
+        "observed": 3402
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": true
+    },
+    {
+      "familyId": "table-28",
+      "label": "Prisoners in Australia \u2014 Table 28 (expected time by Indigenous status)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-28-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-28-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_28_replay",
+      "dagsterJob": "product_prototype_table_28_replay_job",
+      "outputDirectory": "dagster-table-28-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        378,
+        378,
+        378,
+        378,
+        378
+      ],
+      "expectedCanonicalCount": 1890,
+      "expectedMeasureCounts": {
+        "mean-years": 135,
+        "median-years": 135,
+        "prisoner-count": 1620
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1890
+      },
+      "expectedManualReplayYears": [
+        2023
+      ],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-29",
+      "label": "Prisoners in Australia \u2014 Table 29 (prior imprisonment)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-29-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-29-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_29_replay",
+      "dagsterJob": "product_prototype_table_29_replay_job",
+      "outputDirectory": "dagster-table-29-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        243,
+        243,
+        243,
+        243,
+        243
+      ],
+      "expectedCanonicalCount": 1215,
+      "expectedMeasureCounts": {
+        "prisoner-count": 1215
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1215
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-32",
+      "label": "Prisoners in Australia \u2014 Table 32 (time on remand)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-32-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-32-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_32_replay",
+      "dagsterJob": "product_prototype_table_32_replay_job",
+      "outputDirectory": "dagster-table-32-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        135,
+        135,
+        135,
+        135,
+        153
+      ],
+      "expectedCanonicalCount": 693,
+      "expectedMeasureCounts": {
+        "mean-time-on-remand": 45,
+        "median-time-on-remand": 45,
+        "p90-time-on-remand": 45,
+        "unsentenced-prisoner-count": 279,
+        "unsentenced-prisoner-proportion": 279
+      },
+      "expectedValueStatusCounts": {
+        "observed": 693
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-33",
+      "label": "Prisoners in Australia \u2014 Table 33 (security classification)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-33-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-33-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_33_replay",
+      "dagsterJob": "product_prototype_table_33_replay_job",
+      "outputDirectory": "dagster-table-33-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        135,
+        135,
+        135,
+        135,
+        135
+      ],
+      "expectedCanonicalCount": 675,
+      "expectedMeasureCounts": {
+        "prisoner-count": 675
+      },
+      "expectedValueStatusCounts": {
+        "observed": 675
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-34",
+      "label": "Prisoners in Australia \u2014 Table 34 (prison location)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-34-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-34-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_34_replay",
+      "dagsterJob": "product_prototype_table_34_replay_job",
+      "outputDirectory": "dagster-table-34-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        158,
+        160,
+        157,
+        159,
+        159
+      ],
+      "expectedCanonicalCount": 793,
+      "expectedMeasureCounts": {
+        "prisoner-count": 793
+      },
+      "expectedValueStatusCounts": {
+        "observed": 793
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "table-35",
+      "label": "Prisoners in Australia \u2014 Table 35 (court and remand)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-35-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-35-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_table_35_replay",
+      "dagsterJob": "product_prototype_table_35_replay_job",
+      "outputDirectory": "dagster-table-35-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        162,
+        162,
+        162,
+        162,
+        162
+      ],
+      "expectedCanonicalCount": 810,
+      "expectedMeasureCounts": {
+        "mean-time-on-remand": 135,
+        "median-time-on-remand": 135,
+        "p90-time-on-remand": 135,
+        "prisoner-count": 405
+      },
+      "expectedValueStatusCounts": {
+        "observed": 810
+      },
+      "expectedManualReplayYears": [],
+      "preservesPublicationVintage": false
+    }
+  ],
+  "normalizationManifestPath": "fixtures/product-prototype/batch-workbook-normalization-v1.json",
+  "replayRecordedAt": "2026-08-15T09:00:00+00:00"
+}

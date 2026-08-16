@@ -1,0 +1,873 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-table-32-v1",
+  "tableFamilyId": "unsentenced-prisoners-by-time-on-remand",
+  "measures": [
+    {
+      "id": "unsentenced-prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_2_PLUS",
+            "YEAR_1_PLUS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 54,
+        "2022": 54,
+        "2023": 54,
+        "2024": 54,
+        "2025": 63
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_2_PLUS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:7d90f1001cffadecb9e163545eb84338d2d001b4c311b6331e0ac1d66be610fe",
+        "2022": "sha256:7d90f1001cffadecb9e163545eb84338d2d001b4c311b6331e0ac1d66be610fe",
+        "2023": "sha256:7d90f1001cffadecb9e163545eb84338d2d001b4c311b6331e0ac1d66be610fe",
+        "2024": "sha256:7d90f1001cffadecb9e163545eb84338d2d001b4c311b6331e0ac1d66be610fe",
+        "2025": "sha256:6041958ff4edc94f2620a8a8ca980a38fb8c4c18c6424f20b2e59d89bc598b88"
+      }
+    },
+    {
+      "id": "unsentenced-prisoner-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 54,
+        "2022": 54,
+        "2023": 54,
+        "2024": 54,
+        "2025": 63
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEAR_1_PLUS"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MONTHS_1_TO_UNDER_3",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "TOTAL",
+            "UNDER_1_MONTH",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_2_PLUS"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:4d091848236f7510cf99df90a983f0d29950b67e01aedff1248418cd0ffc821c",
+        "2022": "sha256:4d091848236f7510cf99df90a983f0d29950b67e01aedff1248418cd0ffc821c",
+        "2023": "sha256:4d091848236f7510cf99df90a983f0d29950b67e01aedff1248418cd0ffc821c",
+        "2024": "sha256:4d091848236f7510cf99df90a983f0d29950b67e01aedff1248418cd0ffc821c",
+        "2025": "sha256:e9b40204375f64aca24b47effb5feafe7228f40a325c98304b8b2fe932ab8ec3"
+      }
+    },
+    {
+      "id": "mean-time-on-remand",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "time_on_remand": [
+            "MEAN_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 9,
+        "2022": 9,
+        "2023": 9,
+        "2024": 9,
+        "2025": 9
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:d501e07d669b29555c7aa148b1ce5b6b9e49b25638620d489fc0caaeba5beedc",
+        "2022": "sha256:d501e07d669b29555c7aa148b1ce5b6b9e49b25638620d489fc0caaeba5beedc",
+        "2023": "sha256:d501e07d669b29555c7aa148b1ce5b6b9e49b25638620d489fc0caaeba5beedc",
+        "2024": "sha256:d501e07d669b29555c7aa148b1ce5b6b9e49b25638620d489fc0caaeba5beedc",
+        "2025": "sha256:d501e07d669b29555c7aa148b1ce5b6b9e49b25638620d489fc0caaeba5beedc"
+      }
+    },
+    {
+      "id": "median-time-on-remand",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "time_on_remand": [
+            "MEDIAN_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 9,
+        "2022": 9,
+        "2023": 9,
+        "2024": 9,
+        "2025": 9
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEDIAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEDIAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEDIAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEDIAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "MEDIAN_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:4f1ac96c1a91559b13549fa201c421cbcf6b69d742b91e57bb02c45fceeb13e0",
+        "2022": "sha256:4f1ac96c1a91559b13549fa201c421cbcf6b69d742b91e57bb02c45fceeb13e0",
+        "2023": "sha256:4f1ac96c1a91559b13549fa201c421cbcf6b69d742b91e57bb02c45fceeb13e0",
+        "2024": "sha256:4f1ac96c1a91559b13549fa201c421cbcf6b69d742b91e57bb02c45fceeb13e0",
+        "2025": "sha256:4f1ac96c1a91559b13549fa201c421cbcf6b69d742b91e57bb02c45fceeb13e0"
+      }
+    },
+    {
+      "id": "p90-time-on-remand",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "time_on_remand": [
+            "P90_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 9,
+        "2022": 9,
+        "2023": 9,
+        "2024": 9,
+        "2025": 9
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "P90_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "P90_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "P90_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "P90_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "time_on_remand": [
+            "P90_MONTHS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:aaeaaa3823b747111cb35d5543bf770a21f22ac766e513df51a14332bdb943eb",
+        "2022": "sha256:aaeaaa3823b747111cb35d5543bf770a21f22ac766e513df51a14332bdb943eb",
+        "2023": "sha256:aaeaaa3823b747111cb35d5543bf770a21f22ac766e513df51a14332bdb943eb",
+        "2024": "sha256:aaeaaa3823b747111cb35d5543bf770a21f22ac766e513df51a14332bdb943eb",
+        "2025": "sha256:aaeaaa3823b747111cb35d5543bf770a21f22ac766e513df51a14332bdb943eb"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "time_on_remand",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory"
+    ],
+    "time_on_remand": [
+      "time on remand.*"
+    ],
+    "statistic_basis": [
+      "statistic basis",
+      "reporting basis",
+      "measure type",
+      "measure"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "time_on_remand_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 135,
+    "maximumRows": 153,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "timesOnRemandByYear": {
+      "2021": [
+        "MEAN_MONTHS",
+        "MEDIAN_MONTHS",
+        "MONTHS_1_TO_UNDER_3",
+        "MONTHS_3_TO_UNDER_6",
+        "MONTHS_6_TO_UNDER_12",
+        "P90_MONTHS",
+        "TOTAL",
+        "UNDER_1_MONTH",
+        "YEAR_1_PLUS"
+      ],
+      "2022": [
+        "MEAN_MONTHS",
+        "MEDIAN_MONTHS",
+        "MONTHS_1_TO_UNDER_3",
+        "MONTHS_3_TO_UNDER_6",
+        "MONTHS_6_TO_UNDER_12",
+        "P90_MONTHS",
+        "TOTAL",
+        "UNDER_1_MONTH",
+        "YEAR_1_PLUS"
+      ],
+      "2023": [
+        "MEAN_MONTHS",
+        "MEDIAN_MONTHS",
+        "MONTHS_1_TO_UNDER_3",
+        "MONTHS_3_TO_UNDER_6",
+        "MONTHS_6_TO_UNDER_12",
+        "P90_MONTHS",
+        "TOTAL",
+        "UNDER_1_MONTH",
+        "YEAR_1_PLUS"
+      ],
+      "2024": [
+        "MEAN_MONTHS",
+        "MEDIAN_MONTHS",
+        "MONTHS_1_TO_UNDER_3",
+        "MONTHS_3_TO_UNDER_6",
+        "MONTHS_6_TO_UNDER_12",
+        "P90_MONTHS",
+        "TOTAL",
+        "UNDER_1_MONTH",
+        "YEAR_1_PLUS"
+      ],
+      "2025": [
+        "MEAN_MONTHS",
+        "MEDIAN_MONTHS",
+        "MONTHS_1_TO_UNDER_3",
+        "MONTHS_3_TO_UNDER_6",
+        "MONTHS_6_TO_UNDER_12",
+        "P90_MONTHS",
+        "TOTAL",
+        "UNDER_1_MONTH",
+        "YEARS_1_TO_UNDER_2",
+        "YEARS_2_PLUS"
+      ]
+    },
+    "statisticBases": [
+      "NUMBER",
+      "PROPORTION"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    },
+    "time_on_remand": {
+      "1 and under 3 months": "MONTHS_1_TO_UNDER_3",
+      "1 to under 2 years": "YEARS_1_TO_UNDER_2",
+      "1 to under 3 months": "MONTHS_1_TO_UNDER_3",
+      "1 year & over": "YEAR_1_PLUS",
+      "1 year and over": "YEAR_1_PLUS",
+      "2 years & over": "YEARS_2_PLUS",
+      "3 and under 6 months": "MONTHS_3_TO_UNDER_6",
+      "3 to under 6 months": "MONTHS_3_TO_UNDER_6",
+      "6 and under 12 months": "MONTHS_6_TO_UNDER_12",
+      "6 to under 12 months": "MONTHS_6_TO_UNDER_12",
+      "90th percentile (months)": "P90_MONTHS",
+      "90th percentile (months) (b)": "P90_MONTHS",
+      "Mean (months)": "MEAN_MONTHS",
+      "Median (months)": "MEDIAN_MONTHS",
+      "Total": "TOTAL",
+      "Under 1 month": "UNDER_1_MONTH"
+    },
+    "statistic_basis": {
+      "NUMBER": "NUMBER",
+      "Number": "NUMBER",
+      "PROPORTION (%)": "PROPORTION",
+      "Proportion (%)": "PROPORTION"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 25,
+      "measureIds": [
+        "unsentenced-prisoner-count"
+      ]
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

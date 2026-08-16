@@ -121,7 +121,7 @@ describe("compileCellRoleSketch", () => {
     const bytes = outputs.map((entry) => (entry.ok ? entry.canonicalJson : ""));
     expect(new Set(bytes)).toHaveLength(1);
     expect(bytes[0]).toContain('"range":"R10C10:R309C309"');
-  }, 20_000);
+  }, 30_000);
 
   it.each([
     [

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "table-27",
+  "cohortPath": "fixtures/product-prototype/prisoners-table-27-2021-2025.json",
+  "cohortDigest": "sha256:606bd36c714e2fcb770cbbe30b7a19ecfc19c84d5614481eb30044a44b6b13dc",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/prisoners-table-27-v1.json",
+  "acceptanceContractDigest": "sha256:98b5e96bf9925cb126391d4ed11d6a455e3cad6fc048be75fd3f1b4648a5ece1",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 5,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 3402,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 3402,
+  "measureCounts": {
+    "median-aggregate-sentence-length": 486,
+    "sentence-share-1-to-under-5-years": 486,
+    "sentence-share-10-years-plus": 486,
+    "sentence-share-5-to-under-10-years": 486,
+    "sentence-share-under-1-year": 486,
+    "share-sentenced-in-last-12-months": 486,
+    "total-sentenced-prisoners": 486
+  },
+  "valueStatusCounts": {
+    "observed": 3402
+  },
+  "manualReplayYears": [],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:521d55a308d9c4405483d1dce1d875e1ab5fcab4b0bed40bb9feafa6510467db",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:34cc5263a357051144a1e73d38d5c3f3b5b663bb3a0004e5019cb2d7ecd38bfe",
+      "byteLength": 1252
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:bff2eb2bfbe3040d930085960aca7ffaa6aa402c763e740db04aebb431559191",
+      "byteLength": 2579535
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:86f166d91ba9781757d8adcbb64850dc08a020ac753174c5da16d63dedeba3c7",
+      "byteLength": 4375359
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:63f8bf3bfa1dd3d06db13281a50b693ad8e98fdeb56aa4138e8629436ed9f081",
+      "byteLength": 1633
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:fa466d1173436b658256099dedebb2cdabc825dc0b51bbadb55f648db77e13cb",
+      "byteLength": 5072
+    }
+  ]
+}

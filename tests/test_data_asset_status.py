@@ -5,6 +5,7 @@ import shutil
 import threading
 import urllib.error
 import urllib.request
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -17,23 +18,24 @@ from tidy_orchestrator.data_asset_status import (
     render_dashboard,
     snapshot_matches,
 )
+from tidy_orchestrator.large_batch import load_large_batch_registry
 
 PROJECT = Path(__file__).parents[1]
 
 
-def test_current_dashboard_reports_twenty_five_clean_sheet_assets() -> None:
+def test_current_dashboard_reports_eighty_five_clean_sheet_assets() -> None:
     status = build_dashboard(PROJECT)
     assert status.title == "Tidy Data Asset Status"
-    assert len(status.cohorts) == 5
-    assert len(status.assets) == 25
-    assert status.physical_workbook_count == 5
+    assert len(status.cohorts) == 17
+    assert len(status.assets) == 85
+    assert status.physical_workbook_count == 9
     assert {asset.year for asset in status.assets} == set(range(2021, 2026))
     assert all(
         stage == "yes" for asset in status.assets for stage in asset.stages.values()
     )
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
-    assert sum(asset.canonical_count or 0 for asset in status.assets) == 13283
+    assert sum(asset.canonical_count or 0 for asset in status.assets) == 32931
     table_21 = [asset for asset in status.assets if "Table 21" in asset.cohort_label]
     table_22 = [asset for asset in status.assets if "Table 22" in asset.cohort_label]
     table_23 = [asset for asset in status.assets if "Table 23" in asset.cohort_label]
@@ -45,13 +47,19 @@ def test_current_dashboard_reports_twenty_five_clean_sheet_assets() -> None:
     assert [asset.canonical_count for asset in table_30] == [243] * 5
     assert [asset.canonical_count for asset in table_31] == [522, 522, 522, 522, 450]
     assert sum(asset.excluded_count or 0 for asset in table_21) == 1467
+    batch = load_large_batch_registry(PROJECT)
+    for spec in batch.entries:
+        cohort_id = json.loads((PROJECT / spec.cohort_path).read_text())["cohortId"]
+        assets = [asset for asset in status.assets if asset.cohort_id == cohort_id]
+        assert [asset.canonical_count for asset in assets] == list(
+            reversed(spec.expected_year_counts)
+        )
     normalized = [asset for asset in status.assets if asset.normalization]
-    assert {(asset.year, asset.sheet) for asset in normalized} == {
-        (2025, "Table 21"),
-        (2025, "Table 22"),
-        (2025, "Table 23"),
-        (2025, "Table 30"),
-        (2025, "Table 31"),
+    assert Counter(asset.year for asset in normalized) == {
+        2021: 12,
+        2022: 12,
+        2023: 12,
+        2025: 17,
     }
     live = [asset for asset in status.assets if asset.live_evidence_path]
     assert {(asset.year, asset.sheet) for asset in live} == {
@@ -64,8 +72,8 @@ def test_current_dashboard_reports_twenty_five_clean_sheet_assets() -> None:
 def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None:
     rendered = render_dashboard(build_dashboard(PROJECT)).decode()
     assert rendered.startswith("<!doctype html>")
-    assert rendered.count('class="asset-pair"') == 25
-    assert rendered.count('class="detail-toggle"') == 25
+    assert rendered.count('class="asset-pair"') == 85
+    assert rendered.count('class="detail-toggle"') == 85
     assert all(
         value in rendered
         for value in (
@@ -77,13 +85,17 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'class="sort"',
             "Automated checks",
             "Flagged issues",
-            "25 sheet-assets across 5 physical workbooks",
+            "85 sheet-assets across 9 physical workbooks",
             "product_prototype_age_replay",
             "product_prototype_country_replay",
             "product_prototype_offence_replay",
             "product_prototype_replay",
             "product_prototype_charge_replay",
         )
+    )
+    assert all(
+        spec.dagster_asset in rendered
+        for spec in load_large_batch_registry(PROJECT).entries
     )
     assert "/Users/" not in rendered
     assert "raw prompt" not in rendered.lower()

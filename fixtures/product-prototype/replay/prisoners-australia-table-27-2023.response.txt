@@ -1,0 +1,52 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Sentenced prisoners by state or territory, reference period and aggregate sentence length, 2013–2023",
+    "values": {
+      "name": "sentenced prisoner statistic",
+      "regions": [
+        "region-010"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state or territory",
+        "memberRegions": [
+          "region-031"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-036"
+        ]
+      },
+      {
+        "name": "reference period",
+        "memberRegions": [
+          "region-030"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-036"
+        ]
+      },
+      {
+        "name": "sentenced prisoner measure",
+        "memberRegions": [
+          "region-032"
+        ],
+        "direction": "N",
+        "captionHints": [
+          "region-034"
+        ]
+      },
+      {
+        "name": "unit",
+        "memberRegions": [
+          "region-033"
+        ],
+        "direction": "N",
+        "captionHints": []
+      }
+    ]
+  }
+}

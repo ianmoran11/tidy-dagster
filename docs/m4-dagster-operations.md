@@ -100,6 +100,16 @@ partitions. It deletes only disposable Dagster metadata and reconstructs the
 catalog, all active materializations, and check mirrors from unchanged
 authoritative index and gate digests.
 
+The product-prototype large batch adds 12 explicit, registry-generated Dagster
+assets, checks, and diagnostic jobs in group `product_prototype_large_batch`.
+`product_prototype_large_batch_replay_job` selects all 12, while each
+`product_prototype_*_replay_job` preserves family-level failure isolation. The
+batch CLI defaults to three concurrent cohorts and caps concurrency at four;
+it never enables live generation. Dagster run concurrency and the existing
+worker pool remain operational limits rather than evidence authority. The
+audited source for asset names, expected counts, and evidence paths is
+`fixtures/product-prototype/large-batch-assets-v1.json`.
+
 The real `dg dev` operational test starts webserver plus daemon on a
 disposable loopback port, waits for an actual default-sensor tick, all three
 atomic partition additions and queued successful jobs, verifies stable run keys,

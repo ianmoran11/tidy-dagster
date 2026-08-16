@@ -1,0 +1,48 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoners by state or territory, sex and prison location",
+    "values": {
+      "name": "Number of prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "State or territory",
+        "memberRegions": [
+          "region-021"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-053"
+        ]
+      },
+      {
+        "name": "Sex",
+        "memberRegions": [
+          "region-025"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-053"
+        ]
+      },
+      {
+        "name": "Prison location or total",
+        "memberRegions": [
+          "region-018",
+          "region-019",
+          "region-020",
+          "region-022",
+          "region-024"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-053"
+        ]
+      }
+    ]
+  }
+}

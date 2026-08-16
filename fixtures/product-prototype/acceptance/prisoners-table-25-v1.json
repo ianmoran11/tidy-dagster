@@ -1,0 +1,779 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-table-25-v1",
+  "tableFamilyId": "sentenced-prisoners-by-offence-and-expected-time-to-serve",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "n.p.": "suppressed",
+        "np": "suppressed"
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 153,
+        "2022": 153,
+        "2023": 153,
+        "2024": 153,
+        "2025": 153
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "COUNT"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "COUNT"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "COUNT"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "COUNT"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "COUNT"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:0ac8b689419bea20470c1de16bbb85d6392fa2c4cd9723f4b664261f5d551b78",
+        "2022": "sha256:0ac8b689419bea20470c1de16bbb85d6392fa2c4cd9723f4b664261f5d551b78",
+        "2023": "sha256:0ac8b689419bea20470c1de16bbb85d6392fa2c4cd9723f4b664261f5d551b78",
+        "2024": "sha256:0ac8b689419bea20470c1de16bbb85d6392fa2c4cd9723f4b664261f5d551b78",
+        "2025": "sha256:0ac8b689419bea20470c1de16bbb85d6392fa2c4cd9723f4b664261f5d551b78"
+      }
+    },
+    {
+      "id": "mean-years",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "n.p.": "suppressed",
+        "np": "suppressed"
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 153,
+        "2022": 153,
+        "2023": 153,
+        "2024": 153,
+        "2025": 153
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEAN"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEAN"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEAN"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEAN"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEAN"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:593750841ff42331adb3c449b3f3d97ef5bcdb2cf5233f5ef436bfdb0db4a1d5",
+        "2022": "sha256:593750841ff42331adb3c449b3f3d97ef5bcdb2cf5233f5ef436bfdb0db4a1d5",
+        "2023": "sha256:593750841ff42331adb3c449b3f3d97ef5bcdb2cf5233f5ef436bfdb0db4a1d5",
+        "2024": "sha256:593750841ff42331adb3c449b3f3d97ef5bcdb2cf5233f5ef436bfdb0db4a1d5",
+        "2025": "sha256:593750841ff42331adb3c449b3f3d97ef5bcdb2cf5233f5ef436bfdb0db4a1d5"
+      }
+    },
+    {
+      "id": "median-years",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "n.p.": "suppressed",
+        "np": "suppressed"
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 153,
+        "2022": 153,
+        "2023": 153,
+        "2024": 153,
+        "2025": 153
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEDIAN"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEDIAN"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEDIAN"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEDIAN"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "most_serious_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "MEDIAN"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:36a1f6b779ff75fb611e89dfe40cee58706fc2983086a8dd553c1da62460b0bb",
+        "2022": "sha256:36a1f6b779ff75fb611e89dfe40cee58706fc2983086a8dd553c1da62460b0bb",
+        "2023": "sha256:36a1f6b779ff75fb611e89dfe40cee58706fc2983086a8dd553c1da62460b0bb",
+        "2024": "sha256:36a1f6b779ff75fb611e89dfe40cee58706fc2983086a8dd553c1da62460b0bb",
+        "2025": "sha256:36a1f6b779ff75fb611e89dfe40cee58706fc2983086a8dd553c1da62460b0bb"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "most_serious_offence",
+    "sentence_statistic"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory",
+      "geographic area",
+      "geography",
+      "state/territory"
+    ],
+    "most_serious_offence": [
+      "most serious offence"
+    ],
+    "sentence_statistic": [
+      "aggregate sentence measure",
+      "aggregate sentence statistic",
+      "statistic",
+      "measure"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "most_serious_offence_id",
+    "sentence_statistic_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 459,
+    "maximumRows": 459,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "mostSeriousOffences": [
+      "ANZSOC_01",
+      "ANZSOC_02",
+      "ANZSOC_03",
+      "ANZSOC_04",
+      "ANZSOC_05",
+      "ANZSOC_06",
+      "ANZSOC_07",
+      "ANZSOC_08",
+      "ANZSOC_09",
+      "ANZSOC_10",
+      "ANZSOC_11",
+      "ANZSOC_12",
+      "ANZSOC_13",
+      "ANZSOC_14",
+      "ANZSOC_15",
+      "ANZSOC_16",
+      "TOTAL"
+    ],
+    "sentenceStatistics": [
+      "COUNT",
+      "MEAN",
+      "MEDIAN"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "AUSTRALIA": "AUS",
+      "AUSTRALIAN CAPITAL TERRITORY": "ACT",
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "NEW SOUTH WALES": "NSW",
+      "NORTHERN TERRITORY": "NT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "QUEENSLAND": "QLD",
+      "Queensland": "QLD",
+      "SOUTH AUSTRALIA": "SA",
+      "South Australia": "SA",
+      "TASMANIA": "TAS",
+      "Tasmania": "TAS",
+      "VICTORIA": "VIC",
+      "Victoria": "VIC",
+      "WESTERN AUSTRALIA": "WA",
+      "Western Australia": "WA"
+    },
+    "most_serious_offence": {
+      "01 Homicide and related offences": "ANZSOC_01",
+      "02 Acts intended to cause injury": "ANZSOC_02",
+      "03 Sexual assault and related offences": "ANZSOC_03",
+      "04 Dangerous/negligent acts": "ANZSOC_04",
+      "04 Dangerous/negligent acts (e)": "ANZSOC_04",
+      "05 Abduction/harassment": "ANZSOC_05",
+      "06 Robbery/extortion": "ANZSOC_06",
+      "07 Unlawful entry with intent": "ANZSOC_07",
+      "08 Theft": "ANZSOC_08",
+      "09 Fraud/deception": "ANZSOC_09",
+      "10 Illicit drug offences": "ANZSOC_10",
+      "11 Weapons/explosives": "ANZSOC_11",
+      "12 Property damage and environmental pollution": "ANZSOC_12",
+      "13 Public order offences": "ANZSOC_13",
+      "14 Traffic and vehicle regulatory offences": "ANZSOC_14",
+      "15 Offences against justice": "ANZSOC_15",
+      "16 Miscellaneous offences": "ANZSOC_16",
+      "Total": "TOTAL",
+      "Total (f)": "TOTAL"
+    },
+    "sentence_statistic": {
+      "Mean (years)": "MEAN",
+      "Median (years)": "MEDIAN",
+      "No.": "COUNT"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 25,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

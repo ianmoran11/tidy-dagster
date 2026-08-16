@@ -30,6 +30,7 @@ RUN_SCHEMA = "tidy.product-prototype-run/v1"
 MODEL = "openai-codex/gpt-5.6-luna"
 PROMPT_CONTRACT = "cell-role-semantic-map-v13-adjacent-year-aware"
 DEFAULT_PROTOTYPE_MAX_WARNINGS = 10_000
+COMBINATION_COVERAGE_SCHEMA = "tidy.product-prototype-dimension-combinations/v1"
 
 _DIMENSION_FIELDS = {
     "jurisdiction": "jurisdiction_id",
@@ -40,6 +41,20 @@ _DIMENSION_FIELDS = {
     "country_of_birth": "country_of_birth_id",
     "most_serious_offence": "most_serious_offence_id",
     "most_serious_charge": "most_serious_charge_id",
+    "statistic_basis": "statistic_basis_id",
+    "characteristic_group": "characteristic_group_id",
+    "characteristic_category": "characteristic_category_id",
+    "most_serious_offence_or_charge": "most_serious_offence_or_charge_id",
+    "sentence_statistic": "sentence_statistic_id",
+    "aggregate_sentence_length": "aggregate_sentence_length_id",
+    "observation_period": "observation_period_id",
+    "expected_time_to_serve": "expected_time_to_serve_id",
+    "prior_imprisonment_status": "prior_imprisonment_status_id",
+    "time_on_remand": "time_on_remand_id",
+    "security_classification": "security_classification_id",
+    "prison_location": "prison_location_id",
+    "court_level": "court_level_id",
+    "prisoner_statistic": "prisoner_statistic_id",
 }
 _EXPECTED_CATEGORY_FIELDS = {
     "jurisdiction": "jurisdictions",
@@ -50,6 +65,20 @@ _EXPECTED_CATEGORY_FIELDS = {
     "country_of_birth": "countriesOfBirth",
     "most_serious_offence": "mostSeriousOffences",
     "most_serious_charge": "mostSeriousCharges",
+    "statistic_basis": "statisticBases",
+    "characteristic_group": "characteristicGroups",
+    "characteristic_category": "characteristicCategories",
+    "most_serious_offence_or_charge": "mostSeriousOffencesOrCharges",
+    "sentence_statistic": "sentenceStatistics",
+    "aggregate_sentence_length": "aggregateSentenceLengths",
+    "observation_period": "observationPeriods",
+    "expected_time_to_serve": "expectedTimesToServe",
+    "prior_imprisonment_status": "priorImprisonmentStatuses",
+    "time_on_remand": "timesOnRemand",
+    "security_classification": "securityClassifications",
+    "prison_location": "prisonLocations",
+    "court_level": "courtLevels",
+    "prisoner_statistic": "prisonerStatistics",
 }
 _DIMENSION_HEADER_PATTERNS = {
     "jurisdiction": re.compile(r"state|territory|jurisdiction|reporting column", re.I),
@@ -60,6 +89,22 @@ _DIMENSION_HEADER_PATTERNS = {
     "country_of_birth": re.compile(r"country.{0,8}birth|birthplace", re.I),
     "most_serious_offence": re.compile(r"most serious offence", re.I),
     "most_serious_charge": re.compile(r"most serious (?:charge|offence)", re.I),
+    "statistic_basis": re.compile(r"basis|measure(?:ment)? type|section", re.I),
+    "characteristic_group": re.compile(r"characteristic group|statistic", re.I),
+    "characteristic_category": re.compile(r"characteristic|member", re.I),
+    "most_serious_offence_or_charge": re.compile(
+        r"most serious offence or charge", re.I
+    ),
+    "sentence_statistic": re.compile(r"measure|statistic", re.I),
+    "aggregate_sentence_length": re.compile(r"aggregate sentence length", re.I),
+    "observation_period": re.compile(r"reference (?:year|period)", re.I),
+    "expected_time_to_serve": re.compile(r"expected time to serve", re.I),
+    "prior_imprisonment_status": re.compile(r"prior imprisonment", re.I),
+    "time_on_remand": re.compile(r"time on remand", re.I),
+    "security_classification": re.compile(r"security classification", re.I),
+    "prison_location": re.compile(r"prison location", re.I),
+    "court_level": re.compile(r"court level", re.I),
+    "prisoner_statistic": re.compile(r"prisoner|statistic|measure", re.I),
 }
 
 
@@ -1031,8 +1076,14 @@ def _validate_execution(
             codelists_ok = False
             issues.append(_issue("VALUE_INVALID", f"Invalid measure value {value!r}."))
             continue
+        reference_dimension = contract.get("referenceDateDimension")
+        reference_date = (
+            mapped[reference_dimension]
+            if isinstance(reference_dimension, str)
+            else entry["referenceDate"]
+        )
         observation = {
-            "reference_date": entry["referenceDate"],
+            "reference_date": reference_date,
             "measure_id": measure["id"],
             "unit_id": measure["unitId"],
             "value": normalized_value,
@@ -1042,6 +1093,8 @@ def _validate_execution(
             "source_cell": address,
             "recipe_digest": recipe_digest,
         }
+        if contract.get("preservePublicationVintage") is True:
+            observation["publication_vintage_date"] = entry["referenceDate"]
         for dimension in contract["requiredDimensions"]:
             observation[_DIMENSION_FIELDS[dimension]] = mapped[dimension]
             observation[f"raw_{dimension}"] = raw_dimensions[dimension]
@@ -1146,6 +1199,65 @@ def _contract_measures(contract: dict[str, Any]) -> tuple[dict[str, Any], ...]:
     return tuple(item for item in measures if isinstance(item, dict))
 
 
+def _selection_conditions(selection: dict[str, Any]) -> dict[str, list[str]]:
+    configured = selection.get("conditions")
+    if isinstance(configured, dict):
+        return configured
+    dimension = selection.get("dimension")
+    codes = selection.get("codes")
+    return (
+        {dimension: codes}
+        if isinstance(dimension, str) and isinstance(codes, list)
+        else {}
+    )
+
+
+def _selection_is_valid(
+    selection: Any,
+    dimensions: list[str],
+    alias_codes: dict[str, set[str]],
+) -> bool:
+    if not isinstance(selection, dict):
+        return False
+    keys = set(selection)
+    if keys not in (
+        {"dimension", "codes", "dimensionOverrides"},
+        {"conditions", "dimensionOverrides"},
+    ):
+        return False
+    conditions = _selection_conditions(selection)
+    overrides = selection.get("dimensionOverrides")
+    return (
+        bool(conditions)
+        and set(conditions) <= set(dimensions)
+        and all(
+            _valid_string_list(codes) and set(codes) <= alias_codes[dimension]
+            for dimension, codes in conditions.items()
+        )
+        and isinstance(overrides, dict)
+        and set(overrides) <= set(dimensions)
+        and all(
+            isinstance(code, str) and code in alias_codes[dimension]
+            for dimension, code in overrides.items()
+        )
+    )
+
+
+def _selections_overlap(
+    left: dict[str, Any],
+    right: dict[str, Any],
+    alias_codes: dict[str, set[str]],
+) -> bool:
+    left_conditions = _selection_conditions(left)
+    right_conditions = _selection_conditions(right)
+    dimensions = set(left_conditions) | set(right_conditions)
+    return all(
+        set(left_conditions.get(dimension, alias_codes[dimension]))
+        & set(right_conditions.get(dimension, alias_codes[dimension]))
+        for dimension in dimensions
+    )
+
+
 def _select_measure(
     contract: dict[str, Any], mapped: dict[str, str]
 ) -> dict[str, Any] | None:
@@ -1157,7 +1269,10 @@ def _select_measure(
         selection = measure.get("selection")
         if not isinstance(selection, dict):
             continue
-        if mapped.get(selection.get("dimension")) in selection.get("codes", []):
+        conditions = _selection_conditions(selection)
+        if conditions and all(
+            mapped.get(dimension) in codes for dimension, codes in conditions.items()
+        ):
             matches.append(measure)
     return matches[0] if len(matches) == 1 else None
 
@@ -1180,6 +1295,12 @@ def _normalize_measure_value(
 
 
 def _map_alias(contract: dict[str, Any], dimension: str, raw: Any) -> str | None:
+    if isinstance(raw, bool):
+        return None
+    if isinstance(raw, int):
+        raw = str(raw)
+    elif isinstance(raw, float) and raw.is_integer():
+        raw = str(int(raw))
     if not isinstance(raw, str):
         return None
     normalized = " ".join(raw.strip().split())
@@ -1233,7 +1354,11 @@ def _validate_expected_coverage(
                 )
             )
     measures = _contract_measures(contract)
-    wanted_measure_ids = {measure["id"] for measure in measures}
+    wanted_measure_ids = {
+        measure["id"]
+        for measure in measures
+        if str(year) in measure.get("applicableYears", [str(year)])
+    }
     observed_measure_ids = {str(row["measure_id"]) for row in rows}
     if observed_measure_ids != wanted_measure_ids:
         issues.append(
@@ -1246,6 +1371,15 @@ def _validate_expected_coverage(
         )
     for measure in measures:
         measure_rows = [row for row in rows if row["measure_id"] == measure["id"]]
+        if str(year) not in measure.get("applicableYears", [str(year)]):
+            if measure_rows:
+                issues.append(
+                    _issue(
+                        "UNEXPECTED_MEASURE_FOR_YEAR",
+                        f"{measure['id']} is not applicable in {year}.",
+                    )
+                )
+            continue
         expected_count = 1
         for dimension, fallback in required.items():
             wanted = _measure_expected_categories(measure, dimension, year, fallback)
@@ -1261,6 +1395,11 @@ def _validate_expected_coverage(
                     )
                 )
             expected_count *= len(wanted)
+        expected_count = int(
+            measure.get("expectedCombinationCountsByYear", {}).get(
+                str(year), expected_count
+            )
+        )
         if len(measure_rows) != expected_count:
             issues.append(
                 _issue(
@@ -1269,6 +1408,28 @@ def _validate_expected_coverage(
                     f"combinations; got {len(measure_rows)}.",
                 )
             )
+        expected_digest = measure.get("expectedCombinationDigestsByYear", {}).get(
+            str(year)
+        )
+        if isinstance(expected_digest, str):
+            combinations = sorted(
+                [str(row[_DIMENSION_FIELDS[dimension]]) for dimension in required]
+                for row in measure_rows
+            )
+            actual_digest = domain_digest(
+                COMBINATION_COVERAGE_SCHEMA,
+                {
+                    "dimensions": list(required),
+                    "combinations": combinations,
+                },
+            )
+            if actual_digest != expected_digest:
+                issues.append(
+                    _issue(
+                        "EXPECTED_COMBINATION_SET_MISMATCH",
+                        f"{measure['id']}: reviewed combinations differ.",
+                    )
+                )
     return issues
 
 
@@ -1462,6 +1623,11 @@ def _cross_year_issues(
 def _canonical_csv(rows: list[dict[str, Any]], contract: dict[str, Any]) -> bytes:
     dimensions = list(contract["requiredDimensions"])
     fields = [
+        *(
+            ["publication_vintage_date"]
+            if contract.get("preservePublicationVintage") is True
+            else []
+        ),
         "reference_date",
         *[_DIMENSION_FIELDS[dimension] for dimension in dimensions],
         "measure_id",
@@ -1637,6 +1803,7 @@ def _validate_cohort(value: dict[str, Any]) -> None:
         if normalization not in {
             None,
             "trim-pathological-full-width-formatting-merge-v1",
+            "trim-pathological-styled-blank-cells-v1",
         }:
             raise ProductPrototypeError("Workbook normalization is invalid")
         replay = entry.get("replayResponse")
@@ -1699,6 +1866,9 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "measures",
         "excludedDimensionCodes",
         "dimensionHeaders",
+        "referenceDateDimension",
+        "preservePublicationVintage",
+        "totalValidation",
     }
     dimensions = value.get("requiredDimensions")
     expected = value.get("expected")
@@ -1706,6 +1876,31 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     equations = value.get("totalEquations")
     exclusions = value.get("excludedDimensionCodes", {})
     headers = value.get("dimensionHeaders", {})
+    reference_dimension = value.get("referenceDateDimension")
+    preserve_vintage = value.get("preservePublicationVintage")
+    total_validation = value.get("totalValidation", "equations")
+    vintage_enabled = (
+        preserve_vintage is True
+        and isinstance(reference_dimension, str)
+        and isinstance(dimensions, list)
+        and reference_dimension in dimensions
+    )
+    unique_dimensions = (
+        [item for item in dimensions if item != reference_dimension]
+        if vintage_enabled
+        else dimensions
+    )
+    expected_unique_key = (
+        [
+            *(["publication_vintage_date"] if vintage_enabled else []),
+            "reference_date",
+            *[_DIMENSION_FIELDS[item] for item in unique_dimensions],
+            "measure_id",
+        ]
+        if isinstance(unique_dimensions, list)
+        and all(item in _DIMENSION_FIELDS for item in unique_dimensions)
+        else None
+    )
     keys = set(value)
     if (
         not required <= keys <= required | optional
@@ -1714,16 +1909,17 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or value.get("tableFamilyId") != cohort.get("tableFamilyId")
         or value.get("automaticAcceptance") is not True
         or value.get("trainingEligibility") is not False
+        or total_validation not in {"equations", "not_applicable"}
         or not isinstance(dimensions, list)
         or not dimensions
         or len(dimensions) != len(set(dimensions))
         or any(item not in _DIMENSION_FIELDS for item in dimensions)
-        or value.get("uniqueKey")
-        != [
-            "reference_date",
-            *[_DIMENSION_FIELDS[item] for item in dimensions],
-            "measure_id",
-        ]
+        or (
+            ("referenceDateDimension" in value)
+            != ("preservePublicationVintage" in value)
+        )
+        or ("referenceDateDimension" in value and not vintage_enabled)
+        or value.get("uniqueKey") != expected_unique_key
         or not isinstance(expected, dict)
         or not isinstance(aliases, dict)
         or set(aliases) != set(dimensions)
@@ -1749,6 +1945,11 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or not isinstance(value.get("allowedExecutionWarnings"), list)
     ):
         raise ProductPrototypeError("Acceptance contract is incompatible")
+    if vintage_enabled and any(
+        re.fullmatch(r"(?:19|20)[0-9]{2}-[0-9]{2}-[0-9]{2}", code) is None
+        for code in aliases[reference_dimension].values()
+    ):
+        raise ProductPrototypeError("Reference-date dimension codes are invalid")
     try:
         for patterns in headers.values():
             for pattern in patterns:
@@ -1773,6 +1974,9 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "selection",
         "expectedDimensions",
         "expectedDimensionsByYear",
+        "expectedCombinationCountsByYear",
+        "expectedCombinationDigestsByYear",
+        "applicableYears",
         "missingValues",
     }
     years = {str(item["year"]) for item in cohort["workbooks"]}
@@ -1806,6 +2010,9 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         missing = measure.get("missingValues", {})
         expected_dimensions = measure.get("expectedDimensions", {})
         expected_by_year = measure.get("expectedDimensionsByYear", {})
+        combination_counts = measure.get("expectedCombinationCountsByYear", {})
+        combination_digests = measure.get("expectedCombinationDigestsByYear", {})
+        applicable_years = measure.get("applicableYears", sorted(years))
         if (
             not isinstance(missing, dict)
             or any(
@@ -1823,6 +2030,24 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
             )
             or not isinstance(expected_by_year, dict)
             or not set(expected_by_year) <= years
+            or not _valid_string_list(applicable_years)
+            or not set(applicable_years) <= years
+            or not isinstance(combination_counts, dict)
+            or not set(combination_counts) <= set(applicable_years)
+            or any(
+                isinstance(count, bool) or not isinstance(count, int) or count <= 0
+                for count in combination_counts.values()
+            )
+            or not isinstance(combination_digests, dict)
+            or set(combination_digests) != set(combination_counts)
+            or any(
+                re.fullmatch(r"sha256:[0-9a-f]{64}", digest) is None
+                for digest in combination_digests.values()
+                if isinstance(digest, str)
+            )
+            or any(
+                not isinstance(digest, str) for digest in combination_digests.values()
+            )
         ):
             raise ProductPrototypeError("Acceptance measure coverage is invalid")
         for year, configured in expected_by_year.items():
@@ -1841,26 +2066,14 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     if len(measures) > 1:
         selections = [measure.get("selection") for measure in measures]
         if any(
-            not isinstance(selection, dict)
-            or set(selection) != {"dimension", "codes", "dimensionOverrides"}
-            or selection.get("dimension") not in dimensions
-            or not _valid_string_list(selection.get("codes"))
-            or not set(selection["codes"]) <= alias_codes[selection["dimension"]]
-            or not isinstance(selection.get("dimensionOverrides"), dict)
-            or not set(selection["dimensionOverrides"]) <= set(dimensions)
-            or any(
-                code not in alias_codes[dimension]
-                for dimension, code in selection["dimensionOverrides"].items()
-            )
+            not _selection_is_valid(selection, dimensions, alias_codes)
             for selection in selections
         ):
             raise ProductPrototypeError("Acceptance measure selection is invalid")
-        selection_dimensions = {selection["dimension"] for selection in selections}
-        selected_codes = [set(selection["codes"]) for selection in selections]
-        if len(selection_dimensions) != 1 or any(
-            left & right
-            for index, left in enumerate(selected_codes)
-            for right in selected_codes[index + 1 :]
+        if any(
+            _selections_overlap(left, right, alias_codes)
+            for index, left in enumerate(selections)
+            for right in selections[index + 1 :]
         ):
             raise ProductPrototypeError("Acceptance measure selection overlaps")
     elif "selection" in measures[0]:
@@ -1869,7 +2082,8 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     measure_ids = {measure["id"] for measure in measures}
     if (
         not isinstance(equations, list)
-        or not equations
+        or (not equations and total_validation != "not_applicable")
+        or (equations and total_validation != "equations")
         or any(
             not isinstance(item, dict)
             or not {

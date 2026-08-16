@@ -1,0 +1,42 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoners by state or territory, court level, legal status and time on remand",
+    "values": {
+      "name": "prisoner count and time on remand statistic",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state or territory",
+        "memberRegions": [
+          "region-012"
+        ],
+        "direction": "WNW",
+        "captionHints": []
+      },
+      {
+        "name": "court level",
+        "memberRegions": [
+          "region-011",
+          "region-013"
+        ],
+        "direction": "W",
+        "captionHints": []
+      },
+      {
+        "name": "legal status and remand measure",
+        "memberRegions": [
+          "region-014",
+          "region-016"
+        ],
+        "direction": "N",
+        "captionHints": [
+          "region-015"
+        ]
+      }
+    ]
+  }
+}

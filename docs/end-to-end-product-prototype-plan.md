@@ -565,9 +565,10 @@ both expose this run without making provider calls.
 ## 14. Minimal data-asset status projection
 
 `Tidy Data Asset Status` is a deliberately read-only consumer of the checked
-Table 21, Table 22, Table 23, Table 30, and Table 31 evidence. The explicit
-registry at `fixtures/product-prototype/data-asset-status-v1.json` selects 25 sheet-assets
-across five shared physical workbooks. For each sheet it derives independent
+17 checked five-year cohorts. The explicit registry at
+`fixtures/product-prototype/data-asset-status-v1.json` selects 85 sheet-assets
+across nine checked workbook byte identities: five base annual workbooks and
+four deterministic formatting-trim derivatives. For each sheet it derives independent
 `Identified`, `On disk`, `Tidied`, `Canonicalised`, and `Integrated` facts and a
 separate automated-check result. Missing current source custody does not erase
 historical processing evidence; it creates a visible contradiction instead.
@@ -640,3 +641,62 @@ and
 `sha256:86c0d0a8254394e51677f63a110641aaebd78caab098fa0c2ee5e3d32e46ce5f`.
 The standalone CLI, separate Dagster assets, and read-only status page expose
 both cohorts without becoming evidence authority.
+
+## 17. Sixty-worksheet provider-free batch
+
+The next expansion processes 12 additional semantic table families across
+2021–2025, adding exactly 60 worksheet-assets:
+
+| Family | Canonical observations |
+|---|---:|
+| Selected characteristics (Table 14, renumbered Table 15 in 2025) | 1,260 |
+| Indigenous status and offence/charge (Table 16, renumbered Table 20 in 2025) | 2,430 |
+| Table 24 aggregate sentence by offence | 2,295 |
+| Table 25 expected time to serve by offence | 2,295 |
+| Table 26 aggregate sentence by Indigenous status | 1,890 |
+| Table 27 aggregate-sentence publication vintages | 3,402 |
+| Table 28 expected time by Indigenous status | 1,890 |
+| Table 29 prior imprisonment | 1,215 |
+| Table 32 time on remand | 693 |
+| Table 33 security classification | 675 |
+| Table 34 prison location | 793 |
+| Table 35 court level, legal status, and remand | 810 |
+| **Total** | **19,648** |
+
+All 60 worksheets were automatically accepted with zero exceptions, excluded
+rows, cross-year issues, or provider calls. Forty `np`/`n.p.` cells in Tables
+24 and 25 remain suppressed null values. The Table 28 2023 and Table 29 2024
+maps are explicitly identified as checked human-authored adjacent-year maps,
+not provider responses or acceptance authority.
+
+Table numbering is not treated as semantic identity: the selected-characteristic
+and Indigenous-offence cohorts explicitly bind their 2025 successor sheets.
+Table 27 preserves both `publication_vintage_date` and row-level
+`reference_date`/`observation_period_id`; repeated historical years are never
+silently overwritten. Multi-condition measure selection keeps counts,
+proportions, means, medians, percentiles, and duration units distinct.
+
+Four shared workbook derivatives trim out-of-range styled blank cells and
+pathological merge/column formatting using
+`trim-pathological-styled-blank-cells-v1`. The script refuses to remove cell
+values or formulas, deterministically reproduces every checked derivative, and
+binds source/derived digests. This normalization changes no cell value and
+prevents historical full-row/full-column formatting from breaching
+compact-context bounds.
+
+`fixtures/product-prototype/large-batch-assets-v1.json` is the audited
+orchestration registry. It drives 12 explicit Dagster assets/checks/jobs, one
+fixed batch job, generic digest-closed evidence verification, parameterized
+tests, and the status registry. Canonicalization semantics remain in the 12
+human-authored acceptance contracts rather than the Dagster registry.
+
+```sh
+scripts/tidy-prototype-batch verify
+scripts/tidy-prototype-batch run \
+  --output .product-prototype/large-batch-replay \
+  --concurrency 3
+```
+
+The dashboard now projects 17 cohorts, 85 worksheet-assets, and 32,931 total
+canonical observations. Dagster and the dashboard remain replaceable,
+read-only projections rather than evidence authority.

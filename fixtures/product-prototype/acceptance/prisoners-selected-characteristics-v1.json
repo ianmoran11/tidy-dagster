@@ -1,0 +1,817 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-selected-characteristics-v1",
+  "tableFamilyId": "prisoners-selected-characteristics-by-jurisdiction",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "TOTAL",
+            "SEX",
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 99
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX",
+            "TOTAL"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX",
+            "TOTAL"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX",
+            "TOTAL"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX",
+            "TOTAL"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX",
+            "TOTAL"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:7b6555df737f94cf40d10a400aeab1562e2698b233f7b013264c61399855cece",
+        "2022": "sha256:7b6555df737f94cf40d10a400aeab1562e2698b233f7b013264c61399855cece",
+        "2023": "sha256:7b6555df737f94cf40d10a400aeab1562e2698b233f7b013264c61399855cece",
+        "2024": "sha256:7b6555df737f94cf40d10a400aeab1562e2698b233f7b013264c61399855cece",
+        "2025": "sha256:7b6555df737f94cf40d10a400aeab1562e2698b233f7b013264c61399855cece"
+      }
+    },
+    {
+      "id": "prisoner-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 99
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS",
+            "LEGAL_STATUS",
+            "PRIOR_IMPRISONMENT_STATUS",
+            "SEX"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "NO_PRIOR_IMPRISONMENT",
+            "POST_SENTENCE",
+            "PRIOR_IMPRISONMENT",
+            "SENTENCED",
+            "TOTAL_PRISONERS",
+            "UNKNOWN",
+            "UNSENTENCED"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:8045baa315203c533ab19fdcd4f04e78ba15f5e87f95dc067ab2944baa30f2cd",
+        "2022": "sha256:8045baa315203c533ab19fdcd4f04e78ba15f5e87f95dc067ab2944baa30f2cd",
+        "2023": "sha256:8045baa315203c533ab19fdcd4f04e78ba15f5e87f95dc067ab2944baa30f2cd",
+        "2024": "sha256:8045baa315203c533ab19fdcd4f04e78ba15f5e87f95dc067ab2944baa30f2cd",
+        "2025": "sha256:8045baa315203c533ab19fdcd4f04e78ba15f5e87f95dc067ab2944baa30f2cd"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2025"
+      ],
+      "expectedCombinationCountsByYear": {
+        "2025": 45
+      },
+      "expectedDimensionsByYear": {
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEAN_AGE"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "PERSONS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2025": "sha256:f3a417ce2da0112b1ab5bbe25f8b561fb4db2d27478352ade56d78596834fad4"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEDIAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 45,
+        "2022": 45,
+        "2023": 45,
+        "2024": 45,
+        "2025": 45
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEDIAN_AGE"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "PERSONS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEDIAN_AGE"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "PERSONS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEDIAN_AGE"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "PERSONS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEDIAN_AGE"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "PERSONS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ],
+          "characteristic_group": [
+            "MEDIAN_AGE"
+          ],
+          "characteristic_category": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "PERSONS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e11ecf55fde2ebff04eb0435a60580c6de42439fdd0b96ca10a3bf089b62ed8d",
+        "2022": "sha256:e11ecf55fde2ebff04eb0435a60580c6de42439fdd0b96ca10a3bf089b62ed8d",
+        "2023": "sha256:e11ecf55fde2ebff04eb0435a60580c6de42439fdd0b96ca10a3bf089b62ed8d",
+        "2024": "sha256:e11ecf55fde2ebff04eb0435a60580c6de42439fdd0b96ca10a3bf089b62ed8d",
+        "2025": "sha256:e11ecf55fde2ebff04eb0435a60580c6de42439fdd0b96ca10a3bf089b62ed8d"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "statistic_basis",
+    "characteristic_group",
+    "characteristic_category"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory"
+    ],
+    "statistic_basis": [
+      "statistic basis",
+      "measurement type",
+      "statistic section",
+      "measure section",
+      "reporting basis"
+    ],
+    "characteristic_group": [
+      "characteristic group",
+      "selected characteristic or statistic",
+      "characteristic category",
+      "selected characteristic",
+      "characteristic member"
+    ],
+    "characteristic_category": [
+      "characteristic category",
+      "selected characteristic",
+      "characteristic member"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "statistic_basis_id",
+    "characteristic_group_id",
+    "characteristic_category_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 243,
+    "maximumRows": 288,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "statisticBases": [
+      "NUMBER",
+      "PROPORTION"
+    ],
+    "characteristicGroupsByYear": {
+      "2021": [
+        "INDIGENOUS_STATUS",
+        "LEGAL_STATUS",
+        "MEDIAN_AGE",
+        "PRIOR_IMPRISONMENT_STATUS",
+        "SEX",
+        "TOTAL"
+      ],
+      "2022": [
+        "INDIGENOUS_STATUS",
+        "LEGAL_STATUS",
+        "MEDIAN_AGE",
+        "PRIOR_IMPRISONMENT_STATUS",
+        "SEX",
+        "TOTAL"
+      ],
+      "2023": [
+        "INDIGENOUS_STATUS",
+        "LEGAL_STATUS",
+        "MEDIAN_AGE",
+        "PRIOR_IMPRISONMENT_STATUS",
+        "SEX",
+        "TOTAL"
+      ],
+      "2024": [
+        "INDIGENOUS_STATUS",
+        "LEGAL_STATUS",
+        "MEDIAN_AGE",
+        "PRIOR_IMPRISONMENT_STATUS",
+        "SEX",
+        "TOTAL"
+      ],
+      "2025": [
+        "INDIGENOUS_STATUS",
+        "LEGAL_STATUS",
+        "MEAN_AGE",
+        "MEDIAN_AGE",
+        "PRIOR_IMPRISONMENT_STATUS",
+        "SEX",
+        "TOTAL"
+      ]
+    },
+    "characteristicCategories": [
+      "FEMALE",
+      "INDIGENOUS",
+      "MALE",
+      "NON_INDIGENOUS",
+      "NO_PRIOR_IMPRISONMENT",
+      "PERSONS",
+      "POST_SENTENCE",
+      "PRIOR_IMPRISONMENT",
+      "SENTENCED",
+      "TOTAL_PRISONERS",
+      "UNKNOWN",
+      "UNSENTENCED"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    },
+    "statistic_basis": {
+      "NUMBER": "NUMBER",
+      "Number": "NUMBER",
+      "PROPORTION (%)": "PROPORTION",
+      "Proportion (%)": "PROPORTION"
+    },
+    "characteristic_group": {
+      "Indigenous status": "INDIGENOUS_STATUS",
+      "Legal status": "LEGAL_STATUS",
+      "Mean age (years)": "MEAN_AGE",
+      "Median age (years)": "MEDIAN_AGE",
+      "Prior imprisonment status": "PRIOR_IMPRISONMENT_STATUS",
+      "Prior imprisonment status (d)": "PRIOR_IMPRISONMENT_STATUS",
+      "Sex": "SEX",
+      "Total prisoners": "TOTAL",
+      "Total prisoners (b)": "TOTAL"
+    },
+    "characteristic_category": {
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "No prior imprisonment": "NO_PRIOR_IMPRISONMENT",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Persons": "PERSONS",
+      "Persons (e)": "PERSONS",
+      "Post-sentence": "POST_SENTENCE",
+      "Post-sentence (c)": "POST_SENTENCE",
+      "Prior imprisonment": "PRIOR_IMPRISONMENT",
+      "Sentenced": "SENTENCED",
+      "Total prisoners": "TOTAL_PRISONERS",
+      "Total prisoners (b)": "TOTAL_PRISONERS",
+      "Unknown": "UNKNOWN",
+      "Unsentenced": "UNSENTENCED"
+    }
+  },
+  "totalEquations": [],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "totalValidation": "not_applicable"
+}

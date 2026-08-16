@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "tidy.product-prototype-workbook-normalization/v1",
+  "normalization": "trim-pathological-styled-blank-cells-v1",
+  "recordedAt": "2026-08-15T08:30:00+00:00",
+  "scriptPath": "scripts/trim-prototype-workbook-formatting.py",
+  "scriptDigest": "sha256:489859dad4e38248deedf5713032ec8ab05d6a5d3a90097072a42136c4d25e24",
+  "entries": [
+    {
+      "year": 2021,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2021.xlsx",
+      "sourceDigest": "sha256:cd7b352a428bd55a23baf991620b9473fd6693a904ff4226e2eb6c68e7e747bd",
+      "sourceByteLength": 346875,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2021-batch-normalized.xlsx",
+      "outputDigest": "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+      "outputByteLength": 309532,
+      "trimmedSheets": [
+        {
+          "sheet": "Table_34",
+          "retainedRange": "A1:B190"
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2022.xlsx",
+      "sourceDigest": "sha256:6df72fa38f0fc5cc2c5c322c0e20655c3685e41281a6cab4f78c59ae44173c9c",
+      "sourceByteLength": 363962,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "outputDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "outputByteLength": 327530,
+      "trimmedSheets": [
+        {
+          "sheet": "Table_34",
+          "retainedRange": "A1:B192"
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2023.xlsx",
+      "sourceDigest": "sha256:59afcaf8a0c52a2754f75954ce5821611ee735f329d90d0e4b80c3dead0827af",
+      "sourceByteLength": 335227,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "outputDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "outputByteLength": 302509,
+      "trimmedSheets": [
+        {
+          "sheet": "Table_34",
+          "retainedRange": "A1:B189"
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2025.xlsx",
+      "sourceDigest": "sha256:464f80e73901ae9010d2dbbf1fc1bf37222711a3ccacc44efdbe99953aa3d263",
+      "sourceByteLength": 169943,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2025-batch-normalized.xlsx",
+      "outputDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+      "outputByteLength": 169355,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 24",
+          "retainedRange": "A1:D176"
+        },
+        {
+          "sheet": "Table 25",
+          "retainedRange": "A1:D176"
+        },
+        {
+          "sheet": "Table 29",
+          "retainedRange": "A1:J50"
+        },
+        {
+          "sheet": "Table 33",
+          "retainedRange": "A1:F44"
+        },
+        {
+          "sheet": "Table 34",
+          "retainedRange": "A1:B191"
+        }
+      ]
+    }
+  ],
+  "inRangeValuesChanged": false,
+  "manifestDigest": "sha256:325865d14c4427a4814f35c4da03af905b47223a4d6b5b32202e4c41129ff8be"
+}

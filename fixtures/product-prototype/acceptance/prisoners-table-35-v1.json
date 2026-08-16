@@ -1,0 +1,793 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-table-35-v1",
+  "tableFamilyId": "prisoners-by-court-level-legal-status-and-remand",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 81,
+        "2022": 81,
+        "2023": 81,
+        "2024": 81,
+        "2025": 81
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "SENTENCED",
+            "TOTAL",
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "COUNT"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "SENTENCED",
+            "TOTAL",
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "COUNT"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "SENTENCED",
+            "TOTAL",
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "COUNT"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "SENTENCED",
+            "TOTAL",
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "COUNT"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "SENTENCED",
+            "TOTAL",
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "COUNT"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:7200b34b30edbad1861470e0c27ba0966a276859d8d48487dfa2b6fe6d616f9e",
+        "2022": "sha256:7200b34b30edbad1861470e0c27ba0966a276859d8d48487dfa2b6fe6d616f9e",
+        "2023": "sha256:7200b34b30edbad1861470e0c27ba0966a276859d8d48487dfa2b6fe6d616f9e",
+        "2024": "sha256:7200b34b30edbad1861470e0c27ba0966a276859d8d48487dfa2b6fe6d616f9e",
+        "2025": "sha256:7200b34b30edbad1861470e0c27ba0966a276859d8d48487dfa2b6fe6d616f9e"
+      }
+    },
+    {
+      "id": "mean-time-on-remand",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "MEAN_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 27,
+        "2022": 27,
+        "2023": 27,
+        "2024": 27,
+        "2025": 27
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEAN_MONTHS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEAN_MONTHS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEAN_MONTHS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEAN_MONTHS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEAN_MONTHS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:617ca63e6b6583f7d85b9874fc80beb6db73a26e7e7c9e58a19567c211f18927",
+        "2022": "sha256:617ca63e6b6583f7d85b9874fc80beb6db73a26e7e7c9e58a19567c211f18927",
+        "2023": "sha256:617ca63e6b6583f7d85b9874fc80beb6db73a26e7e7c9e58a19567c211f18927",
+        "2024": "sha256:617ca63e6b6583f7d85b9874fc80beb6db73a26e7e7c9e58a19567c211f18927",
+        "2025": "sha256:617ca63e6b6583f7d85b9874fc80beb6db73a26e7e7c9e58a19567c211f18927"
+      }
+    },
+    {
+      "id": "median-time-on-remand",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "MEDIAN_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 27,
+        "2022": 27,
+        "2023": 27,
+        "2024": 27,
+        "2025": 27
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_MONTHS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_MONTHS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_MONTHS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_MONTHS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_MONTHS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:4c8b7e253c8a2afe6c2c941a686959d2cde91c5390d196259b7a0e4034043fdb",
+        "2022": "sha256:4c8b7e253c8a2afe6c2c941a686959d2cde91c5390d196259b7a0e4034043fdb",
+        "2023": "sha256:4c8b7e253c8a2afe6c2c941a686959d2cde91c5390d196259b7a0e4034043fdb",
+        "2024": "sha256:4c8b7e253c8a2afe6c2c941a686959d2cde91c5390d196259b7a0e4034043fdb",
+        "2025": "sha256:4c8b7e253c8a2afe6c2c941a686959d2cde91c5390d196259b7a0e4034043fdb"
+      }
+    },
+    {
+      "id": "p90-time-on-remand",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "P90_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 27,
+        "2022": 27,
+        "2023": 27,
+        "2024": 27,
+        "2025": 27
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "P90_MONTHS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "P90_MONTHS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "P90_MONTHS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "P90_MONTHS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "court_level": [
+            "HIGHER_COURTS",
+            "LOWER_AND_OTHER_COURTS",
+            "TOTAL"
+          ],
+          "legal_status": [
+            "UNSENTENCED"
+          ],
+          "prisoner_statistic": [
+            "P90_MONTHS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:f69960701d14eaa265614635e2928fdb80857683e69f5fdda449488ec9ede73f",
+        "2022": "sha256:f69960701d14eaa265614635e2928fdb80857683e69f5fdda449488ec9ede73f",
+        "2023": "sha256:f69960701d14eaa265614635e2928fdb80857683e69f5fdda449488ec9ede73f",
+        "2024": "sha256:f69960701d14eaa265614635e2928fdb80857683e69f5fdda449488ec9ede73f",
+        "2025": "sha256:f69960701d14eaa265614635e2928fdb80857683e69f5fdda449488ec9ede73f"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "court_level",
+    "legal_status",
+    "prisoner_statistic"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory",
+      "geographic area",
+      "geography",
+      "state/territory"
+    ],
+    "court_level": [
+      "court level"
+    ],
+    "legal_status": [
+      "prisoner count or time on remand statistic",
+      "prisoner measure",
+      "legal status and remand measure",
+      "legal status and statistic",
+      "legal status category",
+      "legal status"
+    ],
+    "prisoner_statistic": [
+      "prisoner count or time on remand statistic",
+      "prisoner measure",
+      "legal status and remand measure",
+      "legal status and statistic",
+      "legal status category"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "court_level_id",
+    "legal_status_id",
+    "prisoner_statistic_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 162,
+    "maximumRows": 162,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "courtLevels": [
+      "HIGHER_COURTS",
+      "LOWER_AND_OTHER_COURTS",
+      "TOTAL"
+    ],
+    "legalStatuses": [
+      "SENTENCED",
+      "TOTAL",
+      "UNSENTENCED"
+    ],
+    "prisonerStatistics": [
+      "COUNT",
+      "MEAN_MONTHS",
+      "MEDIAN_MONTHS",
+      "P90_MONTHS"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "AUSTRALIA": "AUS",
+      "AUSTRALIAN CAPITAL TERRITORY": "ACT",
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "NEW SOUTH WALES": "NSW",
+      "NORTHERN TERRITORY": "NT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "QUEENSLAND": "QLD",
+      "Queensland": "QLD",
+      "SOUTH AUSTRALIA": "SA",
+      "South Australia": "SA",
+      "TASMANIA": "TAS",
+      "Tasmania": "TAS",
+      "VICTORIA": "VIC",
+      "Victoria": "VIC",
+      "WESTERN AUSTRALIA": "WA",
+      "Western Australia": "WA"
+    },
+    "court_level": {
+      "Higher courts": "HIGHER_COURTS",
+      "Lower and other courts": "LOWER_AND_OTHER_COURTS",
+      "Total": "TOTAL",
+      "Total (d)": "TOTAL"
+    },
+    "legal_status": {
+      "Mean time on remand (months)": "UNSENTENCED",
+      "Median time on remand (months)": "UNSENTENCED",
+      "Sentenced": "SENTENCED",
+      "Time on remand - 90th Percentile (months)": "UNSENTENCED",
+      "Time on remand - 90th Percentile (months) (b)": "UNSENTENCED",
+      "Total prisoners": "TOTAL",
+      "Total prisoners (c)": "TOTAL",
+      "no.": "UNSENTENCED"
+    },
+    "prisoner_statistic": {
+      "Mean time on remand (months)": "MEAN_MONTHS",
+      "Median time on remand (months)": "MEDIAN_MONTHS",
+      "Sentenced": "COUNT",
+      "Time on remand - 90th Percentile (months)": "P90_MONTHS",
+      "Time on remand - 90th Percentile (months) (b)": "P90_MONTHS",
+      "Total prisoners": "COUNT",
+      "Total prisoners (c)": "COUNT",
+      "no.": "COUNT"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    },
+    {
+      "dimension": "court_level",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "HIGHER_COURTS",
+        "LOWER_AND_OTHER_COURTS"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 100,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    },
+    {
+      "dimension": "legal_status",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "SENTENCED",
+        "UNSENTENCED"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 150,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

@@ -1,0 +1,43 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoners by Indigenous status, most serious offence or charge, and state or territory",
+    "values": {
+      "name": "Number of prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "Indigenous status",
+        "memberRegions": [
+          "region-007"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-019"
+        ]
+      },
+      {
+        "name": "Most serious offence or charge",
+        "memberRegions": [
+          "region-005",
+          "region-008"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-019"
+        ]
+      },
+      {
+        "name": "State or territory",
+        "memberRegions": [
+          "region-006"
+        ],
+        "direction": "N",
+        "captionHints": []
+      }
+    ]
+  }
+}

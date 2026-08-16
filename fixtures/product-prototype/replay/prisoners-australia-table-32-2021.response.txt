@@ -1,0 +1,41 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Unsentenced prisoners by time on remand and state or territory",
+    "values": {
+      "name": "time on remand statistic",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state or territory",
+        "memberRegions": [
+          "region-006"
+        ],
+        "direction": "N",
+        "captionHints": []
+      },
+      {
+        "name": "time on remand measure",
+        "memberRegions": [
+          "region-005",
+          "region-008"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-019"
+        ]
+      },
+      {
+        "name": "statistic basis",
+        "memberRegions": [
+          "region-007"
+        ],
+        "direction": "WNW",
+        "captionHints": []
+      }
+    ]
+  }
+}

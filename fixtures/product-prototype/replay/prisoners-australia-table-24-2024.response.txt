@@ -1,0 +1,44 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Sentenced prisoners by state or territory, most serious offence, and aggregate sentence statistic, 2024",
+    "values": {
+      "name": "sentenced prisoner count or aggregate sentence length value",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state or territory",
+        "memberRegions": [
+          "region-012"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-019"
+        ]
+      },
+      {
+        "name": "most serious offence",
+        "memberRegions": [
+          "region-011"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-019"
+        ]
+      },
+      {
+        "name": "statistic",
+        "memberRegions": [
+          "region-013"
+        ],
+        "direction": "N",
+        "captionHints": [
+          "region-018"
+        ]
+      }
+    ]
+  }
+}

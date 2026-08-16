@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-indigenous-offence-v1",
+  "tableFamilyId": "prisoners-indigenous-status-by-offence-and-jurisdiction",
+  "measure": {
+    "id": "prisoner-count",
+    "unitId": "person",
+    "numeric": true,
+    "minimum": 0,
+    "expectedDimensionsByYear": {
+      "2021": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "most_serious_offence_or_charge": [
+          "ANZSOC_01",
+          "ANZSOC_02",
+          "ANZSOC_03",
+          "ANZSOC_04",
+          "ANZSOC_05",
+          "ANZSOC_06",
+          "ANZSOC_07",
+          "ANZSOC_08",
+          "ANZSOC_09",
+          "ANZSOC_10",
+          "ANZSOC_11",
+          "ANZSOC_12",
+          "ANZSOC_13",
+          "ANZSOC_14",
+          "ANZSOC_15",
+          "ANZSOC_16",
+          "POST_SENTENCE",
+          "TOTAL"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ]
+      },
+      "2022": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "most_serious_offence_or_charge": [
+          "ANZSOC_01",
+          "ANZSOC_02",
+          "ANZSOC_03",
+          "ANZSOC_04",
+          "ANZSOC_05",
+          "ANZSOC_06",
+          "ANZSOC_07",
+          "ANZSOC_08",
+          "ANZSOC_09",
+          "ANZSOC_10",
+          "ANZSOC_11",
+          "ANZSOC_12",
+          "ANZSOC_13",
+          "ANZSOC_14",
+          "ANZSOC_15",
+          "ANZSOC_16",
+          "POST_SENTENCE",
+          "TOTAL"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ]
+      },
+      "2023": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "most_serious_offence_or_charge": [
+          "ANZSOC_01",
+          "ANZSOC_02",
+          "ANZSOC_03",
+          "ANZSOC_04",
+          "ANZSOC_05",
+          "ANZSOC_06",
+          "ANZSOC_07",
+          "ANZSOC_08",
+          "ANZSOC_09",
+          "ANZSOC_10",
+          "ANZSOC_11",
+          "ANZSOC_12",
+          "ANZSOC_13",
+          "ANZSOC_14",
+          "ANZSOC_15",
+          "ANZSOC_16",
+          "POST_SENTENCE",
+          "TOTAL"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ]
+      },
+      "2024": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "most_serious_offence_or_charge": [
+          "ANZSOC_01",
+          "ANZSOC_02",
+          "ANZSOC_03",
+          "ANZSOC_04",
+          "ANZSOC_05",
+          "ANZSOC_06",
+          "ANZSOC_07",
+          "ANZSOC_08",
+          "ANZSOC_09",
+          "ANZSOC_10",
+          "ANZSOC_11",
+          "ANZSOC_12",
+          "ANZSOC_13",
+          "ANZSOC_14",
+          "ANZSOC_15",
+          "ANZSOC_16",
+          "POST_SENTENCE",
+          "TOTAL"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ]
+      },
+      "2025": {
+        "jurisdiction": [
+          "ACT",
+          "AUS",
+          "NSW",
+          "NT",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "most_serious_offence_or_charge": [
+          "ANZSOC_01",
+          "ANZSOC_02",
+          "ANZSOC_03",
+          "ANZSOC_04",
+          "ANZSOC_05",
+          "ANZSOC_06",
+          "ANZSOC_07",
+          "ANZSOC_08",
+          "ANZSOC_09",
+          "ANZSOC_10",
+          "ANZSOC_11",
+          "ANZSOC_12",
+          "ANZSOC_13",
+          "ANZSOC_14",
+          "ANZSOC_15",
+          "ANZSOC_16",
+          "POST_SENTENCE",
+          "TOTAL"
+        ],
+        "indigenous_status": [
+          "INDIGENOUS",
+          "NON_INDIGENOUS",
+          "TOTAL"
+        ]
+      }
+    }
+  },
+  "requiredDimensions": [
+    "jurisdiction",
+    "most_serious_offence_or_charge",
+    "indigenous_status"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory"
+    ],
+    "most_serious_offence_or_charge": [
+      "most serious offence or charge"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "most_serious_offence_or_charge_id",
+    "indigenous_status_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 486,
+    "maximumRows": 486,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "mostSeriousOffencesOrCharges": [
+      "ANZSOC_01",
+      "ANZSOC_02",
+      "ANZSOC_03",
+      "ANZSOC_04",
+      "ANZSOC_05",
+      "ANZSOC_06",
+      "ANZSOC_07",
+      "ANZSOC_08",
+      "ANZSOC_09",
+      "ANZSOC_10",
+      "ANZSOC_11",
+      "ANZSOC_12",
+      "ANZSOC_13",
+      "ANZSOC_14",
+      "ANZSOC_15",
+      "ANZSOC_16",
+      "POST_SENTENCE",
+      "TOTAL"
+    ],
+    "indigenousStatuses": [
+      "INDIGENOUS",
+      "NON_INDIGENOUS",
+      "TOTAL"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    },
+    "most_serious_offence_or_charge": {
+      "01 Homicide and related offences": "ANZSOC_01",
+      "02 Acts intended to cause injury": "ANZSOC_02",
+      "03 Sexual assault and related offences": "ANZSOC_03",
+      "04 Dangerous/negligent acts": "ANZSOC_04",
+      "04 Dangerous/negligent acts (d)": "ANZSOC_04",
+      "05 Abduction/harassment": "ANZSOC_05",
+      "06 Robbery/extortion": "ANZSOC_06",
+      "07 Unlawful entry with intent": "ANZSOC_07",
+      "08 Theft": "ANZSOC_08",
+      "09 Fraud/deception": "ANZSOC_09",
+      "10 Illicit drug offences": "ANZSOC_10",
+      "11 Weapons/explosives": "ANZSOC_11",
+      "12 Property damage and environmental pollution": "ANZSOC_12",
+      "13 Public order offences": "ANZSOC_13",
+      "14 Traffic and vehicle regulatory offences": "ANZSOC_14",
+      "15 Offences against justice": "ANZSOC_15",
+      "16 Miscellaneous offences": "ANZSOC_16",
+      "Post-sentence": "POST_SENTENCE",
+      "Post-sentence (e)": "POST_SENTENCE",
+      "Total": "TOTAL",
+      "Total (f)": "TOTAL"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "INDIGENOUS",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "NON-INDIGENOUS": "NON_INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "TOTAL": "TOTAL",
+      "Total": "TOTAL",
+      "Total (g)": "TOTAL"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 25
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

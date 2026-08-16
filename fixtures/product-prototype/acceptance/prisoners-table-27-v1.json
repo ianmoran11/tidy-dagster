@@ -1,0 +1,1428 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-table-27-v1",
+  "tableFamilyId": "sentenced-prisoner-aggregate-sentence-vintages",
+  "measures": [
+    {
+      "id": "sentence-share-under-1-year",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "SHARE_UNDER_1_YEAR"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 90
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_UNDER_1_YEAR"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_UNDER_1_YEAR"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_UNDER_1_YEAR"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_UNDER_1_YEAR"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_UNDER_1_YEAR"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:46342af000cd65722fadf5e6fc8ecc13989e322e381ece3e152b6bbbc78f81ee",
+        "2022": "sha256:f82830b37e0fbf614c80ab6681d9e150875e45ea30e8a6a7c444624f8f37e091",
+        "2023": "sha256:98e686eb263a44288352c2c6f8b7d23692378c7cc40e4de8ee3c51b2e0c3a27f",
+        "2024": "sha256:e3be6cbe6c793334ccddeb1a73910d510f2970cd195c290bccf4c11261cfa39d",
+        "2025": "sha256:c0232704acbb9dd0f2ac06497b6801de3624c7b5a56fb8c085022c569944dc34"
+      }
+    },
+    {
+      "id": "sentence-share-1-to-under-5-years",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "SHARE_1_TO_UNDER_5_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 90
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_1_TO_UNDER_5_YEARS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_1_TO_UNDER_5_YEARS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_1_TO_UNDER_5_YEARS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_1_TO_UNDER_5_YEARS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_1_TO_UNDER_5_YEARS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:6fd97d29700b53e0d23479d1504578b778f5f3b627df58758744ce7de72ead81",
+        "2022": "sha256:dae21d4381accb903de3500daed42917f6cee1d45de27d0fc1dd2e8663a97197",
+        "2023": "sha256:0a6f41fe9531f7c72593954f62ac4344ba10c78a7688000f0aa3d5652145f9f7",
+        "2024": "sha256:c4e15f1398dda8c111b3b240e56e76ef1282778da5fae20b3c44097de462bd41",
+        "2025": "sha256:3c4fa4531f4258179793f929d90d8528d992e4acf9ce918d013e131118455c68"
+      }
+    },
+    {
+      "id": "sentence-share-5-to-under-10-years",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "SHARE_5_TO_UNDER_10_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 90
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_5_TO_UNDER_10_YEARS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_5_TO_UNDER_10_YEARS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_5_TO_UNDER_10_YEARS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_5_TO_UNDER_10_YEARS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_5_TO_UNDER_10_YEARS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:331b877a4bb30ca2d51d32b1fa7932912d1c78d037df34a6857708fe8c5908ed",
+        "2022": "sha256:e95afef9f966455fa45958b79e6c89e4953fb79216f71298a9f56048440debc6",
+        "2023": "sha256:07e6588b1e5cf8447dd13b62301b92137347c207b0a2dc2edd225fe33953b438",
+        "2024": "sha256:02dc436822a9383869223bed3877a21e803678e05d0ce15138207660370cd7b1",
+        "2025": "sha256:d3686ef643c27ca86fedf61efff8bec9dc404729585dff315eb7bf9fdcbb51a5"
+      }
+    },
+    {
+      "id": "sentence-share-10-years-plus",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "SHARE_10_YEARS_PLUS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 90
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_10_YEARS_PLUS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_10_YEARS_PLUS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_10_YEARS_PLUS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_10_YEARS_PLUS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_10_YEARS_PLUS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:b4e4bbd38bb3a1bbcd211d80dd9d99b0543d1c62e76a8d8d3ccec7e678942fde",
+        "2022": "sha256:cbac54c158b0500003645cb14de4c200a8d4dc7baf381fa0796473877d6b2a3b",
+        "2023": "sha256:83afba608c9ac2a0e39fd45c7e20e18db3208e18cd8dce29e5a59714bb07320f",
+        "2024": "sha256:28b2918a739bf36b3cf2f913357d93a05f3b512f26891c6558b3f408e33672cb",
+        "2025": "sha256:f314b6e1bda51d2bbba8b50529aca37afa4fdbe68499f807c813a562fa566634"
+      }
+    },
+    {
+      "id": "median-aggregate-sentence-length",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "MEDIAN_SENTENCE_LENGTH"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 90
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "sentence_statistic": [
+            "MEDIAN_SENTENCE_LENGTH"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sentence_statistic": [
+            "MEDIAN_SENTENCE_LENGTH"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sentence_statistic": [
+            "MEDIAN_SENTENCE_LENGTH"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "MEDIAN_SENTENCE_LENGTH"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "MEDIAN_SENTENCE_LENGTH"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:0e4ad5e502546a36b6f579f9938fd985e736ac58ab1da0e127410ce2c7735e96",
+        "2022": "sha256:a98111d42323ef0bcdc29194b82f68bdd3189f02be9a28e0c75d8778107a9f33",
+        "2023": "sha256:a71a90ea412c2e4be6678dfd97cadd36615c22ccf9ea9ce6678d02a1f019f321",
+        "2024": "sha256:9a4b6f18a46fdd0bf3121f54a511b77e7a12380c926635981be661a1c3e8db61",
+        "2025": "sha256:81409f93688ba2bc4803b9d1734078452513c9152175a0d7bd53e4c48b83c89e"
+      }
+    },
+    {
+      "id": "share-sentenced-in-last-12-months",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "SHARE_SENTENCED_LAST_12_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 90
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_SENTENCED_LAST_12_MONTHS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_SENTENCED_LAST_12_MONTHS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_SENTENCED_LAST_12_MONTHS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_SENTENCED_LAST_12_MONTHS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SHARE_SENTENCED_LAST_12_MONTHS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:fac972d53812518ab987d7d4e20f4c63529894c1855a018831ab6f7c325f126e",
+        "2022": "sha256:157ca57f971d7236f39b8c322f8163065b5bf027820487654120e5f5320e32f0",
+        "2023": "sha256:b9400cbe6ccf9ccebd2c90f3b2216fdefb1afe26c4884c6f754c567c00f4b60b",
+        "2024": "sha256:a814c29ddc9a570f4c2cc25e1b3675ca4d454e0ecc5228760f3f536696c77d82",
+        "2025": "sha256:e9ea325e137dde6f1f29a2e529dcf08dcf6f1d8049e1cfcae34c0eb4755ad59b"
+      }
+    },
+    {
+      "id": "total-sentenced-prisoners",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "sentence_statistic": [
+            "TOTAL_SENTENCED_PRISONERS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 90
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "sentence_statistic": [
+            "TOTAL_SENTENCED_PRISONERS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sentence_statistic": [
+            "TOTAL_SENTENCED_PRISONERS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sentence_statistic": [
+            "TOTAL_SENTENCED_PRISONERS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "TOTAL_SENTENCED_PRISONERS"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "TOTAL_SENTENCED_PRISONERS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:b25ce23149ac1760572767b794335c735b80073ab62629aeeb57f47212a59c11",
+        "2022": "sha256:8efa5786ceab370febfa3fa03e1ba0e0d25470cc65cdf208d23e62386889f7a2",
+        "2023": "sha256:f84f94858d44d37256c42c6d3fed7523965e06a8d4faf59c13ee36a4c38851cc",
+        "2024": "sha256:6aba5976efe6c01ac01fdf9e20040d162e19a63e1e23c39f36ce1cfd251882fa",
+        "2025": "sha256:c9139dc4a0b530121c6a704666b12e06f0c778890ad7349e298c71f926e5b644"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "observation_period",
+    "sentence_statistic"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory",
+      "geographic area",
+      "geography",
+      "state/territory"
+    ],
+    "observation_period": [
+      "reference year",
+      "reference period"
+    ],
+    "sentence_statistic": [
+      "measure",
+      "statistic",
+      "sentenced prisoner measure",
+      "sentence measure"
+    ]
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "jurisdiction_id",
+    "sentence_statistic_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 630,
+    "maximumRows": 693,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30"
+      ],
+      "2022": [
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2023": [
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2024": [
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2025": [
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "sentenceStatistics": [
+      "MEDIAN_SENTENCE_LENGTH",
+      "SHARE_10_YEARS_PLUS",
+      "SHARE_1_TO_UNDER_5_YEARS",
+      "SHARE_5_TO_UNDER_10_YEARS",
+      "SHARE_SENTENCED_LAST_12_MONTHS",
+      "SHARE_UNDER_1_YEAR",
+      "TOTAL_SENTENCED_PRISONERS"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "AUSTRALIA": "AUS",
+      "AUSTRALIAN CAPITAL TERRITORY": "ACT",
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "NEW SOUTH WALES": "NSW",
+      "NORTHERN TERRITORY": "NT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "QUEENSLAND": "QLD",
+      "Queensland": "QLD",
+      "SOUTH AUSTRALIA": "SA",
+      "South Australia": "SA",
+      "TASMANIA": "TAS",
+      "Tasmania": "TAS",
+      "VICTORIA": "VIC",
+      "Victoria": "VIC",
+      "WESTERN AUSTRALIA": "WA",
+      "Western Australia": "WA"
+    },
+    "observation_period": {
+      "2011": "2011-06-30",
+      "2012": "2012-06-30",
+      "2013": "2013-06-30",
+      "2014": "2014-06-30",
+      "2015": "2015-06-30",
+      "2016": "2016-06-30",
+      "2017": "2017-06-30",
+      "2018": "2018-06-30",
+      "2019": "2019-06-30",
+      "2020": "2020-06-30",
+      "2021": "2021-06-30",
+      "2022": "2022-06-30",
+      "2023": "2023-06-30",
+      "2024": "2024-06-30",
+      "2025": "2025-06-30"
+    },
+    "sentence_statistic": {
+      "1 & under 5 years": "SHARE_1_TO_UNDER_5_YEARS",
+      "1 to under 5 years": "SHARE_1_TO_UNDER_5_YEARS",
+      "10 years & over": "SHARE_10_YEARS_PLUS",
+      "5 & under 10 years": "SHARE_5_TO_UNDER_10_YEARS",
+      "5 to under 10 years": "SHARE_5_TO_UNDER_10_YEARS",
+      "Median": "MEDIAN_SENTENCE_LENGTH",
+      "Sentenced in last 12 months": "SHARE_SENTENCED_LAST_12_MONTHS",
+      "Sentenced in last 12 months (e)(f)": "SHARE_SENTENCED_LAST_12_MONTHS",
+      "Total sentenced prisoners": "TOTAL_SENTENCED_PRISONERS",
+      "Total sentenced prisoners (g)": "TOTAL_SENTENCED_PRISONERS",
+      "Under 1 year": "SHARE_UNDER_1_YEAR"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 25,
+      "measureIds": [
+        "total-sentenced-prisoners"
+      ]
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "referenceDateDimension": "observation_period",
+  "preservePublicationVintage": true
+}

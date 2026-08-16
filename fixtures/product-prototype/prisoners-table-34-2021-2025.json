@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-table-34-2021-2025",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "prisoners-by-prison-location-and-sex",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-table-34-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-batch-normalized.xlsx",
+      "contentDigest": "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+      "byteLength": 309532,
+      "sheet": "Table_34",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-34-2021.response.txt",
+        "contentDigest": "sha256:d35351d8acb2c0c215db289bffdab94443ec58cc1672493dd715cde7d4c86735",
+        "byteLength": 948,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "contentDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "byteLength": 327530,
+      "sheet": "Table_34",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-34-2022.response.txt",
+        "contentDigest": "sha256:673f35b6e5189a1960b0f85235f7d320ba11bd233243df3330d7084fc5f53361",
+        "byteLength": 957,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "contentDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "byteLength": 302509,
+      "sheet": "Table_34",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-34-2023.response.txt",
+        "contentDigest": "sha256:46f5fdc71d4d51cf50f3950a71c65943e1119d65e704c76f81df19bd83e78299",
+        "byteLength": 918,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024.xlsx",
+      "contentDigest": "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+      "byteLength": 279279,
+      "sheet": "Table 34",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-34-2024.response.txt",
+        "contentDigest": "sha256:a54308df93d18299dcc86905227316cc92764dec9332d7c386aa23605dfb5a53",
+        "byteLength": 824,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-batch-normalized.xlsx",
+      "contentDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+      "byteLength": 169355,
+      "sheet": "Table 34",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-34-2025.response.txt",
+        "contentDigest": "sha256:ac4783d30271f3cf63bae55317076ae05068e6e9ce3c4bae8b09b96a6ed6b248",
+        "byteLength": 876,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "table-32",
+  "cohortPath": "fixtures/product-prototype/prisoners-table-32-2021-2025.json",
+  "cohortDigest": "sha256:6c2272d80f03190c782ed94a8e150da03aca51bfd613b98af37e649cf6f57c8d",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/prisoners-table-32-v1.json",
+  "acceptanceContractDigest": "sha256:db29b55daccc3847868985ab03da4c637f10ea905d5a2b5ae4e8318ea90387a6",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 5,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 693,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 693,
+  "measureCounts": {
+    "mean-time-on-remand": 45,
+    "median-time-on-remand": 45,
+    "p90-time-on-remand": 45,
+    "unsentenced-prisoner-count": 279,
+    "unsentenced-prisoner-proportion": 279
+  },
+  "valueStatusCounts": {
+    "observed": 693
+  },
+  "manualReplayYears": [],
+  "publicationVintagePreserved": false,
+  "runDigest": "sha256:aedb57fb82c1e6f4b3e5bcb5741b3217cee3e9bbd4ac9366b90c710383f8f3e0",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:cffbd13b894df2b6be6923108d538e7fa34581bbceea7c63f44d0ae7cddde7b5",
+      "byteLength": 1185
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:52925d42c19dd3dfafcddf13121e25da16f0ba90a4cb7c3301350594496ccea2",
+      "byteLength": 501868
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:70e1655039f32ada272189fa80929a64922ed89b3ee6c0391a74ba96c0dd32b9",
+      "byteLength": 838966
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:640a63f7c55184233c28ee19ca7df01c339ab9fbc80268b5fc171a82a86ab0b0",
+      "byteLength": 1622
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:09a90849ceedd741598e7231120af88ad89defe71c313c5d8085851b3eb28076",
+      "byteLength": 5071
+    }
+  ]
+}

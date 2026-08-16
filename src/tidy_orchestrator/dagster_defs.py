@@ -2,6 +2,7 @@
 
 import json
 import os
+from collections import Counter
 from pathlib import Path
 
 from dagster import (
@@ -27,6 +28,13 @@ from dagster import (
 
 from .application import actual_worker_gateway
 from .artifacts import LocalArtifactRepository, domain_digest
+from .large_batch import (
+    REGISTRY_PATH,
+    LargeBatchRegistry,
+    LargeBatchSpec,
+    load_large_batch_registry,
+    verify_large_batch_reproduction,
+)
 from .product_prototype import run_product_prototype, verify_live_evidence
 from .work_units import (
     MAX_ACTIVE_WORK_UNITS,
@@ -44,6 +52,7 @@ from .work_units import (
 WORK_UNIT_PARTITIONS = DynamicPartitionsDefinition(name="provider_free_work_units_v1")
 EXPECTED_RECIPE_TAG = "tidy/expected_recipe_revision_digest"
 EXPECTED_CATALOG_TAG = "tidy/expected_work_unit_catalog_digest"
+_DEFAULT_PROJECT_ROOT = Path(__file__).parents[2].resolve()
 
 
 class TidyRuntimeResource(ConfigurableResource):
@@ -725,6 +734,211 @@ def product_prototype_charge_replay_check(
     return _check_offence_cohort(runtime, table=31)
 
 
+def _materialize_large_batch_cohort(
+    runtime: TidyRuntimeResource,
+    spec: LargeBatchSpec,
+    batch_id: str,
+    recorded_at: str,
+) -> MaterializeResult:
+    output_root = runtime.project() / ".product-prototype" / spec.output_directory
+    result = run_product_prototype(
+        repository=runtime.repository(),
+        project_root=runtime.project(),
+        cohort_path=runtime.project() / spec.cohort_path,
+        output_root=output_root,
+        mode="replay",
+        recorded_at=recorded_at,
+    )
+    report = result.report
+    rows = json.loads((output_root / "canonical-observations.json").read_text())
+    return MaterializeResult(
+        metadata={
+            "batch_id": batch_id,
+            "family_id": spec.family_id,
+            "run_digest": report["runDigest"],
+            "mode": report["mode"],
+            "provider_calls": report["providerCalls"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "raw_observations": sum(
+                item["rawObservationCount"] for item in report["workbooks"]
+            ),
+            "canonical_observations": report["canonicalObservationCount"],
+            "measure_counts": dict(Counter(item["measure_id"] for item in rows)),
+            "value_status_counts": dict(Counter(item["value_status"] for item in rows)),
+            "preserves_publication_vintage": spec.preserves_publication_vintage,
+            "manual_replay_years": list(spec.expected_manual_replay_years),
+            "workbooks": report["workbooks"],
+            "collation_report_path": str(output_root / "collation-report.json"),
+            "artifact_uri": f"artifact://{result.run.content_digest}",
+        },
+        data_version=DataVersion(result.run.content_digest),
+    )
+
+
+def _check_large_batch_cohort(
+    runtime: TidyRuntimeResource,
+    spec: LargeBatchSpec,
+    batch_id: str,
+) -> AssetCheckResult:
+    output_root = runtime.project() / ".product-prototype" / spec.output_directory
+    try:
+        report = json.loads((output_root / "run.json").read_text())
+        rows = json.loads((output_root / "canonical-observations.json").read_text())
+        collation = json.loads((output_root / "collation-report.json").read_text())
+        verify_large_batch_reproduction(runtime.project(), spec, output_root)
+    except (OSError, json.JSONDecodeError, RuntimeError) as error:
+        return AssetCheckResult(
+            passed=False,
+            metadata={"error": f"{spec.family_id} evidence is unavailable: {error}"},
+        )
+    clean_fields = (
+        "excludedExceptions",
+        "duplicateCanonicalKeys",
+        "conflictingValues",
+        "unmappedLabels",
+        "missingExpectedCategories",
+        "schemaFailures",
+        "codeListFailures",
+    )
+    measure_counts = dict(sorted(Counter(item["measure_id"] for item in rows).items()))
+    status_counts = dict(sorted(Counter(item["value_status"] for item in rows).items()))
+    vintage_present = all("publication_vintage_date" in item for item in rows)
+    passed = (
+        report["acceptedWorkbookCount"] == len(spec.expected_years)
+        and report["exceptionWorkbookCount"] == 0
+        and report["canonicalObservationCount"] == spec.expected_canonical_count
+        and report["crossYearIssues"] == []
+        and report["providerCalls"] == 0
+        and [item["year"] for item in report["workbooks"]] == list(spec.expected_years)
+        and [item["rawObservationCount"] for item in report["workbooks"]]
+        == list(spec.expected_year_counts)
+        and [item["observationCount"] for item in report["workbooks"]]
+        == list(spec.expected_year_counts)
+        and all(
+            item["decision"] == "prototype_auto_accepted"
+            and item["excludedObservationCount"] == 0
+            and item["issues"] == []
+            and all(item["checks"].values())
+            for item in report["workbooks"]
+        )
+        and len(rows) == spec.expected_canonical_count
+        and measure_counts == spec.expected_measure_counts
+        and status_counts == spec.expected_value_status_counts
+        and vintage_present == spec.preserves_publication_vintage
+        and collation["rowCount"] == spec.expected_canonical_count
+        and all(collation[field] == [] for field in clean_fields)
+    )
+    return AssetCheckResult(
+        passed=passed,
+        metadata={
+            "batch_id": batch_id,
+            "family_id": spec.family_id,
+            "run_digest": report["runDigest"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "canonical_observations": report["canonicalObservationCount"],
+            "measure_counts": measure_counts,
+            "value_status_counts": status_counts,
+            "provider_calls": report["providerCalls"],
+        },
+    )
+
+
+def _build_large_batch_asset(
+    spec: LargeBatchSpec,
+    batch_id: str,
+    recorded_at: str,
+):
+    def materialize(runtime: TidyRuntimeResource) -> MaterializeResult:
+        return _materialize_large_batch_cohort(runtime, spec, batch_id, recorded_at)
+
+    materialize.__name__ = spec.dagster_asset
+    return asset(
+        name=spec.dagster_asset,
+        description=(
+            f"Provider-free five-workbook replay for {spec.label}; part of {batch_id}."
+        ),
+        group_name="product_prototype_large_batch",
+        code_version="tidy.product-prototype-large-batch-run/v1",
+    )(materialize)
+
+
+def _build_large_batch_check(
+    spec: LargeBatchSpec,
+    cohort_asset,
+    batch_id: str,
+):
+    def check(runtime: TidyRuntimeResource) -> AssetCheckResult:
+        return _check_large_batch_cohort(runtime, spec, batch_id)
+
+    check.__name__ = f"{spec.dagster_asset}_check"
+    return asset_check(
+        asset=cohort_asset,
+        name="automatic_acceptance_and_collation",
+    )(check)
+
+
+def _build_large_batch_definitions(registry: LargeBatchRegistry):
+    assets = tuple(
+        _build_large_batch_asset(spec, registry.batch_id, registry.replay_recorded_at)
+        for spec in registry.entries
+    )
+    checks = tuple(
+        _build_large_batch_check(spec, cohort_asset, registry.batch_id)
+        for spec, cohort_asset in zip(registry.entries, assets, strict=True)
+    )
+    jobs = tuple(
+        define_asset_job(
+            spec.dagster_job,
+            selection=AssetSelection.assets(cohort_asset),
+            description=f"Provider-free five-year replay for {spec.label}.",
+            tags={
+                "provider_calls": "0",
+                "mode": "replay",
+                "years": "2021-2025",
+                "batch": registry.batch_id,
+                "family": spec.family_id,
+            },
+        )
+        for spec, cohort_asset in zip(registry.entries, assets, strict=True)
+    )
+    aggregate_job = define_asset_job(
+        "product_prototype_large_batch_replay_job",
+        selection=AssetSelection.assets(*assets),
+        description=(
+            "Provider-free isolated replay of the twelve-family, sixty-worksheet "
+            "Prisoners in Australia expansion."
+        ),
+        tags={
+            "provider_calls": "0",
+            "mode": "replay",
+            "years": "2021-2025",
+            "batch": registry.batch_id,
+            "worksheet_count": str(registry.worksheet_count),
+        },
+    )
+    return assets, checks, jobs, aggregate_job
+
+
+if (_DEFAULT_PROJECT_ROOT / REGISTRY_PATH).is_file():
+    LARGE_BATCH_REGISTRY: LargeBatchRegistry | None = load_large_batch_registry(
+        _DEFAULT_PROJECT_ROOT
+    )
+    (
+        LARGE_BATCH_ASSETS,
+        LARGE_BATCH_CHECKS,
+        LARGE_BATCH_JOBS,
+        product_prototype_large_batch_replay_job,
+    ) = _build_large_batch_definitions(LARGE_BATCH_REGISTRY)
+else:
+    LARGE_BATCH_REGISTRY = None
+    LARGE_BATCH_ASSETS = ()
+    LARGE_BATCH_CHECKS = ()
+    LARGE_BATCH_JOBS = ()
+    product_prototype_large_batch_replay_job = None
+
+
 @asset(
     name="source_catalog_snapshot",
     description=(
@@ -1070,6 +1284,20 @@ def build_definitions(
         repository_root
         or Path(os.environ.get("TIDY_ARTIFACT_ROOT", project / ".local-repository"))
     ).resolve()
+    if project == _DEFAULT_PROJECT_ROOT and LARGE_BATCH_REGISTRY is not None:
+        batch_registry = LARGE_BATCH_REGISTRY
+        batch_assets = LARGE_BATCH_ASSETS
+        batch_checks = LARGE_BATCH_CHECKS
+        batch_jobs = LARGE_BATCH_JOBS
+        batch_aggregate_job = product_prototype_large_batch_replay_job
+    else:
+        batch_registry = load_large_batch_registry(project)
+        (
+            batch_assets,
+            batch_checks,
+            batch_jobs,
+            batch_aggregate_job,
+        ) = _build_large_batch_definitions(batch_registry)
     return Definitions(
         assets=[
             product_prototype_stage_projection,
@@ -1079,6 +1307,7 @@ def build_definitions(
             product_prototype_country_replay,
             product_prototype_offence_replay,
             product_prototype_charge_replay,
+            *batch_assets,
             source_catalog_snapshot,
             verified_fixture_inputs_index,
             recipe_execution_evidence_index,
@@ -1092,6 +1321,7 @@ def build_definitions(
             product_prototype_country_replay_check,
             product_prototype_offence_replay_check,
             product_prototype_charge_replay_check,
+            *batch_checks,
             verified_fixture_inputs_check,
             recipe_execution_check,
             active_projection_check,
@@ -1104,6 +1334,8 @@ def build_definitions(
             product_prototype_country_replay_job,
             product_prototype_offence_replay_job,
             product_prototype_charge_replay_job,
+            *batch_jobs,
+            batch_aggregate_job,
             project_work_unit_job,
         ],
         sensors=[provider_free_work_unit_sensor],
@@ -1134,6 +1366,10 @@ def build_definitions(
             "product_prototype_offence_replay_scope": "prisoners-table-23-2021-2025",
             "product_prototype_charge_replay_supported": True,
             "product_prototype_charge_replay_scope": "prisoners-table-31-2021-2025",
+            "product_prototype_large_batch_supported": True,
+            "product_prototype_large_batch_id": batch_registry.batch_id,
+            "product_prototype_large_batch_cohorts": len(batch_registry.entries),
+            "product_prototype_large_batch_worksheets": batch_registry.worksheet_count,
             "product_prototype_live_evidence_supported": True,
             "product_prototype_stage_projection_supported": True,
             "product_prototype_live_generation_authorized": False,
@@ -1154,7 +1390,13 @@ def _dispatch_binding(
 
 
 def _default_project_root() -> Path:
-    return Path(os.environ.get("TIDY_PROJECT_ROOT", Path(__file__).parents[2]))
+    configured = os.environ.get("TIDY_PROJECT_ROOT")
+    if configured:
+        return Path(configured)
+    working_directory = Path.cwd()
+    if (working_directory / REGISTRY_PATH).is_file():
+        return working_directory
+    return _DEFAULT_PROJECT_ROOT
 
 
 def _materialize(

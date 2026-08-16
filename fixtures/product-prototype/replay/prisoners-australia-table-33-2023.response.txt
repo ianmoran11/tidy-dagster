@@ -1,0 +1,43 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Prisoners by state/territory, sex and security classification",
+    "values": {
+      "name": "Number of prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "State/territory",
+        "memberRegions": [
+          "region-012"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-037"
+        ]
+      },
+      {
+        "name": "Sex",
+        "memberRegions": [
+          "region-011",
+          "region-013"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-037"
+        ]
+      },
+      {
+        "name": "Security classification",
+        "memberRegions": [
+          "region-014"
+        ],
+        "direction": "N",
+        "captionHints": []
+      }
+    ]
+  }
+}

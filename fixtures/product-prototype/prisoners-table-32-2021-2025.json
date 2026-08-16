@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-table-32-2021-2025",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "unsentenced-prisoners-by-time-on-remand",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-table-32-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-batch-normalized.xlsx",
+      "contentDigest": "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+      "byteLength": 309532,
+      "sheet": "Table_32",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-32-2021.response.txt",
+        "contentDigest": "sha256:b7c3bc99d1ac95f829422906ab32dc6eddd3161b46ccc704427ca77863476278",
+        "byteLength": 840,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "contentDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "byteLength": 327530,
+      "sheet": "Table_32",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-32-2022.response.txt",
+        "contentDigest": "sha256:f7eba1cce6968425e33d06cf96c8a96657316d9228988f2433786fba3236be53",
+        "byteLength": 873,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "contentDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "byteLength": 302509,
+      "sheet": "Table_32",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-32-2023.response.txt",
+        "contentDigest": "sha256:fa79f6048e78d2280017ba82e5770e20e797ee4da4505e32d750f2ab9a0343d4",
+        "byteLength": 887,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024.xlsx",
+      "contentDigest": "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+      "byteLength": 279279,
+      "sheet": "Table 32",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-32-2024.response.txt",
+        "contentDigest": "sha256:427e81668ca3ff8e39d0d18951febcd1491fd46c1244a4d89465ea811a29ea7d",
+        "byteLength": 863,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-batch-normalized.xlsx",
+      "contentDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+      "byteLength": 169355,
+      "sheet": "Table 32",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-32-2025.response.txt",
+        "contentDigest": "sha256:22a62a85292de1517533911c2875546dd2fdeb68c8ebac7366f56780a06dbaf0",
+        "byteLength": 881,
+        "historicalModel": "openai-codex/gpt-5.6-sol",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

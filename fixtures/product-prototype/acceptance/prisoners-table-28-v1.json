@@ -1,0 +1,617 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-table-28-v1",
+  "tableFamilyId": "sentenced-prisoners-by-indigenous-status-and-expected-time-to-serve",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "expected_time_to_serve": [
+            "UNDER_3_MONTHS",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_2_TO_UNDER_5",
+            "YEARS_5_TO_UNDER_10",
+            "YEARS_10_TO_UNDER_15",
+            "YEARS_15_TO_UNDER_20",
+            "YEARS_20_PLUS",
+            "LIFE",
+            "OTHER",
+            "TOTAL"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 324,
+        "2022": 324,
+        "2023": 324,
+        "2024": 324,
+        "2025": 324
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "LIFE",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "OTHER",
+            "TOTAL",
+            "UNDER_3_MONTHS",
+            "YEARS_10_TO_UNDER_15",
+            "YEARS_15_TO_UNDER_20",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_20_PLUS",
+            "YEARS_2_TO_UNDER_5",
+            "YEARS_5_TO_UNDER_10"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "LIFE",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "OTHER",
+            "TOTAL",
+            "UNDER_3_MONTHS",
+            "YEARS_10_TO_UNDER_15",
+            "YEARS_15_TO_UNDER_20",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_20_PLUS",
+            "YEARS_2_TO_UNDER_5",
+            "YEARS_5_TO_UNDER_10"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "LIFE",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "OTHER",
+            "TOTAL",
+            "UNDER_3_MONTHS",
+            "YEARS_10_TO_UNDER_15",
+            "YEARS_15_TO_UNDER_20",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_20_PLUS",
+            "YEARS_2_TO_UNDER_5",
+            "YEARS_5_TO_UNDER_10"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "LIFE",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "OTHER",
+            "TOTAL",
+            "UNDER_3_MONTHS",
+            "YEARS_10_TO_UNDER_15",
+            "YEARS_15_TO_UNDER_20",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_20_PLUS",
+            "YEARS_2_TO_UNDER_5",
+            "YEARS_5_TO_UNDER_10"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "LIFE",
+            "MONTHS_3_TO_UNDER_6",
+            "MONTHS_6_TO_UNDER_12",
+            "OTHER",
+            "TOTAL",
+            "UNDER_3_MONTHS",
+            "YEARS_10_TO_UNDER_15",
+            "YEARS_15_TO_UNDER_20",
+            "YEARS_1_TO_UNDER_2",
+            "YEARS_20_PLUS",
+            "YEARS_2_TO_UNDER_5",
+            "YEARS_5_TO_UNDER_10"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e9163bf0719c0b1ab6e21df94ee145e9a68a6ead4e2eebffb5bb64523488659e",
+        "2022": "sha256:e9163bf0719c0b1ab6e21df94ee145e9a68a6ead4e2eebffb5bb64523488659e",
+        "2023": "sha256:e9163bf0719c0b1ab6e21df94ee145e9a68a6ead4e2eebffb5bb64523488659e",
+        "2024": "sha256:e9163bf0719c0b1ab6e21df94ee145e9a68a6ead4e2eebffb5bb64523488659e",
+        "2025": "sha256:e9163bf0719c0b1ab6e21df94ee145e9a68a6ead4e2eebffb5bb64523488659e"
+      }
+    },
+    {
+      "id": "mean-years",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "expected_time_to_serve": [
+            "MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 27,
+        "2022": 27,
+        "2023": 27,
+        "2024": 27,
+        "2025": 27
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEAN"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEAN"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEAN"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEAN"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEAN"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:19e40d465c55c1cffe029a90d21a9bf99adf685516e8f3a9e73cac3b7defef9d",
+        "2022": "sha256:19e40d465c55c1cffe029a90d21a9bf99adf685516e8f3a9e73cac3b7defef9d",
+        "2023": "sha256:19e40d465c55c1cffe029a90d21a9bf99adf685516e8f3a9e73cac3b7defef9d",
+        "2024": "sha256:19e40d465c55c1cffe029a90d21a9bf99adf685516e8f3a9e73cac3b7defef9d",
+        "2025": "sha256:19e40d465c55c1cffe029a90d21a9bf99adf685516e8f3a9e73cac3b7defef9d"
+      }
+    },
+    {
+      "id": "median-years",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "expected_time_to_serve": [
+            "MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 27,
+        "2022": 27,
+        "2023": 27,
+        "2024": 27,
+        "2025": 27
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEDIAN"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEDIAN"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEDIAN"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEDIAN"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "expected_time_to_serve": [
+            "MEDIAN"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:37801768decfa5d9b29a75dc6fe328e1c92ea27b2878e9025bfafaf7b03d368e",
+        "2022": "sha256:37801768decfa5d9b29a75dc6fe328e1c92ea27b2878e9025bfafaf7b03d368e",
+        "2023": "sha256:37801768decfa5d9b29a75dc6fe328e1c92ea27b2878e9025bfafaf7b03d368e",
+        "2024": "sha256:37801768decfa5d9b29a75dc6fe328e1c92ea27b2878e9025bfafaf7b03d368e",
+        "2025": "sha256:37801768decfa5d9b29a75dc6fe328e1c92ea27b2878e9025bfafaf7b03d368e"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "indigenous_status",
+    "expected_time_to_serve"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ],
+    "expected_time_to_serve": [
+      "expected time to serve.*"
+    ]
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "indigenous_status_id",
+    "expected_time_to_serve_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 378,
+    "maximumRows": 378,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "indigenousStatuses": [
+      "INDIGENOUS",
+      "NON_INDIGENOUS",
+      "TOTAL"
+    ],
+    "expectedTimesToServe": [
+      "LIFE",
+      "MEAN",
+      "MEDIAN",
+      "MONTHS_3_TO_UNDER_6",
+      "MONTHS_6_TO_UNDER_12",
+      "OTHER",
+      "TOTAL",
+      "UNDER_3_MONTHS",
+      "YEARS_10_TO_UNDER_15",
+      "YEARS_15_TO_UNDER_20",
+      "YEARS_1_TO_UNDER_2",
+      "YEARS_20_PLUS",
+      "YEARS_2_TO_UNDER_5",
+      "YEARS_5_TO_UNDER_10"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "INDIGENOUS",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "NON-INDIGENOUS": "NON_INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "TOTAL": "TOTAL",
+      "Total": "TOTAL",
+      "Total (f)": "TOTAL"
+    },
+    "expected_time_to_serve": {
+      "1 & under 2 years": "YEARS_1_TO_UNDER_2",
+      "1 to under 2 years": "YEARS_1_TO_UNDER_2",
+      "10 & under 15 years": "YEARS_10_TO_UNDER_15",
+      "10 to under 15 years": "YEARS_10_TO_UNDER_15",
+      "15 & under 20 years": "YEARS_15_TO_UNDER_20",
+      "15 to under 20 years": "YEARS_15_TO_UNDER_20",
+      "2 & under 5 years": "YEARS_2_TO_UNDER_5",
+      "2 to under 5 years": "YEARS_2_TO_UNDER_5",
+      "20 years & over": "YEARS_20_PLUS",
+      "3 & under 6 months": "MONTHS_3_TO_UNDER_6",
+      "3 to under 6 months": "MONTHS_3_TO_UNDER_6",
+      "5 & under 10 years": "YEARS_5_TO_UNDER_10",
+      "5 to under 10 years": "YEARS_5_TO_UNDER_10",
+      "6 & under 12 months": "MONTHS_6_TO_UNDER_12",
+      "6 to under 12 months": "MONTHS_6_TO_UNDER_12",
+      "Life": "LIFE",
+      "Life (b)": "LIFE",
+      "Mean (years)": "MEAN",
+      "Mean (years) (e)": "MEAN",
+      "Median (years)": "MEDIAN",
+      "Median (years) (e)": "MEDIAN",
+      "Other": "OTHER",
+      "Other (c)": "OTHER",
+      "Total": "TOTAL",
+      "Total (d)": "TOTAL",
+      "Under 3 months": "UNDER_3_MONTHS"
+    }
+  },
+  "totalEquations": [
+    {
+      "dimension": "jurisdiction",
+      "totalCode": "AUS",
+      "componentCodes": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 25,
+      "maximumUnmodelledResidual": 25,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    }
+  ],
+  "allowedExecutionWarnings": [],
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}
