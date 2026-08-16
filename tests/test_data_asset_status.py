@@ -27,12 +27,23 @@ from tidy_orchestrator.large_batch import load_large_batch_registry
 PROJECT = Path(__file__).parents[1]
 
 
-def test_current_dashboard_reports_eighty_five_clean_sheet_assets() -> None:
+def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> None:
     status = build_dashboard(PROJECT)
     assert status.title == "Tidy Data Asset Status"
-    assert len(status.cohorts) == 17
-    assert len(status.assets) == 85
-    assert status.physical_workbook_count == 9
+    assert [
+        (
+            publication.publication_id,
+            publication.period_format,
+            len(publication.cohorts),
+        )
+        for publication in status.publications
+    ] == [
+        ("prisoners-australia", "calendar-year", 17),
+        ("recorded-crime-offenders", "fiscal-year", 5),
+    ]
+    assert len(status.cohorts) == 22
+    assert len(status.assets) == 105
+    assert status.physical_workbook_count == 13
     assert {asset.year for asset in status.assets} == set(range(2021, 2026))
     assert all(
         stage == "yes" for asset in status.assets for stage in asset.stages.values()
@@ -40,8 +51,18 @@ def test_current_dashboard_reports_eighty_five_clean_sheet_assets() -> None:
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
     assert all(asset.csv_route for asset in status.assets)
-    assert len({asset.csv_route for asset in status.assets}) == 85
-    assert sum(asset.canonical_count or 0 for asset in status.assets) == 32931
+    assert len({asset.csv_route for asset in status.assets}) == 105
+    assert sum(asset.canonical_count or 0 for asset in status.assets) == 54199
+    offenders = [
+        asset
+        for asset in status.assets
+        if asset.publication_id == "recorded-crime-offenders"
+    ]
+    assert len(offenders) == 20
+    assert sum(asset.canonical_count or 0 for asset in offenders) == 21268
+    assert all(
+        asset.publication_label == "Recorded Crime — Offenders" for asset in offenders
+    )
     table_21 = [asset for asset in status.assets if "Table 21" in asset.cohort_label]
     table_22 = [asset for asset in status.assets if "Table 22" in asset.cohort_label]
     table_23 = [asset for asset in status.assets if "Table 23" in asset.cohort_label]
@@ -62,9 +83,10 @@ def test_current_dashboard_reports_eighty_five_clean_sheet_assets() -> None:
         )
     normalized = [asset for asset in status.assets if asset.normalization]
     assert Counter(asset.year for asset in normalized) == {
-        2021: 12,
-        2022: 12,
-        2023: 12,
+        2021: 17,
+        2022: 17,
+        2023: 17,
+        2024: 5,
         2025: 17,
     }
     live = [asset for asset in status.assets if asset.live_evidence_path]
@@ -78,20 +100,23 @@ def test_current_dashboard_reports_eighty_five_clean_sheet_assets() -> None:
 def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None:
     rendered = render_dashboard(build_dashboard(PROJECT)).decode()
     assert rendered.startswith("<!doctype html>")
-    assert rendered.count('class="asset-pair"') == 85
-    assert rendered.count('class="detail-toggle"') == 85
-    assert rendered.count('class="button csv-link"') == 85
-    assert rendered.count("Open CSV") == 85
-    assert rendered.count('class="coverage-row"') == 17
-    assert rendered.count('class="coverage-cell coverage-complete"') == 85
+    assert rendered.count('class="asset-pair"') == 105
+    assert rendered.count('class="detail-toggle"') == 105
+    assert rendered.count('class="button csv-link"') == 105
+    assert rendered.count("Open CSV") == 105
+    assert rendered.count('class="coverage-publication publication-group"') == 2
+    assert rendered.count('class="assets-publication publication-group"') == 2
+    assert rendered.count('class="coverage-row"') == 22
+    assert rendered.count('class="coverage-cell coverage-complete"') == 105
     assert rendered.count('class="coverage-meter"') == 6
-    assert rendered.count("<strong>85/85</strong>") == 6
-    assert "max-height:min(68vh,760px)" in rendered
+    assert rendered.count("<strong>105/105</strong>") == 6
+    assert "max-height:min(54vh,620px)" in rendered
     assert "position:sticky" in rendered
     assert all(
         value in rendered
         for value in (
             'id="search"',
+            'id="publication-filter"',
             'id="cohort-filter"',
             'id="year-filter"',
             'id="checks-filter"',
@@ -104,8 +129,11 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'class="sort"',
             "Automated checks",
             "Flagged issues",
-            "85 sheet-assets across 9 physical workbooks",
+            "105 sheet-assets across 13 physical workbooks",
             "Registered asset coverage",
+            "Recorded Crime — Offenders",
+            "2021\u201322",
+            "publication-grouped cohort-by-period view",
             "not completeness of the full spreadsheet estate",
             'activateTab("assets", true)',
             "product_prototype_age_replay",
@@ -138,15 +166,15 @@ def test_coverage_matrix_keeps_multiple_assets_in_one_year_compact() -> None:
     expanded_cohort = replace(cohort, assets=(*cohort.assets, duplicate))
     expanded = replace(status, cohorts=(expanded_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(expanded).decode()
-    assert rendered.count('class="coverage-row"') == 17
-    assert rendered.count("data-target-year=") == 85
+    assert rendered.count('class="coverage-row"') == 22
+    assert rendered.count("data-target-year=") == 105
     assert (
         rendered.count('class="coverage-cell coverage-complete coverage-multiple"') == 1
     )
     assert "<small>2</small>" in rendered
     assert "2 registered assets" in rendered
     assert "Select to view all 2 assets" in rendered
-    assert rendered.count("<strong>86/86</strong>") == 6
+    assert rendered.count("<strong>106/106</strong>") == 6
 
 
 def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
@@ -156,15 +184,15 @@ def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
     reduced = replace(status, cohorts=(reduced_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(reduced).decode()
     assert rendered.count('class="coverage-cell coverage-absent"') == 1
-    assert rendered.count('class="coverage-cell coverage-complete"') == 84
+    assert rendered.count('class="coverage-cell coverage-complete"') == 104
     assert "Not registered in this prototype scope" in rendered
-    assert rendered.count("<strong>84/84</strong>") == 6
+    assert rendered.count("<strong>104/104</strong>") == 6
 
 
 def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
     status = build_dashboard(PROJECT)
     payloads = build_asset_csv_payloads(PROJECT, status)
-    assert len(payloads) == 85
+    assert len(payloads) == 105
     observed_rows = 0
     for asset in status.assets:
         assert asset.csv_route is not None
@@ -179,7 +207,7 @@ def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
             row.get("publication_vintage_date") or row["reference_date"] for row in rows
         } == {asset.reference_date}
         observed_rows += len(rows)
-    assert observed_rows == 32931
+    assert observed_rows == 54199
 
 
 def test_committed_snapshot_matches_current_evidence() -> None:
@@ -310,6 +338,32 @@ def test_missing_evidence_is_distinct_from_failed_checks(tmp_path: Path) -> None
     assert all(asset.checks_state == "no_evidence" for asset in status.assets)
     rendered = render_dashboard(status).decode()
     assert rendered.count('class="coverage-cell coverage-on-disk"') == 5
+
+
+def test_legacy_registry_synthesizes_calendar_publication_group(tmp_path: Path) -> None:
+    _copy_table_30_status_project(tmp_path)
+    status = build_dashboard(tmp_path)
+    assert len(status.publications) == 1
+    publication = status.publications[0]
+    assert publication.publication_id == "prisoners-australia"
+    assert publication.period_format == "calendar-year"
+    assert len(publication.cohorts) == 1
+
+
+def test_registry_rejects_unresolved_publication_metadata(tmp_path: Path) -> None:
+    _copy_table_30_status_project(tmp_path)
+    registry_path = tmp_path / DEFAULT_REGISTRY
+    registry = json.loads(registry_path.read_text())
+    registry["publications"] = [
+        {
+            "publicationId": "different-publication",
+            "label": "Different publication",
+            "periodFormat": "calendar-year",
+        }
+    ]
+    registry_path.write_text(json.dumps(registry))
+    with pytest.raises(DataAssetStatusError, match="not configured"):
+        build_dashboard(tmp_path)
 
 
 def test_invalid_registry_shape_fails_instead_of_rendering(tmp_path: Path) -> None:

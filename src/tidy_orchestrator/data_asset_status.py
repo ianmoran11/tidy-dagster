@@ -61,6 +61,9 @@ class AssetStatus:
     asset_id: str
     cohort_id: str
     cohort_label: str
+    publication_id: str
+    publication_label: str
+    period_format: str
     dagster_asset: str
     year: int
     reference_date: str
@@ -97,11 +100,22 @@ class AssetStatus:
 class CohortStatus:
     cohort_id: str
     label: str
+    publication_id: str
+    publication_label: str
+    period_format: str
     dagster_asset: str
     assets: tuple[AssetStatus, ...]
     checks_state: str
     issues: tuple[str, ...]
     evidence_recorded_at: str | None
+
+
+@dataclass(frozen=True)
+class PublicationStatus:
+    publication_id: str
+    label: str
+    period_format: str
+    cohorts: tuple[CohortStatus, ...]
 
 
 @dataclass(frozen=True)
@@ -120,6 +134,21 @@ class DashboardStatus:
     @property
     def assets(self) -> tuple[AssetStatus, ...]:
         return tuple(asset for cohort in self.cohorts for asset in cohort.assets)
+
+    @property
+    def publications(self) -> tuple[PublicationStatus, ...]:
+        grouped: dict[str, list[CohortStatus]] = {}
+        for cohort in self.cohorts:
+            grouped.setdefault(cohort.publication_id, []).append(cohort)
+        return tuple(
+            PublicationStatus(
+                publication_id=cohorts[0].publication_id,
+                label=cohorts[0].publication_label,
+                period_format=cohorts[0].period_format,
+                cohorts=tuple(cohorts),
+            )
+            for cohorts in grouped.values()
+        )
 
 
 @dataclass(frozen=True)
@@ -212,7 +241,10 @@ def _validate_registry(value: dict[str, Any]) -> None:
         "server",
         "cohorts",
     }
-    if set(value) != required or value.get("schemaVersion") != REGISTRY_SCHEMA:
+    if (
+        not required <= set(value) <= required | {"publications"}
+        or value.get("schemaVersion") != REGISTRY_SCHEMA
+    ):
         raise DataAssetStatusError("Status registry shape or schema version is invalid")
     if not isinstance(value.get("title"), str) or not value["title"]:
         raise DataAssetStatusError("Status registry title is invalid")
@@ -236,6 +268,25 @@ def _validate_registry(value: dict[str, Any]) -> None:
         or not server["tailnetHostname"]
     ):
         raise DataAssetStatusError("Status registry server boundary is invalid")
+    publications = value.get("publications")
+    if publications is not None:
+        if not isinstance(publications, list) or not publications:
+            raise DataAssetStatusError("Status registry publications are invalid")
+        publication_ids: set[str] = set()
+        for publication in publications:
+            if (
+                not isinstance(publication, dict)
+                or set(publication) != {"publicationId", "label", "periodFormat"}
+                or not isinstance(publication.get("publicationId"), str)
+                or not publication["publicationId"]
+                or not isinstance(publication.get("label"), str)
+                or not publication["label"]
+                or publication.get("periodFormat")
+                not in {"calendar-year", "fiscal-year"}
+                or publication["publicationId"] in publication_ids
+            ):
+                raise DataAssetStatusError("Status registry publications are invalid")
+            publication_ids.add(publication["publicationId"])
     cohorts = value.get("cohorts")
     if not isinstance(cohorts, list) or not cohorts:
         raise DataAssetStatusError("Status registry must configure at least one cohort")
@@ -612,6 +663,10 @@ def _derive_asset(
     cohort_config: dict[str, Any],
     workbook: dict[str, Any],
     evidence: EvidenceBundle,
+    *,
+    publication_id: str,
+    publication_label: str,
+    period_format: str,
 ) -> AssetStatus:
     source = _safe_nested_path(
         project_root, cohort_path.parent, workbook["path"], "workbook path"
@@ -771,6 +826,9 @@ def _derive_asset(
         asset_id=asset_id,
         cohort_id=cohort_config["cohortId"],
         cohort_label=cohort_config["label"],
+        publication_id=publication_id,
+        publication_label=publication_label,
+        period_format=period_format,
         dagster_asset=cohort_config["dagsterAsset"],
         year=workbook["year"],
         reference_date=workbook["referenceDate"],
@@ -833,6 +891,16 @@ def build_dashboard(
     registry = _load_json_object(registry_path, "status registry")
     _validate_registry(registry)
     _safe_relative_path(root, registry["outputPath"], "status output")
+    configured_publications = registry.get("publications")
+    publication_metadata = {
+        item["publicationId"]: (item["label"], item["periodFormat"])
+        for item in configured_publications or []
+    }
+    publication_order = {
+        item["publicationId"]: index
+        for index, item in enumerate(configured_publications or [])
+    }
+    observed_publications: set[str] = set()
     cohorts: list[CohortStatus] = []
     physical_workbooks: set[tuple[str, str]] = set()
     for cohort_config in registry["cohorts"]:
@@ -841,6 +909,25 @@ def build_dashboard(
         )
         cohort = _load_json_object(cohort_path, "cohort manifest")
         _validate_cohort(cohort, cohort_config["cohortId"])
+        publication_id = cohort.get("publicationId")
+        if not isinstance(publication_id, str) or not publication_id:
+            raise DataAssetStatusError("Cohort publication identity is invalid")
+        if (
+            configured_publications is not None
+            and publication_id not in publication_metadata
+        ):
+            raise DataAssetStatusError(
+                f"Cohort publication is not configured: {publication_id}"
+            )
+        if publication_id not in publication_metadata:
+            inferred_label = cohort_config["label"].split("—", 1)[0].strip()
+            publication_metadata[publication_id] = (
+                inferred_label or publication_id,
+                "calendar-year",
+            )
+            publication_order[publication_id] = len(publication_order)
+        publication_label, period_format = publication_metadata[publication_id]
+        observed_publications.add(publication_id)
         cohort_data = cohort_path.read_bytes()
         cohort_digest = sha256_digest(cohort_data)
         evidence_manifest = _safe_relative_path(
@@ -854,7 +941,16 @@ def build_dashboard(
             cohort_digest,
         )
         assets = [
-            _derive_asset(root, cohort_path, cohort_config, workbook, evidence)
+            _derive_asset(
+                root,
+                cohort_path,
+                cohort_config,
+                workbook,
+                evidence,
+                publication_id=publication_id,
+                publication_label=publication_label,
+                period_format=period_format,
+            )
             for workbook in cohort["workbooks"]
         ]
         for asset in assets:
@@ -881,6 +977,9 @@ def build_dashboard(
             CohortStatus(
                 cohort_id=cohort_config["cohortId"],
                 label=cohort_config["label"],
+                publication_id=publication_id,
+                publication_label=publication_label,
+                period_format=period_format,
                 dagster_asset=cohort_config["dagsterAsset"],
                 assets=tuple(assets),
                 checks_state=checks_state,
@@ -888,8 +987,13 @@ def build_dashboard(
                 evidence_recorded_at=evidence.recorded_at,
             )
         )
+    if configured_publications is not None and observed_publications != set(
+        publication_metadata
+    ):
+        raise DataAssetStatusError("Status registry contains an unused publication")
     cohorts.sort(
         key=lambda item: (
+            publication_order[item.publication_id],
             {"issues": 0, "no_evidence": 1, "pass": 2}[item.checks_state],
             item.label,
         )
@@ -1112,10 +1216,20 @@ def _asset_details(asset: AssetStatus) -> str:
     )
 
 
+def _publication_period(year: int, period_format: str) -> str:
+    if period_format == "calendar-year":
+        return str(year)
+    return f"{year}\N{EN DASH}{(year + 1) % 100:02d}"
+
+
 def _asset_rows(asset: AssetStatus) -> str:
+    period = _publication_period(asset.year, asset.period_format)
     search_parts = [
+        asset.publication_label,
+        asset.publication_id,
         asset.cohort_label,
         str(asset.year),
+        period,
         asset.reference_date,
         asset.sheet,
         asset.source_path,
@@ -1143,6 +1257,7 @@ def _asset_rows(asset: AssetStatus) -> str:
     sort_state = {"failed": 0, "no_evidence": 1, "yes": 2}
     sort_checks = {"issues": 0, "no_evidence": 1, "pass": 2}
     attrs = {
+        "publication": asset.publication_id,
         "cohort": asset.cohort_id,
         "year": str(asset.year),
         "checks": asset.checks_state,
@@ -1152,7 +1267,7 @@ def _asset_rows(asset: AssetStatus) -> str:
         "stage-tidied": asset.stages["tidied"],
         "stage-canonicalised": asset.stages["canonicalised"],
         "stage-integrated": asset.stages["integrated"],
-        "sort-asset": f"{asset.cohort_label} {asset.year}",
+        "sort-asset": f"{asset.publication_label} {asset.cohort_label} {asset.year}",
         "sort-year": str(asset.year),
         "sort-identified": str(sort_state[asset.stages["identified"]]),
         "sort-on-disk": str(sort_state[asset.stages["on_disk"]]),
@@ -1179,7 +1294,7 @@ def _asset_rows(asset: AssetStatus) -> str:
 <tbody class="asset-pair" {rendered_attrs}>
   <tr class="asset-row">
     <th scope="row"><span class="asset-name">{_e(asset.cohort_label)}</span><span class="sheet-name">{_e(asset.sheet)}</span></th>
-    <td>{asset.year}</td>
+    <td title="Source year {asset.year}">{_e(period)}</td>
     <td>{_status_markup(asset.stages["identified"])}</td>
     <td>{_status_markup(asset.stages["on_disk"])}</td>
     <td>{_status_markup(asset.stages["tidied"])}</td>
@@ -1207,7 +1322,7 @@ def _cohort_section(cohort: CohortStatus) -> str:
     rows = "".join(_asset_rows(asset) for asset in cohort.assets)
     headers = [
         ("asset", "Asset"),
-        ("year", "Year"),
+        ("year", "Publication period"),
         ("identified", "Identified"),
         ("on-disk", "On disk"),
         ("tidied", "Tidied"),
@@ -1225,6 +1340,20 @@ def _cohort_section(cohort: CohortStatus) -> str:
   <div class="cohort-heading"><div><h2>{_e(cohort.label)}</h2><p>{len(cohort.assets)} sheet-assets · Evidence recorded {_e(cohort.evidence_recorded_at or "not available")}</p></div>{banner}</div>
   <div class="table-wrap"><table><thead><tr>{header_cells}<th scope="col">Open</th></tr></thead>{rows}</table></div>
   <p class="empty-cohort" hidden>No assets in this cohort match the current filters.</p>
+</section>"""
+
+
+def _publication_asset_section(publication: PublicationStatus) -> str:
+    assets = sum(len(cohort.assets) for cohort in publication.cohorts)
+    sections = "".join(_cohort_section(cohort) for cohort in publication.cohorts)
+    heading_id = (
+        "assets-publication-"
+        + hashlib.sha256(publication.publication_id.encode()).hexdigest()[:12]
+    )
+    return f"""
+<section class="assets-publication publication-group" data-publication-section="{_e(publication.publication_id)}" aria-labelledby="{heading_id}">
+  <div class="publication-heading"><div><p class="eyebrow">Publication</p><h2 id="{heading_id}">{_e(publication.label)}</h2></div><p>{len(publication.cohorts)} cohorts · {assets} sheet-assets</p></div>
+{sections}
 </section>"""
 
 
@@ -1251,7 +1380,7 @@ def _coverage_state(asset: AssetStatus) -> tuple[str, str, str]:
 
 
 def _coverage_label(label: str) -> str:
-    return label.split("—", 1)[-1].strip()
+    return label.rsplit("—", 1)[-1].strip()
 
 
 def _coverage_stage_summary(status: DashboardStatus) -> str:
@@ -1300,20 +1429,27 @@ def _coverage_group_state(
     return least_complete
 
 
-def _coverage_matrix(status: DashboardStatus, years: list[int]) -> str:
-    year_headers = "".join(f'<th scope="col">{year}</th>' for year in years)
+def _coverage_matrix(publication: PublicationStatus) -> str:
+    years = sorted(
+        {asset.year for cohort in publication.cohorts for asset in cohort.assets}
+    )
+    year_headers = "".join(
+        f'<th scope="col">{_e(_publication_period(year, publication.period_format))}</th>'
+        for year in years
+    )
     rows = []
-    for cohort in status.cohorts:
+    for cohort in publication.cohorts:
         by_year: dict[int, list[AssetStatus]] = {}
         for asset in cohort.assets:
             by_year.setdefault(asset.year, []).append(asset)
         cells = []
         for year in years:
+            period = _publication_period(year, publication.period_format)
             year_assets = by_year.get(year, [])
             if not year_assets:
                 cells.append(
                     f'<td><span class="coverage-cell coverage-absent" '
-                    f'aria-label="{_e(cohort.label)}, {year}: not registered" '
+                    f'aria-label="{_e(cohort.label)}, {_e(period)}: not registered" '
                     f'title="Not registered in this prototype scope">·</span></td>'
                 )
                 continue
@@ -1332,14 +1468,14 @@ def _coverage_matrix(status: DashboardStatus, years: list[int]) -> str:
                     else "Select to view the asset; CSV is unavailable."
                 )
                 description = (
-                    f"{cohort.label}, {year}, {asset.sheet}: {label}; {count}. "
+                    f"{cohort.label}, {period}, {asset.sheet}: {label}; {count}. "
                     f"{next_step}"
                 )
                 content = _e(symbol)
                 multiple_class = ""
             else:
                 description = (
-                    f"{cohort.label}, {year}: {len(year_assets)} registered assets; "
+                    f"{cohort.label}, {period}: {len(year_assets)} registered assets; "
                     f"{label}; {count}. Select to view all {len(year_assets)} assets."
                 )
                 content = f"{_e(symbol)}<small>{len(year_assets)}</small>"
@@ -1351,19 +1487,28 @@ def _coverage_matrix(status: DashboardStatus, years: list[int]) -> str:
                 f'title="{_e(description)}">{content}</button></td>'
             )
         compact_label = _coverage_label(cohort.label)
+        search = f"{publication.label} {cohort.label}".lower()
         rows.append(
-            f'<tr class="coverage-row" data-coverage-search="{_e(cohort.label.lower())}">'
+            f'<tr class="coverage-row" data-coverage-search="{_e(search)}">'
             f'<th scope="row" title="{_e(cohort.label)}">{_e(compact_label)}</th>'
             + "".join(cells)
             + "</tr>"
         )
+    heading_id = (
+        "coverage-publication-"
+        + hashlib.sha256(publication.publication_id.encode()).hexdigest()[:12]
+    )
+    asset_count = sum(len(cohort.assets) for cohort in publication.cohorts)
     return f"""
+<section class="coverage-publication publication-group" data-publication-section="{_e(publication.publication_id)}" aria-labelledby="{heading_id}">
+<div class="publication-heading"><div><p class="eyebrow">Publication</p><h3 id="{heading_id}">{_e(publication.label)}</h3></div><p>{len(publication.cohorts)} cohorts · {asset_count} sheet-assets</p></div>
 <div class="coverage-scroll">
-<table class="coverage-grid" aria-label="Registered sheet-asset coverage by cohort and publication year">
+<table class="coverage-grid" aria-label="{_e(publication.label)} registered sheet-asset coverage by cohort and publication period">
 <thead><tr><th scope="col">Cohort</th>{year_headers}</tr></thead>
 <tbody>{"".join(rows)}</tbody>
 </table>
-</div>"""
+</div>
+</section>"""
 
 
 def render_dashboard(status: DashboardStatus) -> bytes:
@@ -1372,15 +1517,42 @@ def render_dashboard(status: DashboardStatus) -> bytes:
     integrated_count = sum(asset.stages["integrated"] == "yes" for asset in assets)
     years = sorted({asset.year for asset in assets})
     coverage_summary = _coverage_stage_summary(status)
-    coverage_matrix = _coverage_matrix(status, years)
-    cohort_options = "".join(
-        f'<option value="{_e(cohort.cohort_id)}">{_e(cohort.label)}</option>'
-        for cohort in status.cohorts
+    coverage_matrix = "".join(
+        _coverage_matrix(publication) for publication in status.publications
     )
-    year_options = "".join(f'<option value="{year}">{year}</option>' for year in years)
-    sections = "".join(_cohort_section(cohort) for cohort in status.cohorts)
+    publication_options = "".join(
+        f'<option value="{_e(publication.publication_id)}">{_e(publication.label)}</option>'
+        for publication in status.publications
+    )
+    cohort_options = "".join(
+        f'<optgroup label="{_e(publication.label)}">'
+        + "".join(
+            f'<option value="{_e(cohort.cohort_id)}">{_e(_coverage_label(cohort.label))}</option>'
+            for cohort in publication.cohorts
+        )
+        + "</optgroup>"
+        for publication in status.publications
+    )
+    year_labels = {
+        year: sorted(
+            {
+                _publication_period(year, asset.period_format)
+                for asset in assets
+                if asset.year == year
+            }
+        )
+        for year in years
+    }
+    year_options = "".join(
+        f'<option value="{year}">{_e(" / ".join(year_labels[year]))}</option>'
+        for year in years
+    )
+    sections = "".join(
+        _publication_asset_section(publication) for publication in status.publications
+    )
     summary = (
-        f"{len(status.cohorts)} cohorts · {len(assets)} sheet-assets across "
+        f"{len(status.publications)} publications · {len(status.cohorts)} cohorts · "
+        f"{len(assets)} sheet-assets across "
         f"{status.physical_workbook_count} physical workbooks · {integrated_count} "
         f"integrated · {issue_count} with issues · Snapshot recorded "
         f"{status.recorded_at}"
@@ -1399,6 +1571,7 @@ body {{ margin:0; color:var(--ink); background:#fff; font:15px/1.45 system-ui,-a
 main {{ max-width:1500px; margin:0 auto; padding:28px 24px 60px; }}
 h1 {{ margin:0; font-size:clamp(1.7rem,4vw,2.35rem); letter-spacing:-.025em; }}
 h2 {{ margin:0; font-size:1.15rem; }}
+h3 {{ margin:0; font-size:1.05rem; }}
 h4 {{ margin:1rem 0 .35rem; }}
 p {{ margin:.35rem 0; }}
 a {{ color:var(--accent); }}
@@ -1418,7 +1591,12 @@ header {{ display:flex; align-items:flex-start; justify-content:space-between; g
 .coverage-meter strong {{ font-variant-numeric:tabular-nums; }}
 .coverage-meter i {{ grid-column:1/-1; height:3px; overflow:hidden; border-radius:2px; background:#dfe5ea; }}
 .coverage-meter b {{ display:block; height:100%; background:var(--pass); }}
-.coverage-scroll {{ max-height:min(68vh,760px); overflow:auto; border:1px solid var(--line); border-radius:6px; }}
+.publication-group[hidden] {{ display:none; }}
+.publication-heading {{ display:flex; align-items:end; justify-content:space-between; gap:18px; padding:8px 10px; border-bottom:1px solid var(--line); background:#f8fafb; }}
+.publication-heading p {{ color:var(--muted); font-size:.78rem; }}
+.publication-heading .eyebrow {{ margin:0; color:var(--accent); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }}
+.coverage-publication {{ margin:0 0 14px; border:1px solid var(--line); border-radius:7px; overflow:hidden; }}
+.coverage-scroll {{ max-height:min(54vh,620px); overflow:auto; }}
 .coverage-grid {{ width:max-content; min-width:100%; border-collapse:separate; border-spacing:0; font-size:.76rem; }}
 .coverage-grid th,.coverage-grid td {{ height:31px; padding:2px 4px; border:0; border-right:1px solid #edf0f2; border-bottom:1px solid #edf0f2; text-align:center; }}
 .coverage-grid thead th {{ position:sticky; top:0; z-index:3; padding:5px 7px; background:#f3f6f8; }}
@@ -1441,13 +1619,15 @@ button.coverage-cell:hover,button.coverage-cell:focus-visible {{ outline:2px sol
 .coverage-legend span {{ display:inline-flex; align-items:center; gap:4px; }}
 .coverage-legend i {{ width:11px; height:11px; border-radius:3px; }}
 .coverage-scope {{ margin-top:6px; color:var(--muted); font-size:.76rem; }}
-.controls {{ display:grid; grid-template-columns:minmax(180px,2fr) repeat(4,minmax(135px,1fr)) auto; gap:10px; align-items:end; padding:14px; margin-bottom:20px; background:var(--panel); border:1px solid var(--line); border-radius:8px; }}
+.controls {{ display:grid; grid-template-columns:minmax(180px,2fr) repeat(5,minmax(130px,1fr)) auto; gap:10px; align-items:end; padding:14px; margin-bottom:20px; background:var(--panel); border:1px solid var(--line); border-radius:8px; }}
 label {{ display:grid; gap:4px; color:var(--muted); font-size:.8rem; font-weight:650; }}
 input,select,button {{ font:inherit; }}
 input,select {{ width:100%; min-height:38px; border:1px solid #aeb8c2; border-radius:5px; background:#fff; padding:7px 9px; color:var(--ink); }}
 button,.button {{ min-height:36px; border:1px solid #9da9b5; border-radius:5px; padding:6px 10px; background:#fff; color:var(--ink); cursor:pointer; text-decoration:none; }}
 button:hover,.button:hover {{ border-color:var(--accent); color:var(--accent); }}
-.cohort {{ margin:26px 0 34px; }}
+.assets-publication {{ margin:24px 0 40px; border-top:3px solid var(--accent); }}
+.assets-publication > .publication-heading {{ margin-bottom:14px; }}
+.cohort {{ margin:18px 0 30px; padding:0 8px; }}
 .cohort-heading {{ display:flex; justify-content:space-between; gap:20px; align-items:flex-start; margin-bottom:10px; }}
 .cohort-banner {{ max-width:620px; margin:0; padding:7px 10px; border-radius:5px; font-size:.9rem; }}
 .cohort-banner ul {{ margin:.4rem 0 0 1rem; padding:0; }}
@@ -1495,7 +1675,7 @@ footer dl {{ margin-top:10px; }}
 <button class="tab" id="assets-tab" type="button" role="tab" aria-selected="false" aria-controls="assets-panel" data-tab="assets" tabindex="-1">Assets</button>
 </div>
 <section class="tab-panel" id="coverage-panel" role="tabpanel" aria-labelledby="coverage-tab">
-<div class="coverage-toolbar"><div><h2>Registered asset coverage</h2><p class="muted">Compact cohort-by-publication-year view. Select a cell to inspect that asset.</p></div><label class="coverage-search">Find cohort<input id="coverage-search" type="search" placeholder="Table, topic…"></label></div>
+<div class="coverage-toolbar"><div><h2>Registered asset coverage</h2><p class="muted">Compact publication-grouped cohort-by-period view. Select a cell to inspect that asset.</p></div><label class="coverage-search">Find publication or cohort<input id="coverage-search" type="search" placeholder="Publication, table, topic…"></label></div>
 <div class="stage-summary" aria-label="Pipeline stage coverage">{coverage_summary}</div>
 {coverage_matrix}
 <div class="coverage-legend" aria-label="Coverage state legend">
@@ -1505,9 +1685,10 @@ footer dl {{ margin-top:10px; }}
 </section>
 <section class="tab-panel" id="assets-panel" role="tabpanel" aria-labelledby="assets-tab" hidden>
 <div class="controls" role="search" aria-label="Filter data assets">
-<label>Search<input id="search" type="search" placeholder="Asset, sheet, path, check…"></label>
+<label>Search<input id="search" type="search" placeholder="Publication, asset, sheet, check…"></label>
+<label>Publication<select id="publication-filter"><option value="">All publications</option>{publication_options}</select></label>
 <label>Cohort<select id="cohort-filter"><option value="">All cohorts</option>{cohort_options}</select></label>
-<label>Year<select id="year-filter"><option value="">All years</option>{year_options}</select></label>
+<label>Publication period<select id="year-filter"><option value="">All periods</option>{year_options}</select></label>
 <label>Checks<select id="checks-filter"><option value="">All check states</option><option value="pass">Pass</option><option value="issues">Issues</option><option value="no_evidence">No evidence</option></select></label>
 <label>Incomplete stage<select id="stage-filter"><option value="">Any stage</option><option value="identified">Identified</option><option value="on-disk">On disk</option><option value="tidied">Tidied</option><option value="canonicalised">Canonicalised</option><option value="integrated">Integrated</option></select></label>
 <button id="reset" type="button">Reset</button>
@@ -1536,6 +1717,7 @@ footer dl {{ margin-top:10px; }}
   const allPairs = Array.from(document.querySelectorAll("tbody.asset-pair"));
   const controls = {{
     search: document.getElementById("search"),
+    publication: document.getElementById("publication-filter"),
     cohort: document.getElementById("cohort-filter"),
     year: document.getElementById("year-filter"),
     checks: document.getElementById("checks-filter"),
@@ -1572,6 +1754,9 @@ footer dl {{ margin-top:10px; }}
       row.hidden = Boolean(query) && !row.dataset.coverageSearch.includes(query);
       if (!row.hidden) shown += 1;
     }}
+    for (const publication of document.querySelectorAll("section.coverage-publication")) {{
+      publication.hidden = !Array.from(publication.querySelectorAll("tr.coverage-row")).some((row) => !row.hidden);
+    }}
     document.getElementById("coverage-visible-count").textContent = `Showing ${{shown}} of ${{coverageRows.length}} cohorts.`;
   }}
   coverageSearch.addEventListener("input", applyCoverageFilter);
@@ -1581,6 +1766,7 @@ footer dl {{ margin-top:10px; }}
     for (const pair of allPairs) {{
       const stage = controls.stage.value;
       const visible = (!query || pair.dataset.search.includes(query))
+        && (!controls.publication.value || pair.dataset.publication === controls.publication.value)
         && (!controls.cohort.value || pair.dataset.cohort === controls.cohort.value)
         && (!controls.year.value || pair.dataset.year === controls.year.value)
         && (!controls.checks.value || pair.dataset.checks === controls.checks.value)
@@ -1592,6 +1778,9 @@ footer dl {{ margin-top:10px; }}
       const visible = Array.from(section.querySelectorAll("tbody.asset-pair")).some((pair) => !pair.hidden);
       section.hidden = !visible;
       section.querySelector(".empty-cohort").hidden = visible;
+    }}
+    for (const publication of document.querySelectorAll("section.assets-publication")) {{
+      publication.hidden = !Array.from(publication.querySelectorAll("section.cohort")).some((section) => !section.hidden);
     }}
     document.getElementById("visible-count").textContent = `Showing ${{shown}} of ${{allPairs.length}} assets.`;
     document.getElementById("no-results").hidden = shown !== 0;

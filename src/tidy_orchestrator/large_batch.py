@@ -1,4 +1,4 @@
-"""Registry and digest-closed evidence verification for the 60-sheet batch."""
+"""Registry and digest-closed evidence verification for prototype batches."""
 
 from __future__ import annotations
 
@@ -22,6 +22,27 @@ REGISTRY_PATH = "fixtures/product-prototype/large-batch-assets-v1.json"
 _DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
 _SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 _DAGSTER_NAME = re.compile(r"^[a-z][a-z0-9_]*$")
+_CELL_ADDRESS = re.compile(r"^([A-Z]+)([1-9][0-9]*)$")
+_CELL_RANGE = re.compile(r"^([A-Z]+)([1-9][0-9]*):([A-Z]+)([1-9][0-9]*)$")
+
+
+def _column_number(label: str) -> int:
+    value = 0
+    for character in label:
+        value = value * 26 + ord(character) - ord("A") + 1
+    return value
+
+
+def _cell_in_range(address: str, retained_range: str) -> bool:
+    cell = _CELL_ADDRESS.fullmatch(address)
+    bounds = _CELL_RANGE.fullmatch(retained_range)
+    if cell is None or bounds is None:
+        return False
+    column = _column_number(cell.group(1))
+    row = int(cell.group(2))
+    return _column_number(bounds.group(1)) <= column <= _column_number(
+        bounds.group(3)
+    ) and int(bounds.group(2)) <= row <= int(bounds.group(4))
 
 
 class LargeBatchError(RuntimeError):
@@ -230,7 +251,7 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
         values = [getattr(item, attribute) for item in entries]
         if len(values) != len(set(values)):
             raise LargeBatchError(f"Large-batch registry repeats {attribute}")
-    if len(entries) * len(entries[0].expected_years) != value["worksheetCount"]:
+    if sum(len(entry.expected_years) for entry in entries) != value["worksheetCount"]:
         raise LargeBatchError("Large-batch worksheet count is inconsistent")
     return LargeBatchRegistry(
         batch_id=value["batchId"],
@@ -258,6 +279,8 @@ def verify_batch_normalization(
         "recordedAt",
         "scriptPath",
         "scriptDigest",
+        "correctionScriptPath",
+        "correctionScriptDigest",
         "entries",
         "inRangeValuesChanged",
         "manifestDigest",
@@ -270,23 +293,32 @@ def verify_batch_normalization(
         or manifest.get("schemaVersion") != NORMALIZATION_SCHEMA
         or manifest.get("normalization") != "trim-pathological-styled-blank-cells-v1"
         or not isinstance(manifest.get("recordedAt"), str)
-        or manifest.get("inRangeValuesChanged") is not False
+        or not isinstance(manifest.get("inRangeValuesChanged"), bool)
         or manifest.get("manifestDigest")
         != domain_digest(NORMALIZATION_SCHEMA, semantic)
         or not isinstance(manifest.get("scriptPath"), str)
         or _DIGEST.fullmatch(str(manifest.get("scriptDigest"))) is None
+        or not isinstance(manifest.get("correctionScriptPath"), str)
+        or _DIGEST.fullmatch(str(manifest.get("correctionScriptDigest"))) is None
         or not isinstance(manifest.get("entries"), list)
         or not manifest["entries"]
     ):
         raise LargeBatchError("Normalization manifest header is invalid")
     script = _safe_path(project, manifest["scriptPath"], "normalization script")
+    correction_script = _safe_path(
+        project, manifest["correctionScriptPath"], "correction script"
+    )
     if (
         not script.is_file()
         or sha256_digest(script.read_bytes()) != manifest["scriptDigest"]
+        or not correction_script.is_file()
+        or sha256_digest(correction_script.read_bytes())
+        != manifest["correctionScriptDigest"]
     ):
         raise LargeBatchError("Normalization script digest mismatch")
 
     outputs: dict[str, tuple[int, str, int]] = {}
+    in_range_values_changed = False
     entry_keys = {
         "year",
         "sourcePath",
@@ -296,6 +328,7 @@ def verify_batch_normalization(
         "outputDigest",
         "outputByteLength",
         "trimmedSheets",
+        "correction",
     }
     for entry in manifest["entries"]:
         if (
@@ -316,6 +349,41 @@ def verify_batch_normalization(
             or entry["outputByteLength"] <= 0
             or not isinstance(entry.get("trimmedSheets"), list)
             or not entry["trimmedSheets"]
+            or (
+                entry.get("correction") is not None
+                and (
+                    not isinstance(entry["correction"], dict)
+                    or set(entry["correction"]) != {"id", "removedCells", "reason"}
+                    or not isinstance(entry["correction"].get("id"), str)
+                    or not entry["correction"]["id"]
+                    or not isinstance(entry["correction"].get("reason"), str)
+                    or not entry["correction"]["reason"]
+                    or not isinstance(entry["correction"].get("removedCells"), list)
+                    or not entry["correction"]["removedCells"]
+                    or any(
+                        not isinstance(cell, dict)
+                        or set(cell)
+                        != {
+                            "sheet",
+                            "cell",
+                            "expectedStyle",
+                            "expectedValue",
+                            "insideRetainedRange",
+                        }
+                        or not all(
+                            isinstance(cell.get(key), str) and cell[key]
+                            for key in (
+                                "sheet",
+                                "cell",
+                                "expectedStyle",
+                                "expectedValue",
+                            )
+                        )
+                        or not isinstance(cell.get("insideRetainedRange"), bool)
+                        for cell in entry["correction"]["removedCells"]
+                    )
+                )
+            )
         ):
             raise LargeBatchError("Normalization manifest entry is invalid")
         trimmed = entry["trimmedSheets"]
@@ -332,6 +400,17 @@ def verify_batch_normalization(
             for item in trimmed
         ) or len({item["sheet"] for item in trimmed}) != len(trimmed):
             raise LargeBatchError("Normalization trimmed-sheet declaration is invalid")
+        retained_by_sheet = {item["sheet"]: item["retainedRange"] for item in trimmed}
+        if entry["correction"] is not None:
+            for cell in entry["correction"]["removedCells"]:
+                inside = cell["sheet"] in retained_by_sheet and _cell_in_range(
+                    cell["cell"], retained_by_sheet[cell["sheet"]]
+                )
+                if cell["insideRetainedRange"] is not inside:
+                    raise LargeBatchError(
+                        "Correction retained-range declaration is invalid"
+                    )
+                in_range_values_changed = in_range_values_changed or inside
         for prefix in ("source", "output"):
             file_path = _safe_path(
                 project, entry[f"{prefix}Path"], f"normalization {prefix}"
@@ -346,10 +425,48 @@ def verify_batch_normalization(
                 raise LargeBatchError(f"Normalization {prefix} digest mismatch")
         with tempfile.TemporaryDirectory(prefix="tidy-normalization-verify-") as temp:
             reproduced = Path(temp) / "reproduced.xlsx"
+            source = _safe_path(project, entry["sourcePath"], "normalization source")
+            normalization_input = source
+            if entry["correction"] is not None:
+                normalization_input = Path(temp) / "corrected.xlsx"
+                receipt_path = Path(temp) / "correction-receipt.json"
+                correction = subprocess.run(
+                    [
+                        sys.executable,
+                        str(correction_script),
+                        str(source),
+                        str(normalization_input),
+                        "--receipt",
+                        str(receipt_path),
+                    ],
+                    cwd=project,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                )
+                if (
+                    correction.returncode != 0
+                    or not normalization_input.is_file()
+                    or not receipt_path.is_file()
+                ):
+                    raise LargeBatchError(
+                        "Workbook correction reproduction failed: "
+                        f"{correction.stderr.strip() or correction.stdout.strip()}"
+                    )
+                try:
+                    receipt = json.loads(receipt_path.read_text())
+                except (OSError, json.JSONDecodeError) as error:
+                    raise LargeBatchError(
+                        "Workbook correction receipt is unreadable"
+                    ) from error
+                if receipt != entry["correction"]:
+                    raise LargeBatchError(
+                        "Workbook correction receipt does not match the manifest"
+                    )
             command = [
                 sys.executable,
                 str(script),
-                str(_safe_path(project, entry["sourcePath"], "normalization source")),
+                str(normalization_input),
                 str(reproduced),
             ]
             for declaration in trimmed:
@@ -385,6 +502,9 @@ def verify_batch_normalization(
             entry["outputDigest"],
             entry["outputByteLength"],
         )
+
+    if manifest["inRangeValuesChanged"] is not in_range_values_changed:
+        raise LargeBatchError("Normalization in-range value-change claim is invalid")
 
     used_outputs: set[str] = set()
     for spec in registry.entries:

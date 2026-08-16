@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-table-4-2021-2024",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "offender-rates-by-principal-offence-age-and-period",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-table-4-v1.json",
+  "workerLimits": {
+    "maxWarnings": 20000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/recorded-crime-offenders-2021-22-normalized.xlsx",
+      "contentDigest": "sha256:26d72180f22725d7c71565dd77b8618e71b1e433c8ed88174b68083399f575ef",
+      "byteLength": 84322,
+      "sheet": "Table 4",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-table-4-2021.response.txt",
+        "contentDigest": "sha256:c81156fd31be8075b685bab2b2c87541f86851ab802d7337355f4f0521003fd4",
+        "byteLength": 628,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/recorded-crime-offenders-2022-23-normalized.xlsx",
+      "contentDigest": "sha256:0ca5b6c8238dfa0fe90a4d7474564a1983ab9066b0690f0f2d9b121b9ea95c5e",
+      "byteLength": 89701,
+      "sheet": "Table 4",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-table-4-2022.response.txt",
+        "contentDigest": "sha256:a603ccdbe9d76310408dc292bf9da3895a72cec230dfe9249d4761fa72b6e184",
+        "byteLength": 628,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/recorded-crime-offenders-2023-24-normalized.xlsx",
+      "contentDigest": "sha256:989fa4a24f5c5f822261dc9a817e99db21fc3899213bc6b3e133f1ee4018a904",
+      "byteLength": 101656,
+      "sheet": "Table 4",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-table-4-2023.response.txt",
+        "contentDigest": "sha256:1607f475413e4f32466fb41461923daa40aa7c86fb16697ce95785fb00564e0c",
+        "byteLength": 615,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/recorded-crime-offenders-2024-25-normalized.xlsx",
+      "contentDigest": "sha256:73c4eec69305f404749b900279cb13ead005bf1b58ee89af82c9fdb8d9994d17",
+      "byteLength": 104611,
+      "sheet": "Table 4",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-table-4-2024.response.txt",
+        "contentDigest": "sha256:b0e03df698101fe4f26a3c8e368b58588c9244a9ec6063cfffd7d72b6baac74e",
+        "byteLength": 615,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

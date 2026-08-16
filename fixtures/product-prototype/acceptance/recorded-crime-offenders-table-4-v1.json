@@ -1,0 +1,447 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "recorded-crime-offenders-table-4-v1",
+  "tableFamilyId": "offender-rates-by-principal-offence-age-and-period",
+  "measures": [
+    {
+      "id": "offender-rate",
+      "unitId": "per-100000-persons-aged-10-plus",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 416,
+        "2022": 512,
+        "2023": 512,
+        "2024": 512
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "age_group": [
+            "AGE_10_14",
+            "AGE_15_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "age_group": [
+            "AGE_10_14",
+            "AGE_10_17",
+            "AGE_15_17",
+            "AGE_18_19",
+            "AGE_18_PLUS",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "age_group": [
+            "AGE_10_14",
+            "AGE_10_17",
+            "AGE_15_17",
+            "AGE_18_19",
+            "AGE_18_PLUS",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "age_group": [
+            "AGE_10_14",
+            "AGE_10_17",
+            "AGE_15_17",
+            "AGE_18_19",
+            "AGE_18_PLUS",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:adc19192cf85b8368ca480b52594d8f361cbdef31824d6e0144249bd2003d515",
+        "2022": "sha256:1eda171e6d5939f97b2607275830b6ef8a36d1fd06f88f4537e295213b976cb1",
+        "2023": "sha256:331b661de11a3ed7cb8301e35d47e27fc15aa83a65956c8636e3adb83cd57ecc",
+        "2024": "sha256:dd8d7c4d6a21b7b1174f947b793eca4c6ac9f5144655fb148edcfa3c24923003"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "age_group",
+    "observation_period"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "Principal offence"
+    ],
+    "age_group": [
+      "Age group or statistic"
+    ],
+    "observation_period": [
+      "Reference period (?:anchor|block)"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "ANZSOC_01",
+      "02 Acts intended to cause injury": "ANZSOC_02",
+      "03 Sexual assault and related offences": "ANZSOC_03",
+      "04 Dangerous/negligent acts(d)": "ANZSOC_04",
+      "05 Abduction/harassment": "ANZSOC_05",
+      "06 Robbery/extortion": "ANZSOC_06",
+      "07 Unlawful entry with intent": "ANZSOC_07",
+      "08 Theft(e)": "ANZSOC_08",
+      "09 Fraud/deception": "ANZSOC_09",
+      "10 Illicit drug offences": "ANZSOC_10",
+      "11 Weapons/explosives": "ANZSOC_11",
+      "12 Property damage and environmental pollution": "ANZSOC_12",
+      "13 Public order offences": "ANZSOC_13",
+      "15 Offences against justice(f)": "ANZSOC_15",
+      "16 Miscellaneous offences": "ANZSOC_16",
+      "Total(g)": "TOTAL"
+    },
+    "age_group": {
+      "10–14 years": "AGE_10_14",
+      "15–17 years": "AGE_15_17",
+      "15–19 years": "AGE_15_19",
+      "18–19 years": "AGE_18_19",
+      "20–24 years": "AGE_20_24",
+      "25–29 years": "AGE_25_29",
+      "30–34 years": "AGE_30_34",
+      "35–39 years": "AGE_35_39",
+      "40–44 years": "AGE_40_44",
+      "45–49 years": "AGE_45_49",
+      "50–54 years": "AGE_50_54",
+      "55–59 years": "AGE_55_59",
+      "60–64 years": "AGE_60_64",
+      "65 years and over": "AGE_65_PLUS",
+      "Total 10–17 years": "AGE_10_17",
+      "Total 18 years and over": "AGE_18_PLUS",
+      "Total(c)": "TOTAL"
+    },
+    "observation_period": {
+      "2020–21": "2021-06-30",
+      "2021-22": "2022-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    }
+  },
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "age_group_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 416,
+    "maximumRows": 512,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 40
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ],
+      "2022": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ],
+      "2023": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ],
+      "2024": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ]
+    },
+    "ageGroupsByYear": {
+      "2021": [
+        "AGE_10_14",
+        "AGE_15_19",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS",
+        "TOTAL"
+      ],
+      "2022": [
+        "AGE_10_14",
+        "AGE_10_17",
+        "AGE_15_17",
+        "AGE_18_19",
+        "AGE_18_PLUS",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS",
+        "TOTAL"
+      ],
+      "2023": [
+        "AGE_10_14",
+        "AGE_10_17",
+        "AGE_15_17",
+        "AGE_18_19",
+        "AGE_18_PLUS",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS",
+        "TOTAL"
+      ],
+      "2024": [
+        "AGE_10_14",
+        "AGE_10_17",
+        "AGE_15_17",
+        "AGE_18_19",
+        "AGE_18_PLUS",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS",
+        "TOTAL"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "referenceDateDimension": "observation_period",
+  "preservePublicationVintage": true
+}

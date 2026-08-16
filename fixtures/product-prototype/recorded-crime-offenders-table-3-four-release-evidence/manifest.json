@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "offenders-table-3",
+  "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-3-2021-2024.json",
+  "cohortDigest": "sha256:2c24cbab4fb0297e9d4299c434e5204f750af69b7321e8b81c49d9ecbce9aa83",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/recorded-crime-offenders-table-3-v1.json",
+  "acceptanceContractDigest": "sha256:60d5aa5dbdd87b51f918a29f722a14229b1d2eed0ff8f7076b17a653e519aa95",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 4,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 2208,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 2208,
+  "measureCounts": {
+    "mean-age": 128,
+    "median-age": 128,
+    "offender-count": 1952
+  },
+  "valueStatusCounts": {
+    "observed": 2208
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:5697d14006de1300d255f41553e45629c05d8c37b60a1ca8e8f43ccdec3fbc54",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:57d574cd0b3cbe16ace60a453371e7d292c2bb2e8cbc26699eace7b00c2d1019",
+      "byteLength": 1230
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:a4c3c74f654852e0db5715145e558346e872e327d5bb164f4e82a5ab7dda9700",
+      "byteLength": 1672318
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:91aacf603067524da870a09e734d51208bcda06fe1463abc8c81e04bf9d0e0be",
+      "byteLength": 2824736
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:501266a8922b46453c57cad5c16d2231ca5dd784f3441fd7184a0536c6371915",
+      "byteLength": 1383
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:6fe6840f3679f50fafc3d2b1c92ac74111e0f0a14d8c00fd143e2e927bfc9ef5",
+      "byteLength": 4243
+    }
+  ]
+}

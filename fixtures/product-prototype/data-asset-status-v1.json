@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tidy.data-asset-status-registry/v1",
   "title": "Tidy Data Asset Status",
-  "recordedAt": "2026-08-15T10:00:00+00:00",
+  "recordedAt": "2026-08-16T12:30:00+00:00",
   "outputPath": "docs/data-asset-status/index.html",
   "server": {
     "host": "127.0.0.1",
@@ -13,28 +13,28 @@
   "cohorts": [
     {
       "cohortId": "prisoners-australia-table-21-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 21 (age)",
+      "label": "Prisoners in Australia — Table 21 (age)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-21-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-21-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_age_replay"
     },
     {
       "cohortId": "prisoners-australia-table-22-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 22 (country of birth)",
+      "label": "Prisoners in Australia — Table 22 (country of birth)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-22-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-22-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_country_replay"
     },
     {
       "cohortId": "prisoners-australia-table-23-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 23 (sentenced offence)",
+      "label": "Prisoners in Australia — Table 23 (sentenced offence)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-23-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-23-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_offence_replay"
     },
     {
       "cohortId": "prisoners-australia-table-30-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 30 (legal status)",
+      "label": "Prisoners in Australia — Table 30 (legal status)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-30-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_replay",
@@ -49,94 +49,141 @@
     },
     {
       "cohortId": "prisoners-australia-table-31-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 31 (unsentenced charge)",
+      "label": "Prisoners in Australia — Table 31 (unsentenced charge)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-31-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-31-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_charge_replay"
     },
     {
       "cohortId": "prisoners-australia-selected-characteristics-2021-2025",
-      "label": "Prisoners in Australia \u2014 selected characteristics",
+      "label": "Prisoners in Australia — selected characteristics",
       "cohortPath": "fixtures/product-prototype/prisoners-selected-characteristics-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/selected-characteristics-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_selected_characteristics_replay"
     },
     {
       "cohortId": "prisoners-australia-indigenous-offence-2021-2025",
-      "label": "Prisoners in Australia \u2014 Indigenous status and offence/charge",
+      "label": "Prisoners in Australia — Indigenous status and offence/charge",
       "cohortPath": "fixtures/product-prototype/prisoners-indigenous-offence-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/indigenous-offence-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_indigenous_offence_replay"
     },
     {
       "cohortId": "prisoners-australia-table-24-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 24 (aggregate sentence by offence)",
+      "label": "Prisoners in Australia — Table 24 (aggregate sentence by offence)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-24-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-24-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_24_replay"
     },
     {
       "cohortId": "prisoners-australia-table-25-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 25 (expected time by offence)",
+      "label": "Prisoners in Australia — Table 25 (expected time by offence)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-25-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-25-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_25_replay"
     },
     {
       "cohortId": "prisoners-australia-table-26-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 26 (aggregate sentence by Indigenous status)",
+      "label": "Prisoners in Australia — Table 26 (aggregate sentence by Indigenous status)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-26-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-26-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_26_replay"
     },
     {
       "cohortId": "prisoners-australia-table-27-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 27 (aggregate sentence vintages)",
+      "label": "Prisoners in Australia — Table 27 (aggregate sentence vintages)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-27-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-27-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_27_replay"
     },
     {
       "cohortId": "prisoners-australia-table-28-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 28 (expected time by Indigenous status)",
+      "label": "Prisoners in Australia — Table 28 (expected time by Indigenous status)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-28-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-28-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_28_replay"
     },
     {
       "cohortId": "prisoners-australia-table-29-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 29 (prior imprisonment)",
+      "label": "Prisoners in Australia — Table 29 (prior imprisonment)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-29-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-29-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_29_replay"
     },
     {
       "cohortId": "prisoners-australia-table-32-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 32 (time on remand)",
+      "label": "Prisoners in Australia — Table 32 (time on remand)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-32-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-32-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_32_replay"
     },
     {
       "cohortId": "prisoners-australia-table-33-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 33 (security classification)",
+      "label": "Prisoners in Australia — Table 33 (security classification)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-33-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-33-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_33_replay"
     },
     {
       "cohortId": "prisoners-australia-table-34-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 34 (prison location)",
+      "label": "Prisoners in Australia — Table 34 (prison location)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-34-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-34-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_34_replay"
     },
     {
       "cohortId": "prisoners-australia-table-35-2021-2025",
-      "label": "Prisoners in Australia \u2014 Table 35 (court and remand)",
+      "label": "Prisoners in Australia — Table 35 (court and remand)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-35-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-35-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_35_replay"
+    },
+    {
+      "cohortId": "recorded-crime-offenders-table-1-2021-2024",
+      "label": "Recorded Crime — Offenders — Table 1 (principal offence time series)",
+      "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-1-2021-2024.json",
+      "evidenceManifestPath": "fixtures/product-prototype/recorded-crime-offenders-table-1-four-release-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_offenders_table_1_replay"
+    },
+    {
+      "cohortId": "recorded-crime-offenders-table-2-2021-2024",
+      "label": "Recorded Crime — Offenders — Table 2 (sex and principal offence time series)",
+      "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-2-2021-2024.json",
+      "evidenceManifestPath": "fixtures/product-prototype/recorded-crime-offenders-table-2-four-release-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_offenders_table_2_replay"
+    },
+    {
+      "cohortId": "recorded-crime-offenders-table-3-2021-2024",
+      "label": "Recorded Crime — Offenders — Table 3 (principal offence by age)",
+      "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-3-2021-2024.json",
+      "evidenceManifestPath": "fixtures/product-prototype/recorded-crime-offenders-table-3-four-release-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_offenders_table_3_replay"
+    },
+    {
+      "cohortId": "recorded-crime-offenders-table-4-2021-2024",
+      "label": "Recorded Crime — Offenders — Table 4 (principal offence age rates)",
+      "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-4-2021-2024.json",
+      "evidenceManifestPath": "fixtures/product-prototype/recorded-crime-offenders-table-4-four-release-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_offenders_table_4_replay"
+    },
+    {
+      "cohortId": "recorded-crime-offenders-table-5-2021-2024",
+      "label": "Recorded Crime — Offenders — Table 5 (sex and age time series)",
+      "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-5-2021-2024.json",
+      "evidenceManifestPath": "fixtures/product-prototype/recorded-crime-offenders-table-5-four-release-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_offenders_table_5_replay"
+    }
+  ],
+  "publications": [
+    {
+      "publicationId": "prisoners-australia",
+      "label": "Prisoners in Australia",
+      "periodFormat": "calendar-year"
+    },
+    {
+      "publicationId": "recorded-crime-offenders",
+      "label": "Recorded Crime — Offenders",
+      "periodFormat": "fiscal-year"
     }
   ]
 }

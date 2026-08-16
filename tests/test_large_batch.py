@@ -40,26 +40,37 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "prisoners-australia-sixty-worksheets-v1"
-    assert registry.worksheet_count == 60
+    assert registry.batch_id == "justice-eighty-worksheets-v1"
+    assert registry.worksheet_count == 80
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 12
+    assert len(registry.entries) == 17
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 4
-    assert normalization["inRangeValuesChanged"] is False
+    assert len(normalization["entries"]) == 8
+    assert normalization["inRangeValuesChanged"] is True
+    removed_cells = [
+        cell
+        for entry in normalization["entries"]
+        if entry["correction"] is not None
+        for cell in entry["correction"]["removedCells"]
+    ]
+    assert sum(cell["insideRetainedRange"] for cell in removed_cells) == 2
+    assert sum(not cell["insideRetainedRange"] for cell in removed_cells) == 1
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 60
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 80
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 19648
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 40916
     assert sum(item["providerCalls"] for item in manifests) == 0
-    assert {
-        item["manualReplayYears"][0] for item in manifests if item["manualReplayYears"]
-    } == {
-        2023,
-        2024,
-    }
+    offender_manifests = [
+        item for item in manifests if item["familyId"].startswith("offenders-table-")
+    ]
+    assert len(offender_manifests) == 5
+    assert all(
+        item["manualReplayYears"] == [2021, 2022, 2023, 2024]
+        and item["publicationVintagePreserved"] is True
+        for item in offender_manifests
+    )
 
 
 def test_large_batch_cohorts_and_contracts_validate() -> None:
@@ -223,20 +234,24 @@ def test_vintage_contract_requires_date_codes_and_two_time_axes() -> None:
         _validate_contract(invalid, cohort)
 
 
-@pytest.mark.timeout(300)
+@pytest.mark.timeout(900)
 def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 60
+    assert report["acceptedWorksheetCount"] == 80
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 19648
+    assert report["canonicalObservationCount"] == 40916
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
+    expected_workbooks = {
+        item.family_id: len(item.expected_years)
+        for item in load_large_batch_registry(PROJECT).entries
+    }
     assert all(
         item["passed"] is True
-        and item["acceptedWorkbookCount"] == 5
+        and item["acceptedWorkbookCount"] == expected_workbooks[item["familyId"]]
         and item["exceptionWorkbookCount"] == 0
         and item["providerCalls"] == 0
         and item["crossYearIssues"] == []
@@ -275,21 +290,53 @@ def test_workbook_format_trim_is_deterministic(tmp_path: Path) -> None:
     )
 
 
+def test_digest_bound_correction_emits_manifest_matching_receipt(
+    tmp_path: Path,
+) -> None:
+    manifest = json.loads(
+        (
+            PROJECT / "fixtures/product-prototype/batch-workbook-normalization-v1.json"
+        ).read_text()
+    )
+    entry = next(
+        item
+        for item in manifest["entries"]
+        if item["year"] == 2024 and item["correction"] is not None
+    )
+    output = tmp_path / "corrected.xlsx"
+    receipt = tmp_path / "receipt.json"
+    completed = subprocess.run(
+        [
+            str(PROJECT / manifest["correctionScriptPath"]),
+            str(PROJECT / entry["sourcePath"]),
+            str(output),
+            "--receipt",
+            str(receipt),
+        ],
+        cwd=PROJECT,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(receipt.read_text()) == entry["correction"]
+
+
 def test_large_batch_cli_verifies_committed_evidence() -> None:
     completed = subprocess.run(
         [str(PROJECT / "scripts/tidy-prototype-batch"), "verify"],
         cwd=PROJECT,
         capture_output=True,
         text=True,
-        timeout=60,
+        timeout=120,
     )
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "prisoners-australia-sixty-worksheets-v1",
-        "worksheetCount": 60,
-        "cohortCount": 12,
-        "canonicalObservationCount": 19648,
+        "batchId": "justice-eighty-worksheets-v1",
+        "worksheetCount": 80,
+        "cohortCount": 17,
+        "canonicalObservationCount": 40916,
         "providerCalls": 0,
         "verified": True,
     }

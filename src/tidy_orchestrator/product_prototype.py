@@ -41,6 +41,7 @@ _DIMENSION_FIELDS = {
     "country_of_birth": "country_of_birth_id",
     "most_serious_offence": "most_serious_offence_id",
     "most_serious_charge": "most_serious_charge_id",
+    "principal_offence": "principal_offence_id",
     "statistic_basis": "statistic_basis_id",
     "characteristic_group": "characteristic_group_id",
     "characteristic_category": "characteristic_category_id",
@@ -65,6 +66,7 @@ _EXPECTED_CATEGORY_FIELDS = {
     "country_of_birth": "countriesOfBirth",
     "most_serious_offence": "mostSeriousOffences",
     "most_serious_charge": "mostSeriousCharges",
+    "principal_offence": "principalOffences",
     "statistic_basis": "statisticBases",
     "characteristic_group": "characteristicGroups",
     "characteristic_category": "characteristicCategories",
@@ -89,6 +91,7 @@ _DIMENSION_HEADER_PATTERNS = {
     "country_of_birth": re.compile(r"country.{0,8}birth|birthplace", re.I),
     "most_serious_offence": re.compile(r"most serious offence", re.I),
     "most_serious_charge": re.compile(r"most serious (?:charge|offence)", re.I),
+    "principal_offence": re.compile(r"principal offence", re.I),
     "statistic_basis": re.compile(r"basis|measure(?:ment)? type|section", re.I),
     "characteristic_group": re.compile(r"characteristic group|statistic", re.I),
     "characteristic_category": re.compile(r"characteristic|member", re.I),
@@ -558,6 +561,11 @@ def run_product_prototype(
             gateway=active_gateway,
             contract=contract,
             prepared=prepared,
+            publication_id=(
+                "prisoners-in-australia"
+                if cohort["publicationId"] == "prisoners-australia"
+                else cohort["publicationId"]
+            ),
             timestamp=timestamp,
             execution_mutator=acceptance_execution_mutator,
             worker_limits=worker_limits,
@@ -782,6 +790,7 @@ def _interpret_accept_one(
     gateway: WorkerGateway,
     contract: dict[str, Any],
     prepared: _PreparedWorkbook,
+    publication_id: str,
     timestamp: str,
     execution_mutator: Any | None = None,
     worker_limits: dict[str, int] | None = None,
@@ -878,7 +887,7 @@ def _interpret_accept_one(
     repository.append_decision(decision_record)
     if first is not None and not issues:
         provenance = {
-            "publication_id": "prisoners-in-australia",
+            "publication_id": publication_id,
             "execution_digest": execution_digest,
             "acceptance_policy_version": ACCEPTANCE_SCHEMA,
             "acceptance_policy_digest": sha256_digest(canonical_json_bytes(contract)),

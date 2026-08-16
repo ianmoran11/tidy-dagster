@@ -1,4 +1,4 @@
-"""Provider-free CLI for the 60-worksheet product-prototype batch."""
+"""Provider-free CLI for the registered product-prototype batch."""
 
 from __future__ import annotations
 
@@ -144,7 +144,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(prog="tidy-prototype-batch")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     commands = parser.add_subparsers(dest="command", required=True)
-    run = commands.add_parser("run", help="run all twelve provider-free cohorts")
+    run = commands.add_parser("run", help="run all registered provider-free cohorts")
     run.add_argument("--output", type=Path, required=True)
     run.add_argument("--concurrency", type=int, default=3)
     commands.add_parser("verify", help="verify all committed batch evidence")

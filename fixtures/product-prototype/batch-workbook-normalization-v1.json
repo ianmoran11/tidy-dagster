@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tidy.product-prototype-workbook-normalization/v1",
   "normalization": "trim-pathological-styled-blank-cells-v1",
-  "recordedAt": "2026-08-15T08:30:00+00:00",
+  "recordedAt": "2026-08-16T11:30:00+00:00",
   "scriptPath": "scripts/trim-prototype-workbook-formatting.py",
   "scriptDigest": "sha256:489859dad4e38248deedf5713032ec8ab05d6a5d3a90097072a42136c4d25e24",
   "entries": [
@@ -18,7 +18,8 @@
           "sheet": "Table_34",
           "retainedRange": "A1:B190"
         }
-      ]
+      ],
+      "correction": null
     },
     {
       "year": 2022,
@@ -33,7 +34,8 @@
           "sheet": "Table_34",
           "retainedRange": "A1:B192"
         }
-      ]
+      ],
+      "correction": null
     },
     {
       "year": 2023,
@@ -48,7 +50,8 @@
           "sheet": "Table_34",
           "retainedRange": "A1:B189"
         }
-      ]
+      ],
+      "correction": null
     },
     {
       "year": 2025,
@@ -79,9 +82,171 @@
           "sheet": "Table 34",
           "retainedRange": "A1:B191"
         }
-      ]
+      ],
+      "correction": null
+    },
+    {
+      "year": 2021,
+      "sourcePath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-source.xlsx",
+      "sourceDigest": "sha256:086162a51db94c2f9501c7be622a8706c7a79379e996d66062b801e7b3181a5d",
+      "sourceByteLength": 93730,
+      "outputPath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-normalized.xlsx",
+      "outputDigest": "sha256:26d72180f22725d7c71565dd77b8618e71b1e433c8ed88174b68083399f575ef",
+      "outputByteLength": 84322,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:AC78"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:AC70"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:P51"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:N51"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:AC66"
+        }
+      ],
+      "correction": null
+    },
+    {
+      "year": 2022,
+      "sourcePath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-source.xlsx",
+      "sourceDigest": "sha256:180d4db8289b6fdd20823f528e75938d21b771647c6ecaf3f0fd5bb761f8a646",
+      "sourceByteLength": 100064,
+      "outputPath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-normalized.xlsx",
+      "outputDigest": "sha256:0ca5b6c8238dfa0fe90a4d7474564a1983ab9066b0690f0f2d9b121b9ea95c5e",
+      "outputByteLength": 89701,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:AE79"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:AE71"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:S53"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:Q53"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:AE76"
+        }
+      ],
+      "correction": null
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-source.xlsx",
+      "sourceDigest": "sha256:8dc16d0c7ac726e0eb8fc87a707f7616408f8be0cb009508afd6c737b1db692a",
+      "sourceByteLength": 111807,
+      "outputPath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-normalized.xlsx",
+      "outputDigest": "sha256:989fa4a24f5c5f822261dc9a817e99db21fc3899213bc6b3e133f1ee4018a904",
+      "outputByteLength": 101656,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:AG77"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:AG69"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:S50"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:Q50"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:AG74"
+        }
+      ],
+      "correction": {
+        "id": "recorded-crime-offenders-2023-24-artifacts-v1",
+        "removedCells": [
+          {
+            "sheet": "Table 5",
+            "cell": "AG1",
+            "expectedStyle": "12",
+            "expectedValue": "0",
+            "insideRetainedRange": true
+          }
+        ],
+        "reason": "Remove a zero-valued cell outside the Table 5 semantic data region; preserve the exact source separately."
+      }
+    },
+    {
+      "year": 2024,
+      "sourcePath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-source.xlsx",
+      "sourceDigest": "sha256:80e2d07fe1d0106688537e8c4873dd736922da84608629d4295aa3f012cb8ea2",
+      "sourceByteLength": 115924,
+      "outputPath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-normalized.xlsx",
+      "outputDigest": "sha256:73c4eec69305f404749b900279cb13ead005bf1b58ee89af82c9fdb8d9994d17",
+      "outputByteLength": 104611,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:AI77"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:AI69"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:S50"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:Q50"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:AI74"
+        }
+      ],
+      "correction": {
+        "id": "recorded-crime-offenders-2024-25-artifacts-v1",
+        "removedCells": [
+          {
+            "sheet": "Table 4",
+            "cell": "XFC50",
+            "expectedStyle": "77",
+            "expectedValue": "3",
+            "insideRetainedRange": false
+          },
+          {
+            "sheet": "Table 5",
+            "cell": "AI1",
+            "expectedStyle": "12",
+            "expectedValue": "0",
+            "insideRetainedRange": true
+          }
+        ],
+        "reason": "Remove isolated values outside the Tables 4 and 5 semantic data regions; preserve the exact source separately."
+      }
     }
   ],
-  "inRangeValuesChanged": false,
-  "manifestDigest": "sha256:325865d14c4427a4814f35c4da03af905b47223a4d6b5b32202e4c41129ff8be"
+  "inRangeValuesChanged": true,
+  "correctionScriptPath": "scripts/correct-known-workbook-artifacts.py",
+  "correctionScriptDigest": "sha256:8dec705a2f80451836111aba77ad4b873bae15baf19d4906e7a385e9fdbb2e9c",
+  "manifestDigest": "sha256:3e5884f9613fadcb1d44b64883527a77c6b9c838d70237b41b30ddc2ce673624"
 }

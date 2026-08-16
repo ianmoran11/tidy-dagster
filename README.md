@@ -59,17 +59,26 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-A checked large-batch expansion adds 12 semantic five-year cohorts—60 more
-worksheet-assets—covering selected characteristics, Indigenous status by
-offence/charge, sentence and expected-time statistics, prior imprisonment,
-remand duration, security classification, prison location, and court level.
-All 60 worksheets were automatically accepted into 19,648 canonical
-observations with zero exceptions, cross-year issues, or provider calls. Table
+A checked cross-publication batch includes 12 semantic *Prisoners in Australia*
+five-year cohorts—60 worksheet-assets—covering selected characteristics,
+Indigenous status by offence/charge, sentence and expected-time statistics,
+prior imprisonment, remand duration, security classification, prison location,
+and court level. A second publication adds *Recorded Crime — Offenders* Tables
+1–5 across 2021–22 through 2024–25: 20 more worksheet-assets and 21,268
+canonical observations. The combined 80-worksheet batch contains 40,916
+canonical observations with zero exceptions, cross-period issues, or provider
+calls. Table
 27 preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,
-which remain non-authoritative. Source/derived workbook digests, byte lengths,
-retained ranges, and the exact normalization script digest are closed in
+which remain non-authoritative. The Offenders maps are likewise deterministic,
+human-authored replay inputs judged only by independent acceptance contracts.
+Counts, rates, mean/median ages, fiscal observation periods, and 372 published
+`na` cells remain semantically distinct. Source/derived workbook digests, byte
+lengths, retained ranges, and the exact normalization and correction-script
+digests are closed in the manifest. It records two reviewed correction cells
+inside retained rectangular ranges and one outside, and verifies an exact
+script-emitted correction receipt in
 `fixtures/product-prototype/batch-workbook-normalization-v1.json`.
 
 ```sh
@@ -95,19 +104,20 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects 17 five-year cohorts as 85 sheet-assets
-across nine checked workbook byte identities: five base annual workbooks and
-four deterministic formatting-trim derivatives used by the large batch. It
+A minimal read-only page projects two publications, 22 cohorts, and 105
+sheet-assets across 13 checked normalized workbook byte identities. It
 derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The default
-**Coverage** tab provides a compact, searchable cohort-by-publication-year
-heatmap with sticky headers and an independently derived six-stage summary.
+**Coverage** tab groups compact cohort-by-period heatmaps under publication
+headings, with sticky headers, fiscal-period labels where needed, and an
+independently derived six-stage summary. The **Assets** tab has the same
+publication grouping plus a publication filter.
 If a future cohort has multiple sheets in one year, one cell shows their count
 and least-complete state rather than expanding or silently dropping them.
 Selecting a heatmap cell switches to the filtered **Assets** tab, where every
 row has an **Open CSV** link for only that workbook/sheet asset's canonical rows.
-The foreground server derives these 85 allowlisted views
+The foreground server derives these 105 allowlisted views
 from the checked cohort CSV files using workbook digest, sheet, and publication
 date; it creates no new data authority or duplicate committed CSVs. Heatmap
 symbols and accessible labels accompany every colour, and the page states that

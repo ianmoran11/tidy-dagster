@@ -564,29 +564,30 @@ both expose this run without making provider calls.
 
 ## 14. Minimal data-asset status projection
 
-`Tidy Data Asset Status` is a deliberately read-only consumer of 17 checked
-five-year cohorts. The explicit registry at
-`fixtures/product-prototype/data-asset-status-v1.json` selects 85 sheet-assets
-across nine checked workbook byte identities: five base annual workbooks and
-four deterministic formatting-trim derivatives. For each sheet it derives independent
+`Tidy Data Asset Status` is a deliberately read-only consumer of two
+publications and 22 checked cohorts. The explicit registry at
+`fixtures/product-prototype/data-asset-status-v1.json` selects 105 sheet-assets
+across 13 checked normalized workbook byte identities. For each sheet it derives independent
 `Identified`, `On disk`, `Tidied`, `Canonicalised`, and `Integrated` facts and a
 separate automated-check result. Missing current source custody does not erase
 historical processing evidence; it creates a visible contradiction instead.
 
 Python standard-library code generates the self-contained, deterministic
 snapshot at `docs/data-asset-status/index.html`. Its default **Coverage** tab
-uses a dense cohort-by-publication-year heatmap, a six-stage completion strip,
-sticky row/year headers, and cohort search so the view can remain compact as the
-registry grows. Colour is always paired with a symbol and full accessible label.
+groups dense cohort-by-publication-period heatmaps beneath publication headings,
+with a six-stage completion strip, sticky row/period headers, and publication or
+cohort search. Calendar and fiscal periods retain their own display conventions.
+Colour is always paired with a symbol and full accessible label.
 Multiple assets in one cohort/year aggregate into a count-badged cell whose
 colour reflects the least-complete member; drill-down retains every matching
-asset. Selecting a cell switches focus to the filtered **Assets** tab. Vanilla JavaScript
-supplies this drill-down, sorting, core filters, text search, inline evidence
+asset. Selecting a cell switches focus to the filtered **Assets** tab, which is
+also grouped and filterable by publication. Vanilla JavaScript supplies this
+drill-down, sorting, core filters, text search, inline evidence
 details, and one **Open CSV** link per sheet-asset without adding a frontend
 framework or mutation API.
 At startup, the foreground server deterministically partitions the checked
 cohort CSVs by source workbook digest, sheet, and publication date, verifies all
-85 row counts, and exposes only the exact generated `/csv/<asset>.csv` allowlist
+105 row counts, and exposes only the exact generated `/csv/<asset>.csv` allowlist
 alongside `/`, `/index.html`, and `/healthz` on `127.0.0.1:3031`. The CSV uses
 an inline plain-text response so browsers display it rather than requiring a
 download. A separately controlled, exactly scoped Tailscale Serve route can
@@ -692,15 +693,17 @@ Four shared workbook derivatives trim out-of-range styled blank cells and
 pathological merge/column formatting using
 `trim-pathological-styled-blank-cells-v1`. The script refuses to remove cell
 values or formulas, deterministically reproduces every checked derivative, and
-binds source/derived digests. This normalization changes no cell value and
-prevents historical full-row/full-column formatting from breaching
-compact-context bounds.
+binds source/derived digests. The trim stage changes no cell value and prevents
+historical full-row/full-column formatting from breaching compact-context
+bounds. The later Offenders correction stage is separately declared below.
 
 `fixtures/product-prototype/large-batch-assets-v1.json` is the audited
-orchestration registry. It drives 12 explicit Dagster assets/checks/jobs, one
-fixed batch job, generic digest-closed evidence verification, parameterized
-tests, and the status registry. Canonicalization semantics remain in the 12
-human-authored acceptance contracts rather than the Dagster registry.
+orchestration registry. The original Prisoners portion contributes 12 explicit
+Dagster assets/checks/jobs. The cross-publication registry now adds five
+Offenders assets while retaining one fixed aggregate job, generic digest-closed
+evidence verification, parameterized tests, and the independent status registry.
+Canonicalization semantics remain in human-authored acceptance contracts rather
+than the Dagster registry.
 
 ```sh
 scripts/tidy-prototype-batch verify
@@ -709,6 +712,61 @@ scripts/tidy-prototype-batch run \
   --concurrency 3
 ```
 
-The dashboard now projects 17 cohorts, 85 worksheet-assets, and 32,931 total
-canonical observations. Dagster and the dashboard remain replaceable,
-read-only projections rather than evidence authority.
+## 18. Recorded Crime — Offenders cross-publication expansion
+
+A second publication adds Tables 1–5 from *Recorded Crime — Offenders* for
+2021–22, 2022–23, 2023–24, and 2024–25. The 20 worksheet-assets are represented
+as five four-release semantic cohorts so each contract can validate layout and
+category drift across publication vintages:
+
+| Family | Canonical observations |
+|---|---:|
+| Table 1 principal-offence count and rate time series | 4,712 |
+| Table 2 sex, principal offence, count, and rate | 5,952 |
+| Table 3 principal offence by age, including mean and median age | 2,208 |
+| Table 4 principal-offence rates by age | 1,952 |
+| Table 5 sex and age count/rate time series | 6,444 |
+| **Total** | **21,268** |
+
+All four vintages in every cohort are automatically accepted with zero
+exceptions, excluded rows, cross-period issues, or provider calls. Counts,
+rates per 100,000 people aged 10 and over, means, medians, sex, age groups,
+principal-offence codes, observation periods, and publication vintage remain
+separate canonical fields. The 372 published `na` rate/statistic intersections
+are preserved as `not_applicable` nulls. Exact additive total equality is
+explicitly not an acceptance rule because ABS states that confidentialised
+cells are randomly adjusted and components may not sum to totals.
+
+The replay maps are deterministic human-authored inputs with
+`acceptanceAuthority: false`; five independent human-authored contracts remain
+the only automatic acceptance authority. Every accepted row retains source
+workbook, sheet, cell, recipe, execution, policy, decision, and replay
+provenance. The evidence closures are under
+`fixtures/product-prototype/recorded-crime-offenders-table-*-four-release-evidence/`.
+Their run digests are:
+
+- Table 1: `sha256:6a28f037ca0de2ddfeefd150bea05b95b781f60fec27bad4f02f9ca7d0f65398`;
+- Table 2: `sha256:16d2298ec077e64f2bb05b74592ef06ce23eb3d56168b596923cdcdcef2b4ced`;
+- Table 3: `sha256:5697d14006de1300d255f41553e45629c05d8c37b60a1ca8e8f43ccdec3fbc54`;
+- Table 4: `sha256:25a6a6f744ff4413703c5dfc493def4b46951594ad648bb20e0cfdde4a299bcb`; and
+- Table 5: `sha256:5f28fc1b8771527b744f97aea9443297e46e99d53f393382554d2b7a7a2b64b6`.
+
+The exact downloaded workbooks remain committed separately from deterministic
+normalized derivatives. The existing trim script still refuses to remove any
+valued or formula cell. A separate digest-bound correction script handles three
+reviewed isolated values outside the semantic observation/header regions:
+2023–24 `Table 5!AG1=0`, and 2024–25 `Table 4!XFC50=3` plus `Table 5!AI1=0`.
+The two row-1 cells are inside the retained rectangular worksheet ranges;
+`XFC50` is outside. The manifest therefore truthfully records two in-range value
+changes and one out-of-range change rather than claiming no retained-range
+changes. The script refuses every other source identity or cell state and emits
+a receipt that the verifier requires to exactly match the manifest correction
+declaration. The manifest binds both scripts, original/derived identities,
+corrections, and retained ranges and reproduces all eight shared derivatives
+byte-for-byte.
+
+The combined registered batch is now 17 cohorts and 80 worksheets, containing
+40,916 canonical observations. The dashboard projects two publications, 22
+cohorts, 105 worksheet-assets, and 54,199 canonical observations through 105
+verified CSV routes. Dagster and the dashboard remain replaceable, read-only
+projections rather than evidence authority.

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "offenders-table-4",
+  "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-4-2021-2024.json",
+  "cohortDigest": "sha256:aebf2f44a9dc5e9e73b30e1c4f2a32eddc0e2483793f0b411994d0ef76f6e283",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/recorded-crime-offenders-table-4-v1.json",
+  "acceptanceContractDigest": "sha256:7a088c84ff12efff3e91c18b5bd50f5fa1b8d73a6efb2115cec676864141ae88",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 4,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 1952,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 1952,
+  "measureCounts": {
+    "offender-rate": 1952
+  },
+  "valueStatusCounts": {
+    "observed": 1952
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:25a6a6f744ff4413703c5dfc493def4b46951594ad648bb20e0cfdde4a299bcb",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:1a417c4a3d97ebf3875380227b285dc7f1c342e07e698208dde10cde33325c30",
+      "byteLength": 1230
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:8aee2458a0bc03d2b11350d7259c2ddeabc6e54b4aab74f31dfaacb15e1097cf",
+      "byteLength": 1527569
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:db0bd9be0fbe80fba6b0bca0f4dd3c4e55de16463030d355b6d475c26b53bb1a",
+      "byteLength": 2546339
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:3308f0ace1b16df5e8925d272e12118c61d0219ca2138c8d517abf7d2f5cae3d",
+      "byteLength": 1383
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:06a999f4aad8fb034a28fe2e2b1054e03e7735703aaed51d39871cbdf6eb96f9",
+      "byteLength": 4243
+    }
+  ]
+}

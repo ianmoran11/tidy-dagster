@@ -1,0 +1,724 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "recorded-crime-offenders-table-2-v1",
+  "tableFamilyId": "offenders-by-sex-principal-offence-and-period",
+  "measures": [
+    {
+      "id": "offender-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 672,
+        "2022": 720,
+        "2023": 768,
+        "2024": 816
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:700cf6590c0288fea23ed8575ec34f764b672162a1344d771f68d9d3d75a89e3",
+        "2022": "sha256:ebaa20dbdab783ef5c65174319d3e740c62a2a44d4eda3a87238bffe570ba092",
+        "2023": "sha256:cd542c7c313116359eff4e024c3578c08e663fa6e56c1549aa4dd8194a4032d0",
+        "2024": "sha256:d8fcc38073056e04a24833b2c30ebdd27eb5675c803bc8ea8af94784339e1059"
+      }
+    },
+    {
+      "id": "offender-rate",
+      "unitId": "per-100000-persons-aged-10-plus",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 672,
+        "2022": 720,
+        "2023": 768,
+        "2024": 816
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2009-06-30",
+            "2010-06-30",
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:8041c8e1825b658b17bd2dc5848cbe4a69acb8a4ebb87edee456920a7d3ea960",
+        "2022": "sha256:81e643a90b1925c7501f567c6e45b31e1c9f790d3bdf3405c3759cf724af94e5",
+        "2023": "sha256:763a5bae9bfb39f57d2424460fbf555939e8cd17fc66537e9071db93a04312fe",
+        "2024": "sha256:c75647d0874b4ed0291c96eb83fe77b8b04d67d2827f2bd6e777e11e6dc918b8"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "observation_period",
+    "sex",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "Principal offence"
+    ],
+    "observation_period": [
+      "Reference period"
+    ],
+    "sex": [
+      "Sex (?:anchor|block)"
+    ],
+    "statistic_basis": [
+      "Measure"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "ANZSOC_01",
+      "02 Acts intended to cause injury": "ANZSOC_02",
+      "03 Sexual assault and related offences": "ANZSOC_03",
+      "04 Dangerous/negligent acts (d)": "ANZSOC_04",
+      "04 Dangerous/negligent acts (e)": "ANZSOC_04",
+      "04 Dangerous/negligent acts(d)": "ANZSOC_04",
+      "04 Dangerous/negligent acts(e)": "ANZSOC_04",
+      "05 Abduction/harassment": "ANZSOC_05",
+      "06 Robbery/extortion": "ANZSOC_06",
+      "07 Unlawful entry with intent": "ANZSOC_07",
+      "08 Theft(e)": "ANZSOC_08",
+      "08 Theft(f)": "ANZSOC_08",
+      "09 Fraud/deception": "ANZSOC_09",
+      "10 Illicit drug offences": "ANZSOC_10",
+      "11 Weapons/explosives": "ANZSOC_11",
+      "12 Property damage and environmental pollution": "ANZSOC_12",
+      "13 Public order offences": "ANZSOC_13",
+      "15 Offences against justice(f)": "ANZSOC_15",
+      "15 Offences against justice(g)": "ANZSOC_15",
+      "16 Miscellaneous offences": "ANZSOC_16",
+      "Total(g)": "TOTAL",
+      "Total(h)": "TOTAL"
+    },
+    "observation_period": {
+      "2008–09": "2009-06-30",
+      "2009–10": "2010-06-30",
+      "2010–11": "2011-06-30",
+      "2011–12": "2012-06-30",
+      "2012–13": "2013-06-30",
+      "2013–14": "2014-06-30",
+      "2014–15": "2015-06-30",
+      "2015–16": "2016-06-30",
+      "2016–17": "2017-06-30",
+      "2016–17(d)": "2017-06-30",
+      "2017–18": "2018-06-30",
+      "2017–18(d)": "2018-06-30",
+      "2018–19": "2019-06-30",
+      "2018–19(d)": "2019-06-30",
+      "2019–20": "2020-06-30",
+      "2019–20(d)": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2020–21(d)": "2021-06-30",
+      "2021-2022": "2022-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "sex": {
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "Persons(h)": "PERSONS",
+      "Persons(i)": "PERSONS"
+    },
+    "statistic_basis": {
+      "Number": "COUNT",
+      "Offender rate(a)": "RATE"
+    }
+  },
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "sex_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1344,
+    "maximumRows": 1632,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 40
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ],
+      "2022": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ],
+      "2023": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ],
+      "2024": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_15",
+        "ANZSOC_16",
+        "TOTAL"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2009-06-30",
+        "2010-06-30",
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2009-06-30",
+        "2010-06-30",
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2009-06-30",
+        "2010-06-30",
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2009-06-30",
+        "2010-06-30",
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2022": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2023": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2024": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "COUNT",
+        "RATE"
+      ],
+      "2022": [
+        "COUNT",
+        "RATE"
+      ],
+      "2023": [
+        "COUNT",
+        "RATE"
+      ],
+      "2024": [
+        "COUNT",
+        "RATE"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "sex",
+      "requireCanonicalOutputEquivalence": true
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "referenceDateDimension": "observation_period",
+  "preservePublicationVintage": true
+}

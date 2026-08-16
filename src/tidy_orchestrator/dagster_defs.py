@@ -857,7 +857,8 @@ def _build_large_batch_asset(
     return asset(
         name=spec.dagster_asset,
         description=(
-            f"Provider-free five-workbook replay for {spec.label}; part of {batch_id}."
+            f"Provider-free {len(spec.expected_years)}-workbook replay for "
+            f"{spec.label}; part of {batch_id}."
         ),
         group_name="product_prototype_large_batch",
         code_version="tidy.product-prototype-large-batch-run/v1",
@@ -892,28 +893,34 @@ def _build_large_batch_definitions(registry: LargeBatchRegistry):
         define_asset_job(
             spec.dagster_job,
             selection=AssetSelection.assets(cohort_asset),
-            description=f"Provider-free five-year replay for {spec.label}.",
+            description=(
+                f"Provider-free {len(spec.expected_years)}-release replay for "
+                f"{spec.label}."
+            ),
             tags={
                 "provider_calls": "0",
                 "mode": "replay",
-                "years": "2021-2025",
+                "years": ",".join(str(year) for year in spec.expected_years),
                 "batch": registry.batch_id,
                 "family": spec.family_id,
             },
         )
         for spec, cohort_asset in zip(registry.entries, assets, strict=True)
     )
+    aggregate_years = sorted(
+        {year for spec in registry.entries for year in spec.expected_years}
+    )
     aggregate_job = define_asset_job(
         "product_prototype_large_batch_replay_job",
         selection=AssetSelection.assets(*assets),
         description=(
-            "Provider-free isolated replay of the twelve-family, sixty-worksheet "
-            "Prisoners in Australia expansion."
+            f"Provider-free isolated replay of {len(registry.entries)} registered "
+            f"families and {registry.worksheet_count} worksheets across publications."
         ),
         tags={
             "provider_calls": "0",
             "mode": "replay",
-            "years": "2021-2025",
+            "years": ",".join(str(year) for year in aggregate_years),
             "batch": registry.batch_id,
             "worksheet_count": str(registry.worksheet_count),
         },
