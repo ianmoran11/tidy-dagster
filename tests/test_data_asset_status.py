@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import csv
+import io
 import json
 import shutil
 import threading
@@ -13,6 +15,7 @@ import pytest
 from tidy_orchestrator.data_asset_status import (
     DEFAULT_REGISTRY,
     DataAssetStatusError,
+    build_asset_csv_payloads,
     build_dashboard,
     make_status_server,
     render_dashboard,
@@ -35,6 +38,8 @@ def test_current_dashboard_reports_eighty_five_clean_sheet_assets() -> None:
     )
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
+    assert all(asset.csv_route for asset in status.assets)
+    assert len({asset.csv_route for asset in status.assets}) == 85
     assert sum(asset.canonical_count or 0 for asset in status.assets) == 32931
     table_21 = [asset for asset in status.assets if "Table 21" in asset.cohort_label]
     table_22 = [asset for asset in status.assets if "Table 22" in asset.cohort_label]
@@ -74,6 +79,8 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
     assert rendered.startswith("<!doctype html>")
     assert rendered.count('class="asset-pair"') == 85
     assert rendered.count('class="detail-toggle"') == 85
+    assert rendered.count('class="button csv-link"') == 85
+    assert rendered.count("Open CSV") == 85
     assert all(
         value in rendered
         for value in (
@@ -101,6 +108,27 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
     assert "raw prompt" not in rendered.lower()
     assert "https://cdn" not in rendered
     assert "<script src=" not in rendered
+
+
+def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
+    status = build_dashboard(PROJECT)
+    payloads = build_asset_csv_payloads(PROJECT, status)
+    assert len(payloads) == 85
+    observed_rows = 0
+    for asset in status.assets:
+        assert asset.csv_route is not None
+        reader = csv.DictReader(
+            io.StringIO(payloads[asset.csv_route].decode(), newline="")
+        )
+        rows = list(reader)
+        assert len(rows) == asset.canonical_count
+        assert {row["source_workbook_digest"] for row in rows} == {asset.source_digest}
+        assert {row["source_sheet"] for row in rows} == {asset.sheet}
+        assert {
+            row.get("publication_vintage_date") or row["reference_date"] for row in rows
+        } == {asset.reference_date}
+        observed_rows += len(rows)
+    assert observed_rows == 32931
 
 
 def test_committed_snapshot_matches_current_evidence() -> None:
@@ -181,6 +209,40 @@ def test_current_custody_failure_does_not_erase_historical_stages(
     assert status.cohorts[0].checks_state == "issues"
 
 
+def test_tampered_canonical_csv_is_not_exposed(tmp_path: Path) -> None:
+    _copy_table_30_status_project(tmp_path)
+    canonical_csv = (
+        tmp_path
+        / "fixtures/product-prototype/five-year-evidence/canonical-observations.csv"
+    )
+    canonical_csv.write_bytes(canonical_csv.read_bytes() + b"tampered\n")
+    status = build_dashboard(tmp_path)
+    assert all(asset.csv_route is None for asset in status.assets)
+    assert all(asset.stages["canonicalised"] == "yes" for asset in status.assets)
+    assert all(asset.checks_state == "issues" for asset in status.assets)
+    assert build_asset_csv_payloads(tmp_path, status) == {}
+
+
+def test_csv_changed_after_status_verification_is_not_served(tmp_path: Path) -> None:
+    _copy_table_30_status_project(tmp_path)
+    status = build_dashboard(tmp_path)
+    assert all(asset.csv_route for asset in status.assets)
+    canonical_csv = (
+        tmp_path
+        / "fixtures/product-prototype/five-year-evidence/canonical-observations.csv"
+    )
+    changed = bytearray(canonical_csv.read_bytes())
+    index = next(
+        offset
+        for offset in range(len(changed) - 2, 0, -1)
+        if changed[offset] not in {10, 13}
+    )
+    changed[index] = ord("X") if changed[index] != ord("X") else ord("Y")
+    canonical_csv.write_bytes(changed)
+    with pytest.raises(DataAssetStatusError, match="digest or length changed"):
+        build_asset_csv_payloads(tmp_path, status)
+
+
 def test_missing_evidence_is_distinct_from_failed_checks(tmp_path: Path) -> None:
     _copy_table_30_status_project(tmp_path)
     (tmp_path / "fixtures/product-prototype/five-year-evidence/manifest.json").unlink()
@@ -210,10 +272,15 @@ def test_invalid_registry_shape_fails_instead_of_rendering(tmp_path: Path) -> No
         build_dashboard(tmp_path)
 
 
-def test_server_exposes_only_page_and_health(tmp_path: Path) -> None:
+def test_server_exposes_only_page_health_and_declared_asset_csvs(
+    tmp_path: Path,
+) -> None:
     page = tmp_path / "index.html"
     page.write_text("<!doctype html><title>Status</title>")
-    server = make_status_server("127.0.0.1", 0, page)
+    csv_body = b"year,value\n2025,42\n"
+    server = make_status_server(
+        "127.0.0.1", 0, page, {"/csv/example-asset.csv": csv_body}
+    )
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     port = server.server_address[1]
@@ -224,6 +291,23 @@ def test_server_exposes_only_page_and_health(tmp_path: Path) -> None:
             assert response.headers["Cache-Control"] == "no-store"
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/healthz") as response:
             assert response.read() == b'{"status":"ok"}\n'
+        csv_url = f"http://127.0.0.1:{port}/csv/example-asset.csv"
+        with urllib.request.urlopen(csv_url) as response:
+            assert response.read() == csv_body
+            assert response.headers["Content-Type"] == "text/plain; charset=utf-8"
+            assert response.headers["Content-Disposition"] == (
+                'inline; filename="example-asset.csv"'
+            )
+        head = urllib.request.Request(csv_url, method="HEAD")
+        with urllib.request.urlopen(head) as response:
+            assert response.read() == b""
+            assert int(response.headers["Content-Length"]) == len(csv_body)
+        with pytest.raises(urllib.error.HTTPError) as undeclared_csv:
+            urllib.request.urlopen(f"http://127.0.0.1:{port}/csv/other.csv")
+        assert undeclared_csv.value.code == 404
+        with pytest.raises(urllib.error.HTTPError) as traversal:
+            urllib.request.urlopen(f"http://127.0.0.1:{port}/csv/%2e%2e/index.html")
+        assert traversal.value.code == 404
         with pytest.raises(urllib.error.HTTPError) as missing:
             urllib.request.urlopen(f"http://127.0.0.1:{port}/anything")
         assert missing.value.code == 404

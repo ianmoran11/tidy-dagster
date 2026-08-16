@@ -1,8 +1,10 @@
 # ruff: noqa: E501
 from __future__ import annotations
 
+import csv
 import hashlib
 import html
+import io
 import json
 import re
 from dataclasses import dataclass
@@ -83,6 +85,10 @@ class AssetStatus:
     run_path: str
     collation_path: str
     canonical_path: str
+    canonical_csv_path: str
+    canonical_csv_digest: str | None
+    canonical_csv_byte_length: int | None
+    csv_route: str | None
     normalization: str | None
     live_evidence_path: str | None
 
@@ -124,6 +130,7 @@ class EvidenceBundle:
     canonical_counts: dict[tuple[str, str, str], int]
     file_states: dict[str, bool | None]
     file_paths: dict[str, str]
+    file_declarations: dict[str, tuple[str, int]]
     evidence_issues: tuple[str, ...]
     quality_issues: tuple[str, ...]
 
@@ -361,6 +368,7 @@ def _load_evidence(
     cohort_digest: str,
 ) -> EvidenceBundle:
     required_files = {
+        "canonical-observations.csv",
         "canonical-observations.json",
         "collation-report.json",
         "run.json",
@@ -370,6 +378,7 @@ def _load_evidence(
         name: f"{manifest_path.parent.relative_to(project_root).as_posix()}/{name}"
         for name in required_files
     }
+    file_declarations: dict[str, tuple[str, int]] = {}
     evidence_issues: list[str] = []
     quality_issues: list[str] = []
     if not manifest_path.is_file() or manifest_path.is_symlink():
@@ -381,6 +390,7 @@ def _load_evidence(
             {},
             file_states,
             file_paths,
+            file_declarations,
             tuple(evidence_issues),
             (),
         )
@@ -395,6 +405,7 @@ def _load_evidence(
             {},
             file_states,
             file_paths,
+            file_declarations,
             tuple(evidence_issues),
             (),
         )
@@ -430,6 +441,7 @@ def _load_evidence(
             evidence_issues.append(f"Evidence manifest repeats file: {name}")
             continue
         declared[name] = entry
+        file_declarations[name] = (entry["contentDigest"], entry["byteLength"])
         try:
             target = _safe_nested_path(
                 project_root, manifest_path.parent, name, "evidence file path"
@@ -547,6 +559,7 @@ def _load_evidence(
         canonical_counts,
         file_states,
         file_paths,
+        file_declarations,
         tuple(dict.fromkeys(evidence_issues)),
         tuple(dict.fromkeys(quality_issues)),
     )
@@ -585,6 +598,12 @@ def _stage_state_for_file(value: bool | None) -> str:
     if value is False:
         return "failed"
     return "no_evidence"
+
+
+def _asset_csv_route(asset_id: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", asset_id.lower()).strip("-")[:100]
+    suffix = hashlib.sha256(asset_id.encode()).hexdigest()[:12]
+    return f"/csv/{slug}-{suffix}.csv"
 
 
 def _derive_asset(
@@ -746,6 +765,7 @@ def _derive_asset(
         else None
     )
     evidence_root = Path(cohort_config["evidenceManifestPath"]).parent
+    csv_declaration = evidence.file_declarations.get("canonical-observations.csv")
     asset_id = f"{cohort_config['cohortId']}:{workbook['year']}:{workbook['sheet']}"
     return AssetStatus(
         asset_id=asset_id,
@@ -785,6 +805,19 @@ def _derive_asset(
         canonical_path=(
             evidence.file_paths.get("canonical-observations.json")
             or (evidence_root / "canonical-observations.json").as_posix()
+        ),
+        canonical_csv_path=(
+            evidence.file_paths.get("canonical-observations.csv")
+            or (evidence_root / "canonical-observations.csv").as_posix()
+        ),
+        canonical_csv_digest=(csv_declaration[0] if csv_declaration else None),
+        canonical_csv_byte_length=(csv_declaration[1] if csv_declaration else None),
+        csv_route=(
+            _asset_csv_route(asset_id)
+            if canonicalised == "yes"
+            and evidence.file_states["canonical-observations.csv"] is True
+            and csv_declaration is not None
+            else None
         ),
         normalization=workbook.get("normalization"),
         live_evidence_path=live_path,
@@ -876,6 +909,104 @@ def build_dashboard(
     )
 
 
+def build_asset_csv_payloads(
+    project_root: Path | None = None,
+    status: DashboardStatus | None = None,
+) -> dict[str, bytes]:
+    root = (project_root or default_project_root()).resolve()
+    dashboard = status or build_dashboard(root)
+    grouped: dict[str, list[AssetStatus]] = {}
+    routes = [asset.csv_route for asset in dashboard.assets if asset.csv_route]
+    if len(routes) != len(set(routes)):
+        raise DataAssetStatusError("Asset CSV routes are not unique")
+    csv_paths = {
+        asset.canonical_csv_path for asset in dashboard.assets if asset.csv_route
+    }
+    for asset in dashboard.assets:
+        if asset.canonical_csv_path in csv_paths:
+            grouped.setdefault(asset.canonical_csv_path, []).append(asset)
+
+    payloads: dict[str, bytes] = {}
+    for relative_path, assets in grouped.items():
+        source = _safe_relative_path(root, relative_path, "canonical CSV")
+        if source.is_symlink() or not source.is_file():
+            raise DataAssetStatusError(
+                f"Canonical CSV is missing or not a regular file: {relative_path}"
+            )
+        declarations = {
+            (asset.canonical_csv_digest, asset.canonical_csv_byte_length)
+            for asset in assets
+            if asset.csv_route is not None
+        }
+        if len(declarations) != 1 or None in next(iter(declarations), (None, None)):
+            raise DataAssetStatusError(
+                f"Canonical CSV declaration is inconsistent: {relative_path}"
+            )
+        expected_digest, expected_length = next(iter(declarations))
+        try:
+            data = source.read_bytes()
+            if len(data) != expected_length or sha256_digest(data) != expected_digest:
+                raise DataAssetStatusError(
+                    f"Canonical CSV digest or length changed: {relative_path}"
+                )
+            reader = csv.DictReader(io.StringIO(data.decode("utf-8"), newline=""))
+            fieldnames = reader.fieldnames
+            if not fieldnames or not {
+                "source_workbook_digest",
+                "source_sheet",
+                "reference_date",
+            } <= set(fieldnames):
+                raise DataAssetStatusError(
+                    f"Canonical CSV has invalid headers: {relative_path}"
+                )
+            asset_by_key = {
+                (asset.source_digest, asset.sheet, asset.reference_date): asset
+                for asset in assets
+            }
+            selected: dict[str, list[dict[str, str]]] = {
+                asset.csv_route: [] for asset in assets if asset.csv_route is not None
+            }
+            unmatched = 0
+            for row in reader:
+                date = row.get("publication_vintage_date") or row.get("reference_date")
+                asset = asset_by_key.get(
+                    (
+                        row.get("source_workbook_digest"),
+                        row.get("source_sheet"),
+                        date,
+                    )
+                )
+                if asset is None:
+                    unmatched += 1
+                elif asset.csv_route is not None:
+                    selected[asset.csv_route].append(row)
+        except (OSError, UnicodeError, csv.Error) as error:
+            raise DataAssetStatusError(
+                f"Canonical CSV is unreadable: {relative_path}"
+            ) from error
+        if unmatched:
+            raise DataAssetStatusError(
+                f"Canonical CSV has rows that do not map to a sheet-asset: "
+                f"{relative_path} ({unmatched})"
+            )
+        for asset in assets:
+            if asset.csv_route is None:
+                continue
+            rows = selected[asset.csv_route]
+            if asset.canonical_count is None or len(rows) != asset.canonical_count:
+                raise DataAssetStatusError(
+                    f"Canonical CSV row count does not match {asset.asset_id}"
+                )
+            output = io.StringIO(newline="")
+            writer = csv.DictWriter(output, fieldnames=fieldnames, lineterminator="\n")
+            writer.writeheader()
+            writer.writerows(rows)
+            payloads[asset.csv_route] = output.getvalue().encode("utf-8")
+    if set(payloads) != set(routes):
+        raise DataAssetStatusError("Asset CSV route payloads are incomplete")
+    return payloads
+
+
 def _e(value: Any) -> str:
     return html.escape(str(value), quote=True)
 
@@ -917,7 +1048,8 @@ def _asset_details(asset: AssetStatus) -> str:
         _detail_item("Evidence manifest", asset.evidence_manifest_path, code=True),
         _detail_item("Run evidence", asset.run_path, code=True),
         _detail_item("Collation evidence", asset.collation_path, code=True),
-        _detail_item("Canonical output", asset.canonical_path, code=True),
+        _detail_item("Canonical JSON", asset.canonical_path, code=True),
+        _detail_item("Canonical CSV", asset.canonical_csv_path, code=True),
     ]
     if asset.raw_count is not None:
         items.append(_detail_item("Raw observations", f"{asset.raw_count:,}"))
@@ -1001,6 +1133,7 @@ def _asset_rows(asset: AssetStatus) -> str:
         asset.run_path,
         asset.collation_path,
         asset.canonical_path,
+        asset.canonical_csv_path,
         asset.normalization or "",
         asset.live_evidence_path or "",
         *asset.issues,
@@ -1036,6 +1169,12 @@ def _asset_rows(asset: AssetStatus) -> str:
     )
     count = f"{asset.canonical_count:,}" if asset.canonical_count is not None else "—"
     detail_id = "detail-" + hashlib.sha256(asset.asset_id.encode()).hexdigest()[:12]
+    csv_link = (
+        f'<a class="button csv-link" href="{_e(asset.csv_route)}" '
+        'target="_blank" rel="noopener noreferrer">Open CSV</a>'
+        if asset.csv_route
+        else '<span class="muted">CSV unavailable</span>'
+    )
     return f"""
 <tbody class="asset-pair" {rendered_attrs}>
   <tr class="asset-row">
@@ -1048,7 +1187,7 @@ def _asset_rows(asset: AssetStatus) -> str:
     <td>{_status_markup(asset.stages["integrated"])}</td>
     <td class="number">{count}</td>
     <td>{_status_markup(asset.checks_state, checks=True)}</td>
-    <td><button class="detail-toggle" type="button" aria-expanded="false" aria-controls="{detail_id}">Evidence</button></td>
+    <td><div class="row-actions">{csv_link}<button class="detail-toggle" type="button" aria-expanded="false" aria-controls="{detail_id}">Evidence</button></div></td>
   </tr>
   <tr class="detail-row" id="{detail_id}" hidden><td colspan="10">{_asset_details(asset)}</td></tr>
 </tbody>"""
@@ -1084,7 +1223,7 @@ def _cohort_section(cohort: CohortStatus) -> str:
     return f"""
 <section class="cohort" data-cohort-section="{_e(cohort.cohort_id)}">
   <div class="cohort-heading"><div><h2>{_e(cohort.label)}</h2><p>{len(cohort.assets)} sheet-assets · Evidence recorded {_e(cohort.evidence_recorded_at or "not available")}</p></div>{banner}</div>
-  <div class="table-wrap"><table><thead><tr>{header_cells}<th scope="col">Details</th></tr></thead>{rows}</table></div>
+  <div class="table-wrap"><table><thead><tr>{header_cells}<th scope="col">Open</th></tr></thead>{rows}</table></div>
   <p class="empty-cohort" hidden>No assets in this cohort match the current filters.</p>
 </section>"""
 
@@ -1140,7 +1279,7 @@ button:hover,.button:hover {{ border-color:var(--accent); color:var(--accent); }
 .banner-issues {{ color:var(--issue); background:var(--issue-bg); }}
 .banner-unknown {{ color:var(--unknown); background:var(--unknown-bg); }}
 .table-wrap {{ overflow-x:auto; border:1px solid var(--line); border-radius:7px; }}
-table {{ width:100%; min-width:1120px; border-collapse:collapse; }}
+table {{ width:100%; min-width:1240px; border-collapse:collapse; }}
 th,td {{ padding:10px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle; white-space:nowrap; }}
 thead th {{ color:#44515e; background:#f3f6f8; font-size:.78rem; text-transform:uppercase; letter-spacing:.035em; }}
 thead .sort {{ min-height:auto; border:0; padding:0; color:inherit; background:transparent; font-size:inherit; text-transform:inherit; letter-spacing:inherit; font-weight:700; }}
@@ -1149,6 +1288,8 @@ tbody:last-child tr:last-child > * {{ border-bottom:0; }}
 .asset-name {{ font-weight:650; }}
 .sheet-name {{ color:var(--muted); font-size:.82rem; }}
 .number {{ text-align:right; font-variant-numeric:tabular-nums; }}
+.row-actions {{ display:flex; align-items:center; gap:7px; }}
+.row-actions .button {{ display:inline-flex; align-items:center; }}
 .status {{ display:inline-flex; align-items:center; gap:3px; border-radius:999px; padding:2px 7px; font-size:.82rem; font-weight:650; }}
 .status-pass {{ color:var(--pass); background:var(--pass-bg); }}
 .status-issues {{ color:var(--issue); background:var(--issue-bg); }}
@@ -1171,7 +1312,7 @@ footer dl {{ margin-top:10px; }}
 </head>
 <body>
 <main>
-<header><div><h1>{_e(status.title)}</h1><p class="subtitle">Read-only projection from checked manifests. Evidence remains authoritative; this page does not edit or approve data.</p></div><a class="button dagster-link" data-dagster-root href="http://127.0.0.1:{status.dagster_port}/assets">Open Dagster</a></header>
+<header><div><h1>{_e(status.title)}</h1><p class="subtitle">Read-only projection from checked manifests. Open any asset's tidied CSV directly; this page does not edit or approve data.</p></div><a class="button dagster-link" data-dagster-root href="http://127.0.0.1:{status.dagster_port}/assets">Open Dagster</a></header>
 <p class="summary" id="summary">{_e(summary)}</p>
 <div class="controls" role="search" aria-label="Filter data assets">
 <label>Search<input id="search" type="search" placeholder="Asset, sheet, path, check…"></label>
@@ -1325,7 +1466,18 @@ class StatusPageServer(ThreadingHTTPServer):
     allow_reuse_address = True
 
 
-def status_handler(page_path: Path) -> type[BaseHTTPRequestHandler]:
+def status_handler(
+    page_path: Path,
+    csv_payloads: dict[str, bytes] | None = None,
+) -> type[BaseHTTPRequestHandler]:
+    payloads = dict(csv_payloads or {})
+    if any(
+        re.fullmatch(r"/csv/[a-z0-9-]+\.csv", route) is None
+        or not isinstance(body, bytes)
+        for route, body in payloads.items()
+    ):
+        raise DataAssetStatusError("Status CSV route mapping is invalid")
+
     class Handler(BaseHTTPRequestHandler):
         server_version = "TidyDataAssetStatus/1"
 
@@ -1345,6 +1497,18 @@ def status_handler(page_path: Path) -> type[BaseHTTPRequestHandler]:
                     HTTPStatus.OK, b'{"status":"ok"}\n', "application/json", head
                 )
                 return
+            csv_body = payloads.get(path)
+            if csv_body is not None:
+                self._send(
+                    HTTPStatus.OK,
+                    csv_body,
+                    "text/plain; charset=utf-8",
+                    head,
+                    content_disposition=(
+                        f'inline; filename="{PurePosixPath(path).name}"'
+                    ),
+                )
+                return
             if path not in {"/", "/index.html"}:
                 self.send_error(HTTPStatus.NOT_FOUND)
                 return
@@ -1361,6 +1525,8 @@ def status_handler(page_path: Path) -> type[BaseHTTPRequestHandler]:
             body: bytes,
             content_type: str,
             head: bool,
+            *,
+            content_disposition: str | None = None,
         ) -> None:
             self.send_response(status)
             self.send_header("Content-Type", content_type)
@@ -1368,6 +1534,8 @@ def status_handler(page_path: Path) -> type[BaseHTTPRequestHandler]:
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Referrer-Policy", "no-referrer")
+            if content_disposition:
+                self.send_header("Content-Disposition", content_disposition)
             self.end_headers()
             if not head:
                 self.wfile.write(body)
@@ -1378,7 +1546,12 @@ def status_handler(page_path: Path) -> type[BaseHTTPRequestHandler]:
     return Handler
 
 
-def make_status_server(host: str, port: int, page_path: Path) -> StatusPageServer:
+def make_status_server(
+    host: str,
+    port: int,
+    page_path: Path,
+    csv_payloads: dict[str, bytes] | None = None,
+) -> StatusPageServer:
     if host != "127.0.0.1":
         raise DataAssetStatusError("Status server must bind exactly to 127.0.0.1")
-    return StatusPageServer((host, port), status_handler(page_path))
+    return StatusPageServer((host, port), status_handler(page_path, csv_payloads))

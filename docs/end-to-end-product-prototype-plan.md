@@ -564,8 +564,8 @@ both expose this run without making provider calls.
 
 ## 14. Minimal data-asset status projection
 
-`Tidy Data Asset Status` is a deliberately read-only consumer of the checked
-17 checked five-year cohorts. The explicit registry at
+`Tidy Data Asset Status` is a deliberately read-only consumer of 17 checked
+five-year cohorts. The explicit registry at
 `fixtures/product-prototype/data-asset-status-v1.json` selects 85 sheet-assets
 across nine checked workbook byte identities: five base annual workbooks and
 four deterministic formatting-trim derivatives. For each sheet it derives independent
@@ -575,13 +575,18 @@ historical processing evidence; it creates a visible contradiction instead.
 
 Python standard-library code generates the self-contained, deterministic
 snapshot at `docs/data-asset-status/index.html`. Vanilla JavaScript supplies
-sorting, core filters, text search, and inline evidence details without adding
-a frontend framework or API. The tiny foreground server exposes only `/`,
-`/index.html`, and `/healthz` on `127.0.0.1:3031`; a separately controlled,
-exactly scoped Tailscale Serve route can expose the same page to the Tailnet.
-Dagster links remain operational conveniences, not evidence authority. CI runs
-the deterministic snapshot drift check, and neither page generation nor serving
-makes provider calls.
+sorting, core filters, text search, inline evidence details, and one **Open
+CSV** link per sheet-asset without adding a frontend framework or mutation API.
+At startup, the foreground server deterministically partitions the checked
+cohort CSVs by source workbook digest, sheet, and publication date, verifies all
+85 row counts, and exposes only the exact generated `/csv/<asset>.csv` allowlist
+alongside `/`, `/index.html`, and `/healthz` on `127.0.0.1:3031`. The CSV uses
+an inline plain-text response so browsers display it rather than requiring a
+download. A separately controlled, exactly scoped Tailscale Serve route can
+expose the same page and CSV views to the Tailnet. Dagster links remain
+operational conveniences, not evidence authority. CI runs the deterministic
+snapshot and per-asset CSV partition checks, and neither page generation nor
+serving makes provider calls.
 
 ## 15. Five-year Table 22 country-of-birth expansion
 

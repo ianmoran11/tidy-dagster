@@ -100,8 +100,12 @@ across nine checked workbook byte identities: five base annual workbooks and
 four deterministic formatting-trim derivatives used by the large batch. It
 derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
-checked cohort, run, canonical-output, and collation evidence. The page is not
-an evidence authority and exposes no run, approval, or editing controls.
+checked cohort, run, canonical-output, and collation evidence. Every row has an
+**Open CSV** link that opens only that workbook/sheet asset's canonical rows in
+a new browser tab. The foreground server derives these 85 allowlisted views
+from the checked cohort CSV files using workbook digest, sheet, and publication
+date; it creates no new data authority or duplicate committed CSVs. The page
+exposes no run, approval, or editing controls.
 
 The deterministic committed snapshot is
 [`docs/data-asset-status/index.html`](docs/data-asset-status/index.html). Refresh,
@@ -113,7 +117,9 @@ scripts/tidy-data-status check
 scripts/tidy-data-status serve
 ```
 
-Serving binds only to `http://127.0.0.1:3031/`. In another terminal, explicitly
+Serving binds only to `http://127.0.0.1:3031/`. The per-asset CSV links require
+this server (locally or through the Tailnet); the committed HTML alone does not
+embed all CSV bytes. In another terminal, explicitly
 manage the separate tailnet-only route with:
 
 ```sh

@@ -7,6 +7,7 @@ from pathlib import Path
 from .data_asset_status import (
     DEFAULT_REGISTRY,
     DataAssetStatusError,
+    build_asset_csv_payloads,
     default_project_root,
     make_status_server,
     refresh_snapshot,
@@ -70,8 +71,12 @@ def main(argv: list[str] | None = None) -> int:
         status, output, _changed = refresh_snapshot(
             arguments.project_root, arguments.registry
         )
-        server = make_status_server(status.host, status.port, output)
-        print(f"Tidy Data Asset Status: http://{status.host}:{status.port}/")
+        csv_payloads = build_asset_csv_payloads(arguments.project_root, status)
+        server = make_status_server(status.host, status.port, output, csv_payloads)
+        print(
+            f"Tidy Data Asset Status: http://{status.host}:{status.port}/ "
+            f"({len(csv_payloads)} asset CSV routes)"
+        )
         print(
             "Tailnet (when explicitly enabled): "
             f"https://{status.tailnet_hostname}:{status.tailnet_https_port}/"
