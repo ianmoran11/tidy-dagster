@@ -1,0 +1,43 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Unsentenced prisoners by most serious charge and state or territory",
+    "values": {
+      "name": "Number of unsentenced prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "Most serious charge division",
+        "memberRegions": [
+          "region-020",
+          "region-022"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-024"
+        ]
+      },
+      {
+        "name": "Most serious charge subdivision",
+        "memberRegions": [
+          "region-019"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-024"
+        ]
+      },
+      {
+        "name": "State or territory",
+        "memberRegions": [
+          "region-021"
+        ],
+        "direction": "N",
+        "captionHints": []
+      }
+    ]
+  }
+}

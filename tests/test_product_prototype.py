@@ -34,6 +34,12 @@ AGE_COHORT = (
 COUNTRY_COHORT = (
     PROJECT / "fixtures" / "product-prototype" / "prisoners-table-22-2021-2025.json"
 )
+OFFENCE_COHORT = (
+    PROJECT / "fixtures" / "product-prototype" / "prisoners-table-23-2021-2025.json"
+)
+CHARGE_COHORT = (
+    PROJECT / "fixtures" / "product-prototype" / "prisoners-table-31-2021-2025.json"
+)
 CONTRACT = json.loads(
     (
         PROJECT
@@ -346,6 +352,165 @@ def test_replay_tidies_table_22_counts_and_rates_for_five_years(
     assert collation["conflictingValues"] == []
 
 
+@pytest.mark.parametrize(
+    ("cohort_path", "table", "dimension", "other_dimension", "year_counts"),
+    [
+        (
+            OFFENCE_COHORT,
+            23,
+            "most_serious_offence",
+            "most_serious_charge",
+            [486, 531, 513, 513, 513],
+        ),
+        (
+            CHARGE_COHORT,
+            31,
+            "most_serious_charge",
+            "most_serious_offence",
+            [450, 522, 522, 522, 522],
+        ),
+    ],
+)
+def test_replay_tidies_separate_offence_and_charge_cohorts(
+    tmp_path: Path,
+    cohort_path: Path,
+    table: int,
+    dimension: str,
+    other_dimension: str,
+    year_counts: list[int],
+) -> None:
+    repository = LocalArtifactRepository(tmp_path / "repository")
+    output = tmp_path / "output"
+    result = run_product_prototype(
+        repository=repository,
+        project_root=PROJECT,
+        cohort_path=cohort_path,
+        output_root=output,
+        mode="replay",
+        gateway=fake_gateway(repository),
+        recorded_at="2026-08-15T06:00:00+00:00",
+    )
+    report = result.report
+    expected_total = sum(year_counts)
+    assert report["providerCalls"] == 0
+    assert report["acceptedWorkbookCount"] == 5
+    assert report["exceptionWorkbookCount"] == 0
+    assert report["canonicalObservationCount"] == expected_total
+    assert report["crossYearIssues"] == []
+    assert [item["rawObservationCount"] for item in report["workbooks"]] == (
+        year_counts
+    )
+    assert [item["observationCount"] for item in report["workbooks"]] == year_counts
+    assert all(item["excludedObservationCount"] == 0 for item in report["workbooks"])
+    assert all(all(item["checks"].values()) for item in report["workbooks"])
+
+    rows = json.loads((output / "canonical-observations.json").read_text())
+    dimension_field = f"{dimension}_id"
+    raw_dimension_field = f"raw_{dimension}"
+    assert len(rows) == expected_total
+    assert all(
+        dimension_field in row
+        and raw_dimension_field in row
+        and f"{other_dimension}_id" not in row
+        for row in rows
+    )
+    assert {row["measure_id"] for row in rows} == {"prisoner-count"}
+    assert {row["unit_id"] for row in rows} == {"person"}
+    assert {row["value_status"] for row in rows} == {"observed"}
+    assert {row["generation_model"] for row in rows} == {"openai-codex/gpt-5.6-sol"}
+    assert all(
+        row[dimension_field] == "TOTAL"
+        for row in rows
+        if "Total" in row[raw_dimension_field]
+    )
+    assert sum(row[dimension_field] == "TOTAL" for row in rows) == 45
+    assert all(
+        row[dimension_field] == "TOTAL" or row[dimension_field].startswith("ANZSOC_")
+        for row in rows
+    )
+    expected_category_counts = (
+        [54, 59, 57, 57, 57] if table == 23 else [50, 58, 58, 58, 58]
+    )
+    assert [
+        len(
+            {
+                row[dimension_field]
+                for row in rows
+                if row["reference_date"].startswith(str(year))
+            }
+        )
+        for year in range(2021, 2026)
+    ] == expected_category_counts
+    collation = json.loads((output / "collation-report.json").read_text())
+    assert collation["rowCount"] == expected_total
+    assert collation["excludedExceptions"] == []
+    assert collation["duplicateCanonicalKeys"] == []
+    assert collation["conflictingValues"] == []
+    assert collation["unmappedLabels"] == []
+    assert collation["missingExpectedCategories"] == []
+
+
+def test_table_23_unknown_offence_is_routed_to_exception(tmp_path: Path) -> None:
+    def mutate_execution(
+        year: int,
+        execution: dict[str, Any],
+        recipe: dict[str, Any],
+        deterministic: bool,
+    ) -> tuple[dict[str, Any], dict[str, Any], bool]:
+        if year == 2025:
+            row = execution["tables"][0]["rows"][0]
+            category = next(
+                key
+                for key in row
+                if "offence category" in key.lower() and not key.endswith("_source")
+            )
+            row[category] = "99 Invented offence"
+        return execution, recipe, deterministic
+
+    repository = LocalArtifactRepository(tmp_path / "repository")
+    result = run_product_prototype(
+        repository=repository,
+        project_root=PROJECT,
+        cohort_path=OFFENCE_COHORT,
+        output_root=tmp_path / "output",
+        mode="replay",
+        gateway=fake_gateway(repository),
+        recorded_at="2026-08-15T06:00:00+00:00",
+        acceptance_execution_mutator=mutate_execution,
+    )
+    assert result.report["acceptedWorkbookCount"] == 4
+    assert result.report["exceptionWorkbookCount"] == 1
+    failed = result.report["workbooks"][-1]
+    assert failed["decision"] == "exception_required"
+    assert "UNKNOWN_CODE" in {item["code"] for item in failed["issues"]}
+
+
+def test_offence_and_charge_contracts_keep_source_concepts_separate() -> None:
+    offence_cohort = json.loads(OFFENCE_COHORT.read_text())
+    charge_cohort = json.loads(CHARGE_COHORT.read_text())
+    offence_contract = json.loads(
+        (
+            PROJECT / "fixtures/product-prototype/acceptance/prisoners-table-23-v1.json"
+        ).read_text()
+    )
+    charge_contract = json.loads(
+        (
+            PROJECT / "fixtures/product-prototype/acceptance/prisoners-table-31-v1.json"
+        ).read_text()
+    )
+    _validate_contract(offence_contract, offence_cohort)
+    _validate_contract(charge_contract, charge_cohort)
+    assert offence_contract["requiredDimensions"] == [
+        "jurisdiction",
+        "most_serious_offence",
+    ]
+    assert charge_contract["requiredDimensions"] == [
+        "jurisdiction",
+        "most_serious_charge",
+    ]
+    assert offence_contract["uniqueKey"] != charge_contract["uniqueKey"]
+
+
 def test_table_22_measure_rules_are_disjoint() -> None:
     cohort = json.loads(COUNTRY_COHORT.read_text())
     contract_path = (
@@ -356,6 +521,64 @@ def test_table_22_measure_rules_are_disjoint() -> None:
     contract["measures"][1]["selection"]["codes"] = ["AUS"]
     with pytest.raises(ProductPrototypeError, match="selection overlaps"):
         _validate_contract(contract, cohort)
+
+
+@pytest.mark.parametrize(
+    ("table", "cohort_path", "expected_count", "expected_run_digest"),
+    [
+        (
+            23,
+            OFFENCE_COHORT,
+            2556,
+            "sha256:000e694bffb36909951b6f3c54266d768cb45a2300d8829c9853a58f509edfd0",
+        ),
+        (
+            31,
+            CHARGE_COHORT,
+            2538,
+            "sha256:86c0d0a8254394e51677f63a110641aaebd78caab098fa0c2ee5e3d32e46ce5f",
+        ),
+    ],
+)
+def test_offence_pair_evidence_manifests_bind_committed_outputs(
+    table: int,
+    cohort_path: Path,
+    expected_count: int,
+    expected_run_digest: str,
+) -> None:
+    cohort = json.loads(cohort_path.read_text())
+    cohort_schema = json.loads(
+        (PROJECT / "contracts/product-prototype/v1/cohort.schema.json").read_text()
+    )
+    jsonschema.Draft202012Validator(
+        cohort_schema,
+        format_checker=jsonschema.FormatChecker(),
+    ).validate(cohort)
+    root = PROJECT / f"fixtures/product-prototype/table-{table}-five-year-evidence"
+    manifest = json.loads((root / "manifest.json").read_text())
+    assert manifest["cohortDigest"] == sha256_digest(cohort_path.read_bytes())
+    assert manifest["canonicalObservationCount"] == expected_count
+    assert manifest["classificationMigrationCautionRecorded"] is True
+    declared_paths = {item["path"] for item in manifest["files"]}
+    assert "README.md" in declared_paths
+    readme_text = " ".join((root / "README.md").read_text().split())
+    assert (
+        "migration to ANZSOC 2023 may have changed the coding of earlier ANZSOC 2011"
+        in readme_text
+    )
+    for item in manifest["files"]:
+        content = (root / item["path"]).read_bytes()
+        assert len(content) == item["byteLength"]
+        assert sha256_digest(content) == item["contentDigest"]
+    run = json.loads((root / "run.json").read_text())
+    contract = cohort_path.parent / cohort["acceptanceContract"]
+    assert run["runDigest"] == manifest["runDigest"] == expected_run_digest
+    assert run["acceptanceContractDigest"] == sha256_digest(contract.read_bytes())
+    assert run["acceptedWorkbookCount"] == 5
+    assert run["exceptionWorkbookCount"] == 0
+    assert run["canonicalObservationCount"] == expected_count
+    assert run["crossYearIssues"] == []
+    assert json.loads((root / "exceptions.json").read_text()) == []
 
 
 def test_cohort_requires_increasing_years_and_matching_call_ceiling() -> None:

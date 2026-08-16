@@ -40,6 +40,25 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-22-five-year-replay
 ```
 
+Tables 23 and 31 add a provider-free offence pair while deliberately preserving
+the distinction between sentenced prisoners' most serious offence and
+unsentenced prisoners' most serious charge. Across ten worksheets they produce
+2,556 and 2,538 canonical prisoner counts respectively, retaining published
+ANZSOC-style divisions, subdivisions, totals, raw labels, and source-cell
+provenance. Both digest-bound evidence closures record the 2025 ANZSOC
+migration comparability caution, and the replays make no provider calls:
+
+```sh
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-23-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-23-five-year-replay
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-31-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-31-five-year-replay
+```
+
 The live model is pinned to `openai-codex/gpt-5.6-luna` with high reasoning.
 The checked live campaign made three calls for USD 0.0197296, compiled and
 executed all three fresh candidates, automatically accepted 2023–2025, and
@@ -56,7 +75,7 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects the three five-year cohorts as 15 sheet-assets
+A minimal read-only page projects the five five-year cohorts as 25 sheet-assets
 across five physical workbooks. It derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The page is not

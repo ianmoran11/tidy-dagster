@@ -1,0 +1,42 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Sentenced prisoners by selected most serious offence and state or territory, 2024",
+    "values": {
+      "name": "Number of sentenced prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "Most serious offence division",
+        "memberRegions": [
+          "region-009",
+          "region-003",
+          "region-010"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-011"
+        ]
+      },
+      {
+        "name": "Most serious offence subdivision",
+        "memberRegions": [
+          "region-002"
+        ],
+        "direction": "W",
+        "captionHints": []
+      },
+      {
+        "name": "State or territory",
+        "memberRegions": [
+          "region-004"
+        ],
+        "direction": "N",
+        "captionHints": []
+      }
+    ]
+  }
+}

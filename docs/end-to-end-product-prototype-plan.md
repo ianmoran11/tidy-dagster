@@ -565,8 +565,8 @@ both expose this run without making provider calls.
 ## 14. Minimal data-asset status projection
 
 `Tidy Data Asset Status` is a deliberately read-only consumer of the checked
-Table 21, Table 22, and Table 30 evidence. The explicit registry at
-`fixtures/product-prototype/data-asset-status-v1.json` selects 15 sheet-assets
+Table 21, Table 22, Table 23, Table 30, and Table 31 evidence. The explicit
+registry at `fixtures/product-prototype/data-asset-status-v1.json` selects 25 sheet-assets
 across five shared physical workbooks. For each sheet it derives independent
 `Identified`, `On disk`, `Tidied`, `Canonicalised`, and `Integrated` facts and a
 separate automated-check result. Missing current source custody does not erase
@@ -607,3 +607,36 @@ run digest
 `sha256:faed294328690572ebfa475cbc700fa8c3f9927b00fe3eeefda53e71986ad0f0`.
 The standalone CLI, `product_prototype_country_replay` Dagster asset, and the
 status page all project this cohort without becoming evidence authority.
+
+## 16. Five-year sentenced-offence and unsentenced-charge pair
+
+The fourth and fifth provider-free cohorts process Tables 23 and 31 for
+2021–2025 using ten existing recipe-valid Sol/high responses. Table 23 emits
+sentenced prisoner counts by selected most serious offence and jurisdiction;
+Table 31 emits unsentenced prisoner counts by selected most serious charge and
+jurisdiction. The canonical model deliberately keeps `most_serious_offence_id`
+and `most_serious_charge_id` separate rather than implying that conviction and
+charge concepts are interchangeable.
+
+Both contracts coalesce historical division/subdivision and
+category/subcategory header variants, map the exact published labels to stable
+`ANZSOC_` codes, preserve raw labels, and retain published `TOTAL` rows. Annual
+code coverage is explicit because the selected subdivisions vary by year.
+Totals are not synthesized from selected categories: the 2025 totals include
+unknown classifications, and all national/state arithmetic is subject to ABS
+perturbation. The evidence records the 2025 caution that migration to ANZSOC
+2023 may have changed the coding of earlier ANZSOC 2011 data.
+
+Table 23 produced 2,556 canonical observations with yearly counts of 486, 531,
+513, 513, and 513. Table 31 produced 2,538 with yearly counts of 450, 522, 522,
+522, and 522. All ten worksheets passed deterministic execution, annual
+coverage, code-list, non-negative value, uniqueness, source-cell, national-total,
+warning, and collation checks with zero exceptions, cross-year issues, or
+provider calls. Checked evidence is under
+`fixtures/product-prototype/table-23-five-year-evidence/` and
+`fixtures/product-prototype/table-31-five-year-evidence/`, with run digests
+`sha256:000e694bffb36909951b6f3c54266d768cb45a2300d8829c9853a58f509edfd0`
+and
+`sha256:86c0d0a8254394e51677f63a110641aaebd78caab098fa0c2ee5e3d32e46ce5f`.
+The standalone CLI, separate Dagster assets, and read-only status page expose
+both cohorts without becoming evidence authority.

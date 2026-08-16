@@ -1,0 +1,44 @@
+{
+  "version": "semantic-table-map-v1",
+  "table": {
+    "name": "Unsentenced prisoners by most serious offence and state or territory, 2024",
+    "values": {
+      "name": "number of unsentenced prisoners",
+      "regions": [
+        "region-001"
+      ]
+    },
+    "dimensions": [
+      {
+        "name": "state or territory",
+        "memberRegions": [
+          "region-004"
+        ],
+        "direction": "N",
+        "captionHints": []
+      },
+      {
+        "name": "most serious offence division",
+        "memberRegions": [
+          "region-009",
+          "region-003",
+          "region-010"
+        ],
+        "direction": "WNW",
+        "captionHints": [
+          "region-011"
+        ]
+      },
+      {
+        "name": "most serious offence subdivision",
+        "memberRegions": [
+          "region-002"
+        ],
+        "direction": "W",
+        "captionHints": [
+          "region-011"
+        ]
+      }
+    ]
+  }
+}

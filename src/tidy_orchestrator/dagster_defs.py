@@ -547,6 +547,184 @@ def product_prototype_country_replay_check(
     )
 
 
+_OFFENCE_COHORT_SPECS = {
+    23: {
+        "output": "dagster-table-23-five-year-replay",
+        "cohort": "prisoners-table-23-2021-2025.json",
+        "dimension": "most_serious_offence_id",
+        "other_dimension": "most_serious_charge_id",
+        "year_counts": [486, 531, 513, 513, 513],
+        "canonical_count": 2556,
+    },
+    31: {
+        "output": "dagster-table-31-five-year-replay",
+        "cohort": "prisoners-table-31-2021-2025.json",
+        "dimension": "most_serious_charge_id",
+        "other_dimension": "most_serious_offence_id",
+        "year_counts": [450, 522, 522, 522, 522],
+        "canonical_count": 2538,
+    },
+}
+
+
+def _materialize_offence_cohort(
+    runtime: TidyRuntimeResource,
+    *,
+    table: int,
+) -> MaterializeResult:
+    spec = _OFFENCE_COHORT_SPECS[table]
+    output_root = runtime.project() / ".product-prototype" / str(spec["output"])
+    result = run_product_prototype(
+        repository=runtime.repository(),
+        project_root=runtime.project(),
+        cohort_path=(
+            runtime.project() / "fixtures" / "product-prototype" / str(spec["cohort"])
+        ),
+        output_root=output_root,
+        mode="replay",
+    )
+    report = result.report
+    rows = json.loads((output_root / "canonical-observations.json").read_text())
+    return MaterializeResult(
+        metadata={
+            "run_digest": report["runDigest"],
+            "mode": report["mode"],
+            "provider_calls": report["providerCalls"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "raw_observations": sum(
+                item["rawObservationCount"] for item in report["workbooks"]
+            ),
+            "canonical_observations": report["canonicalObservationCount"],
+            "published_total_observations": sum(
+                item[str(spec["dimension"])] == "TOTAL" for item in rows
+            ),
+            "workbooks": report["workbooks"],
+            "collation_report_path": str(output_root / "collation-report.json"),
+            "artifact_uri": f"artifact://{result.run.content_digest}",
+        },
+        data_version=DataVersion(result.run.content_digest),
+    )
+
+
+def _check_offence_cohort(
+    runtime: TidyRuntimeResource,
+    *,
+    table: int,
+) -> AssetCheckResult:
+    spec = _OFFENCE_COHORT_SPECS[table]
+    output_root = runtime.project() / ".product-prototype" / str(spec["output"])
+    try:
+        report = json.loads((output_root / "run.json").read_text())
+        collation = json.loads((output_root / "collation-report.json").read_text())
+        rows = json.loads((output_root / "canonical-observations.json").read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        return AssetCheckResult(
+            passed=False,
+            metadata={
+                "error": f"Table {table} replay evidence is unavailable: {error}"
+            },
+        )
+    clean_collation_fields = (
+        "excludedExceptions",
+        "duplicateCanonicalKeys",
+        "conflictingValues",
+        "unmappedLabels",
+        "missingExpectedCategories",
+        "schemaFailures",
+        "codeListFailures",
+    )
+    dimension = str(spec["dimension"])
+    other_dimension = str(spec["other_dimension"])
+    canonical_count = int(spec["canonical_count"])
+    passed = (
+        report["acceptedWorkbookCount"] == 5
+        and report["exceptionWorkbookCount"] == 0
+        and report["canonicalObservationCount"] == canonical_count
+        and report["crossYearIssues"] == []
+        and report["providerCalls"] == 0
+        and [item["year"] for item in report["workbooks"]] == list(range(2021, 2026))
+        and [item["rawObservationCount"] for item in report["workbooks"]]
+        == spec["year_counts"]
+        and [item["observationCount"] for item in report["workbooks"]]
+        == spec["year_counts"]
+        and all(
+            item["decision"] == "prototype_auto_accepted"
+            and item["excludedObservationCount"] == 0
+            and all(item["checks"].values())
+            for item in report["workbooks"]
+        )
+        and len(rows) == canonical_count
+        and sum(item[dimension] == "TOTAL" for item in rows) == 45
+        and all(dimension in item and other_dimension not in item for item in rows)
+        and collation["rowCount"] == canonical_count
+        and all(collation[field] == [] for field in clean_collation_fields)
+    )
+    return AssetCheckResult(
+        passed=passed,
+        metadata={
+            "run_digest": report["runDigest"],
+            "accepted_workbooks": report["acceptedWorkbookCount"],
+            "exception_workbooks": report["exceptionWorkbookCount"],
+            "canonical_observations": report["canonicalObservationCount"],
+            "published_total_observations": sum(
+                item.get(dimension) == "TOTAL" for item in rows
+            ),
+            "provider_calls": report["providerCalls"],
+        },
+    )
+
+
+@asset(
+    name="product_prototype_offence_replay",
+    description=(
+        "Provider-free replay of the 2021-2025 Table 23 cohort, producing "
+        "sentenced prisoner counts by selected most serious offence and jurisdiction."
+    ),
+    group_name="product_prototype",
+    code_version="tidy.product-prototype-offence-run/v1",
+)
+def product_prototype_offence_replay(
+    runtime: TidyRuntimeResource,
+) -> MaterializeResult:
+    return _materialize_offence_cohort(runtime, table=23)
+
+
+@asset_check(
+    asset=product_prototype_offence_replay,
+    name="offence_acceptance_and_collation",
+)
+def product_prototype_offence_replay_check(
+    runtime: TidyRuntimeResource,
+) -> AssetCheckResult:
+    return _check_offence_cohort(runtime, table=23)
+
+
+@asset(
+    name="product_prototype_charge_replay",
+    description=(
+        "Provider-free replay of the 2021-2025 Table 31 cohort, producing "
+        "unsentenced prisoner counts by selected most serious charge and jurisdiction."
+    ),
+    group_name="product_prototype",
+    code_version="tidy.product-prototype-charge-run/v1",
+)
+def product_prototype_charge_replay(
+    runtime: TidyRuntimeResource,
+) -> MaterializeResult:
+    return _materialize_offence_cohort(runtime, table=31)
+
+
+@asset_check(
+    asset=product_prototype_charge_replay,
+    name="charge_acceptance_and_collation",
+)
+def product_prototype_charge_replay_check(
+    runtime: TidyRuntimeResource,
+) -> AssetCheckResult:
+    return _check_offence_cohort(runtime, table=31)
+
+
 @asset(
     name="source_catalog_snapshot",
     description=(
@@ -793,6 +971,38 @@ product_prototype_country_replay_job = define_asset_job(
 )
 
 
+product_prototype_offence_replay_job = define_asset_job(
+    "product_prototype_offence_replay_job",
+    selection=AssetSelection.assets(product_prototype_offence_replay),
+    description=(
+        "Provider-free Table 23 sentenced-prisoner replay by selected most "
+        "serious offence and jurisdiction for 2021-2025."
+    ),
+    tags={
+        "provider_calls": "0",
+        "mode": "replay",
+        "years": "2021-2025",
+        "table": "23",
+    },
+)
+
+
+product_prototype_charge_replay_job = define_asset_job(
+    "product_prototype_charge_replay_job",
+    selection=AssetSelection.assets(product_prototype_charge_replay),
+    description=(
+        "Provider-free Table 31 unsentenced-prisoner replay by selected most "
+        "serious charge and jurisdiction for 2021-2025."
+    ),
+    tags={
+        "provider_calls": "0",
+        "mode": "replay",
+        "years": "2021-2025",
+        "table": "31",
+    },
+)
+
+
 project_work_unit_job = define_asset_job(
     "project_provider_free_work_unit",
     selection=AssetSelection.assets(
@@ -867,6 +1077,8 @@ def build_definitions(
             product_prototype_replay,
             product_prototype_age_replay,
             product_prototype_country_replay,
+            product_prototype_offence_replay,
+            product_prototype_charge_replay,
             source_catalog_snapshot,
             verified_fixture_inputs_index,
             recipe_execution_evidence_index,
@@ -878,6 +1090,8 @@ def build_definitions(
             product_prototype_replay_check,
             product_prototype_age_replay_check,
             product_prototype_country_replay_check,
+            product_prototype_offence_replay_check,
+            product_prototype_charge_replay_check,
             verified_fixture_inputs_check,
             recipe_execution_check,
             active_projection_check,
@@ -888,6 +1102,8 @@ def build_definitions(
             product_prototype_replay_job,
             product_prototype_age_replay_job,
             product_prototype_country_replay_job,
+            product_prototype_offence_replay_job,
+            product_prototype_charge_replay_job,
             project_work_unit_job,
         ],
         sensors=[provider_free_work_unit_sensor],
@@ -914,6 +1130,10 @@ def build_definitions(
             "product_prototype_age_replay_scope": "prisoners-table-21-2021-2025",
             "product_prototype_country_replay_supported": True,
             "product_prototype_country_replay_scope": "prisoners-table-22-2021-2025",
+            "product_prototype_offence_replay_supported": True,
+            "product_prototype_offence_replay_scope": "prisoners-table-23-2021-2025",
+            "product_prototype_charge_replay_supported": True,
+            "product_prototype_charge_replay_scope": "prisoners-table-31-2021-2025",
             "product_prototype_live_evidence_supported": True,
             "product_prototype_stage_projection_supported": True,
             "product_prototype_live_generation_authorized": False,

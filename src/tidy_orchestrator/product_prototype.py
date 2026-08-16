@@ -38,6 +38,8 @@ _DIMENSION_FIELDS = {
     "legal_status": "legal_status_id",
     "age_group": "age_group_id",
     "country_of_birth": "country_of_birth_id",
+    "most_serious_offence": "most_serious_offence_id",
+    "most_serious_charge": "most_serious_charge_id",
 }
 _EXPECTED_CATEGORY_FIELDS = {
     "jurisdiction": "jurisdictions",
@@ -46,6 +48,8 @@ _EXPECTED_CATEGORY_FIELDS = {
     "legal_status": "legalStatuses",
     "age_group": "ageGroups",
     "country_of_birth": "countriesOfBirth",
+    "most_serious_offence": "mostSeriousOffences",
+    "most_serious_charge": "mostSeriousCharges",
 }
 _DIMENSION_HEADER_PATTERNS = {
     "jurisdiction": re.compile(r"state|territory|jurisdiction|reporting column", re.I),
@@ -54,6 +58,8 @@ _DIMENSION_HEADER_PATTERNS = {
     "legal_status": re.compile(r"legal status", re.I),
     "age_group": re.compile(r"\bage\b", re.I),
     "country_of_birth": re.compile(r"country.{0,8}birth|birthplace", re.I),
+    "most_serious_offence": re.compile(r"most serious offence", re.I),
+    "most_serious_charge": re.compile(r"most serious (?:charge|offence)", re.I),
 }
 
 

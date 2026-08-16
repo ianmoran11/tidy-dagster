@@ -126,6 +126,44 @@ def test_tidy_prototype_cli_completes_table_22_country_replay(
     assert (tmp_path / "table-22-run" / "collation-report.json").is_file()
 
 
+@pytest.mark.parametrize(
+    ("table", "expected_count"),
+    [(23, 2556), (31, 2538)],
+)
+def test_tidy_prototype_cli_completes_offence_pair_replays(
+    tmp_path: Path,
+    table: int,
+    expected_count: int,
+) -> None:
+    script = PROJECT / "scripts/tidy-prototype"
+    output = tmp_path / f"table-{table}-run"
+    completed = subprocess.run(
+        [
+            str(script),
+            "run",
+            "--cohort",
+            f"fixtures/product-prototype/prisoners-table-{table}-2021-2025.json",
+            "--mode",
+            "replay",
+            "--output",
+            str(output),
+            "--recorded-at",
+            "2026-08-15T06:00:00+00:00",
+        ],
+        cwd=PROJECT,
+        capture_output=True,
+        text=True,
+        timeout=240,
+    )
+    assert completed.returncode == 0, completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["acceptedWorkbookCount"] == 5
+    assert result["exceptionWorkbookCount"] == 0
+    assert result["canonicalObservationCount"] == expected_count
+    assert result["providerCalls"] == 0
+    assert (output / "collation-report.json").is_file()
+
+
 def test_dagster_ui_status_is_safe_and_does_not_touch_tailscale() -> None:
     script = PROJECT / "scripts/dagster-ui"
     source = script.read_text()

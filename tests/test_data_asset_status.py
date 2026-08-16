@@ -21,11 +21,11 @@ from tidy_orchestrator.data_asset_status import (
 PROJECT = Path(__file__).parents[1]
 
 
-def test_current_dashboard_reports_fifteen_clean_sheet_assets() -> None:
+def test_current_dashboard_reports_twenty_five_clean_sheet_assets() -> None:
     status = build_dashboard(PROJECT)
     assert status.title == "Tidy Data Asset Status"
-    assert len(status.cohorts) == 3
-    assert len(status.assets) == 15
+    assert len(status.cohorts) == 5
+    assert len(status.assets) == 25
     assert status.physical_workbook_count == 5
     assert {asset.year for asset in status.assets} == set(range(2021, 2026))
     assert all(
@@ -33,19 +33,25 @@ def test_current_dashboard_reports_fifteen_clean_sheet_assets() -> None:
     )
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
-    assert sum(asset.canonical_count or 0 for asset in status.assets) == 8189
+    assert sum(asset.canonical_count or 0 for asset in status.assets) == 13283
     table_21 = [asset for asset in status.assets if "Table 21" in asset.cohort_label]
     table_22 = [asset for asset in status.assets if "Table 22" in asset.cohort_label]
+    table_23 = [asset for asset in status.assets if "Table 23" in asset.cohort_label]
     table_30 = [asset for asset in status.assets if "Table 30" in asset.cohort_label]
+    table_31 = [asset for asset in status.assets if "Table 31" in asset.cohort_label]
     assert [asset.canonical_count for asset in table_21] == [1053] * 5
     assert [asset.canonical_count for asset in table_22] == [340, 340, 350, 340, 339]
+    assert [asset.canonical_count for asset in table_23] == [513, 513, 513, 531, 486]
     assert [asset.canonical_count for asset in table_30] == [243] * 5
+    assert [asset.canonical_count for asset in table_31] == [522, 522, 522, 522, 450]
     assert sum(asset.excluded_count or 0 for asset in table_21) == 1467
     normalized = [asset for asset in status.assets if asset.normalization]
     assert {(asset.year, asset.sheet) for asset in normalized} == {
         (2025, "Table 21"),
         (2025, "Table 22"),
+        (2025, "Table 23"),
         (2025, "Table 30"),
+        (2025, "Table 31"),
     }
     live = [asset for asset in status.assets if asset.live_evidence_path]
     assert {(asset.year, asset.sheet) for asset in live} == {
@@ -58,8 +64,8 @@ def test_current_dashboard_reports_fifteen_clean_sheet_assets() -> None:
 def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None:
     rendered = render_dashboard(build_dashboard(PROJECT)).decode()
     assert rendered.startswith("<!doctype html>")
-    assert rendered.count('class="asset-pair"') == 15
-    assert rendered.count('class="detail-toggle"') == 15
+    assert rendered.count('class="asset-pair"') == 25
+    assert rendered.count('class="detail-toggle"') == 25
     assert all(
         value in rendered
         for value in (
@@ -71,10 +77,12 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'class="sort"',
             "Automated checks",
             "Flagged issues",
-            "15 sheet-assets across 5 physical workbooks",
+            "25 sheet-assets across 5 physical workbooks",
             "product_prototype_age_replay",
             "product_prototype_country_replay",
+            "product_prototype_offence_replay",
             "product_prototype_replay",
+            "product_prototype_charge_replay",
         )
     )
     assert "/Users/" not in rendered

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tidy.data-asset-status-registry/v1",
   "title": "Tidy Data Asset Status",
-  "recordedAt": "2026-08-15T05:00:00+00:00",
+  "recordedAt": "2026-08-15T06:30:00+00:00",
   "outputPath": "docs/data-asset-status/index.html",
   "server": {
     "host": "127.0.0.1",
@@ -26,6 +26,13 @@
       "dagsterAsset": "product_prototype_country_replay"
     },
     {
+      "cohortId": "prisoners-australia-table-23-2021-2025",
+      "label": "Prisoners in Australia — Table 23 (sentenced offence)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-23-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-23-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_offence_replay"
+    },
+    {
       "cohortId": "prisoners-australia-table-30-2021-2025",
       "label": "Prisoners in Australia — Table 30 (legal status)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-30-2021-2025.json",
@@ -35,6 +42,13 @@
         "manifestPath": "fixtures/product-prototype/live-evidence/manifest.json",
         "years": [2023, 2024, 2025]
       }
+    },
+    {
+      "cohortId": "prisoners-australia-table-31-2021-2025",
+      "label": "Prisoners in Australia — Table 31 (unsentenced charge)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-31-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-31-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_charge_replay"
     }
   ]
 }

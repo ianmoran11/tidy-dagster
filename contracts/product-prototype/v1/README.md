@@ -55,3 +55,25 @@ scripts/tidy-prototype run \
   --mode replay \
   --output .product-prototype/table-22-five-year-replay
 ```
+
+Tables 23 and 31 use separate `most_serious_offence` and
+`most_serious_charge` dimensions. Both map published ANZSOC-style division and
+subdivision labels to stable prefixed codes while preserving each raw label and
+source cell. Published total rows remain explicit `TOTAL` categories because
+they can include unknown classifications and must not be reconstructed from the
+selected component rows. National totals are checked against all eight
+jurisdictions with the publication's perturbation allowance. The contracts use
+annual category coverage because the selected code sets vary by year, and they
+do not claim that the 2025 ANZSOC 2023 migration is perfectly comparable with
+earlier ANZSOC 2011 coding.
+
+```sh
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-23-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-23-five-year-replay
+scripts/tidy-prototype run \
+  --cohort fixtures/product-prototype/prisoners-table-31-2021-2025.json \
+  --mode replay \
+  --output .product-prototype/table-31-five-year-replay
+```

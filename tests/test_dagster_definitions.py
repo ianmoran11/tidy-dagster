@@ -18,10 +18,14 @@ from tidy_orchestrator.dagster_defs import (
     build_definitions,
     product_prototype_age_replay,
     product_prototype_age_replay_check,
+    product_prototype_charge_replay,
+    product_prototype_charge_replay_check,
     product_prototype_country_replay,
     product_prototype_country_replay_check,
     product_prototype_live_evidence,
     product_prototype_live_evidence_check,
+    product_prototype_offence_replay,
+    product_prototype_offence_replay_check,
     product_prototype_replay,
     product_prototype_replay_check,
     product_prototype_stage_projection,
@@ -69,6 +73,18 @@ def test_definitions_include_provider_free_product_prototype_projection(
     assert product_prototype_country_replay_check.check_key.name == (
         "country_measure_acceptance_and_collation"
     )
+    assert product_prototype_offence_replay.key.to_user_string() == (
+        "product_prototype_offence_replay"
+    )
+    assert product_prototype_offence_replay_check.check_key.name == (
+        "offence_acceptance_and_collation"
+    )
+    assert product_prototype_charge_replay.key.to_user_string() == (
+        "product_prototype_charge_replay"
+    )
+    assert product_prototype_charge_replay_check.check_key.name == (
+        "charge_acceptance_and_collation"
+    )
     assert product_prototype_stage_projection.key.to_user_string() == (
         "product_prototype_stage_projection"
     )
@@ -95,6 +111,14 @@ def test_definitions_include_provider_free_product_prototype_projection(
     assert definitions.metadata["product_prototype_country_replay_supported"].value
     assert definitions.metadata["product_prototype_country_replay_scope"].value == (
         "prisoners-table-22-2021-2025"
+    )
+    assert definitions.metadata["product_prototype_offence_replay_supported"].value
+    assert definitions.metadata["product_prototype_offence_replay_scope"].value == (
+        "prisoners-table-23-2021-2025"
+    )
+    assert definitions.metadata["product_prototype_charge_replay_supported"].value
+    assert definitions.metadata["product_prototype_charge_replay_scope"].value == (
+        "prisoners-table-31-2021-2025"
     )
     assert definitions.metadata["product_prototype_live_evidence_supported"].value
     assert definitions.metadata["product_prototype_stage_projection_supported"].value
@@ -458,6 +482,44 @@ def test_product_prototype_country_dagster_job_materializes_and_passes_check(
     assert metadata["canonical_observations"].value == 1709
     assert metadata["prisoner_count_observations"].value == 1539
     assert metadata["imprisonment_rate_observations"].value == 170
+    assert len(metadata["workbooks"].data) == 5
+    evaluations = result.get_asset_check_evaluations()
+    assert len(evaluations) == 1
+    assert evaluations[0].passed
+
+
+@pytest.mark.parametrize(
+    ("asset", "expected_count"),
+    [
+        ("offence", 2556),
+        ("charge", 2538),
+    ],
+)
+def test_product_prototype_offence_pair_dagster_jobs_materialize_and_pass_checks(
+    tmp_path: Path,
+    asset: str,
+    expected_count: int,
+) -> None:
+    subprocess.run(
+        ["npm", "run", "build"], cwd=PROJECT, check=True, capture_output=True
+    )
+    definitions = build_definitions(
+        project_root=PROJECT, repository_root=tmp_path / "repository"
+    )
+    result = definitions.resolve_job_def(
+        f"product_prototype_{asset}_replay_job"
+    ).execute_in_process()
+    assert result.success
+    materializations = result.get_asset_materialization_events()
+    assert {event.asset_key.to_user_string() for event in materializations} == {
+        f"product_prototype_{asset}_replay"
+    }
+    metadata = materializations[0].event_specific_data.materialization.metadata
+    assert metadata["accepted_workbooks"].value == 5
+    assert metadata["exception_workbooks"].value == 0
+    assert metadata["raw_observations"].value == expected_count
+    assert metadata["canonical_observations"].value == expected_count
+    assert metadata["published_total_observations"].value == 45
     assert len(metadata["workbooks"].data) == 5
     evaluations = result.get_asset_check_evaluations()
     assert len(evaluations) == 1
