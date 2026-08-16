@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "state-sex-by-indigenous-status",
+  "cohortPath": "fixtures/product-prototype/prisoners-state-sex-by-indigenous-status.json",
+  "cohortDigest": "sha256:3c49c4758a84fc8615445b14860e456e49345cf278bac0fa316ae6e43bad045e",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/prisoners-state-sex-by-indigenous-status-v1.json",
+  "acceptanceContractDigest": "sha256:c2ea98c74b32cd159019a1af21ec2370f2bb0233f2ad1a525336f118c6aa5c5b",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 5,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 1026,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 1026,
+  "measureCounts": {
+    "age-standardised-imprisonment-rate": 270,
+    "crude-imprisonment-rate": 405,
+    "indigenous-to-non-indigenous-rate-ratio": 270,
+    "prisoner-count": 81
+  },
+  "valueStatusCounts": {
+    "not_applicable": 10,
+    "observed": 995,
+    "suppressed": 21
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "publicationVintagePreserved": false,
+  "runDigest": "sha256:10cc47c13a5f0b2e6fed4921ef41de230dcd97068d41b337dd5b13038f8fa3f8",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:d7d9301ad7d62610e5f4e7bfb227a034d87b3446df34ebf49751a603eeb0cd60",
+      "byteLength": 868
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:2ac8479289cfe17258302c3a14de41031013bff9aa2943f7436de5c720e19ae0",
+      "byteLength": 858128
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:3b4624f3edb9548be9325b40a022ff40d1747d3a213a7f666eb1334e7269fbf1",
+      "byteLength": 1437713
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:9726192519ee50dda6b6319e5cb853dd5492d7edf3f8400850562ffea3d79036",
+      "byteLength": 1651
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:1ba072e3fee165fd6da1250f7608eca54c9f4d399da7000c6cd724df68676756",
+      "byteLength": 5072
+    }
+  ]
+}

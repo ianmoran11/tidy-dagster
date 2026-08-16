@@ -43,6 +43,7 @@ _DIMENSION_FIELDS = {
     "most_serious_charge": "most_serious_charge_id",
     "principal_offence": "principal_offence_id",
     "statistic_basis": "statistic_basis_id",
+    "rate_basis": "rate_basis_id",
     "characteristic_group": "characteristic_group_id",
     "characteristic_category": "characteristic_category_id",
     "most_serious_offence_or_charge": "most_serious_offence_or_charge_id",
@@ -68,6 +69,7 @@ _EXPECTED_CATEGORY_FIELDS = {
     "most_serious_charge": "mostSeriousCharges",
     "principal_offence": "principalOffences",
     "statistic_basis": "statisticBases",
+    "rate_basis": "rateBases",
     "characteristic_group": "characteristicGroups",
     "characteristic_category": "characteristicCategories",
     "most_serious_offence_or_charge": "mostSeriousOffencesOrCharges",
@@ -93,6 +95,7 @@ _DIMENSION_HEADER_PATTERNS = {
     "most_serious_charge": re.compile(r"most serious (?:charge|offence)", re.I),
     "principal_offence": re.compile(r"principal offence", re.I),
     "statistic_basis": re.compile(r"basis|measure(?:ment)? type|section", re.I),
+    "rate_basis": re.compile(r"rate|basis|measure|statistic", re.I),
     "characteristic_group": re.compile(r"characteristic group|statistic", re.I),
     "characteristic_category": re.compile(r"characteristic|member", re.I),
     "most_serious_offence_or_charge": re.compile(
@@ -1104,6 +1107,8 @@ def _validate_execution(
         }
         if contract.get("preservePublicationVintage") is True:
             observation["publication_vintage_date"] = entry["referenceDate"]
+        if contract.get("preserveRawValueText") is True:
+            observation["raw_value"] = value
         for dimension in contract["requiredDimensions"]:
             observation[_DIMENSION_FIELDS[dimension]] = mapped[dimension]
             observation[f"raw_{dimension}"] = raw_dimensions[dimension]
@@ -1314,7 +1319,11 @@ def _map_alias(contract: dict[str, Any], dimension: str, raw: Any) -> str | None
         return None
     normalized = " ".join(raw.strip().split())
     aliases = contract["aliases"][dimension]
-    return aliases.get(normalized)
+    exact = aliases.get(normalized)
+    if exact is not None:
+        return exact
+    without_footnotes = re.sub(r"(?:\s*\([a-z]\))+$", "", normalized, flags=re.I)
+    return aliases.get(without_footnotes)
 
 
 def _expected_categories(
@@ -1643,6 +1652,7 @@ def _canonical_csv(rows: list[dict[str, Any]], contract: dict[str, Any]) -> byte
         "unit_id",
         "value",
         "value_status",
+        *(["raw_value"] if contract.get("preserveRawValueText") is True else []),
         "source_workbook_digest",
         "source_sheet",
         "source_cell",
@@ -1877,6 +1887,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "dimensionHeaders",
         "referenceDateDimension",
         "preservePublicationVintage",
+        "preserveRawValueText",
         "totalValidation",
     }
     dimensions = value.get("requiredDimensions")
@@ -1918,6 +1929,10 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or value.get("tableFamilyId") != cohort.get("tableFamilyId")
         or value.get("automaticAcceptance") is not True
         or value.get("trainingEligibility") is not False
+        or (
+            "preserveRawValueText" in value
+            and value.get("preserveRawValueText") is not True
+        )
         or total_validation not in {"equations", "not_applicable"}
         or not isinstance(dimensions, list)
         or not dimensions

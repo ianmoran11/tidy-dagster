@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "tidy.prisoners-state-cluster-acceptance-audit/v1",
+  "recordedAt": "2026-08-17T09:00:00+00:00",
+  "authority": "independent-of-replay-output",
+  "sourceAuthority": "committed-workbook-cells",
+  "handoffCorrection": {
+    "year": 2025,
+    "sheet": "Table 16",
+    "publishedGrid": "B:K",
+    "publishedColumns": 10,
+    "expectedRows": 900,
+    "familyRows": 4068,
+    "clusterRows": 8406,
+    "reason": "The published 2025 grid replaces mean/median age and Indigenous proportion with five count, two proportion, and three rate columns."
+  },
+  "families": [
+    {
+      "familyId": "state-selected-characteristics-time-series",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        792,
+        792,
+        792,
+        792,
+        900
+      ],
+      "expectedCanonicalCount": 4068,
+      "totalValidation": "not_applicable",
+      "preservePublicationVintage": true,
+      "measureCounts": {
+        "prisoner-count": 846,
+        "imprisonment-rate": 1062,
+        "mean-age": 396,
+        "median-age": 396,
+        "prisoner-proportion": 1368
+      }
+    },
+    {
+      "familyId": "state-sex-by-indigenous-status",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        189,
+        189,
+        189,
+        189,
+        270
+      ],
+      "expectedCanonicalCount": 1026,
+      "totalValidation": "not_applicable",
+      "preservePublicationVintage": false,
+      "measureCounts": {
+        "prisoner-count": 81,
+        "crude-imprisonment-rate": 405,
+        "age-standardised-imprisonment-rate": 270,
+        "indigenous-to-non-indigenous-rate-ratio": 270
+      }
+    },
+    {
+      "familyId": "state-age-standardised-rate-by-indigenous-status",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        297,
+        297,
+        297,
+        297,
+        270
+      ],
+      "expectedCanonicalCount": 1458,
+      "totalValidation": "not_applicable",
+      "preservePublicationVintage": true,
+      "measureCounts": {
+        "age-standardised-imprisonment-rate": 972,
+        "indigenous-to-non-indigenous-rate-ratio": 486
+      }
+    },
+    {
+      "familyId": "state-crude-imprisonment-rate",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        99,
+        99,
+        99,
+        99
+      ],
+      "expectedCanonicalCount": 396,
+      "totalValidation": "not_applicable",
+      "preservePublicationVintage": true,
+      "measureCounts": {
+        "crude-imprisonment-rate": 396
+      }
+    },
+    {
+      "familyId": "state-crude-rate-by-indigenous-status",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        297,
+        297,
+        297,
+        297,
+        270
+      ],
+      "expectedCanonicalCount": 1458,
+      "totalValidation": "not_applicable",
+      "preservePublicationVintage": true,
+      "measureCounts": {
+        "crude-imprisonment-rate": 972,
+        "indigenous-to-non-indigenous-rate-ratio": 486
+      }
+    }
+  ]
+}

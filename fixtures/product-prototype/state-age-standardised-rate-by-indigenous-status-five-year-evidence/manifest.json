@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "state-age-standardised-rate-by-indigenous-status",
+  "cohortPath": "fixtures/product-prototype/prisoners-state-age-standardised-rate-by-indigenous-status.json",
+  "cohortDigest": "sha256:5fe329ed43b03dbb17c39b8ddc47097bea12456e908c40d5b3e6c382df8cc3ed",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/prisoners-state-age-standardised-rate-by-indigenous-status-v1.json",
+  "acceptanceContractDigest": "sha256:eb1c221a48bd7d4d9a8ce799c915215bf4b0ad41ee032e9ff1a43e3dabe3f148",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 5,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 1458,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 1458,
+  "measureCounts": {
+    "age-standardised-imprisonment-rate": 972,
+    "indigenous-to-non-indigenous-rate-ratio": 486
+  },
+  "valueStatusCounts": {
+    "observed": 1458
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:2ecf6e9a73f75f64e28d3a17072f4053fc02bf056ea349eac7a2fccb96baf51a",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:88fd145c996fce0037a108668de5b4b0eecb46dad018a70c5ee36b6fb240c83b",
+      "byteLength": 903
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:7cff6d9eca289b5e3822e38cae72585da07c0a41ccae0e7333695108573be442",
+      "byteLength": 1239767
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:484bfaa112ecffea23eb0c32296c75817ad190704821d5aaa3b159f3a33373f6",
+      "byteLength": 2060162
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:c797a401ef427dde63cb969c028c1d87a936d7aeee6199c2d45a5447672a3964",
+      "byteLength": 1648
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:1f7339ff3304f525369cb89756378fc8efb47ffa7268b88e2755deaa2b79ad8f",
+      "byteLength": 5072
+    }
+  ]
+}

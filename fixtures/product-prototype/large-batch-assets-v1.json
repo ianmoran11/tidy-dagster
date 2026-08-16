@@ -1,8 +1,8 @@
 {
   "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
-  "batchId": "justice-eighty-worksheets-v1",
+  "batchId": "justice-one-hundred-four-worksheets-v1",
   "recordedAt": "2026-08-16T12:00:00+00:00",
-  "worksheetCount": 80,
+  "worksheetCount": 104,
   "providerCalls": 0,
   "entries": [
     {
@@ -599,6 +599,204 @@
         2022,
         2023,
         2024
+      ],
+      "preservesPublicationVintage": true
+    },
+    {
+      "familyId": "state-selected-characteristics-time-series",
+      "label": "Prisoners in Australia — state selected-characteristics time series",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-selected-characteristics-time-series.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-selected-characteristics-time-series-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_selected_characteristics_time_series_replay",
+      "dagsterJob": "product_prototype_state_selected_characteristics_time_series_replay_job",
+      "outputDirectory": "dagster-state-selected-characteristics-time-series-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        792,
+        792,
+        792,
+        792,
+        900
+      ],
+      "expectedCanonicalCount": 4068,
+      "expectedMeasureCounts": {
+        "imprisonment-rate": 1062,
+        "mean-age": 396,
+        "median-age": 396,
+        "prisoner-count": 846,
+        "prisoner-proportion": 1368
+      },
+      "expectedValueStatusCounts": {
+        "observed": 4068
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "preservesPublicationVintage": true
+    },
+    {
+      "familyId": "state-sex-by-indigenous-status",
+      "label": "Prisoners in Australia — sex by Indigenous status and state/territory",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-sex-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-sex-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_sex_by_indigenous_status_replay",
+      "dagsterJob": "product_prototype_state_sex_by_indigenous_status_replay_job",
+      "outputDirectory": "dagster-state-sex-by-indigenous-status-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        189,
+        189,
+        189,
+        189,
+        270
+      ],
+      "expectedCanonicalCount": 1026,
+      "expectedMeasureCounts": {
+        "age-standardised-imprisonment-rate": 270,
+        "crude-imprisonment-rate": 405,
+        "indigenous-to-non-indigenous-rate-ratio": 270,
+        "prisoner-count": 81
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 10,
+        "observed": 995,
+        "suppressed": 21
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "preservesPublicationVintage": false
+    },
+    {
+      "familyId": "state-age-standardised-rate-by-indigenous-status",
+      "label": "Prisoners in Australia — age-standardised rate by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-age-standardised-rate-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-age-standardised-rate-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_age_standardised_rate_by_indigenous_status_replay",
+      "dagsterJob": "product_prototype_state_age_standardised_rate_by_indigenous_status_replay_job",
+      "outputDirectory": "dagster-state-age-standardised-rate-by-indigenous-status-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        297,
+        297,
+        297,
+        297,
+        270
+      ],
+      "expectedCanonicalCount": 1458,
+      "expectedMeasureCounts": {
+        "age-standardised-imprisonment-rate": 972,
+        "indigenous-to-non-indigenous-rate-ratio": 486
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1458
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "preservesPublicationVintage": true
+    },
+    {
+      "familyId": "state-crude-imprisonment-rate",
+      "label": "Prisoners in Australia — crude imprisonment rate by state/territory",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-imprisonment-rate.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-crude-imprisonment-rate-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_crude_imprisonment_rate_replay",
+      "dagsterJob": "product_prototype_state_crude_imprisonment_rate_replay_job",
+      "outputDirectory": "dagster-state-crude-imprisonment-rate-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        99,
+        99,
+        99,
+        99
+      ],
+      "expectedCanonicalCount": 396,
+      "expectedMeasureCounts": {
+        "crude-imprisonment-rate": 396
+      },
+      "expectedValueStatusCounts": {
+        "observed": 396
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true
+    },
+    {
+      "familyId": "state-crude-rate-by-indigenous-status",
+      "label": "Prisoners in Australia — crude rate by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-rate-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-crude-rate-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_crude_rate_by_indigenous_status_replay",
+      "dagsterJob": "product_prototype_state_crude_rate_by_indigenous_status_replay_job",
+      "outputDirectory": "dagster-state-crude-rate-by-indigenous-status-five-year-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        297,
+        297,
+        297,
+        297,
+        270
+      ],
+      "expectedCanonicalCount": 1458,
+      "expectedMeasureCounts": {
+        "crude-imprisonment-rate": 972,
+        "indigenous-to-non-indigenous-rate-ratio": 486
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1458
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
       ],
       "preservesPublicationVintage": true
     }

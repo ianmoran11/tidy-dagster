@@ -1,0 +1,1263 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-state-selected-characteristics-time-series-v1",
+  "tableFamilyId": "state-selected-characteristics-time-series",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "TOTAL_PRISONERS"
+          ],
+          "statistic_basis": [
+            "NUMBER",
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99,
+        "2025": 450
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "prisoner_statistic": [
+            "TOTAL_PRISONERS"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "prisoner_statistic": [
+            "TOTAL_PRISONERS"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "prisoner_statistic": [
+            "TOTAL_PRISONERS"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "prisoner_statistic": [
+            "TOTAL_PRISONERS"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "prisoner_statistic": [
+            "FEMALE",
+            "INDIGENOUS",
+            "MALE",
+            "NON_INDIGENOUS",
+            "TOTAL_PRISONERS"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:25a6a33451b994fb93407d61c8e3bd0c6fe78e2644b22f501a14b082ad8744a7",
+        "2022": "sha256:23962ad527aa733b46f761d3a6948717fbad7b34575172ce610519b7c0c5d401",
+        "2023": "sha256:e8b1d62d65da8e7742526b0cd30641bdbb88f7cd4c3dcf49b0df590969279b1a",
+        "2024": "sha256:e899c9ffc8f09a735e2a3b91865dafa0b936a0069a7ad25dedfe5a685cf355d1",
+        "2025": "sha256:04f2c32480e469649df69e1e2537bbc485cac716445db190d363b0d9977678dc"
+      }
+    },
+    {
+      "id": "imprisonment-rate",
+      "unitId": "persons-per-100000-adult-population",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "FEMALE_RATE",
+            "MALE_RATE",
+            "TOTAL_RATE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 198,
+        "2022": 198,
+        "2023": 198,
+        "2024": 198,
+        "2025": 270
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "prisoner_statistic": [
+            "FEMALE_RATE",
+            "MALE_RATE"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "prisoner_statistic": [
+            "FEMALE_RATE",
+            "MALE_RATE"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "prisoner_statistic": [
+            "FEMALE_RATE",
+            "MALE_RATE"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "prisoner_statistic": [
+            "FEMALE_RATE",
+            "MALE_RATE"
+          ],
+          "statistic_basis": [
+            "NUMBER_OR_RATE"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "prisoner_statistic": [
+            "FEMALE_RATE",
+            "MALE_RATE",
+            "TOTAL_RATE"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:683e3a4c24b73eb1e7e2af60466bfbd8d977f785e8a22c60bb1814adb3cd6dda",
+        "2022": "sha256:68456dac44f27e814736e7f14a166e2a86158cebfa29e7009180cd9332c3b35b",
+        "2023": "sha256:2e60feb8cc011736ca9f002e6b9f293b434fcdd6e4d87428a32332ec586f60d1",
+        "2024": "sha256:8a2a2cb4961c6c9ea4fc0955a43be192d9b09b39f60752187e95966fa99ea632",
+        "2025": "sha256:dadaa5cad4db81349b9b9aea17511b34c910892fb806c5632fcd090c74ce3755"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "MEAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:709774968d0ef8e8c7a48d2d2017027a78d79e6147e6d75fff0caaf7e7be6340",
+        "2022": "sha256:6fe56fb80eed4d9a407592e48c3d6754711bf70ab7be3d020bfac4623972cb8c",
+        "2023": "sha256:11e895f24f7b91809ef751202feac41e4e82cf10c87e22733e38ace0a4e40243",
+        "2024": "sha256:fd9427cc99e8b24aab54c1bf3c7d08c98ccf58ca7c5b94999b4cad4fd4edae81"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "MEDIAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedCombinationCountsByYear": {
+        "2021": 99,
+        "2022": 99,
+        "2023": 99,
+        "2024": 99
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "prisoner_statistic": [
+            "MEDIAN_AGE"
+          ],
+          "statistic_basis": [
+            "YEARS"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:c9da89db9e5c5f6048610abd8a0bd5327a80402d4303e104dc410e3877dfddab",
+        "2022": "sha256:248bac0c398db92b87695eb2b629d951f74bfe4e23bc6f0cd543f175977b8fd1",
+        "2023": "sha256:a7763ef6ae82b76ad20da4fc3d801e93b0894b389836394053cb727bb5122b90",
+        "2024": "sha256:a0b6c0aca6a69f0a8a1ed5d0a569f90914b4adebfef17e6b9d91fe0760ab47f3"
+      }
+    },
+    {
+      "id": "prisoner-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "prisoner_statistic": [
+            "INDIGENOUS",
+            "KNOWN_PRIOR_IMPRISONMENT",
+            "UNSENTENCED"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 297,
+        "2022": 297,
+        "2023": 297,
+        "2024": 297,
+        "2025": 180
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30"
+          ],
+          "prisoner_statistic": [
+            "INDIGENOUS",
+            "KNOWN_PRIOR_IMPRISONMENT",
+            "UNSENTENCED"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "prisoner_statistic": [
+            "INDIGENOUS",
+            "KNOWN_PRIOR_IMPRISONMENT",
+            "UNSENTENCED"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "prisoner_statistic": [
+            "INDIGENOUS",
+            "KNOWN_PRIOR_IMPRISONMENT",
+            "UNSENTENCED"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "prisoner_statistic": [
+            "INDIGENOUS",
+            "KNOWN_PRIOR_IMPRISONMENT",
+            "UNSENTENCED"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "prisoner_statistic": [
+            "KNOWN_PRIOR_IMPRISONMENT",
+            "UNSENTENCED"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:522886a7d42e1c1744bd8b19c4c3402241ae42c217dd142dc01290130fdf9421",
+        "2022": "sha256:3aad8d34da7ec5e80a8f04fd461934b75fa361001b69db97aac8a45b6b153228",
+        "2023": "sha256:3c14973cec4aa32f9a53536c90367afcbcd9e42ec0155a2ce13fa69a57e9a0dc",
+        "2024": "sha256:839d2b3af5493b1611ee62104609052d1b3edcc8e2ca9a3171ec9bdddb686224",
+        "2025": "sha256:88fd255140496d8399a38bb5fd26b29bbba6a08611705080772753d6362a7a82"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "observation_period",
+    "prisoner_statistic",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory"
+    ],
+    "observation_period": [
+      "reference period"
+    ],
+    "prisoner_statistic": [
+      "prisoner statistic"
+    ],
+    "statistic_basis": [
+      "statistic basis"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "NSW": "NSW",
+      "New South Wales": "NSW",
+      "NEW SOUTH WALES": "NSW",
+      "Vic.": "VIC",
+      "Vic": "VIC",
+      "Victoria": "VIC",
+      "VICTORIA": "VIC",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "Queensland": "QLD",
+      "QUEENSLAND": "QLD",
+      "SA": "SA",
+      "South Australia": "SA",
+      "SOUTH AUSTRALIA": "SA",
+      "WA": "WA",
+      "Western Australia": "WA",
+      "WESTERN AUSTRALIA": "WA",
+      "Tas.": "TAS",
+      "Tasmania": "TAS",
+      "TASMANIA": "TAS",
+      "NT": "NT",
+      "Northern Territory": "NT",
+      "NORTHERN TERRITORY": "NT",
+      "ACT": "ACT",
+      "Australian Capital Territory": "ACT",
+      "AUSTRALIAN CAPITAL TERRITORY": "ACT",
+      "Aust.": "AUS",
+      "Australia": "AUS",
+      "AUSTRALIA": "AUS"
+    },
+    "observation_period": {
+      "2011": "2011-06-30",
+      "2012": "2012-06-30",
+      "2013": "2013-06-30",
+      "2014": "2014-06-30",
+      "2015": "2015-06-30",
+      "2016": "2016-06-30",
+      "2017": "2017-06-30",
+      "2018": "2018-06-30",
+      "2019": "2019-06-30",
+      "2020": "2020-06-30",
+      "2021": "2021-06-30",
+      "2022": "2022-06-30",
+      "2023": "2023-06-30",
+      "2024": "2024-06-30",
+      "2025": "2025-06-30"
+    },
+    "prisoner_statistic": {
+      "Total prisoners": "TOTAL_PRISONERS",
+      "Total prisoners (d)": "TOTAL_PRISONERS",
+      "Male imprisonment rate": "MALE_RATE",
+      "Male imprisonment rate (e)": "MALE_RATE",
+      "Female imprisonment rate": "FEMALE_RATE",
+      "Female imprisonment rate (e)": "FEMALE_RATE",
+      "Total imprisonment rate (e)": "TOTAL_RATE",
+      "Mean age": "MEAN_AGE",
+      "Median age": "MEDIAN_AGE",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "Known prior imprisonment": "KNOWN_PRIOR_IMPRISONMENT",
+      "Unsentenced": "UNSENTENCED",
+      "Males": "MALE",
+      "Females": "FEMALE",
+      "Non-Indigenous": "NON_INDIGENOUS"
+    },
+    "statistic_basis": {
+      "no.": "NUMBER_OR_RATE",
+      "years": "YEARS",
+      "%": "PROPORTION",
+      "Number": "NUMBER",
+      "Total prisoners": "NUMBER",
+      "Males": "NUMBER",
+      "Females": "NUMBER",
+      "Aboriginal and Torres Strait Islander": "NUMBER",
+      "Non-Indigenous": "NUMBER",
+      "Proportion (%)": "PROPORTION",
+      "Known prior imprisonment": "PROPORTION",
+      "Unsentenced": "PROPORTION",
+      "Male imprisonment rate (e)": "RATE",
+      "Female imprisonment rate (e)": "RATE",
+      "Total imprisonment rate (e)": "RATE"
+    }
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "jurisdiction_id",
+    "prisoner_statistic_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 792,
+    "maximumRows": 900,
+    "sourceColumns": {
+      "minimum": 8,
+      "maximum": 10
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2022": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2023": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2024": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2025": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30"
+      ],
+      "2022": [
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2023": [
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2024": [
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2025": [
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "prisonerStatisticsByYear": {
+      "2021": [
+        "FEMALE_RATE",
+        "INDIGENOUS",
+        "KNOWN_PRIOR_IMPRISONMENT",
+        "MALE_RATE",
+        "MEAN_AGE",
+        "MEDIAN_AGE",
+        "TOTAL_PRISONERS",
+        "UNSENTENCED"
+      ],
+      "2022": [
+        "FEMALE_RATE",
+        "INDIGENOUS",
+        "KNOWN_PRIOR_IMPRISONMENT",
+        "MALE_RATE",
+        "MEAN_AGE",
+        "MEDIAN_AGE",
+        "TOTAL_PRISONERS",
+        "UNSENTENCED"
+      ],
+      "2023": [
+        "FEMALE_RATE",
+        "INDIGENOUS",
+        "KNOWN_PRIOR_IMPRISONMENT",
+        "MALE_RATE",
+        "MEAN_AGE",
+        "MEDIAN_AGE",
+        "TOTAL_PRISONERS",
+        "UNSENTENCED"
+      ],
+      "2024": [
+        "FEMALE_RATE",
+        "INDIGENOUS",
+        "KNOWN_PRIOR_IMPRISONMENT",
+        "MALE_RATE",
+        "MEAN_AGE",
+        "MEDIAN_AGE",
+        "TOTAL_PRISONERS",
+        "UNSENTENCED"
+      ],
+      "2025": [
+        "FEMALE",
+        "FEMALE_RATE",
+        "INDIGENOUS",
+        "KNOWN_PRIOR_IMPRISONMENT",
+        "MALE",
+        "MALE_RATE",
+        "NON_INDIGENOUS",
+        "TOTAL_PRISONERS",
+        "TOTAL_RATE",
+        "UNSENTENCED"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_OR_RATE",
+        "PROPORTION",
+        "YEARS"
+      ],
+      "2022": [
+        "NUMBER_OR_RATE",
+        "PROPORTION",
+        "YEARS"
+      ],
+      "2023": [
+        "NUMBER_OR_RATE",
+        "PROPORTION",
+        "YEARS"
+      ],
+      "2024": [
+        "NUMBER_OR_RATE",
+        "PROPORTION",
+        "YEARS"
+      ],
+      "2025": [
+        "NUMBER",
+        "PROPORTION",
+        "RATE"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "referenceDateDimension": "observation_period",
+  "preservePublicationVintage": true
+}

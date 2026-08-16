@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tidy.data-asset-status-registry/v1",
   "title": "Tidy Data Asset Status",
-  "recordedAt": "2026-08-16T12:30:00+00:00",
+  "recordedAt": "2026-08-17T09:00:00+00:00",
   "outputPath": "docs/data-asset-status/index.html",
   "server": {
     "host": "127.0.0.1",
@@ -172,6 +172,41 @@
       "cohortPath": "fixtures/product-prototype/recorded-crime-offenders-table-5-2021-2024.json",
       "evidenceManifestPath": "fixtures/product-prototype/recorded-crime-offenders-table-5-four-release-evidence/manifest.json",
       "dagsterAsset": "product_prototype_offenders_table_5_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-selected-characteristics-time-series",
+      "label": "Prisoners in Australia — state selected-characteristics time series",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-selected-characteristics-time-series.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-selected-characteristics-time-series-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_selected_characteristics_time_series_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-sex-by-indigenous-status",
+      "label": "Prisoners in Australia — sex by Indigenous status and state/territory",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-sex-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-sex-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_sex_by_indigenous_status_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-age-standardised-rate-by-indigenous-status",
+      "label": "Prisoners in Australia — age-standardised rate by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-age-standardised-rate-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-age-standardised-rate-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_age_standardised_rate_by_indigenous_status_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-crude-imprisonment-rate",
+      "label": "Prisoners in Australia — crude imprisonment rate by state/territory",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-imprisonment-rate.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-crude-imprisonment-rate-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_crude_imprisonment_rate_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-crude-rate-by-indigenous-status",
+      "label": "Prisoners in Australia — crude rate by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-rate-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-crude-rate-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_crude_rate_by_indigenous_status_replay"
     }
   ],
   "publications": [

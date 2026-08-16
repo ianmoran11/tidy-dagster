@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-state-crude-imprisonment-rate",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "state-crude-imprisonment-rate",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-state-crude-imprisonment-rate-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-batch-normalized.xlsx",
+      "contentDigest": "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+      "byteLength": 309532,
+      "sheet": "Table_19",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-19-2021.response.txt",
+        "contentDigest": "sha256:7f8b3e69846ab878d4446b58aeba9f91a7f7624698f8b944f4f8ea52530e6448",
+        "byteLength": 385,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "contentDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "byteLength": 327530,
+      "sheet": "Table_19",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-19-2022.response.txt",
+        "contentDigest": "sha256:87816baabc3d382b962768bdf9b14e6b5b26aeda4d3e51b03f3e99e2ddbab806",
+        "byteLength": 385,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "contentDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "byteLength": 302509,
+      "sheet": "Table_19",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-19-2023.response.txt",
+        "contentDigest": "sha256:627dc98e09f143e2452b8f024cda5ea0d6e7f1058d0db05ab45f078c3b54f6b9",
+        "byteLength": 385,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024.xlsx",
+      "contentDigest": "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+      "byteLength": 279279,
+      "sheet": "Table 19",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-19-2024.response.txt",
+        "contentDigest": "sha256:f56ae5470135756381b6dc3cd07b7bdd375231dbf4771a669354597432fb6e02",
+        "byteLength": 385,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
+from collections import Counter
 from pathlib import Path
 
 import jsonschema
@@ -40,10 +42,10 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-eighty-worksheets-v1"
-    assert registry.worksheet_count == 80
+    assert registry.batch_id == "justice-one-hundred-four-worksheets-v1"
+    assert registry.worksheet_count == 104
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 17
+    assert len(registry.entries) == 22
     normalization = verify_batch_normalization(PROJECT, registry)
     assert len(normalization["entries"]) == 8
     assert normalization["inRangeValuesChanged"] is True
@@ -58,9 +60,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 80
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 104
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 40916
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 49322
     assert sum(item["providerCalls"] for item in manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
@@ -239,9 +241,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 80
+    assert report["acceptedWorksheetCount"] == 104
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 40916
+    assert report["canonicalObservationCount"] == 49322
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -322,6 +324,212 @@ def test_digest_bound_correction_emits_manifest_matching_receipt(
     assert json.loads(receipt.read_text()) == entry["correction"]
 
 
+def _source_cell(address: str) -> str:
+    match = re.fullmatch(r"([A-Z]+)([1-9][0-9]*)", address)
+    assert match is not None
+    column = 0
+    for character in match.group(1):
+        column = column * 26 + ord(character) - ord("A") + 1
+    return f"R{match.group(2)}C{column}"
+
+
+def test_prisoners_state_cluster_geometry_and_acceptance_are_independent() -> None:
+    completed = subprocess.run(
+        [
+            "uv",
+            "run",
+            "python",
+            str(PROJECT / "scripts/generate-prisoners-state-cluster.py"),
+            "--check",
+        ],
+        cwd=PROJECT,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert completed.returncode == 0, completed.stderr
+    geometry = json.loads(
+        (
+            PROJECT
+            / "fixtures/product-prototype/prisoners-state-cluster-geometry-v1.json"
+        ).read_text()
+    )
+    audit = json.loads(
+        (
+            PROJECT
+            / "fixtures/product-prototype"
+            / "prisoners-state-cluster-acceptance-audit-v1.json"
+        ).read_text()
+    )
+    assert geometry["authority"] == "human-authored-reviewed-physical-geometry"
+    assert audit["authority"] == "independent-of-replay-output"
+    assert audit["handoffCorrection"] == {
+        "year": 2025,
+        "sheet": "Table 16",
+        "publishedGrid": "B:K",
+        "publishedColumns": 10,
+        "expectedRows": 900,
+        "familyRows": 4068,
+        "clusterRows": 8406,
+        "reason": audit["handoffCorrection"]["reason"],
+    }
+    assert sum(item["expectedCanonicalCount"] for item in audit["families"]) == 8406
+    assert sum(len(item["members"]) for item in geometry["families"]) == 24
+
+    geometry_by_family = {item["familyId"]: item for item in geometry["families"]}
+    crosswalk = json.loads(
+        (
+            PROJECT
+            / "fixtures/product-prototype/prisoners-release-family-crosswalk-v1.json"
+        ).read_text()
+    )
+    crosswalk_by_family = {
+        item["familyId"]: item["members"] for item in crosswalk["families"]
+    }
+    expected_workbook_digests = {
+        2021: "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+        2022: "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+        2023: "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+        2024: "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+        2025: "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+    }
+    for family in audit["families"]:
+        evidence = json.loads(
+            (
+                PROJECT
+                / "fixtures/product-prototype"
+                / f"{family['familyId']}-five-year-evidence/canonical-observations.json"
+            ).read_text()
+        )
+        assert len(evidence) == family["expectedCanonicalCount"]
+        assert (
+            dict(sorted(Counter(row["measure_id"] for row in evidence).items()))
+            == family["measureCounts"]
+        )
+        cohort = json.loads(
+            (
+                PROJECT
+                / "fixtures/product-prototype"
+                / f"prisoners-{family['familyId']}.json"
+            ).read_text()
+        )
+        reviewed_members = crosswalk_by_family[family["familyId"]]
+        assert all(item["cube"] == 2 for item in reviewed_members)
+        assert [(item["year"], item["sheet"]) for item in reviewed_members] == [
+            (item["year"], item["sheet"]) for item in cohort["workbooks"]
+        ]
+        assert all(
+            item["contentDigest"] == expected_workbook_digests[item["year"]]
+            for item in cohort["workbooks"]
+        )
+        assert {
+            item["year"] for item in cohort["workbooks"] if "normalization" in item
+        } == ({2021, 2022, 2023, 2025} & set(family["years"]))
+        rows_by_digest = {
+            workbook["contentDigest"]: [
+                row
+                for row in evidence
+                if row["source_workbook_digest"] == workbook["contentDigest"]
+            ]
+            for workbook in cohort["workbooks"]
+        }
+        assert [
+            len(rows_by_digest[item["contentDigest"]]) for item in cohort["workbooks"]
+        ] == family["expectedYearCounts"]
+        for member, workbook in zip(
+            geometry_by_family[family["familyId"]]["members"],
+            cohort["workbooks"],
+            strict=True,
+        ):
+            cells = {
+                row["source_cell"] for row in rows_by_digest[workbook["contentDigest"]]
+            }
+            for band in member["valueBands"]:
+                first, last = band.split(":")
+                assert {_source_cell(first), _source_cell(last)} <= cells
+
+
+def test_prisoners_state_cluster_retains_vintages_totals_and_null_markers() -> None:
+    base = PROJECT / "fixtures/product-prototype"
+    crude = json.loads(
+        (base / "prisoners-state-crude-imprisonment-rate.json").read_text()
+    )
+    assert [item["year"] for item in crude["workbooks"]] == [2021, 2022, 2023, 2024]
+    assert all(
+        item["sheet"].replace("_", " ") == "Table 19" for item in crude["workbooks"]
+    )
+
+    selected = json.loads(
+        (
+            base
+            / "state-selected-characteristics-time-series-five-year-evidence"
+            / "canonical-observations.json"
+        ).read_text()
+    )
+    assert all(
+        row["reference_date"] == row["observation_period_id"] for row in selected
+    )
+    assert any(
+        row["publication_vintage_date"] != row["reference_date"] for row in selected
+    )
+    vintages_by_period: dict[str, set[str]] = {}
+    for row in selected:
+        vintages_by_period.setdefault(row["reference_date"], set()).add(
+            row["publication_vintage_date"]
+        )
+    assert any(len(vintages) > 1 for vintages in vintages_by_period.values())
+
+    sex_status = json.loads(
+        (
+            base
+            / "state-sex-by-indigenous-status-five-year-evidence"
+            / "canonical-observations.json"
+        ).read_text()
+    )
+    markers = Counter(
+        (row["raw_value"], row["value_status"])
+        for row in sex_status
+        if row["value_status"] != "observed"
+    )
+    assert set(markers) == {
+        ("n.p.", "suppressed"),
+        ("np", "suppressed"),
+        ("n.a.", "not_applicable"),
+        ("n.a", "not_applicable"),
+        ("na", "not_applicable"),
+    }
+    assert all(
+        row["value"] is None for row in sex_status if row["value_status"] != "observed"
+    )
+    count_rows = [row for row in sex_status if row["measure_id"] == "prisoner-count"]
+    assert len(count_rows) == 81
+    assert {row["source_workbook_digest"] for row in count_rows} == {
+        "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e"
+    }
+    assert all(row["unit_id"] == "person" for row in count_rows)
+    assert {"AUS"} <= {row["jurisdiction_id"] for row in sex_status}
+    assert {"PERSONS"} <= {row["sex_id"] for row in sex_status}
+    assert {"TOTAL"} <= {row["indigenous_status_id"] for row in sex_status}
+    assert any(
+        row["measure_id"] == "indigenous-to-non-indigenous-rate-ratio"
+        and row["statistic_basis_id"] == "RATE_RATIO"
+        and row["rate_basis_id"] in {"CRUDE", "AGE_STANDARDISED"}
+        for row in sex_status
+    )
+    for family in (
+        "state-selected-characteristics-time-series",
+        "state-sex-by-indigenous-status",
+        "state-age-standardised-rate-by-indigenous-status",
+        "state-crude-imprisonment-rate",
+        "state-crude-rate-by-indigenous-status",
+    ):
+        contract = json.loads(
+            (base / f"acceptance/prisoners-{family}-v1.json").read_text()
+        )
+        assert contract["totalValidation"] == "not_applicable"
+        assert contract["totalEquations"] == []
+
+
 def test_large_batch_cli_verifies_committed_evidence() -> None:
     completed = subprocess.run(
         [str(PROJECT / "scripts/tidy-prototype-batch"), "verify"],
@@ -333,10 +541,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-eighty-worksheets-v1",
-        "worksheetCount": 80,
-        "cohortCount": 17,
-        "canonicalObservationCount": 40916,
+        "batchId": "justice-one-hundred-four-worksheets-v1",
+        "worksheetCount": 104,
+        "cohortCount": 22,
+        "canonicalObservationCount": 49322,
         "providerCalls": 0,
         "verified": True,
     }

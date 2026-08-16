@@ -18,10 +18,10 @@ must not be treated as fresh Luna evidence.
 The Prisoners release inventory, family crosswalk, and membership manifest are
 a source-custody and completeness foundation only. They bind the five annual
 guides, 17 substantive source cubes, and all 203 numbered data sheets without
-claiming semantic extraction for every sheet. Canonical extraction remains
-85/203 members until later phases add reviewed semantic contracts; this phase
-does not change the status snapshot, Dagster assets, or dashboard totals.
-The provider-free custody check is runnable as
+claiming semantic extraction for every sheet. Canonical extraction covers
+109/203 members, with 94 members pending reviewed semantic contracts. The five
+state/territory cohorts are registered dynamically in the status snapshot,
+Dagster assets, and dashboard totals. The provider-free custody check is runnable as
 `scripts/tidy-prisoners-release verify`.
 
 The completed safe live-evidence closure is at
@@ -88,8 +88,8 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 60-worksheet batch extends the same v1 contract without weakening existing
-cohorts:
+The 104-worksheet cross-publication batch extends the same v1 contract without
+weakening existing cohorts:
 
 - multi-measure selection may use an AND conjunction across several dimensions;
 - a measure can declare applicable publication years plus reviewed annual
@@ -97,16 +97,18 @@ cohorts:
   non-Cartesian tables;
 - a table without a valid arithmetic identity must explicitly set
   `totalValidation: not_applicable`; an unmarked empty equation list fails;
-- Table 27 declares `referenceDateDimension` and
-  `preservePublicationVintage`, making publication vintage and row-level
-  observation date separate canonical key fields; and
+- Table 27 and the state/territory rolling families declare
+  `referenceDateDimension` and `preservePublicationVintage`, making publication
+  vintage and row-level observation date separate canonical key fields;
+- `preserveRawValueText` is opt-in for reviewed marker-bearing families and
+  retains the exact published marker beside its canonical null status; and
 - cohort normalization now also recognizes
   `trim-pathological-styled-blank-cells-v1`, which trims out-of-range styled
   blanks and pathological merge/column formatting while refusing to remove
   cell values or formulas.
 
 The batch registry is
-`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 12
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 22
 contracts pins exact annual dimensions, measure applicability, value statuses,
 combination counts, and source-header variants. Verification remains
 provider-free:

@@ -133,16 +133,16 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
 
 
-def test_definitions_include_eighty_worksheet_cross_publication_batch() -> None:
+def test_definitions_include_104_worksheet_cross_publication_batch() -> None:
     definitions = build_definitions(project_root=PROJECT)
     Definitions.validate_loadable(definitions)
-    assert LARGE_BATCH_REGISTRY.worksheet_count == 80
-    assert len(LARGE_BATCH_REGISTRY.entries) == 17
-    assert len(LARGE_BATCH_ASSETS) == 17
-    assert len(LARGE_BATCH_CHECKS) == 17
-    assert len(LARGE_BATCH_JOBS) == 17
+    assert LARGE_BATCH_REGISTRY.worksheet_count == 104
+    assert len(LARGE_BATCH_REGISTRY.entries) == 22
+    assert len(LARGE_BATCH_ASSETS) == 22
+    assert len(LARGE_BATCH_CHECKS) == 22
+    assert len(LARGE_BATCH_JOBS) == 22
     assert definitions.metadata["product_prototype_large_batch_supported"].value
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 80
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 104
     assert {
         spec.family_id
         for spec in LARGE_BATCH_REGISTRY.entries
@@ -167,14 +167,14 @@ def test_build_definitions_uses_requested_project_registry(tmp_path: Path) -> No
     registry = json.loads(
         (PROJECT / "fixtures/product-prototype/large-batch-assets-v1.json").read_text()
     )
-    registry["batchId"] = "alternate-eighty-worksheets-v1"
+    registry["batchId"] = "alternate-one-hundred-four-worksheets-v1"
     registry_path.write_text(json.dumps(registry))
     definitions = build_definitions(project_root=tmp_path)
     assert (
         definitions.metadata["product_prototype_large_batch_id"].value
-        == "alternate-eighty-worksheets-v1"
+        == "alternate-one-hundred-four-worksheets-v1"
     )
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 80
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 104
 
 
 def test_definitions_load_identity_and_share_one_partition_definition(

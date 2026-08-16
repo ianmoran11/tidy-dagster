@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "state-crude-rate-by-indigenous-status",
+  "cohortPath": "fixtures/product-prototype/prisoners-state-crude-rate-by-indigenous-status.json",
+  "cohortDigest": "sha256:9304b8e57340b7132a8194356cb26aec2e2c49fbe8752ea3541eb9d4671169c6",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/prisoners-state-crude-rate-by-indigenous-status-v1.json",
+  "acceptanceContractDigest": "sha256:beb83598b8a333ba9c95732aa12c0ab88f0068b0f4897b70e2124b87e759e7f3",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 5,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 1458,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 1458,
+  "measureCounts": {
+    "crude-imprisonment-rate": 972,
+    "indigenous-to-non-indigenous-rate-ratio": 486
+  },
+  "valueStatusCounts": {
+    "observed": 1458
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:24669fb317bf1313add4a62f5811e137731d68000a5fa3c4966a02775c20dca2",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:20a0596b983d3a959158114f0ce30d3689dfacfdfc5eaa32bda3468d28a8c23e",
+      "byteLength": 892
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:fcc9d23ca53031c662a2f58afaa664ecbdf108fa5d24c80ac8b6d8511338807e",
+      "byteLength": 1218522
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:c5ee433b2ab140539ffcfa4b6792d090952d1aba6825859b761e92adc1f3904a",
+      "byteLength": 2038971
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:be454a5c92b5ecd5d8d65702f9904aa3069c5e79f9d96ffd1ed05c424098aa11",
+      "byteLength": 1648
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:fd04f2b82f27944a3a1c835a15a1a9f9e4f7b32d37bb2a350b4518becf4f2bb9",
+      "byteLength": 5072
+    }
+  ]
+}

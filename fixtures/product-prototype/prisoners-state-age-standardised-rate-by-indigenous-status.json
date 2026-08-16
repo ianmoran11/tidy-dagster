@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-state-age-standardised-rate-by-indigenous-status",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "state-age-standardised-rate-by-indigenous-status",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-state-age-standardised-rate-by-indigenous-status-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-batch-normalized.xlsx",
+      "contentDigest": "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+      "byteLength": 309532,
+      "sheet": "Table_18",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-18-2021.response.txt",
+        "contentDigest": "sha256:07db54f73ba78057d7e695d38c88a57e1988699ca548ff35dffc91353a3a2851",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "contentDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "byteLength": 327530,
+      "sheet": "Table_18",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-18-2022.response.txt",
+        "contentDigest": "sha256:907b5001d618b8dc8e5c9008e6a4df5eae0545361d508654a0551bf449b414f3",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "contentDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "byteLength": 302509,
+      "sheet": "Table_18",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-18-2023.response.txt",
+        "contentDigest": "sha256:83a454e361bd427bec1b12fabda6c3beefa8303e7dbad1e92a90f6b9bb5ffa8f",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024.xlsx",
+      "contentDigest": "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+      "byteLength": 279279,
+      "sheet": "Table 18",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-18-2024.response.txt",
+        "contentDigest": "sha256:19b01bab1fa1a31872c1d257f84af2ec28592c9da826efe010f5088f945cdbed",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-batch-normalized.xlsx",
+      "contentDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+      "byteLength": 169355,
+      "sheet": "Table 19",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-19-2025.response.txt",
+        "contentDigest": "sha256:7221d7b3dee637f1c0209e7f7d22fd10630e3b437d84c41e83b9c39a69cf8860",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

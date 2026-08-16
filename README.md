@@ -66,24 +66,25 @@ Every numbered sheet has one reviewed family assignment, including 2021-only
 Tables 40–42 and the separate 2025 preliminary ANZSOC 2023 namespace. Exact
 current 2025 state-cube bytes remain distinct from the historical execution
 source and are proven value/formula/coordinate-equivalent. This is a custody and
-coverage foundation: checked canonical extraction remains 85/203 until the
-remaining family contracts land.
+coverage foundation: checked canonical extraction now covers 109/203 members,
+with 94 pending reviewed semantic contracts.
 
 ```sh
 scripts/generate-prisoners-release-inventory.py --check
 scripts/tidy-prisoners-release verify
 ```
 
-A checked cross-publication batch includes 12 semantic *Prisoners in Australia*
-five-year cohorts—60 worksheet-assets—covering selected characteristics,
-Indigenous status by offence/charge, sentence and expected-time statistics,
-prior imprisonment, remand duration, security classification, prison location,
-and court level. A second publication adds *Recorded Crime — Offenders* Tables
-1–5 across 2021–22 through 2024–25: 20 more worksheet-assets and 21,268
-canonical observations. The combined 80-worksheet batch contains 40,916
-canonical observations with zero exceptions, cross-period issues, or provider
-calls. Table
-27 preserves publication vintage and observation period separately; 40
+A checked cross-publication batch includes 17 semantic *Prisoners in Australia*
+cohorts—84 worksheet-assets—including the five state/territory families for
+selected-characteristic vintages, sex by Indigenous status, age-standardised
+rates, crude rates, and crude rates by Indigenous status. A second publication
+adds *Recorded Crime — Offenders* Tables 1–5 across 2021–22 through 2024–25:
+20 more worksheet-assets and 21,268 canonical observations. The combined
+104-worksheet batch contains 49,322 canonical observations with zero exceptions,
+cross-period issues, or provider calls. The state cluster contributes 8,406 rows;
+its corrected 2025 Table 16 uses all ten B:K measures and contributes 900. The
+status dashboard now exposes 129 deterministic per-asset CSV routes. Table 27
+preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,
 which remain non-authoritative. The Offenders maps are likewise deterministic,

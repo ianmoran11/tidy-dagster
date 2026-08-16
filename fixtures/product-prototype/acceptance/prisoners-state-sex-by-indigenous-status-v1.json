@@ -1,0 +1,888 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-state-sex-by-indigenous-status-v1",
+  "tableFamilyId": "state-sex-by-indigenous-status",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2025"
+      ],
+      "expectedCombinationCountsByYear": {
+        "2025": 81
+      },
+      "expectedDimensionsByYear": {
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2025": "sha256:d7f41abad888dce49217619e744ac7541b8d9e91449463981f5dbd9018826d09"
+      },
+      "missingValues": {
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "n.a.": "not_applicable",
+        "n.a": "not_applicable",
+        "na": "not_applicable"
+      }
+    },
+    {
+      "id": "crude-imprisonment-rate",
+      "unitId": "persons-per-100000-adult-population",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "CRUDE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 81,
+        "2022": 81,
+        "2023": 81,
+        "2024": 81,
+        "2025": 81
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "CRUDE"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "CRUDE"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "CRUDE"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "CRUDE"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "CRUDE"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:1b4290ff3a5c6bb18960da3ff9be43dcf062dcef9c3b721aceb26690eb9661b0",
+        "2022": "sha256:1b4290ff3a5c6bb18960da3ff9be43dcf062dcef9c3b721aceb26690eb9661b0",
+        "2023": "sha256:1b4290ff3a5c6bb18960da3ff9be43dcf062dcef9c3b721aceb26690eb9661b0",
+        "2024": "sha256:1b4290ff3a5c6bb18960da3ff9be43dcf062dcef9c3b721aceb26690eb9661b0",
+        "2025": "sha256:1b4290ff3a5c6bb18960da3ff9be43dcf062dcef9c3b721aceb26690eb9661b0"
+      },
+      "missingValues": {
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "n.a.": "not_applicable",
+        "n.a": "not_applicable",
+        "na": "not_applicable"
+      }
+    },
+    {
+      "id": "age-standardised-imprisonment-rate",
+      "unitId": "persons-per-100000-adult-population",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "AGE_STANDARDISED"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 54,
+        "2022": 54,
+        "2023": 54,
+        "2024": 54,
+        "2025": 54
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "statistic_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "statistic_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "statistic_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "statistic_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "statistic_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "rate_basis": [
+            "NOT_APPLICABLE"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:5471ee2a515c964a8b4dd0534b8b05e1a16764acd2baa14f5df8c259d0724626",
+        "2022": "sha256:5471ee2a515c964a8b4dd0534b8b05e1a16764acd2baa14f5df8c259d0724626",
+        "2023": "sha256:5471ee2a515c964a8b4dd0534b8b05e1a16764acd2baa14f5df8c259d0724626",
+        "2024": "sha256:5471ee2a515c964a8b4dd0534b8b05e1a16764acd2baa14f5df8c259d0724626",
+        "2025": "sha256:5471ee2a515c964a8b4dd0534b8b05e1a16764acd2baa14f5df8c259d0724626"
+      },
+      "missingValues": {
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "n.a.": "not_applicable",
+        "n.a": "not_applicable",
+        "na": "not_applicable"
+      }
+    },
+    {
+      "id": "indigenous-to-non-indigenous-rate-ratio",
+      "unitId": "ratio",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "RATE_RATIO"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 54,
+        "2022": 54,
+        "2023": 54,
+        "2024": 54,
+        "2025": 54
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "indigenous_status": [
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:dfef316ad80dab32321b0a0928eeb6e1a0ba3684f3756ef98d1cd62c95766a85",
+        "2022": "sha256:dfef316ad80dab32321b0a0928eeb6e1a0ba3684f3756ef98d1cd62c95766a85",
+        "2023": "sha256:dfef316ad80dab32321b0a0928eeb6e1a0ba3684f3756ef98d1cd62c95766a85",
+        "2024": "sha256:dfef316ad80dab32321b0a0928eeb6e1a0ba3684f3756ef98d1cd62c95766a85",
+        "2025": "sha256:dfef316ad80dab32321b0a0928eeb6e1a0ba3684f3756ef98d1cd62c95766a85"
+      },
+      "missingValues": {
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "n.a.": "not_applicable",
+        "n.a": "not_applicable",
+        "na": "not_applicable"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "sex",
+    "indigenous_status",
+    "statistic_basis",
+    "rate_basis"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "state or territory"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ],
+    "statistic_basis": [
+      "statistic basis"
+    ],
+    "rate_basis": [
+      "rate basis"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "NSW": "NSW",
+      "New South Wales": "NSW",
+      "NEW SOUTH WALES": "NSW",
+      "Vic.": "VIC",
+      "Vic": "VIC",
+      "Victoria": "VIC",
+      "VICTORIA": "VIC",
+      "Qld": "QLD",
+      "Qld.": "QLD",
+      "Queensland": "QLD",
+      "QUEENSLAND": "QLD",
+      "SA": "SA",
+      "South Australia": "SA",
+      "SOUTH AUSTRALIA": "SA",
+      "WA": "WA",
+      "Western Australia": "WA",
+      "WESTERN AUSTRALIA": "WA",
+      "Tas.": "TAS",
+      "Tasmania": "TAS",
+      "TASMANIA": "TAS",
+      "NT": "NT",
+      "Northern Territory": "NT",
+      "NORTHERN TERRITORY": "NT",
+      "ACT": "ACT",
+      "Australian Capital Territory": "ACT",
+      "AUSTRALIAN CAPITAL TERRITORY": "ACT",
+      "Aust.": "AUS",
+      "Australia": "AUS",
+      "AUSTRALIA": "AUS"
+    },
+    "sex": {
+      "Males": "MALE",
+      "Male": "MALE",
+      "Females": "FEMALE",
+      "Female": "FEMALE",
+      "Persons": "PERSONS"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "INDIGENOUS",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "NON-INDIGENOUS": "NON_INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Total": "TOTAL",
+      "TOTAL": "TOTAL",
+      "Crude": "TOTAL",
+      "Age-standardised": "TOTAL",
+      "RATIO OF ABORIGINAL AND TORRES STRAIT ISLANDER TO NON-INDIGENOUS": "TOTAL",
+      "Ratio of Aboriginal and Torres Strait Islander to non-Indigenous": "TOTAL"
+    },
+    "statistic_basis": {
+      "CRUDE RATE": "CRUDE",
+      "Crude rate": "CRUDE",
+      "Crude rate (d)": "CRUDE",
+      "AGE STANDARDISED RATE": "AGE_STANDARDISED",
+      "AGE STANDARDISED RATE ": "AGE_STANDARDISED",
+      "Age standardised rate": "AGE_STANDARDISED",
+      "Age standardised rate (e)(f)": "AGE_STANDARDISED",
+      "RATIO OF ABORIGINAL AND TORRES STRAIT ISLANDER RATES TO NON-INDIGENOUS RATES": "RATE_RATIO",
+      "Ratio of Aboriginal and Torres Strait Islander rates to non-Indigenous rates": "RATE_RATIO",
+      "Number": "COUNT"
+    },
+    "rate_basis": {
+      "Aboriginal and Torres Strait Islander": "NOT_APPLICABLE",
+      "Non-Indigenous": "NOT_APPLICABLE",
+      "Total": "NOT_APPLICABLE",
+      "Crude": "CRUDE",
+      "Age-standardised": "AGE_STANDARDISED"
+    }
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "sex_id",
+    "indigenous_status_id",
+    "statistic_basis_id",
+    "rate_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 189,
+    "maximumRows": 270,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2022": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2023": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2024": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2025": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2022": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2023": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2024": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2025": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ],
+      "2022": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ],
+      "2023": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ],
+      "2024": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ],
+      "2025": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "RATE_RATIO"
+      ],
+      "2022": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "RATE_RATIO"
+      ],
+      "2023": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "RATE_RATIO"
+      ],
+      "2024": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "RATE_RATIO"
+      ],
+      "2025": [
+        "AGE_STANDARDISED",
+        "COUNT",
+        "CRUDE",
+        "RATE_RATIO"
+      ]
+    },
+    "rateBasesByYear": {
+      "2021": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "NOT_APPLICABLE"
+      ],
+      "2022": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "NOT_APPLICABLE"
+      ],
+      "2023": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "NOT_APPLICABLE"
+      ],
+      "2024": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "NOT_APPLICABLE"
+      ],
+      "2025": [
+        "AGE_STANDARDISED",
+        "CRUDE",
+        "NOT_APPLICABLE"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preserveRawValueText": true
+}

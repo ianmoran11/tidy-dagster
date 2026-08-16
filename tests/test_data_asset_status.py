@@ -38,11 +38,11 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
         )
         for publication in status.publications
     ] == [
-        ("prisoners-australia", "calendar-year", 17),
+        ("prisoners-australia", "calendar-year", 22),
         ("recorded-crime-offenders", "fiscal-year", 5),
     ]
-    assert len(status.cohorts) == 22
-    assert len(status.assets) == 105
+    assert len(status.cohorts) == 27
+    assert len(status.assets) == 129
     assert status.physical_workbook_count == 13
     assert {asset.year for asset in status.assets} == set(range(2021, 2026))
     assert all(
@@ -51,8 +51,8 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
     assert all(asset.csv_route for asset in status.assets)
-    assert len({asset.csv_route for asset in status.assets}) == 105
-    assert sum(asset.canonical_count or 0 for asset in status.assets) == 54199
+    assert len({asset.csv_route for asset in status.assets}) == 129
+    assert sum(asset.canonical_count or 0 for asset in status.assets) == 62605
     offenders = [
         asset
         for asset in status.assets
@@ -83,11 +83,11 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
         )
     normalized = [asset for asset in status.assets if asset.normalization]
     assert Counter(asset.year for asset in normalized) == {
-        2021: 17,
-        2022: 17,
-        2023: 17,
+        2021: 22,
+        2022: 22,
+        2023: 22,
         2024: 5,
-        2025: 17,
+        2025: 21,
     }
     live = [asset for asset in status.assets if asset.live_evidence_path]
     assert {(asset.year, asset.sheet) for asset in live} == {
@@ -100,16 +100,16 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
 def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None:
     rendered = render_dashboard(build_dashboard(PROJECT)).decode()
     assert rendered.startswith("<!doctype html>")
-    assert rendered.count('class="asset-pair"') == 105
-    assert rendered.count('class="detail-toggle"') == 105
-    assert rendered.count('class="button csv-link"') == 105
-    assert rendered.count("Open CSV") == 105
+    assert rendered.count('class="asset-pair"') == 129
+    assert rendered.count('class="detail-toggle"') == 129
+    assert rendered.count('class="button csv-link"') == 129
+    assert rendered.count("Open CSV") == 129
     assert rendered.count('class="coverage-publication publication-group"') == 2
     assert rendered.count('class="assets-publication publication-group"') == 2
-    assert rendered.count('class="coverage-row"') == 22
-    assert rendered.count('class="coverage-cell coverage-complete"') == 105
+    assert rendered.count('class="coverage-row"') == 27
+    assert rendered.count('class="coverage-cell coverage-complete"') == 129
     assert rendered.count('class="coverage-meter"') == 6
-    assert rendered.count("<strong>105/105</strong>") == 6
+    assert rendered.count("<strong>129/129</strong>") == 6
     assert "max-height:min(54vh,620px)" in rendered
     assert "position:sticky" in rendered
     assert all(
@@ -129,7 +129,7 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'class="sort"',
             "Automated checks",
             "Flagged issues",
-            "105 sheet-assets across 13 physical workbooks",
+            "129 sheet-assets across 13 physical workbooks",
             "Registered asset coverage",
             "Recorded Crime — Offenders",
             "2021\u201322",
@@ -166,15 +166,15 @@ def test_coverage_matrix_keeps_multiple_assets_in_one_year_compact() -> None:
     expanded_cohort = replace(cohort, assets=(*cohort.assets, duplicate))
     expanded = replace(status, cohorts=(expanded_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(expanded).decode()
-    assert rendered.count('class="coverage-row"') == 22
-    assert rendered.count("data-target-year=") == 105
+    assert rendered.count('class="coverage-row"') == 27
+    assert rendered.count("data-target-year=") == 129
     assert (
         rendered.count('class="coverage-cell coverage-complete coverage-multiple"') == 1
     )
     assert "<small>2</small>" in rendered
     assert "2 registered assets" in rendered
     assert "Select to view all 2 assets" in rendered
-    assert rendered.count("<strong>106/106</strong>") == 6
+    assert rendered.count("<strong>130/130</strong>") == 6
 
 
 def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
@@ -183,16 +183,16 @@ def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
     reduced_cohort = replace(cohort, assets=cohort.assets[1:])
     reduced = replace(status, cohorts=(reduced_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(reduced).decode()
-    assert rendered.count('class="coverage-cell coverage-absent"') == 1
-    assert rendered.count('class="coverage-cell coverage-complete"') == 104
+    assert rendered.count('class="coverage-cell coverage-absent"') == 2
+    assert rendered.count('class="coverage-cell coverage-complete"') == 128
     assert "Not registered in this prototype scope" in rendered
-    assert rendered.count("<strong>104/104</strong>") == 6
+    assert rendered.count("<strong>128/128</strong>") == 6
 
 
 def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
     status = build_dashboard(PROJECT)
     payloads = build_asset_csv_payloads(PROJECT, status)
-    assert len(payloads) == 105
+    assert len(payloads) == 129
     observed_rows = 0
     for asset in status.assets:
         assert asset.csv_route is not None
@@ -207,7 +207,7 @@ def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
             row.get("publication_vintage_date") or row["reference_date"] for row in rows
         } == {asset.reference_date}
         observed_rows += len(rows)
-    assert observed_rows == 54199
+    assert observed_rows == 62605
 
 
 def test_committed_snapshot_matches_current_evidence() -> None:

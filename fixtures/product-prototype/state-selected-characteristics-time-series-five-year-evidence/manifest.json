@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "state-selected-characteristics-time-series",
+  "cohortPath": "fixtures/product-prototype/prisoners-state-selected-characteristics-time-series.json",
+  "cohortDigest": "sha256:97a442b9c8e94932f049a4b8bd620ef438fc171b8f32320dc92ab1dcbee439a8",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/prisoners-state-selected-characteristics-time-series-v1.json",
+  "acceptanceContractDigest": "sha256:2533f2c4d3ed72283caf7ec6d61544bfed7b5f587010782bb12416afd317d5ad",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 5,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 4068,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 4068,
+  "measureCounts": {
+    "imprisonment-rate": 1062,
+    "mean-age": 396,
+    "median-age": 396,
+    "prisoner-count": 846,
+    "prisoner-proportion": 1368
+  },
+  "valueStatusCounts": {
+    "observed": 4068
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:b420da066c4ce639da752be63099aa318e513604fef327018ff3248a0abceaa5",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:ed473fadc5d492d592c5a43bc41fa118ef7d0eb2c802cd7e3cfa44350ee82552",
+      "byteLength": 897
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:5e563e61333e2370e036931dd4a1950bbb43098c67c7013c52973f5e05fd43e3",
+      "byteLength": 3153671
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:4e5e365c34f64fdd994060fa8e1aacdb5a9752e076934fbcbf59ef02d0fa3d0e",
+      "byteLength": 5492300
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:43cfcb1dfab80920f3124bf9c814152cf15d0aed1a77d2898d2afaf2eedceaa6",
+      "byteLength": 1654
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:32033c7d587c103f354b8890df6ec159d850cd94db3dab372a750f6b26662be1",
+      "byteLength": 5072
+    }
+  ]
+}

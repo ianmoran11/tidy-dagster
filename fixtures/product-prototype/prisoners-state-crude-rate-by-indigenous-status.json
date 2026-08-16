@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-state-crude-rate-by-indigenous-status",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "state-crude-rate-by-indigenous-status",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-state-crude-rate-by-indigenous-status-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-batch-normalized.xlsx",
+      "contentDigest": "sha256:9a5be165da58005a2a31634568491645192785a96f27d9eee3c17e45175d1710",
+      "byteLength": 309532,
+      "sheet": "Table_20",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-20-2021.response.txt",
+        "contentDigest": "sha256:217d124069a7689f37bb2c030201e81ee29b2c70d30d984431277f01fd5d42be",
+        "byteLength": 578,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "contentDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "byteLength": 327530,
+      "sheet": "Table_20",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-20-2022.response.txt",
+        "contentDigest": "sha256:c4a25d8f9d353d9725e7f52b1ddd6ba9dd5fd38c85e9c675b76dce5b1f0d56f2",
+        "byteLength": 578,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "contentDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "byteLength": 302509,
+      "sheet": "Table_20",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-20-2023.response.txt",
+        "contentDigest": "sha256:41abe92c13eca670897038251a6178b41373d2705f81c7b1d1b0ecf6e7900e83",
+        "byteLength": 578,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024.xlsx",
+      "contentDigest": "sha256:609a96a96e2e359ae3e534252bcb1a6b6a329eb91fcf289834d1014dc61273d1",
+      "byteLength": 279279,
+      "sheet": "Table 20",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-20-2024.response.txt",
+        "contentDigest": "sha256:67eb88563e99c0866d3472ed6e5e754157e0dbb555cc762d6b099e5fd59ebee3",
+        "byteLength": 578,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-batch-normalized.xlsx",
+      "contentDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+      "byteLength": 169355,
+      "sheet": "Table 18",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-table-18-2025.response.txt",
+        "contentDigest": "sha256:79b13587a878a5fd5d8495ee93e33235655f4cc063604b3412b52d546defe6fe",
+        "byteLength": 578,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}
