@@ -1228,11 +1228,151 @@ def _cohort_section(cohort: CohortStatus) -> str:
 </section>"""
 
 
+def _coverage_state(asset: AssetStatus) -> tuple[str, str, str]:
+    if asset.checks_state == "issues" or any(
+        state == "failed" for state in asset.stages.values()
+    ):
+        return "issues", "!", "Issues"
+    if (
+        all(state == "yes" for state in asset.stages.values())
+        and asset.checks_state == "pass"
+    ):
+        return "complete", "✓", "Integrated; checks pass"
+    for stage, symbol, label in (
+        ("integrated", "G", "Integrated; checks incomplete"),
+        ("canonicalised", "C", "Canonicalised"),
+        ("tidied", "T", "Tidied"),
+        ("on_disk", "D", "On disk"),
+        ("identified", "I", "Identified"),
+    ):
+        if asset.stages[stage] == "yes":
+            return stage.replace("_", "-"), symbol, label
+    return "no-evidence", "?", "No evidence"
+
+
+def _coverage_label(label: str) -> str:
+    return label.split("—", 1)[-1].strip()
+
+
+def _coverage_stage_summary(status: DashboardStatus) -> str:
+    assets = status.assets
+    total = len(assets)
+    stages = [
+        ("Identified", sum(asset.stages["identified"] == "yes" for asset in assets)),
+        ("On disk", sum(asset.stages["on_disk"] == "yes" for asset in assets)),
+        ("Tidied", sum(asset.stages["tidied"] == "yes" for asset in assets)),
+        (
+            "Canonicalised",
+            sum(asset.stages["canonicalised"] == "yes" for asset in assets),
+        ),
+        ("Integrated", sum(asset.stages["integrated"] == "yes" for asset in assets)),
+        ("Checks pass", sum(asset.checks_state == "pass" for asset in assets)),
+    ]
+    return "".join(
+        f'<div class="coverage-meter"><span>{_e(label)}</span>'
+        f'<strong>{count}/{total}</strong><i aria-hidden="true"><b '
+        f'style="width:{(count / total * 100) if total else 0:.1f}%"></b></i></div>'
+        for label, count in stages
+    )
+
+
+def _coverage_group_state(
+    assets: list[AssetStatus],
+) -> tuple[str, str, str]:
+    ranked = {
+        "issues": 0,
+        "no-evidence": 1,
+        "identified": 2,
+        "on-disk": 3,
+        "tidied": 4,
+        "canonicalised": 5,
+        "integrated": 6,
+        "complete": 7,
+    }
+    states = [_coverage_state(asset) for asset in assets]
+    least_complete = min(states, key=lambda item: ranked[item[0]])
+    if len({item[0] for item in states}) > 1:
+        return (
+            least_complete[0],
+            least_complete[1],
+            f"Mixed states; least complete: {least_complete[2]}",
+        )
+    return least_complete
+
+
+def _coverage_matrix(status: DashboardStatus, years: list[int]) -> str:
+    year_headers = "".join(f'<th scope="col">{year}</th>' for year in years)
+    rows = []
+    for cohort in status.cohorts:
+        by_year: dict[int, list[AssetStatus]] = {}
+        for asset in cohort.assets:
+            by_year.setdefault(asset.year, []).append(asset)
+        cells = []
+        for year in years:
+            year_assets = by_year.get(year, [])
+            if not year_assets:
+                cells.append(
+                    f'<td><span class="coverage-cell coverage-absent" '
+                    f'aria-label="{_e(cohort.label)}, {year}: not registered" '
+                    f'title="Not registered in this prototype scope">·</span></td>'
+                )
+                continue
+            state, symbol, label = _coverage_group_state(year_assets)
+            counts = [asset.canonical_count for asset in year_assets]
+            count = (
+                f"{sum(counts):,} canonical rows"
+                if all(value is not None for value in counts)
+                else "canonical row count incomplete"
+            )
+            if len(year_assets) == 1:
+                asset = year_assets[0]
+                next_step = (
+                    "Select to view the asset and open its CSV."
+                    if asset.csv_route
+                    else "Select to view the asset; CSV is unavailable."
+                )
+                description = (
+                    f"{cohort.label}, {year}, {asset.sheet}: {label}; {count}. "
+                    f"{next_step}"
+                )
+                content = _e(symbol)
+                multiple_class = ""
+            else:
+                description = (
+                    f"{cohort.label}, {year}: {len(year_assets)} registered assets; "
+                    f"{label}; {count}. Select to view all {len(year_assets)} assets."
+                )
+                content = f"{_e(symbol)}<small>{len(year_assets)}</small>"
+                multiple_class = " coverage-multiple"
+            cells.append(
+                f'<td><button class="coverage-cell coverage-{state}{multiple_class}" type="button" '
+                f'data-target-cohort="{_e(cohort.cohort_id)}" '
+                f'data-target-year="{year}" aria-label="{_e(description)}" '
+                f'title="{_e(description)}">{content}</button></td>'
+            )
+        compact_label = _coverage_label(cohort.label)
+        rows.append(
+            f'<tr class="coverage-row" data-coverage-search="{_e(cohort.label.lower())}">'
+            f'<th scope="row" title="{_e(cohort.label)}">{_e(compact_label)}</th>'
+            + "".join(cells)
+            + "</tr>"
+        )
+    return f"""
+<div class="coverage-scroll">
+<table class="coverage-grid" aria-label="Registered sheet-asset coverage by cohort and publication year">
+<thead><tr><th scope="col">Cohort</th>{year_headers}</tr></thead>
+<tbody>{"".join(rows)}</tbody>
+</table>
+</div>"""
+
+
 def render_dashboard(status: DashboardStatus) -> bytes:
     assets = status.assets
     issue_count = sum(asset.checks_state == "issues" for asset in assets)
     integrated_count = sum(asset.stages["integrated"] == "yes" for asset in assets)
     years = sorted({asset.year for asset in assets})
+    coverage_summary = _coverage_stage_summary(status)
+    coverage_matrix = _coverage_matrix(status, years)
     cohort_options = "".join(
         f'<option value="{_e(cohort.cohort_id)}">{_e(cohort.label)}</option>'
         for cohort in status.cohorts
@@ -1264,7 +1404,43 @@ p {{ margin:.35rem 0; }}
 a {{ color:var(--accent); }}
 header {{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom:18px; }}
 .subtitle,.summary,.cohort-heading p,.muted {{ color:var(--muted); }}
-.summary {{ font-size:.93rem; margin-bottom:18px; }}
+.summary {{ font-size:.93rem; margin-bottom:14px; }}
+.tabs {{ display:flex; gap:4px; margin-bottom:14px; border-bottom:1px solid var(--line); }}
+.tab {{ min-height:38px; margin-bottom:-1px; border:0; border-bottom:3px solid transparent; border-radius:0; padding:7px 14px; background:transparent; font-weight:700; color:var(--muted); }}
+.tab[aria-selected="true"] {{ border-bottom-color:var(--accent); color:var(--accent); }}
+.tab-panel[hidden] {{ display:none; }}
+.coverage-toolbar {{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:10px; }}
+.coverage-toolbar h2 {{ margin-bottom:2px; }}
+.coverage-search {{ width:min(280px,40vw); }}
+.stage-summary {{ display:grid; grid-template-columns:repeat(6,minmax(105px,1fr)); gap:6px; margin-bottom:10px; }}
+.coverage-meter {{ display:grid; grid-template-columns:1fr auto; gap:1px 8px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--panel); font-size:.72rem; }}
+.coverage-meter span {{ color:var(--muted); white-space:nowrap; }}
+.coverage-meter strong {{ font-variant-numeric:tabular-nums; }}
+.coverage-meter i {{ grid-column:1/-1; height:3px; overflow:hidden; border-radius:2px; background:#dfe5ea; }}
+.coverage-meter b {{ display:block; height:100%; background:var(--pass); }}
+.coverage-scroll {{ max-height:min(68vh,760px); overflow:auto; border:1px solid var(--line); border-radius:6px; }}
+.coverage-grid {{ width:max-content; min-width:100%; border-collapse:separate; border-spacing:0; font-size:.76rem; }}
+.coverage-grid th,.coverage-grid td {{ height:31px; padding:2px 4px; border:0; border-right:1px solid #edf0f2; border-bottom:1px solid #edf0f2; text-align:center; }}
+.coverage-grid thead th {{ position:sticky; top:0; z-index:3; padding:5px 7px; background:#f3f6f8; }}
+.coverage-grid th:first-child {{ position:sticky; left:0; z-index:2; width:245px; max-width:245px; overflow:hidden; text-align:left; text-overflow:ellipsis; background:#fff; white-space:nowrap; }}
+.coverage-grid thead th:first-child {{ z-index:4; background:#f3f6f8; }}
+.coverage-cell {{ display:inline-flex; width:34px; min-height:25px; align-items:center; justify-content:center; border:1px solid transparent; border-radius:4px; padding:0; font-size:.75rem; font-weight:800; line-height:1; }}
+.coverage-multiple {{ gap:2px; width:39px; }}
+.coverage-multiple small {{ font-size:.58rem; font-weight:800; }}
+button.coverage-cell:hover,button.coverage-cell:focus-visible {{ outline:2px solid var(--accent); outline-offset:1px; }}
+.coverage-complete {{ color:#fff; background:#237a46; }}
+.coverage-issues {{ color:#fff; background:#b33a3a; }}
+.coverage-integrated {{ color:#174d2d; background:#a9dbb9; }}
+.coverage-canonicalised {{ color:#123f68; background:#acd2ee; }}
+.coverage-tidied {{ color:#3c356b; background:#c9c0ed; }}
+.coverage-on-disk {{ color:#65460c; background:#efd18f; }}
+.coverage-identified {{ color:#4f5358; background:#dfe4e8; }}
+.coverage-no-evidence {{ color:#625b50; background:#eeeae3; }}
+.coverage-absent {{ color:#858b91; background:#fff; border-color:#dfe3e6; }}
+.coverage-legend {{ display:flex; flex-wrap:wrap; gap:5px 12px; margin:9px 0 4px; color:var(--muted); font-size:.75rem; }}
+.coverage-legend span {{ display:inline-flex; align-items:center; gap:4px; }}
+.coverage-legend i {{ width:11px; height:11px; border-radius:3px; }}
+.coverage-scope {{ margin-top:6px; color:var(--muted); font-size:.76rem; }}
 .controls {{ display:grid; grid-template-columns:minmax(180px,2fr) repeat(4,minmax(135px,1fr)) auto; gap:10px; align-items:end; padding:14px; margin-bottom:20px; background:var(--panel); border:1px solid var(--line); border-radius:8px; }}
 label {{ display:grid; gap:4px; color:var(--muted); font-size:.8rem; font-weight:650; }}
 input,select,button {{ font:inherit; }}
@@ -1306,14 +1482,28 @@ ul {{ padding-left:1.3rem; }}
 .empty-cohort,.no-results {{ color:var(--muted); padding:14px; }}
 footer {{ margin-top:40px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }}
 footer dl {{ margin-top:10px; }}
-@media (max-width:980px) {{ .controls {{ grid-template-columns:1fr 1fr; }} header,.cohort-heading {{ display:block; }} .cohort-banner {{ margin-top:9px; }} .detail-grid {{ grid-template-columns:1fr; }} }}
-@media (max-width:600px) {{ main {{ padding:20px 12px 40px; }} .controls {{ grid-template-columns:1fr; }} dl {{ grid-template-columns:1fr; gap:2px; }} dd {{ margin-bottom:8px; }} }}
+@media (max-width:980px) {{ .stage-summary {{ grid-template-columns:repeat(3,1fr); }} .controls {{ grid-template-columns:1fr 1fr; }} header,.cohort-heading {{ display:block; }} .cohort-banner {{ margin-top:9px; }} .detail-grid {{ grid-template-columns:1fr; }} }}
+@media (max-width:600px) {{ main {{ padding:20px 12px 40px; }} .coverage-toolbar {{ display:block; }} .coverage-search {{ width:100%; margin-top:8px; }} .stage-summary {{ grid-template-columns:repeat(2,1fr); }} .coverage-grid th:first-child {{ width:180px; max-width:180px; }} .controls {{ grid-template-columns:1fr; }} dl {{ grid-template-columns:1fr; gap:2px; }} dd {{ margin-bottom:8px; }} }}
 </style>
 </head>
 <body>
 <main>
 <header><div><h1>{_e(status.title)}</h1><p class="subtitle">Read-only projection from checked manifests. Open any asset's tidied CSV directly; this page does not edit or approve data.</p></div><a class="button dagster-link" data-dagster-root href="http://127.0.0.1:{status.dagster_port}/assets">Open Dagster</a></header>
 <p class="summary" id="summary">{_e(summary)}</p>
+<div class="tabs" role="tablist" aria-label="Data asset views">
+<button class="tab" id="coverage-tab" type="button" role="tab" aria-selected="true" aria-controls="coverage-panel" data-tab="coverage">Coverage</button>
+<button class="tab" id="assets-tab" type="button" role="tab" aria-selected="false" aria-controls="assets-panel" data-tab="assets" tabindex="-1">Assets</button>
+</div>
+<section class="tab-panel" id="coverage-panel" role="tabpanel" aria-labelledby="coverage-tab">
+<div class="coverage-toolbar"><div><h2>Registered asset coverage</h2><p class="muted">Compact cohort-by-publication-year view. Select a cell to inspect that asset.</p></div><label class="coverage-search">Find cohort<input id="coverage-search" type="search" placeholder="Table, topic…"></label></div>
+<div class="stage-summary" aria-label="Pipeline stage coverage">{coverage_summary}</div>
+{coverage_matrix}
+<div class="coverage-legend" aria-label="Coverage state legend">
+<span><i class="coverage-complete"></i>Integrated + pass</span><span><i class="coverage-issues"></i>Issues</span><span><i class="coverage-integrated"></i>Integrated</span><span><i class="coverage-canonicalised"></i>Canonicalised</span><span><i class="coverage-tidied"></i>Tidied</span><span><i class="coverage-on-disk"></i>On disk</span><span><i class="coverage-identified"></i>Identified</span><span><i class="coverage-no-evidence"></i>No evidence</span><span><i class="coverage-absent"></i>Not registered</span>
+</div>
+<p class="coverage-scope"><strong>Scope:</strong> this shows the explicit prototype registry, not completeness of the full spreadsheet estate. Missing cells mean “not registered here”, not “source data does not exist”. <span id="coverage-visible-count">Showing {len(status.cohorts)} of {len(status.cohorts)} cohorts.</span></p>
+</section>
+<section class="tab-panel" id="assets-panel" role="tabpanel" aria-labelledby="assets-tab" hidden>
 <div class="controls" role="search" aria-label="Filter data assets">
 <label>Search<input id="search" type="search" placeholder="Asset, sheet, path, check…"></label>
 <label>Cohort<select id="cohort-filter"><option value="">All cohorts</option>{cohort_options}</select></label>
@@ -1325,6 +1515,7 @@ footer dl {{ margin-top:10px; }}
 <p id="visible-count" class="muted" aria-live="polite">Showing {len(assets)} of {len(assets)} assets.</p>
 {sections}
 <p class="no-results" id="no-results" hidden>No assets match the current filters.</p>
+</section>
 <footer>
 <strong>Status definitions</strong>
 <dl>
@@ -1351,6 +1542,39 @@ footer dl {{ margin-top:10px; }}
     stage: document.getElementById("stage-filter")
   }};
   const dataKey = (value) => value.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+  const tabButtons = Array.from(document.querySelectorAll("button.tab"));
+  const tabPanels = Array.from(document.querySelectorAll(".tab-panel"));
+  function activateTab(name, focus = false) {{
+    for (const button of tabButtons) {{
+      const selected = button.dataset.tab === name;
+      button.setAttribute("aria-selected", String(selected));
+      button.tabIndex = selected ? 0 : -1;
+      if (selected && focus) button.focus();
+    }}
+    for (const panel of tabPanels) panel.hidden = panel.id !== `${{name}}-panel`;
+  }}
+  tabButtons.forEach((button, index) => {{
+    button.addEventListener("click", () => activateTab(button.dataset.tab, true));
+    button.addEventListener("keydown", (event) => {{
+      if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      const offset = event.key === 'ArrowRight' ? 1 : -1;
+      const target = tabButtons[(index + offset + tabButtons.length) % tabButtons.length];
+      activateTab(target.dataset.tab, true);
+    }});
+  }});
+  const coverageRows = Array.from(document.querySelectorAll("tr.coverage-row"));
+  const coverageSearch = document.getElementById("coverage-search");
+  function applyCoverageFilter() {{
+    const query = coverageSearch.value.trim().toLowerCase();
+    let shown = 0;
+    for (const row of coverageRows) {{
+      row.hidden = Boolean(query) && !row.dataset.coverageSearch.includes(query);
+      if (!row.hidden) shown += 1;
+    }}
+    document.getElementById("coverage-visible-count").textContent = `Showing ${{shown}} of ${{coverageRows.length}} cohorts.`;
+  }}
+  coverageSearch.addEventListener("input", applyCoverageFilter);
   function applyFilters() {{
     const query = controls.search.value.trim().toLowerCase();
     let shown = 0;
@@ -1376,6 +1600,16 @@ footer dl {{ margin-top:10px; }}
   document.getElementById("reset").addEventListener("click", () => {{
     Object.values(controls).forEach((control) => {{ control.value = ""; }});
     applyFilters();
+  }});
+  document.querySelectorAll("button.coverage-cell").forEach((button) => {{
+    button.addEventListener("click", () => {{
+      Object.values(controls).forEach((control) => {{ control.value = ""; }});
+      controls.cohort.value = button.dataset.targetCohort;
+      controls.year.value = button.dataset.targetYear;
+      applyFilters();
+      activateTab("assets", true);
+      document.getElementById("assets-panel").scrollIntoView({{ block: "start" }});
+    }});
   }});
   document.querySelectorAll("button.detail-toggle").forEach((button) => {{
     button.addEventListener("click", () => {{
@@ -1413,7 +1647,9 @@ footer dl {{ margin-top:10px; }}
     link.href = asset ? `${{dagsterBase}}/assets/${{encodeURIComponent(asset)}}` : `${{dagsterBase}}/assets`;
     link.referrerPolicy = "no-referrer";
   }});
+  applyCoverageFilter();
   applyFilters();
+  activateTab("coverage", false);
 }})();
 </script>
 </body>

@@ -100,12 +100,19 @@ across nine checked workbook byte identities: five base annual workbooks and
 four deterministic formatting-trim derivatives used by the large batch. It
 derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
-checked cohort, run, canonical-output, and collation evidence. Every row has an
-**Open CSV** link that opens only that workbook/sheet asset's canonical rows in
-a new browser tab. The foreground server derives these 85 allowlisted views
+checked cohort, run, canonical-output, and collation evidence. The default
+**Coverage** tab provides a compact, searchable cohort-by-publication-year
+heatmap with sticky headers and an independently derived six-stage summary.
+If a future cohort has multiple sheets in one year, one cell shows their count
+and least-complete state rather than expanding or silently dropping them.
+Selecting a heatmap cell switches to the filtered **Assets** tab, where every
+row has an **Open CSV** link for only that workbook/sheet asset's canonical rows.
+The foreground server derives these 85 allowlisted views
 from the checked cohort CSV files using workbook digest, sheet, and publication
-date; it creates no new data authority or duplicate committed CSVs. The page
-exposes no run, approval, or editing controls.
+date; it creates no new data authority or duplicate committed CSVs. Heatmap
+symbols and accessible labels accompany every colour, and the page states that
+coverage means the explicit prototype registry—not the full spreadsheet estate.
+The page exposes no run, approval, or editing controls.
 
 The deterministic committed snapshot is
 [`docs/data-asset-status/index.html`](docs/data-asset-status/index.html). Refresh,

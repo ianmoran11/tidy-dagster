@@ -8,6 +8,7 @@ import threading
 import urllib.error
 import urllib.request
 from collections import Counter
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -81,6 +82,12 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
     assert rendered.count('class="detail-toggle"') == 85
     assert rendered.count('class="button csv-link"') == 85
     assert rendered.count("Open CSV") == 85
+    assert rendered.count('class="coverage-row"') == 17
+    assert rendered.count('class="coverage-cell coverage-complete"') == 85
+    assert rendered.count('class="coverage-meter"') == 6
+    assert rendered.count("<strong>85/85</strong>") == 6
+    assert "max-height:min(68vh,760px)" in rendered
+    assert "position:sticky" in rendered
     assert all(
         value in rendered
         for value in (
@@ -89,10 +96,18 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'id="year-filter"',
             'id="checks-filter"',
             'id="stage-filter"',
+            'id="coverage-tab"',
+            'id="assets-tab"',
+            'id="coverage-panel"',
+            'id="assets-panel"',
+            'id="coverage-search"',
             'class="sort"',
             "Automated checks",
             "Flagged issues",
             "85 sheet-assets across 9 physical workbooks",
+            "Registered asset coverage",
+            "not completeness of the full spreadsheet estate",
+            'activateTab("assets", true)',
             "product_prototype_age_replay",
             "product_prototype_country_replay",
             "product_prototype_offence_replay",
@@ -108,6 +123,42 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
     assert "raw prompt" not in rendered.lower()
     assert "https://cdn" not in rendered
     assert "<script src=" not in rendered
+
+
+def test_coverage_matrix_keeps_multiple_assets_in_one_year_compact() -> None:
+    status = build_dashboard(PROJECT)
+    cohort = status.cohorts[0]
+    original = cohort.assets[0]
+    duplicate = replace(
+        original,
+        asset_id=f"{original.asset_id}:second-sheet",
+        sheet=f"{original.sheet} second sheet",
+        csv_route="/csv/synthetic-second-sheet.csv",
+    )
+    expanded_cohort = replace(cohort, assets=(*cohort.assets, duplicate))
+    expanded = replace(status, cohorts=(expanded_cohort, *status.cohorts[1:]))
+    rendered = render_dashboard(expanded).decode()
+    assert rendered.count('class="coverage-row"') == 17
+    assert rendered.count("data-target-year=") == 85
+    assert (
+        rendered.count('class="coverage-cell coverage-complete coverage-multiple"') == 1
+    )
+    assert "<small>2</small>" in rendered
+    assert "2 registered assets" in rendered
+    assert "Select to view all 2 assets" in rendered
+    assert rendered.count("<strong>86/86</strong>") == 6
+
+
+def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
+    status = build_dashboard(PROJECT)
+    cohort = status.cohorts[0]
+    reduced_cohort = replace(cohort, assets=cohort.assets[1:])
+    reduced = replace(status, cohorts=(reduced_cohort, *status.cohorts[1:]))
+    rendered = render_dashboard(reduced).decode()
+    assert rendered.count('class="coverage-cell coverage-absent"') == 1
+    assert rendered.count('class="coverage-cell coverage-complete"') == 84
+    assert "Not registered in this prototype scope" in rendered
+    assert rendered.count("<strong>84/84</strong>") == 6
 
 
 def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
@@ -207,6 +258,9 @@ def test_current_custody_failure_does_not_erase_historical_stages(
     assert asset.checks_state == "issues"
     assert any("digest or byte length" in issue for issue in asset.issues)
     assert status.cohorts[0].checks_state == "issues"
+    rendered = render_dashboard(status).decode()
+    assert rendered.count('class="coverage-cell coverage-issues"') == 1
+    assert rendered.count('class="coverage-cell coverage-complete"') == 4
 
 
 def test_tampered_canonical_csv_is_not_exposed(tmp_path: Path) -> None:
@@ -221,6 +275,9 @@ def test_tampered_canonical_csv_is_not_exposed(tmp_path: Path) -> None:
     assert all(asset.stages["canonicalised"] == "yes" for asset in status.assets)
     assert all(asset.checks_state == "issues" for asset in status.assets)
     assert build_asset_csv_payloads(tmp_path, status) == {}
+    rendered = render_dashboard(status).decode()
+    assert rendered.count("Select to view the asset; CSV is unavailable.") == 10
+    assert rendered.count('class="coverage-cell coverage-issues"') == 5
 
 
 def test_csv_changed_after_status_verification_is_not_served(tmp_path: Path) -> None:
@@ -251,6 +308,8 @@ def test_missing_evidence_is_distinct_from_failed_checks(tmp_path: Path) -> None
     assert all(asset.stages["on_disk"] == "yes" for asset in status.assets)
     assert all(asset.stages["tidied"] == "no_evidence" for asset in status.assets)
     assert all(asset.checks_state == "no_evidence" for asset in status.assets)
+    rendered = render_dashboard(status).decode()
+    assert rendered.count('class="coverage-cell coverage-on-disk"') == 5
 
 
 def test_invalid_registry_shape_fails_instead_of_rendering(tmp_path: Path) -> None:

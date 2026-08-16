@@ -574,9 +574,16 @@ separate automated-check result. Missing current source custody does not erase
 historical processing evidence; it creates a visible contradiction instead.
 
 Python standard-library code generates the self-contained, deterministic
-snapshot at `docs/data-asset-status/index.html`. Vanilla JavaScript supplies
-sorting, core filters, text search, inline evidence details, and one **Open
-CSV** link per sheet-asset without adding a frontend framework or mutation API.
+snapshot at `docs/data-asset-status/index.html`. Its default **Coverage** tab
+uses a dense cohort-by-publication-year heatmap, a six-stage completion strip,
+sticky row/year headers, and cohort search so the view can remain compact as the
+registry grows. Colour is always paired with a symbol and full accessible label.
+Multiple assets in one cohort/year aggregate into a count-badged cell whose
+colour reflects the least-complete member; drill-down retains every matching
+asset. Selecting a cell switches focus to the filtered **Assets** tab. Vanilla JavaScript
+supplies this drill-down, sorting, core filters, text search, inline evidence
+details, and one **Open CSV** link per sheet-asset without adding a frontend
+framework or mutation API.
 At startup, the foreground server deterministically partitions the checked
 cohort CSVs by source workbook digest, sheet, and publication date, verifies all
 85 row counts, and exposes only the exact generated `/csv/<asset>.csv` allowlist
