@@ -59,6 +59,21 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
+A provider-free release inventory now freezes all five official 2021–2025
+*Prisoners in Australia* releases: five guides, 17 substantive cubes, 48 stable
+semantic families, and exactly 203 numbered worksheets (42/39/39/39/44).
+Every numbered sheet has one reviewed family assignment, including 2021-only
+Tables 40–42 and the separate 2025 preliminary ANZSOC 2023 namespace. Exact
+current 2025 state-cube bytes remain distinct from the historical execution
+source and are proven value/formula/coordinate-equivalent. This is a custody and
+coverage foundation: checked canonical extraction remains 85/203 until the
+remaining family contracts land.
+
+```sh
+scripts/generate-prisoners-release-inventory.py --check
+scripts/tidy-prisoners-release verify
+```
+
 A checked cross-publication batch includes 12 semantic *Prisoners in Australia*
 five-year cohorts—60 worksheet-assets—covering selected characteristics,
 Indigenous status by offence/charge, sentence and expected-time statistics,

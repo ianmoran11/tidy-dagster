@@ -1764,8 +1764,8 @@ def _validate_cohort(value: dict[str, Any]) -> None:
         raise ProductPrototypeError("Cohort manifest shape/version is invalid")
     _cohort_worker_limits(value)
     workbooks = value.get("workbooks")
-    if not isinstance(workbooks, list) or not 2 <= len(workbooks) <= 12:
-        raise ProductPrototypeError("Cohort must bind between two and twelve workbooks")
+    if not isinstance(workbooks, list) or not 1 <= len(workbooks) <= 12:
+        raise ProductPrototypeError("Cohort must bind between one and twelve workbooks")
     years = [item.get("year") for item in workbooks if isinstance(item, dict)]
     if (
         len(years) != len(workbooks)

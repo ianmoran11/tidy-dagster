@@ -45,7 +45,7 @@
         "promptContract": {
           "const": "cell-role-semantic-map-v13-adjacent-year-aware"
         },
-        "maximumCalls": { "type": "integer", "minimum": 4, "maximum": 24 },
+        "maximumCalls": { "type": "integer", "minimum": 2, "maximum": 24 },
         "maximumCostUsd": { "type": "number", "exclusiveMinimum": 0 },
         "correctionPolicy": {
           "const": "one-pre-execution-compilation-correction-only"
@@ -54,7 +54,7 @@
     },
     "workbooks": {
       "type": "array",
-      "minItems": 2,
+      "minItems": 1,
       "maxItems": 12,
       "items": {
         "type": "object",

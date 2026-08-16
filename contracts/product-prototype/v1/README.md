@@ -1,7 +1,8 @@
 # Product prototype contracts
 
-`tidy.product-prototype-cohort/v1` binds an ordered cohort of two to twelve
-related workbooks, their source bytes and sheets, the independent table-family
+`tidy.product-prototype-cohort/v1` binds an ordered cohort of one to twelve
+related workbooks, including honestly singleton or discontinued publication
+families, their source bytes and sheets, the independent table-family
 acceptance contract, the V13 prompt contract, and
 `openai-codex/gpt-5.6-luna` with high reasoning and hard call/cost ceilings.
 The original live milestone remains the three-workbook 2023-2025 cohort; the
@@ -13,6 +14,15 @@ bound exceeds the original 10,000 limit.
 Replay responses are non-authoritative integration fixtures. They may exercise
 the provider-free interpretation path, but they do not determine acceptance and
 must not be treated as fresh Luna evidence.
+
+The Prisoners release inventory, family crosswalk, and membership manifest are
+a source-custody and completeness foundation only. They bind the five annual
+guides, 17 substantive source cubes, and all 203 numbered data sheets without
+claiming semantic extraction for every sheet. Canonical extraction remains
+85/203 members until later phases add reviewed semantic contracts; this phase
+does not change the status snapshot, Dagster assets, or dashboard totals.
+The provider-free custody check is runnable as
+`scripts/tidy-prisoners-release verify`.
 
 The completed safe live-evidence closure is at
 `fixtures/product-prototype/live-evidence/manifest.json`. It binds three fresh
