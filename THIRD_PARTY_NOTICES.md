@@ -18,6 +18,19 @@ evidence serialization and never imports candidate modules; exact source,
 runner, toolchain, dependency, command, and output hashes are recorded in
 `fixtures/gold/manifest.json`. It is not represented as source-authored gold.
 
+## TidyCell all-approved-gold XGBoost model package
+
+The paired cell-role and header-direction model custody sources, their metadata,
+and the exact feature extraction port in the local ML hint integration are from
+TidyCell under the MIT License (Copyright (c) 2026 Ian Moran). The full upstream
+MIT text is retained at
+`vendor/tidycell-ml/all-approved-gold-exclusion-v1/TIDYCELL_LICENSE.txt`.
+Exact source, native derivative, conversion, parity, toolchain, cohort, and
+package-closure hashes are recorded in that directory's `manifest.json` and
+`conversion-receipt.json`. Production code loads only native XGBoost JSON and
+never deserializes the retained pickle custody bytes. XGBoost is an optional
+local runtime dependency distributed under the Apache License 2.0.
+
 ## Tidybank
 
 Tidybank commit `6eed7df0c54a53d4680a5a0551655bf6346d4c7d`

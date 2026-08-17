@@ -18,6 +18,14 @@ import {
   runWorker,
   serializeWorkerResult,
 } from "../src/protocol/worker.js";
+import {
+  canonicalDigest,
+  ML_DIRECTION_MODEL_DIGEST,
+  ML_PACKAGE_ID,
+  ML_PACKAGE_MANIFEST_DIGEST,
+  ML_ROLE_MODEL_DIGEST,
+  ML_SOURCE_COHORT_DIGEST,
+} from "../src/prompt/ml/contractsV1.js";
 import { runPrototypeAwareWorker } from "../src/protocol/prototypeSchema.js";
 
 const roots: string[] = [];
@@ -302,6 +310,184 @@ describe("strict worker protocol", () => {
     expect(interpreted.ok).toBe(false);
     if (!interpreted.ok) expect(interpreted.error.stage).toBe("semantic-map");
   });
+
+  it("advertises prototype operations and strictly binds optional ML hints", async () => {
+    const capabilityRoots = await fixtureRoot();
+    const capability = baseRequest();
+    capability.operation = "capabilities";
+    capability.inputs = [];
+    capability.parameters = {};
+    const capabilities = await runPrototypeAwareWorker(
+      capability,
+      capabilityRoots.input,
+      capabilityRoots.output,
+    );
+    expect(capabilities.ok).toBe(true);
+    const capabilityJson = JSON.parse(
+      await readFile(
+        path.join(capabilityRoots.output, "capabilities.json"),
+        "utf8",
+      ),
+    ) as { operations: string[] };
+    expect(capabilityJson.operations).toEqual(
+      expect.arrayContaining([
+        "extract-ml-features-v1",
+        "prepare-semantic-map-v13",
+        "interpret-semantic-map-v13",
+      ]),
+    );
+
+    const workbookBytes = await xlsxWithStructure({ cells: 2 });
+    const extractRoots = await fixtureRoot();
+    const workbook = await writeInput(
+      extractRoots.input,
+      "workbook.xlsx",
+      workbookBytes,
+    );
+    const extract = baseRequest();
+    extract.operation = "extract-ml-features-v1";
+    extract.inputs = [{ name: "workbook", ...workbook }];
+    extract.parameters = { sheet: "Data" };
+    const extracted = await runPrototypeAwareWorker(
+      extract,
+      extractRoots.input,
+      extractRoots.output,
+    );
+    expect(extracted.ok).toBe(true);
+    const featureBytes = await readFile(
+      path.join(extractRoots.output, "ml-features.json"),
+    );
+    const features = JSON.parse(featureBytes.toString("utf8")) as {
+      workbookDigest: string;
+      sheet: string;
+      featureBatchDigest: string;
+      cells: Array<{ address: string }>;
+    };
+    expect(features.workbookDigest).toBe(workbook.contentDigest);
+    expect(features.sheet).toBe("Data");
+
+    const semantic = {
+      schemaVersion: "tidy.ml-hints/v1",
+      workbookDigest: workbook.contentDigest,
+      sheet: "Data",
+      featureBatchDigest: features.featureBatchDigest,
+      packageId: ML_PACKAGE_ID,
+      packageManifestDigest: ML_PACKAGE_MANIFEST_DIGEST,
+      sourceCohortSha256: ML_SOURCE_COHORT_DIGEST,
+      models: {
+        cellRole: ML_ROLE_MODEL_DIGEST,
+        headerDirection: ML_DIRECTION_MODEL_DIGEST,
+      },
+      predictions: features.cells.map((cell) => ({
+        address: cell.address,
+        role: "unused" as const,
+        direction: "N" as const,
+        roleConfidence: 0.75,
+        directionConfidence: 0.75,
+      })),
+    };
+    const hints = { ...semantic, hintDigest: canonicalDigest(semantic) };
+    const prepareRoots = await fixtureRoot();
+    const preparedWorkbook = await writeInput(
+      prepareRoots.input,
+      "workbook.xlsx",
+      workbookBytes,
+    );
+    const featureInput = await writeInput(
+      prepareRoots.input,
+      "ml-features.json",
+      featureBytes,
+    );
+    const hintInput = await writeInput(
+      prepareRoots.input,
+      "ml-hints.json",
+      JSON.stringify(hints),
+    );
+    const prepare = baseRequest();
+    prepare.operation = "prepare-semantic-map-v13";
+    prepare.inputs = [
+      { name: "workbook", ...preparedWorkbook },
+      { name: "ml-features", ...featureInput },
+      { name: "ml-hints", ...hintInput },
+    ];
+    prepare.parameters = { sheet: "Data" };
+    const prepared = await runPrototypeAwareWorker(
+      prepare,
+      prepareRoots.input,
+      prepareRoots.output,
+    );
+    expect(prepared.ok).toBe(true);
+    expect(
+      await readFile(path.join(prepareRoots.output, "prompt.txt"), "utf8"),
+    ).toContain("hints may be wrong");
+
+    for (const invalid of [
+      { ...hints, sheet: "Other" },
+      { ...hints, featureBatchDigest: `sha256:${"0".repeat(64)}` },
+      { ...hints, packageManifestDigest: `sha256:${"0".repeat(64)}` },
+      { ...hints, sourceCohortSha256: `sha256:${"0".repeat(64)}` },
+      {
+        ...hints,
+        models: { ...hints.models, cellRole: `sha256:${"0".repeat(64)}` },
+      },
+    ]) {
+      const invalidRoots = await fixtureRoot();
+      const invalidWorkbook = await writeInput(
+        invalidRoots.input,
+        "workbook.xlsx",
+        workbookBytes,
+      );
+      const invalidFeatures = await writeInput(
+        invalidRoots.input,
+        "ml-features.json",
+        featureBytes,
+      );
+      const invalidHints = await writeInput(
+        invalidRoots.input,
+        "ml-hints.json",
+        JSON.stringify(invalid),
+      );
+      const request = baseRequest();
+      request.operation = "prepare-semantic-map-v13";
+      request.inputs = [
+        { name: "workbook", ...invalidWorkbook },
+        { name: "ml-features", ...invalidFeatures },
+        { name: "ml-hints", ...invalidHints },
+      ];
+      request.parameters = { sheet: "Data" };
+      const result = await runPrototypeAwareWorker(
+        request,
+        invalidRoots.input,
+        invalidRoots.output,
+      );
+      expect(result).toMatchObject({
+        ok: false,
+        error: { code: "ML_HINT_INTEGRITY_INVALID" },
+      });
+    }
+  });
+
+  it("returns the reviewed ML cell boundary as an availability-class domain failure", async () => {
+    const roots = await fixtureRoot();
+    const workbook = await writeInput(
+      roots.input,
+      "workbook.xlsx",
+      await xlsxWithStructure({ cells: 25_001 }),
+    );
+    const request = baseRequest();
+    request.operation = "extract-ml-features-v1";
+    request.inputs = [{ name: "workbook", ...workbook }];
+    request.parameters = { sheet: "Data" };
+    const result = await runPrototypeAwareWorker(
+      request,
+      roots.input,
+      roots.output,
+    );
+    expect(result).toMatchObject({
+      ok: false,
+      error: { code: "ML_CELL_LIMIT_EXCEEDED", stage: "limit" },
+    });
+  }, 30_000);
 
   it("executes a valid semantic map into RecipeV01 evidence", async () => {
     const workbook = new ExcelJS.Workbook();

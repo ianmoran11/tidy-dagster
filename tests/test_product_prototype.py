@@ -1,25 +1,45 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
+import subprocess
+import sys
 from collections import Counter
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import jsonschema
 import pytest
 
 from tidy_orchestrator.artifacts import LocalArtifactRepository, sha256_digest
+from tidy_orchestrator.ml_contract import canonical_digest_v1
+from tidy_orchestrator.ml_gateway import (
+    COHORT_DIGEST,
+    DIRECTION_DIGEST,
+    MANIFEST_SHA256,
+    PACKAGE_ID,
+    ROLE_DIGEST,
+    MlIntegrityError,
+    MlUnavailable,
+)
 from tidy_orchestrator.product_prototype import (
     ProductPrototypeError,
     _cross_year_issues,
+    _prepare_fresh_live_with_ml,
     _validate_cohort,
     _validate_contract,
     evaluate_execution_for_acceptance,
     run_product_prototype,
     verify_live_evidence,
 )
-from tidy_orchestrator.worker import GatewayConfig, WorkerGateway
+from tidy_orchestrator.worker import (
+    GatewayConfig,
+    GatewayInput,
+    WorkerDomainFailure,
+    WorkerGateway,
+)
 
 PROJECT = Path(__file__).parents[1]
 COHORT = (
@@ -51,6 +71,80 @@ CONTRACT = json.loads(
 )
 
 
+class BombMl:
+    def infer(self, _features: bytes) -> dict[str, Any]:
+        raise AssertionError("ML must not be called")
+
+
+class SuccessfulMl:
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def infer(self, feature_bytes: bytes) -> dict[str, Any]:
+        self.calls += 1
+        features = json.loads(feature_bytes)
+        semantic = {
+            "schemaVersion": "tidy.ml-hints/v1",
+            "workbookDigest": features["workbookDigest"],
+            "sheet": features["sheet"],
+            "featureBatchDigest": features["featureBatchDigest"],
+            "packageId": PACKAGE_ID,
+            "packageManifestDigest": "sha256:" + MANIFEST_SHA256,
+            "sourceCohortSha256": COHORT_DIGEST,
+            "models": {
+                "cellRole": ROLE_DIGEST,
+                "headerDirection": DIRECTION_DIGEST,
+            },
+            "predictions": [
+                {
+                    "address": cell["address"],
+                    "role": "unused",
+                    "direction": "N",
+                    "roleConfidence": 0.75,
+                    "directionConfidence": 0.75,
+                }
+                for cell in features["cells"]
+            ],
+        }
+        return {**semantic, "hintDigest": canonical_digest_v1(semantic)}
+
+
+class UnavailableMl:
+    def infer(self, _features: bytes) -> dict[str, Any]:
+        raise MlUnavailable("ML_TIMEOUT", "availability", "test timeout")
+
+
+class IntegrityMl:
+    def infer(self, _features: bytes) -> dict[str, Any]:
+        raise MlIntegrityError("ML_PACKAGE_INTEGRITY", "integrity", "test drift")
+
+
+class FixtureProvider:
+    def __init__(self, restricted_root: Path) -> None:
+        self.restricted_root = restricted_root
+        self.prompts: list[str] = []
+        cohort = json.loads(COHORT.read_text())
+        base = COHORT.parent
+        self.responses = {
+            str(entry["year"]): (base / entry["replayResponse"]["path"]).read_text()
+            for entry in cohort["workbooks"]
+        }
+
+    def dispatch(
+        self, *, prompt: str, work_unit_id: str, ordinal: int, correction: bool = False
+    ) -> SimpleNamespace:
+        del ordinal, correction
+        self.prompts.append(prompt)
+        content = self.responses[work_unit_id]
+        return SimpleNamespace(
+            content=content,
+            attempt_id=sha256_digest(f"attempt:{work_unit_id}".encode()),
+            api_equivalent_usd=0.01,
+            response_digest=sha256_digest(content.encode()),
+            usage={"apiEquivalentUsd": 0.01},
+        )
+
+
 def fake_gateway(repository: LocalArtifactRepository) -> WorkerGateway:
     return WorkerGateway(
         repository,
@@ -63,6 +157,52 @@ def fake_gateway(repository: LocalArtifactRepository) -> WorkerGateway:
             sandbox_mode="insecure-test-only",
         ),
     )
+
+
+def test_replay_runs_when_unix_resource_module_is_unavailable(tmp_path: Path) -> None:
+    script = f"""
+import builtins
+from pathlib import Path
+real_import = builtins.__import__
+def import_without_resource(name, globals=None, locals=None, fromlist=(), level=0):
+    if name == 'resource':
+        raise ModuleNotFoundError("No module named 'resource'", name='resource')
+    return real_import(name, globals, locals, fromlist, level)
+builtins.__import__ = import_without_resource
+from tidy_orchestrator.artifacts import LocalArtifactRepository
+from tidy_orchestrator.product_prototype import run_product_prototype
+from tidy_orchestrator.worker import GatewayConfig, WorkerGateway
+project = Path({str(PROJECT)!r})
+repository = LocalArtifactRepository(Path({str(tmp_path / "portable-repository")!r}))
+node = {str(Path(shutil.which("node") or "").resolve())!r}
+gateway = WorkerGateway(repository, GatewayConfig(
+    command=(node, str(project / 'dist/tidy-domain-worker.cjs')),
+    cwd=project,
+    sandbox_mode='insecure-test-only',
+))
+result = run_product_prototype(
+    repository=repository,
+    project_root=project,
+    cohort_path=Path({str(COHORT)!r}),
+    output_root=Path({str(tmp_path / "portable-output")!r}),
+    mode='replay',
+    gateway=gateway,
+    recorded_at='2026-08-13T21:30:00+00:00',
+)
+assert result.report['providerCalls'] == 0
+"""
+    environment = dict(os.environ)
+    environment["PYTHONPATH"] = str(PROJECT / "src")
+    completed = subprocess.run(
+        [sys.executable, "-c", script],
+        cwd=PROJECT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=120,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def test_checked_live_evidence_binds_three_fresh_luna_results(
@@ -131,6 +271,7 @@ def test_replay_runs_three_real_workbooks_and_collates(tmp_path: Path) -> None:
         output_root=tmp_path / "output",
         mode="replay",
         gateway=fake_gateway(repository),
+        ml_gateway=BombMl(),
         recorded_at="2026-08-13T21:30:00+00:00",
     )
     report = result.report
@@ -173,6 +314,172 @@ def test_replay_runs_three_real_workbooks_and_collates(tmp_path: Path) -> None:
     decisions = repository.list_decisions()
     assert len(decisions) == 3
     assert {item.decision_type for item in decisions} == {"prototype_auto_accepted"}
+
+
+def test_stored_checked_live_responses_never_invoke_ml(tmp_path: Path) -> None:
+    cohort = json.loads(COHORT.read_text())
+    response_root = tmp_path / "stored"
+    attempts: dict[str, dict[str, Any]] = {}
+    for entry in cohort["workbooks"]:
+        year = str(entry["year"])
+        data = (COHORT.parent / entry["replayResponse"]["path"]).read_bytes()
+        target = response_root / year / "response.txt"
+        target.parent.mkdir(parents=True)
+        target.write_bytes(data)
+        attempts[year] = {
+            "attemptId": sha256_digest(f"stored:{year}".encode()),
+            "providerCallCount": 1,
+            "apiEquivalentUsd": 0.01,
+            "responseDigest": sha256_digest(data),
+            "correctionAttempted": False,
+            "correctionSuccessful": False,
+            "model": "openai-codex/gpt-5.6-luna",
+            "reasoning": "high",
+        }
+    repository = LocalArtifactRepository(tmp_path / "repository")
+    result = run_product_prototype(
+        repository=repository,
+        project_root=PROJECT,
+        cohort_path=COHORT,
+        output_root=tmp_path / "output",
+        mode="live",
+        gateway=fake_gateway(repository),
+        recorded_at="2026-08-13T21:30:00+00:00",
+        live_response_root=response_root,
+        live_attempts=attempts,
+        ml_gateway=BombMl(),
+    )
+    assert result.report["providerCalls"] == 3
+    assert result.report["acceptedWorkbookCount"] == 3
+
+
+def test_fresh_live_hints_fallback_integrity_and_downstream_identity(
+    tmp_path: Path,
+) -> None:
+    def run(name: str, ml: Any, provider: FixtureProvider):
+        repository = LocalArtifactRepository(tmp_path / name / "repository")
+        result = run_product_prototype(
+            repository=repository,
+            project_root=PROJECT,
+            cohort_path=COHORT,
+            output_root=tmp_path / name / "output",
+            mode="live",
+            gateway=fake_gateway(repository),
+            recorded_at="2026-08-13T21:30:00+00:00",
+            provider=provider,
+            ml_gateway=ml,
+        )
+        return result, repository
+
+    success_ml = SuccessfulMl()
+    success_provider = FixtureProvider(tmp_path / "success" / "restricted")
+    success, _ = run("success", success_ml, success_provider)
+    fallback_provider = FixtureProvider(tmp_path / "fallback" / "restricted")
+    fallback, fallback_repository = run("fallback", UnavailableMl(), fallback_provider)
+
+    assert success_ml.calls == 3
+    assert len(success_provider.prompts) == len(fallback_provider.prompts) == 3
+    assert all(
+        "BEGIN_LOCAL_ML_HINT_EXTENSION" in prompt for prompt in success_provider.prompts
+    )
+    assert all(
+        "BEGIN_LOCAL_ML_HINT_EXTENSION" not in prompt
+        for prompt in fallback_provider.prompts
+    )
+    assert success.report["providerCalls"] == fallback.report["providerCalls"] == 3
+    assert [
+        item["ml"]["status"] for item in success.report["liveAttempts"].values()
+    ] == ["hinted"] * 3
+    assert [
+        item["ml"]["status"] for item in fallback.report["liveAttempts"].values()
+    ] == ["availability-fallback"] * 3
+
+    # The fallback prompt is exactly the ordinary one-input worker prompt.
+    baseline_prompts = []
+    cohort = json.loads(COHORT.read_text())
+    for entry in cohort["workbooks"]:
+        workbook_bytes = (COHORT.parent / entry["path"]).read_bytes()
+        descriptor = fallback_repository.get_content(sha256_digest(workbook_bytes))
+        execution = fake_gateway(fallback_repository).execute(
+            operation="prepare-semantic-map-v13",
+            inputs=(
+                GatewayInput("workbook", descriptor.content_digest, "workbook.xlsx"),
+            ),
+            parameters={"sheet": entry["sheet"]},
+        )
+        digest = execution.outputs[
+            execution.output_paths.index("prompt.txt")
+        ].content_digest
+        baseline_prompts.append(
+            fallback_repository.read_bytes_verified(digest).decode()
+        )
+    assert fallback_provider.prompts == baseline_prompts
+
+    for hinted, unhinted in zip(
+        success.report["workbooks"], fallback.report["workbooks"], strict=True
+    ):
+        assert hinted["interpretDerivationId"] == unhinted["interpretDerivationId"]
+        assert hinted["decisionId"] == unhinted["decisionId"]
+        assert hinted["checks"] == unhinted["checks"]
+        assert hinted["observationCount"] == unhinted["observationCount"]
+
+    integrity_provider = FixtureProvider(tmp_path / "integrity" / "restricted")
+    with pytest.raises(MlIntegrityError, match="test drift"):
+        run("integrity", IntegrityMl(), integrity_provider)
+    assert integrity_provider.prompts == []
+
+
+def test_ml_cell_limit_falls_back_before_provider_dispatch(tmp_path: Path) -> None:
+    baseline = object()
+
+    class LimitGateway:
+        def __init__(self) -> None:
+            self.operations: list[str] = []
+
+        def execute(self, *, operation: str, **_kwargs: Any) -> Any:
+            self.operations.append(operation)
+            if operation == "extract-ml-features-v1":
+                raise WorkerDomainFailure(
+                    {
+                        "code": "ML_CELL_LIMIT_EXCEEDED",
+                        "stage": "limit",
+                        "message": "reviewed ML boundary",
+                    }
+                )
+            assert operation == "prepare-semantic-map-v13"
+            return baseline
+
+    gateway = LimitGateway()
+    prepared, record = _prepare_fresh_live_with_ml(
+        repository=LocalArtifactRepository(tmp_path / "repository"),
+        gateway=gateway,  # type: ignore[arg-type]
+        ml_gateway=BombMl(),  # type: ignore[arg-type]
+        workbook=SimpleNamespace(content_digest="sha256:" + "1" * 64),
+        sheet="Data",
+        worker_limits={},
+    )
+    assert prepared is baseline
+    assert record["status"] == "availability-fallback"
+    assert record["code"] == "ML_CELL_LIMIT_EXCEEDED"
+    assert gateway.operations == [
+        "extract-ml-features-v1",
+        "prepare-semantic-map-v13",
+    ]
+
+
+def test_ml_fields_cannot_satisfy_or_suppress_acceptance_checks() -> None:
+    execution, recipe, entry = valid_execution()
+    invalid = {**execution, "tables": [], "mlHintsAccepted": True, "mlConfidence": 1}
+    rows, issues, checks = evaluate_execution_for_acceptance(
+        execution=invalid,
+        recipe={**recipe, "mlHintsAccepted": True},
+        contract=CONTRACT,
+        entry=entry,
+        recipe_digest="sha256:" + "1" * 64,
+    )
+    assert rows == ()
+    assert issues
+    assert checks["interpretation"] is True
 
 
 def test_replay_extends_table_30_to_five_years(tmp_path: Path) -> None:

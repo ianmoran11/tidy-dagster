@@ -1,5 +1,16 @@
 # tidy-dagster
 
+## Fresh-live local ML hints
+
+New provider-backed live semantic-map generation uses the vendored local
+TidyCell XGBoost hint pair by default. Replay and checked historical-response
+paths never invoke ML and retain their exact baseline prompt/output behavior.
+Availability failures fall back to that same baseline prompt; integrity failures
+stop before any provider call. Hints are explicitly non-authoritative and never
+enter interpretation, RecipeV01, execution, acceptance, decisions, dashboards,
+or Dagster authority. See `docs/adr-local-ml-hints.md` for the package custody,
+sandbox, contracts, provenance, and practical bounds.
+
 ## End-to-end spreadsheet product prototype
 
 The replay-first product slice processes the *Prisoners in Australia* Table 30

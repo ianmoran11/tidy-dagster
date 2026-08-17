@@ -11,6 +11,17 @@ import {
   buildSemanticMapV13Prompt,
   formatSemanticMapCorrectionDiagnostics,
 } from "../prompt/semanticMapV13.js";
+import { extractCellFeatures } from "../prompt/ml/featuresV1.js";
+import {
+  canonicalDigest,
+  encodeModelFeatures,
+  MAX_ML_CELLS,
+  ML_FEATURE_SCHEMA,
+  ML_PACKAGE_ID,
+  validateMlFeatureBatch,
+  validateMlHints,
+} from "../prompt/ml/contractsV1.js";
+import { appendMlHintExtension } from "../prompt/ml/semanticMapHintsV1.js";
 import {
   buildCompactContextSnapshot,
   buildCompactSemanticContext,
@@ -43,7 +54,10 @@ export type PrototypeWorkerRequest = Omit<
   import("./worker.js").WorkerRequest,
   "operation" | "parameters"
 > & {
-  operation: "prepare-semantic-map-v13" | "interpret-semantic-map-v13";
+  operation:
+    | "extract-ml-features-v1"
+    | "prepare-semantic-map-v13"
+    | "interpret-semantic-map-v13";
   parameters: {
     sheet?: string;
     correction?: boolean;
@@ -75,14 +89,23 @@ export async function prepareSemanticMapV13(
       "protocol",
       "prepare-semantic-map-v13 requires exactly the sheet parameter.",
     );
-  if (request.inputs.length !== 1 || request.inputs[0]?.name !== "workbook")
+  const inputByName = new Map(
+    request.inputs.map((input) => [input.name, input]),
+  );
+  if (
+    inputByName.size !== request.inputs.length ||
+    !inputByName.has("workbook") ||
+    (request.inputs.length === 3 &&
+      (!inputByName.has("ml-features") || !inputByName.has("ml-hints"))) ||
+    (request.inputs.length !== 1 && request.inputs.length !== 3)
+  )
     return failure(
       request.requestId,
       "INVALID_INPUT_MANIFEST",
       "input",
-      "prepare-semantic-map-v13 requires exactly the workbook input.",
+      "prepare-semantic-map-v13 requires workbook and optional paired ml-features/ml-hints inputs.",
     );
-  const workbookInput = request.inputs[0];
+  const workbookInput = inputByName.get("workbook")!;
   if (workbookInput.byteLength > request.limits.maxWorkbookCompressedBytes)
     throw new ProtocolError(
       "WORKBOOK_COMPRESSED_LIMIT_EXCEEDED",
@@ -120,7 +143,40 @@ export async function prepareSemanticMapV13(
     formattingFacts,
     cellDataFacts,
   });
-  const prompt = buildSemanticMapV13Prompt(snapshot, catalog);
+  const baselinePrompt = buildSemanticMapV13Prompt(snapshot, catalog);
+  let prompt = baselinePrompt;
+  if (inputByName.has("ml-hints")) {
+    try {
+      const featureBytes = await readVerifiedInput(
+        inputRoot,
+        inputByName.get("ml-features")!,
+      );
+      const features = validateMlFeatureBatch(
+        JSON.parse(featureBytes.toString("utf8")),
+        workbookInput.contentDigest,
+        sheet.name,
+      );
+      const hintBytes = await readVerifiedInput(
+        inputRoot,
+        inputByName.get("ml-hints")!,
+      );
+      const hints = validateMlHints(
+        JSON.parse(hintBytes.toString("utf8")),
+        workbookInput.contentDigest,
+        sheet.name,
+        features.featureBatchDigest,
+        features.cells.map((cell) => cell.address),
+      );
+      prompt = appendMlHintExtension(baselinePrompt, hints);
+    } catch (error) {
+      return failure(
+        request.requestId,
+        "ML_HINT_INTEGRITY_INVALID",
+        "prompt",
+        error instanceof Error ? error.message : "ML hints are invalid.",
+      );
+    }
+  }
   return await publish(request, roots, [
     {
       name: "sheet-summary.json",
@@ -141,6 +197,75 @@ export async function prepareSemanticMapV13(
       name: "prompt.txt",
       relativePath: "prompt.txt",
       render: () => Buffer.from(prompt, "utf8"),
+    },
+  ]);
+}
+
+export async function extractMlFeaturesV1(
+  request: PrototypeWorkerRequest,
+  roots: RootContext,
+  inputRoot: string,
+): Promise<WorkerResult> {
+  if (!request.parameters.sheet || Object.keys(request.parameters).length !== 1)
+    return failure(
+      request.requestId,
+      "INVALID_PARAMETERS",
+      "protocol",
+      "extract-ml-features-v1 requires exactly the sheet parameter.",
+    );
+  if (request.inputs.length !== 1 || request.inputs[0]?.name !== "workbook")
+    return failure(
+      request.requestId,
+      "INVALID_INPUT_MANIFEST",
+      "input",
+      "extract-ml-features-v1 requires exactly the workbook input.",
+    );
+  const workbookInput = request.inputs[0];
+  const workbookBytes = await readVerifiedInput(inputRoot, workbookInput);
+  await preflightXlsxZip(workbookBytes, request.limits);
+  const parsed = await parseWorkbook(workbookBytes);
+  if (!parsed.ok)
+    return failure(
+      request.requestId,
+      "INVALID_WORKBOOK",
+      "parse",
+      "Workbook parsing failed.",
+    );
+  enforceWorkbookLimits(parsed.workbook, request.limits);
+  const sheet = parsed.workbook.sheets.find(
+    (item) => item.name === request.parameters.sheet,
+  );
+  if (!sheet)
+    return failure(
+      request.requestId,
+      "SHEET_NOT_FOUND",
+      "parse",
+      "Requested sheet was not found.",
+    );
+  if (sheet.cells.length > MAX_ML_CELLS)
+    return failure(
+      request.requestId,
+      "ML_CELL_LIMIT_EXCEEDED",
+      "limit",
+      `ML extraction is limited to ${MAX_ML_CELLS} explicit cells.`,
+    );
+  const cells = extractCellFeatures(sheet).map((feature) => ({
+    address: feature.address,
+    ...encodeModelFeatures(feature),
+  }));
+  const semantic = {
+    schemaVersion: ML_FEATURE_SCHEMA,
+    workbookDigest: workbookInput.contentDigest,
+    sheet: sheet.name,
+    packageId: ML_PACKAGE_ID,
+    cells,
+  };
+  const batch = { ...semantic, featureBatchDigest: canonicalDigest(semantic) };
+  return await publish(request, roots, [
+    {
+      name: "ml-features.json",
+      relativePath: "ml-features.json",
+      render: () => jsonBytes(batch),
     },
   ]);
 }

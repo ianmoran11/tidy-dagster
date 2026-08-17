@@ -6,7 +6,6 @@ import contextlib
 import json
 import os
 import re
-import resource
 import shutil
 import signal
 import stat
@@ -19,6 +18,11 @@ from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
+
+try:
+    import resource
+except ImportError:  # pragma: no cover - exercised in an isolated import test
+    resource = None  # type: ignore[assignment]
 
 from .artifacts import (
     ContentDescriptor,
@@ -155,7 +159,8 @@ class WorkerGateway:
 
     Production mode is currently macOS-only: Seatbelt denies network, process
     forks, and writes outside the private run root. The explicitly named
-    insecure test mode provides only POSIX process-group and rlimit controls.
+    insecure test mode uses POSIX process-group and rlimit controls where
+    available and remains usable for provider-free replay on other platforms.
     """
 
     def __init__(
@@ -165,8 +170,6 @@ class WorkerGateway:
         *,
         fault_injector: Callable[[str], None] | None = None,
     ) -> None:
-        if os.name != "posix":
-            raise RuntimeError("WorkerGateway process-tree guarantees are POSIX-only")
         self.repository = repository
         self.config = config
         self._fault = fault_injector
@@ -183,6 +186,7 @@ class WorkerGateway:
             "health",
             "capabilities",
             "execute-recipe-v01",
+            "extract-ml-features-v1",
             "prepare-semantic-map-v13",
             "interpret-semantic-map-v13",
         }:
@@ -191,7 +195,12 @@ class WorkerGateway:
             )
         minimum_inputs = (
             1
-            if operation in {"execute-recipe-v01", "prepare-semantic-map-v13"}
+            if operation
+            in {
+                "execute-recipe-v01",
+                "extract-ml-features-v1",
+                "prepare-semantic-map-v13",
+            }
             else 2
             if operation == "interpret-semantic-map-v13"
             else 0
@@ -403,8 +412,11 @@ class WorkerGateway:
                     stdout=stdout,
                     stderr=stderr,
                     close_fds=True,
-                    start_new_session=True,
-                    preexec_fn=self._apply_limits,
+                    start_new_session=os.name == "posix",
+                    preexec_fn=self._apply_limits if os.name == "posix" else None,
+                    creationflags=(
+                        subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
+                    ),
                 )
                 return_code = self._wait_bounded(
                     process, output_root, stdout_path, stderr_path
@@ -573,7 +585,7 @@ class WorkerGateway:
                 _terminate_process_group(process, self.config.termination_grace_seconds)
                 raise violation
             if return_code is not None:
-                if _process_group_exists(process.pid):
+                if os.name == "posix" and _process_group_exists(process.pid):
                     _terminate_process_group(
                         process, self.config.termination_grace_seconds
                     )
@@ -645,6 +657,8 @@ class WorkerGateway:
         }
 
     def _apply_limits(self) -> None:
+        if resource is None:
+            return
         limits = [
             (resource.RLIMIT_AS, self.config.address_space_bytes),
             (resource.RLIMIT_CPU, self.config.cpu_seconds),
@@ -1196,6 +1210,17 @@ def _write_private(path: Path, data: bytes, *, mode: int) -> None:
 
 
 def _terminate_process_group(process: subprocess.Popen[bytes], grace: float) -> None:
+    if os.name != "posix":
+        with contextlib.suppress(ProcessLookupError, PermissionError):
+            process.terminate()
+        try:
+            process.wait(timeout=grace)
+        except subprocess.TimeoutExpired:
+            with contextlib.suppress(ProcessLookupError, PermissionError):
+                process.kill()
+            with contextlib.suppress(subprocess.TimeoutExpired):
+                process.wait(timeout=max(grace, 1.0))
+        return
     process_group = process.pid
     with contextlib.suppress(ProcessLookupError, PermissionError):
         os.killpg(process_group, signal.SIGTERM)

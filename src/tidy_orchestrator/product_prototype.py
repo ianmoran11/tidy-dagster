@@ -21,8 +21,18 @@ from .artifacts import (
     domain_digest,
     sha256_digest,
 )
+from .ml_gateway import (
+    MlGateway,
+    MlUnavailable,
+    actual_ml_gateway,
+)
 from .provider_gateway import AuthorizedPiProvider
-from .worker import GatewayExecution, GatewayInput, WorkerGateway
+from .worker import (
+    GatewayExecution,
+    GatewayInput,
+    WorkerDomainFailure,
+    WorkerGateway,
+)
 
 COHORT_SCHEMA = "tidy.product-prototype-cohort/v1"
 ACCEPTANCE_SCHEMA = "tidy.table-family-acceptance/v1"
@@ -487,6 +497,7 @@ def run_product_prototype(
     live_response_root: Path | None = None,
     live_attempts: dict[int | str, dict[str, Any]] | None = None,
     provider: AuthorizedPiProvider | None = None,
+    ml_gateway: MlGateway | None = None,
     acceptance_execution_mutator: Any | None = None,
 ) -> PrototypeRun:
     """Run the exact cohort from saved replay or freshly dispatched responses."""
@@ -555,6 +566,7 @@ def run_product_prototype(
             mode=mode,
             live_response_root=live_response_root,
             provider=provider,
+            ml_gateway=ml_gateway,
             live_attempt=_attempt_for_year(live_attempts, int(entry["year"])),
             dispatch_ordinal=2 * workbook_index + 1,
             worker_limits=worker_limits,
@@ -694,6 +706,7 @@ def _prepare_one(
     mode: str,
     live_response_root: Path | None,
     provider: AuthorizedPiProvider | None,
+    ml_gateway: MlGateway | None,
     live_attempt: dict[str, Any] | None,
     dispatch_ordinal: int,
     worker_limits: dict[str, int],
@@ -745,12 +758,27 @@ def _prepare_one(
         timestamp=timestamp,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
-    prepare = gateway.execute(
-        operation="prepare-semantic-map-v13",
-        inputs=(GatewayInput("workbook", workbook.content_digest, "workbook.xlsx"),),
-        parameters={"sheet": entry["sheet"]},
-        limits=worker_limits,
-    )
+    ml_record: dict[str, Any] | None = None
+    if provider is not None:
+        prepare, ml_record = _prepare_fresh_live_with_ml(
+            repository=repository,
+            gateway=gateway,
+            ml_gateway=ml_gateway or actual_ml_gateway(project),
+            workbook=workbook,
+            sheet=str(entry["sheet"]),
+            worker_limits=worker_limits,
+        )
+    else:
+        # Replay and checked stored-live responses retain their exact historical
+        # one-input derivation and prompt bytes and never construct an ML gateway.
+        prepare = gateway.execute(
+            operation="prepare-semantic-map-v13",
+            inputs=(
+                GatewayInput("workbook", workbook.content_digest, "workbook.xlsx"),
+            ),
+            parameters={"sheet": entry["sheet"]},
+            limits=worker_limits,
+        )
     if provider is not None:
         prompt = repository.read_bytes_verified(
             _output_digest(prepare, "prompt.txt")
@@ -772,6 +800,7 @@ def _prepare_one(
             "correctionSuccessful": False,
             "model": MODEL,
             "reasoning": "high",
+            "ml": ml_record,
         }
     response = _store_source(
         repository,
@@ -785,6 +814,99 @@ def _prepare_one(
         classification=response_classification,
     )
     return _PreparedWorkbook(entry, workbook, response, prepare, provider_attempt)
+
+
+def _prepare_fresh_live_with_ml(
+    *,
+    repository: LocalArtifactRepository,
+    gateway: WorkerGateway,
+    ml_gateway: MlGateway,
+    workbook: ContentDescriptor,
+    sheet: str,
+    worker_limits: dict[str, int],
+) -> tuple[GatewayExecution, dict[str, Any]]:
+    try:
+        extracted = gateway.execute(
+            operation="extract-ml-features-v1",
+            inputs=(
+                GatewayInput("workbook", workbook.content_digest, "workbook.xlsx"),
+            ),
+            parameters={"sheet": sheet},
+            limits=worker_limits,
+        )
+    except WorkerDomainFailure as error:
+        if error.code != "ML_CELL_LIMIT_EXCEEDED":
+            raise
+        baseline = gateway.execute(
+            operation="prepare-semantic-map-v13",
+            inputs=(
+                GatewayInput("workbook", workbook.content_digest, "workbook.xlsx"),
+            ),
+            parameters={"sheet": sheet},
+            limits=worker_limits,
+        )
+        return baseline, {
+            "schemaVersion": "tidy.live-ml-provenance/v1",
+            "status": "availability-fallback",
+            "code": error.code,
+            "featureBatchDigest": None,
+            "workbookDigest": workbook.content_digest,
+            "sheet": sheet,
+            "providerCallsAdded": 0,
+        }
+    feature_digest = _output_digest(extracted, "ml-features.json")
+    feature_bytes = repository.read_bytes_verified(feature_digest)
+    feature_batch = _load_object(feature_bytes, "ML feature batch")
+    try:
+        hints = ml_gateway.infer(feature_bytes)
+    except MlUnavailable as error:
+        baseline = gateway.execute(
+            operation="prepare-semantic-map-v13",
+            inputs=(
+                GatewayInput("workbook", workbook.content_digest, "workbook.xlsx"),
+            ),
+            parameters={"sheet": sheet},
+            limits=worker_limits,
+        )
+        return baseline, {
+            "schemaVersion": "tidy.live-ml-provenance/v1",
+            "status": "availability-fallback",
+            "code": error.code,
+            "featureBatchDigest": feature_batch.get("featureBatchDigest"),
+            "workbookDigest": workbook.content_digest,
+            "sheet": sheet,
+            "providerCallsAdded": 0,
+        }
+    hint_bytes = canonical_json_bytes(hints)
+    hint_descriptor = repository.put_bytes(
+        hint_bytes,
+        kind="local-ml-hints",
+        schema_version="tidy.ml-hints/v1",
+        media_type="application/json",
+    )
+    prepared = gateway.execute(
+        operation="prepare-semantic-map-v13",
+        inputs=(
+            GatewayInput("workbook", workbook.content_digest, "workbook.xlsx"),
+            GatewayInput("ml-features", feature_digest, "ml-features.json"),
+            GatewayInput("ml-hints", hint_descriptor.content_digest, "ml-hints.json"),
+        ),
+        parameters={"sheet": sheet},
+        limits=worker_limits,
+    )
+    return prepared, {
+        "schemaVersion": "tidy.live-ml-provenance/v1",
+        "status": "hinted",
+        "packageId": hints.get("packageId"),
+        "packageManifestDigest": hints.get("packageManifestDigest"),
+        "sourceCohortSha256": hints.get("sourceCohortSha256"),
+        "models": hints.get("models"),
+        "featureBatchDigest": hints.get("featureBatchDigest"),
+        "hintDigest": hints.get("hintDigest"),
+        "workbookDigest": workbook.content_digest,
+        "sheet": sheet,
+        "providerCallsAdded": 0,
+    }
 
 
 def _interpret_accept_one(
