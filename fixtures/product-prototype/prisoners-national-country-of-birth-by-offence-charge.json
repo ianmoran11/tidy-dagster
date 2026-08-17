@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-national-country-of-birth-by-offence-charge",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "national-country-of-birth-by-offence-charge",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-national-country-of-birth-by-offence-charge-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-national-source.xlsx",
+      "contentDigest": "sha256:264b018d9ab5584ebc44774cf349283c072b0eb1304a0b865dadffe40d5d2d7a",
+      "byteLength": 195239,
+      "sheet": "Table_7",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-table-7-2021.response.txt",
+        "contentDigest": "sha256:182338bae81a3cb317f34cb5f2da65eb4668ec41ec43484cb52a2a7075b965bd",
+        "byteLength": 437,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-national-source.xlsx",
+      "contentDigest": "sha256:0b6f14ccf90fded702181e26e023262afbb01016986c630e8bf27648fd7828be",
+      "byteLength": 212754,
+      "sheet": "Table_7",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-table-7-2022.response.txt",
+        "contentDigest": "sha256:1fb5d7a37d6e9d0c81e0adc1b6b97669797163710250fab8ac2b8ad635a871f9",
+        "byteLength": 437,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-national-source.xlsx",
+      "contentDigest": "sha256:6e640bf65399eaa405e48acda86be9403bc2b8196ff2ccd926906a2e76527e2b",
+      "byteLength": 209379,
+      "sheet": "Table_7",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-table-7-2023.response.txt",
+        "contentDigest": "sha256:f89a5d0a5aede1dd0c15e29e4b104c4e17a84aa4e2151d9eceae82e438da37a6",
+        "byteLength": 437,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024-national-source.xlsx",
+      "contentDigest": "sha256:23f0677e705e9bf88bf4cffed42d1f263772dd38bd2409d2a000d1f9fc79667e",
+      "byteLength": 180975,
+      "sheet": "Table 7",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-table-7-2024.response.txt",
+        "contentDigest": "sha256:34a894904d7709a372697db7aaaaa49bb7efd024d2199afdea75240ac290f165",
+        "byteLength": 437,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-national-snapshots-bounded.xlsx",
+      "contentDigest": "sha256:d6e2f3e3e2a7a86b990fd89066e8f5f3d4bea5d2d217925083d27eb3a36a021a",
+      "byteLength": 115314,
+      "sheet": "Table 8",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-table-8-2025.response.txt",
+        "contentDigest": "sha256:62d7612e3898c06b9b1a1ed54e40e971231fe0bf5a41dd21bbf85551dc7d5f8f",
+        "byteLength": 437,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-full-width-formatting-merge-v1"
+    }
+  ]
+}

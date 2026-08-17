@@ -19,9 +19,9 @@ The Prisoners release inventory, family crosswalk, and membership manifest are
 a source-custody and completeness foundation only. They bind the five annual
 guides, 17 substantive source cubes, and all 203 numbered data sheets without
 claiming semantic extraction for every sheet. Canonical extraction covers
-109/203 members, with 94 members pending reviewed semantic contracts. The five
-state/territory cohorts are registered dynamically in the status snapshot,
-Dagster assets, and dashboard totals. The provider-free custody check is runnable as
+134/203 members, with 69 members pending reviewed semantic contracts. The five
+state/territory and five national snapshot cohorts are registered dynamically in
+the status snapshot, Dagster assets, and dashboard totals. The provider-free custody check is runnable as
 `scripts/tidy-prisoners-release verify`.
 
 The completed safe live-evidence closure is at
@@ -88,7 +88,7 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 104-worksheet cross-publication batch extends the same v1 contract without
+The 129-worksheet cross-publication batch extends the same v1 contract without
 weakening existing cohorts:
 
 - multi-measure selection may use an AND conjunction across several dimensions;
@@ -101,14 +101,17 @@ weakening existing cohorts:
   `referenceDateDimension` and `preservePublicationVintage`, making publication
   vintage and row-level observation date separate canonical key fields;
 - `preserveRawValueText` is opt-in for reviewed marker-bearing families and
-  retains the exact published marker beside its canonical null status; and
+  retains the exact published marker beside its canonical null status;
+- `strictAliasMatching` prevents unreviewed footnote-suffix inference, while
+  `excludeMissingValues` accounts for reviewed non-observation markers; and
 - cohort normalization now also recognizes
-  `trim-pathological-styled-blank-cells-v1`, which trims out-of-range styled
-  blanks and pathological merge/column formatting while refusing to remove
+  `trim-pathological-styled-blank-cells-v1` and the reviewed full-width
+  formatting variant, which trim out-of-range styled blanks and pathological
+  merge/column formatting while refusing to remove
   cell values or formulas.
 
 The batch registry is
-`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 22
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 27
 contracts pins exact annual dimensions, measure applicability, value statuses,
 combination counts, and source-header variants. Verification remains
 provider-free:

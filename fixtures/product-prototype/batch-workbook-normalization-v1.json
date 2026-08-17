@@ -1,6 +1,5 @@
 {
   "schemaVersion": "tidy.product-prototype-workbook-normalization/v1",
-  "normalization": "trim-pathological-styled-blank-cells-v1",
   "recordedAt": "2026-08-16T11:30:00+00:00",
   "scriptPath": "scripts/trim-prototype-workbook-formatting.py",
   "scriptDigest": "sha256:489859dad4e38248deedf5713032ec8ab05d6a5d3a90097072a42136c4d25e24",
@@ -19,7 +18,8 @@
           "retainedRange": "A1:B190"
         }
       ],
-      "correction": null
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
       "year": 2022,
@@ -35,7 +35,8 @@
           "retainedRange": "A1:B192"
         }
       ],
-      "correction": null
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
       "year": 2023,
@@ -51,7 +52,8 @@
           "retainedRange": "A1:B189"
         }
       ],
-      "correction": null
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
       "year": 2025,
@@ -83,7 +85,8 @@
           "retainedRange": "A1:B191"
         }
       ],
-      "correction": null
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
       "year": 2021,
@@ -115,7 +118,8 @@
           "retainedRange": "A1:AC66"
         }
       ],
-      "correction": null
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
       "year": 2022,
@@ -147,7 +151,8 @@
           "retainedRange": "A1:AE76"
         }
       ],
-      "correction": null
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
       "year": 2023,
@@ -191,7 +196,8 @@
           }
         ],
         "reason": "Remove a zero-valued cell outside the Table 5 semantic data region; preserve the exact source separately."
-      }
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
       "year": 2024,
@@ -242,11 +248,33 @@
           }
         ],
         "reason": "Remove isolated values outside the Tables 4 and 5 semantic data regions; preserve the exact source separately."
-      }
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2025,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2025-national-source.xlsx",
+      "sourceDigest": "sha256:28af3897513142d7080f02a0cee4a21d763f1b633aaf8e0cee9e53561f0a317c",
+      "sourceByteLength": 125447,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2025-national-snapshots-bounded.xlsx",
+      "outputDigest": "sha256:d6e2f3e3e2a7a86b990fd89066e8f5f3d4bea5d2d217925083d27eb3a36a021a",
+      "outputByteLength": 115314,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 7",
+          "retainedRange": "A1:R25"
+        },
+        {
+          "sheet": "Table 8",
+          "retainedRange": "A1:R28"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-full-width-formatting-merge-v1"
     }
   ],
   "inRangeValuesChanged": true,
   "correctionScriptPath": "scripts/correct-known-workbook-artifacts.py",
   "correctionScriptDigest": "sha256:8dec705a2f80451836111aba77ad4b873bae15baf19d4906e7a385e9fdbb2e9c",
-  "manifestDigest": "sha256:3e5884f9613fadcb1d44b64883527a77c6b9c838d70237b41b30ddc2ce673624"
+  "manifestDigest": "sha256:0dbb65d75e47a7c980b6ea926e2ccd01228b7731c2a3edad20ca3ab2e9659ab3"
 }

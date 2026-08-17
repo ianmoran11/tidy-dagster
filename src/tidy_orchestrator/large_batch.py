@@ -61,6 +61,8 @@ class LargeBatchSpec:
     expected_years: tuple[int, ...]
     expected_year_counts: tuple[int, ...]
     expected_canonical_count: int
+    expected_excluded_observation_count: int
+    expected_excluded_observation_counts_by_year: dict[int, int]
     expected_measure_counts: dict[str, int]
     expected_value_status_counts: dict[str, int]
     expected_manual_replay_years: tuple[int, ...]
@@ -164,6 +166,8 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
         "expectedYears",
         "expectedYearCounts",
         "expectedCanonicalCount",
+        "expectedExcludedObservationCount",
+        "expectedExcludedObservationCountsByYear",
         "expectedMeasureCounts",
         "expectedValueStatusCounts",
         "expectedManualReplayYears",
@@ -178,6 +182,7 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
         manual_years = item.get("expectedManualReplayYears")
         measure_counts = _positive_counts(item.get("expectedMeasureCounts"))
         status_counts = _positive_counts(item.get("expectedValueStatusCounts"))
+        excluded_counts = item.get("expectedExcludedObservationCountsByYear")
         strings = (
             "familyId",
             "label",
@@ -208,6 +213,16 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
             or isinstance(item.get("expectedCanonicalCount"), bool)
             or not isinstance(item.get("expectedCanonicalCount"), int)
             or item["expectedCanonicalCount"] != sum(year_counts)
+            or isinstance(item.get("expectedExcludedObservationCount"), bool)
+            or not isinstance(item.get("expectedExcludedObservationCount"), int)
+            or item["expectedExcludedObservationCount"] < 0
+            or not isinstance(excluded_counts, dict)
+            or set(excluded_counts) != {str(year) for year in years}
+            or any(
+                isinstance(count, bool) or not isinstance(count, int) or count < 0
+                for count in excluded_counts.values()
+            )
+            or sum(excluded_counts.values()) != item["expectedExcludedObservationCount"]
             or measure_counts is None
             or sum(measure_counts.values()) != item["expectedCanonicalCount"]
             or status_counts is None
@@ -234,6 +249,12 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
                 expected_years=tuple(years),
                 expected_year_counts=tuple(year_counts),
                 expected_canonical_count=item["expectedCanonicalCount"],
+                expected_excluded_observation_count=item[
+                    "expectedExcludedObservationCount"
+                ],
+                expected_excluded_observation_counts_by_year={
+                    year: excluded_counts[str(year)] for year in years
+                },
                 expected_measure_counts=measure_counts,
                 expected_value_status_counts=status_counts,
                 expected_manual_replay_years=tuple(manual_years),
@@ -275,7 +296,6 @@ def verify_batch_normalization(
     manifest = _load_object(path, "normalization manifest")
     expected_keys = {
         "schemaVersion",
-        "normalization",
         "recordedAt",
         "scriptPath",
         "scriptDigest",
@@ -291,7 +311,6 @@ def verify_batch_normalization(
     if (
         set(manifest) != expected_keys
         or manifest.get("schemaVersion") != NORMALIZATION_SCHEMA
-        or manifest.get("normalization") != "trim-pathological-styled-blank-cells-v1"
         or not isinstance(manifest.get("recordedAt"), str)
         or not isinstance(manifest.get("inRangeValuesChanged"), bool)
         or manifest.get("manifestDigest")
@@ -317,9 +336,10 @@ def verify_batch_normalization(
     ):
         raise LargeBatchError("Normalization script digest mismatch")
 
-    outputs: dict[str, tuple[int, str, int]] = {}
+    outputs: dict[str, tuple[str, int, str, int]] = {}
     in_range_values_changed = False
     entry_keys = {
+        "normalization",
         "year",
         "sourcePath",
         "sourceDigest",
@@ -334,6 +354,8 @@ def verify_batch_normalization(
         if (
             not isinstance(entry, dict)
             or set(entry) != entry_keys
+            or not isinstance(entry.get("normalization"), str)
+            or not entry["normalization"]
             or isinstance(entry.get("year"), bool)
             or not isinstance(entry.get("year"), int)
             or not isinstance(entry.get("sourcePath"), str)
@@ -498,6 +520,7 @@ def verify_batch_normalization(
         if entry["outputPath"] in outputs:
             raise LargeBatchError("Normalization manifest repeats an output path")
         outputs[entry["outputPath"]] = (
+            entry["normalization"],
             entry["year"],
             entry["outputDigest"],
             entry["outputByteLength"],
@@ -529,12 +552,13 @@ def verify_batch_normalization(
                     )
                 continue
             if (
-                workbook.get("normalization")
-                != "trim-pathological-styled-blank-cells-v1"
+                not isinstance(workbook.get("normalization"), str)
+                or not workbook["normalization"]
             ):
                 raise LargeBatchError("Large-batch workbook normalization is invalid")
             expected = outputs.get(relative_output)
             if expected != (
+                workbook["normalization"],
                 workbook.get("year"),
                 workbook.get("contentDigest"),
                 workbook.get("byteLength"),
@@ -611,9 +635,11 @@ def verify_large_batch_evidence(
         or manifest.get("providerCalls") != 0
         or manifest.get("acceptedWorkbookCount") != len(spec.expected_years)
         or manifest.get("exceptionWorkbookCount") != 0
-        or manifest.get("excludedObservationCount") != 0
+        or manifest.get("excludedObservationCount")
+        != spec.expected_excluded_observation_count
         or manifest.get("canonicalObservationCount") != spec.expected_canonical_count
-        or manifest.get("rawObservationCount") != spec.expected_canonical_count
+        or manifest.get("rawObservationCount")
+        != spec.expected_canonical_count + spec.expected_excluded_observation_count
         or manifest.get("measureCounts") != spec.expected_measure_counts
         or manifest.get("valueStatusCounts") != spec.expected_value_status_counts
         or manifest.get("manualReplayYears") != list(spec.expected_manual_replay_years)
@@ -687,6 +713,19 @@ def verify_large_batch_evidence(
     run = _load_object(root / "run.json", "large-batch run")
     semantic = dict(run)
     run_digest = semantic.pop("runDigest", None)
+    run_workbooks = run.get("workbooks")
+    workbook_claims_valid = isinstance(run_workbooks, list) and all(
+        isinstance(item, dict) for item in run_workbooks
+    )
+    observed_excluded_counts = (
+        [item.get("excludedObservationCount") for item in run_workbooks]
+        if workbook_claims_valid
+        else []
+    )
+    expected_excluded_counts = [
+        spec.expected_excluded_observation_counts_by_year[year]
+        for year in spec.expected_years
+    ]
     if (
         run_digest != domain_digest(RUN_SCHEMA, semantic)
         or run_digest != manifest["runDigest"]
@@ -697,13 +736,18 @@ def verify_large_batch_evidence(
         or run.get("exceptionWorkbookCount") != 0
         or run.get("canonicalObservationCount") != spec.expected_canonical_count
         or run.get("crossYearIssues") != []
-        or [item.get("year") for item in run.get("workbooks", [])]
-        != list(spec.expected_years)
-        or [item.get("observationCount") for item in run.get("workbooks", [])]
+        or not workbook_claims_valid
+        or [item.get("year") for item in run_workbooks] != list(spec.expected_years)
+        or [item.get("observationCount") for item in run_workbooks]
         != list(spec.expected_year_counts)
         or any(
+            isinstance(count, bool) or not isinstance(count, int) or count < 0
+            for count in observed_excluded_counts
+        )
+        or observed_excluded_counts != expected_excluded_counts
+        or sum(observed_excluded_counts) != spec.expected_excluded_observation_count
+        or any(
             item.get("decision") != "prototype_auto_accepted"
-            or item.get("excludedObservationCount") != 0
             or not all(item.get("checks", {}).values())
             or item.get("issues") != []
             for item in run.get("workbooks", [])

@@ -1,0 +1,615 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-national-age-by-sex-v1",
+  "tableFamilyId": "national-age-by-sex",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 39,
+        "2022": 39,
+        "2023": 39,
+        "2024": 39,
+        "2025": 39
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2022": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2023": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2024": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2025": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:524129ebe5522116c70793b734c7157eb4c020f5bb79d64e134bc0cee7b523f9",
+        "2022": "sha256:524129ebe5522116c70793b734c7157eb4c020f5bb79d64e134bc0cee7b523f9",
+        "2023": "sha256:524129ebe5522116c70793b734c7157eb4c020f5bb79d64e134bc0cee7b523f9",
+        "2024": "sha256:524129ebe5522116c70793b734c7157eb4c020f5bb79d64e134bc0cee7b523f9",
+        "2025": "sha256:524129ebe5522116c70793b734c7157eb4c020f5bb79d64e134bc0cee7b523f9"
+      }
+    },
+    {
+      "id": "prisoner-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 39,
+        "2022": 39,
+        "2023": 39,
+        "2024": 39,
+        "2025": 39
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2022": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2023": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2024": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2025": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:5db58d8bf50fb0de72e9b7b205321d8e3e81c4c5cc946e9cdecc64d4886e12e4",
+        "2022": "sha256:5db58d8bf50fb0de72e9b7b205321d8e3e81c4c5cc946e9cdecc64d4886e12e4",
+        "2023": "sha256:5db58d8bf50fb0de72e9b7b205321d8e3e81c4c5cc946e9cdecc64d4886e12e4",
+        "2024": "sha256:5db58d8bf50fb0de72e9b7b205321d8e3e81c4c5cc946e9cdecc64d4886e12e4",
+        "2025": "sha256:5db58d8bf50fb0de72e9b7b205321d8e3e81c4c5cc946e9cdecc64d4886e12e4"
+      }
+    },
+    {
+      "id": "imprisonment-rate",
+      "unitId": "persons-per-100000-adult-population",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 39,
+        "2022": 39,
+        "2023": 39,
+        "2024": 39,
+        "2025": 39
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "2022": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "2023": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "2024": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "2025": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e270b4ba7defb912cf3a4f50f9eea08c7b8bddfbee58d2a5fd0f844b79285b6c",
+        "2022": "sha256:e270b4ba7defb912cf3a4f50f9eea08c7b8bddfbee58d2a5fd0f844b79285b6c",
+        "2023": "sha256:e270b4ba7defb912cf3a4f50f9eea08c7b8bddfbee58d2a5fd0f844b79285b6c",
+        "2024": "sha256:e270b4ba7defb912cf3a4f50f9eea08c7b8bddfbee58d2a5fd0f844b79285b6c",
+        "2025": "sha256:e270b4ba7defb912cf3a4f50f9eea08c7b8bddfbee58d2a5fd0f844b79285b6c"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "sex",
+    "age_group",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "sex": [
+      "sex"
+    ],
+    "age_group": [
+      "age group"
+    ],
+    "statistic_basis": [
+      "statistic basis"
+    ]
+  },
+  "aliases": {
+    "sex": {
+      "MALES": "MALE",
+      "Males": "MALE",
+      "FEMALES": "FEMALE",
+      "Females": "FEMALE",
+      "PERSONS": "PERSONS",
+      "Persons": "PERSONS",
+      "Persons (b)": "PERSONS",
+      "Persons (f)": "PERSONS"
+    },
+    "age_group": {
+      "18 years": "AGE_18_OR_YOUNGER",
+      "18 years (d)": "AGE_18_OR_YOUNGER",
+      "18 years (e)": "AGE_18_OR_YOUNGER",
+      "19 years": "AGE_19",
+      "20–24 years": "AGE_20_24",
+      "25–29 years": "AGE_25_29",
+      "30–34 years": "AGE_30_34",
+      "35–39 years": "AGE_35_39",
+      "40–44 years": "AGE_40_44",
+      "45–49 years": "AGE_45_49",
+      "50–54 years": "AGE_50_54",
+      "55–59 years": "AGE_55_59",
+      "60–64 years": "AGE_60_64",
+      "65 years and over": "AGE_65_PLUS",
+      "Total": "TOTAL",
+      "TOTAL": "TOTAL",
+      "Total (e)": "TOTAL",
+      "Total (f)": "TOTAL"
+    },
+    "statistic_basis": {
+      "NUMBER": "NUMBER",
+      "Number": "NUMBER",
+      "no.": "NUMBER",
+      "%": "PROPORTION",
+      "PROPORTION (%)": "PROPORTION",
+      "Proportion (%)": "PROPORTION",
+      "Imprisonment rate": "RATE",
+      "Imprisonment rate (c)": "RATE"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "reference_date",
+    "sex_id",
+    "age_group_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 117,
+    "maximumRows": 117,
+    "sourceColumns": {
+      "minimum": 9,
+      "maximum": 9
+    },
+    "sexes": [
+      "FEMALE",
+      "MALE",
+      "PERSONS"
+    ],
+    "ageGroups": [
+      "AGE_18_OR_YOUNGER",
+      "AGE_19",
+      "AGE_20_24",
+      "AGE_25_29",
+      "AGE_30_34",
+      "AGE_35_39",
+      "AGE_40_44",
+      "AGE_45_49",
+      "AGE_50_54",
+      "AGE_55_59",
+      "AGE_60_64",
+      "AGE_65_PLUS",
+      "TOTAL"
+    ],
+    "statisticBases": [
+      "NUMBER",
+      "PROPORTION",
+      "RATE"
+    ]
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [
+    {
+      "dimension": "sex",
+      "totalCode": "PERSONS",
+      "componentCodes": [
+        "MALE",
+        "FEMALE"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    },
+    {
+      "dimension": "age_group",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "AGE_18_OR_YOUNGER",
+        "AGE_19",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    }
+  ],
+  "totalValidation": "equations",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

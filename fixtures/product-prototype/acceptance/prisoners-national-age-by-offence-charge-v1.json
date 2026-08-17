@@ -1,0 +1,381 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-national-age-by-offence-charge-v1",
+  "tableFamilyId": "national-age-by-offence-charge",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 221,
+        "2022": 221,
+        "2023": 221,
+        "2024": 221,
+        "2025": 221
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ]
+        },
+        "2022": {
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ]
+        },
+        "2023": {
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ]
+        },
+        "2024": {
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ]
+        },
+        "2025": {
+          "age_group": [
+            "AGE_18_OR_YOUNGER",
+            "AGE_19",
+            "AGE_20_24",
+            "AGE_25_29",
+            "AGE_30_34",
+            "AGE_35_39",
+            "AGE_40_44",
+            "AGE_45_49",
+            "AGE_50_54",
+            "AGE_55_59",
+            "AGE_60_64",
+            "AGE_65_PLUS",
+            "TOTAL"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:0e7671f3b3440aff88ea32a3b216520f8c3c8a78960419d0d974dbed9c6bad90",
+        "2022": "sha256:0e7671f3b3440aff88ea32a3b216520f8c3c8a78960419d0d974dbed9c6bad90",
+        "2023": "sha256:0e7671f3b3440aff88ea32a3b216520f8c3c8a78960419d0d974dbed9c6bad90",
+        "2024": "sha256:0e7671f3b3440aff88ea32a3b216520f8c3c8a78960419d0d974dbed9c6bad90",
+        "2025": "sha256:0e7671f3b3440aff88ea32a3b216520f8c3c8a78960419d0d974dbed9c6bad90"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "age_group",
+    "most_serious_offence_or_charge"
+  ],
+  "dimensionHeaders": {
+    "age_group": [
+      "age group"
+    ],
+    "most_serious_offence_or_charge": [
+      "most serious offence or charge"
+    ]
+  },
+  "aliases": {
+    "age_group": {
+      "18 years": "AGE_18_OR_YOUNGER",
+      "18 years (d)": "AGE_18_OR_YOUNGER",
+      "18 years (e)": "AGE_18_OR_YOUNGER",
+      "19 years": "AGE_19",
+      "20–24 years": "AGE_20_24",
+      "25–29 years": "AGE_25_29",
+      "30–34 years": "AGE_30_34",
+      "35–39 years": "AGE_35_39",
+      "40–44 years": "AGE_40_44",
+      "45–49 years": "AGE_45_49",
+      "50–54 years": "AGE_50_54",
+      "55–59 years": "AGE_55_59",
+      "60–64 years": "AGE_60_64",
+      "65 years and over": "AGE_65_PLUS",
+      "Total": "TOTAL",
+      "TOTAL": "TOTAL",
+      "Total (e)": "TOTAL",
+      "Total (f)": "TOTAL"
+    },
+    "most_serious_offence_or_charge": {
+      "01 Homicide and related offences": "ANZSOC_01",
+      "02 Acts intended to cause injury": "ANZSOC_02",
+      "03 Sexual assault and related offences": "ANZSOC_03",
+      "04 Dangerous/ negligent acts": "ANZSOC_04",
+      "04 Dangerous/negligent acts": "ANZSOC_04",
+      "05 Abduction/ harassment": "ANZSOC_05",
+      "05 Abduction/harassment": "ANZSOC_05",
+      "06 Robbery/ extortion": "ANZSOC_06",
+      "06 Robbery/extortion": "ANZSOC_06",
+      "07 Unlawful entry with intent": "ANZSOC_07",
+      "08 Theft": "ANZSOC_08",
+      "09 Fraud/ deception": "ANZSOC_09",
+      "09 Fraud/deception": "ANZSOC_09",
+      "10 Illicit drug offences": "ANZSOC_10",
+      "11 Weapons/ explosives": "ANZSOC_11",
+      "11 Weapons/explosives": "ANZSOC_11",
+      "12 Property damage and environmental pollution": "ANZSOC_12",
+      "13 Public order offences": "ANZSOC_13",
+      "14 Traffic and vehicle regulatory offences": "ANZSOC_14",
+      "15 Offences against justice": "ANZSOC_15",
+      "16 Miscellaneous offences": "ANZSOC_16",
+      "Post-sentence detention": "POST_SENTENCE",
+      "Post-sentence detention (d)": "POST_SENTENCE",
+      "Total": "TOTAL",
+      "TOTAL": "TOTAL",
+      "Total (d)": "TOTAL",
+      "Total (e)": "TOTAL",
+      "Total (f)": "TOTAL",
+      "Total (g)": "TOTAL"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "reference_date",
+    "age_group_id",
+    "most_serious_offence_or_charge_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 221,
+    "maximumRows": 221,
+    "sourceColumns": {
+      "minimum": 17,
+      "maximum": 17
+    },
+    "ageGroups": [
+      "AGE_18_OR_YOUNGER",
+      "AGE_19",
+      "AGE_20_24",
+      "AGE_25_29",
+      "AGE_30_34",
+      "AGE_35_39",
+      "AGE_40_44",
+      "AGE_45_49",
+      "AGE_50_54",
+      "AGE_55_59",
+      "AGE_60_64",
+      "AGE_65_PLUS",
+      "TOTAL"
+    ],
+    "mostSeriousOffencesOrCharges": [
+      "ANZSOC_01",
+      "ANZSOC_02",
+      "ANZSOC_03",
+      "ANZSOC_04",
+      "ANZSOC_05",
+      "ANZSOC_06",
+      "ANZSOC_07",
+      "ANZSOC_08",
+      "ANZSOC_09",
+      "ANZSOC_10",
+      "ANZSOC_11",
+      "ANZSOC_12",
+      "ANZSOC_13",
+      "ANZSOC_14",
+      "ANZSOC_15",
+      "ANZSOC_16",
+      "TOTAL"
+    ]
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [
+    {
+      "dimension": "age_group",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "AGE_18_OR_YOUNGER",
+        "AGE_19",
+        "AGE_20_24",
+        "AGE_25_29",
+        "AGE_30_34",
+        "AGE_35_39",
+        "AGE_40_44",
+        "AGE_45_49",
+        "AGE_50_54",
+        "AGE_55_59",
+        "AGE_60_64",
+        "AGE_65_PLUS"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    },
+    {
+      "dimension": "most_serious_offence_or_charge",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "ANZSOC_01",
+        "ANZSOC_02",
+        "ANZSOC_03",
+        "ANZSOC_04",
+        "ANZSOC_05",
+        "ANZSOC_06",
+        "ANZSOC_07",
+        "ANZSOC_08",
+        "ANZSOC_09",
+        "ANZSOC_10",
+        "ANZSOC_11",
+        "ANZSOC_12",
+        "ANZSOC_13",
+        "ANZSOC_14",
+        "ANZSOC_15",
+        "ANZSOC_16"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 500,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    }
+  ],
+  "totalValidation": "equations",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

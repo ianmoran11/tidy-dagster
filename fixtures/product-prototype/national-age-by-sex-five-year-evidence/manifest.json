@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "national-age-by-sex",
+  "cohortPath": "fixtures/product-prototype/prisoners-national-age-by-sex.json",
+  "cohortDigest": "sha256:274baa8a8a2d2eceb8104861df7893106e3ee3bd1a446d3a9acd6d5f4b7c8df5",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/prisoners-national-age-by-sex-v1.json",
+  "acceptanceContractDigest": "sha256:529f62d68daf45d0aa1098e706ea41c4721aa72427128cca20d1f10dcc824b01",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 5,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 585,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 585,
+  "measureCounts": {
+    "imprisonment-rate": 195,
+    "prisoner-count": 195,
+    "prisoner-proportion": 195
+  },
+  "valueStatusCounts": {
+    "observed": 585
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "publicationVintagePreserved": false,
+  "runDigest": "sha256:a258ac61dfe2c7273e4343e69de727b1e6fcbeabdebf5fe92fa89e57331a168c",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:7a9d7fbcf87869c5183e64370938197081a2c587f5b5785a4ae7e3add400abc7",
+      "byteLength": 931
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:5c660acec029d95044a9b059d069a53b6432428386f32bee2a2860c8ede01516",
+      "byteLength": 429573
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:1f02bb1dd3279057d46c3cfb677143accbb9185defcc1b1847e859518dc22fdc",
+      "byteLength": 697723
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:ae19bcae80f8af2b22256a7173ea1c569e8f84251a0eb89dd0123d45f3b0990a",
+      "byteLength": 1608
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:947737df826fedee7022e289d434b88fc0c753815cf3c5306253ab6c643ea08d",
+      "byteLength": 5066
+    }
+  ]
+}

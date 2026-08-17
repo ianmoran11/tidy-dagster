@@ -1088,6 +1088,9 @@ def _validate_execution(
             codelists_ok = False
             issues.append(_issue("VALUE_INVALID", f"Invalid measure value {value!r}."))
             continue
+        if value_status != "observed" and measure.get("excludeMissingValues") is True:
+            selection["excludedRowCount"] += 1
+            continue
         reference_dimension = contract.get("referenceDateDimension")
         reference_date = (
             mapped[reference_dimension]
@@ -1320,7 +1323,7 @@ def _map_alias(contract: dict[str, Any], dimension: str, raw: Any) -> str | None
     normalized = " ".join(raw.strip().split())
     aliases = contract["aliases"][dimension]
     exact = aliases.get(normalized)
-    if exact is not None:
+    if exact is not None or contract.get("strictAliasMatching") is True:
         return exact
     without_footnotes = re.sub(r"(?:\s*\([a-z]\))+$", "", normalized, flags=re.I)
     return aliases.get(without_footnotes)
@@ -1888,6 +1891,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "referenceDateDimension",
         "preservePublicationVintage",
         "preserveRawValueText",
+        "strictAliasMatching",
         "totalValidation",
     }
     dimensions = value.get("requiredDimensions")
@@ -1932,6 +1936,10 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or (
             "preserveRawValueText" in value
             and value.get("preserveRawValueText") is not True
+        )
+        or (
+            "strictAliasMatching" in value
+            and value.get("strictAliasMatching") is not True
         )
         or total_validation not in {"equations", "not_applicable"}
         or not isinstance(dimensions, list)
@@ -2002,6 +2010,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "expectedCombinationDigestsByYear",
         "applicableYears",
         "missingValues",
+        "excludeMissingValues",
     }
     years = {str(item["year"]) for item in cohort["workbooks"]}
     alias_codes = {
@@ -2022,6 +2031,10 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
             or not isinstance(measure.get("unitId"), str)
             or not measure["unitId"]
             or measure.get("numeric") is not True
+            or (
+                "excludeMissingValues" in measure
+                and measure.get("excludeMissingValues") is not True
+            )
             or isinstance(measure.get("minimum"), bool)
             or not isinstance(measure.get("minimum"), int | float)
             or measure["minimum"] < 0
@@ -2175,7 +2188,10 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
             or not set(configured) <= alias_codes[dimension]
         ):
             raise ProductPrototypeError("Acceptance category coverage is invalid")
-    if exclusions:
+    has_excluded_rows = bool(exclusions) or any(
+        measure.get("excludeMissingValues") is True for measure in measures
+    )
+    if has_excluded_rows:
         expected_keys |= {"minimumExcludedRows", "maximumExcludedRows"}
     source_columns = expected.get("sourceColumns")
     if (
@@ -2194,7 +2210,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         )
         or not 1 <= source_columns["minimum"] <= source_columns["maximum"]
         or (
-            exclusions
+            has_excluded_rows
             and (
                 isinstance(expected.get("minimumExcludedRows"), bool)
                 or not isinstance(expected.get("minimumExcludedRows"), int)

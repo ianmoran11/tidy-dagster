@@ -66,24 +66,26 @@ Every numbered sheet has one reviewed family assignment, including 2021-only
 Tables 40–42 and the separate 2025 preliminary ANZSOC 2023 namespace. Exact
 current 2025 state-cube bytes remain distinct from the historical execution
 source and are proven value/formula/coordinate-equivalent. This is a custody and
-coverage foundation: checked canonical extraction now covers 109/203 members,
-with 94 pending reviewed semantic contracts.
+coverage foundation: checked canonical extraction now covers 134/203 members,
+with 69 pending reviewed semantic contracts.
 
 ```sh
 scripts/generate-prisoners-release-inventory.py --check
 scripts/tidy-prisoners-release verify
 ```
 
-A checked cross-publication batch includes 17 semantic *Prisoners in Australia*
-cohorts—84 worksheet-assets—including the five state/territory families for
-selected-characteristic vintages, sex by Indigenous status, age-standardised
-rates, crude rates, and crude rates by Indigenous status. A second publication
-adds *Recorded Crime — Offenders* Tables 1–5 across 2021–22 through 2024–25:
-20 more worksheet-assets and 21,268 canonical observations. The combined
-104-worksheet batch contains 49,322 canonical observations with zero exceptions,
-cross-period issues, or provider calls. The state cluster contributes 8,406 rows;
-its corrected 2025 Table 16 uses all ten B:K measures and contributes 900. The
-status dashboard now exposes 129 deterministic per-asset CSV routes. Table 27
+A checked cross-publication batch includes 22 semantic *Prisoners in Australia*
+cohorts—109 worksheet-assets—including the five state/territory families and five
+national snapshot families for characteristics, age, sex, Indigenous status,
+offence/charge, and country of birth. A second publication adds *Recorded Crime —
+Offenders* Tables 1–5 across 2021–22 through 2024–25: 20 more worksheet-assets
+and 21,268 canonical observations. The combined 129-worksheet batch contains
+56,017 canonical observations with zero exceptions, cross-period issues, or
+provider calls. The national snapshot cluster contributes 6,695 rows and bounds
+2025 Tables 7/8 to A:R without changing nonblank or formula payload. The state
+cluster contributes 8,406 rows; its corrected 2025 Table 16 uses all ten B:K
+measures and contributes 900. The status dashboard now exposes 154 deterministic
+per-asset CSV routes and 69,300 canonical observations. Table 27
 preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,
@@ -91,8 +93,11 @@ which remain non-authoritative. The Offenders maps are likewise deterministic,
 human-authored replay inputs judged only by independent acceptance contracts.
 Counts, rates, mean/median ages, fiscal observation periods, and 372 published
 `na` cells remain semantically distinct. Source/derived workbook digests, byte
-lengths, retained ranges, and the exact normalization and correction-script
-digests are closed in the manifest. It records two reviewed correction cells
+lengths, retained ranges, per-output normalization identities, and exact
+normalization/correction-script digests are closed in the manifest. The batch
+registry independently pins exact excluded-observation counts for every year
+(`0/36/37/37/38` for national Table 1 and zero for the other cohorts). It
+records two reviewed correction cells
 inside retained rectangular ranges and one outside, and verifies an exact
 script-emitted correction receipt in
 `fixtures/product-prototype/batch-workbook-normalization-v1.json`.
@@ -120,8 +125,8 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects two publications, 22 cohorts, and 105
-sheet-assets across 13 checked normalized workbook byte identities. It
+A minimal read-only page projects two publications, 32 cohorts, and 154
+sheet-assets across 19 checked workbook byte identities. It
 derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The default

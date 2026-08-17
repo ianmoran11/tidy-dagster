@@ -100,9 +100,9 @@ partitions. It deletes only disposable Dagster metadata and reconstructs the
 catalog, all active materializations, and check mirrors from unchanged
 authoritative index and gate digests.
 
-The product-prototype large batch adds 22 explicit, registry-generated Dagster
+The product-prototype large batch adds 27 explicit, registry-generated Dagster
 assets, checks, and diagnostic jobs in group `product_prototype_large_batch`.
-`product_prototype_large_batch_replay_job` selects all 22, while each
+`product_prototype_large_batch_replay_job` selects all 27, while each
 `product_prototype_*_replay_job` preserves family-level failure isolation. The
 batch CLI defaults to three concurrent cohorts and caps concurrency at four;
 it never enables live generation. Dagster run concurrency and the existing

@@ -9,6 +9,8 @@ from pathlib import Path
 import jsonschema
 import pytest
 
+import tidy_orchestrator.large_batch as large_batch_module
+from tidy_orchestrator.artifacts import domain_digest
 from tidy_orchestrator.large_batch import (
     LargeBatchError,
     load_large_batch_registry,
@@ -17,6 +19,7 @@ from tidy_orchestrator.large_batch import (
 )
 from tidy_orchestrator.large_batch_cli import run_batch
 from tidy_orchestrator.product_prototype import (
+    RUN_SCHEMA,
     ProductPrototypeError,
     _validate_cohort,
     _validate_contract,
@@ -42,12 +45,17 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-one-hundred-four-worksheets-v1"
-    assert registry.worksheet_count == 104
+    assert registry.batch_id == "justice-one-hundred-twenty-nine-worksheets-v1"
+    assert registry.worksheet_count == 129
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 22
+    assert len(registry.entries) == 27
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 8
+    assert len(normalization["entries"]) == 9
+    assert "normalization" not in normalization
+    assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
+        "trim-pathological-styled-blank-cells-v1": 8,
+        "trim-pathological-full-width-formatting-merge-v1": 1,
+    }
     assert normalization["inRangeValuesChanged"] is True
     removed_cells = [
         cell
@@ -60,9 +68,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 104
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 129
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 49322
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 56017
     assert sum(item["providerCalls"] for item in manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
@@ -103,16 +111,180 @@ def test_large_batch_cohorts_and_contracts_validate() -> None:
         )
 
 
-def test_registry_rejects_output_path_escape(tmp_path: Path) -> None:
+def _write_registry(tmp_path: Path, value: dict[str, object]) -> None:
     registry_path = tmp_path / "fixtures/product-prototype/large-batch-assets-v1.json"
     registry_path.parent.mkdir(parents=True)
-    value = json.loads(
+    registry_path.write_text(json.dumps(value))
+
+
+def _registry_value() -> dict[str, object]:
+    return json.loads(
         (PROJECT / "fixtures/product-prototype/large-batch-assets-v1.json").read_text()
     )
+
+
+def test_registry_pins_exact_exclusions_for_every_year() -> None:
+    registry = load_large_batch_registry(PROJECT)
+    for spec in registry.entries:
+        assert set(spec.expected_excluded_observation_counts_by_year) == set(
+            spec.expected_years
+        )
+        expected = (
+            {2021: 0, 2022: 36, 2023: 37, 2024: 37, 2025: 38}
+            if spec.family_id == "national-selected-characteristics-by-offence-charge"
+            else {year: 0 for year in spec.expected_years}
+        )
+        assert spec.expected_excluded_observation_counts_by_year == expected
+        assert sum(expected.values()) == spec.expected_excluded_observation_count
+
+
+def test_registry_rejects_output_path_escape(tmp_path: Path) -> None:
+    value = _registry_value()
     value["entries"][0]["outputDirectory"] = "../escape"
-    registry_path.write_text(json.dumps(value))
+    _write_registry(tmp_path, value)
     with pytest.raises(LargeBatchError, match="entry is invalid"):
         load_large_batch_registry(tmp_path)
+
+
+@pytest.mark.parametrize("invalid_count", [-1, "0", True])
+def test_registry_rejects_invalid_per_year_exclusion_types(
+    tmp_path: Path, invalid_count: object
+) -> None:
+    value = _registry_value()
+    value["entries"][0]["expectedExcludedObservationCountsByYear"]["2021"] = (
+        invalid_count
+    )
+    _write_registry(tmp_path, value)
+    with pytest.raises(LargeBatchError, match="entry is invalid"):
+        load_large_batch_registry(tmp_path)
+
+
+@pytest.mark.parametrize("mutation", ["missing", "extra"])
+def test_registry_rejects_missing_or_extra_exclusion_year(
+    tmp_path: Path, mutation: str
+) -> None:
+    value = _registry_value()
+    counts = value["entries"][0]["expectedExcludedObservationCountsByYear"]
+    if mutation == "missing":
+        counts.pop("2021")
+    else:
+        counts["2099"] = 0
+    _write_registry(tmp_path, value)
+    with pytest.raises(LargeBatchError, match="entry is invalid"):
+        load_large_batch_registry(tmp_path)
+
+
+def _normalization_manifest() -> dict[str, object]:
+    return json.loads(
+        (
+            PROJECT / "fixtures/product-prototype/batch-workbook-normalization-v1.json"
+        ).read_text()
+    )
+
+
+def _bind_normalization_manifest(manifest: dict[str, object]) -> None:
+    semantic = {
+        key: value for key, value in manifest.items() if key != "manifestDigest"
+    }
+    manifest["manifestDigest"] = domain_digest(
+        large_batch_module.NORMALIZATION_SCHEMA, semantic
+    )
+
+
+def test_normalization_manifest_rejects_missing_entry_identity(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    manifest = _normalization_manifest()
+    manifest["entries"][0].pop("normalization")
+    _bind_normalization_manifest(manifest)
+    original_load = large_batch_module._load_object
+
+    def load(path: Path, label: str) -> dict[str, object]:
+        if label == "normalization manifest":
+            return manifest
+        return original_load(path, label)
+
+    monkeypatch.setattr(large_batch_module, "_load_object", load)
+    with pytest.raises(LargeBatchError, match="manifest entry is invalid"):
+        verify_batch_normalization(PROJECT, registry)
+
+
+def test_normalization_manifest_rejects_relabelled_output(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    manifest = _normalization_manifest()
+    manifest["entries"][0]["normalization"] = (
+        "trim-pathological-full-width-formatting-merge-v1"
+    )
+    _bind_normalization_manifest(manifest)
+    original_load = large_batch_module._load_object
+
+    def load(path: Path, label: str) -> dict[str, object]:
+        if label == "normalization manifest":
+            return manifest
+        return original_load(path, label)
+
+    monkeypatch.setattr(large_batch_module, "_load_object", load)
+    with pytest.raises(LargeBatchError, match="does not match normalization manifest"):
+        verify_batch_normalization(PROJECT, registry)
+
+
+def test_normalization_manifest_rejects_wrong_cohort_identity(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = registry.entries[0]
+    cohort_path = (PROJECT / spec.cohort_path).resolve()
+    cohort = json.loads(cohort_path.read_text())
+    normalized = next(
+        workbook for workbook in cohort["workbooks"] if "normalization" in workbook
+    )
+    normalized["normalization"] = "wrong-normalization-v1"
+    original_load = large_batch_module._load_object
+
+    def load(path: Path, label: str) -> dict[str, object]:
+        if label == "large-batch cohort" and path == cohort_path:
+            return cohort
+        return original_load(path, label)
+
+    monkeypatch.setattr(large_batch_module, "_load_object", load)
+    with pytest.raises(LargeBatchError, match="does not match normalization manifest"):
+        verify_batch_normalization(PROJECT, registry)
+
+
+def test_evidence_rejects_redistributed_per_year_exclusions(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = next(
+        item
+        for item in registry.entries
+        if item.family_id == "national-selected-characteristics-by-offence-charge"
+    )
+    manifest_path = (PROJECT / spec.evidence_manifest_path).resolve()
+    evidence_root = manifest_path.parent
+    manifest = json.loads(manifest_path.read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    run["workbooks"][0]["excludedObservationCount"] = 1
+    run["workbooks"][1]["excludedObservationCount"] = 35
+    semantic = dict(run)
+    semantic.pop("runDigest")
+    run["runDigest"] = domain_digest(RUN_SCHEMA, semantic)
+    manifest["runDigest"] = run["runDigest"]
+    original_load = large_batch_module._load_object
+
+    def load(path: Path, label: str) -> dict[str, object]:
+        if path == manifest_path:
+            return manifest
+        if path == evidence_root / "run.json":
+            return run
+        return original_load(path, label)
+
+    monkeypatch.setattr(large_batch_module, "_load_object", load)
+    with pytest.raises(LargeBatchError, match="Run evidence is invalid"):
+        verify_large_batch_evidence(PROJECT, spec)
 
 
 def test_multi_condition_measure_selection_rejects_overlap() -> None:
@@ -241,9 +413,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 104
+    assert report["acceptedWorksheetCount"] == 129
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 49322
+    assert report["canonicalObservationCount"] == 56017
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -541,10 +713,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-one-hundred-four-worksheets-v1",
-        "worksheetCount": 104,
-        "cohortCount": 22,
-        "canonicalObservationCount": 49322,
+        "batchId": "justice-one-hundred-twenty-nine-worksheets-v1",
+        "worksheetCount": 129,
+        "cohortCount": 27,
+        "canonicalObservationCount": 56017,
         "providerCalls": 0,
         "verified": True,
     }

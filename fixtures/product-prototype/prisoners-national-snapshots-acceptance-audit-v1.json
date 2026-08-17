@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "tidy.prisoners-national-snapshots-acceptance-audit/v1",
+  "recordedAt": "2026-08-17T09:00:00+00:00",
+  "authority": "independent-of-replay-output",
+  "sourceAuthority": "committed-workbook-cells",
+  "expectedCanonicalCount": 6695,
+  "families": [
+    {
+      "familyId": "national-selected-characteristics-by-offence-charge",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        450,
+        450,
+        449,
+        449,
+        538
+      ],
+      "expectedCanonicalCount": 2336,
+      "measureCounts": {
+        "prisoner-count": 900,
+        "prisoner-proportion": 900,
+        "median-age": 447,
+        "mean-age": 89
+      },
+      "totalValidation": "not_applicable",
+      "ANZSOCVersion": "2011"
+    },
+    {
+      "familyId": "national-age-by-sex",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        117,
+        117,
+        117,
+        117,
+        117
+      ],
+      "expectedCanonicalCount": 585,
+      "measureCounts": {
+        "prisoner-count": 195,
+        "prisoner-proportion": 195,
+        "imprisonment-rate": 195
+      },
+      "totalValidation": "equations",
+      "ANZSOCVersion": "2011"
+    },
+    {
+      "familyId": "national-sex-offence-charge-by-indigenous-status",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        306,
+        306,
+        306,
+        306,
+        306
+      ],
+      "expectedCanonicalCount": 1530,
+      "measureCounts": {
+        "prisoner-count": 765,
+        "prisoner-proportion": 765
+      },
+      "totalValidation": "equations",
+      "ANZSOCVersion": "2011"
+    },
+    {
+      "familyId": "national-age-by-offence-charge",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        221,
+        221,
+        221,
+        221,
+        221
+      ],
+      "expectedCanonicalCount": 1105,
+      "measureCounts": {
+        "prisoner-count": 1105
+      },
+      "totalValidation": "equations",
+      "ANZSOCVersion": "2011"
+    },
+    {
+      "familyId": "national-country-of-birth-by-offence-charge",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "expectedYearCounts": [
+        221,
+        238,
+        221,
+        221,
+        238
+      ],
+      "expectedCanonicalCount": 1139,
+      "measureCounts": {
+        "prisoner-count": 1139
+      },
+      "totalValidation": "not_applicable",
+      "ANZSOCVersion": "2011"
+    }
+  ]
+}

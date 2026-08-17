@@ -1,0 +1,572 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "prisoners-national-sex-offence-charge-by-indigenous-status-v1",
+  "tableFamilyId": "national-sex-offence-charge-by-indigenous-status",
+  "measures": [
+    {
+      "id": "prisoner-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 153,
+        "2022": 153,
+        "2023": 153,
+        "2024": 153,
+        "2025": 153
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2022": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2023": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2024": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        },
+        "2025": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "NUMBER"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:76ad9d8ba27625657ec6e40fcb96cd3272ae328a8c99f43b4489e98f8f18cdd4",
+        "2022": "sha256:76ad9d8ba27625657ec6e40fcb96cd3272ae328a8c99f43b4489e98f8f18cdd4",
+        "2023": "sha256:76ad9d8ba27625657ec6e40fcb96cd3272ae328a8c99f43b4489e98f8f18cdd4",
+        "2024": "sha256:76ad9d8ba27625657ec6e40fcb96cd3272ae328a8c99f43b4489e98f8f18cdd4",
+        "2025": "sha256:76ad9d8ba27625657ec6e40fcb96cd3272ae328a8c99f43b4489e98f8f18cdd4"
+      }
+    },
+    {
+      "id": "prisoner-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 153,
+        "2022": 153,
+        "2023": 153,
+        "2024": 153,
+        "2025": 153
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2022": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2023": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2024": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        },
+        "2025": {
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "most_serious_offence_or_charge": [
+            "ANZSOC_01",
+            "ANZSOC_02",
+            "ANZSOC_03",
+            "ANZSOC_04",
+            "ANZSOC_05",
+            "ANZSOC_06",
+            "ANZSOC_07",
+            "ANZSOC_08",
+            "ANZSOC_09",
+            "ANZSOC_10",
+            "ANZSOC_11",
+            "ANZSOC_12",
+            "ANZSOC_13",
+            "ANZSOC_14",
+            "ANZSOC_15",
+            "ANZSOC_16",
+            "TOTAL"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "statistic_basis": [
+            "PROPORTION"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:3d4fc513a997853578961b3e74bf1786e9f801f8345471cd803ce240737159bb",
+        "2022": "sha256:3d4fc513a997853578961b3e74bf1786e9f801f8345471cd803ce240737159bb",
+        "2023": "sha256:3d4fc513a997853578961b3e74bf1786e9f801f8345471cd803ce240737159bb",
+        "2024": "sha256:3d4fc513a997853578961b3e74bf1786e9f801f8345471cd803ce240737159bb",
+        "2025": "sha256:3d4fc513a997853578961b3e74bf1786e9f801f8345471cd803ce240737159bb"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "sex",
+    "most_serious_offence_or_charge",
+    "indigenous_status",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "sex": [
+      "sex"
+    ],
+    "most_serious_offence_or_charge": [
+      "most serious offence or charge"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ],
+    "statistic_basis": [
+      "statistic basis"
+    ]
+  },
+  "aliases": {
+    "sex": {
+      "MALES": "MALE",
+      "Males": "MALE",
+      "FEMALES": "FEMALE",
+      "Females": "FEMALE",
+      "PERSONS": "PERSONS",
+      "Persons": "PERSONS",
+      "Persons (b)": "PERSONS",
+      "Persons (f)": "PERSONS"
+    },
+    "most_serious_offence_or_charge": {
+      "01 Homicide and related offences": "ANZSOC_01",
+      "02 Acts intended to cause injury": "ANZSOC_02",
+      "03 Sexual assault and related offences": "ANZSOC_03",
+      "04 Dangerous/ negligent acts": "ANZSOC_04",
+      "04 Dangerous/negligent acts": "ANZSOC_04",
+      "05 Abduction/ harassment": "ANZSOC_05",
+      "05 Abduction/harassment": "ANZSOC_05",
+      "06 Robbery/ extortion": "ANZSOC_06",
+      "06 Robbery/extortion": "ANZSOC_06",
+      "07 Unlawful entry with intent": "ANZSOC_07",
+      "08 Theft": "ANZSOC_08",
+      "09 Fraud/ deception": "ANZSOC_09",
+      "09 Fraud/deception": "ANZSOC_09",
+      "10 Illicit drug offences": "ANZSOC_10",
+      "11 Weapons/ explosives": "ANZSOC_11",
+      "11 Weapons/explosives": "ANZSOC_11",
+      "12 Property damage and environmental pollution": "ANZSOC_12",
+      "13 Public order offences": "ANZSOC_13",
+      "14 Traffic and vehicle regulatory offences": "ANZSOC_14",
+      "15 Offences against justice": "ANZSOC_15",
+      "16 Miscellaneous offences": "ANZSOC_16",
+      "Post-sentence detention": "POST_SENTENCE",
+      "Post-sentence detention (d)": "POST_SENTENCE",
+      "Total": "TOTAL",
+      "TOTAL": "TOTAL",
+      "Total (d)": "TOTAL",
+      "Total (e)": "TOTAL",
+      "Total (f)": "TOTAL",
+      "Total (g)": "TOTAL"
+    },
+    "indigenous_status": {
+      "Aboriginal & Torres Strait Islander": "INDIGENOUS",
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Total": "TOTAL",
+      "TOTAL": "TOTAL",
+      "Total (d)": "TOTAL"
+    },
+    "statistic_basis": {
+      "NUMBER": "NUMBER",
+      "Number": "NUMBER",
+      "no.": "NUMBER",
+      "%": "PROPORTION",
+      "PROPORTION (%)": "PROPORTION",
+      "Proportion (%)": "PROPORTION",
+      "Imprisonment rate": "RATE",
+      "Imprisonment rate (c)": "RATE"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "reference_date",
+    "sex_id",
+    "most_serious_offence_or_charge_id",
+    "indigenous_status_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 306,
+    "maximumRows": 306,
+    "sourceColumns": {
+      "minimum": 6,
+      "maximum": 6
+    },
+    "sexes": [
+      "FEMALE",
+      "MALE",
+      "PERSONS"
+    ],
+    "mostSeriousOffencesOrCharges": [
+      "ANZSOC_01",
+      "ANZSOC_02",
+      "ANZSOC_03",
+      "ANZSOC_04",
+      "ANZSOC_05",
+      "ANZSOC_06",
+      "ANZSOC_07",
+      "ANZSOC_08",
+      "ANZSOC_09",
+      "ANZSOC_10",
+      "ANZSOC_11",
+      "ANZSOC_12",
+      "ANZSOC_13",
+      "ANZSOC_14",
+      "ANZSOC_15",
+      "ANZSOC_16",
+      "TOTAL"
+    ],
+    "indigenousStatuses": [
+      "INDIGENOUS",
+      "NON_INDIGENOUS",
+      "TOTAL"
+    ],
+    "statisticBases": [
+      "NUMBER",
+      "PROPORTION"
+    ]
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [
+    {
+      "dimension": "indigenous_status",
+      "totalCode": "TOTAL",
+      "componentCodes": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 500,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    },
+    {
+      "dimension": "sex",
+      "totalCode": "PERSONS",
+      "componentCodes": [
+        "MALE",
+        "FEMALE"
+      ],
+      "check": "components-must-not-exceed-total-beyond-rounding",
+      "componentExcessTolerance": 30,
+      "maximumUnmodelledResidual": 30,
+      "measureIds": [
+        "prisoner-count"
+      ]
+    }
+  ],
+  "totalValidation": "equations",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}
