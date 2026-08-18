@@ -1,0 +1,460 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023-v1",
+  "tableFamilyId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 390
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:2e936b85c93808910b98fcfe1ba260875ec449101f552bdb95101acef915782f"
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 65
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:98bd024461c341a021f794b1ceab41c168056b2d3ea3e6be00eb14f76f657924"
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 65
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:088773a7631f06f848a570f7cb5a17b4f0ba6f5f1d71d2a4a20739fcf9058ec2"
+      }
+    },
+    {
+      "id": "defendant-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "OFFENCE_TOTAL_PERCENTAGE_SELECTION"
+          ]
+        },
+        "dimensionOverrides": {
+          "principal_offence": "OFFENCE_TOTAL"
+        }
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 72
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:7696f1dd18c65aabfb021d169f971a7aa818f0c7178bbcbbc9a25606f2f8aa0c"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "aggregate_sentence_length",
+    "court_level",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "aggregate_sentence_length": [
+      "^sentence\\ length$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "aggregate_sentence_length_id",
+    "court_level_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 592,
+    "maximumRows": 592,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 9
+    },
+    "principalOffencesByYear": {
+      "2024": [
+        "ANZSOC_2023_021_SERIOUS_ASSAULT",
+        "ANZSOC_2023_02_ASSAULT",
+        "ANZSOC_2023_03_SEXUAL_OFFENCES",
+        "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+        "ANZSOC_2023_051_ROBBERY",
+        "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+        "ANZSOC_2023_06_BURGLARY",
+        "ANZSOC_2023_07_THEFT",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2024": [
+        "LENGTH_1_YEAR_AND_OVER",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "CHILDRENS_COURTS"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2024": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    }
+  },
+  "aliases": {
+    "principal_offence": {
+      "02 Assault": "ANZSOC_2023_02_ASSAULT",
+      "021 Serious assault": "ANZSOC_2023_021_SERIOUS_ASSAULT",
+      "03 Sexual offences": "ANZSOC_2023_03_SEXUAL_OFFENCES",
+      "04 Harm or endanger persons": "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "04 Harm or endanger persons(d)": "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "05 Robbery, blackmail, and extortion": "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "051 Robbery": "ANZSOC_2023_051_ROBBERY",
+      "06 Burglary": "ANZSOC_2023_06_BURGLARY",
+      "07 Theft": "ANZSOC_2023_07_THEFT",
+      "All principal offences (%)": "OFFENCE_TOTAL_PERCENTAGE_SELECTION",
+      "All principal offences(e)": "OFFENCE_TOTAL"
+    },
+    "aggregate_sentence_length": {
+      "1 year & over": "LENGTH_1_YEAR_AND_OVER",
+      "3 to under 6 months": "LENGTH_3_TO_UNDER_6_MONTHS",
+      "6 to under 12 months": "LENGTH_6_TO_UNDER_12_MONTHS",
+      "Mean(c)": "LENGTH_MEAN",
+      "Median(c)": "LENGTH_MEDIAN",
+      "No further penalty due to time spent in custody(a)": "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+      "Total(b)": "LENGTH_TOTAL",
+      "Under 3 months": "LENGTH_UNDER_3_MONTHS"
+    },
+    "court_level": {
+      "This tab contains defendants sentenced to custody in a correctional institution by selected principal offence, state/territory and sentence length – Children's Courts, 2024–25. It ranges from cell A1 to I101.": "CHILDRENS_COURTS"
+    },
+    "jurisdiction": {
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "Queensland": "QLD",
+      "South Australia(a)": "SA",
+      "Tasmania": "TAS",
+      "Victoria": "VIC",
+      "Western Australia": "WA"
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "ACT": [
+            "R81C2"
+          ],
+          "NSW": [
+            "R18C2"
+          ],
+          "NT": [
+            "R72C2"
+          ],
+          "QLD": [
+            "R36C2"
+          ],
+          "SA": [
+            "R45C2"
+          ],
+          "TAS": [
+            "R63C2"
+          ],
+          "VIC": [
+            "R27C2"
+          ],
+          "WA": [
+            "R54C2"
+          ]
+        }
+      }
+    }
+  ],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "strictAliasMatching": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

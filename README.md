@@ -87,12 +87,14 @@ scripts/tidy-prisoners-release verify
 
 A second complete release inventory freezes all four official 2021–22 through
 2024–25 *Criminal Courts, Australia* releases: 69 exact downloads, four
-custodied guide exclusions, 65 substantive cubes, 192 reviewed semantic
-families, and 430 numbered worksheets (94/102/116/118). Two national clusters
-register 48 worksheet-assets across 18 classification-aware cohorts. They keep
+custodied guide exclusions, 65 substantive cubes, 198 reviewed semantic
+families, and 430 numbered worksheets (94/102/116/118). Three national clusters
+register 79 worksheet-assets across 32 classification-aware cohorts. They keep
 ANZSOC 2011, preliminary ANZSOC 2023, ANZSOC 2023, concorded historical series,
-and experimental FDV namespaces explicit; 382 worksheets remain pending
-semantic contracts.
+and experimental FDV namespaces explicit; 351 worksheets remain pending
+semantic contracts. The newest 31-worksheet cluster preserves sentence-length
+counts, proportions, mean/median durations, fine amounts, court levels,
+jurisdictions, Indigenous status, and classification-specific offence codes.
 
 ```sh
 scripts/generate-criminal-courts-release-inventory.py --check
@@ -104,16 +106,17 @@ cohorts—109 worksheet-assets—including the five state/territory families and
 national snapshot families for characteristics, age, sex, Indigenous status,
 offence/charge, and country of birth. A second publication adds *Recorded Crime —
 Offenders* Tables 1–5 across 2021–22 through 2024–25: 20 more worksheet-assets
-and 21,268 canonical observations. A third publication adds 48
-*Criminal Courts, Australia* national worksheet-assets and 94,380 observations,
-including the expanded guilty-outcome, sentence, offence, age, and duration
-cluster. The combined 177-worksheet batch contains 150,397 canonical
-observations with zero exceptions, cross-period issues, or provider calls. The national snapshot
+and 21,268 canonical observations. A third publication adds 79
+*Criminal Courts, Australia* national worksheet-assets and 137,664 observations,
+including the guilty-outcome, sentence, offence, age, duration, sentence-length,
+and fine-amount clusters. The combined 208-worksheet batch contains 193,681
+canonical observations with zero exceptions, cross-period issues, or provider
+calls. The national snapshot
 cluster contributes 6,695 rows and bounds
 2025 Tables 7/8 to A:R without changing nonblank or formula payload. The state
 cluster contributes 8,406 rows; its corrected 2025 Table 16 uses all ten B:K
-measures and contributes 900. The status dashboard now exposes 202 deterministic
-per-asset CSV routes and 163,680 canonical observations. Table 27
+measures and contributes 900. The status dashboard now exposes 233 deterministic
+per-asset CSV routes and 206,964 canonical observations. Table 27
 preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,
@@ -153,8 +156,8 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects three publications, 42 cohorts, and 183
-sheet-assets across 27 checked workbook byte identities. It
+A minimal read-only page projects three publications, 64 cohorts, and 233
+sheet-assets across 31 checked workbook byte identities. It
 derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The default
@@ -166,7 +169,7 @@ If a future cohort has multiple sheets in one year, one cell shows their count
 and least-complete state rather than expanding or silently dropping them.
 Selecting a heatmap cell switches to the filtered **Assets** tab, where every
 row has an **Open CSV** link for only that workbook/sheet asset's canonical rows.
-The foreground server derives these 183 allowlisted views
+The foreground server derives these 233 allowlisted views
 from the checked cohort CSV files using workbook digest, sheet, and publication
 date; it creates no new data authority or duplicate committed CSVs. Heatmap
 symbols and accessible labels accompany every colour, and the page states that

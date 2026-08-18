@@ -30,8 +30,8 @@ EXPECTED_NUMBERED_COUNTS = {
 EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
-EXPECTED_FAMILY_COUNT = 192
-EXPECTED_REGISTERED_COUNT = 48
+EXPECTED_FAMILY_COUNT = 198
+EXPECTED_REGISTERED_COUNT = 79
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -52,6 +52,20 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
         "criminal-courts-guilty-outcome-offence-by-sentence",
         "criminal-courts-guilty-outcome-offence-by-duration",
+        "criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level",
+        "criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2011",
+        "criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023",
+        "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011",
+        "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023",
+        "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011",
+        "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2023",
+        "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011",
+        "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023",
+        "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011",
+        "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023",
+        "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
+        "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023",
+        "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
     }
 )
 

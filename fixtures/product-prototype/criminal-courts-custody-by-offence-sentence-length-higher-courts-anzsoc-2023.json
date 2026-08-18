@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-13-normalized.xlsx",
+      "contentDigest": "sha256:fa1e98f3489817397e3a0de43b220f7f91a234577adee89546445b2c87332695",
+      "byteLength": 117473,
+      "sheet": "Table 80",
+      "replayResponse": {
+        "path": "replay/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023-2024.response.txt",
+        "contentDigest": "sha256:c16d94533b0154bcea0065234a033c8075245d1d948a726923f7f45da313b589",
+        "byteLength": 595,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

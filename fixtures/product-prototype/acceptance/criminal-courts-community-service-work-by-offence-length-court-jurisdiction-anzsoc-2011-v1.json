@@ -1,0 +1,1210 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011-v1",
+  "tableFamilyId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 745,
+        "2022": 745,
+        "2023": 745
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:44762b1c585d4e3694cae4c12fee4e63ea3b8a929996a2c80af07214fb583b5e",
+        "2022": "sha256:44762b1c585d4e3694cae4c12fee4e63ea3b8a929996a2c80af07214fb583b5e",
+        "2023": "sha256:44762b1c585d4e3694cae4c12fee4e63ea3b8a929996a2c80af07214fb583b5e"
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "hour",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 579,
+        "2022": 528,
+        "2023": 596
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:a19629d9d2662d4bb02831ccb91a7601de0669202debcba7ea845ded822d0259",
+        "2022": "sha256:f6399ad48f4ddd8ea9aee5ebc765e83694d093f6580b943b216d9ed370fb7958",
+        "2023": "sha256:1bf8a61dbde8e062349036bfc9b58cafacb9d4a3fa6d253583b53dfa9bff1c8b"
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "hour",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_031_SEXUAL_ASSAULT",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_121_PROPERTY_DAMAGE",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+            "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 579,
+        "2022": 528,
+        "2023": 596
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:d102336eb9a82130814cbbf61190dd351b0d455f7db46fec886b143f454b6332",
+        "2022": "sha256:e7e9671e914402d3c910b67311c158ae13d3c57e9b354e14b5a75e671efe1a22",
+        "2023": "sha256:30a2abf3e0ca2e44df63b9d742b975be74aeaaec12a7cb69784647fe6f4e2520"
+      }
+    },
+    {
+      "id": "defendant-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "OFFENCE_TOTAL_PERCENTAGE_SELECTION"
+          ]
+        },
+        "dimensionOverrides": {
+          "principal_offence": "OFFENCE_TOTAL"
+        }
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 117,
+        "2022": 117,
+        "2023": 117
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:080808827a00e3b8a9d32f9ab90b566a8240200f83d91b0b2dd8e7003a8ffd00",
+        "2022": "sha256:080808827a00e3b8a9d32f9ab90b566a8240200f83d91b0b2dd8e7003a8ffd00",
+        "2023": "sha256:080808827a00e3b8a9d32f9ab90b566a8240200f83d91b0b2dd8e7003a8ffd00"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "aggregate_sentence_length",
+    "court_level",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "aggregate_sentence_length": [
+      "^sentence\\ length$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "aggregate_sentence_length_id",
+    "court_level_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1918,
+    "maximumRows": 2054,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 14
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "ANZSOC_2011_021_ASSAULT",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_031_SEXUAL_ASSAULT",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_061_ROBBERY",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_121_PROPERTY_DAMAGE",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+        "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+        "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+        "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+        "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "OFFENCE_TOTAL"
+      ],
+      "2022": [
+        "ANZSOC_2011_021_ASSAULT",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_031_SEXUAL_ASSAULT",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_061_ROBBERY",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_121_PROPERTY_DAMAGE",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+        "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+        "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+        "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+        "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "OFFENCE_TOTAL"
+      ],
+      "2023": [
+        "ANZSOC_2011_021_ASSAULT",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_031_SEXUAL_ASSAULT",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_061_ROBBERY",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_121_PROPERTY_DAMAGE",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+        "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+        "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+        "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+        "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2021": [
+        "LENGTH_120_HOURS_AND_OVER",
+        "LENGTH_40_TO_UNDER_80_HOURS",
+        "LENGTH_80_TO_UNDER_120_HOURS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_40_HOURS"
+      ],
+      "2022": [
+        "LENGTH_120_HOURS_AND_OVER",
+        "LENGTH_40_TO_UNDER_80_HOURS",
+        "LENGTH_80_TO_UNDER_120_HOURS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_40_HOURS"
+      ],
+      "2023": [
+        "LENGTH_120_HOURS_AND_OVER",
+        "LENGTH_40_TO_UNDER_80_HOURS",
+        "LENGTH_80_TO_UNDER_120_HOURS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_40_HOURS"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2022": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2023": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    }
+  },
+  "aliases": {
+    "principal_offence": {
+      "02 Acts intended to cause injury": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Acts intended to cause injury(c)": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "021 Assault": "ANZSOC_2011_021_ASSAULT",
+      "03 Sexual assault and related offences": "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "031 Sexual assault": "ANZSOC_2011_031_SEXUAL_ASSAULT",
+      "04 Dangerous/negligent acts": "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/harassment": "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "05 Abduction/harassment(d)": "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "053 Harassment and threatening behaviour": "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "053 Harassment and threatening behaviour(d)": "ANZSOC_2011_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "06 Robbery/extortion": "ANZSOC_2011_06_ROBBERY_EXTORTION",
+      "061 Robbery": "ANZSOC_2011_061_ROBBERY",
+      "07 Unlawful entry with intent": "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "08 Theft": "ANZSOC_2011_08_THEFT",
+      "082 Theft (except motor vehicles)": "ANZSOC_2011_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+      "09 Fraud/deception": "ANZSOC_2011_09_FRAUD_DECEPTION",
+      "091 Obtain benefit by deception": "ANZSOC_2011_091_OBTAIN_BENEFIT_BY_DECEPTION",
+      "10 Illicit drug offences": "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+      "102 Deal or traffic illicit drugs": "ANZSOC_2011_102_DEAL_OR_TRAFFIC_ILLICIT_DRUGS",
+      "11 Weapons/explosives": "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+      "12 Property damage and environmental pollution": "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "121 Property damage": "ANZSOC_2011_121_PROPERTY_DAMAGE",
+      "13 Public order offences": "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+      "131 Disorderly conduct": "ANZSOC_2011_131_DISORDERLY_CONDUCT",
+      "133 Offensive conduct": "ANZSOC_2011_133_OFFENSIVE_CONDUCT",
+      "14 Traffic and vehicle regulatory offences": "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "141 Driver licence offences": "ANZSOC_2011_141_DRIVER_LICENCE_OFFENCES",
+      "143 Regulatory driving offences": "ANZSOC_2011_143_REGULATORY_DRIVING_OFFENCES",
+      "15 Offences against justice": "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "15 Offences against justice(e)": "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "153 Breach of violence and non violence orders": "ANZSOC_2011_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+      "156 Offences against justice procedures": "ANZSOC_2011_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+      "All principal offences": "OFFENCE_TOTAL",
+      "All principal offences (%)": "OFFENCE_TOTAL_PERCENTAGE_SELECTION",
+      "All principal offences(f)": "OFFENCE_TOTAL"
+    },
+    "aggregate_sentence_length": {
+      "120 hours & over": "LENGTH_120_HOURS_AND_OVER",
+      "40 to under 80 hours": "LENGTH_40_TO_UNDER_80_HOURS",
+      "80 to under 120 hours": "LENGTH_80_TO_UNDER_120_HOURS",
+      "Mean": "LENGTH_MEAN",
+      "Mean(b)": "LENGTH_MEAN",
+      "Median": "LENGTH_MEDIAN",
+      "Median(b)": "LENGTH_MEDIAN",
+      "Total": "LENGTH_TOTAL",
+      "Total(a)": "LENGTH_TOTAL",
+      "Under 40 hours": "LENGTH_UNDER_40_HOURS"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    },
+    "jurisdiction": {
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "Queensland": "QLD",
+      "South Australia": "SA",
+      "Tasmania": "TAS",
+      "Victoria": "VIC",
+      "Victoria(g)": "VIC",
+      "Western Australia": "WA"
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ACT": [
+            "R158C2"
+          ],
+          "NSW": [
+            "R39C2"
+          ],
+          "NT": [
+            "R141C2"
+          ],
+          "QLD": [
+            "R73C2"
+          ],
+          "SA": [
+            "R90C2"
+          ],
+          "TAS": [
+            "R124C2"
+          ],
+          "VIC": [
+            "R56C2"
+          ],
+          "WA": [
+            "R107C2"
+          ]
+        },
+        "2022": {
+          "ACT": [
+            "R158C2"
+          ],
+          "NSW": [
+            "R39C2"
+          ],
+          "NT": [
+            "R141C2"
+          ],
+          "QLD": [
+            "R73C2"
+          ],
+          "SA": [
+            "R90C2"
+          ],
+          "TAS": [
+            "R124C2"
+          ],
+          "VIC": [
+            "R56C2"
+          ],
+          "WA": [
+            "R107C2"
+          ]
+        },
+        "2023": {
+          "ACT": [
+            "R157C2"
+          ],
+          "NSW": [
+            "R38C2"
+          ],
+          "NT": [
+            "R140C2"
+          ],
+          "QLD": [
+            "R72C2"
+          ],
+          "SA": [
+            "R89C2"
+          ],
+          "TAS": [
+            "R123C2"
+          ],
+          "VIC": [
+            "R55C2"
+          ],
+          "WA": [
+            "R106C2"
+          ]
+        }
+      }
+    }
+  ],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "strictAliasMatching": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

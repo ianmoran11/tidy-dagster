@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-13-normalized.xlsx",
+      "contentDigest": "sha256:3b8fb5b8430126c59802828000ed40e637db8d533edf8caa2c25260f46a978b4",
+      "byteLength": 174379,
+      "sheet": "Table 68",
+      "replayResponse": {
+        "path": "replay/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011-2021.response.txt",
+        "contentDigest": "sha256:2e7057b130f55838b976fa8e14f9a6c7f9355db64c65f41111d4bc4bcae4cfdb",
+        "byteLength": 613,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-13-normalized.xlsx",
+      "contentDigest": "sha256:c28dc27123429a9599ba601b13190012e3370a93157d82f10f24aabfa1d01381",
+      "byteLength": 183903,
+      "sheet": "Table 68",
+      "replayResponse": {
+        "path": "replay/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011-2022.response.txt",
+        "contentDigest": "sha256:fe315a7d204ba649f1fd793eb184fe698809e58d2b7feb735884a5fb029e6056",
+        "byteLength": 613,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-13-normalized.xlsx",
+      "contentDigest": "sha256:028acd5b907dee9f4d3d4a637f926320a58a185b8e49e5c3493ab5b7245353db",
+      "byteLength": 127650,
+      "sheet": "Table 76",
+      "replayResponse": {
+        "path": "replay/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011-2023.response.txt",
+        "contentDigest": "sha256:b1539f6ba03a7e2b7bd218c29bb401b4f2bccb1024b1ee8bcd12aeed64182eb6",
+        "byteLength": 613,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-13-normalized.xlsx",
+      "contentDigest": "sha256:3b8fb5b8430126c59802828000ed40e637db8d533edf8caa2c25260f46a978b4",
+      "byteLength": 174379,
+      "sheet": "Table 71",
+      "replayResponse": {
+        "path": "replay/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011-2021.response.txt",
+        "contentDigest": "sha256:cc67e6e0d0a5bd45639fc1f2b8d57fbeee3f0d370e0105d80722150e6cd589d6",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-13-normalized.xlsx",
+      "contentDigest": "sha256:c28dc27123429a9599ba601b13190012e3370a93157d82f10f24aabfa1d01381",
+      "byteLength": 183903,
+      "sheet": "Table 71",
+      "replayResponse": {
+        "path": "replay/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011-2022.response.txt",
+        "contentDigest": "sha256:763c41d3dea8cbf8a93952583c041b4c066a7dcf30798ee03c49eda783f77592",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-13-normalized.xlsx",
+      "contentDigest": "sha256:028acd5b907dee9f4d3d4a637f926320a58a185b8e49e5c3493ab5b7245353db",
+      "byteLength": 127650,
+      "sheet": "Table 79",
+      "replayResponse": {
+        "path": "replay/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011-2023.response.txt",
+        "contentDigest": "sha256:60de9f3c7faa1afd2c3a1c8ea7dcf62c22e2aa34a2082360f00459095efa74cf",
+        "byteLength": 589,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

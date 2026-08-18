@@ -765,8 +765,8 @@ declaration. The manifest binds both scripts, original/derived identities,
 corrections, and retained ranges and reproduces all eight shared derivatives
 byte-for-byte.
 
-The combined registered batch is now 17 cohorts and 80 worksheets, containing
-40,916 canonical observations. The dashboard projects two publications, 22
-cohorts, 105 worksheet-assets, and 54,199 canonical observations through 105
+The combined registered batch now contains 59 cohorts and 208 worksheets with
+193,681 canonical observations. The dashboard projects three publications, 64
+cohorts, 233 worksheet-assets, and 206,964 canonical observations through 233
 verified CSV routes. Dagster and the dashboard remain replaceable, read-only
 projections rather than evidence authority.

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
-  "batchId": "justice-one-hundred-seventy-seven-worksheets-v1",
-  "recordedAt": "2026-08-18T00:00:00+00:00",
-  "worksheetCount": 177,
+  "batchId": "justice-two-hundred-eight-worksheets-v1",
+  "recordedAt": "2026-08-18T10:00:00Z",
+  "worksheetCount": 208,
   "providerCalls": 0,
   "entries": [
     {
@@ -1898,6 +1898,561 @@
         "2022": 0,
         "2023": 0,
         "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level",
+      "label": "Criminal Courts, Australia — Guilty outcome — principal sentence by length and court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_principal_sentence_by_length_and_court_level_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_principal_sentence_by_length_and_court_level_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        272,
+        214,
+        224,
+        224
+      ],
+      "expectedCanonicalCount": 934,
+      "expectedMeasureCounts": {
+        "defendant-count": 472,
+        "sentence-mean-duration": 231,
+        "sentence-median-duration": 231
+      },
+      "expectedValueStatusCounts": {
+        "observed": 918,
+        "suppressed": 16
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Custody sentence length — All Courts — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_all_courts_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_all_courts_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        1782,
+        1784,
+        1969
+      ],
+      "expectedCanonicalCount": 5535,
+      "expectedMeasureCounts": {
+        "defendant-count": 4250,
+        "defendant-proportion": 279,
+        "sentence-mean-duration": 503,
+        "sentence-median-duration": 503
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 180,
+        "observed": 5351,
+        "suppressed": 4
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Custody sentence length — All Courts — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_all_courts_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_all_courts_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        2123
+      ],
+      "expectedCanonicalCount": 2123,
+      "expectedMeasureCounts": {
+        "defendant-count": 1656,
+        "defendant-proportion": 99,
+        "sentence-mean-duration": 184,
+        "sentence-median-duration": 184
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 151,
+        "observed": 1960,
+        "suppressed": 12
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Custody sentence length — Higher Courts — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_higher_courts_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_higher_courts_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        1454,
+        1460,
+        1470
+      ],
+      "expectedCanonicalCount": 4384,
+      "expectedMeasureCounts": {
+        "defendant-count": 3312,
+        "defendant-proportion": 270,
+        "sentence-mean-duration": 401,
+        "sentence-median-duration": 401
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 54,
+        "observed": 4312,
+        "suppressed": 18
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Custody sentence length — Higher Courts — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_higher_courts_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_higher_courts_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        1380
+      ],
+      "expectedCanonicalCount": 1380,
+      "expectedMeasureCounts": {
+        "defendant-count": 1032,
+        "defendant-proportion": 90,
+        "sentence-mean-duration": 129,
+        "sentence-median-duration": 129
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 18,
+        "observed": 1350,
+        "suppressed": 12
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Custody sentence length — Magistrates' Courts — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_magistrates_courts_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_magistrates_courts_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        1178,
+        1192,
+        1341
+      ],
+      "expectedCanonicalCount": 3711,
+      "expectedMeasureCounts": {
+        "defendant-count": 2660,
+        "defendant-proportion": 223,
+        "sentence-mean-duration": 414,
+        "sentence-median-duration": 414
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 157,
+        "observed": 3548,
+        "suppressed": 6
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Custody sentence length — Magistrates' Courts — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_magistrates_courts_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_magistrates_courts_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        1269
+      ],
+      "expectedCanonicalCount": 1269,
+      "expectedMeasureCounts": {
+        "defendant-count": 924,
+        "defendant-proportion": 81,
+        "sentence-mean-duration": 132,
+        "sentence-median-duration": 132
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 116,
+        "observed": 1153
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Custody sentence length — Children's Courts — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        510,
+        508,
+        592
+      ],
+      "expectedCanonicalCount": 1610,
+      "expectedMeasureCounts": {
+        "defendant-count": 1040,
+        "defendant-proportion": 198,
+        "sentence-mean-duration": 186,
+        "sentence-median-duration": 186
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 110,
+        "observed": 1480,
+        "suppressed": 20
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Custody sentence length — Children's Courts — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        592
+      ],
+      "expectedCanonicalCount": 592,
+      "expectedMeasureCounts": {
+        "defendant-count": 390,
+        "defendant-proportion": 72,
+        "sentence-mean-duration": 65,
+        "sentence-median-duration": 65
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 74,
+        "observed": 508,
+        "suppressed": 10
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Community service/work length — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        2020,
+        1918,
+        2054
+      ],
+      "expectedCanonicalCount": 5992,
+      "expectedMeasureCounts": {
+        "defendant-count": 2235,
+        "defendant-proportion": 351,
+        "sentence-mean-duration": 1703,
+        "sentence-median-duration": 1703
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 246,
+        "observed": 5600,
+        "suppressed": 146
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Community service/work length — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        1950
+      ],
+      "expectedCanonicalCount": 1950,
+      "expectedMeasureCounts": {
+        "defendant-count": 705,
+        "defendant-proportion": 117,
+        "sentence-mean-duration": 564,
+        "sentence-median-duration": 564
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 100,
+        "observed": 1716,
+        "suppressed": 134
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Fine amount by offence, court and jurisdiction — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fines_by_offence_amount_court_jurisdiction_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fines_by_offence_amount_court_jurisdiction_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        1894,
+        1800,
+        1924
+      ],
+      "expectedCanonicalCount": 5618,
+      "expectedMeasureCounts": {
+        "defendant-count": 2085,
+        "defendant-proportion": 343,
+        "fine-mean-amount": 1595,
+        "fine-median-amount": 1595
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 208,
+        "observed": 5258,
+        "suppressed": 152
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Fine amount by offence, court and jurisdiction — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fines_by_offence_amount_court_jurisdiction_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fines_by_offence_amount_court_jurisdiction_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        1768
+      ],
+      "expectedCanonicalCount": 1768,
+      "expectedMeasureCounts": {
+        "defendant-count": 635,
+        "defendant-proportion": 117,
+        "fine-mean-amount": 508,
+        "fine-median-amount": 508
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 72,
+        "observed": 1582,
+        "suppressed": 114
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Custody sentence length by Indigenous status — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        1989,
+        1981,
+        2448
+      ],
+      "expectedCanonicalCount": 6418,
+      "expectedMeasureCounts": {
+        "defendant-count": 4448,
+        "defendant-proportion": 382,
+        "sentence-mean-duration": 794,
+        "sentence-median-duration": 794
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 476,
+        "observed": 5910,
+        "suppressed": 32
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
       }
     }
   ],

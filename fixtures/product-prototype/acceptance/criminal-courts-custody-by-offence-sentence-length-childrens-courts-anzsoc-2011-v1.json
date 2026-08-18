@@ -1,0 +1,855 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011-v1",
+  "tableFamilyId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 325,
+        "2022": 325,
+        "2023": 390
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:0653c5dd1ac68507241b27c7414a4e63e907860df45423526db7a03ba8d4a216",
+        "2022": "sha256:0653c5dd1ac68507241b27c7414a4e63e907860df45423526db7a03ba8d4a216",
+        "2023": "sha256:1414579fef30acb402c62f36e3600d18a5a8d73553b4de2fbbe70b5a62a18656"
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 61,
+        "2022": 60,
+        "2023": 65
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:6fd3a2d397e77c59857291d1ec673709d6e229c2711f827b67a109ddf22fae97",
+        "2022": "sha256:b9979ed086a0d1ceb1b748f4f9a3f270e7edc15f1f21ac11565fc4eebc954edc",
+        "2023": "sha256:6271573e3a31af04161042f309f52a5a27256500b4c998a8402b35e6ceccf998"
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_021_ASSAULT",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_061_ROBBERY",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 61,
+        "2022": 60,
+        "2023": 65
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:383b533455375aa99a4a312b8792c46a87514149b88527bf95065c9c91f070fc",
+        "2022": "sha256:7ce71b9bee66e55895c167e459aa3177deab2406d42ec4ea169a6152eb6aaa83",
+        "2023": "sha256:9d01df2c66de2b23e492bf4e3e193d08f6bf2460c776c30619f6eed7fc7b59a9"
+      }
+    },
+    {
+      "id": "defendant-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "OFFENCE_TOTAL_PERCENTAGE_SELECTION"
+          ]
+        },
+        "dimensionOverrides": {
+          "principal_offence": "OFFENCE_TOTAL"
+        }
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_YEAR_AND_OVER",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 63,
+        "2022": 63,
+        "2023": 72
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:7438c887207bd831a9a9f015c0ab533af435fbde03f1e2cb22eee4f6aa54a96a",
+        "2022": "sha256:7438c887207bd831a9a9f015c0ab533af435fbde03f1e2cb22eee4f6aa54a96a",
+        "2023": "sha256:7696f1dd18c65aabfb021d169f971a7aa818f0c7178bbcbbc9a25606f2f8aa0c"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "aggregate_sentence_length",
+    "court_level",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "aggregate_sentence_length": [
+      "^sentence\\ length$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "aggregate_sentence_length_id",
+    "court_level_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 508,
+    "maximumRows": 592,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 9
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "ANZSOC_2011_021_ASSAULT",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_061_ROBBERY",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "OFFENCE_TOTAL"
+      ],
+      "2022": [
+        "ANZSOC_2011_021_ASSAULT",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_061_ROBBERY",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "OFFENCE_TOTAL"
+      ],
+      "2023": [
+        "ANZSOC_2011_021_ASSAULT",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_061_ROBBERY",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2021": [
+        "LENGTH_1_YEAR_AND_OVER",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ],
+      "2022": [
+        "LENGTH_1_YEAR_AND_OVER",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ],
+      "2023": [
+        "LENGTH_1_YEAR_AND_OVER",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "CHILDRENS_COURTS"
+      ],
+      "2022": [
+        "CHILDRENS_COURTS"
+      ],
+      "2023": [
+        "CHILDRENS_COURTS"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2022": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2023": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    }
+  },
+  "aliases": {
+    "principal_offence": {
+      "02 Acts intended to cause injury": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Acts intended to cause injury(e)": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "021 Assault": "ANZSOC_2011_021_ASSAULT",
+      "03 Sexual assault and related offences": "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "04 Dangerous/negligent acts": "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+      "06 Robbery/extortion": "ANZSOC_2011_06_ROBBERY_EXTORTION",
+      "061 Robbery": "ANZSOC_2011_061_ROBBERY",
+      "07 Unlawful entry with intent": "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "08 Theft": "ANZSOC_2011_08_THEFT",
+      "All principal offences": "OFFENCE_TOTAL",
+      "All principal offences (%)": "OFFENCE_TOTAL_PERCENTAGE_SELECTION",
+      "All principal offences(d)": "OFFENCE_TOTAL"
+    },
+    "aggregate_sentence_length": {
+      "1 year & over": "LENGTH_1_YEAR_AND_OVER",
+      "3 to under 6 months": "LENGTH_3_TO_UNDER_6_MONTHS",
+      "6 to under 12 months": "LENGTH_6_TO_UNDER_12_MONTHS",
+      "Mean": "LENGTH_MEAN",
+      "Mean(c)": "LENGTH_MEAN",
+      "Median": "LENGTH_MEDIAN",
+      "Median(c)": "LENGTH_MEDIAN",
+      "No further penalty due to time spent in custody(a)": "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+      "Total": "LENGTH_TOTAL",
+      "Total(b)": "LENGTH_TOTAL",
+      "Under 3 months": "LENGTH_UNDER_3_MONTHS"
+    },
+    "court_level": {
+      "Table 69 Defendants sentenced to custody in a correctional institution – Children's Courts, Selected principal offence by sentence length, States and territories, 2021–22": "CHILDRENS_COURTS",
+      "Table 69 Defendants sentenced to custody in a correctional institution – Children's Courts, Selected principal offence by sentence length, States and territories, 2022–23": "CHILDRENS_COURTS",
+      "Table 77 Defendants sentenced to custody in a correctional institution – Children's Courts, Selected principal offence by sentence length, States and territories, 2023–24": "CHILDRENS_COURTS"
+    },
+    "jurisdiction": {
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "Queensland": "QLD",
+      "South Australia": "SA",
+      "South Australia(f)": "SA",
+      "Tasmania": "TAS",
+      "Victoria": "VIC",
+      "Western Australia": "WA"
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ACT": [
+            "R81C2"
+          ],
+          "NSW": [
+            "R18C2"
+          ],
+          "NT": [
+            "R72C2"
+          ],
+          "QLD": [
+            "R36C2"
+          ],
+          "SA": [
+            "R45C2"
+          ],
+          "TAS": [
+            "R63C2"
+          ],
+          "VIC": [
+            "R27C2"
+          ],
+          "WA": [
+            "R54C2"
+          ]
+        },
+        "2022": {
+          "ACT": [
+            "R81C2"
+          ],
+          "NSW": [
+            "R18C2"
+          ],
+          "NT": [
+            "R72C2"
+          ],
+          "QLD": [
+            "R36C2"
+          ],
+          "SA": [
+            "R45C2"
+          ],
+          "TAS": [
+            "R63C2"
+          ],
+          "VIC": [
+            "R27C2"
+          ],
+          "WA": [
+            "R54C2"
+          ]
+        },
+        "2023": {
+          "ACT": [
+            "R80C2"
+          ],
+          "NSW": [
+            "R17C2"
+          ],
+          "NT": [
+            "R71C2"
+          ],
+          "QLD": [
+            "R35C2"
+          ],
+          "SA": [
+            "R44C2"
+          ],
+          "TAS": [
+            "R62C2"
+          ],
+          "VIC": [
+            "R26C2"
+          ],
+          "WA": [
+            "R53C2"
+          ]
+        }
+      }
+    }
+  ],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "strictAliasMatching": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

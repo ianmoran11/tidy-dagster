@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011",
+  "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011.json",
+  "cohortDigest": "sha256:f5129db8f422865b755a230f949c57ca91a2d46f57ad3a9935736713093cb377",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011-v1.json",
+  "acceptanceContractDigest": "sha256:3fb3168578dff3996eb168d222f2c5389a685b851d974f841b0eee46bf08cdc5",
+  "recordedAt": "2026-08-18T10:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 3,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 4384,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 4384,
+  "measureCounts": {
+    "defendant-count": 3312,
+    "defendant-proportion": 270,
+    "sentence-mean-duration": 401,
+    "sentence-median-duration": 401
+  },
+  "valueStatusCounts": {
+    "not_applicable": 54,
+    "observed": 4312,
+    "suppressed": 18
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:84f13cb210005a40eed03d804a9bbd490650470bfcabc16b675203c13d3f029f",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:17f4a2b61e244c7186d8e20afe5a4305ee13953e96c16800e21310dc1dbf0db8",
+      "byteLength": 919
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:591634b5a91d732a35ac7d37bc1a32e5b76d8a4990decce52f78fbd0dded551d",
+      "byteLength": 4332217
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:9c460112c433abb7fff7ebe1664a02c218bf5e03497ad5eca038257e9d882d0a",
+      "byteLength": 6924044
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:f32d647f0314053ccc18dc2afb9b2025591b6ea66e3e533aa249cbb3cc40f0ab",
+      "byteLength": 1194
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:32af7ccc904280d042905b25eee925a554cfe7715f903e837e83418e0507e6b8",
+      "byteLength": 3428
+    }
+  ]
+}

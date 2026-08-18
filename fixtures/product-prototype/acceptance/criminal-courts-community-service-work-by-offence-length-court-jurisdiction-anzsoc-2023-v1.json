@@ -1,0 +1,630 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023-v1",
+  "tableFamilyId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+            "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_111_ARSON",
+            "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+            "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+            "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+            "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+            "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_111_ARSON",
+            "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+            "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+            "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+            "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 705
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:59b0efd69d164243ae854bb0381f2f5a227b40cce75239a4af3300e03a05a8d2"
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "hour",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+            "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_111_ARSON",
+            "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+            "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+            "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+            "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+            "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_111_ARSON",
+            "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+            "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+            "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+            "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 564
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:a8b705539d35b03fe4237a2b4754d63f356000eecb266508b46d3d8a49573e5a"
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "hour",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+            "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_111_ARSON",
+            "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+            "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+            "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+            "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_021_SERIOUS_ASSAULT",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+            "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_051_ROBBERY",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_111_ARSON",
+            "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+            "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+            "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+            "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 564
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:6782e12bbcf6c7f5ea173368b3adf00bf2006d73a79cde500f30717236877bdd"
+      }
+    },
+    {
+      "id": "defendant-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "OFFENCE_TOTAL_PERCENTAGE_SELECTION"
+          ]
+        },
+        "dimensionOverrides": {
+          "principal_offence": "OFFENCE_TOTAL"
+        }
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_120_HOURS_AND_OVER",
+            "LENGTH_40_TO_UNDER_80_HOURS",
+            "LENGTH_80_TO_UNDER_120_HOURS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_40_HOURS"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 117
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:080808827a00e3b8a9d32f9ab90b566a8240200f83d91b0b2dd8e7003a8ffd00"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "aggregate_sentence_length",
+    "court_level",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "aggregate_sentence_length": [
+      "^sentence\\ length$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "aggregate_sentence_length_id",
+    "court_level_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1950,
+    "maximumRows": 1950,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 14
+    },
+    "principalOffencesByYear": {
+      "2024": [
+        "ANZSOC_2023_021_SERIOUS_ASSAULT",
+        "ANZSOC_2023_02_ASSAULT",
+        "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+        "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+        "ANZSOC_2023_03_SEXUAL_OFFENCES",
+        "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+        "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+        "ANZSOC_2023_051_ROBBERY",
+        "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+        "ANZSOC_2023_06_BURGLARY",
+        "ANZSOC_2023_07_THEFT",
+        "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+        "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+        "ANZSOC_2023_09_DRUG_OFFENCES",
+        "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+        "ANZSOC_2023_111_ARSON",
+        "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+        "ANZSOC_2023_11_PROPERTY_DAMAGE",
+        "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+        "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+        "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+        "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+        "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+        "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+        "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+        "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+        "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2024": [
+        "LENGTH_120_HOURS_AND_OVER",
+        "LENGTH_40_TO_UNDER_80_HOURS",
+        "LENGTH_80_TO_UNDER_120_HOURS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_40_HOURS"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2024": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    }
+  },
+  "aliases": {
+    "principal_offence": {
+      "02 Assault": "ANZSOC_2023_02_ASSAULT",
+      "021 Serious assault": "ANZSOC_2023_021_SERIOUS_ASSAULT",
+      "03 Sexual offences": "ANZSOC_2023_03_SEXUAL_OFFENCES",
+      "031 Sexual assault of an adult": "ANZSOC_2023_031_SEXUAL_ASSAULT_OF_AN_ADULT",
+      "032 Sexual assault of a child": "ANZSOC_2023_032_SEXUAL_ASSAULT_OF_A_CHILD",
+      "04 Harm or endanger persons": "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "04 Harm or endanger persons(c)": "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "044 Acts that threaten, harass or control": "ANZSOC_2023_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+      "05 Robbery, blackmail, and extortion": "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "051 Robbery": "ANZSOC_2023_051_ROBBERY",
+      "06 Burglary": "ANZSOC_2023_06_BURGLARY",
+      "07 Theft": "ANZSOC_2023_07_THEFT",
+      "08 Fraud and related offences": "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+      "09 Drug offences": "ANZSOC_2023_09_DRUG_OFFENCES",
+      "092 Distribute or deal drugs": "ANZSOC_2023_092_DISTRIBUTE_OR_DEAL_DRUGS",
+      "10 Weapons and explosives offences": "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "11 Property damage": "ANZSOC_2023_11_PROPERTY_DAMAGE",
+      "111 Arson": "ANZSOC_2023_111_ARSON",
+      "112 Damage or destroy property": "ANZSOC_2023_112_DAMAGE_OR_DESTROY_PROPERTY",
+      "12 Public order, health, and safety offences": "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "121 Public safety offences": "ANZSOC_2023_121_PUBLIC_SAFETY_OFFENCES",
+      "122 Disruptive conduct": "ANZSOC_2023_122_DISRUPTIVE_CONDUCT",
+      "13 Traffic and vehicle offences": "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "131 Drink or drug driving": "ANZSOC_2023_131_DRINK_OR_DRUG_DRIVING",
+      "132 Unsafe operation of a road vehicle": "ANZSOC_2023_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+      "133 Driver licence offences": "ANZSOC_2023_133_DRIVER_LICENCE_OFFENCES",
+      "14 Offences against justice procedures and orders(d)": "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "141 Breach of restraining order": "ANZSOC_2023_141_BREACH_OF_RESTRAINING_ORDER",
+      "142 Offences against justice procedures": "ANZSOC_2023_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+      "All principal offences (%)": "OFFENCE_TOTAL_PERCENTAGE_SELECTION",
+      "All principal offences(e)": "OFFENCE_TOTAL"
+    },
+    "aggregate_sentence_length": {
+      "120 hours & over": "LENGTH_120_HOURS_AND_OVER",
+      "40 to under 80 hours": "LENGTH_40_TO_UNDER_80_HOURS",
+      "80 to under 120 hours": "LENGTH_80_TO_UNDER_120_HOURS",
+      "Mean(b)": "LENGTH_MEAN",
+      "Median(b)": "LENGTH_MEDIAN",
+      "Total(a)": "LENGTH_TOTAL",
+      "Under 40 hours": "LENGTH_UNDER_40_HOURS"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    },
+    "jurisdiction": {
+      "Australia": "AUS",
+      "Australian Capital Territory": "ACT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "Queensland": "QLD",
+      "South Australia": "SA",
+      "Tasmania": "TAS",
+      "Victoria(f)": "VIC",
+      "Western Australia": "WA"
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "ACT": [
+            "R151C2"
+          ],
+          "NSW": [
+            "R39C2"
+          ],
+          "NT": [
+            "R135C2"
+          ],
+          "QLD": [
+            "R71C2"
+          ],
+          "SA": [
+            "R87C2"
+          ],
+          "TAS": [
+            "R119C2"
+          ],
+          "VIC": [
+            "R55C2"
+          ],
+          "WA": [
+            "R103C2"
+          ]
+        }
+      }
+    }
+  ],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "strictAliasMatching": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

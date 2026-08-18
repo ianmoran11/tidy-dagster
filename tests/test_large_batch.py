@@ -45,15 +45,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-one-hundred-seventy-seven-worksheets-v1"
-    assert registry.worksheet_count == 177
+    assert registry.batch_id == "justice-two-hundred-eight-worksheets-v1"
+    assert registry.worksheet_count == 208
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 45
+    assert len(registry.entries) == 59
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 17
+    assert len(normalization["entries"]) == 21
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 16,
+        "trim-pathological-styled-blank-cells-v1": 20,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -68,9 +68,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 177
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 208
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 150397
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 193681
     assert sum(item["providerCalls"] for item in manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
@@ -413,9 +413,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 177
+    assert report["acceptedWorksheetCount"] == 208
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 150397
+    assert report["canonicalObservationCount"] == 193681
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -713,10 +713,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-one-hundred-seventy-seven-worksheets-v1",
-        "worksheetCount": 177,
-        "cohortCount": 45,
-        "canonicalObservationCount": 150397,
+        "batchId": "justice-two-hundred-eight-worksheets-v1",
+        "worksheetCount": 208,
+        "cohortCount": 59,
+        "canonicalObservationCount": 193681,
         "providerCalls": 0,
         "verified": True,
     }

@@ -1,0 +1,725 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level-v1",
+  "tableFamilyId": "criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_10_YEARS_AND_OVER",
+            "LENGTH_1_TO_UNDER_2_YEARS",
+            "LENGTH_2_TO_UNDER_5_YEARS",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_5_TO_UNDER_10_YEARS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_BONDS",
+            "SENTENCE_HOME_DETENTION",
+            "SENTENCE_IMPRISONMENT_INCL_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_CORRECTIONS_ORDER",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_OTHER_CUSTODY_IN_THE_COMMUNITY_N_E_C",
+            "SENTENCE_PROBATION_ORDERS",
+            "SENTENCE_TOTAL_CUSTODIAL_ORDERS"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_10_YEARS_AND_OVER",
+            "LENGTH_1_TO_UNDER_2_YEARS",
+            "LENGTH_2_TO_UNDER_5_YEARS",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_5_TO_UNDER_10_YEARS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ]
+        },
+        "2022": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_10_YEARS_AND_OVER",
+            "LENGTH_1_TO_UNDER_2_YEARS",
+            "LENGTH_2_TO_UNDER_5_YEARS",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_5_TO_UNDER_10_YEARS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ]
+        },
+        "2023": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_10_YEARS_AND_OVER",
+            "LENGTH_1_TO_UNDER_2_YEARS",
+            "LENGTH_2_TO_UNDER_5_YEARS",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_5_TO_UNDER_10_YEARS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ]
+        },
+        "2024": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_10_YEARS_AND_OVER",
+            "LENGTH_1_TO_UNDER_2_YEARS",
+            "LENGTH_2_TO_UNDER_5_YEARS",
+            "LENGTH_3_TO_UNDER_6_MONTHS",
+            "LENGTH_5_TO_UNDER_10_YEARS",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_3_MONTHS"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 136,
+        "2022": 112,
+        "2023": 112,
+        "2024": 112
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:0ed7e8bef04b8570f642d110d8344a067ad9299cb481a50a7b57f61eef9f29d7",
+        "2022": "sha256:e529f33bb5bc523971e0d4473ee89bc16d7a07b3aaa07b0d7d0add54cacc5097",
+        "2023": "sha256:e529f33bb5bc523971e0d4473ee89bc16d7a07b3aaa07b0d7d0add54cacc5097",
+        "2024": "sha256:e529f33bb5bc523971e0d4473ee89bc16d7a07b3aaa07b0d7d0add54cacc5097"
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_BONDS",
+            "SENTENCE_HOME_DETENTION",
+            "SENTENCE_IMPRISONMENT_INCL_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_CORRECTIONS_ORDER",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_OTHER_CUSTODY_IN_THE_COMMUNITY_N_E_C",
+            "SENTENCE_PROBATION_ORDERS",
+            "SENTENCE_TOTAL_CUSTODIAL_ORDERS"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 68,
+        "2022": 51,
+        "2023": 56,
+        "2024": 56
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:2d2668257ec1e4d3302ceca6cb1987b5089bee29f626d73d83fd1b6fc58b12c6",
+        "2022": "sha256:87473eba0aff554a758762a9c6d77531ce65261e37234fa0f31d6bedfb6a3131",
+        "2023": "sha256:2cc69a2b508a87031b61686bf76285ab131d0a986c4131beda8a65664696b0e4",
+        "2024": "sha256:2cc69a2b508a87031b61686bf76285ab131d0a986c4131beda8a65664696b0e4"
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_BONDS",
+            "SENTENCE_HOME_DETENTION",
+            "SENTENCE_IMPRISONMENT_INCL_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_CORRECTIONS_ORDER",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_OTHER_CUSTODY_IN_THE_COMMUNITY_N_E_C",
+            "SENTENCE_PROBATION_ORDERS",
+            "SENTENCE_TOTAL_CUSTODIAL_ORDERS"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "sentence_statistic": [
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_IMPRISONMENT",
+            "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+            "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+            "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+            "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 68,
+        "2022": 51,
+        "2023": 56,
+        "2024": 56
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:48cd67d99d9e64f8dba17511927607f88954466eeb8e681bace64e236a2a4ca6",
+        "2022": "sha256:49af25ed9c70e929e1d2b3566bdf5995c16f6c0384a08d9171f9a3f0e44f7e54",
+        "2023": "sha256:eabf06c41fd6cbf742ec3462fdd59bddb4418f54f96fc5c26a523f8c7e643655",
+        "2024": "sha256:eabf06c41fd6cbf742ec3462fdd59bddb4418f54f96fc5c26a523f8c7e643655"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "sentence_statistic",
+    "aggregate_sentence_length",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "sentence_statistic": [
+      "^principal\\ sentence$"
+    ],
+    "aggregate_sentence_length": [
+      "^sentence\\ length$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "sentence_statistic_id",
+    "aggregate_sentence_length_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 214,
+    "maximumRows": 272,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 17
+    },
+    "sentenceStatisticsByYear": {
+      "2021": [
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+        "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_BONDS",
+        "SENTENCE_HOME_DETENTION",
+        "SENTENCE_IMPRISONMENT_INCL_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+        "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+        "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_INTENSIVE_CORRECTIONS_ORDER",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+        "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_OTHER_CUSTODY_IN_THE_COMMUNITY_N_E_C",
+        "SENTENCE_PROBATION_ORDERS",
+        "SENTENCE_TOTAL_CUSTODIAL_ORDERS"
+      ],
+      "2022": [
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_IMPRISONMENT",
+        "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+        "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+        "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+      ],
+      "2023": [
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_IMPRISONMENT",
+        "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+        "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+        "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+      ],
+      "2024": [
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_IMPRISONMENT",
+        "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+        "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+        "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+        "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2021": [
+        "LENGTH_10_YEARS_AND_OVER",
+        "LENGTH_1_TO_UNDER_2_YEARS",
+        "LENGTH_2_TO_UNDER_5_YEARS",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_5_TO_UNDER_10_YEARS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ],
+      "2022": [
+        "LENGTH_10_YEARS_AND_OVER",
+        "LENGTH_1_TO_UNDER_2_YEARS",
+        "LENGTH_2_TO_UNDER_5_YEARS",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_5_TO_UNDER_10_YEARS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ],
+      "2023": [
+        "LENGTH_10_YEARS_AND_OVER",
+        "LENGTH_1_TO_UNDER_2_YEARS",
+        "LENGTH_2_TO_UNDER_5_YEARS",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_5_TO_UNDER_10_YEARS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ],
+      "2024": [
+        "LENGTH_10_YEARS_AND_OVER",
+        "LENGTH_1_TO_UNDER_2_YEARS",
+        "LENGTH_2_TO_UNDER_5_YEARS",
+        "LENGTH_3_TO_UNDER_6_MONTHS",
+        "LENGTH_5_TO_UNDER_10_YEARS",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_3_MONTHS"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "aliases": {
+    "sentence_statistic": {
+      "Custody in a correctional institution": "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Custody in a correctional institution(d)": "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Custody in the community": "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+      "Fully suspended adult sentence": "SENTENCE_FULLY_SUSPENDED_ADULT_SENTENCE",
+      "Fully suspended juvenile sentence": "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+      "Fully suspended sentence": "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+      "Fully suspended sentence(e)": "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+      "Fully suspended sentence(g)": "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+      "Good behaviour (incl. bonds)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour (incl. bonds)(f)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour (incl. bonds)(h)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour bonds": "SENTENCE_GOOD_BEHAVIOUR_BONDS",
+      "Home detention": "SENTENCE_HOME_DETENTION",
+      "Imprisonment": "SENTENCE_IMPRISONMENT",
+      "Imprisonment (incl. Life & Indeterminate imprisonment)": "SENTENCE_IMPRISONMENT_INCL_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+      "Imprisonment with determined term": "SENTENCE_IMPRISONMENT_WITH_DETERMINED_TERM",
+      "Imprisonment with partially suspended term": "SENTENCE_IMPRISONMENT_WITH_PARTIALLY_SUSPENDED_TERM",
+      "Imprisonment(e)": "SENTENCE_IMPRISONMENT",
+      "Intensive corrections order": "SENTENCE_INTENSIVE_CORRECTIONS_ORDER",
+      "Intensive penalty in the community": "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Juvenile detention": "SENTENCE_JUVENILE_DETENTION",
+      "Juvenile detention with determined term": "SENTENCE_JUVENILE_DETENTION_WITH_DETERMINED_TERM",
+      "Juvenile detention with partially suspended term": "SENTENCE_JUVENILE_DETENTION_WITH_PARTIALLY_SUSPENDED_TERM",
+      "Juvenile detention(d)": "SENTENCE_JUVENILE_DETENTION",
+      "Juvenile detention(f)": "SENTENCE_JUVENILE_DETENTION",
+      "Life & Indeterminate imprisonment": "SENTENCE_LIFE_AND_INDETERMINATE_IMPRISONMENT",
+      "Moderate penalty in the community": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Other custody in the community n.e.c.": "SENTENCE_OTHER_CUSTODY_IN_THE_COMMUNITY_N_E_C",
+      "Probation orders": "SENTENCE_PROBATION_ORDERS",
+      "Total custodial orders": "SENTENCE_TOTAL_CUSTODIAL_ORDERS"
+    },
+    "aggregate_sentence_length": {
+      "1 to under 2 years": "LENGTH_1_TO_UNDER_2_YEARS",
+      "10 years & over": "LENGTH_10_YEARS_AND_OVER",
+      "10 years & over(a)": "LENGTH_10_YEARS_AND_OVER",
+      "2 to under 5 years": "LENGTH_2_TO_UNDER_5_YEARS",
+      "3 to under 6 months": "LENGTH_3_TO_UNDER_6_MONTHS",
+      "5 to under 10 years": "LENGTH_5_TO_UNDER_10_YEARS",
+      "6 to under 12 months": "LENGTH_6_TO_UNDER_12_MONTHS",
+      "Mean": "LENGTH_MEAN",
+      "Mean(c)": "LENGTH_MEAN",
+      "Median": "LENGTH_MEDIAN",
+      "Median(c)": "LENGTH_MEDIAN",
+      "Total": "LENGTH_TOTAL",
+      "Total(b)": "LENGTH_TOTAL",
+      "Under 3 months": "LENGTH_UNDER_3_MONTHS"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "strictAliasMatching": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

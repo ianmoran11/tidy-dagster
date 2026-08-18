@@ -1,9 +1,124 @@
 {
   "schemaVersion": "tidy.product-prototype-workbook-normalization/v1",
-  "recordedAt": "2026-08-16T11:30:00+00:00",
+  "recordedAt": "2026-08-18T10:00:00Z",
   "scriptPath": "scripts/trim-prototype-workbook-formatting.py",
   "scriptDigest": "sha256:489859dad4e38248deedf5713032ec8ab05d6a5d3a90097072a42136c4d25e24",
   "entries": [
+    {
+      "year": 2021,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-1-source.xlsx",
+      "sourceDigest": "sha256:9651530dbd598478cef0d8f2a2d68bc62cade94d259d43f18ee8fe8feb575534",
+      "sourceByteLength": 216832,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-1-normalized.xlsx",
+      "outputDigest": "sha256:a541909bfe1a7f44d214e9ae870bb33e6c43feb181f73b07ed5f930d0cdd8b8c",
+      "outputByteLength": 166236,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:M333"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:J222"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:R146"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:G593"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:M147"
+        },
+        {
+          "sheet": "Table 6",
+          "retainedRange": "A1:M49"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2021,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-13-source.xlsx",
+      "sourceDigest": "sha256:8858a0af0fbd4f04e985be983c1f9c1b5412ce67e1fad93bd51f07272aab9dc9",
+      "sourceByteLength": 215619,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-13-normalized.xlsx",
+      "outputDigest": "sha256:3b8fb5b8430126c59802828000ed40e637db8d533edf8caa2c25260f46a978b4",
+      "outputByteLength": 174379,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 65",
+          "retainedRange": "A1:Q34"
+        },
+        {
+          "sheet": "Table 66",
+          "retainedRange": "A1:K197"
+        },
+        {
+          "sheet": "Table 67",
+          "retainedRange": "A1:K165"
+        },
+        {
+          "sheet": "Table 68",
+          "retainedRange": "A1:I167"
+        },
+        {
+          "sheet": "Table 69",
+          "retainedRange": "A1:H92"
+        },
+        {
+          "sheet": "Table 70",
+          "retainedRange": "A1:N177"
+        },
+        {
+          "sheet": "Table 71",
+          "retainedRange": "A1:N167"
+        },
+        {
+          "sheet": "Table 72",
+          "retainedRange": "A1:V118"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2021,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-2-source.xlsx",
+      "sourceDigest": "sha256:b28f7ac2a9d8a3fd39a413e6d38b8fea0c3a262cc4469f724bb2a7db176bf92a",
+      "sourceByteLength": 187543,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-2-normalized.xlsx",
+      "outputDigest": "sha256:13031bceb80730548ebcbb6a9074724ebafed087f841b9eecb99afc7aaee210c",
+      "outputByteLength": 141801,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 7",
+          "retainedRange": "A1:M341"
+        },
+        {
+          "sheet": "Table 8",
+          "retainedRange": "A1:J230"
+        },
+        {
+          "sheet": "Table 9",
+          "retainedRange": "A1:S147"
+        },
+        {
+          "sheet": "Table 10",
+          "retainedRange": "A1:S117"
+        },
+        {
+          "sheet": "Table 11",
+          "retainedRange": "A1:Q81"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
     {
       "year": 2021,
       "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2021.xlsx",
@@ -16,73 +131,6 @@
         {
           "sheet": "Table_34",
           "retainedRange": "A1:B190"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2022,
-      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2022.xlsx",
-      "sourceDigest": "sha256:6df72fa38f0fc5cc2c5c322c0e20655c3685e41281a6cab4f78c59ae44173c9c",
-      "sourceByteLength": 363962,
-      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2022-batch-normalized.xlsx",
-      "outputDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
-      "outputByteLength": 327530,
-      "trimmedSheets": [
-        {
-          "sheet": "Table_34",
-          "retainedRange": "A1:B192"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2023,
-      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2023.xlsx",
-      "sourceDigest": "sha256:59afcaf8a0c52a2754f75954ce5821611ee735f329d90d0e4b80c3dead0827af",
-      "sourceByteLength": 335227,
-      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2023-batch-normalized.xlsx",
-      "outputDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
-      "outputByteLength": 302509,
-      "trimmedSheets": [
-        {
-          "sheet": "Table_34",
-          "retainedRange": "A1:B189"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2025,
-      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2025.xlsx",
-      "sourceDigest": "sha256:464f80e73901ae9010d2dbbf1fc1bf37222711a3ccacc44efdbe99953aa3d263",
-      "sourceByteLength": 169943,
-      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2025-batch-normalized.xlsx",
-      "outputDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
-      "outputByteLength": 169355,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 24",
-          "retainedRange": "A1:D176"
-        },
-        {
-          "sheet": "Table 25",
-          "retainedRange": "A1:D176"
-        },
-        {
-          "sheet": "Table 29",
-          "retainedRange": "A1:J50"
-        },
-        {
-          "sheet": "Table 33",
-          "retainedRange": "A1:F44"
-        },
-        {
-          "sheet": "Table 34",
-          "retainedRange": "A1:B191"
         }
       ],
       "correction": null,
@@ -123,6 +171,138 @@
     },
     {
       "year": 2022,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-1-source.xlsx",
+      "sourceDigest": "sha256:9fd38cfca91c5a601b40d2a5e3d85eb875630cc600ecceb3e7ee37f0f5d64340",
+      "sourceByteLength": 204103,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-1-normalized.xlsx",
+      "outputDigest": "sha256:9a9a18151fc6ccb58fa831a0628f13cd867486873b206ae32e4ab327bd903eba",
+      "outputByteLength": 167661,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:N333"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:J222"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:R146"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:G593"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:M147"
+        },
+        {
+          "sheet": "Table 6",
+          "retainedRange": "A1:M49"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-13-source.xlsx",
+      "sourceDigest": "sha256:aea836d7165a9e68478a04e49f3242095746938791be25528dca9ba7c31cfd55",
+      "sourceByteLength": 225907,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-13-normalized.xlsx",
+      "outputDigest": "sha256:c28dc27123429a9599ba601b13190012e3370a93157d82f10f24aabfa1d01381",
+      "outputByteLength": 183903,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 65",
+          "retainedRange": "A1:Q28"
+        },
+        {
+          "sheet": "Table 66",
+          "retainedRange": "A1:K197"
+        },
+        {
+          "sheet": "Table 67",
+          "retainedRange": "A1:K165"
+        },
+        {
+          "sheet": "Table 68",
+          "retainedRange": "A1:I167"
+        },
+        {
+          "sheet": "Table 69",
+          "retainedRange": "A1:H92"
+        },
+        {
+          "sheet": "Table 70",
+          "retainedRange": "A1:N177"
+        },
+        {
+          "sheet": "Table 71",
+          "retainedRange": "A1:N167"
+        },
+        {
+          "sheet": "Table 72",
+          "retainedRange": "A1:V118"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-2-source.xlsx",
+      "sourceDigest": "sha256:4f6761f483c64e26dc88ad05f5df0262d3a64dacd4598b29bff86eee8663a5ca",
+      "sourceByteLength": 161952,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-2-normalized.xlsx",
+      "outputDigest": "sha256:cde6a914aa3b974579f8199dcaeb1102f2ae76629bf13d04f67d00e70810c9e8",
+      "outputByteLength": 137613,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 7",
+          "retainedRange": "A1:N333"
+        },
+        {
+          "sheet": "Table 8",
+          "retainedRange": "A1:J222"
+        },
+        {
+          "sheet": "Table 9",
+          "retainedRange": "A1:S147"
+        },
+        {
+          "sheet": "Table 10",
+          "retainedRange": "A1:S117"
+        },
+        {
+          "sheet": "Table 11",
+          "retainedRange": "A1:Q81"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2022.xlsx",
+      "sourceDigest": "sha256:6df72fa38f0fc5cc2c5c322c0e20655c3685e41281a6cab4f78c59ae44173c9c",
+      "sourceByteLength": 363962,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2022-batch-normalized.xlsx",
+      "outputDigest": "sha256:a16a47e574d8da8d851f904f8ee60324cac870a89e76f4ea9114680bdde40a2b",
+      "outputByteLength": 327530,
+      "trimmedSheets": [
+        {
+          "sheet": "Table_34",
+          "retainedRange": "A1:B192"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
       "sourcePath": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-source.xlsx",
       "sourceDigest": "sha256:180d4db8289b6fdd20823f528e75938d21b771647c6ecaf3f0fd5bb761f8a646",
       "sourceByteLength": 100064,
@@ -149,6 +329,138 @@
         {
           "sheet": "Table 5",
           "retainedRange": "A1:AE76"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-1-source.xlsx",
+      "sourceDigest": "sha256:bfce118ad6b441bc6341360db234500d11fa6fa70b5eafc46f372ac3156cfa33",
+      "sourceByteLength": 155683,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-1-normalized.xlsx",
+      "outputDigest": "sha256:9050c583f3651ea86960db546f49b4cfe7d89cd41755f5ae88930d2a52c2def0",
+      "outputByteLength": 133603,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:O366"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:J235"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:R153"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:G623"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:M151"
+        },
+        {
+          "sheet": "Table 6",
+          "retainedRange": "A1:M50"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-13-source.xlsx",
+      "sourceDigest": "sha256:0dc51f02c529c1c502a47462eb50995c946731be18e4546baddea3b36cfb09c5",
+      "sourceByteLength": 145126,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-13-normalized.xlsx",
+      "outputDigest": "sha256:028acd5b907dee9f4d3d4a637f926320a58a185b8e49e5c3493ab5b7245353db",
+      "outputByteLength": 127650,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 73",
+          "retainedRange": "A1:Q35"
+        },
+        {
+          "sheet": "Table 74",
+          "retainedRange": "A1:L209"
+        },
+        {
+          "sheet": "Table 75",
+          "retainedRange": "A1:K176"
+        },
+        {
+          "sheet": "Table 76",
+          "retainedRange": "A1:J178"
+        },
+        {
+          "sheet": "Table 77",
+          "retainedRange": "A1:I101"
+        },
+        {
+          "sheet": "Table 78",
+          "retainedRange": "A1:N188"
+        },
+        {
+          "sheet": "Table 79",
+          "retainedRange": "A1:N176"
+        },
+        {
+          "sheet": "Table 80",
+          "retainedRange": "A1:Y133"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-2-source.xlsx",
+      "sourceDigest": "sha256:73fa6f5b89b3aaf11a89ae79a0a9e1e0bf1fad94bc38411d12b7bbea2051e041",
+      "sourceByteLength": 127312,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-2-normalized.xlsx",
+      "outputDigest": "sha256:b4b6a79b420d846d87dfd030bc0edd70f845d17d2c33d7353f5161b17cdbd289",
+      "outputByteLength": 111102,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 7",
+          "retainedRange": "A1:O350"
+        },
+        {
+          "sheet": "Table 8",
+          "retainedRange": "A1:J234"
+        },
+        {
+          "sheet": "Table 9",
+          "retainedRange": "A1:S150"
+        },
+        {
+          "sheet": "Table 10",
+          "retainedRange": "A1:S122"
+        },
+        {
+          "sheet": "Table 11",
+          "retainedRange": "A1:Q84"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2023.xlsx",
+      "sourceDigest": "sha256:59afcaf8a0c52a2754f75954ce5821611ee735f329d90d0e4b80c3dead0827af",
+      "sourceByteLength": 335227,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2023-batch-normalized.xlsx",
+      "outputDigest": "sha256:61366170db7a4da717332a3ad1ca9e11f884d95905bb4556f5f44ce51d31c66f",
+      "outputByteLength": 302509,
+      "trimmedSheets": [
+        {
+          "sheet": "Table_34",
+          "retainedRange": "A1:B189"
         }
       ],
       "correction": null,
@@ -197,6 +509,133 @@
         ],
         "reason": "Remove a zero-valued cell outside the Table 5 semantic data region; preserve the exact source separately."
       },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-1-source.xlsx",
+      "sourceDigest": "sha256:686d5091f9fb9397827d4f11cc9a743d26b0156f6df3eb4f22ff44b1de268ecc",
+      "sourceByteLength": 185699,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-1-normalized.xlsx",
+      "outputDigest": "sha256:086e5b5e79ad778632db673578aeede249cf8c2563c0c43b7338d09687e8a684",
+      "outputByteLength": 158788,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 1",
+          "retainedRange": "A1:P371"
+        },
+        {
+          "sheet": "Table 2",
+          "retainedRange": "A1:J391"
+        },
+        {
+          "sheet": "Table 3",
+          "retainedRange": "A1:S178"
+        },
+        {
+          "sheet": "Table 4",
+          "retainedRange": "A1:S59"
+        },
+        {
+          "sheet": "Table 5",
+          "retainedRange": "A1:G722"
+        },
+        {
+          "sheet": "Table 6",
+          "retainedRange": "A1:M153"
+        },
+        {
+          "sheet": "Table 7",
+          "retainedRange": "A1:M53"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-13-source.xlsx",
+      "sourceDigest": "sha256:a16c96d9663e39c07246361193e96787e3db1ab16bb633d9580c09b1979796b0",
+      "sourceByteLength": 132550,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-13-normalized.xlsx",
+      "outputDigest": "sha256:fa1e98f3489817397e3a0de43b220f7f91a234577adee89546445b2c87332695",
+      "outputByteLength": 117473,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 78",
+          "retainedRange": "A1:Q38"
+        },
+        {
+          "sheet": "Table 79",
+          "retainedRange": "A1:L223"
+        },
+        {
+          "sheet": "Table 80",
+          "retainedRange": "A1:K168"
+        },
+        {
+          "sheet": "Table 81",
+          "retainedRange": "A1:J168"
+        },
+        {
+          "sheet": "Table 82",
+          "retainedRange": "A1:I101"
+        },
+        {
+          "sheet": "Table 83",
+          "retainedRange": "A1:N180"
+        },
+        {
+          "sheet": "Table 84",
+          "retainedRange": "A1:N164"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
+      "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
+      "sourceByteLength": 154712,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-2-normalized.xlsx",
+      "outputDigest": "sha256:c92ee92a71b022987498ddeeb299ee7063f9cb623e340d8844e9b69a0fadd80f",
+      "outputByteLength": 136299,
+      "trimmedSheets": [
+        {
+          "sheet": "Table 8",
+          "retainedRange": "A1:P370"
+        },
+        {
+          "sheet": "Table 9",
+          "retainedRange": "A1:J238"
+        },
+        {
+          "sheet": "Table 10",
+          "retainedRange": "A1:J89"
+        },
+        {
+          "sheet": "Table 11",
+          "retainedRange": "A1:J91"
+        },
+        {
+          "sheet": "Table 12",
+          "retainedRange": "A1:J89"
+        },
+        {
+          "sheet": "Table 13",
+          "retainedRange": "A1:J53"
+        },
+        {
+          "sheet": "Table 14",
+          "retainedRange": "A1:J175"
+        },
+        {
+          "sheet": "Table 15",
+          "retainedRange": "A1:I174"
+        }
+      ],
+      "correction": null,
       "normalization": "trim-pathological-styled-blank-cells-v1"
     },
     {
@@ -273,296 +712,33 @@
       "normalization": "trim-pathological-full-width-formatting-merge-v1"
     },
     {
-      "year": 2021,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-1-source.xlsx",
-      "sourceDigest": "sha256:9651530dbd598478cef0d8f2a2d68bc62cade94d259d43f18ee8fe8feb575534",
-      "sourceByteLength": 216832,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-1-normalized.xlsx",
-      "outputDigest": "sha256:a541909bfe1a7f44d214e9ae870bb33e6c43feb181f73b07ed5f930d0cdd8b8c",
-      "outputByteLength": 166236,
+      "year": 2025,
+      "sourcePath": "fixtures/product-prototype/workbooks/prisoners-australia-2025.xlsx",
+      "sourceDigest": "sha256:464f80e73901ae9010d2dbbf1fc1bf37222711a3ccacc44efdbe99953aa3d263",
+      "sourceByteLength": 169943,
+      "outputPath": "fixtures/product-prototype/workbooks/prisoners-australia-2025-batch-normalized.xlsx",
+      "outputDigest": "sha256:007a1c21fc2a2b256cbde672405a4710edcac85eff035949f403ca3fbed6ab6e",
+      "outputByteLength": 169355,
       "trimmedSheets": [
         {
-          "sheet": "Table 1",
-          "retainedRange": "A1:M333"
+          "sheet": "Table 24",
+          "retainedRange": "A1:D176"
         },
         {
-          "sheet": "Table 2",
-          "retainedRange": "A1:J222"
+          "sheet": "Table 25",
+          "retainedRange": "A1:D176"
         },
         {
-          "sheet": "Table 3",
-          "retainedRange": "A1:R146"
+          "sheet": "Table 29",
+          "retainedRange": "A1:J50"
         },
         {
-          "sheet": "Table 4",
-          "retainedRange": "A1:G593"
+          "sheet": "Table 33",
+          "retainedRange": "A1:F44"
         },
         {
-          "sheet": "Table 5",
-          "retainedRange": "A1:M147"
-        },
-        {
-          "sheet": "Table 6",
-          "retainedRange": "A1:M49"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2021,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-2-source.xlsx",
-      "sourceDigest": "sha256:b28f7ac2a9d8a3fd39a413e6d38b8fea0c3a262cc4469f724bb2a7db176bf92a",
-      "sourceByteLength": 187543,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2021-22-cube-2-normalized.xlsx",
-      "outputDigest": "sha256:13031bceb80730548ebcbb6a9074724ebafed087f841b9eecb99afc7aaee210c",
-      "outputByteLength": 141801,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 7",
-          "retainedRange": "A1:M341"
-        },
-        {
-          "sheet": "Table 8",
-          "retainedRange": "A1:J230"
-        },
-        {
-          "sheet": "Table 9",
-          "retainedRange": "A1:S147"
-        },
-        {
-          "sheet": "Table 10",
-          "retainedRange": "A1:S117"
-        },
-        {
-          "sheet": "Table 11",
-          "retainedRange": "A1:Q81"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2022,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-1-source.xlsx",
-      "sourceDigest": "sha256:9fd38cfca91c5a601b40d2a5e3d85eb875630cc600ecceb3e7ee37f0f5d64340",
-      "sourceByteLength": 204103,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-1-normalized.xlsx",
-      "outputDigest": "sha256:9a9a18151fc6ccb58fa831a0628f13cd867486873b206ae32e4ab327bd903eba",
-      "outputByteLength": 167661,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 1",
-          "retainedRange": "A1:N333"
-        },
-        {
-          "sheet": "Table 2",
-          "retainedRange": "A1:J222"
-        },
-        {
-          "sheet": "Table 3",
-          "retainedRange": "A1:R146"
-        },
-        {
-          "sheet": "Table 4",
-          "retainedRange": "A1:G593"
-        },
-        {
-          "sheet": "Table 5",
-          "retainedRange": "A1:M147"
-        },
-        {
-          "sheet": "Table 6",
-          "retainedRange": "A1:M49"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2022,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-2-source.xlsx",
-      "sourceDigest": "sha256:4f6761f483c64e26dc88ad05f5df0262d3a64dacd4598b29bff86eee8663a5ca",
-      "sourceByteLength": 161952,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2022-23-cube-2-normalized.xlsx",
-      "outputDigest": "sha256:cde6a914aa3b974579f8199dcaeb1102f2ae76629bf13d04f67d00e70810c9e8",
-      "outputByteLength": 137613,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 7",
-          "retainedRange": "A1:N333"
-        },
-        {
-          "sheet": "Table 8",
-          "retainedRange": "A1:J222"
-        },
-        {
-          "sheet": "Table 9",
-          "retainedRange": "A1:S147"
-        },
-        {
-          "sheet": "Table 10",
-          "retainedRange": "A1:S117"
-        },
-        {
-          "sheet": "Table 11",
-          "retainedRange": "A1:Q81"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2023,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-1-source.xlsx",
-      "sourceDigest": "sha256:bfce118ad6b441bc6341360db234500d11fa6fa70b5eafc46f372ac3156cfa33",
-      "sourceByteLength": 155683,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-1-normalized.xlsx",
-      "outputDigest": "sha256:9050c583f3651ea86960db546f49b4cfe7d89cd41755f5ae88930d2a52c2def0",
-      "outputByteLength": 133603,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 1",
-          "retainedRange": "A1:O366"
-        },
-        {
-          "sheet": "Table 2",
-          "retainedRange": "A1:J235"
-        },
-        {
-          "sheet": "Table 3",
-          "retainedRange": "A1:R153"
-        },
-        {
-          "sheet": "Table 4",
-          "retainedRange": "A1:G623"
-        },
-        {
-          "sheet": "Table 5",
-          "retainedRange": "A1:M151"
-        },
-        {
-          "sheet": "Table 6",
-          "retainedRange": "A1:M50"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2023,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-2-source.xlsx",
-      "sourceDigest": "sha256:73fa6f5b89b3aaf11a89ae79a0a9e1e0bf1fad94bc38411d12b7bbea2051e041",
-      "sourceByteLength": 127312,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-2-normalized.xlsx",
-      "outputDigest": "sha256:b4b6a79b420d846d87dfd030bc0edd70f845d17d2c33d7353f5161b17cdbd289",
-      "outputByteLength": 111102,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 7",
-          "retainedRange": "A1:O350"
-        },
-        {
-          "sheet": "Table 8",
-          "retainedRange": "A1:J234"
-        },
-        {
-          "sheet": "Table 9",
-          "retainedRange": "A1:S150"
-        },
-        {
-          "sheet": "Table 10",
-          "retainedRange": "A1:S122"
-        },
-        {
-          "sheet": "Table 11",
-          "retainedRange": "A1:Q84"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2024,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-1-source.xlsx",
-      "sourceDigest": "sha256:686d5091f9fb9397827d4f11cc9a743d26b0156f6df3eb4f22ff44b1de268ecc",
-      "sourceByteLength": 185699,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-1-normalized.xlsx",
-      "outputDigest": "sha256:086e5b5e79ad778632db673578aeede249cf8c2563c0c43b7338d09687e8a684",
-      "outputByteLength": 158788,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 1",
-          "retainedRange": "A1:P371"
-        },
-        {
-          "sheet": "Table 2",
-          "retainedRange": "A1:J391"
-        },
-        {
-          "sheet": "Table 3",
-          "retainedRange": "A1:S178"
-        },
-        {
-          "sheet": "Table 4",
-          "retainedRange": "A1:S59"
-        },
-        {
-          "sheet": "Table 5",
-          "retainedRange": "A1:G722"
-        },
-        {
-          "sheet": "Table 6",
-          "retainedRange": "A1:M153"
-        },
-        {
-          "sheet": "Table 7",
-          "retainedRange": "A1:M53"
-        }
-      ],
-      "correction": null,
-      "normalization": "trim-pathological-styled-blank-cells-v1"
-    },
-    {
-      "year": 2024,
-      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
-      "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
-      "sourceByteLength": 154712,
-      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2024-25-cube-2-normalized.xlsx",
-      "outputDigest": "sha256:c92ee92a71b022987498ddeeb299ee7063f9cb623e340d8844e9b69a0fadd80f",
-      "outputByteLength": 136299,
-      "trimmedSheets": [
-        {
-          "sheet": "Table 8",
-          "retainedRange": "A1:P370"
-        },
-        {
-          "sheet": "Table 9",
-          "retainedRange": "A1:J238"
-        },
-        {
-          "sheet": "Table 10",
-          "retainedRange": "A1:J89"
-        },
-        {
-          "sheet": "Table 11",
-          "retainedRange": "A1:J91"
-        },
-        {
-          "sheet": "Table 12",
-          "retainedRange": "A1:J89"
-        },
-        {
-          "sheet": "Table 13",
-          "retainedRange": "A1:J53"
-        },
-        {
-          "sheet": "Table 14",
-          "retainedRange": "A1:J175"
-        },
-        {
-          "sheet": "Table 15",
-          "retainedRange": "A1:I174"
+          "sheet": "Table 34",
+          "retainedRange": "A1:B191"
         }
       ],
       "correction": null,
@@ -572,5 +748,5 @@
   "inRangeValuesChanged": true,
   "correctionScriptPath": "scripts/correct-known-workbook-artifacts.py",
   "correctionScriptDigest": "sha256:8dec705a2f80451836111aba77ad4b873bae15baf19d4906e7a385e9fdbb2e9c",
-  "manifestDigest": "sha256:9198c081edc299b9eb240bb0bf80a50463c5f581877e4f50fbd022bd95c6020c"
+  "manifestDigest": "sha256:83c653791746ff40522b2b0dc118a4e8276218f7c600d43d28d7e98b2278c52e"
 }

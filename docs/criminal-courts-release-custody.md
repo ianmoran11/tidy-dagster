@@ -14,7 +14,7 @@ The checked inventory covers every official XLSX download in the 2021–22,
 | **Total** | **69** | **4** | **65** | **430** |
 
 The guides are exact custodied exclusions. Every substantive numbered main,
-preliminary ANZSOC 2023, and FDV sheet belongs to exactly one of 192 explicit
+preliminary ANZSOC 2023, and FDV sheet belongs to exactly one of 198 explicit
 semantic families. Review merged the 2023–24 abbreviated offence-by-sentence
 title into its continuing four-release family instead of treating wording drift
 as a new family.
@@ -58,8 +58,28 @@ observation period both produce deterministic ambiguity diagnostics, acceptance
 matches each warning to its own dimension-specific, year-specific source-header
 allowlist.
 
-Together the two clusters cover 48 of 430 worksheets and produce 94,380
-canonical observations; 382 worksheets remain pending reviewed contracts.
+Together the first two clusters cover 48 worksheets and produce 94,380
+canonical observations.
+
+## Third accepted national cluster
+
+The third cluster covers all 31 numbered worksheets in the national sentence
+length and fine amount cubes: Tables 65–72 in 2021–22 and 2022–23, Tables 73–80
+in 2023–24, and Tables 78–84 in 2024–25. Fourteen contracts preserve selected
+principal sentence, offence, sentence-length or community-service bands, fine
+bands, court level, jurisdiction, and Indigenous status.
+
+ANZSOC 2011 and ANZSOC 2023 contracts remain separate whenever an identical raw
+offence label could otherwise collapse two classifications. Counts,
+proportions, mean and median duration, and mean and median fine amount remain
+separate measures with `person`, `percent`, `month`, `hour`, and `dollar` units.
+The contracts preserve all published zeros and typed `..`, `na`, and `np`
+markers. Repeated jurisdiction panels may emit deterministic `AMBIGUOUS_HEADER`
+warnings; each contract accepts them only when the selected canonical
+jurisdiction and exact year-specific source header match its reviewed allowlist.
+
+The three clusters now cover 79 of 430 worksheets and produce 137,664 canonical
+observations; 351 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -70,6 +90,9 @@ canonical observations; 382 worksheets remain pending reviewed contracts.
   from ANZSOC 2011, the inventory records that mixed publication context rather
   than claiming the historical observations were originally coded to ANZSOC
   2023.
+- The ANZSOC 2023 Indigenous-status sentence-length counterpart is 2024–25
+  Table 19 in a different cube. It remains a distinct pending family rather than
+  being silently folded into the accepted three-release ANZSOC 2011 cohort.
 - Experimental family and domestic violence tables remain in a separate FDV
   namespace.
 
@@ -77,7 +100,7 @@ canonical observations; 382 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 48 assets replay with
+measures, value statuses, source cells, and warnings. All 79 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

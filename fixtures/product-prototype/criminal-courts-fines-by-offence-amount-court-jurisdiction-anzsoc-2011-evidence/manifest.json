@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
+  "cohortPath": "fixtures/product-prototype/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011.json",
+  "cohortDigest": "sha256:554a97ec1691d1c7393a50782f776b126f4263310b702adb87f717db6515e525",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011-v1.json",
+  "acceptanceContractDigest": "sha256:7d725ce2913681de4042ffc38cad728326d953268795310ead7e4d5dedb950cb",
+  "recordedAt": "2026-08-18T10:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 3,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 5618,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 5618,
+  "measureCounts": {
+    "defendant-count": 2085,
+    "defendant-proportion": 343,
+    "fine-mean-amount": 1595,
+    "fine-median-amount": 1595
+  },
+  "valueStatusCounts": {
+    "not_applicable": 208,
+    "observed": 5258,
+    "suppressed": 152
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:a4b27af906ee526ba8ab9ab9225de49641f42f1808aa97f9c61a6da04743d554",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:6f85da16e65194ba4c821b5df4a8c5a40a4fc12027bdeee4a7e8074c6bda4ba2",
+      "byteLength": 907
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:436d212288204b30f1418a728f9d04322be7f8925a06516c8f0bf80c8b342a09",
+      "byteLength": 4648753
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:673d753e491109fefe083423a1bb654797dd287f7c880a2eae9af8ee146c9c58",
+      "byteLength": 7824158
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:3a8b3e9eb9c204a03076f60ee78010559fe9fe58f1c2266272c73a9625f73815",
+      "byteLength": 1180
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:5ecd0c49f8b0c64773d6d58ff9326ed97fdcb850e5d47fb4b1720c7bc14ee490",
+      "byteLength": 3428
+    }
+  ]
+}

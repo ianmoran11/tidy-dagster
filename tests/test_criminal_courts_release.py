@@ -21,6 +21,22 @@ DOWNLOADS = FIXTURES / "criminal-courts-release-downloads-v1.json"
 CROSSWALK = FIXTURES / "criminal-courts-release-family-crosswalk-v1.json"
 INVENTORY = FIXTURES / "criminal-courts-release-source-inventory-v1.json"
 MEMBERSHIP = FIXTURES / "criminal-courts-release-family-membership-v1.json"
+SENTENCE_FINE_FAMILIES = (
+    "criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level",
+    "criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2011",
+    "criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023",
+    "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011",
+    "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2023",
+    "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2011",
+    "criminal-courts-custody-by-offence-sentence-length-magistrates-courts-anzsoc-2023",
+    "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011",
+    "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023",
+    "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011",
+    "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023",
+    "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
+    "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023",
+    "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
+)
 GUILTY_OUTCOME_FAMILIES = (
     "criminal-courts-guilty-outcome-summary-by-jurisdiction",
     "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
@@ -70,9 +86,9 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "reviewedExclusionDownloadCount": 4,
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
-        "familyCount": 192,
-        "registeredMemberCount": 48,
-        "pendingSemanticContractCount": 382,
+        "familyCount": 198,
+        "registeredMemberCount": 79,
+        "pendingSemanticContractCount": 351,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -114,7 +130,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 48
+        == 79
     )
 
 
@@ -139,7 +155,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 48
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 79
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -254,6 +270,104 @@ def test_guilty_outcome_cluster_preserves_semantics_and_provenance() -> None:
             "court_level",
             "observation_period",
         }
+
+
+def test_sentence_and_fine_cluster_preserves_classification_and_measures() -> None:
+    membership = _load(MEMBERSHIP)
+    families = {family["familyId"]: family for family in membership["families"]}
+    assert (
+        sum(len(families[family_id]["members"]) for family_id in SENTENCE_FINE_FAMILIES)
+        == 31
+    )
+    assert all(
+        all(member["registered"] for member in families[family_id]["members"])
+        for family_id in SENTENCE_FINE_FAMILIES
+    )
+    pending_indigenous_2023 = families[
+        "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023"
+    ]["members"]
+    assert [
+        (member["releaseId"], member["physicalSheetName"])
+        for member in pending_indigenous_2023
+    ] == [("2024-25", "Table 19")]
+    assert pending_indigenous_2023[0]["registered"] is False
+
+    rows: list[dict[str, object]] = []
+    measure_counts: dict[str, int] = {}
+    value_status_counts: dict[str, int] = {}
+    source_cells: set[tuple[str, str, str]] = set()
+    for family_id in SENTENCE_FINE_FAMILIES:
+        evidence = FIXTURES / f"{family_id}-evidence"
+        manifest = _load(evidence / "manifest.json")
+        run = _load(evidence / "run.json")
+        family_rows = json.loads((evidence / "canonical-observations.json").read_text())
+        assert manifest["providerCalls"] == 0
+        assert manifest["exceptionWorkbookCount"] == 0
+        assert run["acceptedWorkbookCount"] == len(run["workbooks"])
+        assert all(
+            item["decision"] == "prototype_auto_accepted" for item in run["workbooks"]
+        )
+        for measure, count in manifest["measureCounts"].items():
+            measure_counts[measure] = measure_counts.get(measure, 0) + count
+        for status, count in manifest["valueStatusCounts"].items():
+            value_status_counts[status] = value_status_counts.get(status, 0) + count
+        for row in family_rows:
+            source_key = (
+                row["source_workbook_digest"],
+                row["source_sheet"],
+                row["source_cell"],
+            )
+            assert source_key not in source_cells
+            source_cells.add(source_key)
+            assert row["publication_vintage_date"]
+            assert row["raw_value"] is not None
+            if family_id.endswith("anzsoc-2011") and "principal_offence_id" in row:
+                assert row["principal_offence_id"].startswith(
+                    ("ANZSOC_2011_", "OFFENCE_TOTAL")
+                )
+            if family_id.endswith("anzsoc-2023") and "principal_offence_id" in row:
+                assert row["principal_offence_id"].startswith(
+                    ("ANZSOC_2023_", "OFFENCE_TOTAL")
+                )
+            if row["measure_id"] == "defendant-proportion":
+                assert row["principal_offence_id"] == "OFFENCE_TOTAL"
+            if "fine_amount_id" in row:
+                assert row["fine_amount_id"].startswith("FINE_")
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        if family_id == SENTENCE_FINE_FAMILIES[0]:
+            assert contract["allowedExecutionWarnings"] == []
+        else:
+            assert len(contract["allowedExecutionWarnings"]) == 1
+            warning_rule = contract["allowedExecutionWarnings"][0]
+            assert warning_rule["dimension"] == "jurisdiction"
+            assert warning_rule["requireCanonicalOutputEquivalence"] is True
+            assert warning_rule["expectedHeaderSourcesByYear"]
+        rows.extend(family_rows)
+
+    assert len(rows) == 43284
+    assert measure_counts == {
+        "defendant-count": 25844,
+        "defendant-proportion": 2622,
+        "fine-mean-amount": 2103,
+        "fine-median-amount": 2103,
+        "sentence-mean-duration": 5306,
+        "sentence-median-duration": 5306,
+    }
+    assert value_status_counts == {
+        "not_applicable": 1962,
+        "observed": 40646,
+        "suppressed": 676,
+    }
+    assert {(row["measure_id"], row["unit_id"]) for row in rows} == {
+        ("defendant-count", "person"),
+        ("defendant-proportion", "percent"),
+        ("fine-mean-amount", "dollar"),
+        ("fine-median-amount", "dollar"),
+        ("sentence-mean-duration", "hour"),
+        ("sentence-mean-duration", "month"),
+        ("sentence-median-duration", "hour"),
+        ("sentence-median-duration", "month"),
+    }
 
 
 def test_download_digest_mutation_fails_closed(tmp_path: Path) -> None:

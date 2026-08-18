@@ -1,0 +1,927 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011-v1",
+  "tableFamilyId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_TO_UNDER_5_YEARS",
+            "LENGTH_5_YEARS_AND_OVER",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_6_MONTHS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_TO_UNDER_5_YEARS",
+            "LENGTH_5_YEARS_AND_OVER",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_6_MONTHS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_TO_UNDER_5_YEARS",
+            "LENGTH_5_YEARS_AND_OVER",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_6_MONTHS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_TO_UNDER_5_YEARS",
+            "LENGTH_5_YEARS_AND_OVER",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_6_MONTHS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 1360,
+        "2022": 1360,
+        "2023": 1728
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:64094ace20d2a1d10266b852a0feedc56e5142eea5aa5bd5229c66dffcece519",
+        "2022": "sha256:64094ace20d2a1d10266b852a0feedc56e5142eea5aa5bd5229c66dffcece519",
+        "2023": "sha256:b1adaf6dea167482fff0d900f39b0f4007de23acd03d3e7a26b141899368337e"
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 256,
+        "2022": 250,
+        "2023": 288
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:4b3545e9e267581e8d38f0282e114a23a6a4aa79121c903f6dfc735271ad6b00",
+        "2022": "sha256:660627d2cd601cfcb830e4026fd6310a90a1985a60dc15975230f8937b1ddb7e",
+        "2023": "sha256:2ede05fa757896c40d7a86d0e70f826becff3227512fc1ad567f9d2ef1817b63"
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 256,
+        "2022": 250,
+        "2023": 288
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:4462326cc77cb039764518b984af9889b29dd3b7330d7626ebdab263dc8116c5",
+        "2022": "sha256:5da0b8cf22bc908b63488fd7915c154b7c19252650cb16022e96cbd1c6521c7c",
+        "2023": "sha256:9301de9e6d25d0ceae9c42fd9244d85a946777b1abdf228c96705f81320da2d0"
+      }
+    },
+    {
+      "id": "defendant-proportion",
+      "unitId": "percent",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "principal_offence": [
+            "OFFENCE_TOTAL_PERCENTAGE_SELECTION"
+          ]
+        },
+        "dimensionOverrides": {
+          "principal_offence": "OFFENCE_TOTAL"
+        }
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_TO_UNDER_5_YEARS",
+            "LENGTH_5_YEARS_AND_OVER",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_6_MONTHS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_TO_UNDER_5_YEARS",
+            "LENGTH_5_YEARS_AND_OVER",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_6_MONTHS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "OFFENCE_TOTAL"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_1_TO_UNDER_5_YEARS",
+            "LENGTH_5_YEARS_AND_OVER",
+            "LENGTH_6_TO_UNDER_12_MONTHS",
+            "LENGTH_MEAN",
+            "LENGTH_MEDIAN",
+            "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_6_MONTHS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "TOTAL"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 117,
+        "2022": 121,
+        "2023": 144
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:056b2ec89575e3ba866aabc0cd82ba1b3363969464db00532fc62c1837334ea4",
+        "2022": "sha256:9749799102d0d75f738a3c39f40accc3455bcdd09eaeb8f9b1c0137a215bc902",
+        "2023": "sha256:4d1a9558c78376e9fae20dbfa7496409774ef5c30efe8a7d83f18e94e2e44e05"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "aggregate_sentence_length",
+    "indigenous_status",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "aggregate_sentence_length": [
+      "^sentence\\ length$"
+    ],
+    "indigenous_status": [
+      "^indigenous\\ status$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "aggregate_sentence_length_id",
+    "indigenous_status_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1981,
+    "maximumRows": 2448,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 25
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2022": [
+        "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2023": [
+        "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2021": [
+        "LENGTH_1_TO_UNDER_5_YEARS",
+        "LENGTH_5_YEARS_AND_OVER",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_6_MONTHS"
+      ],
+      "2022": [
+        "LENGTH_1_TO_UNDER_5_YEARS",
+        "LENGTH_5_YEARS_AND_OVER",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_6_MONTHS"
+      ],
+      "2023": [
+        "LENGTH_1_TO_UNDER_5_YEARS",
+        "LENGTH_5_YEARS_AND_OVER",
+        "LENGTH_6_TO_UNDER_12_MONTHS",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN",
+        "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_6_MONTHS"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ],
+      "2022": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ],
+      "2023": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "TOTAL"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2022": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2023": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ]
+    }
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "02 Acts intended to cause injury": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Acts intended to cause injury(f)": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "03 Sexual assault and related offences": "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "04 Dangerous/negligent acts": "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+      "04 Dangerous/negligent acts(g)": "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/harassment": "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "05 Abduction/harassment(h)": "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "06 Robbery/extortion": "ANZSOC_2011_06_ROBBERY_EXTORTION",
+      "07 Unlawful entry with intent": "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "08 Theft": "ANZSOC_2011_08_THEFT",
+      "09 Fraud/deception": "ANZSOC_2011_09_FRAUD_DECEPTION",
+      "10 Illicit drug offences": "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+      "11 Weapons/explosives": "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+      "12 Property damage and environmental pollution": "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "13 Public order offences": "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+      "15 Offences against justice": "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "15 Offences against justice(i)": "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "16 Miscellaneous offences": "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+      "All principal offences": "OFFENCE_TOTAL",
+      "All principal offences (%)": "OFFENCE_TOTAL_PERCENTAGE_SELECTION",
+      "All principal offences(j)": "OFFENCE_TOTAL"
+    },
+    "aggregate_sentence_length": {
+      "1 to under 5 years": "LENGTH_1_TO_UNDER_5_YEARS",
+      "5 years & over": "LENGTH_5_YEARS_AND_OVER",
+      "5 years & over(b)": "LENGTH_5_YEARS_AND_OVER",
+      "6 to under 12 months": "LENGTH_6_TO_UNDER_12_MONTHS",
+      "Mean": "LENGTH_MEAN",
+      "Mean(e)": "LENGTH_MEAN",
+      "Median": "LENGTH_MEDIAN",
+      "Median(e)": "LENGTH_MEDIAN",
+      "No further penalty due to time spent in custody(c)": "LENGTH_NO_FURTHER_PENALTY_DUE_TO_TIME_SPENT_IN_CUSTODY",
+      "Total": "LENGTH_TOTAL",
+      "Total(d)": "LENGTH_TOTAL",
+      "Under 6 months": "LENGTH_UNDER_6_MONTHS"
+    },
+    "indigenous_status": {
+      "Aboriginal & Torres Strait Islander": "INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Total": "TOTAL",
+      "Total(a)": "TOTAL"
+    },
+    "jurisdiction": {
+      "Australian Capital Territory": "ACT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "Queensland": "QLD",
+      "South Australia": "SA",
+      "South Australia(k)": "SA",
+      "Tasmania": "TAS"
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ACT": [
+            "R98C2"
+          ],
+          "NT": [
+            "R80C2"
+          ],
+          "QLD": [
+            "R26C2"
+          ],
+          "SA": [
+            "R44C2"
+          ],
+          "TAS": [
+            "R62C2"
+          ]
+        },
+        "2022": {
+          "ACT": [
+            "R98C2"
+          ],
+          "NT": [
+            "R80C2"
+          ],
+          "QLD": [
+            "R26C2"
+          ],
+          "SA": [
+            "R44C2"
+          ],
+          "TAS": [
+            "R62C2"
+          ]
+        },
+        "2023": {
+          "ACT": [
+            "R97C2"
+          ],
+          "NT": [
+            "R79C2"
+          ],
+          "QLD": [
+            "R25C2"
+          ],
+          "SA": [
+            "R43C2"
+          ],
+          "TAS": [
+            "R61C2"
+          ]
+        }
+      }
+    }
+  ],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "strictAliasMatching": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}
