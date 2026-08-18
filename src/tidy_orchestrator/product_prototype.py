@@ -1604,6 +1604,14 @@ def _validate_warning_rules(
             for rule in rules
             if isinstance(rule, dict) and rule.get("code") == warning.get("code")
         ]
+        if len(matching) > 1:
+            warning_header = warning.get("header")
+            matching = [
+                rule
+                for rule in matching
+                if isinstance(rule.get("dimension"), str)
+                and names.get(rule["dimension"]) == warning_header
+            ]
         if len(matching) != 1:
             issues.append(_issue("UNALLOWLISTED_WARNING", str(warning.get("code"))))
             continue

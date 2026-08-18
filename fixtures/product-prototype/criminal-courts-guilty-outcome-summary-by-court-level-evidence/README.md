@@ -1,3 +1,10 @@
-# Criminal Courts evidence — Guilty outcome — summary by court level
+# Criminal Courts guilty-outcome evidence — criminal-courts-guilty-outcome-summary-by-court-level
 
-This checked replay closure covers 4 independently accepted worksheet asset(s) from *Criminal Courts, Australia*. It preserves publication vintage, exact source cells, raw labels, ANZSOC classification identity, published null markers, and distinct count/age/duration measures. Human-authored semantic maps are non-authoritative; the family contract supplies acceptance authority. Expected deterministic `AMBIGUOUS_HEADER` diagnostics are allowed only when the selected court-level output resolves to an exact canonical court code. Provider calls: 0. Exceptions: 0. Canonical observations: 15,554.
+This directory freezes provider-free replay evidence for the reviewed `criminal-courts-guilty-outcome-summary-by-court-level` semantic family from *Criminal Courts, Australia*.
+
+- Source workbooks remain exact, digest-pinned ABS downloads.
+- Normalized workbooks remove only out-of-range styled blank cells.
+- Replay maps are deterministic aids and have no acceptance authority.
+- The family acceptance contract owns code lists, measures, warning-source bindings, coverage, and automatic acceptance.
+- Publication vintage and exact source-cell provenance are preserved.
+- Provider calls: 0.

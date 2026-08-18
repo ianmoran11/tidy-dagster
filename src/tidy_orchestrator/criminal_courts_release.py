@@ -30,8 +30,8 @@ EXPECTED_NUMBERED_COUNTS = {
 EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
-EXPECTED_FAMILY_COUNT = 193
-EXPECTED_REGISTERED_COUNT = 29
+EXPECTED_FAMILY_COUNT = 192
+EXPECTED_REGISTERED_COUNT = 48
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -44,6 +44,14 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-defendants-finalised-method-by-duration",
         "criminal-courts-guilty-outcome-summary-by-court-level",
         "criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023",
+        "criminal-courts-guilty-outcome-summary-by-jurisdiction",
+        "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
+        "criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts",
+        "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
+        "criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts",
+        "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
+        "criminal-courts-guilty-outcome-offence-by-sentence",
+        "criminal-courts-guilty-outcome-offence-by-duration",
     }
 )
 

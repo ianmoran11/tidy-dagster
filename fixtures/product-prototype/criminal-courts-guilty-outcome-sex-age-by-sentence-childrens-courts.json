@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-2-normalized.xlsx",
+      "contentDigest": "sha256:c92ee92a71b022987498ddeeb299ee7063f9cb623e340d8844e9b69a0fadd80f",
+      "byteLength": 136299,
+      "sheet": "Table 13",
+      "replayResponse": {
+        "path": "replay/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts-2024.response.txt",
+        "contentDigest": "sha256:89980ae5479494436d7ecb5bc141896ca648478544a7c86fcb0b7f688ac055e3",
+        "byteLength": 669,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

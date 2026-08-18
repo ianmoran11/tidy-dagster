@@ -1,0 +1,477 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level-v1",
+  "tableFamilyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SUPERVISION_WORK_ORDERS",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+            "SENTENCE_OTHER_NON_CUSTODIAL_ORDERS",
+            "SENTENCE_TOTAL",
+            "SENTENCE_TOTAL_CUSTODIAL_ORDERS",
+            "SENTENCE_TOTAL_NON_CUSTODIAL_ORDERS"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 1998,
+        "2022": 1998,
+        "2023": 1998
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:5768445bf863c90a1384010c8d5b0bcc28e3e84025268c449ffbe6be5e7d4750",
+        "2022": "sha256:7e20858eaf3333da0086ee891d6526b39f48de1914d21601da1459ef5a18a68e",
+        "2023": "sha256:9c753adf9dbeb2b91262aa0fefeb790e0361867e092de07c485dcfa21f606fb4"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "sex",
+    "sentence_statistic",
+    "observation_period",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^age\\ category$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "sentence_statistic": [
+      "^principal\\ sentence$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "10–19 years": "CHAR_10_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Total": "CHAR_TOTAL",
+      "Organisations": "CHAR_ORGANISATIONS",
+      "Total guilty outcome": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "10–14 years": "CHAR_10_14_YEARS",
+      "15–19 years": "CHAR_15_19_YEARS",
+      "25 years and over": "CHAR_25_YEARS_AND_OVER",
+      "Total(b)": "CHAR_TOTAL"
+    },
+    "sex": {
+      "Males": "MALES",
+      "Females": "FEMALES",
+      "Persons": "PERSONS",
+      "Total": "TOTAL",
+      "Persons(c)": "PERSONS",
+      "Total(b)": "TOTAL"
+    },
+    "sentence_statistic": {
+      "Custody in a correctional institution": "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Custody in the community": "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+      "Fully suspended sentence": "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+      "Total custodial orders": "SENTENCE_TOTAL_CUSTODIAL_ORDERS",
+      "Community supervision/ work orders": "SENTENCE_COMMUNITY_SUPERVISION_WORK_ORDERS",
+      "Fines": "SENTENCE_FINES",
+      "Other non-custodial orders": "SENTENCE_OTHER_NON_CUSTODIAL_ORDERS",
+      "Total non-custodial orders": "SENTENCE_TOTAL_NON_CUSTODIAL_ORDERS",
+      "Total": "SENTENCE_TOTAL",
+      "Intensive penalty in the community": "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Fully suspended sentence of imprisonment": "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Community service / work": "SENTENCE_COMMUNITY_SERVICE_WORK",
+      "Moderate penalty in the community": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Good behaviour (incl. bonds)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Nominal and other penalties": "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+      "Fines(a)": "SENTENCE_FINES",
+      "Total(b)": "SENTENCE_TOTAL"
+    },
+    "observation_period": {
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "sex_id",
+    "sentence_statistic_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1998,
+    "maximumRows": 1998,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 19
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2022": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2023": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES",
+        "MALES",
+        "PERSONS",
+        "TOTAL"
+      ],
+      "2022": [
+        "FEMALES",
+        "MALES",
+        "PERSONS",
+        "TOTAL"
+      ],
+      "2023": [
+        "FEMALES",
+        "MALES",
+        "PERSONS",
+        "TOTAL"
+      ]
+    },
+    "sentenceStatisticsByYear": {
+      "2021": [
+        "SENTENCE_COMMUNITY_SUPERVISION_WORK_ORDERS",
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_CUSTODY_IN_THE_COMMUNITY",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE",
+        "SENTENCE_OTHER_NON_CUSTODIAL_ORDERS",
+        "SENTENCE_TOTAL",
+        "SENTENCE_TOTAL_CUSTODIAL_ORDERS",
+        "SENTENCE_TOTAL_NON_CUSTODIAL_ORDERS"
+      ],
+      "2022": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+        "SENTENCE_TOTAL"
+      ],
+      "2023": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+        "SENTENCE_TOTAL"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2023-06-30",
+        "2024-06-30"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R124C2"
+          ],
+          "HIGHER_COURTS": [
+            "R46C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R85C2"
+          ]
+        },
+        "2022": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R124C2"
+          ],
+          "HIGHER_COURTS": [
+            "R46C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R85C2"
+          ]
+        },
+        "2023": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R123C2"
+          ],
+          "HIGHER_COURTS": [
+            "R45C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R84C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

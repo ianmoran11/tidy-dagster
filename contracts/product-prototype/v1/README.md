@@ -27,10 +27,10 @@ the status snapshot, Dagster assets, and dashboard totals. The provider-free cus
 `scripts/tidy-prisoners-release verify`.
 
 The Criminal Courts release inventory applies the same custody/completeness
-boundary to 69 downloads, 65 substantive cubes, 193 semantic families, and all
-430 numbered sheets across 2021–22 through 2024–25. The first 29 registered
-assets are split where ANZSOC 2011 and ANZSOC 2023 identities cannot safely
-share one alias namespace. The remaining 401 sheets stay pending. Run
+boundary to 69 downloads, 65 substantive cubes, 192 reviewed semantic families,
+and all 430 numbered sheets across 2021–22 through 2024–25. The first 48
+registered assets are split where ANZSOC 2011 and ANZSOC 2023 identities cannot
+safely share one alias namespace. The remaining 382 sheets stay pending. Run
 `scripts/tidy-criminal-courts-release verify` for the provider-free closure.
 
 The completed safe live-evidence closure is at
@@ -97,7 +97,7 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 158-worksheet cross-publication batch extends the same v1 contract without
+The 177-worksheet cross-publication batch extends the same v1 contract without
 weakening existing cohorts:
 
 - multi-measure selection may use an AND conjunction across several dimensions;

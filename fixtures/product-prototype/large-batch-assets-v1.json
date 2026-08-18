@@ -1,8 +1,8 @@
 {
   "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
-  "batchId": "justice-one-hundred-fifty-eight-worksheets-v1",
+  "batchId": "justice-one-hundred-seventy-seven-worksheets-v1",
   "recordedAt": "2026-08-18T00:00:00+00:00",
-  "worksheetCount": 158,
+  "worksheetCount": 177,
   "providerCalls": 0,
   "entries": [
     {
@@ -1602,6 +1602,301 @@
       "preservesPublicationVintage": true,
       "expectedExcludedObservationCount": 0,
       "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-summary-by-jurisdiction",
+      "label": "Criminal Courts, Australia — Guilty outcome — summary by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_summary_by_jurisdiction_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_summary_by_jurisdiction_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-summary-by-jurisdiction-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        1566,
+        1566,
+        1575,
+        1575
+      ],
+      "expectedCanonicalCount": 6282,
+      "expectedMeasureCounts": {
+        "defendant-count": 5706,
+        "defendant-mean-age": 144,
+        "defendant-mean-duration": 144,
+        "defendant-median-age": 144,
+        "defendant-median-duration": 144
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 3,
+        "observed": 6275,
+        "suppressed": 4
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence and court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_and_court_level_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_and_court_level_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        1998,
+        1998,
+        1998
+      ],
+      "expectedCanonicalCount": 5994,
+      "expectedMeasureCounts": {
+        "defendant-count": 5994
+      },
+      "expectedValueStatusCounts": {
+        "observed": 5994
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — All Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_all_courts_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_all_courts_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        576
+      ],
+      "expectedCanonicalCount": 576,
+      "expectedMeasureCounts": {
+        "defendant-count": 576
+      },
+      "expectedValueStatusCounts": {
+        "observed": 576
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Higher Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_higher_courts_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_higher_courts_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        576
+      ],
+      "expectedCanonicalCount": 576,
+      "expectedMeasureCounts": {
+        "defendant-count": 576
+      },
+      "expectedValueStatusCounts": {
+        "observed": 512,
+        "suppressed": 64
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Magistrates' Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_magistrates_courts_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_magistrates_courts_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        576
+      ],
+      "expectedCanonicalCount": 576,
+      "expectedMeasureCounts": {
+        "defendant-count": 576
+      },
+      "expectedValueStatusCounts": {
+        "observed": 576
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Children's Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_childrens_courts_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_childrens_courts_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        270
+      ],
+      "expectedCanonicalCount": 270,
+      "expectedMeasureCounts": {
+        "defendant-count": 270
+      },
+      "expectedValueStatusCounts": {
+        "observed": 270
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-offence-by-sentence",
+      "label": "Criminal Courts, Australia — Guilty outcome — offence by sentence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-sentence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-sentence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_offence_by_sentence_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_offence_by_sentence_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-offence-by-sentence-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        1872,
+        1872,
+        1872,
+        1296
+      ],
+      "expectedCanonicalCount": 6912,
+      "expectedMeasureCounts": {
+        "defendant-count": 6912
+      },
+      "expectedValueStatusCounts": {
+        "observed": 6876,
+        "suppressed": 36
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-offence-by-duration",
+      "label": "Criminal Courts, Australia — Guilty outcome — offence by duration",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-duration.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-duration-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_offence_by_duration_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_offence_by_duration_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-offence-by-duration-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        1088,
+        1088,
+        1088,
+        1152
+      ],
+      "expectedCanonicalCount": 4416,
+      "expectedMeasureCounts": {
+        "defendant-count": 3312,
+        "sentence-mean-duration": 552,
+        "sentence-median-duration": 552
+      },
+      "expectedValueStatusCounts": {
+        "observed": 4414,
+        "suppressed": 2
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
         "2024": 0
       }
     }

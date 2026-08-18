@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-2-normalized.xlsx",
+      "contentDigest": "sha256:c92ee92a71b022987498ddeeb299ee7063f9cb623e340d8844e9b69a0fadd80f",
+      "byteLength": 136299,
+      "sheet": "Table 11",
+      "replayResponse": {
+        "path": "replay/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts-2024.response.txt",
+        "contentDigest": "sha256:f4ed1e16b329ddd11969e91de05e9f3c3b343451361220e31c49b17b643e6b7e",
+        "byteLength": 708,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

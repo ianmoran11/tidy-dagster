@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-guilty-outcome-offence-by-sentence",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-guilty-outcome-offence-by-sentence",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-guilty-outcome-offence-by-sentence-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-2-normalized.xlsx",
+      "contentDigest": "sha256:13031bceb80730548ebcbb6a9074724ebafed087f841b9eecb99afc7aaee210c",
+      "byteLength": 141801,
+      "sheet": "Table 10",
+      "replayResponse": {
+        "path": "replay/criminal-courts-guilty-outcome-offence-by-sentence-2021.response.txt",
+        "contentDigest": "sha256:a7d754c66552389b858f899e76da286889308cfa8f5373c94c35d7b7b8ed3416",
+        "byteLength": 647,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-2-normalized.xlsx",
+      "contentDigest": "sha256:cde6a914aa3b974579f8199dcaeb1102f2ae76629bf13d04f67d00e70810c9e8",
+      "byteLength": 137613,
+      "sheet": "Table 10",
+      "replayResponse": {
+        "path": "replay/criminal-courts-guilty-outcome-offence-by-sentence-2022.response.txt",
+        "contentDigest": "sha256:d261ffd7f336e7540601ecd6eee0b6c6b82d81fda9646768b4ad9ad655305f4c",
+        "byteLength": 647,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-2-normalized.xlsx",
+      "contentDigest": "sha256:b4b6a79b420d846d87dfd030bc0edd70f845d17d2c33d7353f5161b17cdbd289",
+      "byteLength": 111102,
+      "sheet": "Table 10",
+      "replayResponse": {
+        "path": "replay/criminal-courts-guilty-outcome-offence-by-sentence-2023.response.txt",
+        "contentDigest": "sha256:73059422af185f9eff6f0f6f306073c558cbc39288edeaee17f7abfee21d3238",
+        "byteLength": 660,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-2-normalized.xlsx",
+      "contentDigest": "sha256:c92ee92a71b022987498ddeeb299ee7063f9cb623e340d8844e9b69a0fadd80f",
+      "byteLength": 136299,
+      "sheet": "Table 14",
+      "replayResponse": {
+        "path": "replay/criminal-courts-guilty-outcome-offence-by-sentence-2024.response.txt",
+        "contentDigest": "sha256:9cf30e19982cb97f4f0394d0fc91d17388d29d2882024e4c96ba1dd9ce7b1190",
+        "byteLength": 603,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

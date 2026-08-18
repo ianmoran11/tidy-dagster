@@ -133,16 +133,16 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
 
 
-def test_definitions_include_158_worksheet_cross_publication_batch() -> None:
+def test_definitions_include_177_worksheet_cross_publication_batch() -> None:
     definitions = build_definitions(project_root=PROJECT)
     Definitions.validate_loadable(definitions)
-    assert LARGE_BATCH_REGISTRY.worksheet_count == 158
-    assert len(LARGE_BATCH_REGISTRY.entries) == 37
-    assert len(LARGE_BATCH_ASSETS) == 37
-    assert len(LARGE_BATCH_CHECKS) == 37
-    assert len(LARGE_BATCH_JOBS) == 37
+    assert LARGE_BATCH_REGISTRY.worksheet_count == 177
+    assert len(LARGE_BATCH_REGISTRY.entries) == 45
+    assert len(LARGE_BATCH_ASSETS) == 45
+    assert len(LARGE_BATCH_CHECKS) == 45
+    assert len(LARGE_BATCH_JOBS) == 45
     assert definitions.metadata["product_prototype_large_batch_supported"].value
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 158
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 177
     assert {
         spec.family_id
         for spec in LARGE_BATCH_REGISTRY.entries
@@ -153,7 +153,7 @@ def test_definitions_include_158_worksheet_cross_publication_batch() -> None:
             spec.family_id.startswith("criminal-courts-")
             for spec in LARGE_BATCH_REGISTRY.entries
         )
-        == 10
+        == 18
     )
     assert {asset.key.to_user_string() for asset in LARGE_BATCH_ASSETS} == {
         spec.dagster_asset for spec in LARGE_BATCH_REGISTRY.entries
@@ -174,14 +174,14 @@ def test_build_definitions_uses_requested_project_registry(tmp_path: Path) -> No
     registry = json.loads(
         (PROJECT / "fixtures/product-prototype/large-batch-assets-v1.json").read_text()
     )
-    registry["batchId"] = "alternate-one-hundred-fifty-eight-worksheets-v1"
+    registry["batchId"] = "alternate-one-hundred-seventy-seven-worksheets-v1"
     registry_path.write_text(json.dumps(registry))
     definitions = build_definitions(project_root=tmp_path)
     assert (
         definitions.metadata["product_prototype_large_batch_id"].value
-        == "alternate-one-hundred-fifty-eight-worksheets-v1"
+        == "alternate-one-hundred-seventy-seven-worksheets-v1"
     )
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 158
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 177
 
 
 def test_definitions_load_identity_and_share_one_partition_definition(

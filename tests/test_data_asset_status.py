@@ -40,10 +40,10 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
     ] == [
         ("prisoners-australia", "calendar-year", 27),
         ("recorded-crime-offenders", "fiscal-year", 5),
-        ("criminal-courts-australia", "fiscal-year", 10),
+        ("criminal-courts-australia", "fiscal-year", 18),
     ]
-    assert len(status.cohorts) == 42
-    assert len(status.assets) == 183
+    assert len(status.cohorts) == 50
+    assert len(status.assets) == 202
     assert status.physical_workbook_count == 27
     assert {asset.year for asset in status.assets} == set(range(2021, 2026))
     assert all(
@@ -52,8 +52,8 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
     assert all(asset.csv_route for asset in status.assets)
-    assert len({asset.csv_route for asset in status.assets}) == 183
-    assert sum(asset.canonical_count or 0 for asset in status.assets) == 138078
+    assert len({asset.csv_route for asset in status.assets}) == 202
+    assert sum(asset.canonical_count or 0 for asset in status.assets) == 163680
     offenders = [
         asset
         for asset in status.assets
@@ -69,8 +69,8 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
         for asset in status.assets
         if asset.publication_id == "criminal-courts-australia"
     ]
-    assert len(criminal_courts) == 29
-    assert sum(asset.canonical_count or 0 for asset in criminal_courts) == 68778
+    assert len(criminal_courts) == 48
+    assert sum(asset.canonical_count or 0 for asset in criminal_courts) == 94380
     assert all(
         asset.publication_label == "Criminal Courts, Australia"
         for asset in criminal_courts
@@ -95,10 +95,10 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
         )
     normalized = [asset for asset in status.assets if asset.normalization]
     assert Counter(asset.year for asset in normalized) == {
-        2021: 29,
-        2022: 29,
-        2023: 29,
-        2024: 13,
+        2021: 33,
+        2022: 33,
+        2023: 33,
+        2024: 20,
         2025: 23,
     }
     live = [asset for asset in status.assets if asset.live_evidence_path]
@@ -112,16 +112,16 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
 def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None:
     rendered = render_dashboard(build_dashboard(PROJECT)).decode()
     assert rendered.startswith("<!doctype html>")
-    assert rendered.count('class="asset-pair"') == 183
-    assert rendered.count('class="detail-toggle"') == 183
-    assert rendered.count('class="button csv-link"') == 183
-    assert rendered.count("Open CSV") == 183
+    assert rendered.count('class="asset-pair"') == 202
+    assert rendered.count('class="detail-toggle"') == 202
+    assert rendered.count('class="button csv-link"') == 202
+    assert rendered.count("Open CSV") == 202
     assert rendered.count('class="coverage-publication publication-group"') == 3
     assert rendered.count('class="assets-publication publication-group"') == 3
-    assert rendered.count('class="coverage-row"') == 42
-    assert rendered.count('class="coverage-cell coverage-complete"') == 183
+    assert rendered.count('class="coverage-row"') == 50
+    assert rendered.count('class="coverage-cell coverage-complete"') == 202
     assert rendered.count('class="coverage-meter"') == 6
-    assert rendered.count("<strong>183/183</strong>") == 6
+    assert rendered.count("<strong>202/202</strong>") == 6
     assert "max-height:min(54vh,620px)" in rendered
     assert "position:sticky" in rendered
     assert all(
@@ -141,7 +141,7 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'class="sort"',
             "Automated checks",
             "Flagged issues",
-            "183 sheet-assets across 27 physical workbooks",
+            "202 sheet-assets across 27 physical workbooks",
             "Registered asset coverage",
             "Recorded Crime — Offenders",
             "2021\u201322",
@@ -178,15 +178,15 @@ def test_coverage_matrix_keeps_multiple_assets_in_one_year_compact() -> None:
     expanded_cohort = replace(cohort, assets=(*cohort.assets, duplicate))
     expanded = replace(status, cohorts=(expanded_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(expanded).decode()
-    assert rendered.count('class="coverage-row"') == 42
-    assert rendered.count("data-target-year=") == 183
+    assert rendered.count('class="coverage-row"') == 50
+    assert rendered.count("data-target-year=") == 202
     assert (
         rendered.count('class="coverage-cell coverage-complete coverage-multiple"') == 1
     )
     assert "<small>2</small>" in rendered
     assert "2 registered assets" in rendered
     assert "Select to view all 2 assets" in rendered
-    assert rendered.count("<strong>184/184</strong>") == 6
+    assert rendered.count("<strong>203/203</strong>") == 6
 
 
 def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
@@ -195,16 +195,16 @@ def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
     reduced_cohort = replace(cohort, assets=cohort.assets[1:])
     reduced = replace(status, cohorts=(reduced_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(reduced).decode()
-    assert rendered.count('class="coverage-cell coverage-absent"') == 13
-    assert rendered.count('class="coverage-cell coverage-complete"') == 182
+    assert rendered.count('class="coverage-cell coverage-absent"') == 26
+    assert rendered.count('class="coverage-cell coverage-complete"') == 201
     assert "Not registered in this prototype scope" in rendered
-    assert rendered.count("<strong>182/182</strong>") == 6
+    assert rendered.count("<strong>201/201</strong>") == 6
 
 
 def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
     status = build_dashboard(PROJECT)
     payloads = build_asset_csv_payloads(PROJECT, status)
-    assert len(payloads) == 183
+    assert len(payloads) == 202
     observed_rows = 0
     for asset in status.assets:
         assert asset.csv_route is not None
@@ -219,7 +219,7 @@ def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
             row.get("publication_vintage_date") or row["reference_date"] for row in rows
         } == {asset.reference_date}
         observed_rows += len(rows)
-    assert observed_rows == 138078
+    assert observed_rows == 163680
 
 
 def test_committed_snapshot_matches_current_evidence() -> None:

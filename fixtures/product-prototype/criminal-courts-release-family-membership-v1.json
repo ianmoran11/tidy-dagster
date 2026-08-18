@@ -2,10 +2,10 @@
   "schemaVersion": "tidy.criminal-courts-release-family-membership/v1",
   "recordedAt": "2026-08-18T00:00:00+00:00",
   "publicationId": "criminal-courts-australia",
-  "familyCount": 193,
+  "familyCount": 192,
   "numberedDataSheetCount": 430,
-  "registeredMemberCount": 29,
-  "pendingSemanticContractCount": 401,
+  "registeredMemberCount": 48,
+  "pendingSemanticContractCount": 382,
   "families": [
     {
       "familyId": "criminal-courts-defendants-finalised-method-by-duration",
@@ -1931,25 +1931,6 @@
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023-with-concorded-anzsoc-2011-series",
           "registered": true
-        }
-      ]
-    },
-    {
-      "familyId": "criminal-courts-main-court-level-and-principal-offence-by-principal-sentence-24379a95b7",
-      "semanticTitle": "Court level and principal offence by principal sentence",
-      "members": [
-        {
-          "releaseId": "2023-24",
-          "downloadOrdinal": 2,
-          "cubeId": "defendants-with-a-guilty-outcome-australia",
-          "tableNamespace": "main",
-          "physicalSheetName": "Table 10",
-          "physicalTableNumber": 10,
-          "publishedTitle": "Table 10 Court level and principal offence by principal sentence, 2022–23 to 2023–24",
-          "sourcePath": "workbooks/criminal-courts-2023-24-cube-2-source.xlsx",
-          "sourceDigest": "sha256:73fa6f5b89b3aaf11a89ae79a0a9e1e0bf1fad94bc38411d12b7bbea2051e041",
-          "classificationContext": "anzsoc-2011",
-          "registered": false
         }
       ]
     },
@@ -5790,8 +5771,8 @@
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-court-level-and-principal-offence-by-duration-a05fc46157",
-      "semanticTitle": "Defendants with a guilty outcome, Court level and principal offence by duration",
+      "familyId": "criminal-courts-guilty-outcome-offence-by-duration",
+      "semanticTitle": "Defendants with a guilty outcome, court level and principal offence by duration",
       "members": [
         {
           "releaseId": "2021-22",
@@ -5804,7 +5785,7 @@
           "sourcePath": "workbooks/criminal-courts-2021-22-cube-2-source.xlsx",
           "sourceDigest": "sha256:b28f7ac2a9d8a3fd39a413e6d38b8fea0c3a262cc4469f724bb2a7db176bf92a",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2022-23",
@@ -5817,7 +5798,7 @@
           "sourcePath": "workbooks/criminal-courts-2022-23-cube-2-source.xlsx",
           "sourceDigest": "sha256:4f6761f483c64e26dc88ad05f5df0262d3a64dacd4598b29bff86eee8663a5ca",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2023-24",
@@ -5830,7 +5811,7 @@
           "sourcePath": "workbooks/criminal-courts-2023-24-cube-2-source.xlsx",
           "sourceDigest": "sha256:73fa6f5b89b3aaf11a89ae79a0a9e1e0bf1fad94bc38411d12b7bbea2051e041",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2024-25",
@@ -5843,13 +5824,13 @@
           "sourcePath": "workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023",
-          "registered": false
+          "registered": true
         }
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-court-level-and-principal-offence-by-principal-sentence-202c309b70",
-      "semanticTitle": "Defendants with a guilty outcome, Court level and principal offence by principal sentence",
+      "familyId": "criminal-courts-guilty-outcome-offence-by-sentence",
+      "semanticTitle": "Defendants with a guilty outcome, court level and principal offence by principal sentence",
       "members": [
         {
           "releaseId": "2021-22",
@@ -5862,7 +5843,7 @@
           "sourcePath": "workbooks/criminal-courts-2021-22-cube-2-source.xlsx",
           "sourceDigest": "sha256:b28f7ac2a9d8a3fd39a413e6d38b8fea0c3a262cc4469f724bb2a7db176bf92a",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2022-23",
@@ -5875,7 +5856,20 @@
           "sourcePath": "workbooks/criminal-courts-2022-23-cube-2-source.xlsx",
           "sourceDigest": "sha256:4f6761f483c64e26dc88ad05f5df0262d3a64dacd4598b29bff86eee8663a5ca",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
+        },
+        {
+          "releaseId": "2023-24",
+          "downloadOrdinal": 2,
+          "cubeId": "defendants-with-a-guilty-outcome-australia",
+          "tableNamespace": "main",
+          "physicalSheetName": "Table 10",
+          "physicalTableNumber": 10,
+          "publishedTitle": "Table 10 Court level and principal offence by principal sentence, 2022–23 to 2023–24",
+          "sourcePath": "workbooks/criminal-courts-2023-24-cube-2-source.xlsx",
+          "sourceDigest": "sha256:73fa6f5b89b3aaf11a89ae79a0a9e1e0bf1fad94bc38411d12b7bbea2051e041",
+          "classificationContext": "anzsoc-2011",
+          "registered": true
         },
         {
           "releaseId": "2024-25",
@@ -5888,7 +5882,7 @@
           "sourcePath": "workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023",
-          "registered": false
+          "registered": true
         }
       ]
     },
@@ -6009,8 +6003,8 @@
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-sex-and-age-by-principal-sentence-all-courts-a96c16bd3d",
-      "semanticTitle": "Defendants with a guilty outcome, Sex and age by principal sentence – All Courts",
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts",
+      "semanticTitle": "Defendants with a guilty outcome, sex and age by principal sentence — All Courts",
       "members": [
         {
           "releaseId": "2024-25",
@@ -6023,13 +6017,13 @@
           "sourcePath": "workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023",
-          "registered": false
+          "registered": true
         }
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-sex-and-age-by-principal-sentence-and-court-level-bb2a24b2df",
-      "semanticTitle": "Defendants with a guilty outcome, Sex and age by principal sentence and court level",
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
+      "semanticTitle": "Defendants with a guilty outcome, sex and age by principal sentence and court level",
       "members": [
         {
           "releaseId": "2021-22",
@@ -6042,7 +6036,7 @@
           "sourcePath": "workbooks/criminal-courts-2021-22-cube-2-source.xlsx",
           "sourceDigest": "sha256:b28f7ac2a9d8a3fd39a413e6d38b8fea0c3a262cc4469f724bb2a7db176bf92a",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2022-23",
@@ -6055,7 +6049,7 @@
           "sourcePath": "workbooks/criminal-courts-2022-23-cube-2-source.xlsx",
           "sourceDigest": "sha256:4f6761f483c64e26dc88ad05f5df0262d3a64dacd4598b29bff86eee8663a5ca",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2023-24",
@@ -6068,13 +6062,13 @@
           "sourcePath": "workbooks/criminal-courts-2023-24-cube-2-source.xlsx",
           "sourceDigest": "sha256:73fa6f5b89b3aaf11a89ae79a0a9e1e0bf1fad94bc38411d12b7bbea2051e041",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         }
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-sex-and-age-by-principal-sentence-children-s-courts-49817d3496",
-      "semanticTitle": "Defendants with a guilty outcome, Sex and age by principal sentence – Children's Courts",
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
+      "semanticTitle": "Defendants with a guilty outcome, sex and age by principal sentence — Children's Courts",
       "members": [
         {
           "releaseId": "2024-25",
@@ -6087,13 +6081,13 @@
           "sourcePath": "workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023",
-          "registered": false
+          "registered": true
         }
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-sex-and-age-by-principal-sentence-higher-courts-c1bfc4a737",
-      "semanticTitle": "Defendants with a guilty outcome, Sex and age by principal sentence – Higher Courts",
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
+      "semanticTitle": "Defendants with a guilty outcome, sex and age by principal sentence — Higher Courts",
       "members": [
         {
           "releaseId": "2024-25",
@@ -6106,13 +6100,13 @@
           "sourcePath": "workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023",
-          "registered": false
+          "registered": true
         }
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-sex-and-age-by-principal-sentence-magistrates-courts-1df45e15f6",
-      "semanticTitle": "Defendants with a guilty outcome, Sex and age by principal sentence – Magistrates' Courts",
+      "familyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts",
+      "semanticTitle": "Defendants with a guilty outcome, sex and age by principal sentence — Magistrates' Courts",
       "members": [
         {
           "releaseId": "2024-25",
@@ -6125,13 +6119,13 @@
           "sourcePath": "workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023",
-          "registered": false
+          "registered": true
         }
       ]
     },
     {
-      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-summary-characteristics-by-court-level-states-and-territories-d4c6f14c65",
-      "semanticTitle": "Defendants with a guilty outcome, Summary characteristics by court level, States and territories",
+      "familyId": "criminal-courts-guilty-outcome-summary-by-jurisdiction",
+      "semanticTitle": "Defendants with a guilty outcome, summary characteristics by court level and jurisdiction",
       "members": [
         {
           "releaseId": "2021-22",
@@ -6144,7 +6138,7 @@
           "sourcePath": "workbooks/criminal-courts-2021-22-cube-2-source.xlsx",
           "sourceDigest": "sha256:b28f7ac2a9d8a3fd39a413e6d38b8fea0c3a262cc4469f724bb2a7db176bf92a",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2022-23",
@@ -6157,7 +6151,7 @@
           "sourcePath": "workbooks/criminal-courts-2022-23-cube-2-source.xlsx",
           "sourceDigest": "sha256:4f6761f483c64e26dc88ad05f5df0262d3a64dacd4598b29bff86eee8663a5ca",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2023-24",
@@ -6170,7 +6164,7 @@
           "sourcePath": "workbooks/criminal-courts-2023-24-cube-2-source.xlsx",
           "sourceDigest": "sha256:73fa6f5b89b3aaf11a89ae79a0a9e1e0bf1fad94bc38411d12b7bbea2051e041",
           "classificationContext": "anzsoc-2011",
-          "registered": false
+          "registered": true
         },
         {
           "releaseId": "2024-25",
@@ -6183,7 +6177,7 @@
           "sourcePath": "workbooks/criminal-courts-2024-25-cube-2-source.xlsx",
           "sourceDigest": "sha256:8366a0e8ffd99372928686440ba026115b90be081f1b082799bbc70a5b9742cf",
           "classificationContext": "anzsoc-2023",
-          "registered": false
+          "registered": true
         }
       ]
     },
@@ -6756,5 +6750,5 @@
       ]
     }
   ],
-  "membershipDigest": "sha256:f0cf6df9e34d7b71e3a0f0b1685299fbd3b16efbc229b2e12c22fd98fd345c95"
+  "membershipDigest": "sha256:208519d67bb955b004a05e1ab143e9be4ec08495e5873fdd27300fdbba19f426"
 }

@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts-v1",
+  "tableFamilyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_10_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS",
+            "TOTAL"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "HIGHER_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 576
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:ecfb59adae9510caa79199c06aade83a77bb3a9f47a146aeea06cd98b5c3082d"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "sex",
+    "sentence_statistic",
+    "observation_period",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^age\\ category$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "sentence_statistic": [
+      "^principal\\ sentence$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "10–19 years": "CHAR_10_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Total(c)": "CHAR_TOTAL",
+      "Organisations": "CHAR_ORGANISATIONS",
+      "Total guilty outcome": "CHAR_TOTAL_GUILTY_OUTCOME"
+    },
+    "sex": {
+      "Males": "MALES",
+      "Females": "FEMALES",
+      "Persons(d)": "PERSONS",
+      "Total(c)": "TOTAL"
+    },
+    "sentence_statistic": {
+      "Custody in a correctional institution": "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Intensive penalty in the community": "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Fully suspended sentence of imprisonment": "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Community service / work": "SENTENCE_COMMUNITY_SERVICE_WORK",
+      "Moderate penalty in the community": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Fines": "SENTENCE_FINES",
+      "Good behaviour (incl. bonds)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Nominal and other penalties(a)": "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+      "Total(a)(b)": "SENTENCE_TOTAL"
+    },
+    "observation_period": {
+      "2024–25": "2025-06-30",
+      "2023–24": "2024-06-30"
+    },
+    "court_level": {
+      "This table contains defendants with a guilty outcome, sex and age by principal sentence – Higher Courts, 2023–24 to 2024–25. It ranges from cell A1 to J91.": "HIGHER_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "sex_id",
+    "sentence_statistic_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 576,
+    "maximumRows": 576,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 10
+    },
+    "characteristicCategoriesByYear": {
+      "2024": [
+        "CHAR_10_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ]
+    },
+    "sexesByYear": {
+      "2024": [
+        "FEMALES",
+        "MALES",
+        "PERSONS",
+        "TOTAL"
+      ]
+    },
+    "sentenceStatisticsByYear": {
+      "2024": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+        "SENTENCE_TOTAL"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "HIGHER_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "2024-06-30": [
+            "R45C2"
+          ],
+          "2025-06-30": [
+            "R6C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

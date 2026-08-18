@@ -1,0 +1,952 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-guilty-outcome-offence-by-duration-v1",
+  "tableFamilyId": "criminal-courts-guilty-outcome-offence-by-duration",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_13_TO_UNDER_26_WEEKS",
+            "LENGTH_26_TO_UNDER_39_WEEKS",
+            "LENGTH_39_TO_UNDER_52_WEEKS",
+            "LENGTH_52_WEEKS_AND_OVER",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_13_WEEKS"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_13_TO_UNDER_26_WEEKS",
+            "LENGTH_26_TO_UNDER_39_WEEKS",
+            "LENGTH_39_TO_UNDER_52_WEEKS",
+            "LENGTH_52_WEEKS_AND_OVER",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_13_WEEKS"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_13_TO_UNDER_26_WEEKS",
+            "LENGTH_26_TO_UNDER_39_WEEKS",
+            "LENGTH_39_TO_UNDER_52_WEEKS",
+            "LENGTH_52_WEEKS_AND_OVER",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_13_WEEKS"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_01_HOMICIDE",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+            "ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+            "ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_13_TO_UNDER_26_WEEKS",
+            "LENGTH_26_TO_UNDER_39_WEEKS",
+            "LENGTH_39_TO_UNDER_52_WEEKS",
+            "LENGTH_52_WEEKS_AND_OVER",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_13_WEEKS"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 816,
+        "2022": 816,
+        "2023": 816,
+        "2024": 864
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:1d6a0f1671108ebb7692a22aecbe509761058925c4ad8599dedb14c747d10c66",
+        "2022": "sha256:d1863618ff3c60b199a143f8290501e2392dc1224da00020b04cfba4d476b4a0",
+        "2023": "sha256:26d1b23e1674e88621c29eaa6219924011866ad163356cb715cdbf555b78a151",
+        "2024": "sha256:718f488d73cffa1d271173c4b0c546664a9b1f1477cb8dc84950e276f9a614e0"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_13_TO_UNDER_26_WEEKS",
+            "LENGTH_26_TO_UNDER_39_WEEKS",
+            "LENGTH_39_TO_UNDER_52_WEEKS",
+            "LENGTH_52_WEEKS_AND_OVER",
+            "LENGTH_TOTAL",
+            "LENGTH_UNDER_13_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN_WEEKS"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN_WEEKS"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN_WEEKS"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_01_HOMICIDE",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+            "ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+            "ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN_WEEKS"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 136,
+        "2022": 136,
+        "2023": 136,
+        "2024": 144
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:afd482e8d4d7867c6a192bfdf274435b6e470c35f2053271a1348e1622cfdc72",
+        "2022": "sha256:592debed833eae1dbb18374073ec65ed1323c8749b2d94d3e9ddf5df85481398",
+        "2023": "sha256:bc429831d4d8c6eddbe603e06f00abb0d94ce5c2fe86128f888f9e2d029670d9",
+        "2024": "sha256:92558b2451e71fe0dd8ffa03fc1685d958f368f40c835a15ab4807870d747639"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN_WEEKS"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN_WEEKS"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN_WEEKS"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "ANZSOC_2023_01_HOMICIDE",
+            "ANZSOC_2023_02_ASSAULT",
+            "ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "ANZSOC_2023_06_BURGLARY",
+            "ANZSOC_2023_07_THEFT",
+            "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "ANZSOC_2023_09_DRUG_OFFENCES",
+            "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+            "ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+            "ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN_WEEKS"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 136,
+        "2022": 136,
+        "2023": 136,
+        "2024": 144
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:283cdd2acac3d50356ccd0ba566c4d8c5b2aa0ab3e80c5b330839f3542826881",
+        "2022": "sha256:ade043d9cc38137bb69d7e8b6d1428f26a246ce5dde51901f894d15b7d71134a",
+        "2023": "sha256:41284b3ab0bb42a6b1b1bad1a800464b17ff3aa2dc5e2bb97b66b903d28e8ac6",
+        "2024": "sha256:67c304427a3aee8c6e0c133ba852750abf84000415bd25229a47302b7f61d524"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "aggregate_sentence_length",
+    "observation_period",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "aggregate_sentence_length": [
+      "^duration\\ band$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "02 Acts intended to cause injury": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "03 Sexual assault and related offences": "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "04 Dangerous/negligent acts": "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/harassment": "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "06 Robbery/extortion": "ANZSOC_2011_06_ROBBERY_EXTORTION",
+      "07 Unlawful entry with intent": "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "08 Theft": "ANZSOC_2011_08_THEFT",
+      "09 Fraud/deception": "ANZSOC_2011_09_FRAUD_DECEPTION",
+      "10 Illicit drug offences": "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+      "11 Weapons/explosives": "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+      "12 Property damage and environmental pollution": "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "13 Public order offences": "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+      "14 Traffic and vehicle regulatory offences": "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "15 Offences against justice": "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "16 Miscellaneous offences": "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+      "Total guilty outcome": "OFFENCE_TOTAL_GUILTY_OUTCOME",
+      "02 Acts intended to cause injury(a)": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "05 Abduction/harassment(b)": "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "15 Offences against justice(c)": "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "Total guilty outcome(d)": "OFFENCE_TOTAL_GUILTY_OUTCOME",
+      "01 Homicide(b)": "ANZSOC_2023_01_HOMICIDE",
+      "02 Assault": "ANZSOC_2023_02_ASSAULT",
+      "03 Sexual offences": "ANZSOC_2023_03_SEXUAL_OFFENCES",
+      "04 Harm or endanger persons(c)": "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "05 Robbery, blackmail, and extortion": "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "06 Burglary": "ANZSOC_2023_06_BURGLARY",
+      "07 Theft": "ANZSOC_2023_07_THEFT",
+      "08 Fraud and related offences": "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+      "09 Drug offences": "ANZSOC_2023_09_DRUG_OFFENCES",
+      "10 Weapons and explosives offences": "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "11 Property damage": "ANZSOC_2023_11_PROPERTY_DAMAGE",
+      "12 Public order, health, and safety offences": "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "13 Traffic and vehicle offences": "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "14 Offences against justice procedures and orders(d)": "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "15 Offences against government": "ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+      "16 Environmental offences": "ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+      "17 Miscellaneous offences": "ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+      "Total guilty outcome(e)": "OFFENCE_TOTAL_GUILTY_OUTCOME"
+    },
+    "aggregate_sentence_length": {
+      "Under 13 weeks": "LENGTH_UNDER_13_WEEKS",
+      "13 to under 26 weeks": "LENGTH_13_TO_UNDER_26_WEEKS",
+      "26 to under 39 weeks": "LENGTH_26_TO_UNDER_39_WEEKS",
+      "39 to under 52 weeks": "LENGTH_39_TO_UNDER_52_WEEKS",
+      "52 weeks & over": "LENGTH_52_WEEKS_AND_OVER",
+      "Total": "LENGTH_TOTAL",
+      "Mean (weeks)": "LENGTH_MEAN_WEEKS",
+      "Median (weeks)": "LENGTH_MEDIAN_WEEKS",
+      "Mean (weeks)(a)": "LENGTH_MEAN_WEEKS",
+      "Median (weeks)(a)": "LENGTH_MEDIAN_WEEKS"
+    },
+    "observation_period": {
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "aggregate_sentence_length_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1088,
+    "maximumRows": 1152,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 17
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2022": [
+        "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2023": [
+        "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+        "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+        "ANZSOC_2011_06_ROBBERY_EXTORTION",
+        "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "ANZSOC_2011_08_THEFT",
+        "ANZSOC_2011_09_FRAUD_DECEPTION",
+        "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+        "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+        "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+        "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+        "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2024": [
+        "ANZSOC_2023_01_HOMICIDE",
+        "ANZSOC_2023_02_ASSAULT",
+        "ANZSOC_2023_03_SEXUAL_OFFENCES",
+        "ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+        "ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+        "ANZSOC_2023_06_BURGLARY",
+        "ANZSOC_2023_07_THEFT",
+        "ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+        "ANZSOC_2023_09_DRUG_OFFENCES",
+        "ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+        "ANZSOC_2023_11_PROPERTY_DAMAGE",
+        "ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+        "ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+        "ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+        "ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+        "ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+        "ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL_GUILTY_OUTCOME"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2021": [
+        "LENGTH_13_TO_UNDER_26_WEEKS",
+        "LENGTH_26_TO_UNDER_39_WEEKS",
+        "LENGTH_39_TO_UNDER_52_WEEKS",
+        "LENGTH_52_WEEKS_AND_OVER",
+        "LENGTH_MEAN_WEEKS",
+        "LENGTH_MEDIAN_WEEKS",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_13_WEEKS"
+      ],
+      "2022": [
+        "LENGTH_13_TO_UNDER_26_WEEKS",
+        "LENGTH_26_TO_UNDER_39_WEEKS",
+        "LENGTH_39_TO_UNDER_52_WEEKS",
+        "LENGTH_52_WEEKS_AND_OVER",
+        "LENGTH_MEAN_WEEKS",
+        "LENGTH_MEDIAN_WEEKS",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_13_WEEKS"
+      ],
+      "2023": [
+        "LENGTH_13_TO_UNDER_26_WEEKS",
+        "LENGTH_26_TO_UNDER_39_WEEKS",
+        "LENGTH_39_TO_UNDER_52_WEEKS",
+        "LENGTH_52_WEEKS_AND_OVER",
+        "LENGTH_MEAN_WEEKS",
+        "LENGTH_MEDIAN_WEEKS",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_13_WEEKS"
+      ],
+      "2024": [
+        "LENGTH_13_TO_UNDER_26_WEEKS",
+        "LENGTH_26_TO_UNDER_39_WEEKS",
+        "LENGTH_39_TO_UNDER_52_WEEKS",
+        "LENGTH_52_WEEKS_AND_OVER",
+        "LENGTH_MEAN_WEEKS",
+        "LENGTH_MEDIAN_WEEKS",
+        "LENGTH_TOTAL",
+        "LENGTH_UNDER_13_WEEKS"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R61C2"
+          ],
+          "HIGHER_COURTS": [
+            "R25C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R43C2"
+          ]
+        },
+        "2022": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R61C2"
+          ],
+          "HIGHER_COURTS": [
+            "R25C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R43C2"
+          ]
+        },
+        "2023": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R60C2"
+          ],
+          "HIGHER_COURTS": [
+            "R24C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R42C2"
+          ]
+        },
+        "2024": {
+          "ALL_COURTS": [
+            "R7C1",
+            "R87C1"
+          ],
+          "CHILDRENS_COURTS": [
+            "R147C1",
+            "R67C1"
+          ],
+          "HIGHER_COURTS": [
+            "R107C1",
+            "R27C1"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R127C1",
+            "R47C1"
+          ]
+        }
+      }
+    },
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "2021-06-30": [
+            "R6C2"
+          ],
+          "2022-06-30": [
+            "R6C10"
+          ]
+        },
+        "2022": {
+          "2022-06-30": [
+            "R6C2"
+          ],
+          "2023-06-30": [
+            "R6C10"
+          ]
+        },
+        "2023": {
+          "2023-06-30": [
+            "R5C2"
+          ],
+          "2024-06-30": [
+            "R5C10"
+          ]
+        },
+        "2024": {
+          "2024-06-30": [
+            "R86C2"
+          ],
+          "2025-06-30": [
+            "R6C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

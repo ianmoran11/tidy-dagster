@@ -1303,6 +1303,58 @@ def test_ambiguous_warning_can_pin_the_exact_selected_header_source() -> None:
     }
 
 
+def test_ambiguous_warning_selects_the_exact_dimension_specific_rule() -> None:
+    warning = {
+        "code": "AMBIGUOUS_HEADER",
+        "header": "observation period",
+        "address": "R8C2",
+        "message": (
+            "Multiple observation period headers could attach to value cell R8C2."
+        ),
+    }
+    rows = [
+        {
+            "_source": {"address": "R8C2"},
+            "court level": "All Courts",
+            "court level_source": "R7C2",
+            "observation period": "2024\u201325",
+            "observation period_source": "R6C2",
+        }
+    ]
+    rules = [
+        {
+            "code": "AMBIGUOUS_HEADER",
+            "dimension": "court_level",
+            "requireCanonicalOutputEquivalence": True,
+            "expectedHeaderSourcesByYear": {"2024": {"ALL_COURTS": ["R7C2"]}},
+        },
+        {
+            "code": "AMBIGUOUS_HEADER",
+            "dimension": "observation_period",
+            "requireCanonicalOutputEquivalence": True,
+            "expectedHeaderSourcesByYear": {"2024": {"2025-06-30": ["R6C2"]}},
+        },
+    ]
+    names = {
+        "court_level": "court level",
+        "observation_period": "observation period",
+    }
+    contract = {
+        "aliases": {
+            "court_level": {"All Courts": "ALL_COURTS"},
+            "observation_period": {"2024\u201325": "2025-06-30"},
+        }
+    }
+    assert (
+        _validate_warning_rules([warning], rules, rows, names, contract, year=2024)
+        == []
+    )
+
+    warning.pop("header")
+    issues = _validate_warning_rules([warning], rules, rows, names, contract, year=2024)
+    assert {issue["code"] for issue in issues} == {"UNALLOWLISTED_WARNING"}
+
+
 def test_end_to_end_malformed_response_creates_exception_and_is_excluded(
     tmp_path: Path,
 ) -> None:

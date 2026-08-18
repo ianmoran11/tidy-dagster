@@ -87,11 +87,11 @@ scripts/tidy-prisoners-release verify
 
 A second complete release inventory freezes all four official 2021–22 through
 2024–25 *Criminal Courts, Australia* releases: 69 exact downloads, four
-custodied guide exclusions, 65 substantive cubes, 193 semantic families, and
-430 numbered worksheets (94/102/116/118). The first reviewed national cluster
-registers 29 worksheet-assets across ten classification-aware cohorts. It keeps
+custodied guide exclusions, 65 substantive cubes, 192 reviewed semantic
+families, and 430 numbered worksheets (94/102/116/118). Two national clusters
+register 48 worksheet-assets across 18 classification-aware cohorts. They keep
 ANZSOC 2011, preliminary ANZSOC 2023, ANZSOC 2023, concorded historical series,
-and experimental FDV namespaces explicit; 401 worksheets remain pending
+and experimental FDV namespaces explicit; 382 worksheets remain pending
 semantic contracts.
 
 ```sh
@@ -104,15 +104,16 @@ cohorts—109 worksheet-assets—including the five state/territory families and
 national snapshot families for characteristics, age, sex, Indigenous status,
 offence/charge, and country of birth. A second publication adds *Recorded Crime —
 Offenders* Tables 1–5 across 2021–22 through 2024–25: 20 more worksheet-assets
-and 21,268 canonical observations. A third publication adds the first 29
-*Criminal Courts, Australia* national worksheet-assets and 68,778 observations.
-The combined 158-worksheet batch contains 124,795 canonical observations with
-zero exceptions, cross-period issues, or provider calls. The national snapshot
+and 21,268 canonical observations. A third publication adds 48
+*Criminal Courts, Australia* national worksheet-assets and 94,380 observations,
+including the expanded guilty-outcome, sentence, offence, age, and duration
+cluster. The combined 177-worksheet batch contains 150,397 canonical
+observations with zero exceptions, cross-period issues, or provider calls. The national snapshot
 cluster contributes 6,695 rows and bounds
 2025 Tables 7/8 to A:R without changing nonblank or formula payload. The state
 cluster contributes 8,406 rows; its corrected 2025 Table 16 uses all ten B:K
-measures and contributes 900. The status dashboard now exposes 183 deterministic
-per-asset CSV routes and 138,078 canonical observations. Table 27
+measures and contributes 900. The status dashboard now exposes 202 deterministic
+per-asset CSV routes and 163,680 canonical observations. Table 27
 preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,

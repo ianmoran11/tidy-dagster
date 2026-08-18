@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts-v1",
+  "tableFamilyId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_TOTAL"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 270
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:a258b217cbde6d174fb5c0b8e200d32ccc2f0aa3ff95b6df8dec9671d2381a53"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "sex",
+    "sentence_statistic",
+    "observation_period",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^age\\ category$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "sentence_statistic": [
+      "^principal\\ sentence$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "10–14 years": "CHAR_10_14_YEARS",
+      "15–19 years": "CHAR_15_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25 years and over": "CHAR_25_YEARS_AND_OVER",
+      "Total(b)": "CHAR_TOTAL"
+    },
+    "sex": {
+      "Males": "MALES",
+      "Females": "FEMALES",
+      "Persons(c)": "PERSONS"
+    },
+    "sentence_statistic": {
+      "Custody in a correctional institution": "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Intensive penalty in the community": "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Fully suspended sentence of imprisonment": "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Community service / work": "SENTENCE_COMMUNITY_SERVICE_WORK",
+      "Moderate penalty in the community": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Fines": "SENTENCE_FINES",
+      "Good behaviour (incl. bonds)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Nominal and other penalties": "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+      "Total(a)": "SENTENCE_TOTAL"
+    },
+    "observation_period": {
+      "2024–25": "2025-06-30",
+      "2023–24": "2024-06-30"
+    },
+    "court_level": {
+      "This table contains defendants with a guilty outcome, sex and age by principal sentence – Children's Courts, 2023–24 to 2024–25. It ranges from cell A1 to J53.": "CHILDRENS_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "sex_id",
+    "sentence_statistic_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 270,
+    "maximumRows": 270,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 10
+    },
+    "characteristicCategoriesByYear": {
+      "2024": [
+        "CHAR_10_14_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_TOTAL"
+      ]
+    },
+    "sexesByYear": {
+      "2024": [
+        "FEMALES",
+        "MALES",
+        "PERSONS"
+      ]
+    },
+    "sentenceStatisticsByYear": {
+      "2024": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+        "SENTENCE_TOTAL"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "CHILDRENS_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "2024-06-30": [
+            "R27C2"
+          ],
+          "2025-06-30": [
+            "R6C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}
