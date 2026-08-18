@@ -1841,9 +1841,17 @@ def _canonical_csv(rows: list[dict[str, Any]], contract: dict[str, Any]) -> byte
     output = io.StringIO(newline="")
     writer = csv.DictWriter(output, fieldnames=fields, lineterminator="\n")
     writer.writeheader()
+    # Physical worksheet names are source identities and may legitimately end in
+    # spaces (for example the official Criminal Courts `Table 80 ` worksheet).
+    # Keep that field byte-faithful while retaining the established CSV text
+    # normalization for non-identity fields.
     writer.writerows(
         {
-            key: value.rstrip() if isinstance(value, str) else value
+            key: (
+                value.rstrip()
+                if isinstance(value, str) and key != "source_sheet"
+                else value
+            )
             for key, value in row.items()
         }
         for row in rows

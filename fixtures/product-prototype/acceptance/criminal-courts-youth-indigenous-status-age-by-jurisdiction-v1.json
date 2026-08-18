@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-youth-indigenous-status-age-by-jurisdiction-v1",
+  "tableFamilyId": "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2023": {
+          "characteristic_category": [
+            "CHAR_10_13_YEARS",
+            "CHAR_14_17_YEARS",
+            "CHAR_TOTAL_YOUTH_DEFENDANTS"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "NON_INDIGENOUS_AND_NOT_STATED",
+            "NOT_STATED",
+            "TOTAL"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_10_13_YEARS",
+            "CHAR_14_17_YEARS",
+            "CHAR_TOTAL_YOUTH_DEFENDANTS"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "NOT_STATED",
+            "TOTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2023": 828,
+        "2024": 936
+      },
+      "expectedCombinationDigestsByYear": {
+        "2023": "sha256:172354e6f83e2622b52a3fde64d56725014e17fde8475408ab83d8a8e0266dd9",
+        "2024": "sha256:1bd1df65bb8541b3e6960fc6c1a156aaa6578326e7e2482658bf25ab5d7664fe"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "observation_period",
+    "jurisdiction",
+    "indigenous_status"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^age\\ category$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "indigenous_status": [
+      "^indigenous\\ status$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "10–13 years": "CHAR_10_13_YEARS",
+      "14–17 years": "CHAR_14_17_YEARS",
+      "Aged 10 to 13": "CHAR_10_13_YEARS",
+      "Aged 10 to 13(h)": "CHAR_10_13_YEARS",
+      "Aged 14 to 17": "CHAR_14_17_YEARS",
+      "Total youth defendants": "CHAR_TOTAL_YOUTH_DEFENDANTS"
+    },
+    "observation_period": {
+      "2012–13": "2013-06-30",
+      "2013–14": "2014-06-30",
+      "2014–15": "2015-06-30",
+      "2015–16": "2016-06-30",
+      "2016–17": "2017-06-30",
+      "2017–18": "2018-06-30",
+      "2018–19": "2019-06-30",
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "jurisdiction": {
+      "Australian Capital Territory(g)": "ACT",
+      "Australian Capital Territory(g)(h)": "ACT",
+      "New South Wales(a)": "NSW",
+      "Northern Territory(e)(f)": "NT",
+      "Queensland": "QLD",
+      "South Australia(b)(c)": "SA",
+      "Tasmania(d)": "TAS"
+    },
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Non-Indigenous and not stated(i)": "NON_INDIGENOUS_AND_NOT_STATED",
+      "Not stated": "NOT_STATED",
+      "Total": "TOTAL"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "jurisdiction_id",
+    "indigenous_status_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2023": [
+        "CHAR_10_13_YEARS",
+        "CHAR_14_17_YEARS",
+        "CHAR_TOTAL_YOUTH_DEFENDANTS"
+      ],
+      "2024": [
+        "CHAR_10_13_YEARS",
+        "CHAR_14_17_YEARS",
+        "CHAR_TOTAL_YOUTH_DEFENDANTS"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2023": [
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2023": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2024": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2023": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "NON_INDIGENOUS_AND_NOT_STATED",
+        "NOT_STATED",
+        "TOTAL"
+      ],
+      "2024": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "NOT_STATED",
+        "TOTAL"
+      ]
+    },
+    "minimumRows": 828,
+    "maximumRows": 936,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 14
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2023": {
+          "ACT": [
+            "R90C2"
+          ],
+          "NT": [
+            "R73C2"
+          ],
+          "QLD": [
+            "R22C2"
+          ],
+          "SA": [
+            "R39C2"
+          ],
+          "TAS": [
+            "R56C2"
+          ]
+        },
+        "2024": {
+          "ACT": [
+            "R106C2"
+          ],
+          "NT": [
+            "R86C2"
+          ],
+          "QLD": [
+            "R26C2"
+          ],
+          "SA": [
+            "R46C2"
+          ],
+          "TAS": [
+            "R66C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

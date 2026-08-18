@@ -94,8 +94,28 @@ measures and units. Publication vintage remains separate from the row-level
 observation period. Published `..`, `na`, and `np` values remain respectively
 not applicable, not available, and suppressed rather than becoming zero.
 
-The four clusters now cover 96 of 430 worksheets and produce 162,307 canonical
-observations; 334 worksheets remain pending reviewed contracts.
+## Fifth accepted youth-defendants cluster
+
+The fifth cluster covers all 24 numbered worksheets in the youth-defendants
+cube across 2022–23 through 2024–25. Nine stable contracts span table renumbering
+and title-order drift while keeping genuinely different Indigenous-status-only
+and Indigenous-status-by-age tables separate. They cover national and
+jurisdiction summary characteristics, finalised and guilty-outcome offence and
+sentence tables, sex and age, Indigenous status, and mean and median sentence
+length by jurisdiction.
+
+The cluster adds 10,302 canonical observations. Defendant counts, mean and
+median defendant age, mean and median case duration, and mean and median sentence
+duration remain separate measures with person, year, week, and month units. The
+2024–25 offence aliases remain ANZSOC 2023, earlier offence aliases remain ANZSOC
+2011, and the 2024–25 national historical summary identifies its concorded
+ANZSOC 2011 series explicitly. Published `..`, `na`, and `np` values remain
+respectively not applicable, not available, and suppressed. The literal
+2022–23 worksheet name `Table 80 ` is preserved through source provenance and
+CSV projection.
+
+The five clusters now cover 120 of 430 worksheets and produce 172,609 canonical
+observations; 310 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -107,8 +127,9 @@ observations; 334 worksheets remain pending reviewed contracts.
   than claiming the historical observations were originally coded to ANZSOC
   2023.
 - The ANZSOC 2023 Indigenous-status sentence-length counterpart is 2024–25
-  Table 19 in a different cube from its third-cluster predecessor. It remains a distinct accepted family rather
-  than being silently folded into the three-release ANZSOC 2011 cohort.
+  Table 19 in a different cube from its third-cluster predecessor. It remains a
+  distinct accepted family rather than being silently folded into the
+  three-release ANZSOC 2011 cohort.
 - Experimental family and domestic violence tables remain in a separate FDV
   namespace.
 
@@ -116,7 +137,7 @@ observations; 334 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 96 assets replay with
+measures, value statuses, source cells, and warnings. All 120 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

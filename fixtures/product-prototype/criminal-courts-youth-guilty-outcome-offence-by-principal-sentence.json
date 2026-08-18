@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-youth-guilty-outcome-offence-by-principal-sentence",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-youth-guilty-outcome-offence-by-principal-sentence",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:654c5be8d7c89aa4b9de596225c5785ce737f922cf3cea2a24834d56cdedf811",
+      "byteLength": 115332,
+      "sheet": "Table 76",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-2022.response.txt",
+        "contentDigest": "sha256:c1da17118486b455473083c4b77a4ae36c3e124d9cb089692c0f9a59055b507f",
+        "byteLength": 420,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:6df72ba46542120e1c948d07b90dcacfe7ebd2d828271e9ff844a6cdb4334e01",
+      "byteLength": 81815,
+      "sheet": "Table 84",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-2023.response.txt",
+        "contentDigest": "sha256:be49299ff165ba1adc845ce3f2e9a08c269030a7960286cb84399d0979274d74",
+        "byteLength": 420,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:802136280ef2de2a63b018ed340bcd2a9c73a9cbe4b8c04762504f231a963b61",
+      "byteLength": 78859,
+      "sheet": "Table 89",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-2024.response.txt",
+        "contentDigest": "sha256:972918686514957fb5a11cb2509e0d2f8e09ab3d5db557f0a0b5b525518d713c",
+        "byteLength": 394,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:654c5be8d7c89aa4b9de596225c5785ce737f922cf3cea2a24834d56cdedf811",
+      "byteLength": 115332,
+      "sheet": "Table 77",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-2022.response.txt",
+        "contentDigest": "sha256:8dbb181d49b7e4c3ec80c42b40d491fff48894d60924e0274a186d3aab28aad4",
+        "byteLength": 471,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:6df72ba46542120e1c948d07b90dcacfe7ebd2d828271e9ff844a6cdb4334e01",
+      "byteLength": 81815,
+      "sheet": "Table 85",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-2023.response.txt",
+        "contentDigest": "sha256:40892056b07b23e0a91b17cdccecc994582d78be2c3feff5692d71b940ed3d63",
+        "byteLength": 484,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:802136280ef2de2a63b018ed340bcd2a9c73a9cbe4b8c04762504f231a963b61",
+      "byteLength": 78859,
+      "sheet": "Table 90",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-2024.response.txt",
+        "contentDigest": "sha256:dd3595b40edc87394c6b6ecdcde2c140184e53342811ac8310b8f129a9431817",
+        "byteLength": 471,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

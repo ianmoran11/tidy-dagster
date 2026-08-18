@@ -1,0 +1,471 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction-v1",
+  "tableFamilyId": "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_COUNT"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_COUNT"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_COUNT"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 45,
+        "2023": 45,
+        "2024": 45
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:71e492ba76e7b40c55b2288d02a1e8ce03eea5526bc16cf7b391df75fcfcd5f3",
+        "2023": "sha256:71e492ba76e7b40c55b2288d02a1e8ce03eea5526bc16cf7b391df75fcfcd5f3",
+        "2024": "sha256:71e492ba76e7b40c55b2288d02a1e8ce03eea5526bc16cf7b391df75fcfcd5f3"
+      }
+    },
+    {
+      "id": "sentence-mean-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEAN"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 42,
+        "2023": 45,
+        "2024": 45
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:ad954575e3e38d882b9da8a3d45dbe40e07bbf1db1efd13789f3a35717025497",
+        "2023": "sha256:411cc831373de2ec97d5aebad5e0cf36ff0b0fc3cb6175f7c0c886d4d5593386",
+        "2024": "sha256:411cc831373de2ec97d5aebad5e0cf36ff0b0fc3cb6175f7c0c886d4d5593386"
+      }
+    },
+    {
+      "id": "sentence-median-duration",
+      "unitId": "month",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "sentence_statistic": [
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+          ],
+          "aggregate_sentence_length": [
+            "LENGTH_MEDIAN"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 42,
+        "2023": 45,
+        "2024": 45
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:edeef41831acedb21e9a6109b58d5739588a3fb53babb538827d87c2b2003411",
+        "2023": "sha256:9e79a145335c4cb2e1f185c2fc4a1f4ff3bfc4f786a01ba62b6de0f9c97778e2",
+        "2024": "sha256:9e79a145335c4cb2e1f185c2fc4a1f4ff3bfc4f786a01ba62b6de0f9c97778e2"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "sentence_statistic",
+    "aggregate_sentence_length",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "sentence_statistic": [
+      "^selected\\ principal\\ sentence$"
+    ],
+    "aggregate_sentence_length": [
+      "^statistic$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "aliases": {
+    "sentence_statistic": {
+      "Fully suspended juvenile sentence": "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+      "Good behaviour (incl. bonds)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour (incl. bonds)(a)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour (incl. bonds)(b)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Intensive penalty in the community": "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Juvenile detention": "SENTENCE_JUVENILE_DETENTION",
+      "Moderate penalty in the community": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Moderate penalty in the community(a)": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+    },
+    "aggregate_sentence_length": {
+      "Defendants (no.)": "LENGTH_COUNT",
+      "Mean (months)": "LENGTH_MEAN",
+      "Median (months)": "LENGTH_MEDIAN"
+    },
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "sentence_statistic_id",
+    "aggregate_sentence_length_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "sentenceStatisticsByYear": {
+      "2022": [
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+      ],
+      "2023": [
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+      ],
+      "2024": [
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY"
+      ]
+    },
+    "aggregateSentenceLengthsByYear": {
+      "2022": [
+        "LENGTH_COUNT",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN"
+      ],
+      "2023": [
+        "LENGTH_COUNT",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN"
+      ],
+      "2024": [
+        "LENGTH_COUNT",
+        "LENGTH_MEAN",
+        "LENGTH_MEDIAN"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2022": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2023": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2024": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    },
+    "minimumRows": 129,
+    "maximumRows": 135,
+    "sourceColumns": {
+      "minimum": 3,
+      "maximum": 11
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

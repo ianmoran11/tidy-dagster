@@ -1,0 +1,975 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-youth-summary-characteristics-by-jurisdiction-v1",
+  "tableFamilyId": "criminal-courts-youth-summary-characteristics-by-jurisdiction",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ASSAULT",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_03_SEXUAL_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "CHAR_06_BURGLARY",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_THEFT",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+            "CHAR_08_THEFT",
+            "CHAR_09_DRUG_OFFENCES",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_11_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "CHAR_11_PROPERTY_DAMAGE",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "CHAR_12_YEARS",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_14_YEARS",
+            "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_15_YEARS",
+            "CHAR_16_ENVIRONMENTAL_OFFENCES",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_MISCELLANEOUS_OFFENCES",
+            "CHAR_17_YEARS",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_AGREEMENT_OF_WRONGDOING",
+            "CHAR_FEMALES",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TRANSFER_TO_NON_COURT_AGENCIES",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_11_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_12_YEARS",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_14_YEARS",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_15_YEARS",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_FEMALES",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TRANSFER_TO_NON_COURT_AGENCIES",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_11_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_12_YEARS",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_14_YEARS",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_15_YEARS",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_AGREEMENT_OF_WRONGDOING",
+            "CHAR_FEMALES",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TRANSFER_TO_NON_COURT_AGENCIES",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE",
+            "CHAR_02_ASSAULT",
+            "CHAR_03_SEXUAL_OFFENCES",
+            "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "CHAR_06_BURGLARY",
+            "CHAR_07_THEFT",
+            "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+            "CHAR_09_DRUG_OFFENCES",
+            "CHAR_10_11_YEARS",
+            "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "CHAR_11_PROPERTY_DAMAGE",
+            "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "CHAR_12_YEARS",
+            "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "CHAR_14_YEARS",
+            "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+            "CHAR_15_YEARS",
+            "CHAR_16_ENVIRONMENTAL_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_MISCELLANEOUS_OFFENCES",
+            "CHAR_17_YEARS",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_AGREEMENT_OF_WRONGDOING",
+            "CHAR_FEMALES",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 333,
+        "2023": 342,
+        "2024": 333
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:0a37da68cc2c226103e69ff69bb7e3a45e19d86907217f79a8aab0e3d2d5218f",
+        "2023": "sha256:f4638b104d51b52a940374507b8d2839c3a262304c1e678a8ed90dd7ac49ae7d",
+        "2024": "sha256:707accad9a6a7f600fbaeabede8b7cbfd0a673e5f0a5eb10650ee99097e43993"
+      }
+    },
+    {
+      "id": "mean-case-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 9,
+        "2023": 9,
+        "2024": 9
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:c05522b9529f6f14862eb46cd339646c41abb3db955ce042384e8915ef231b3c",
+        "2023": "sha256:c05522b9529f6f14862eb46cd339646c41abb3db955ce042384e8915ef231b3c",
+        "2024": "sha256:c05522b9529f6f14862eb46cd339646c41abb3db955ce042384e8915ef231b3c"
+      }
+    },
+    {
+      "id": "mean-defendant-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 9,
+        "2023": 9,
+        "2024": 9
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:0cd350a09486026868b22db4185f8068762d3f33e161e602dcf4fc134c0384b6",
+        "2023": "sha256:0cd350a09486026868b22db4185f8068762d3f33e161e602dcf4fc134c0384b6",
+        "2024": "sha256:0cd350a09486026868b22db4185f8068762d3f33e161e602dcf4fc134c0384b6"
+      }
+    },
+    {
+      "id": "median-case-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 9,
+        "2023": 9,
+        "2024": 9
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:6dbe52ff733cb966da6fb6e6f8687eba850eda090d308cce8a4d49d81b160223",
+        "2023": "sha256:6dbe52ff733cb966da6fb6e6f8687eba850eda090d308cce8a4d49d81b160223",
+        "2024": "sha256:6dbe52ff733cb966da6fb6e6f8687eba850eda090d308cce8a4d49d81b160223"
+      }
+    },
+    {
+      "id": "median-defendant-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 9,
+        "2023": 9,
+        "2024": 9
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:e90115f65f2797aeb4b62b6e7481dc0e5773e3d5bce5d14953df96db34aa355b",
+        "2023": "sha256:e90115f65f2797aeb4b62b6e7481dc0e5773e3d5bce5d14953df96db34aa355b",
+        "2024": "sha256:e90115f65f2797aeb4b62b6e7481dc0e5773e3d5bce5d14953df96db34aa355b"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "01 Homicide and related offences": "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "01 Homicide(a)": "CHAR_01_HOMICIDE",
+      "02 Acts intended to cause injury": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Acts intended to cause injury(a)": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Assault": "CHAR_02_ASSAULT",
+      "021 Assault": "CHAR_021_ASSAULT",
+      "03 Sexual assault and related offences": "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "03 Sexual offences": "CHAR_03_SEXUAL_OFFENCES",
+      "04 Dangerous/negligent acts": "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+      "04 Harm or endanger persons(b)": "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+      "05 Abduction/harassment": "CHAR_05_ABDUCTION_HARASSMENT",
+      "05 Abduction/harassment(b)": "CHAR_05_ABDUCTION_HARASSMENT",
+      "05 Robbery, blackmail, and extortion": "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "06 Burglary": "CHAR_06_BURGLARY",
+      "06 Robbery/extortion": "CHAR_06_ROBBERY_EXTORTION",
+      "07 Theft": "CHAR_07_THEFT",
+      "07 Unlawful entry with intent": "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "08 Fraud and related offences": "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+      "08 Theft": "CHAR_08_THEFT",
+      "09 Drug offences": "CHAR_09_DRUG_OFFENCES",
+      "09 Fraud/deception": "CHAR_09_FRAUD_DECEPTION",
+      "10 Illicit drug offences": "CHAR_10_ILLICIT_DRUG_OFFENCES",
+      "10 Weapons and explosives offences": "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "10-11 years": "CHAR_10_11_YEARS",
+      "10–11 years": "CHAR_10_11_YEARS",
+      "11 Property damage": "CHAR_11_PROPERTY_DAMAGE",
+      "11 Weapons/explosives": "CHAR_11_WEAPONS_EXPLOSIVES",
+      "12 Property damage and environmental pollution": "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "12 Public order, health, and safety offences": "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "12 years": "CHAR_12_YEARS",
+      "13 Public order offences": "CHAR_13_PUBLIC_ORDER_OFFENCES",
+      "13 Traffic and vehicle offences": "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "13 years": "CHAR_13_YEARS",
+      "14 Offences against justice procedures and orders(c)": "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "14 Traffic and vehicle regulatory offences": "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "14 years": "CHAR_14_YEARS",
+      "15 Offences against government": "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+      "15 Offences against justice": "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+      "15 Offences against justice(c)": "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+      "15 years": "CHAR_15_YEARS",
+      "16 Environmental offences": "CHAR_16_ENVIRONMENTAL_OFFENCES",
+      "16 Miscellaneous offences": "CHAR_16_MISCELLANEOUS_OFFENCES",
+      "16 years": "CHAR_16_YEARS",
+      "17 Miscellaneous offences": "CHAR_17_MISCELLANEOUS_OFFENCES",
+      "17 years": "CHAR_17_YEARS",
+      "Acquitted": "CHAR_ACQUITTED",
+      "Adjudicated outcomes": "CHAR_ADJUDICATED_OUTCOMES",
+      "Adjudicated outcomes(f)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Agreement of wrongdoing(g)": "CHAR_AGREEMENT_OF_WRONGDOING",
+      "Females": "CHAR_FEMALES",
+      "Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Guilty outcome": "CHAR_GUILTY_OUTCOME",
+      "Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      "Males": "CHAR_MALES",
+      "Mean (weeks)": "CHAR_MEAN_WEEKS",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (weeks)": "CHAR_MEDIAN_WEEKS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Total finalised": "CHAR_TOTAL_FINALISED",
+      "Total finalised (excluding transfer to other court levels)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Total finalised (excluding transfer to other court levels)(d)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Total finalised(h)": "CHAR_TOTAL_FINALISED",
+      "Transfer to non - court agencies": "CHAR_TRANSFER_TO_NON_COURT_AGENCIES",
+      "Transfer to other court levels": "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "CHAR_WITHDRAWN_BY_PROSECUTION"
+    },
+    "characteristic_group": {
+      "Age": "GROUP_AGE",
+      "Age(i)": "GROUP_AGE",
+      "Duration": "GROUP_DURATION",
+      "Duration(e)": "GROUP_DURATION",
+      "Method of finalisation": "GROUP_METHOD_OF_FINALISATION",
+      "Principal offence": "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+      "Principal offence (ANZSOC 2023)": "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023",
+      "Sex": "GROUP_SEX"
+    },
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2022": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_08_THEFT",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_10_11_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_12_YEARS",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_YEARS",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_14_YEARS",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_15_YEARS",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_FEMALES",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TRANSFER_TO_NON_COURT_AGENCIES",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_08_THEFT",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_10_11_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_12_YEARS",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_YEARS",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_14_YEARS",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_15_YEARS",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_AGREEMENT_OF_WRONGDOING",
+        "CHAR_FEMALES",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TRANSFER_TO_NON_COURT_AGENCIES",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2024": [
+        "CHAR_01_HOMICIDE",
+        "CHAR_02_ASSAULT",
+        "CHAR_03_SEXUAL_OFFENCES",
+        "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+        "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+        "CHAR_06_BURGLARY",
+        "CHAR_07_THEFT",
+        "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+        "CHAR_09_DRUG_OFFENCES",
+        "CHAR_10_11_YEARS",
+        "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+        "CHAR_11_PROPERTY_DAMAGE",
+        "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+        "CHAR_12_YEARS",
+        "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+        "CHAR_13_YEARS",
+        "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+        "CHAR_14_YEARS",
+        "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+        "CHAR_15_YEARS",
+        "CHAR_16_ENVIRONMENTAL_OFFENCES",
+        "CHAR_16_YEARS",
+        "CHAR_17_MISCELLANEOUS_OFFENCES",
+        "CHAR_17_YEARS",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_AGREEMENT_OF_WRONGDOING",
+        "CHAR_FEMALES",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2022": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+        "GROUP_SEX"
+      ],
+      "2023": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+        "GROUP_SEX"
+      ],
+      "2024": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023",
+        "GROUP_SEX"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2022": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2023": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2024": [
+        "ACT",
+        "AUS",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    },
+    "minimumRows": 369,
+    "maximumRows": 378,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 10
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

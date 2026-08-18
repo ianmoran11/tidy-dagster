@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-youth-indigenous-status-by-jurisdiction-v1",
+  "tableFamilyId": "criminal-courts-youth-indigenous-status-by-jurisdiction",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2022"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "NON_INDIGENOUS_AND_NOT_STATED",
+            "NOT_STATED",
+            "TOTAL"
+          ],
+          "observation_period": [
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 190
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:a6aa36cdb93980b7b29225bc725f1522a1c102b55a8b23e148c9591140b06cd7"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "indigenous_status",
+    "observation_period",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "indigenous_status": [
+      "^indigenous\\ status$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "aliases": {
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Non-Indigenous/Not stated": "NON_INDIGENOUS_AND_NOT_STATED",
+      "Not stated": "NOT_STATED",
+      "Total": "TOTAL"
+    },
+    "observation_period": {
+      "2012–13": "2013-06-30",
+      "2013–14": "2014-06-30",
+      "2014–15": "2015-06-30",
+      "2015–16": "2016-06-30",
+      "2016–17": "2017-06-30",
+      "2017–18": "2018-06-30",
+      "2018–19": "2019-06-30",
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30"
+    },
+    "jurisdiction": {
+      "Australian Capital Territory": "ACT",
+      "New South Wales": "NSW",
+      "Northern Territory": "NT",
+      "Queensland": "QLD",
+      "South Australia": "SA",
+      "Tasmania": "TAS"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "indigenous_status_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "indigenousStatusesByYear": {
+      "2022": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "NON_INDIGENOUS_AND_NOT_STATED",
+        "NOT_STATED",
+        "TOTAL"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2022": [
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2022": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ]
+    },
+    "minimumRows": 190,
+    "maximumRows": 190,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 12
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2022": {
+          "ACT": [
+            "R31C2"
+          ],
+          "NT": [
+            "R26C2"
+          ],
+          "QLD": [
+            "R11C2"
+          ],
+          "SA": [
+            "R16C2"
+          ],
+          "TAS": [
+            "R21C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

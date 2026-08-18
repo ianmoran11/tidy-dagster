@@ -1,8 +1,8 @@
 {
   "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
-  "batchId": "justice-two-hundred-twenty-five-worksheets-v1",
-  "recordedAt": "2026-08-18T12:00:00Z",
-  "worksheetCount": 225,
+  "batchId": "justice-two-hundred-forty-nine-worksheets-v1",
+  "recordedAt": "2026-08-18T22:00:00Z",
+  "worksheetCount": 249,
   "providerCalls": 0,
   "entries": [
     {
@@ -2695,6 +2695,352 @@
       "preservesPublicationVintage": true,
       "expectedExcludedObservationCount": 0,
       "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-summary-characteristics-australia",
+      "label": "Criminal Courts — youth summary characteristics, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-australia.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-australia-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_summary_characteristics_australia_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_summary_characteristics_australia_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-summary-characteristics-australia-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        858,
+        938,
+        645
+      ],
+      "expectedCanonicalCount": 2441,
+      "expectedMeasureCounts": {
+        "defendant-count": 2273,
+        "mean-case-duration": 42,
+        "mean-defendant-age": 42,
+        "median-case-duration": 42,
+        "median-defendant-age": 42
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 26,
+        "observed": 2415
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-summary-characteristics-by-jurisdiction",
+      "label": "Criminal Courts — youth summary characteristics by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_summary_characteristics_by_jurisdiction_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_summary_characteristics_by_jurisdiction_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-summary-characteristics-by-jurisdiction-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        369,
+        378,
+        369
+      ],
+      "expectedCanonicalCount": 1116,
+      "expectedMeasureCounts": {
+        "defendant-count": 1008,
+        "mean-case-duration": 27,
+        "mean-defendant-age": 27,
+        "median-case-duration": 27,
+        "median-defendant-age": 27
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 2,
+        "not_available": 3,
+        "observed": 1111
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-finalised-sex-age-by-principal-offence",
+      "label": "Criminal Courts — youth finalised by sex, age and principal offence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-finalised-sex-age-by-principal-offence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-finalised-sex-age-by-principal-offence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_finalised_sex_age_by_principal_offence_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_finalised_sex_age_by_principal_offence_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-finalised-sex-age-by-principal-offence-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        432,
+        432,
+        432
+      ],
+      "expectedCanonicalCount": 1296,
+      "expectedMeasureCounts": {
+        "defendant-count": 1296
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1296
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-guilty-outcome-offence-by-principal-sentence",
+      "label": "Criminal Courts — youth guilty outcomes by offence and sentence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_offence_by_principal_sentence_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_guilty_outcome_offence_by_principal_sentence_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        378,
+        462,
+        216
+      ],
+      "expectedCanonicalCount": 1056,
+      "expectedMeasureCounts": {
+        "defendant-count": 1056
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1056
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence",
+      "label": "Criminal Courts — youth guilty outcomes by sex, age and sentence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_sentence_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_sentence_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        216,
+        240,
+        288
+      ],
+      "expectedCanonicalCount": 744,
+      "expectedMeasureCounts": {
+        "defendant-count": 744
+      },
+      "expectedValueStatusCounts": {
+        "observed": 744
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-indigenous-status-by-jurisdiction",
+      "label": "Criminal Courts — youth Indigenous status by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_indigenous_status_by_jurisdiction_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_indigenous_status_by_jurisdiction_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-indigenous-status-by-jurisdiction-replay",
+      "expectedYears": [
+        2022
+      ],
+      "expectedYearCounts": [
+        190
+      ],
+      "expectedCanonicalCount": 190,
+      "expectedMeasureCounts": {
+        "defendant-count": 190
+      },
+      "expectedValueStatusCounts": {
+        "observed": 190
+      },
+      "expectedManualReplayYears": [
+        2022
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
+      "label": "Criminal Courts — youth Indigenous status and age by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-age-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-age-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_indigenous_status_age_by_jurisdiction_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_indigenous_status_age_by_jurisdiction_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-indigenous-status-age-by-jurisdiction-replay",
+      "expectedYears": [
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        828,
+        936
+      ],
+      "expectedCanonicalCount": 1764,
+      "expectedMeasureCounts": {
+        "defendant-count": 1764
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 414,
+        "observed": 1350
+      },
+      "expectedManualReplayYears": [
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence",
+      "label": "Criminal Courts — youth guilty outcomes by sex, age and offence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_offence_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_offence_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        432,
+        432,
+        432
+      ],
+      "expectedCanonicalCount": 1296,
+      "expectedMeasureCounts": {
+        "defendant-count": 1296
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1296
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction",
+      "label": "Criminal Courts — youth sentence length by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sentence_length_by_jurisdiction_replay",
+      "dagsterJob": "product_prototype_criminal_courts_youth_guilty_outcome_sentence_length_by_jurisdiction_replay_job",
+      "outputDirectory": "dagster-criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        129,
+        135,
+        135
+      ],
+      "expectedCanonicalCount": 399,
+      "expectedMeasureCounts": {
+        "defendant-count": 135,
+        "sentence-mean-duration": 132,
+        "sentence-median-duration": 132
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 4,
+        "observed": 389,
+        "suppressed": 6
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
         "2024": 0
       }
     }

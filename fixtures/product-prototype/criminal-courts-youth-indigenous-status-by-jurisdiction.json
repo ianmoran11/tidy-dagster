@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-youth-indigenous-status-by-jurisdiction",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-youth-indigenous-status-by-jurisdiction",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-youth-indigenous-status-by-jurisdiction-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:654c5be8d7c89aa4b9de596225c5785ce737f922cf3cea2a24834d56cdedf811",
+      "byteLength": 115332,
+      "sheet": "Table 78",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-indigenous-status-by-jurisdiction-2022.response.txt",
+        "contentDigest": "sha256:42971727c2a3b9639b12940b55d49698399efbf9f2b9101e350151d5fdb8eb75",
+        "byteLength": 500,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

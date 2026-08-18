@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 96
+EXPECTED_REGISTERED_COUNT = 120
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -72,6 +72,15 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d",
         "criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407",
         "criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab",
+        "criminal-courts-youth-summary-characteristics-australia",
+        "criminal-courts-youth-summary-characteristics-by-jurisdiction",
+        "criminal-courts-youth-finalised-sex-age-by-principal-offence",
+        "criminal-courts-youth-guilty-outcome-offence-by-principal-sentence",
+        "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence",
+        "criminal-courts-youth-indigenous-status-by-jurisdiction",
+        "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
+        "criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence",
+        "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction",
     }
 )
 

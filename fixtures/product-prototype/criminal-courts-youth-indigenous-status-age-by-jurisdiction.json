@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-youth-indigenous-status-age-by-jurisdiction-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:6df72ba46542120e1c948d07b90dcacfe7ebd2d828271e9ff844a6cdb4334e01",
+      "byteLength": 81815,
+      "sheet": "Table 86",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-indigenous-status-age-by-jurisdiction-2023.response.txt",
+        "contentDigest": "sha256:700c98bc169bfb53a7f4863f18aba3546b0a6cb6a70f222f798b50d253468a0d",
+        "byteLength": 565,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-14-normalized.xlsx",
+      "contentDigest": "sha256:802136280ef2de2a63b018ed340bcd2a9c73a9cbe4b8c04762504f231a963b61",
+      "byteLength": 78859,
+      "sheet": "Table 88",
+      "replayResponse": {
+        "path": "replay/criminal-courts-youth-indigenous-status-age-by-jurisdiction-2024.response.txt",
+        "contentDigest": "sha256:c1cd791fca5864f1ec6d7830ce9f2a769545cf8667a175d7f48062c4da42065d",
+        "byteLength": 565,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

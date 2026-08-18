@@ -1,0 +1,314 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-v1",
+  "tableFamilyId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2022": {
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "characteristic_category": [
+            "CHAR_10_11_YEARS",
+            "CHAR_12_YEARS",
+            "CHAR_13_YEARS",
+            "CHAR_14_YEARS",
+            "CHAR_15_YEARS",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_TOTAL"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS"
+          ]
+        },
+        "2023": {
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "characteristic_category": [
+            "CHAR_10_11_YEARS",
+            "CHAR_12_YEARS",
+            "CHAR_13_YEARS",
+            "CHAR_14_YEARS",
+            "CHAR_15_YEARS",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_TOTAL"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS"
+          ]
+        },
+        "2024": {
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_JUVENILE_DETENTION",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_PENALTY",
+            "SENTENCE_OTHER",
+            "SENTENCE_OTHER_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_TOTAL_GUILTY_OUTCOME"
+          ],
+          "characteristic_category": [
+            "CHAR_10_11_YEARS",
+            "CHAR_12_YEARS",
+            "CHAR_13_YEARS",
+            "CHAR_14_YEARS",
+            "CHAR_15_YEARS",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_TOTAL"
+          ],
+          "sex": [
+            "FEMALES",
+            "MALES",
+            "PERSONS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2022": 216,
+        "2023": 240,
+        "2024": 288
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:cadc8583531d09bb2ea71624aede19c6aacdfae79f9ab8116befda74e9dbb9bc",
+        "2023": "sha256:f378c1353536a3c7bd764cc6e14c1888b1424403d410a4f808181e51d5d388e4",
+        "2024": "sha256:b6cd7c003f151f9348d5af5db6a790a05b7d1145feeed0f08c1a4ad4e7858826"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "sentence_statistic",
+    "characteristic_category",
+    "sex"
+  ],
+  "dimensionHeaders": {
+    "sentence_statistic": [
+      "^principal\\ sentence$"
+    ],
+    "characteristic_category": [
+      "^age\\ category$"
+    ],
+    "sex": [
+      "^sex$"
+    ]
+  },
+  "aliases": {
+    "sentence_statistic": {
+      "Community service / work": "SENTENCE_COMMUNITY_SERVICE_WORK",
+      "Conference or diversion program": "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+      "Conference or diversion program(b)(c)(d)": "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+      "Fines": "SENTENCE_FINES",
+      "Fully suspended juvenile sentence": "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+      "Good behaviour (incl. bonds)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Intensive penalty in the community": "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Juvenile detention": "SENTENCE_JUVENILE_DETENTION",
+      "Moderate penalty in the community": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Nominal and other penalties": "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+      "Nominal penalty": "SENTENCE_NOMINAL_PENALTY",
+      "Other custody in a correctional institution(a)": "SENTENCE_OTHER_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Other(e)": "SENTENCE_OTHER",
+      "Total guilty outcome": "SENTENCE_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(a)": "SENTENCE_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(f)": "SENTENCE_TOTAL_GUILTY_OUTCOME"
+    },
+    "characteristic_category": {
+      "10–11 years": "CHAR_10_11_YEARS",
+      "12 years": "CHAR_12_YEARS",
+      "13 years": "CHAR_13_YEARS",
+      "14 years": "CHAR_14_YEARS",
+      "15 years": "CHAR_15_YEARS",
+      "16 years": "CHAR_16_YEARS",
+      "17 years": "CHAR_17_YEARS",
+      "Total": "CHAR_TOTAL"
+    },
+    "sex": {
+      "Females": "FEMALES",
+      "Males": "MALES",
+      "Persons": "PERSONS",
+      "Persons(b)": "PERSONS",
+      "Persons(g)": "PERSONS"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "sentence_statistic_id",
+    "characteristic_category_id",
+    "sex_id",
+    "measure_id"
+  ],
+  "expected": {
+    "sentenceStatisticsByYear": {
+      "2022": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+        "SENTENCE_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2023": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+        "SENTENCE_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2024": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_JUVENILE_SENTENCE",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_JUVENILE_DETENTION",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_PENALTY",
+        "SENTENCE_OTHER",
+        "SENTENCE_OTHER_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_TOTAL_GUILTY_OUTCOME"
+      ]
+    },
+    "characteristicCategoriesByYear": {
+      "2022": [
+        "CHAR_10_11_YEARS",
+        "CHAR_12_YEARS",
+        "CHAR_13_YEARS",
+        "CHAR_14_YEARS",
+        "CHAR_15_YEARS",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_TOTAL"
+      ],
+      "2023": [
+        "CHAR_10_11_YEARS",
+        "CHAR_12_YEARS",
+        "CHAR_13_YEARS",
+        "CHAR_14_YEARS",
+        "CHAR_15_YEARS",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_TOTAL"
+      ],
+      "2024": [
+        "CHAR_10_11_YEARS",
+        "CHAR_12_YEARS",
+        "CHAR_13_YEARS",
+        "CHAR_14_YEARS",
+        "CHAR_15_YEARS",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_TOTAL"
+      ]
+    },
+    "sexesByYear": {
+      "2022": [
+        "FEMALES",
+        "MALES",
+        "PERSONS"
+      ],
+      "2023": [
+        "FEMALES",
+        "MALES",
+        "PERSONS"
+      ],
+      "2024": [
+        "FEMALES",
+        "MALES",
+        "PERSONS"
+      ]
+    },
+    "minimumRows": 216,
+    "maximumRows": 288,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 25
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "sex",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2023": {
+          "FEMALES": [
+            "R16C2"
+          ],
+          "PERSONS": [
+            "R27C2"
+          ]
+        },
+        "2024": {
+          "FEMALES": [
+            "R19C2"
+          ],
+          "PERSONS": [
+            "R32C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}
