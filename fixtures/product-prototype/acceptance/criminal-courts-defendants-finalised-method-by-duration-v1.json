@@ -1,0 +1,702 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-defendants-finalised-method-by-duration-v1",
+  "tableFamilyId": "criminal-courts-defendants-finalised-method-by-duration",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_13_TO_UNDER_26_WEEKS",
+            "CHAR_26_TO_UNDER_39_WEEKS",
+            "CHAR_39_TO_UNDER_52_WEEKS",
+            "CHAR_52_WEEKS_OVER",
+            "CHAR_TOTAL",
+            "CHAR_UNDER_13_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_13_TO_UNDER_26_WEEKS",
+            "CHAR_26_TO_UNDER_39_WEEKS",
+            "CHAR_39_TO_UNDER_52_WEEKS",
+            "CHAR_52_WEEKS_OVER",
+            "CHAR_TOTAL",
+            "CHAR_UNDER_13_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_13_TO_UNDER_26_WEEKS",
+            "CHAR_26_TO_UNDER_39_WEEKS",
+            "CHAR_39_TO_UNDER_52_WEEKS",
+            "CHAR_52_WEEKS_OVER",
+            "CHAR_TOTAL",
+            "CHAR_UNDER_13_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_13_TO_UNDER_26_WEEKS",
+            "CHAR_26_TO_UNDER_39_WEEKS",
+            "CHAR_39_TO_UNDER_52_WEEKS",
+            "CHAR_52_WEEKS_OVER",
+            "CHAR_TOTAL",
+            "CHAR_UNDER_13_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_13_TO_UNDER_26_WEEKS",
+            "CHAR_26_TO_UNDER_39_WEEKS",
+            "CHAR_39_TO_UNDER_52_WEEKS",
+            "CHAR_52_WEEKS_OVER",
+            "CHAR_TOTAL",
+            "CHAR_UNDER_13_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 288,
+        "2022": 288,
+        "2023": 288,
+        "2024": 288
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:d33e61fd311fbcb4f1233dabc716766f40b164e489ad6ca788a45a20c131dcbb",
+        "2022": "sha256:e6ee8c9eb26c46a39cc3f8b60845dd168e5bb2c902d0967b8035207d4edd4c32",
+        "2023": "sha256:90784a1d2a8d65028a502a90372492614ca7c53d841e71792e4435b8cf2c2729",
+        "2024": "sha256:2092327ee317bc5e71b97fd22f67a3a5121aefb6077ae55c10ad8ca860fe6efa"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "mean-case-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 48,
+        "2022": 48,
+        "2023": 48,
+        "2024": 48
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e103c4db3bd333dcca88733687d6ce008434702bdb56b535cf46b9707a63a8bd",
+        "2022": "sha256:4c1e197c6c853fe98468599c7316c70176a9ca67c2e3b90de62c8bbc6194f061",
+        "2023": "sha256:f06ff171877b0602e6362096fd8f64cf38f9c2ca5294b5f4504c1b99ea85a467",
+        "2024": "sha256:55acd238b4702c94fc27e4a8386da88d94c894676517d8bf9ff23f701913e3c8"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "median-case-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 48,
+        "2022": 48,
+        "2023": 48,
+        "2024": 48
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:04a2e4387746ff5b1373a01d1b22a5c740bd6f1afc5cced0699385a6af72d658",
+        "2022": "sha256:4e67a2be49566e8eac612d2b1936c74e5468f4442b58ea1257657a7dc2f56c85",
+        "2023": "sha256:b84486aefb5da9bdc52dc03978f2c3ad7bc6a682c4dccfa1824ea008433502a7",
+        "2024": "sha256:b333e2220c324813d0b2d21dc580f2f5c25db53ed7e4a1ff518bf4d426c90106"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "method_of_finalisation",
+    "observation_period",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^duration\\ or\\ statistic$"
+    ],
+    "method_of_finalisation": [
+      "^method\\ of\\ finalisation$"
+    ],
+    "observation_period": [
+      "^reference\\ period$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "13 to under 26 weeks": "CHAR_13_TO_UNDER_26_WEEKS",
+      "26 to under 39 weeks": "CHAR_26_TO_UNDER_39_WEEKS",
+      "39 to under 52 weeks": "CHAR_39_TO_UNDER_52_WEEKS",
+      "52 weeks & over": "CHAR_52_WEEKS_OVER",
+      "Mean (weeks)": "CHAR_MEAN_WEEKS",
+      "Mean (weeks)(d)": "CHAR_MEAN_WEEKS",
+      "Median (weeks)": "CHAR_MEDIAN_WEEKS",
+      "Median (weeks)(d)": "CHAR_MEDIAN_WEEKS",
+      "Total": "CHAR_TOTAL",
+      "Under 13 weeks": "CHAR_UNDER_13_WEEKS"
+    },
+    "method_of_finalisation": {
+      "Acquitted": "METHOD_ACQUITTED",
+      "Guilty outcome": "METHOD_GUILTY_OUTCOME",
+      "Guilty outcome(a)": "METHOD_GUILTY_OUTCOME",
+      "Total": "METHOD_TOTAL",
+      "Total adjudicated": "METHOD_TOTAL_ADJUDICATED",
+      "Total adjudicated(a)": "METHOD_TOTAL_ADJUDICATED",
+      "Total adjudicated(a)(b)": "METHOD_TOTAL_ADJUDICATED",
+      "Total(b)": "METHOD_TOTAL",
+      "Total(c)": "METHOD_TOTAL",
+      "Transfer to other court levels": "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "METHOD_WITHDRAWN_BY_PROSECUTION",
+      "Withdrawn by prosecution(a)": "METHOD_WITHDRAWN_BY_PROSECUTION"
+    },
+    "observation_period": {
+      "2020–21": "2022-06-30",
+      "2021–22": "2023-06-30",
+      "2022–23": "2024-06-30",
+      "2023–24": "2025-06-30",
+      "2024–25": "2026-06-30"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "method_of_finalisation_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 384,
+    "maximumRows": 384,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 13
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_13_TO_UNDER_26_WEEKS",
+        "CHAR_26_TO_UNDER_39_WEEKS",
+        "CHAR_39_TO_UNDER_52_WEEKS",
+        "CHAR_52_WEEKS_OVER",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_TOTAL",
+        "CHAR_UNDER_13_WEEKS"
+      ],
+      "2022": [
+        "CHAR_13_TO_UNDER_26_WEEKS",
+        "CHAR_26_TO_UNDER_39_WEEKS",
+        "CHAR_39_TO_UNDER_52_WEEKS",
+        "CHAR_52_WEEKS_OVER",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_TOTAL",
+        "CHAR_UNDER_13_WEEKS"
+      ],
+      "2023": [
+        "CHAR_13_TO_UNDER_26_WEEKS",
+        "CHAR_26_TO_UNDER_39_WEEKS",
+        "CHAR_39_TO_UNDER_52_WEEKS",
+        "CHAR_52_WEEKS_OVER",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_TOTAL",
+        "CHAR_UNDER_13_WEEKS"
+      ],
+      "2024": [
+        "CHAR_13_TO_UNDER_26_WEEKS",
+        "CHAR_26_TO_UNDER_39_WEEKS",
+        "CHAR_39_TO_UNDER_52_WEEKS",
+        "CHAR_52_WEEKS_OVER",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_TOTAL",
+        "CHAR_UNDER_13_WEEKS"
+      ]
+    },
+    "methodsOfFinalisationByYear": {
+      "2021": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2024": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2022": [
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2023": [
+        "2024-06-30",
+        "2025-06-30"
+      ],
+      "2024": [
+        "2025-06-30",
+        "2026-06-30"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R37C2"
+          ],
+          "HIGHER_COURTS": [
+            "R17C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R27C2"
+          ]
+        },
+        "2022": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R37C2"
+          ],
+          "HIGHER_COURTS": [
+            "R17C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R27C2"
+          ]
+        },
+        "2023": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R36C2"
+          ],
+          "HIGHER_COURTS": [
+            "R16C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R26C2"
+          ]
+        },
+        "2024": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R37C2"
+          ],
+          "HIGHER_COURTS": [
+            "R17C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R27C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

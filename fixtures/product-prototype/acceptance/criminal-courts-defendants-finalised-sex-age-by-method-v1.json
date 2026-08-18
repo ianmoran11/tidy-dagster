@@ -1,0 +1,547 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-defendants-finalised-sex-age-by-method-v1",
+  "tableFamilyId": "criminal-courts-defendants-finalised-sex-age-by-method",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 1332,
+        "2022": 1332,
+        "2023": 1332,
+        "2024": 1332
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:fa2d3c4abd8d5eafbaa8079ef87cb4ac03f82bf506b54d8fef04bcba2b2a27a4",
+        "2022": "sha256:7b5b1ed9f41449ad959d5358a51100d015a07e0bd91b15f9b9d351d1f39ff159",
+        "2023": "sha256:9be8b611ba132892a2ed6702382750e2cd462679ebe0cc23321608b2ef10e16a",
+        "2024": "sha256:401faf59f912280cd24e2f1c744ac0f0501b2c5773ae3e632d6b81e0f906be06"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "sex",
+    "method_of_finalisation",
+    "observation_period",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^age\\ or\\ statistic$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "method_of_finalisation": [
+      "^method\\ of\\ finalisation$"
+    ],
+    "observation_period": [
+      "^reference\\ period$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "10–14 years": "CHAR_10_14_YEARS",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "15–19 years": "CHAR_15_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25 years and over": "CHAR_25_YEARS_AND_OVER",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Organisations": "CHAR_ORGANISATIONS",
+      "Total": "CHAR_TOTAL",
+      "Total finalised": "CHAR_TOTAL_FINALISED",
+      "Total finalised(c)": "CHAR_TOTAL_FINALISED",
+      "Total finalised(e)": "CHAR_TOTAL_FINALISED",
+      "Total(c)": "CHAR_TOTAL"
+    },
+    "sex": {
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "Persons": "PERSONS",
+      "Persons(d)": "PERSONS"
+    },
+    "method_of_finalisation": {
+      "Acquitted": "METHOD_ACQUITTED",
+      "Guilty outcome": "METHOD_GUILTY_OUTCOME",
+      "Guilty outcome(f)": "METHOD_GUILTY_OUTCOME",
+      "Total": "METHOD_TOTAL",
+      "Total adjudicated": "METHOD_TOTAL_ADJUDICATED",
+      "Total adjudicated(a)": "METHOD_TOTAL_ADJUDICATED",
+      "Total adjudicated(a)(f)": "METHOD_TOTAL_ADJUDICATED",
+      "Total(b)": "METHOD_TOTAL",
+      "Transfer to other court levels": "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "METHOD_WITHDRAWN_BY_PROSECUTION",
+      "Withdrawn by prosecution(f)": "METHOD_WITHDRAWN_BY_PROSECUTION"
+    },
+    "observation_period": {
+      "2020–21": "2022-06-30",
+      "2021–22": "2023-06-30",
+      "2022–23": "2024-06-30",
+      "2023–24": "2025-06-30",
+      "2024–25": "2026-06-30"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "sex_id",
+    "method_of_finalisation_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1332,
+    "maximumRows": 1332,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 13
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_FINALISED"
+      ],
+      "2022": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_FINALISED"
+      ],
+      "2023": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_FINALISED"
+      ],
+      "2024": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_FINALISED"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2022": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2023": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2024": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ]
+    },
+    "methodsOfFinalisationByYear": {
+      "2021": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2024": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2022": [
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2023": [
+        "2024-06-30",
+        "2025-06-30"
+      ],
+      "2024": [
+        "2025-06-30",
+        "2026-06-30"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R124C2"
+          ],
+          "HIGHER_COURTS": [
+            "R46C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R85C2"
+          ]
+        },
+        "2022": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R124C2"
+          ],
+          "HIGHER_COURTS": [
+            "R46C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R85C2"
+          ]
+        },
+        "2023": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R123C2"
+          ],
+          "HIGHER_COURTS": [
+            "R45C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R84C2"
+          ]
+        },
+        "2024": {
+          "ALL_COURTS": [
+            "R7C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R124C2"
+          ],
+          "HIGHER_COURTS": [
+            "R46C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R85C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

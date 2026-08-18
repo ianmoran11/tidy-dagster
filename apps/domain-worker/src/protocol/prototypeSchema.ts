@@ -11,7 +11,7 @@ import {
 import { runWorker } from "./worker.js";
 
 const MAX_OUTPUT_DESCRIPTORS = 10_000;
-const MAX_WARNING_DESCRIPTORS = 20_000;
+const MAX_WARNING_DESCRIPTORS = 100_000;
 import {
   extractMlFeaturesV1,
   interpretSemanticMapV13,

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-defendants-finalised-method-by-duration",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-defendants-finalised-method-by-duration",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-defendants-finalised-method-by-duration-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:a541909bfe1a7f44d214e9ae870bb33e6c43feb181f73b07ed5f930d0cdd8b8c",
+      "byteLength": 166236,
+      "sheet": "Table 6",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-method-by-duration-2021.response.txt",
+        "contentDigest": "sha256:5c511bf97198ef9310493bf9dade51ede471d580d6ff221e804de7a88dbfb361",
+        "byteLength": 605,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:9a9a18151fc6ccb58fa831a0628f13cd867486873b206ae32e4ab327bd903eba",
+      "byteLength": 167661,
+      "sheet": "Table 6",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-method-by-duration-2022.response.txt",
+        "contentDigest": "sha256:f83d8090d9c0c8499befd88fc572e50751120472102647ff8951f0a747055bfb",
+        "byteLength": 605,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:9050c583f3651ea86960db546f49b4cfe7d89cd41755f5ae88930d2a52c2def0",
+      "byteLength": 133603,
+      "sheet": "Table 6",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-method-by-duration-2023.response.txt",
+        "contentDigest": "sha256:c86b0eb823cf842c1a6e5b54b543b49918f973e04edca368f4c826b7a5856f1f",
+        "byteLength": 592,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:086e5b5e79ad778632db673578aeede249cf8c2563c0c43b7338d09687e8a684",
+      "byteLength": 158788,
+      "sheet": "Table 7",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-method-by-duration-2024.response.txt",
+        "contentDigest": "sha256:c863b72dd8e999811ca17ee9e7c5a72f48e604e4f16b3f4479b43ab0a90bc125",
+        "byteLength": 592,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

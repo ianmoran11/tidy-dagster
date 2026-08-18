@@ -66,6 +66,7 @@ _DIMENSION_FIELDS = {
     "security_classification": "security_classification_id",
     "prison_location": "prison_location_id",
     "court_level": "court_level_id",
+    "method_of_finalisation": "method_of_finalisation_id",
     "prisoner_statistic": "prisoner_statistic_id",
 }
 _EXPECTED_CATEGORY_FIELDS = {
@@ -92,6 +93,7 @@ _EXPECTED_CATEGORY_FIELDS = {
     "security_classification": "securityClassifications",
     "prison_location": "prisonLocations",
     "court_level": "courtLevels",
+    "method_of_finalisation": "methodsOfFinalisation",
     "prisoner_statistic": "prisonerStatistics",
 }
 _DIMENSION_HEADER_PATTERNS = {
@@ -120,6 +122,7 @@ _DIMENSION_HEADER_PATTERNS = {
     "security_classification": re.compile(r"security classification", re.I),
     "prison_location": re.compile(r"prison location", re.I),
     "court_level": re.compile(r"court level", re.I),
+    "method_of_finalisation": re.compile(r"method of finalisation", re.I),
     "prisoner_statistic": re.compile(r"prisoner|statistic|measure", re.I),
 }
 
@@ -1277,6 +1280,7 @@ def _validate_execution(
         rows,
         names,
         contract,
+        year=int(entry["year"]),
     )
     checks["warningAllowlist"] = not warning_issues
     issues.extend(warning_issues)
@@ -1582,6 +1586,8 @@ def _validate_warning_rules(
     rows: list[Any],
     names: dict[str, Any],
     contract: dict[str, Any],
+    *,
+    year: int,
 ) -> list[dict[str, Any]]:
     issues: list[dict[str, Any]] = []
     by_address = {
@@ -1614,7 +1620,8 @@ def _validate_warning_rules(
             if isinstance(row, dict)
             else None
         )
-        if _map_alias(contract, dimension, raw) is None:
+        canonical = _map_alias(contract, dimension, raw)
+        if canonical is None:
             issues.append(
                 _issue(
                     "AMBIGUOUS_WARNING_OUTPUT_UNRESOLVED",
@@ -1622,6 +1629,34 @@ def _validate_warning_rules(
                     f"{warning.get('address')!r}.",
                 )
             )
+            continue
+        expected_sources_by_year = rule.get("expectedHeaderSourcesByYear")
+        if expected_sources_by_year is not None:
+            configured = (
+                expected_sources_by_year.get(str(year), {})
+                if isinstance(expected_sources_by_year, dict)
+                else {}
+            )
+            wanted = configured.get(canonical) if isinstance(configured, dict) else None
+            header_name = names.get(dimension)
+            source = (
+                row.get(f"{header_name}_source")
+                if isinstance(row, dict) and isinstance(header_name, str)
+                else None
+            )
+            if (
+                not isinstance(wanted, list)
+                or not wanted
+                or any(not isinstance(item, str) or not item for item in wanted)
+                or source not in wanted
+            ):
+                issues.append(
+                    _issue(
+                        "AMBIGUOUS_WARNING_HEADER_SOURCE_MISMATCH",
+                        f"{dimension} output {canonical!r} used header source "
+                        f"{source!r} at {warning.get('address')!r}.",
+                    )
+                )
     return issues
 
 
@@ -1976,7 +2011,7 @@ def _cohort_worker_limits(cohort: dict[str, Any]) -> dict[str, int]:
     if (
         isinstance(maximum_warnings, bool)
         or not isinstance(maximum_warnings, int)
-        or not 1 <= maximum_warnings <= 20_000
+        or not 1 <= maximum_warnings <= 100_000
     ):
         raise ProductPrototypeError("Cohort maxWarnings is outside protocol bounds")
     return {"maxWarnings": maximum_warnings}
@@ -2025,20 +2060,20 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     reference_dimension = value.get("referenceDateDimension")
     preserve_vintage = value.get("preservePublicationVintage")
     total_validation = value.get("totalValidation", "equations")
-    vintage_enabled = (
-        preserve_vintage is True
-        and isinstance(reference_dimension, str)
+    preserve_vintage_enabled = preserve_vintage is True
+    reference_dimension_enabled = (
+        isinstance(reference_dimension, str)
         and isinstance(dimensions, list)
         and reference_dimension in dimensions
     )
     unique_dimensions = (
         [item for item in dimensions if item != reference_dimension]
-        if vintage_enabled
+        if reference_dimension_enabled
         else dimensions
     )
     expected_unique_key = (
         [
-            *(["publication_vintage_date"] if vintage_enabled else []),
+            *(["publication_vintage_date"] if preserve_vintage_enabled else []),
             "reference_date",
             *[_DIMENSION_FIELDS[item] for item in unique_dimensions],
             "measure_id",
@@ -2068,11 +2103,11 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or not dimensions
         or len(dimensions) != len(set(dimensions))
         or any(item not in _DIMENSION_FIELDS for item in dimensions)
+        or ("preservePublicationVintage" in value and not preserve_vintage_enabled)
         or (
-            ("referenceDateDimension" in value)
-            != ("preservePublicationVintage" in value)
+            "referenceDateDimension" in value
+            and (not preserve_vintage_enabled or not reference_dimension_enabled)
         )
-        or ("referenceDateDimension" in value and not vintage_enabled)
         or value.get("uniqueKey") != expected_unique_key
         or not isinstance(expected, dict)
         or not isinstance(aliases, dict)
@@ -2099,7 +2134,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or not isinstance(value.get("allowedExecutionWarnings"), list)
     ):
         raise ProductPrototypeError("Acceptance contract is incompatible")
-    if vintage_enabled and any(
+    if reference_dimension_enabled and any(
         re.fullmatch(r"(?:19|20)[0-9]{2}-[0-9]{2}-[0-9]{2}", code) is None
         for code in aliases[reference_dimension].values()
     ):

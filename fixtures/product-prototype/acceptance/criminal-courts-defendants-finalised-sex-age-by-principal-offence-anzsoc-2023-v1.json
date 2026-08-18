@@ -1,0 +1,417 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023-v1",
+  "tableFamilyId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFERS_TO_OTHER_COURT_LEVELS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_10_14_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_15_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFERS_TO_OTHER_COURT_LEVELS"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "principal_offence": [
+            "ANZSOC2023_01",
+            "ANZSOC2023_02",
+            "ANZSOC2023_03",
+            "ANZSOC2023_04",
+            "ANZSOC2023_05",
+            "ANZSOC2023_06",
+            "ANZSOC2023_07",
+            "ANZSOC2023_08",
+            "ANZSOC2023_09",
+            "ANZSOC2023_10",
+            "ANZSOC2023_11",
+            "ANZSOC2023_12",
+            "ANZSOC2023_13",
+            "ANZSOC2023_14",
+            "ANZSOC2023_15",
+            "ANZSOC2023_16",
+            "ANZSOC2023_17",
+            "ANZSOC2023_TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 1998
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:17a517ffac8aad44924939086c777f76af00813068024dda5cfedb83a037f1da"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "mean-defendant-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "principal_offence": [
+            "ANZSOC2023_01",
+            "ANZSOC2023_02",
+            "ANZSOC2023_03",
+            "ANZSOC2023_04",
+            "ANZSOC2023_05",
+            "ANZSOC2023_06",
+            "ANZSOC2023_07",
+            "ANZSOC2023_08",
+            "ANZSOC2023_09",
+            "ANZSOC2023_10",
+            "ANZSOC2023_11",
+            "ANZSOC2023_12",
+            "ANZSOC2023_13",
+            "ANZSOC2023_14",
+            "ANZSOC2023_15",
+            "ANZSOC2023_16",
+            "ANZSOC2023_17",
+            "ANZSOC2023_TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 216
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:fd5b9f3ff2be449ab7138f21baaf7427fac01753fc1cd0ff6af73c8916fdcc6a"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "median-defendant-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "principal_offence": [
+            "ANZSOC2023_01",
+            "ANZSOC2023_02",
+            "ANZSOC2023_03",
+            "ANZSOC2023_04",
+            "ANZSOC2023_05",
+            "ANZSOC2023_06",
+            "ANZSOC2023_07",
+            "ANZSOC2023_08",
+            "ANZSOC2023_09",
+            "ANZSOC2023_10",
+            "ANZSOC2023_11",
+            "ANZSOC2023_12",
+            "ANZSOC2023_13",
+            "ANZSOC2023_14",
+            "ANZSOC2023_15",
+            "ANZSOC2023_16",
+            "ANZSOC2023_17",
+            "ANZSOC2023_TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 216
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:1e0f2344d3da19e3e827846133ca9eae9abe7c3ce4bb22abe14171bb1eedb182"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "sex",
+    "principal_offence",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^age\\ or\\ statistic$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "10–14 years": "CHAR_10_14_YEARS",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "15–19 years": "CHAR_15_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25 years and over": "CHAR_25_YEARS_AND_OVER",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Organisations": "CHAR_ORGANISATIONS",
+      "Total finalised (excluding transfers to other court levels)(g)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFERS_TO_OTHER_COURT_LEVELS",
+      "Total(e)": "CHAR_TOTAL"
+    },
+    "sex": {
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "Persons(f)": "PERSONS"
+    },
+    "principal_offence": {
+      "01 Homicide(a)": "ANZSOC2023_01",
+      "02 Assault": "ANZSOC2023_02",
+      "03 Sexual offences": "ANZSOC2023_03",
+      "04 Harm or endanger persons(b)": "ANZSOC2023_04",
+      "05 Robbery, blackmail, and extortion": "ANZSOC2023_05",
+      "06 Burglary": "ANZSOC2023_06",
+      "07 Theft": "ANZSOC2023_07",
+      "08 Fraud and related offences": "ANZSOC2023_08",
+      "09 Drug offences": "ANZSOC2023_09",
+      "10 Weapons and explosives offences": "ANZSOC2023_10",
+      "11 Property damage": "ANZSOC2023_11",
+      "12 Public order, health, and safety offences": "ANZSOC2023_12",
+      "13 Traffic and vehicle offences": "ANZSOC2023_13",
+      "14 Offences against justice procedures and orders(c)": "ANZSOC2023_14",
+      "15 Offences against government": "ANZSOC2023_15",
+      "16 Environmental offences": "ANZSOC2023_16",
+      "17 Miscellaneous offences": "ANZSOC2023_17",
+      "Total(d)": "ANZSOC2023_TOTAL"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "sex_id",
+    "principal_offence_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 2430,
+    "maximumRows": 2430,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 19
+    },
+    "characteristicCategoriesByYear": {
+      "2024": [
+        "CHAR_10_14_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_15_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFERS_TO_OTHER_COURT_LEVELS"
+      ]
+    },
+    "sexesByYear": {
+      "2024": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ]
+    },
+    "principalOffencesByYear": {
+      "2024": [
+        "ANZSOC2023_01",
+        "ANZSOC2023_02",
+        "ANZSOC2023_03",
+        "ANZSOC2023_04",
+        "ANZSOC2023_05",
+        "ANZSOC2023_06",
+        "ANZSOC2023_07",
+        "ANZSOC2023_08",
+        "ANZSOC2023_09",
+        "ANZSOC2023_10",
+        "ANZSOC2023_11",
+        "ANZSOC2023_12",
+        "ANZSOC2023_13",
+        "ANZSOC2023_14",
+        "ANZSOC2023_15",
+        "ANZSOC2023_16",
+        "ANZSOC2023_17",
+        "ANZSOC2023_TOTAL"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R141C2"
+          ],
+          "HIGHER_COURTS": [
+            "R51C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R96C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

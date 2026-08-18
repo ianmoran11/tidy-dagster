@@ -1,0 +1,2049 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-guilty-outcome-summary-by-court-level-v1",
+  "tableFamilyId": "criminal-courts-guilty-outcome-summary-by-court-level",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_013_MANSLAUGHTER_OR_DRIVING_CAUSING_DEATH",
+            "CHAR_01_HOMICIDE",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ASSAULT",
+            "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_031_032_SEXUAL_ASSAULT_OF_AN_ADULT_CHILD",
+            "CHAR_031_SEXUAL_ASSAULT",
+            "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+            "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+            "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+            "CHAR_034_CHILD_ABUSE_MATERIAL_OFFENCES",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_03_SEXUAL_OFFENCES",
+            "CHAR_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "CHAR_045_DRIVING_CAUSING_SERIOUS_INJURY",
+            "CHAR_049_OTHER_ACTS_THAT_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_051_ROBBERY",
+            "CHAR_052_BLACKMAIL_OR_OTHER_EXTORTION",
+            "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "CHAR_06_BURGLARY",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_071_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+            "CHAR_072_073_079_OTHER_TYPES_OF_THEFT",
+            "CHAR_074_RECEIVE_OR_HANDLE_PROCEEDS_OF_CRIME",
+            "CHAR_07_THEFT",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+            "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+            "CHAR_08_THEFT",
+            "CHAR_091_INTERNATIONAL_DRUG_TRAFFICKING",
+            "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "CHAR_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "CHAR_093_MANUFACTURE_OR_CULTIVATE_DRUGS",
+            "CHAR_094_UNLAWFUL_POSSESSION_OR_USE_OF_DRUGS",
+            "CHAR_09_DRUG_OFFENCES",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+            "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+            "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+            "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+            "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "CHAR_10_YEARS",
+            "CHAR_111_ARSON",
+            "CHAR_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "CHAR_11_PROPERTY_DAMAGE",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_11_YEARS",
+            "CHAR_123_PUBLIC_HEALTH_REGULATORY_OFFENCES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "CHAR_12_YEARS",
+            "CHAR_131_DRINK_OR_DRUG_DRIVING",
+            "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+            "CHAR_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "CHAR_133_DRIVER_LICENCE_OFFENCES",
+            "CHAR_134_VEHICLE_REGISTRATION_AND_STANDARDS_OFFENCES",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_141_BREACH_OF_RESTRAINING_ORDER",
+            "CHAR_141_DRIVER_LICENCE_OFFENCES",
+            "CHAR_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+            "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+            "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+            "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+            "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_14_YEARS",
+            "CHAR_151_OFFENCES_AGAINST_NATIONAL_SECURITY",
+            "CHAR_152_OFFENCES_AGAINST_GOVERNMENT_SERVICES",
+            "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+            "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+            "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_15_YEARS",
+            "CHAR_161_ENVIRONMENTAL_POLLUTION",
+            "CHAR_163_ANIMAL_CRUELTY",
+            "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+            "CHAR_16_ENVIRONMENTAL_OFFENCES",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_MISCELLANEOUS_OFFENCES",
+            "CHAR_17_YEARS",
+            "CHAR_18_YEARS",
+            "CHAR_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+            "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_CUSTODY_IN_THE_COMMUNITY",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MALES",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_ORDERS",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_ORGANISATIONS",
+            "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_031_SEXUAL_ASSAULT",
+            "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+            "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+            "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+            "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "CHAR_08_THEFT",
+            "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+            "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+            "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+            "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+            "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_YEARS",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_11_YEARS",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_12_YEARS",
+            "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_141_DRIVER_LICENCE_OFFENCES",
+            "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+            "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+            "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+            "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_14_YEARS",
+            "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+            "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+            "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_15_YEARS",
+            "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_18_YEARS",
+            "CHAR_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_CUSTODY_IN_THE_COMMUNITY",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE",
+            "CHAR_MALES",
+            "CHAR_MONETARY_ORDERS",
+            "CHAR_ORGANISATIONS",
+            "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_CUSTODIAL_ORDERS",
+            "GROUP_NON_CUSTODIAL_ORDERS",
+            "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_031_SEXUAL_ASSAULT",
+            "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+            "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+            "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+            "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "CHAR_08_THEFT",
+            "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+            "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+            "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+            "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+            "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_YEARS",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_11_YEARS",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_12_YEARS",
+            "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_141_DRIVER_LICENCE_OFFENCES",
+            "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+            "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+            "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+            "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_14_YEARS",
+            "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+            "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+            "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_15_YEARS",
+            "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_18_YEARS",
+            "CHAR_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MALES",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+            "GROUP_PRINCIPAL_SENTENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+            "CHAR_031_SEXUAL_ASSAULT",
+            "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+            "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+            "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+            "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+            "CHAR_08_THEFT",
+            "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+            "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+            "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+            "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+            "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_10_YEARS",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_11_YEARS",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_12_YEARS",
+            "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_141_DRIVER_LICENCE_OFFENCES",
+            "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+            "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+            "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+            "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_14_YEARS",
+            "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+            "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+            "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+            "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_15_YEARS",
+            "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_18_YEARS",
+            "CHAR_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MALES",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+            "GROUP_PRINCIPAL_SENTENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_013_MANSLAUGHTER_OR_DRIVING_CAUSING_DEATH",
+            "CHAR_01_HOMICIDE",
+            "CHAR_02_ASSAULT",
+            "CHAR_031_032_SEXUAL_ASSAULT_OF_AN_ADULT_CHILD",
+            "CHAR_034_CHILD_ABUSE_MATERIAL_OFFENCES",
+            "CHAR_03_SEXUAL_OFFENCES",
+            "CHAR_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "CHAR_045_DRIVING_CAUSING_SERIOUS_INJURY",
+            "CHAR_049_OTHER_ACTS_THAT_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_051_ROBBERY",
+            "CHAR_052_BLACKMAIL_OR_OTHER_EXTORTION",
+            "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "CHAR_06_BURGLARY",
+            "CHAR_071_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+            "CHAR_072_073_079_OTHER_TYPES_OF_THEFT",
+            "CHAR_074_RECEIVE_OR_HANDLE_PROCEEDS_OF_CRIME",
+            "CHAR_07_THEFT",
+            "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+            "CHAR_091_INTERNATIONAL_DRUG_TRAFFICKING",
+            "CHAR_092_DISTRIBUTE_OR_DEAL_DRUGS",
+            "CHAR_093_MANUFACTURE_OR_CULTIVATE_DRUGS",
+            "CHAR_094_UNLAWFUL_POSSESSION_OR_USE_OF_DRUGS",
+            "CHAR_09_DRUG_OFFENCES",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "CHAR_10_YEARS",
+            "CHAR_111_ARSON",
+            "CHAR_112_DAMAGE_OR_DESTROY_PROPERTY",
+            "CHAR_11_PROPERTY_DAMAGE",
+            "CHAR_11_YEARS",
+            "CHAR_123_PUBLIC_HEALTH_REGULATORY_OFFENCES",
+            "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "CHAR_12_YEARS",
+            "CHAR_131_DRINK_OR_DRUG_DRIVING",
+            "CHAR_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+            "CHAR_133_DRIVER_LICENCE_OFFENCES",
+            "CHAR_134_VEHICLE_REGISTRATION_AND_STANDARDS_OFFENCES",
+            "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "CHAR_13_YEARS",
+            "CHAR_141_BREACH_OF_RESTRAINING_ORDER",
+            "CHAR_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+            "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "CHAR_14_YEARS",
+            "CHAR_151_OFFENCES_AGAINST_NATIONAL_SECURITY",
+            "CHAR_152_OFFENCES_AGAINST_GOVERNMENT_SERVICES",
+            "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+            "CHAR_15_YEARS",
+            "CHAR_161_ENVIRONMENTAL_POLLUTION",
+            "CHAR_163_ANIMAL_CRUELTY",
+            "CHAR_16_ENVIRONMENTAL_OFFENCES",
+            "CHAR_16_YEARS",
+            "CHAR_17_MISCELLANEOUS_OFFENCES",
+            "CHAR_17_YEARS",
+            "CHAR_18_YEARS",
+            "CHAR_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_25_YEARS_AND_OVER",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MALES",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_ORGANISATIONS",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023",
+            "GROUP_PRINCIPAL_SENTENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 3228,
+        "2022": 3497,
+        "2023": 3780,
+        "2024": 4185
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:0001e220dbc2430f3c7ab9f9d218bcdc283ee0e7ef1048fad62e5c646fc52b93",
+        "2022": "sha256:dd7fb6dba84f3c1808a5b78e2dd9a1c2834d2671d611bc7b1fb03263389efb0f",
+        "2023": "sha256:36587960127847b102ed3682e464a93da63cdb471fc76f6864587f9d626431e8",
+        "2024": "sha256:4c45a980c02a9691066405fd68fc3a9c3b4756c70f2dbd84e77b071ec7fc00b6"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "mean-case-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 48,
+        "2022": 52,
+        "2023": 56,
+        "2024": 60
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:aaf10bad2e4a76b82a23eb1d5fecd203167628a22d5150527a80ee0510886117",
+        "2022": "sha256:11ecd32a46e9ae4a753182305db8be8ff82c6bb1a3257f616a408a70e765428d",
+        "2023": "sha256:e487d9039b51fa3bdc0b9e2da976e6feb735dc53abb50ff9bdbd0be0f4d22e68",
+        "2024": "sha256:06d24533de07f3611e8ddca191d192dd46949eef79f4bf3f16decab9098ea6e9"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "mean-defendant-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 48,
+        "2022": 52,
+        "2023": 56,
+        "2024": 60
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:edee835e7bf32a27844ccb104ac84546e1c97107499e00f0adc116bc9b083c38",
+        "2022": "sha256:134657649eb6f7300e24a52cfd454d01ca9ee4b3628d154e3e0ebd469395721e",
+        "2023": "sha256:a94b26bae946d3c750dfb4e03e909cc22de0af8d817f3421bb499f3c78314a1a",
+        "2024": "sha256:875b251af7b7e3e4a78541342a714e40261b96dba2a4dcc83ec2bda6e9aea6db"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "median-case-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 48,
+        "2022": 52,
+        "2023": 56,
+        "2024": 60
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:23986f110cae26f1e1ab8e9e0c4c9ae43b402049202736fe9c8916c539a22ef7",
+        "2022": "sha256:d40fbe79c498223716b71803b06a811793e024e7ca3ab7bcb251ae41ce0fbec9",
+        "2023": "sha256:5ada677148121b92908b43e1910996dc6abd30e19afb437c0fbf284a8c17f2dd",
+        "2024": "sha256:35bcab483a56e6d4b9bb28d92dadfc1f8cfdeee38f0a15bd8f315ec38d051e30"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    },
+    {
+      "id": "median-defendant-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "selection": {
+        "conditions": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "observation_period": [
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30",
+            "2026-06-30"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 48,
+        "2022": 52,
+        "2023": 56,
+        "2024": 60
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e6a1a2188ad0a4c27228be20f756a13bc76b61fa27cc81bdb15708c37c72bab7",
+        "2022": "sha256:a87d83757491ae2e6be0316e323501c965d084e5f076075c9c10073254c03e77",
+        "2023": "sha256:a72ab3ce6bbe2e32ba3c7454f76a577a11cd45e9369917511918768ae9bc6c36",
+        "2024": "sha256:a92851943e00fb9d4cec30992b434140391b916154d9e52c7f362f11c0fde61f"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "observation_period",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "observation_period": [
+      "^reference\\ period$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "01 Homicide": "CHAR_01_HOMICIDE",
+      "01 Homicide and related offences": "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "011 Murder": "CHAR_011_MURDER",
+      "012 Attempted murder": "CHAR_012_ATTEMPTED_MURDER",
+      "013 Manslaughter or driving causing death(f)": "CHAR_013_MANSLAUGHTER_OR_DRIVING_CAUSING_DEATH",
+      "02 Acts intended to cause injury": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Assault": "CHAR_02_ASSAULT",
+      "021 Assault": "CHAR_021_ASSAULT",
+      "029 Other acts intended to cause injury": "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "0291 Stalking": "CHAR_0291_STALKING",
+      "0291 Stalking(d)": "CHAR_0291_STALKING",
+      "03 Sexual assault and related offences": "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "03 Sexual offences": "CHAR_03_SEXUAL_OFFENCES",
+      "031 & 032 Sexual assault of an adult/child": "CHAR_031_032_SEXUAL_ASSAULT_OF_AN_ADULT_CHILD",
+      "031 Sexual assault": "CHAR_031_SEXUAL_ASSAULT",
+      "0311 Aggravated sexual assault": "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+      "0312 Non-aggravated sexual assault": "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+      "032 Non-assaultative sexual offences": "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+      "0321 Non-assaultive sexual offences against a child": "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+      "0322 Child pornography/child abuse material offences": "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+      "034 Child abuse material offences": "CHAR_034_CHILD_ABUSE_MATERIAL_OFFENCES",
+      "04 Dangerous/negligent acts": "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+      "04 Dangerous/negligent acts(e)": "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+      "04 Harm or endanger persons": "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+      "044 Acts that threaten, harass, or control": "CHAR_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+      "045 Driving causing serious injury(g)": "CHAR_045_DRIVING_CAUSING_SERIOUS_INJURY",
+      "049 Other acts that harm or endanger persons": "CHAR_049_OTHER_ACTS_THAT_HARM_OR_ENDANGER_PERSONS",
+      "05 Abduction/harassment": "CHAR_05_ABDUCTION_HARASSMENT",
+      "05 Robbery, blackmail, and extortion": "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "051 Robbery": "CHAR_051_ROBBERY",
+      "052 Blackmail or other extortion": "CHAR_052_BLACKMAIL_OR_OTHER_EXTORTION",
+      "053 Harassment/threatening behaviour": "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+      "053 Harassment/threatening behaviour(f)": "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+      "06 Burglary": "CHAR_06_BURGLARY",
+      "06 Robbery/extortion": "CHAR_06_ROBBERY_EXTORTION",
+      "07 Theft": "CHAR_07_THEFT",
+      "07 Unlawful entry with intent": "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "071 Motor vehicle theft and related offences": "CHAR_071_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+      "072, 073 & 079 Other types of theft(h)": "CHAR_072_073_079_OTHER_TYPES_OF_THEFT",
+      "074 Receive or handle proceeds of crime": "CHAR_074_RECEIVE_OR_HANDLE_PROCEEDS_OF_CRIME",
+      "08 Fraud and related offences": "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+      "08 Theft": "CHAR_08_THEFT",
+      "081 Motor vehicle theft and related offences": "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+      "082 Theft (except motor vehicles)": "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+      "09 Drug offences": "CHAR_09_DRUG_OFFENCES",
+      "09 Fraud/deception": "CHAR_09_FRAUD_DECEPTION",
+      "091 International drug trafficking": "CHAR_091_INTERNATIONAL_DRUG_TRAFFICKING",
+      "091 Obtain benefit by deception": "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+      "092 Distribute or deal drugs": "CHAR_092_DISTRIBUTE_OR_DEAL_DRUGS",
+      "093 Manufacture or cultivate drugs": "CHAR_093_MANUFACTURE_OR_CULTIVATE_DRUGS",
+      "094 Unlawful possession or use of drugs(i)": "CHAR_094_UNLAWFUL_POSSESSION_OR_USE_OF_DRUGS",
+      "10 Illicit drug offences": "CHAR_10_ILLICIT_DRUG_OFFENCES",
+      "10 Weapons and explosives offences": "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "10 years": "CHAR_10_YEARS",
+      "101 Import or export illicit drugs": "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+      "102 Deal or traffic in illicit drugs": "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+      "103 Manufacture or cultivate illicit drugs": "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+      "104 Possess and/or use illicit drugs": "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+      "109 Other illicit drug offences": "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "11 Property damage": "CHAR_11_PROPERTY_DAMAGE",
+      "11 Weapons/explosives": "CHAR_11_WEAPONS_EXPLOSIVES",
+      "11 years": "CHAR_11_YEARS",
+      "111 Arson": "CHAR_111_ARSON",
+      "112 Damage or destroy property": "CHAR_112_DAMAGE_OR_DESTROY_PROPERTY",
+      "12 Property damage and environmental pollution": "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "12 Public order, health, and safety offences": "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "12 years": "CHAR_12_YEARS",
+      "123 Public health regulatory offences": "CHAR_123_PUBLIC_HEALTH_REGULATORY_OFFENCES",
+      "13 Public order offences": "CHAR_13_PUBLIC_ORDER_OFFENCES",
+      "13 Public order offences(g)": "CHAR_13_PUBLIC_ORDER_OFFENCES",
+      "13 Traffic and vehicle offences(j)(k)": "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "13 years": "CHAR_13_YEARS",
+      "131 Drink or drug driving": "CHAR_131_DRINK_OR_DRUG_DRIVING",
+      "132 Regulated public order offences": "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+      "132 Unsafe operation of a road vehicle": "CHAR_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+      "133 Driver licence offences": "CHAR_133_DRIVER_LICENCE_OFFENCES",
+      "134 Vehicle registration and standards offences": "CHAR_134_VEHICLE_REGISTRATION_AND_STANDARDS_OFFENCES",
+      "14 Offences against justice procedures and orders(l)": "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "14 Traffic and vehicle regulatory offences": "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "14 Traffic and vehicle regulatory offences(h)": "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "14 years": "CHAR_14_YEARS",
+      "141 Breach of restraining order": "CHAR_141_BREACH_OF_RESTRAINING_ORDER",
+      "141 Driver licence offences": "CHAR_141_DRIVER_LICENCE_OFFENCES",
+      "142 Offences against justice procedures(m)": "CHAR_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+      "142 Vehicle registration and roadworthiness offences": "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+      "143 Regulatory driving offences": "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+      "1431 Exceed the prescribed content of alcohol or other substance limit": "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+      "1431 Exceed the prescribed content of alcohol or other substance limit(i)": "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+      "1432 Exceed legal speed limit": "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+      "15 Offences against government": "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+      "15 Offences against justice": "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+      "15 Offences against justice(j)": "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+      "15 years": "CHAR_15_YEARS",
+      "151 Offences against national security": "CHAR_151_OFFENCES_AGAINST_NATIONAL_SECURITY",
+      "152 Offences against government services(n)": "CHAR_152_OFFENCES_AGAINST_GOVERNMENT_SERVICES",
+      "153 Breach of violence and non-violence orders": "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+      "154 Offences against government operations": "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+      "155 Offences against government security": "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+      "156 Offences against justice procedures": "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+      "16 Environmental offences": "CHAR_16_ENVIRONMENTAL_OFFENCES",
+      "16 Miscellaneous offences": "CHAR_16_MISCELLANEOUS_OFFENCES",
+      "16 years": "CHAR_16_YEARS",
+      "161 Environmental pollution": "CHAR_161_ENVIRONMENTAL_POLLUTION",
+      "163 Animal cruelty(o)": "CHAR_163_ANIMAL_CRUELTY",
+      "163 Commercial/industry/financial regulation": "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+      "17 Miscellaneous offences": "CHAR_17_MISCELLANEOUS_OFFENCES",
+      "17 years": "CHAR_17_YEARS",
+      "18 years": "CHAR_18_YEARS",
+      "19 years": "CHAR_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25 years and over": "CHAR_25_YEARS_AND_OVER",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Community service / work": "CHAR_COMMUNITY_SERVICE_WORK",
+      "Community supervision/work orders": "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+      "Conference or diversion program(q)": "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+      "Conference or diversion program(v)(w)(x)": "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+      "Custody in a correctional institution": "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Custody in the community": "CHAR_CUSTODY_IN_THE_COMMUNITY",
+      "Females": "CHAR_FEMALES",
+      "Fines": "CHAR_FINES",
+      "Fines(j)(s)": "CHAR_FINES",
+      "Fines(n)": "CHAR_FINES",
+      "Fully suspended sentence": "CHAR_FULLY_SUSPENDED_SENTENCE",
+      "Fully suspended sentence of imprisonment": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Fully suspended sentence of imprisonment(l)": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Fully suspended sentence of imprisonment(s)": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Good behaviour (incl. bonds)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour (incl. bonds)(s)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Intensive penalty in the community": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Intensive penalty in the community(l)": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Intensive penalty in the community(s)": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Males": "CHAR_MALES",
+      "Mean (weeks)": "CHAR_MEAN_WEEKS",
+      "Mean (weeks)(d)": "CHAR_MEAN_WEEKS",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Mean (years)(b)": "CHAR_MEAN_YEARS",
+      "Mean (years)(c)": "CHAR_MEAN_YEARS",
+      "Median (weeks)": "CHAR_MEDIAN_WEEKS",
+      "Median (weeks)(d)": "CHAR_MEDIAN_WEEKS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Median (years)(b)": "CHAR_MEDIAN_YEARS",
+      "Median (years)(c)": "CHAR_MEDIAN_YEARS",
+      "Moderate penalty in the community": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Moderate penalty in the community(l)": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Moderate penalty in the community(s)": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Monetary orders": "CHAR_MONETARY_ORDERS",
+      "Monetary penalties": "CHAR_MONETARY_PENALTIES",
+      "Monetary penalties(m)": "CHAR_MONETARY_PENALTIES",
+      "Monetary penalties(t)": "CHAR_MONETARY_PENALTIES",
+      "Nominal and other penalties": "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+      "Nominal and other penalties(y)": "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+      "Organisations": "CHAR_ORGANISATIONS",
+      "Other non-custodial orders": "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+      "Total": "CHAR_TOTAL",
+      "Total guilty outcome": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(o)": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(u)": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(u)(v)": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(u)(y)": "CHAR_TOTAL_GUILTY_OUTCOME"
+    },
+    "characteristic_group": {
+      "Age": "GROUP_AGE",
+      "Custodial orders": "GROUP_CUSTODIAL_ORDERS",
+      "Duration": "GROUP_DURATION",
+      "Non-custodial orders": "GROUP_NON_CUSTODIAL_ORDERS",
+      "Principal offence": "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+      "Principal offence (ANZSOC 2023)(e)": "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023",
+      "Principal offence(c)": "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+      "Principal sentence": "GROUP_PRINCIPAL_SENTENCE",
+      "Principal sentence(k)": "GROUP_PRINCIPAL_SENTENCE",
+      "Principal sentence(q)": "GROUP_PRINCIPAL_SENTENCE",
+      "Sex": "GROUP_SEX"
+    },
+    "observation_period": {
+      "2010–11": "2012-06-30",
+      "2010–11(a)": "2012-06-30",
+      "2011–12": "2013-06-30",
+      "2011–12(a)": "2013-06-30",
+      "2012–13": "2014-06-30",
+      "2012–13(a)": "2014-06-30",
+      "2013–14": "2015-06-30",
+      "2013–14(a)": "2015-06-30",
+      "2014–15": "2016-06-30",
+      "2014–15(a)": "2016-06-30",
+      "2015–16": "2017-06-30",
+      "2015–16(a)": "2017-06-30",
+      "2016–17": "2018-06-30",
+      "2016–17(a)": "2018-06-30",
+      "2017–18": "2019-06-30",
+      "2017–18(a)": "2019-06-30",
+      "2018–19": "2020-06-30",
+      "2018–19(a)": "2020-06-30",
+      "2018–19(a)(b)": "2020-06-30",
+      "2019–20": "2021-06-30",
+      "2019–20(a)": "2021-06-30",
+      "2020–21": "2022-06-30",
+      "2020–21(a)": "2022-06-30",
+      "2021–22": "2023-06-30",
+      "2021–22(a)": "2023-06-30",
+      "2022–23": "2024-06-30",
+      "2022–23(a)": "2024-06-30",
+      "2023–24": "2025-06-30",
+      "2024–25": "2026-06-30"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 3420,
+    "maximumRows": 4425,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 16
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING",
+        "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+        "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+        "CHAR_031_SEXUAL_ASSAULT",
+        "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+        "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+        "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+        "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+        "CHAR_08_THEFT",
+        "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+        "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+        "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+        "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+        "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+        "CHAR_10_19_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_10_YEARS",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_11_YEARS",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_12_YEARS",
+        "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_YEARS",
+        "CHAR_141_DRIVER_LICENCE_OFFENCES",
+        "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+        "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+        "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+        "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_14_YEARS",
+        "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+        "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+        "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+        "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_15_YEARS",
+        "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_18_YEARS",
+        "CHAR_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_CUSTODY_IN_THE_COMMUNITY",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_MONETARY_ORDERS",
+        "CHAR_ORGANISATIONS",
+        "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2022": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING",
+        "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+        "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+        "CHAR_031_SEXUAL_ASSAULT",
+        "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+        "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+        "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+        "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+        "CHAR_08_THEFT",
+        "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+        "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+        "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+        "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+        "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+        "CHAR_10_19_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_10_YEARS",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_11_YEARS",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_12_YEARS",
+        "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_YEARS",
+        "CHAR_141_DRIVER_LICENCE_OFFENCES",
+        "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+        "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+        "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+        "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_14_YEARS",
+        "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+        "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+        "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+        "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_15_YEARS",
+        "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_18_YEARS",
+        "CHAR_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2023": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING",
+        "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_0311_AGGRAVATED_SEXUAL_ASSAULT",
+        "CHAR_0312_NON_AGGRAVATED_SEXUAL_ASSAULT",
+        "CHAR_031_SEXUAL_ASSAULT",
+        "CHAR_0321_NON_ASSAULTIVE_SEXUAL_OFFENCES_AGAINST_A_CHILD",
+        "CHAR_0322_CHILD_PORNOGRAPHY_CHILD_ABUSE_MATERIAL_OFFENCES",
+        "CHAR_032_NON_ASSAULTATIVE_SEXUAL_OFFENCES",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_053_HARASSMENT_THREATENING_BEHAVIOUR",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_081_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+        "CHAR_082_THEFT_EXCEPT_MOTOR_VEHICLES",
+        "CHAR_08_THEFT",
+        "CHAR_091_OBTAIN_BENEFIT_BY_DECEPTION",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_101_IMPORT_OR_EXPORT_ILLICIT_DRUGS",
+        "CHAR_102_DEAL_OR_TRAFFIC_IN_ILLICIT_DRUGS",
+        "CHAR_103_MANUFACTURE_OR_CULTIVATE_ILLICIT_DRUGS",
+        "CHAR_104_POSSESS_AND_OR_USE_ILLICIT_DRUGS",
+        "CHAR_109_OTHER_ILLICIT_DRUG_OFFENCES",
+        "CHAR_10_19_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_10_YEARS",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_11_YEARS",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_12_YEARS",
+        "CHAR_132_REGULATED_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_13_YEARS",
+        "CHAR_141_DRIVER_LICENCE_OFFENCES",
+        "CHAR_142_VEHICLE_REGISTRATION_AND_ROADWORTHINESS_OFFENCES",
+        "CHAR_1431_EXCEED_THE_PRESCRIBED_CONTENT_OF_ALCOHOL_OR_OTHER_SUBSTANCE_LIMIT",
+        "CHAR_1432_EXCEED_LEGAL_SPEED_LIMIT",
+        "CHAR_143_REGULATORY_DRIVING_OFFENCES",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_14_YEARS",
+        "CHAR_153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS",
+        "CHAR_154_OFFENCES_AGAINST_GOVERNMENT_OPERATIONS",
+        "CHAR_155_OFFENCES_AGAINST_GOVERNMENT_SECURITY",
+        "CHAR_156_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_15_YEARS",
+        "CHAR_163_COMMERCIAL_INDUSTRY_FINANCIAL_REGULATION",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_18_YEARS",
+        "CHAR_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2024": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_013_MANSLAUGHTER_OR_DRIVING_CAUSING_DEATH",
+        "CHAR_01_HOMICIDE",
+        "CHAR_02_ASSAULT",
+        "CHAR_031_032_SEXUAL_ASSAULT_OF_AN_ADULT_CHILD",
+        "CHAR_034_CHILD_ABUSE_MATERIAL_OFFENCES",
+        "CHAR_03_SEXUAL_OFFENCES",
+        "CHAR_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+        "CHAR_045_DRIVING_CAUSING_SERIOUS_INJURY",
+        "CHAR_049_OTHER_ACTS_THAT_HARM_OR_ENDANGER_PERSONS",
+        "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+        "CHAR_051_ROBBERY",
+        "CHAR_052_BLACKMAIL_OR_OTHER_EXTORTION",
+        "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+        "CHAR_06_BURGLARY",
+        "CHAR_071_MOTOR_VEHICLE_THEFT_AND_RELATED_OFFENCES",
+        "CHAR_072_073_079_OTHER_TYPES_OF_THEFT",
+        "CHAR_074_RECEIVE_OR_HANDLE_PROCEEDS_OF_CRIME",
+        "CHAR_07_THEFT",
+        "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+        "CHAR_091_INTERNATIONAL_DRUG_TRAFFICKING",
+        "CHAR_092_DISTRIBUTE_OR_DEAL_DRUGS",
+        "CHAR_093_MANUFACTURE_OR_CULTIVATE_DRUGS",
+        "CHAR_094_UNLAWFUL_POSSESSION_OR_USE_OF_DRUGS",
+        "CHAR_09_DRUG_OFFENCES",
+        "CHAR_10_19_YEARS",
+        "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+        "CHAR_10_YEARS",
+        "CHAR_111_ARSON",
+        "CHAR_112_DAMAGE_OR_DESTROY_PROPERTY",
+        "CHAR_11_PROPERTY_DAMAGE",
+        "CHAR_11_YEARS",
+        "CHAR_123_PUBLIC_HEALTH_REGULATORY_OFFENCES",
+        "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+        "CHAR_12_YEARS",
+        "CHAR_131_DRINK_OR_DRUG_DRIVING",
+        "CHAR_132_UNSAFE_OPERATION_OF_A_ROAD_VEHICLE",
+        "CHAR_133_DRIVER_LICENCE_OFFENCES",
+        "CHAR_134_VEHICLE_REGISTRATION_AND_STANDARDS_OFFENCES",
+        "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+        "CHAR_13_YEARS",
+        "CHAR_141_BREACH_OF_RESTRAINING_ORDER",
+        "CHAR_142_OFFENCES_AGAINST_JUSTICE_PROCEDURES",
+        "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+        "CHAR_14_YEARS",
+        "CHAR_151_OFFENCES_AGAINST_NATIONAL_SECURITY",
+        "CHAR_152_OFFENCES_AGAINST_GOVERNMENT_SERVICES",
+        "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+        "CHAR_15_YEARS",
+        "CHAR_161_ENVIRONMENTAL_POLLUTION",
+        "CHAR_163_ANIMAL_CRUELTY",
+        "CHAR_16_ENVIRONMENTAL_OFFENCES",
+        "CHAR_16_YEARS",
+        "CHAR_17_MISCELLANEOUS_OFFENCES",
+        "CHAR_17_YEARS",
+        "CHAR_18_YEARS",
+        "CHAR_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_25_YEARS_AND_OVER",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_ORGANISATIONS",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "GROUP_AGE",
+        "GROUP_CUSTODIAL_ORDERS",
+        "GROUP_DURATION",
+        "GROUP_NON_CUSTODIAL_ORDERS",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+        "GROUP_SEX"
+      ],
+      "2022": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+        "GROUP_PRINCIPAL_SENTENCE",
+        "GROUP_SEX"
+      ],
+      "2023": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+        "GROUP_PRINCIPAL_SENTENCE",
+        "GROUP_SEX"
+      ],
+      "2024": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023",
+        "GROUP_PRINCIPAL_SENTENCE",
+        "GROUP_SEX"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2022": [
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2023": [
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ],
+      "2024": [
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30",
+        "2026-06-30"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R255C2"
+          ],
+          "HIGHER_COURTS": [
+            "R89C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R172C2"
+          ]
+        },
+        "2022": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R249C2"
+          ],
+          "HIGHER_COURTS": [
+            "R87C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R168C2"
+          ]
+        },
+        "2023": {
+          "ALL_COURTS": [
+            "R5C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R248C2"
+          ],
+          "HIGHER_COURTS": [
+            "R86C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R167C2"
+          ]
+        },
+        "2024": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R255C2"
+          ],
+          "HIGHER_COURTS": [
+            "R89C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R172C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

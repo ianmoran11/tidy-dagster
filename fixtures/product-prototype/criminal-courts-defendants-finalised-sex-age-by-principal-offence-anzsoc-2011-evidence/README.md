@@ -1,0 +1,3 @@
+# Criminal Courts evidence — Defendants finalised — sex and age by principal offence (ANZSOC 2011)
+
+This checked replay closure covers 3 independently accepted worksheet asset(s) from *Criminal Courts, Australia*. It preserves publication vintage, exact source cells, raw labels, ANZSOC classification identity, published null markers, and distinct count/age/duration measures. Human-authored semantic maps are non-authoritative; the family contract supplies acceptance authority. Expected deterministic `AMBIGUOUS_HEADER` diagnostics are allowed only when the selected court-level output resolves to an exact canonical court code. Provider calls: 0. Exceptions: 0. Canonical observations: 5,661.

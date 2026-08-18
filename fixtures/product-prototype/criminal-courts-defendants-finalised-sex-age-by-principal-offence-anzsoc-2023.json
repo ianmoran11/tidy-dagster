@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:086e5b5e79ad778632db673578aeede249cf8c2563c0c43b7338d09687e8a684",
+      "byteLength": 158788,
+      "sheet": "Table 3",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023-2024.response.txt",
+        "contentDigest": "sha256:6d7b3119677e597c6bd7645cfeca81cc40674770a9c9c5e6b6c6a44f1a506fca",
+        "byteLength": 582,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023-v1",
+  "tableFamilyId": "criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_ADJUDICATED_OUTCOMES",
+            "METHOD_AGREEMENT_OF_WRONGDOING",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING_BY_COURT",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+            "METHOD_TOTAL_FINALISED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "principal_offence": [
+            "ANZSOC2023_01",
+            "ANZSOC2023_02",
+            "ANZSOC2023_03",
+            "ANZSOC2023_04",
+            "ANZSOC2023_05",
+            "ANZSOC2023_06",
+            "ANZSOC2023_07",
+            "ANZSOC2023_08",
+            "ANZSOC2023_09",
+            "ANZSOC2023_10",
+            "ANZSOC2023_11",
+            "ANZSOC2023_12",
+            "ANZSOC2023_13",
+            "ANZSOC2023_14",
+            "ANZSOC2023_15",
+            "ANZSOC2023_16",
+            "ANZSOC2023_17",
+            "ANZSOC2023_TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 666
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:caa2a68cc145146b05c56ba02dee5d83a609aeb3b6171c245d169716ecd3ad02"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "method_of_finalisation",
+    "principal_offence",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "method_of_finalisation": [
+      "^method\\ of\\ finalisation$"
+    ],
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "method_of_finalisation": {
+      "Acquitted": "METHOD_ACQUITTED",
+      "Adjudicated outcomes(e)": "METHOD_ADJUDICATED_OUTCOMES",
+      "Adjudicated outcomes(e)(i)": "METHOD_ADJUDICATED_OUTCOMES",
+      "Agreement of wrongdoing": "METHOD_AGREEMENT_OF_WRONGDOING",
+      "Guilty ex-parte": "METHOD_GUILTY_EX_PARTE",
+      "Guilty finding by court": "METHOD_GUILTY_FINDING_BY_COURT",
+      "Guilty outcome(f)": "METHOD_GUILTY_OUTCOME",
+      "Guilty outcome(g)": "METHOD_GUILTY_OUTCOME",
+      "Guilty outcome(g)(i)": "METHOD_GUILTY_OUTCOME",
+      "Guilty plea by defendant": "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+      "Total finalised(h)": "METHOD_TOTAL_FINALISED",
+      "Transfer to other court levels": "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "METHOD_WITHDRAWN_BY_PROSECUTION",
+      "Withdrawn by prosecution(i)": "METHOD_WITHDRAWN_BY_PROSECUTION"
+    },
+    "principal_offence": {
+      "01 Homicide(a)": "ANZSOC2023_01",
+      "02 Assault": "ANZSOC2023_02",
+      "03 Sexual offences": "ANZSOC2023_03",
+      "04 Harm or endanger persons(b)": "ANZSOC2023_04",
+      "05 Robbery, blackmail, and extortion": "ANZSOC2023_05",
+      "06 Burglary": "ANZSOC2023_06",
+      "07 Theft": "ANZSOC2023_07",
+      "08 Fraud and related offences": "ANZSOC2023_08",
+      "09 Drug offences": "ANZSOC2023_09",
+      "10 Weapons and explosives offences": "ANZSOC2023_10",
+      "11 Property damage": "ANZSOC2023_11",
+      "12 Public order, health, and safety offences": "ANZSOC2023_12",
+      "13 Traffic and vehicle offences": "ANZSOC2023_13",
+      "14 Offences against justice procedures and orders(c)": "ANZSOC2023_14",
+      "15 Offences against government": "ANZSOC2023_15",
+      "16 Environmental offences": "ANZSOC2023_16",
+      "17 Miscellaneous offences": "ANZSOC2023_17",
+      "Total(d)": "ANZSOC2023_TOTAL"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "method_of_finalisation_id",
+    "principal_offence_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 666,
+    "maximumRows": 666,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 19
+    },
+    "methodsOfFinalisationByYear": {
+      "2024": [
+        "METHOD_ACQUITTED",
+        "METHOD_ADJUDICATED_OUTCOMES",
+        "METHOD_AGREEMENT_OF_WRONGDOING",
+        "METHOD_GUILTY_EX_PARTE",
+        "METHOD_GUILTY_FINDING_BY_COURT",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+        "METHOD_TOTAL_FINALISED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "principalOffencesByYear": {
+      "2024": [
+        "ANZSOC2023_01",
+        "ANZSOC2023_02",
+        "ANZSOC2023_03",
+        "ANZSOC2023_04",
+        "ANZSOC2023_05",
+        "ANZSOC2023_06",
+        "ANZSOC2023_07",
+        "ANZSOC2023_08",
+        "ANZSOC2023_09",
+        "ANZSOC2023_10",
+        "ANZSOC2023_11",
+        "ANZSOC2023_12",
+        "ANZSOC2023_13",
+        "ANZSOC2023_14",
+        "ANZSOC2023_15",
+        "ANZSOC2023_16",
+        "ANZSOC2023_17",
+        "ANZSOC2023_TOTAL"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R36C2"
+          ],
+          "HIGHER_COURTS": [
+            "R16C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R26C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

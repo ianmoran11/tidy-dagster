@@ -30,6 +30,7 @@ from tidy_orchestrator.product_prototype import (
     _prepare_fresh_live_with_ml,
     _validate_cohort,
     _validate_contract,
+    _validate_warning_rules,
     evaluate_execution_for_acceptance,
     run_product_prototype,
     verify_live_evidence,
@@ -901,7 +902,7 @@ def test_cohort_requires_increasing_years_and_matching_call_ceiling() -> None:
         _validate_cohort(wrong_ceiling)
     age_cohort = json.loads(AGE_COHORT.read_text())
     _validate_cohort(age_cohort)
-    age_cohort["workerLimits"]["maxWarnings"] = 20_001
+    age_cohort["workerLimits"]["maxWarnings"] = 100_001
     with pytest.raises(ProductPrototypeError, match="outside protocol bounds"):
         _validate_cohort(age_cohort)
 
@@ -1254,6 +1255,52 @@ def test_negative_allowed_warning_with_unmapped_output_routes_to_exception() -> 
     ]
     found = codes_for(execution, recipe, entry)
     assert "AMBIGUOUS_WARNING_OUTPUT_UNRESOLVED" in found
+
+
+def test_ambiguous_warning_can_pin_the_exact_selected_header_source() -> None:
+    warning = {
+        "code": "AMBIGUOUS_HEADER",
+        "address": "R8C2",
+        "message": "Multiple candidates.",
+    }
+    rows = [
+        {
+            "_source": {"address": "R8C2"},
+            "court level": "All Courts",
+            "court level_source": "R6C2",
+        }
+    ]
+    rule = {
+        "code": "AMBIGUOUS_HEADER",
+        "dimension": "court_level",
+        "requireCanonicalOutputEquivalence": True,
+        "expectedHeaderSourcesByYear": {"2024": {"ALL_COURTS": ["R6C2"]}},
+    }
+    contract = {"aliases": {"court_level": {"All Courts": "ALL_COURTS"}}}
+    assert (
+        _validate_warning_rules(
+            [warning],
+            [rule],
+            rows,
+            {"court_level": "court level"},
+            contract,
+            year=2024,
+        )
+        == []
+    )
+
+    rule["expectedHeaderSourcesByYear"]["2024"]["ALL_COURTS"] = ["R7C2"]
+    issues = _validate_warning_rules(
+        [warning],
+        [rule],
+        rows,
+        {"court_level": "court level"},
+        contract,
+        year=2024,
+    )
+    assert {issue["code"] for issue in issues} == {
+        "AMBIGUOUS_WARNING_HEADER_SOURCE_MISMATCH"
+    }
 
 
 def test_end_to_end_malformed_response_creates_exception_and_is_excluded(

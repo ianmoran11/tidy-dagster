@@ -1,0 +1,349 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023-v1",
+  "tableFamilyId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "principal_offence": [
+            "ANZSOC2023_01",
+            "ANZSOC2023_011",
+            "ANZSOC2023_012",
+            "ANZSOC2023_013",
+            "ANZSOC2023_02",
+            "ANZSOC2023_021",
+            "ANZSOC2023_022",
+            "ANZSOC2023_023",
+            "ANZSOC2023_03",
+            "ANZSOC2023_031",
+            "ANZSOC2023_032",
+            "ANZSOC2023_033",
+            "ANZSOC2023_034",
+            "ANZSOC2023_035",
+            "ANZSOC2023_039",
+            "ANZSOC2023_04",
+            "ANZSOC2023_044",
+            "ANZSOC2023_045",
+            "ANZSOC2023_049",
+            "ANZSOC2023_05",
+            "ANZSOC2023_051",
+            "ANZSOC2023_052",
+            "ANZSOC2023_06",
+            "ANZSOC2023_07",
+            "ANZSOC2023_071",
+            "ANZSOC2023_072_073_079",
+            "ANZSOC2023_074",
+            "ANZSOC2023_08",
+            "ANZSOC2023_09",
+            "ANZSOC2023_091",
+            "ANZSOC2023_092",
+            "ANZSOC2023_093",
+            "ANZSOC2023_094",
+            "ANZSOC2023_099",
+            "ANZSOC2023_10",
+            "ANZSOC2023_11",
+            "ANZSOC2023_111",
+            "ANZSOC2023_112",
+            "ANZSOC2023_12",
+            "ANZSOC2023_123",
+            "ANZSOC2023_13",
+            "ANZSOC2023_131",
+            "ANZSOC2023_132",
+            "ANZSOC2023_133",
+            "ANZSOC2023_134",
+            "ANZSOC2023_14",
+            "ANZSOC2023_141",
+            "ANZSOC2023_142",
+            "ANZSOC2023_15",
+            "ANZSOC2023_151",
+            "ANZSOC2023_152",
+            "ANZSOC2023_16",
+            "ANZSOC2023_161",
+            "ANZSOC2023_163",
+            "ANZSOC2023_17",
+            "ANZSOC2023_ORGANISATIONS",
+            "ANZSOC2023_TOTAL",
+            "ANZSOC2023_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 4068
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:cb3ae6ce4e7eefa9fddc5bafaa77987086125d7f8bc98a43950a103249470086"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "sex",
+    "method_of_finalisation",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "method_of_finalisation": [
+      "^method\\ of\\ finalisation$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide": "ANZSOC2023_01",
+      "011 Murder": "ANZSOC2023_011",
+      "012 Attempted murder": "ANZSOC2023_012",
+      "013 Manslaughter or driving causing death(c)": "ANZSOC2023_013",
+      "02 Assault": "ANZSOC2023_02",
+      "021 Serious assault": "ANZSOC2023_021",
+      "022 Assault of a prescribed officer": "ANZSOC2023_022",
+      "023 Common assault": "ANZSOC2023_023",
+      "03 Sexual offences": "ANZSOC2023_03",
+      "031 Sexual assault of an adult": "ANZSOC2023_031",
+      "032 Sexual assault of a child": "ANZSOC2023_032",
+      "033 Child procurement or grooming": "ANZSOC2023_033",
+      "034 Child abuse material offences": "ANZSOC2023_034",
+      "035 Intimate image offences": "ANZSOC2023_035",
+      "039 Other sexual offences": "ANZSOC2023_039",
+      "04 Harm or endanger persons": "ANZSOC2023_04",
+      "044 Acts that threaten, harass, or control": "ANZSOC2023_044",
+      "045 Driving causing serious injury(d)": "ANZSOC2023_045",
+      "049 Other acts that harm or endanger persons": "ANZSOC2023_049",
+      "05 Robbery, blackmail, and extortion": "ANZSOC2023_05",
+      "051 Robbery": "ANZSOC2023_051",
+      "052 Blackmail or other extortion": "ANZSOC2023_052",
+      "06 Burglary": "ANZSOC2023_06",
+      "07 Theft": "ANZSOC2023_07",
+      "071 Motor vehicle theft and related offences": "ANZSOC2023_071",
+      "072, 073 & 079 Other types of theft(e)": "ANZSOC2023_072_073_079",
+      "074 Receive or handle proceeds of crime": "ANZSOC2023_074",
+      "08 Fraud and related offences": "ANZSOC2023_08",
+      "09 Drug offences": "ANZSOC2023_09",
+      "091 International drug trafficking": "ANZSOC2023_091",
+      "092 Distribute or deal drugs": "ANZSOC2023_092",
+      "093 Manufacture or cultivate drugs": "ANZSOC2023_093",
+      "094 Unlawful possession or use of drugs": "ANZSOC2023_094",
+      "099 Other drug offences": "ANZSOC2023_099",
+      "10 Weapons and explosives offences": "ANZSOC2023_10",
+      "11 Property damage": "ANZSOC2023_11",
+      "111 Arson": "ANZSOC2023_111",
+      "112 Damage or destroy property": "ANZSOC2023_112",
+      "12 Public order, health, and safety offences": "ANZSOC2023_12",
+      "123 Public health regulatory offences": "ANZSOC2023_123",
+      "13 Traffic and vehicle offences": "ANZSOC2023_13",
+      "131 Drink or drug driving": "ANZSOC2023_131",
+      "132 Unsafe operation of a road vehicle": "ANZSOC2023_132",
+      "133 Driver licence offences": "ANZSOC2023_133",
+      "134 Vehicle registration and standards offences": "ANZSOC2023_134",
+      "14 Offences against justice procedures and orders(f)": "ANZSOC2023_14",
+      "141 Breach of restraining order": "ANZSOC2023_141",
+      "142 Offences against justice procedures": "ANZSOC2023_142",
+      "15 Offences against government": "ANZSOC2023_15",
+      "151 Offences against national security": "ANZSOC2023_151",
+      "152 Offences against government services": "ANZSOC2023_152",
+      "16 Environmental offences": "ANZSOC2023_16",
+      "161 Environmental pollution": "ANZSOC2023_161",
+      "163 Animal cruelty": "ANZSOC2023_163",
+      "17 Miscellaneous offences": "ANZSOC2023_17",
+      "Organisations": "ANZSOC2023_ORGANISATIONS",
+      "Total finalised": "ANZSOC2023_TOTAL_FINALISED",
+      "Total finalised(g)": "ANZSOC2023_TOTAL_FINALISED",
+      "Total(g)": "ANZSOC2023_TOTAL"
+    },
+    "sex": {
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "Persons(h)": "PERSONS"
+    },
+    "method_of_finalisation": {
+      "Acquitted": "METHOD_ACQUITTED",
+      "Guilty outcome(i)": "METHOD_GUILTY_OUTCOME",
+      "Total adjudicated(a)(i)": "METHOD_TOTAL_ADJUDICATED",
+      "Total(b)": "METHOD_TOTAL",
+      "Transfer to other court levels": "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution(i)": "METHOD_WITHDRAWN_BY_PROSECUTION"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "sex_id",
+    "method_of_finalisation_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 4068,
+    "maximumRows": 4068,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 7
+    },
+    "principalOffencesByYear": {
+      "2024": [
+        "ANZSOC2023_01",
+        "ANZSOC2023_011",
+        "ANZSOC2023_012",
+        "ANZSOC2023_013",
+        "ANZSOC2023_02",
+        "ANZSOC2023_021",
+        "ANZSOC2023_022",
+        "ANZSOC2023_023",
+        "ANZSOC2023_03",
+        "ANZSOC2023_031",
+        "ANZSOC2023_032",
+        "ANZSOC2023_033",
+        "ANZSOC2023_034",
+        "ANZSOC2023_035",
+        "ANZSOC2023_039",
+        "ANZSOC2023_04",
+        "ANZSOC2023_044",
+        "ANZSOC2023_045",
+        "ANZSOC2023_049",
+        "ANZSOC2023_05",
+        "ANZSOC2023_051",
+        "ANZSOC2023_052",
+        "ANZSOC2023_06",
+        "ANZSOC2023_07",
+        "ANZSOC2023_071",
+        "ANZSOC2023_072_073_079",
+        "ANZSOC2023_074",
+        "ANZSOC2023_08",
+        "ANZSOC2023_09",
+        "ANZSOC2023_091",
+        "ANZSOC2023_092",
+        "ANZSOC2023_093",
+        "ANZSOC2023_094",
+        "ANZSOC2023_099",
+        "ANZSOC2023_10",
+        "ANZSOC2023_11",
+        "ANZSOC2023_111",
+        "ANZSOC2023_112",
+        "ANZSOC2023_12",
+        "ANZSOC2023_123",
+        "ANZSOC2023_13",
+        "ANZSOC2023_131",
+        "ANZSOC2023_132",
+        "ANZSOC2023_133",
+        "ANZSOC2023_134",
+        "ANZSOC2023_14",
+        "ANZSOC2023_141",
+        "ANZSOC2023_142",
+        "ANZSOC2023_15",
+        "ANZSOC2023_151",
+        "ANZSOC2023_152",
+        "ANZSOC2023_16",
+        "ANZSOC2023_161",
+        "ANZSOC2023_163",
+        "ANZSOC2023_17",
+        "ANZSOC2023_ORGANISATIONS",
+        "ANZSOC2023_TOTAL",
+        "ANZSOC2023_TOTAL_FINALISED"
+      ]
+    },
+    "sexesByYear": {
+      "2024": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ]
+    },
+    "methodsOfFinalisationByYear": {
+      "2024": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R537C2"
+          ],
+          "HIGHER_COURTS": [
+            "R183C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R360C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

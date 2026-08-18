@@ -1,8 +1,8 @@
 {
   "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
-  "batchId": "justice-one-hundred-twenty-nine-worksheets-v1",
-  "recordedAt": "2026-08-16T12:00:00+00:00",
-  "worksheetCount": 129,
+  "batchId": "justice-one-hundred-fifty-eight-worksheets-v1",
+  "recordedAt": "2026-08-18T00:00:00+00:00",
+  "worksheetCount": 158,
   "providerCalls": 0,
   "entries": [
     {
@@ -1204,6 +1204,405 @@
         "2023": 0,
         "2024": 0,
         "2025": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-summary-by-court-level",
+      "label": "Criminal Courts, Australia — Defendants finalised — summary by court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_summary_by_court_level_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_summary_by_court_level_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-summary-by-court-level-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        3408,
+        3692,
+        4172,
+        4425
+      ],
+      "expectedCanonicalCount": 15697,
+      "expectedMeasureCounts": {
+        "defendant-count": 14833,
+        "mean-case-duration": 216,
+        "mean-defendant-age": 216,
+        "median-case-duration": 216,
+        "median-defendant-age": 216
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 211,
+        "observed": 15486
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-summary-by-jurisdiction",
+      "label": "Criminal Courts, Australia — Defendants finalised — summary by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_summary_by_jurisdiction_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_summary_by_jurisdiction_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-summary-by-jurisdiction-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        1566,
+        1566,
+        1575,
+        2943
+      ],
+      "expectedCanonicalCount": 7650,
+      "expectedMeasureCounts": {
+        "defendant-count": 7074,
+        "mean-case-duration": 144,
+        "mean-defendant-age": 144,
+        "median-case-duration": 144,
+        "median-defendant-age": 144
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 23,
+        "observed": 7624,
+        "suppressed": 3
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by principal offence (ANZSOC 2011)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        1887,
+        1887,
+        1887
+      ],
+      "expectedCanonicalCount": 5661,
+      "expectedMeasureCounts": {
+        "defendant-count": 5661
+      },
+      "expectedValueStatusCounts": {
+        "observed": 5661
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by principal offence (ANZSOC 2023)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        2430
+      ],
+      "expectedCanonicalCount": 2430,
+      "expectedMeasureCounts": {
+        "defendant-count": 1998,
+        "mean-defendant-age": 216,
+        "median-defendant-age": 216
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2424,
+        "suppressed": 6
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and principal offence by method (ANZSOC 2011)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2011_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2011_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "expectedYearCounts": [
+        3348,
+        3348,
+        3492
+      ],
+      "expectedCanonicalCount": 10188,
+      "expectedMeasureCounts": {
+        "defendant-count": 10188
+      },
+      "expectedValueStatusCounts": {
+        "observed": 10188
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and principal offence by method (ANZSOC 2023)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        4068
+      ],
+      "expectedCanonicalCount": 4068,
+      "expectedMeasureCounts": {
+        "defendant-count": 4068
+      },
+      "expectedValueStatusCounts": {
+        "observed": 4068
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-sex-age-by-method",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by method",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-method.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-method-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_method_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_method_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-sex-age-by-method-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        1332,
+        1332,
+        1332,
+        1332
+      ],
+      "expectedCanonicalCount": 5328,
+      "expectedMeasureCounts": {
+        "defendant-count": 5328
+      },
+      "expectedValueStatusCounts": {
+        "observed": 5328
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-method-by-duration",
+      "label": "Criminal Courts, Australia — Defendants finalised — method by case duration",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-duration.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-duration-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_method_by_duration_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_method_by_duration_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-method-by-duration-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        384,
+        384,
+        384,
+        384
+      ],
+      "expectedCanonicalCount": 1536,
+      "expectedMeasureCounts": {
+        "defendant-count": 1152,
+        "mean-case-duration": 192,
+        "median-case-duration": 192
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1536
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-guilty-outcome-summary-by-court-level",
+      "label": "Criminal Courts, Australia — Guilty outcome — summary by court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_summary_by_court_level_replay",
+      "dagsterJob": "product_prototype_criminal_courts_guilty_outcome_summary_by_court_level_replay_job",
+      "outputDirectory": "dagster-criminal-courts-guilty-outcome-summary-by-court-level-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        3420,
+        3705,
+        4004,
+        4425
+      ],
+      "expectedCanonicalCount": 15554,
+      "expectedMeasureCounts": {
+        "defendant-count": 14690,
+        "mean-case-duration": 216,
+        "mean-defendant-age": 216,
+        "median-case-duration": 216,
+        "median-defendant-age": 216
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 169,
+        "observed": 15381,
+        "suppressed": 4
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Defendants finalised — method by principal offence (ANZSOC 2023)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_method_by_principal_offence_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_defendants_finalised_method_by_principal_offence_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        666
+      ],
+      "expectedCanonicalCount": 666,
+      "expectedMeasureCounts": {
+        "defendant-count": 666
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 18,
+        "observed": 648
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
       }
     }
   ],

@@ -8,8 +8,10 @@ acceptance contract, the V13 prompt contract, and
 The original live milestone remains the three-workbook 2023-2025 cohort; the
 provider-free expansion adds 2021 and 2022 to form a five-workbook replay.
 An optional cohort-level `workerLimits.maxWarnings` supports larger but still
-bounded tables; Table 21 uses 20,000 because its conservative warning upper
-bound exceeds the original 10,000 limit.
+bounded tables; Table 21 uses 20,000 and the reviewed Criminal Courts cluster
+uses 100,000 because the conservative warning upper bound counts every possible
+header diagnostic. Actual warnings remain independently allowlisted and output
+bytes retain their separate hard cap.
 
 Replay responses are non-authoritative integration fixtures. They may exercise
 the provider-free interpretation path, but they do not determine acceptance and
@@ -23,6 +25,13 @@ claiming semantic extraction for every sheet. Canonical extraction covers
 state/territory and five national snapshot cohorts are registered dynamically in
 the status snapshot, Dagster assets, and dashboard totals. The provider-free custody check is runnable as
 `scripts/tidy-prisoners-release verify`.
+
+The Criminal Courts release inventory applies the same custody/completeness
+boundary to 69 downloads, 65 substantive cubes, 193 semantic families, and all
+430 numbered sheets across 2021–22 through 2024–25. The first 29 registered
+assets are split where ANZSOC 2011 and ANZSOC 2023 identities cannot safely
+share one alias namespace. The remaining 401 sheets stay pending. Run
+`scripts/tidy-criminal-courts-release verify` for the provider-free closure.
 
 The completed safe live-evidence closure is at
 `fixtures/product-prototype/live-evidence/manifest.json`. It binds three fresh
@@ -88,7 +97,7 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 129-worksheet cross-publication batch extends the same v1 contract without
+The 158-worksheet cross-publication batch extends the same v1 contract without
 weakening existing cohorts:
 
 - multi-measure selection may use an AND conjunction across several dimensions;
@@ -100,6 +109,9 @@ weakening existing cohorts:
 - Table 27 and the state/territory rolling families declare
   `referenceDateDimension` and `preservePublicationVintage`, making publication
   vintage and row-level observation date separate canonical key fields;
+  current-period-only tables may preserve publication vintage without inventing
+  a spreadsheet dimension, while their reference date remains the cohort's
+  exact publication period;
 - `preserveRawValueText` is opt-in for reviewed marker-bearing families and
   retains the exact published marker beside its canonical null status;
 - `strictAliasMatching` prevents unreviewed footnote-suffix inference, while
@@ -111,7 +123,7 @@ weakening existing cohorts:
   cell values or formulas.
 
 The batch registry is
-`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 27
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 37
 contracts pins exact annual dimensions, measure applicability, value statuses,
 combination counts, and source-header variants. Verification remains
 provider-free:

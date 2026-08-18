@@ -122,7 +122,7 @@ _PROTOCOL_MAX_LIMITS: dict[str, int] = {
     "maxInputBytes": 50_000_000,
     "maxOutputBytes": 50_000_000,
     "maxOutputFiles": 10_000,
-    "maxWarnings": 20_000,
+    "maxWarnings": 100_000,
     "maxWorkbookCompressedBytes": 25_000_000,
     "maxZipEntries": 10_000,
     "maxZipEntryUncompressedBytes": 50_000_000,

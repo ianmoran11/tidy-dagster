@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:a541909bfe1a7f44d214e9ae870bb33e6c43feb181f73b07ed5f930d0cdd8b8c",
+      "byteLength": 166236,
+      "sheet": "Table 4",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-2021.response.txt",
+        "contentDigest": "sha256:ab1fedd2906fe249f3e86c5f9561b741f76e3cf4d1ed54f83faa697323722ec3",
+        "byteLength": 627,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:9a9a18151fc6ccb58fa831a0628f13cd867486873b206ae32e4ab327bd903eba",
+      "byteLength": 167661,
+      "sheet": "Table 4",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-2022.response.txt",
+        "contentDigest": "sha256:ea404b1f95464aa76fd91983b7617db6c3ea28b1246f4f915804d4fd5805a64f",
+        "byteLength": 627,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-1-normalized.xlsx",
+      "contentDigest": "sha256:9050c583f3651ea86960db546f49b4cfe7d89cd41755f5ae88930d2a52c2def0",
+      "byteLength": 133603,
+      "sheet": "Table 4",
+      "replayResponse": {
+        "path": "replay/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-2023.response.txt",
+        "contentDigest": "sha256:d99672cc58c7faf0423fd0518446ed9af192efa4fba782e5ca43e47c706f8786",
+        "byteLength": 640,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

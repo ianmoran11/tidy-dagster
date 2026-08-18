@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "tidy.product-prototype-large-batch-evidence/v1",
+  "familyId": "criminal-courts-guilty-outcome-summary-by-court-level",
+  "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-court-level.json",
+  "cohortDigest": "sha256:672d334a21cada4cbfd73e985b7309d744f1993d792ff790188698e43680e30b",
+  "acceptanceContractPath": "fixtures/product-prototype/acceptance/criminal-courts-guilty-outcome-summary-by-court-level-v1.json",
+  "acceptanceContractDigest": "sha256:7b081676c4d9b52bf2fc6c87088d7e1aac4f1a049c37cdbc9ddbfb7e545c18ec",
+  "recordedAt": "2026-08-15T09:00:00+00:00",
+  "mode": "replay",
+  "providerCalls": 0,
+  "acceptedWorkbookCount": 4,
+  "exceptionWorkbookCount": 0,
+  "rawObservationCount": 15554,
+  "excludedObservationCount": 0,
+  "canonicalObservationCount": 15554,
+  "measureCounts": {
+    "defendant-count": 14690,
+    "mean-case-duration": 216,
+    "mean-defendant-age": 216,
+    "median-case-duration": 216,
+    "median-defendant-age": 216
+  },
+  "valueStatusCounts": {
+    "not_applicable": 169,
+    "observed": 15381,
+    "suppressed": 4
+  },
+  "manualReplayYears": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "publicationVintagePreserved": true,
+  "runDigest": "sha256:0bb060a37f4f5e31055a472a7398623d8fe208b5cf13313d3fc1f0d50cfed214",
+  "files": [
+    {
+      "path": "README.md",
+      "contentDigest": "sha256:fe8d6e608b01e3aeda42cf23b8845de86755fe73f6f2e867b332c83153816d03",
+      "byteLength": 672
+    },
+    {
+      "path": "canonical-observations.csv",
+      "contentDigest": "sha256:8eecf0644097613b046eef487cda03846f25dc6b460317132793aa7cebe80b1b",
+      "byteLength": 13129758
+    },
+    {
+      "path": "canonical-observations.json",
+      "contentDigest": "sha256:4bdacdcba15a8d033d36f87b3c6f5dd99db15db44fefca1bfb3d1b2dd0bb2635",
+      "byteLength": 22571799
+    },
+    {
+      "path": "collation-report.json",
+      "contentDigest": "sha256:5b51cffd71be35acd59287ab777b48452b3c1c4ddf5fc85cd63e7d5caf196cd1",
+      "byteLength": 1426
+    },
+    {
+      "path": "exceptions.json",
+      "contentDigest": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byteLength": 3
+    },
+    {
+      "path": "run.json",
+      "contentDigest": "sha256:7fe588f794598424c91df01162e1706d98fd6d3a61f03dde0ff6dbf5b0384d88",
+      "byteLength": 4252
+    }
+  ]
+}

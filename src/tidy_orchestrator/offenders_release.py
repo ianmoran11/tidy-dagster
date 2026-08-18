@@ -139,7 +139,7 @@ REGISTERED_FAMILY_IDS = {
 _MAIN = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
 _DOC_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 _PKG_REL = "http://schemas.openxmlformats.org/package/2006/relationships"
-_NUMBERED_TABLE = re.compile(r"^Table ([1-9][0-9]*)$")
+_NUMBERED_TABLE = re.compile(r"^(?:(?:ANZSOC 2023|FDV) )?Table ([1-9][0-9]*)$")
 _CELL = re.compile(r"^([A-Z]{1,3})([1-9][0-9]*)$")
 _RANGE = re.compile(r"^([A-Z]{1,3})([1-9][0-9]*)(?::([A-Z]{1,3})([1-9][0-9]*))?$")
 _DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -340,7 +340,10 @@ def inspect_workbook(
                     (
                         value
                         for value in visible_values
-                        if re.match(r"^(?:ANZSOC 2023 )?Table [1-9][0-9]*\b", value)
+                        if re.match(
+                            r"^(?:(?:ANZSOC 2023|FDV) )?Table [1-9][0-9]*\b",
+                            value,
+                        )
                     ),
                     None,
                 )

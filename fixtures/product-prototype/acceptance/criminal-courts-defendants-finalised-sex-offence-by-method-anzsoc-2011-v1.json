@@ -1,0 +1,648 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-v1",
+  "tableFamilyId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "ANZSOC2011_01",
+            "ANZSOC2011_02",
+            "ANZSOC2011_021",
+            "ANZSOC2011_029",
+            "ANZSOC2011_0291",
+            "ANZSOC2011_03",
+            "ANZSOC2011_031",
+            "ANZSOC2011_0311",
+            "ANZSOC2011_0312",
+            "ANZSOC2011_032",
+            "ANZSOC2011_0321",
+            "ANZSOC2011_0322",
+            "ANZSOC2011_04",
+            "ANZSOC2011_05",
+            "ANZSOC2011_053",
+            "ANZSOC2011_06",
+            "ANZSOC2011_07",
+            "ANZSOC2011_08",
+            "ANZSOC2011_081",
+            "ANZSOC2011_082",
+            "ANZSOC2011_09",
+            "ANZSOC2011_091",
+            "ANZSOC2011_10",
+            "ANZSOC2011_101",
+            "ANZSOC2011_102",
+            "ANZSOC2011_103",
+            "ANZSOC2011_104",
+            "ANZSOC2011_109",
+            "ANZSOC2011_11",
+            "ANZSOC2011_12",
+            "ANZSOC2011_13",
+            "ANZSOC2011_132",
+            "ANZSOC2011_14",
+            "ANZSOC2011_141",
+            "ANZSOC2011_142",
+            "ANZSOC2011_143",
+            "ANZSOC2011_1431",
+            "ANZSOC2011_1432",
+            "ANZSOC2011_15",
+            "ANZSOC2011_153",
+            "ANZSOC2011_154",
+            "ANZSOC2011_155",
+            "ANZSOC2011_156",
+            "ANZSOC2011_16",
+            "ANZSOC2011_163",
+            "ANZSOC2011_ORGANISATIONS",
+            "ANZSOC2011_TOTAL",
+            "ANZSOC2011_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "ANZSOC2011_01",
+            "ANZSOC2011_02",
+            "ANZSOC2011_021",
+            "ANZSOC2011_029",
+            "ANZSOC2011_0291",
+            "ANZSOC2011_03",
+            "ANZSOC2011_031",
+            "ANZSOC2011_0311",
+            "ANZSOC2011_0312",
+            "ANZSOC2011_032",
+            "ANZSOC2011_0321",
+            "ANZSOC2011_0322",
+            "ANZSOC2011_04",
+            "ANZSOC2011_05",
+            "ANZSOC2011_053",
+            "ANZSOC2011_06",
+            "ANZSOC2011_07",
+            "ANZSOC2011_08",
+            "ANZSOC2011_081",
+            "ANZSOC2011_082",
+            "ANZSOC2011_09",
+            "ANZSOC2011_091",
+            "ANZSOC2011_10",
+            "ANZSOC2011_101",
+            "ANZSOC2011_102",
+            "ANZSOC2011_103",
+            "ANZSOC2011_104",
+            "ANZSOC2011_109",
+            "ANZSOC2011_11",
+            "ANZSOC2011_12",
+            "ANZSOC2011_13",
+            "ANZSOC2011_132",
+            "ANZSOC2011_14",
+            "ANZSOC2011_141",
+            "ANZSOC2011_142",
+            "ANZSOC2011_143",
+            "ANZSOC2011_1431",
+            "ANZSOC2011_1432",
+            "ANZSOC2011_15",
+            "ANZSOC2011_153",
+            "ANZSOC2011_154",
+            "ANZSOC2011_155",
+            "ANZSOC2011_156",
+            "ANZSOC2011_16",
+            "ANZSOC2011_163",
+            "ANZSOC2011_ORGANISATIONS",
+            "ANZSOC2011_TOTAL",
+            "ANZSOC2011_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "ANZSOC2011_01",
+            "ANZSOC2011_011",
+            "ANZSOC2011_012",
+            "ANZSOC2011_013",
+            "ANZSOC2011_02",
+            "ANZSOC2011_021",
+            "ANZSOC2011_029",
+            "ANZSOC2011_0291",
+            "ANZSOC2011_03",
+            "ANZSOC2011_031",
+            "ANZSOC2011_0311",
+            "ANZSOC2011_0312",
+            "ANZSOC2011_032",
+            "ANZSOC2011_0321",
+            "ANZSOC2011_0322",
+            "ANZSOC2011_04",
+            "ANZSOC2011_05",
+            "ANZSOC2011_053",
+            "ANZSOC2011_06",
+            "ANZSOC2011_07",
+            "ANZSOC2011_08",
+            "ANZSOC2011_081",
+            "ANZSOC2011_082",
+            "ANZSOC2011_09",
+            "ANZSOC2011_091",
+            "ANZSOC2011_10",
+            "ANZSOC2011_101",
+            "ANZSOC2011_102",
+            "ANZSOC2011_103",
+            "ANZSOC2011_104",
+            "ANZSOC2011_109",
+            "ANZSOC2011_11",
+            "ANZSOC2011_12",
+            "ANZSOC2011_13",
+            "ANZSOC2011_132",
+            "ANZSOC2011_14",
+            "ANZSOC2011_141",
+            "ANZSOC2011_142",
+            "ANZSOC2011_143",
+            "ANZSOC2011_1431",
+            "ANZSOC2011_1432",
+            "ANZSOC2011_15",
+            "ANZSOC2011_153",
+            "ANZSOC2011_154",
+            "ANZSOC2011_155",
+            "ANZSOC2011_156",
+            "ANZSOC2011_16",
+            "ANZSOC2011_163",
+            "ANZSOC2011_ORGANISATIONS",
+            "ANZSOC2011_TOTAL",
+            "ANZSOC2011_TOTAL_FINALISED"
+          ],
+          "sex": [
+            "FEMALE",
+            "MALE",
+            "PERSONS"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_GUILTY_OUTCOME",
+            "METHOD_TOTAL",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 3348,
+        "2022": 3348,
+        "2023": 3492
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:1b161f7463a8c4e5f025c009eca2def7e18ed426f017def9653ec4f020159f0a",
+        "2022": "sha256:1b161f7463a8c4e5f025c009eca2def7e18ed426f017def9653ec4f020159f0a",
+        "2023": "sha256:a415c82cb2dcbb6b204afbcd9c5dd2228d8a4c0b0761d8026032e107d810f470"
+      },
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_applicable",
+        "n.a.": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "sex",
+    "method_of_finalisation",
+    "court_level"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "method_of_finalisation": [
+      "^method\\ of\\ finalisation$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "ANZSOC2011_01",
+      "011 Murder": "ANZSOC2011_011",
+      "012 Attempted murder": "ANZSOC2011_012",
+      "013 Manslaughter and driving causing death": "ANZSOC2011_013",
+      "02 Acts intended to cause injury": "ANZSOC2011_02",
+      "021 Assault": "ANZSOC2011_021",
+      "029 Other acts intended to cause injury": "ANZSOC2011_029",
+      "0291 Stalking": "ANZSOC2011_0291",
+      "0291 Stalking(c)": "ANZSOC2011_0291",
+      "03 Sexual assault and related offences": "ANZSOC2011_03",
+      "031 Sexual assault": "ANZSOC2011_031",
+      "0311 Aggravated sexual assault": "ANZSOC2011_0311",
+      "0312 Non-aggravated sexual assault": "ANZSOC2011_0312",
+      "032 Non-assaultative sexual offences": "ANZSOC2011_032",
+      "0321 Non-assaultive sexual offences against a child": "ANZSOC2011_0321",
+      "0322 Child pornography/child abuse material offences": "ANZSOC2011_0322",
+      "04 Dangerous/negligent acts": "ANZSOC2011_04",
+      "05 Abduction/harassment": "ANZSOC2011_05",
+      "053 Harassment and threatening behaviour": "ANZSOC2011_053",
+      "053 Harassment and threatening behaviour(d)": "ANZSOC2011_053",
+      "06 Robbery/extortion": "ANZSOC2011_06",
+      "07 Unlawful entry with intent": "ANZSOC2011_07",
+      "08 Theft": "ANZSOC2011_08",
+      "081 Motor vehicle theft and related offences": "ANZSOC2011_081",
+      "082 Theft (except motor vehicles)": "ANZSOC2011_082",
+      "09 Fraud/deception": "ANZSOC2011_09",
+      "091 Obtain benefit by deception": "ANZSOC2011_091",
+      "10 Illicit drug offences": "ANZSOC2011_10",
+      "101 Import or export illicit drugs": "ANZSOC2011_101",
+      "102 Deal or traffic in illicit drugs": "ANZSOC2011_102",
+      "103 Manufacture or cultivate illicit drugs": "ANZSOC2011_103",
+      "104 Possess and/or use illicit drugs": "ANZSOC2011_104",
+      "109 Other illicit drug offences": "ANZSOC2011_109",
+      "11 Weapons/explosives": "ANZSOC2011_11",
+      "12 Property damage and environmental pollution": "ANZSOC2011_12",
+      "13 Public order offences": "ANZSOC2011_13",
+      "132 Regulated public order offences": "ANZSOC2011_132",
+      "14 Traffic and vehicle regulatory offences": "ANZSOC2011_14",
+      "141 Driver licence offences": "ANZSOC2011_141",
+      "142 Vehicle registration and roadworthiness offences": "ANZSOC2011_142",
+      "143 Regulatory driving offences": "ANZSOC2011_143",
+      "1431 Exceed the prescribed content of alcohol or other substance limit": "ANZSOC2011_1431",
+      "1432 Exceed legal speed limit": "ANZSOC2011_1432",
+      "15 Offences against justice": "ANZSOC2011_15",
+      "15 Offences against justice(e)": "ANZSOC2011_15",
+      "153 Breach of violence and non-violence orders": "ANZSOC2011_153",
+      "154 Offences against government operations": "ANZSOC2011_154",
+      "155 Offences against government security": "ANZSOC2011_155",
+      "156 Offences against justice procedures": "ANZSOC2011_156",
+      "16 Miscellaneous offences": "ANZSOC2011_16",
+      "163 Commercial/industry/financial regulaton": "ANZSOC2011_163",
+      "Organisations": "ANZSOC2011_ORGANISATIONS",
+      "Total": "ANZSOC2011_TOTAL",
+      "Total finalised": "ANZSOC2011_TOTAL_FINALISED",
+      "Total(f)": "ANZSOC2011_TOTAL"
+    },
+    "sex": {
+      "Females": "FEMALE",
+      "Males": "MALE",
+      "Persons": "PERSONS",
+      "Persons(g)": "PERSONS"
+    },
+    "method_of_finalisation": {
+      "Acquitted": "METHOD_ACQUITTED",
+      "Guilty outcome": "METHOD_GUILTY_OUTCOME",
+      "Total": "METHOD_TOTAL",
+      "Total adjudicated": "METHOD_TOTAL_ADJUDICATED",
+      "Total adjudicated(a)": "METHOD_TOTAL_ADJUDICATED",
+      "Total(b)": "METHOD_TOTAL",
+      "Transfer to other court levels": "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "METHOD_WITHDRAWN_BY_PROSECUTION"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    }
+  },
+  "strictAliasMatching": true,
+  "excludedDimensionCodes": {},
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "sex_id",
+    "method_of_finalisation_id",
+    "court_level_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 3348,
+    "maximumRows": 3492,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 7
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "ANZSOC2011_01",
+        "ANZSOC2011_02",
+        "ANZSOC2011_021",
+        "ANZSOC2011_029",
+        "ANZSOC2011_0291",
+        "ANZSOC2011_03",
+        "ANZSOC2011_031",
+        "ANZSOC2011_0311",
+        "ANZSOC2011_0312",
+        "ANZSOC2011_032",
+        "ANZSOC2011_0321",
+        "ANZSOC2011_0322",
+        "ANZSOC2011_04",
+        "ANZSOC2011_05",
+        "ANZSOC2011_053",
+        "ANZSOC2011_06",
+        "ANZSOC2011_07",
+        "ANZSOC2011_08",
+        "ANZSOC2011_081",
+        "ANZSOC2011_082",
+        "ANZSOC2011_09",
+        "ANZSOC2011_091",
+        "ANZSOC2011_10",
+        "ANZSOC2011_101",
+        "ANZSOC2011_102",
+        "ANZSOC2011_103",
+        "ANZSOC2011_104",
+        "ANZSOC2011_109",
+        "ANZSOC2011_11",
+        "ANZSOC2011_12",
+        "ANZSOC2011_13",
+        "ANZSOC2011_132",
+        "ANZSOC2011_14",
+        "ANZSOC2011_141",
+        "ANZSOC2011_142",
+        "ANZSOC2011_143",
+        "ANZSOC2011_1431",
+        "ANZSOC2011_1432",
+        "ANZSOC2011_15",
+        "ANZSOC2011_153",
+        "ANZSOC2011_154",
+        "ANZSOC2011_155",
+        "ANZSOC2011_156",
+        "ANZSOC2011_16",
+        "ANZSOC2011_163",
+        "ANZSOC2011_ORGANISATIONS",
+        "ANZSOC2011_TOTAL",
+        "ANZSOC2011_TOTAL_FINALISED"
+      ],
+      "2022": [
+        "ANZSOC2011_01",
+        "ANZSOC2011_02",
+        "ANZSOC2011_021",
+        "ANZSOC2011_029",
+        "ANZSOC2011_0291",
+        "ANZSOC2011_03",
+        "ANZSOC2011_031",
+        "ANZSOC2011_0311",
+        "ANZSOC2011_0312",
+        "ANZSOC2011_032",
+        "ANZSOC2011_0321",
+        "ANZSOC2011_0322",
+        "ANZSOC2011_04",
+        "ANZSOC2011_05",
+        "ANZSOC2011_053",
+        "ANZSOC2011_06",
+        "ANZSOC2011_07",
+        "ANZSOC2011_08",
+        "ANZSOC2011_081",
+        "ANZSOC2011_082",
+        "ANZSOC2011_09",
+        "ANZSOC2011_091",
+        "ANZSOC2011_10",
+        "ANZSOC2011_101",
+        "ANZSOC2011_102",
+        "ANZSOC2011_103",
+        "ANZSOC2011_104",
+        "ANZSOC2011_109",
+        "ANZSOC2011_11",
+        "ANZSOC2011_12",
+        "ANZSOC2011_13",
+        "ANZSOC2011_132",
+        "ANZSOC2011_14",
+        "ANZSOC2011_141",
+        "ANZSOC2011_142",
+        "ANZSOC2011_143",
+        "ANZSOC2011_1431",
+        "ANZSOC2011_1432",
+        "ANZSOC2011_15",
+        "ANZSOC2011_153",
+        "ANZSOC2011_154",
+        "ANZSOC2011_155",
+        "ANZSOC2011_156",
+        "ANZSOC2011_16",
+        "ANZSOC2011_163",
+        "ANZSOC2011_ORGANISATIONS",
+        "ANZSOC2011_TOTAL",
+        "ANZSOC2011_TOTAL_FINALISED"
+      ],
+      "2023": [
+        "ANZSOC2011_01",
+        "ANZSOC2011_011",
+        "ANZSOC2011_012",
+        "ANZSOC2011_013",
+        "ANZSOC2011_02",
+        "ANZSOC2011_021",
+        "ANZSOC2011_029",
+        "ANZSOC2011_0291",
+        "ANZSOC2011_03",
+        "ANZSOC2011_031",
+        "ANZSOC2011_0311",
+        "ANZSOC2011_0312",
+        "ANZSOC2011_032",
+        "ANZSOC2011_0321",
+        "ANZSOC2011_0322",
+        "ANZSOC2011_04",
+        "ANZSOC2011_05",
+        "ANZSOC2011_053",
+        "ANZSOC2011_06",
+        "ANZSOC2011_07",
+        "ANZSOC2011_08",
+        "ANZSOC2011_081",
+        "ANZSOC2011_082",
+        "ANZSOC2011_09",
+        "ANZSOC2011_091",
+        "ANZSOC2011_10",
+        "ANZSOC2011_101",
+        "ANZSOC2011_102",
+        "ANZSOC2011_103",
+        "ANZSOC2011_104",
+        "ANZSOC2011_109",
+        "ANZSOC2011_11",
+        "ANZSOC2011_12",
+        "ANZSOC2011_13",
+        "ANZSOC2011_132",
+        "ANZSOC2011_14",
+        "ANZSOC2011_141",
+        "ANZSOC2011_142",
+        "ANZSOC2011_143",
+        "ANZSOC2011_1431",
+        "ANZSOC2011_1432",
+        "ANZSOC2011_15",
+        "ANZSOC2011_153",
+        "ANZSOC2011_154",
+        "ANZSOC2011_155",
+        "ANZSOC2011_156",
+        "ANZSOC2011_16",
+        "ANZSOC2011_163",
+        "ANZSOC2011_ORGANISATIONS",
+        "ANZSOC2011_TOTAL",
+        "ANZSOC2011_TOTAL_FINALISED"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2022": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ],
+      "2023": [
+        "FEMALE",
+        "MALE",
+        "PERSONS"
+      ]
+    },
+    "methodsOfFinalisationByYear": {
+      "2021": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "METHOD_ACQUITTED",
+        "METHOD_GUILTY_OUTCOME",
+        "METHOD_TOTAL",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R447C2"
+          ],
+          "HIGHER_COURTS": [
+            "R153C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R300C2"
+          ]
+        },
+        "2022": {
+          "ALL_COURTS": [
+            "R6C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R447C2"
+          ],
+          "HIGHER_COURTS": [
+            "R153C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R300C2"
+          ]
+        },
+        "2023": {
+          "ALL_COURTS": [
+            "R5C2"
+          ],
+          "CHILDRENS_COURTS": [
+            "R473C2"
+          ],
+          "HIGHER_COURTS": [
+            "R161C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R317C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}
