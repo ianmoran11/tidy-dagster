@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-3-normalized.xlsx",
+      "contentDigest": "sha256:c73793e4be698a9d8b45418fd9e4b02f6f690ad6a1f6cabdd970bf089e172bc6",
+      "byteLength": 126987,
+      "sheet": "Table 13",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d-2022.response.txt",
+        "contentDigest": "sha256:0d9ff20874526f964bd3f29dc0466c62a78a19209cfc8381943daf725258fd9c",
+        "byteLength": 755,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-3-normalized.xlsx",
+      "contentDigest": "sha256:c6abfc74ce76e317e0655d9af2418e4af3dd0be3bd8388f867a7e3831956cc70",
+      "byteLength": 80350,
+      "sheet": "Table 13",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d-2023.response.txt",
+        "contentDigest": "sha256:32e87ac21cde168e7e464a06d54ebd2ada59d044b0b71faa99f4cd32aaeafeae",
+        "byteLength": 794,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-3-normalized.xlsx",
+      "contentDigest": "sha256:a137daed5dc4f0a0d2b4b5d068937a462facebeb5db90919e83db21114b0e83c",
+      "byteLength": 119559,
+      "sheet": "Table 17",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d-2024.response.txt",
+        "contentDigest": "sha256:3ca35c636a53a0407bec437ee8751736a8d1a973c5e4a1a8f21b59b16c5c980d",
+        "byteLength": 820,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

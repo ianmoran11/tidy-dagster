@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-3-normalized.xlsx",
+      "contentDigest": "sha256:9586be303867542545b12b0176aeafd1f5013c57e059ebdf58828bb1464790e2",
+      "byteLength": 147712,
+      "sheet": "Table 14",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407-2021.response.txt",
+        "contentDigest": "sha256:90198f933e972917fada10f3bf7dc3451e154003bc832c1eeabcccf3875afef5",
+        "byteLength": 690,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-3-normalized.xlsx",
+      "contentDigest": "sha256:c73793e4be698a9d8b45418fd9e4b02f6f690ad6a1f6cabdd970bf089e172bc6",
+      "byteLength": 126987,
+      "sheet": "Table 14",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407-2022.response.txt",
+        "contentDigest": "sha256:843dbb1eeecd13b0889518be9832dc679721657c0b74d41821bc5ca898408249",
+        "byteLength": 690,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-3-normalized.xlsx",
+      "contentDigest": "sha256:c6abfc74ce76e317e0655d9af2418e4af3dd0be3bd8388f867a7e3831956cc70",
+      "byteLength": 80350,
+      "sheet": "Table 14",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407-2023.response.txt",
+        "contentDigest": "sha256:b89d3814d540b0f4e3f7586601df193541419c20b36743095cb2a34952ab03a3",
+        "byteLength": 703,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-3-normalized.xlsx",
+      "contentDigest": "sha256:a137daed5dc4f0a0d2b4b5d068937a462facebeb5db90919e83db21114b0e83c",
+      "byteLength": 119559,
+      "sheet": "Table 18",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407-2024.response.txt",
+        "contentDigest": "sha256:9b278825550102b090f7c52f834ab00528f27334c6cbfec2ae48611358a719bc",
+        "byteLength": 742,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

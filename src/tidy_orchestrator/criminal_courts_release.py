@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 79
+EXPECTED_REGISTERED_COUNT = 96
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -66,6 +66,12 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
         "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023",
         "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
+        "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023",
+        "criminal-courts-main-defendants-finalised-excluding-traffic-offences-summary-characteristics-by-indigenous-status-selected-sta-b7c24101f2",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d",
+        "criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407",
+        "criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab",
     }
 )
 

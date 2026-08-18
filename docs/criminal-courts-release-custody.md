@@ -78,8 +78,24 @@ markers. Repeated jurisdiction panels may emit deterministic `AMBIGUOUS_HEADER`
 warnings; each contract accepts them only when the selected canonical
 jurisdiction and exact year-specific source header match its reviewed allowlist.
 
-The three clusters now cover 79 of 430 worksheets and produce 137,664 canonical
-observations; 351 worksheets remain pending reviewed contracts.
+## Fourth accepted Indigenous-status cluster
+
+The fourth cluster covers all 17 numbered worksheets in the selected
+states-and-territories Indigenous-status cube, which is separate from the third
+cluster's national sentence-length and fine cubes. Six independent contracts cover
+court level, summary characteristics, principal sentence and age, crude and
+age-standardised defendant rates, rate ratios, and the 2024–25 ANZSOC 2023
+custody sentence-length counterpart.
+
+The cluster adds 24,643 canonical observations. Counts, mean and median age,
+crude and age-standardised rates per 100,000 people aged 10 years and over, rate
+ratios, proportions, and mean and median custody durations remain distinct
+measures and units. Publication vintage remains separate from the row-level
+observation period. Published `..`, `na`, and `np` values remain respectively
+not applicable, not available, and suppressed rather than becoming zero.
+
+The four clusters now cover 96 of 430 worksheets and produce 162,307 canonical
+observations; 334 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -91,8 +107,8 @@ observations; 351 worksheets remain pending reviewed contracts.
   than claiming the historical observations were originally coded to ANZSOC
   2023.
 - The ANZSOC 2023 Indigenous-status sentence-length counterpart is 2024–25
-  Table 19 in a different cube. It remains a distinct pending family rather than
-  being silently folded into the accepted three-release ANZSOC 2011 cohort.
+  Table 19 in a different cube from its third-cluster predecessor. It remains a distinct accepted family rather
+  than being silently folded into the three-release ANZSOC 2011 cohort.
 - Experimental family and domestic violence tables remain in a separate FDV
   namespace.
 
@@ -100,7 +116,7 @@ observations; 351 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 79 assets replay with
+measures, value statuses, source cells, and warnings. All 96 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

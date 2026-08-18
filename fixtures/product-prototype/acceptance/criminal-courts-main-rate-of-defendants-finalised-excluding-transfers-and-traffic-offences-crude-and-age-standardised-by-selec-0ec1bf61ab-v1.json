@@ -1,0 +1,778 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab-v1",
+  "tableFamilyId": "criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab",
+  "measures": [
+    {
+      "id": "crude-defendant-rate",
+      "unitId": "per-100000-persons-aged-10-plus",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "rate_basis": [
+            "CRUDE"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2024": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 93,
+        "2022": 104,
+        "2023": 88,
+        "2024": 108
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:6c4185042f122a5ea4bfa79e99ecbc7a5e66cd5e0d738c7cd4ec21044e3a8e25",
+        "2022": "sha256:e95b06c4cabaa6f3c9e2d0c8a4a1bd8c2595a6ce829efc99a21f855e857495fb",
+        "2023": "sha256:091b7d6b182dbc1c1e366c9a1a4cb1b33a98355cae4df2628a3d653595a852c6",
+        "2024": "sha256:66b3db83185703d1cbf5addf95342c7c8c4f84ad9a4b34fecabdae0045a7baad"
+      }
+    },
+    {
+      "id": "age-standardised-defendant-rate",
+      "unitId": "per-100000-persons-aged-10-plus",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "rate_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "jurisdiction": [
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "jurisdiction": [
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "observation_period": [
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "jurisdiction": [
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2024": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED"
+          ],
+          "observation_period": [
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 92,
+        "2022": 102,
+        "2023": 80,
+        "2024": 108
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:cc6170b90b80689cbd6520e063de33496ad766045d5c32891f9a8d3db25b9b7a",
+        "2022": "sha256:5d9842d511b35c4b922b285f732ff29d2fd0d550ba6cbafe836d9284a2ebe2d0",
+        "2023": "sha256:1628f8dbaaf1eaf1f619740090fe7d238200d74fff58ffe4d5ab6390d8d06ce6",
+        "2024": "sha256:f1af8535ae877c8d64792bbb8da84d94b7d21084f27adc737d60a87a98787d0f"
+      }
+    },
+    {
+      "id": "indigenous-to-non-indigenous-rate-ratio",
+      "unitId": "ratio",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "indigenous_status": [
+            "RATE_RATIO"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "indigenous_status": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "jurisdiction": [
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "indigenous_status": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "jurisdiction": [
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "indigenous_status": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "jurisdiction": [
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2024": {
+          "indigenous_status": [
+            "RATE_RATIO"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED",
+            "CRUDE"
+          ],
+          "observation_period": [
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 92,
+        "2022": 102,
+        "2023": 80,
+        "2024": 108
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:6ae3e48e65695f809525d8a1dda20965fa4e5a149dfa709ae2eaeeffbc5bc70d",
+        "2022": "sha256:c38baf93dcd592f0959afb67d55683a7f27750517287aca2c999880a488a0a60",
+        "2023": "sha256:f8f60b7898d48179356f9b83eec2dbe3d9cf3ab4dc7b48560ae5cf0130efa8d0",
+        "2024": "sha256:229c837535b5bfc87a8d648cd4691a075f21ddd21b593674f39d2e714cea05a1"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "indigenous_status",
+    "rate_basis",
+    "observation_period",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "indigenous_status": [
+      "^indigenous\\ status$"
+    ],
+    "rate_basis": [
+      "^rate\\ basis$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "aliases": {
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Ratio": "RATE_RATIO",
+      "Ratio(c)": "RATE_RATIO"
+    },
+    "rate_basis": {
+      "Age Standardised": "AGE_STANDARDISED",
+      "Age standardised(d)": "AGE_STANDARDISED",
+      "Crude": "CRUDE",
+      "Crude(b)": "CRUDE"
+    },
+    "observation_period": {
+      "2010–11": "2011-06-30",
+      "2011–12": "2012-06-30",
+      "2012–13": "2013-06-30",
+      "2013–14": "2014-06-30",
+      "2014–15": "2015-06-30",
+      "2015–16": "2016-06-30",
+      "2016–17": "2017-06-30",
+      "2017–18": "2018-06-30",
+      "2018–19": "2019-06-30",
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "jurisdiction": {
+      "Australian Capital Territory": "ACT",
+      "Australian Capital Territory(j)(k)": "ACT",
+      "Australian Capital Territory(j)(k)(l)": "ACT",
+      "New South Wales": "NSW",
+      "New South Wales(a)": "NSW",
+      "Northern Territory": "NT",
+      "Northern Territory(i)": "NT",
+      "Queensland": "QLD",
+      "South Australia": "SA",
+      "South Australia(e)(f)(g)": "SA",
+      "Tasmania": "TAS",
+      "Tasmania(h)": "TAS"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "indigenous_status_id",
+    "rate_basis_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "indigenousStatusesByYear": {
+      "2021": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "RATE_RATIO"
+      ],
+      "2022": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "RATE_RATIO"
+      ],
+      "2023": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "RATE_RATIO"
+      ],
+      "2024": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "RATE_RATIO"
+      ]
+    },
+    "rateBasesByYear": {
+      "2021": [
+        "AGE_STANDARDISED",
+        "CRUDE"
+      ],
+      "2022": [
+        "AGE_STANDARDISED",
+        "CRUDE"
+      ],
+      "2023": [
+        "AGE_STANDARDISED",
+        "CRUDE"
+      ],
+      "2024": [
+        "AGE_STANDARDISED",
+        "CRUDE"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2022": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2023": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2024": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ]
+    },
+    "minimumRows": 248,
+    "maximumRows": 324,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 14
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ACT": [
+            "R51C2"
+          ],
+          "NT": [
+            "R42C2"
+          ],
+          "QLD": [
+            "R15C2"
+          ],
+          "SA": [
+            "R24C2"
+          ],
+          "TAS": [
+            "R33C2"
+          ]
+        },
+        "2022": {
+          "ACT": [
+            "R51C2"
+          ],
+          "NT": [
+            "R42C2"
+          ],
+          "QLD": [
+            "R15C2"
+          ],
+          "SA": [
+            "R24C2"
+          ],
+          "TAS": [
+            "R33C2"
+          ]
+        },
+        "2023": {
+          "ACT": [
+            "R50C2"
+          ],
+          "NT": [
+            "R41C2"
+          ],
+          "QLD": [
+            "R14C2"
+          ],
+          "SA": [
+            "R23C2"
+          ],
+          "TAS": [
+            "R32C2"
+          ]
+        },
+        "2024": {
+          "ACT": [
+            "R56C2"
+          ],
+          "NT": [
+            "R46C2"
+          ],
+          "QLD": [
+            "R16C2"
+          ],
+          "SA": [
+            "R26C2"
+          ],
+          "TAS": [
+            "R36C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

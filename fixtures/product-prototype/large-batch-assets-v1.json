@@ -1,8 +1,8 @@
 {
   "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
-  "batchId": "justice-two-hundred-eight-worksheets-v1",
-  "recordedAt": "2026-08-18T10:00:00Z",
-  "worksheetCount": 208,
+  "batchId": "justice-two-hundred-twenty-five-worksheets-v1",
+  "recordedAt": "2026-08-18T12:00:00Z",
+  "worksheetCount": 225,
   "providerCalls": 0,
   "entries": [
     {
@@ -2453,6 +2453,249 @@
         "2021": 0,
         "2022": 0,
         "2023": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c",
+      "label": "Criminal Courts, Australia — Court level by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_excluding_transfers_and_traffic_offences_court_level_by_indigenous_status_selected_s_95ed08966c_replay",
+      "dagsterJob": "product_prototype_criminal_courts_main_defendants_finalised_excluding_transfers_and_traffic_offences_court_level_by_indigenous_status_selected_s_95ed08966c_replay_job",
+      "outputDirectory": "dagster-criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        764,
+        858,
+        1288,
+        1440
+      ],
+      "expectedCanonicalCount": 4350,
+      "expectedMeasureCounts": {
+        "defendant-count": 4350
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 544,
+        "observed": 3806
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-main-defendants-finalised-excluding-traffic-offences-summary-characteristics-by-indigenous-status-selected-sta-b7c24101f2",
+      "label": "Criminal Courts, Australia — Summary characteristics by Indigenous status — 2021 source definition",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-traffic-offences-summary-characteristics-by-indigenous-status-selected-sta-b7c24101f2.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-traffic-offences-summary-characteristics-by-indigenous-status-selected-sta-b7c24101f2-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_excluding_traffic_offences_summary_characteristics_by_indigenous_status_selected_sta_b7c24101f2_replay",
+      "dagsterJob": "product_prototype_criminal_courts_main_defendants_finalised_excluding_traffic_offences_summary_characteristics_by_indigenous_status_selected_sta_b7c24101f2_replay_job",
+      "outputDirectory": "dagster-criminal-courts-main-defendants-finalised-excluding-traffic-offences-summary-characteristics-by-indigenous-status-selected-sta-b7c24101f2-replay",
+      "expectedYears": [
+        2021
+      ],
+      "expectedYearCounts": [
+        1521
+      ],
+      "expectedCanonicalCount": 1521,
+      "expectedMeasureCounts": {
+        "defendant-count": 1443,
+        "mean-defendant-age": 39,
+        "median-defendant-age": 39
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1521
+      },
+      "expectedManualReplayYears": [
+        2021
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d",
+      "label": "Criminal Courts, Australia — Summary characteristics by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_excluding_transfers_and_traffic_offences_summary_characteristics_by_indigenous_statu_eb8b64429d_replay",
+      "dagsterJob": "product_prototype_criminal_courts_main_defendants_finalised_excluding_transfers_and_traffic_offences_summary_characteristics_by_indigenous_statu_eb8b64429d_replay_job",
+      "outputDirectory": "dagster-criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d-replay",
+      "expectedYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        1840,
+        1886,
+        2496
+      ],
+      "expectedCanonicalCount": 6222,
+      "expectedMeasureCounts": {
+        "defendant-count": 5942,
+        "mean-defendant-age": 140,
+        "median-defendant-age": 140
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 12,
+        "not_available": 88,
+        "observed": 6114,
+        "suppressed": 8
+      },
+      "expectedManualReplayYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407",
+      "label": "Criminal Courts, Australia — Principal sentence and age by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_with_a_guilty_outcome_excluding_traffic_offences_principal_sentence_and_age_by_indigenous_stat_904a1a9407_replay",
+      "dagsterJob": "product_prototype_criminal_courts_main_defendants_with_a_guilty_outcome_excluding_traffic_offences_principal_sentence_and_age_by_indigenous_stat_904a1a9407_replay_job",
+      "outputDirectory": "dagster-criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        1521,
+        2392,
+        2392,
+        2496
+      ],
+      "expectedCanonicalCount": 8801,
+      "expectedMeasureCounts": {
+        "defendant-count": 7447,
+        "mean-defendant-age": 677,
+        "median-defendant-age": 677
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 52,
+        "observed": 8749
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab",
+      "label": "Criminal Courts, Australia — Defendant rates by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_rate_of_defendants_finalised_excluding_transfers_and_traffic_offences_crude_and_age_standardised_by_selec_0ec1bf61ab_replay",
+      "dagsterJob": "product_prototype_criminal_courts_main_rate_of_defendants_finalised_excluding_transfers_and_traffic_offences_crude_and_age_standardised_by_selec_0ec1bf61ab_replay_job",
+      "outputDirectory": "dagster-criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab-replay",
+      "expectedYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "expectedYearCounts": [
+        277,
+        308,
+        248,
+        324
+      ],
+      "expectedCanonicalCount": 1157,
+      "expectedMeasureCounts": {
+        "age-standardised-defendant-rate": 382,
+        "crude-defendant-rate": 393,
+        "indigenous-to-non-indigenous-rate-ratio": 382
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 110,
+        "observed": 1047
+      },
+      "expectedManualReplayYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "familyId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Custody sentence length by Indigenous status — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2023_replay",
+      "dagsterJob": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2023_replay_job",
+      "outputDirectory": "dagster-criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023-replay",
+      "expectedYears": [
+        2024
+      ],
+      "expectedYearCounts": [
+        2592
+      ],
+      "expectedCanonicalCount": 2592,
+      "expectedMeasureCounts": {
+        "defendant-count": 1836,
+        "defendant-proportion": 144,
+        "sentence-mean-duration": 306,
+        "sentence-median-duration": 306
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 306,
+        "observed": 2242,
+        "suppressed": 44
+      },
+      "expectedManualReplayYears": [
+        2024
+      ],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
       }
     }
   ],

@@ -1,0 +1,515 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c-v1",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "NON_INDIGENOUS_AND_NOT_STATED",
+            "NOT_STATED",
+            "TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2022": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "NON_INDIGENOUS_AND_NOT_STATED",
+            "NOT_STATED",
+            "TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2023": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "NON_INDIGENOUS_AND_NOT_STATED",
+            "NOT_STATED",
+            "TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        },
+        "2024": {
+          "indigenous_status": [
+            "INDIGENOUS",
+            "NON_INDIGENOUS",
+            "NOT_STATED",
+            "TOTAL"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 764,
+        "2022": 858,
+        "2023": 1288,
+        "2024": 1440
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:b1d23b0788c3711d8c246f8f0f7fd03e5fc93ea6401aa2232c95e6780c38afb0",
+        "2022": "sha256:d64395e320740200403162fcfbd3bfc126c67c7d242388fb63a70af6fb6d350f",
+        "2023": "sha256:ff39dfabbf50b0d923f1c64ba69ba189b7af52e7f6a623d460d173484f43ee15",
+        "2024": "sha256:ba25204402540a0b8cf9a9cba14b73f0b33e05065e8ceab1d9956c21c8628866"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "indigenous_status",
+    "court_level",
+    "observation_period",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "indigenous_status": [
+      "^indigenous\\ status$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "aliases": {
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "INDIGENOUS",
+      "Non-Indigenous": "NON_INDIGENOUS",
+      "Non-Indigenous and Not stated": "NON_INDIGENOUS_AND_NOT_STATED",
+      "Non-Indigenous and Not stated(l)": "NON_INDIGENOUS_AND_NOT_STATED",
+      "Not stated": "NOT_STATED",
+      "Total": "TOTAL"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Courts": "MAGISTRATES_COURTS"
+    },
+    "observation_period": {
+      "2010–11": "2011-06-30",
+      "2011–12": "2012-06-30",
+      "2012–13": "2013-06-30",
+      "2013–14": "2014-06-30",
+      "2014–15": "2015-06-30",
+      "2015–16": "2016-06-30",
+      "2016–17": "2017-06-30",
+      "2017–18": "2018-06-30",
+      "2018–19": "2019-06-30",
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "jurisdiction": {
+      "Australian Capital Territory": "ACT",
+      "Australian Capital Territory(k)": "ACT",
+      "Australian Capital Territory(k)(l)": "ACT",
+      "New South Wales": "NSW",
+      "New South Wales(a)(b)": "NSW",
+      "Northern Territory": "NT",
+      "Northern Territory(i)(j)": "NT",
+      "Queensland": "QLD",
+      "Queensland(c)": "QLD",
+      "South Australia": "SA",
+      "South Australia(d)(e)(f)(g)": "SA",
+      "Tasmania": "TAS",
+      "Tasmania(h)": "TAS"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "indigenous_status_id",
+    "court_level_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "indigenousStatusesByYear": {
+      "2021": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "NON_INDIGENOUS_AND_NOT_STATED",
+        "NOT_STATED",
+        "TOTAL"
+      ],
+      "2022": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "NON_INDIGENOUS_AND_NOT_STATED",
+        "NOT_STATED",
+        "TOTAL"
+      ],
+      "2023": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "NON_INDIGENOUS_AND_NOT_STATED",
+        "NOT_STATED",
+        "TOTAL"
+      ],
+      "2024": [
+        "INDIGENOUS",
+        "NON_INDIGENOUS",
+        "NOT_STATED",
+        "TOTAL"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2023": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2024": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2022": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2023": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "2024": [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS"
+      ]
+    },
+    "minimumRows": 764,
+    "maximumRows": 1440,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 16
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "jurisdiction",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "ACT": [
+            "R111C2"
+          ],
+          "NT": [
+            "R90C2"
+          ],
+          "QLD": [
+            "R27C2"
+          ],
+          "SA": [
+            "R48C2"
+          ],
+          "TAS": [
+            "R69C2"
+          ]
+        },
+        "2022": {
+          "ACT": [
+            "R111C2"
+          ],
+          "NT": [
+            "R90C2"
+          ],
+          "QLD": [
+            "R27C2"
+          ],
+          "SA": [
+            "R48C2"
+          ],
+          "TAS": [
+            "R69C2"
+          ]
+        },
+        "2023": {
+          "ACT": [
+            "R110C2"
+          ],
+          "NT": [
+            "R89C2"
+          ],
+          "QLD": [
+            "R26C2"
+          ],
+          "SA": [
+            "R47C2"
+          ],
+          "TAS": [
+            "R68C2"
+          ]
+        },
+        "2024": {
+          "ACT": [
+            "R126C2"
+          ],
+          "NT": [
+            "R102C2"
+          ],
+          "QLD": [
+            "R30C2"
+          ],
+          "SA": [
+            "R54C2"
+          ],
+          "TAS": [
+            "R78C2"
+          ]
+        }
+      }
+    }
+  ],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

@@ -37,6 +37,14 @@ SENTENCE_FINE_FAMILIES = (
     "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2023",
     "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
 )
+INDIGENOUS_STATUS_FAMILIES = (
+    "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023",
+    "criminal-courts-main-defendants-finalised-excluding-traffic-offences-summary-characteristics-by-indigenous-status-selected-sta-b7c24101f2",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d",
+    "criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407",
+    "criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab",
+)
 GUILTY_OUTCOME_FAMILIES = (
     "criminal-courts-guilty-outcome-summary-by-jurisdiction",
     "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
@@ -87,8 +95,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 79,
-        "pendingSemanticContractCount": 351,
+        "registeredMemberCount": 96,
+        "pendingSemanticContractCount": 334,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -130,7 +138,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 79
+        == 96
     )
 
 
@@ -155,7 +163,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 79
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 96
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -283,15 +291,6 @@ def test_sentence_and_fine_cluster_preserves_classification_and_measures() -> No
         all(member["registered"] for member in families[family_id]["members"])
         for family_id in SENTENCE_FINE_FAMILIES
     )
-    pending_indigenous_2023 = families[
-        "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023"
-    ]["members"]
-    assert [
-        (member["releaseId"], member["physicalSheetName"])
-        for member in pending_indigenous_2023
-    ] == [("2024-25", "Table 19")]
-    assert pending_indigenous_2023[0]["registered"] is False
-
     rows: list[dict[str, object]] = []
     measure_counts: dict[str, int] = {}
     value_status_counts: dict[str, int] = {}
@@ -368,6 +367,138 @@ def test_sentence_and_fine_cluster_preserves_classification_and_measures() -> No
         ("sentence-median-duration", "hour"),
         ("sentence-median-duration", "month"),
     }
+
+
+def test_indigenous_status_cluster_preserves_periods_rates_and_null_markers() -> None:
+    membership = _load(MEMBERSHIP)
+    families = {family["familyId"]: family for family in membership["families"]}
+    assert (
+        sum(
+            len(families[family_id]["members"])
+            for family_id in INDIGENOUS_STATUS_FAMILIES
+        )
+        == 17
+    )
+    assert all(
+        all(member["registered"] for member in families[family_id]["members"])
+        for family_id in INDIGENOUS_STATUS_FAMILIES
+    )
+
+    rows: list[dict[str, object]] = []
+    measure_counts: dict[str, int] = {}
+    value_status_counts: dict[str, int] = {}
+    source_cells: set[tuple[str, str, str]] = set()
+    warning_dimensions: dict[str, set[str]] = {}
+    for family_id in INDIGENOUS_STATUS_FAMILIES:
+        evidence = FIXTURES / f"{family_id}-evidence"
+        manifest = _load(evidence / "manifest.json")
+        run = _load(evidence / "run.json")
+        family_rows = json.loads((evidence / "canonical-observations.json").read_text())
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        uses_observation_period = (
+            contract.get("referenceDateDimension") == "observation_period"
+        )
+        assert manifest["providerCalls"] == 0
+        assert manifest["exceptionWorkbookCount"] == 0
+        assert run["acceptedWorkbookCount"] == len(run["workbooks"])
+        assert all(
+            item["decision"] == "prototype_auto_accepted" for item in run["workbooks"]
+        )
+        for measure, count in manifest["measureCounts"].items():
+            measure_counts[measure] = measure_counts.get(measure, 0) + count
+        for status, count in manifest["valueStatusCounts"].items():
+            value_status_counts[status] = value_status_counts.get(status, 0) + count
+        for row in family_rows:
+            source_key = (
+                row["source_workbook_digest"],
+                row["source_sheet"],
+                row["source_cell"],
+            )
+            assert source_key not in source_cells
+            source_cells.add(source_key)
+            assert row["publication_vintage_date"]
+            assert row["raw_value"] is not None
+            if uses_observation_period:
+                assert "observation_period_id" in row
+                assert row["reference_date"] == row["observation_period_id"]
+        if uses_observation_period:
+            assert any(
+                row["publication_vintage_date"] != row["reference_date"]
+                for row in family_rows
+            )
+        warning_dimensions[family_id] = {
+            rule["dimension"] for rule in contract["allowedExecutionWarnings"]
+        }
+        assert all(
+            rule["requireCanonicalOutputEquivalence"] is True
+            and rule["expectedHeaderSourcesByYear"]
+            for rule in contract["allowedExecutionWarnings"]
+        )
+        rows.extend(family_rows)
+
+    assert len(rows) == 24643
+    assert measure_counts == {
+        "age-standardised-defendant-rate": 382,
+        "crude-defendant-rate": 393,
+        "defendant-count": 21018,
+        "defendant-proportion": 144,
+        "indigenous-to-non-indigenous-rate-ratio": 382,
+        "mean-defendant-age": 856,
+        "median-defendant-age": 856,
+        "sentence-mean-duration": 306,
+        "sentence-median-duration": 306,
+    }
+    assert value_status_counts == {
+        "not_applicable": 318,
+        "not_available": 794,
+        "observed": 23479,
+        "suppressed": 52,
+    }
+    assert {
+        (row["raw_value"], row["value_status"])
+        for row in rows
+        if row["value_status"] != "observed"
+    } == {
+        ("..", "not_applicable"),
+        ("na", "not_available"),
+        ("np", "suppressed"),
+    }
+    assert {(row["measure_id"], row["unit_id"]) for row in rows} == {
+        ("age-standardised-defendant-rate", "per-100000-persons-aged-10-plus"),
+        ("crude-defendant-rate", "per-100000-persons-aged-10-plus"),
+        ("defendant-count", "person"),
+        ("defendant-proportion", "percent"),
+        ("indigenous-to-non-indigenous-rate-ratio", "ratio"),
+        ("mean-defendant-age", "year"),
+        ("median-defendant-age", "year"),
+        ("sentence-mean-duration", "month"),
+        ("sentence-median-duration", "month"),
+    }
+    offence_rows = [row for row in rows if "principal_offence_id" in row]
+    assert all(
+        row["principal_offence_id"].startswith(("ANZSOC_2023_", "OFFENCE_TOTAL"))
+        for row in offence_rows
+    )
+    assert {
+        row["characteristic_group_id"]
+        for row in rows
+        if "characteristic_group_id" in row
+        and str(row["characteristic_group_id"]).startswith("GROUP_PRINCIPAL_OFFENCE")
+    } == {
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2011",
+        "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023",
+    }
+    for family_id, dimensions in warning_dimensions.items():
+        assert dimensions == (
+            {"observation_period"}
+            if family_id
+            in {
+                INDIGENOUS_STATUS_FAMILIES[1],
+                INDIGENOUS_STATUS_FAMILIES[3],
+                INDIGENOUS_STATUS_FAMILIES[4],
+            }
+            else {"jurisdiction"}
+        )
 
 
 def test_download_digest_mutation_fails_closed(tmp_path: Path) -> None:
