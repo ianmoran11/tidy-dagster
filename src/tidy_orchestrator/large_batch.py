@@ -629,8 +629,9 @@ def verify_large_batch_evidence(
         "runDigest",
         "files",
     }
+    optional_header = {"warningCountsByYear"}
     if (
-        set(manifest) != required_header
+        not required_header <= set(manifest) <= required_header | optional_header
         or manifest.get("schemaVersion") != EVIDENCE_SCHEMA
         or manifest.get("familyId") != spec.family_id
         or manifest.get("cohortPath") != spec.cohort_path
@@ -650,6 +651,19 @@ def verify_large_batch_evidence(
         != spec.preserves_publication_vintage
         or _DIGEST.fullmatch(str(manifest.get("runDigest"))) is None
         or not isinstance(manifest.get("files"), list)
+        or (
+            "warningCountsByYear" in manifest
+            and (
+                not isinstance(manifest["warningCountsByYear"], dict)
+                or any(
+                    not isinstance(year, str)
+                    or isinstance(count, bool)
+                    or not isinstance(count, int)
+                    or count < 0
+                    for year, count in manifest["warningCountsByYear"].items()
+                )
+            )
+        )
     ):
         raise LargeBatchError(f"Evidence manifest claims are invalid: {spec.family_id}")
     declared = [_verify_declared_file(root, entry) for entry in manifest["files"]]
@@ -682,10 +696,17 @@ def verify_large_batch_evidence(
     if manifest.get("acceptanceContractPath") != contract_relative:
         raise LargeBatchError("Evidence acceptance contract path does not match cohort")
     contract_path = _safe_path(project, contract_relative, "acceptance contract")
+    contract = _load_object(contract_path, "acceptance contract")
     if sha256_digest(contract_path.read_bytes()) != manifest.get(
         "acceptanceContractDigest"
     ):
         raise LargeBatchError("Evidence acceptance contract digest does not match")
+    expected_warning_counts = contract.get("expectedWarningCountsByYear")
+    if (expected_warning_counts is None) != ("warningCountsByYear" not in manifest) or (
+        expected_warning_counts is not None
+        and manifest.get("warningCountsByYear") != expected_warning_counts
+    ):
+        raise LargeBatchError("Evidence warning counts do not match contract")
     if len(cohort.get("workbooks", [])) != len(spec.expected_years):
         raise LargeBatchError("Cohort workbook count does not match")
     manual_years = []
@@ -729,6 +750,11 @@ def verify_large_batch_evidence(
         spec.expected_excluded_observation_counts_by_year[year]
         for year in spec.expected_years
     ]
+    observed_warning_counts = {
+        str(item.get("year")): item.get("executionWarningCount")
+        for item in run_workbooks or []
+        if isinstance(item, dict) and "executionWarningCount" in item
+    }
     if (
         run_digest != domain_digest(RUN_SCHEMA, semantic)
         or run_digest != manifest["runDigest"]
@@ -749,6 +775,11 @@ def verify_large_batch_evidence(
         )
         or observed_excluded_counts != expected_excluded_counts
         or sum(observed_excluded_counts) != spec.expected_excluded_observation_count
+        or (
+            expected_warning_counts is not None
+            and observed_warning_counts != expected_warning_counts
+        )
+        or (expected_warning_counts is None and observed_warning_counts)
         or any(
             item.get("decision") != "prototype_auto_accepted"
             or not all(item.get("checks", {}).values())

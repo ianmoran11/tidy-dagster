@@ -45,15 +45,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-two-hundred-fifty-five-worksheets-v1"
-    assert registry.worksheet_count == 255
+    assert registry.batch_id == "justice-two-hundred-seventy-seven-worksheets-v1"
+    assert registry.worksheet_count == 277
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 80
+    assert len(registry.entries) == 89
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 29
+    assert len(normalization["entries"]) == 33
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 28,
+        "trim-pathological-styled-blank-cells-v1": 32,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -68,9 +68,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 255
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 277
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 230997
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 248688
     assert sum(item["providerCalls"] for item in manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
@@ -295,6 +295,30 @@ def test_evidence_rejects_redistributed_per_year_exclusions(
         verify_large_batch_evidence(PROJECT, spec)
 
 
+def test_evidence_rejects_warning_count_drift(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = next(
+        item
+        for item in registry.entries
+        if item.family_id.endswith("new-south-wales-and-99870bae7c")
+    )
+    manifest_path = (PROJECT / spec.evidence_manifest_path).resolve()
+    manifest = json.loads(manifest_path.read_text())
+    manifest["warningCountsByYear"]["2024"] += 1
+    original_load = large_batch_module._load_object
+
+    def load(path: Path, label: str) -> dict[str, object]:
+        if path == manifest_path:
+            return manifest
+        return original_load(path, label)
+
+    monkeypatch.setattr(large_batch_module, "_load_object", load)
+    with pytest.raises(LargeBatchError, match="warning counts do not match"):
+        verify_large_batch_evidence(PROJECT, spec)
+
+
 def test_multi_condition_measure_selection_rejects_overlap() -> None:
     cohort_path = (
         PROJECT
@@ -421,9 +445,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 255
+    assert report["acceptedWorksheetCount"] == 277
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 230997
+    assert report["canonicalObservationCount"] == 248688
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -722,10 +746,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-two-hundred-fifty-five-worksheets-v1",
-        "worksheetCount": 255,
-        "cohortCount": 80,
-        "canonicalObservationCount": 230997,
+        "batchId": "justice-two-hundred-seventy-seven-worksheets-v1",
+        "worksheetCount": 277,
+        "cohortCount": 89,
+        "canonicalObservationCount": 248688,
         "providerCalls": 0,
         "verified": True,
     }

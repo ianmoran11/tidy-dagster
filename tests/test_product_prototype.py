@@ -1242,6 +1242,37 @@ def test_negative_nondeterminism_routes_to_exception() -> None:
     assert "NONDETERMINISTIC_REPLAY" in {item["code"] for item in issues}
 
 
+def test_exact_warning_count_mismatch_routes_to_exception() -> None:
+    execution, recipe, entry = valid_execution()
+    contract = json.loads(json.dumps(CONTRACT))
+    contract["expectedWarningCountsByYear"] = {str(entry["year"]): 1}
+    _rows, issues, checks = evaluate_execution_for_acceptance(
+        execution=execution,
+        recipe=recipe,
+        contract=contract,
+        entry=entry,
+        recipe_digest="sha256:" + "2" * 64,
+    )
+    assert checks["warningCount"] is False
+    assert "WARNING_COUNT_MISMATCH" in {item["code"] for item in issues}
+
+
+def test_malformed_warning_collection_routes_to_exception() -> None:
+    execution, recipe, entry = valid_execution()
+    execution["warnings"] = {"code": "AMBIGUOUS_HEADER"}
+    contract = json.loads(json.dumps(CONTRACT))
+    contract["expectedWarningCountsByYear"] = {str(entry["year"]): 0}
+    _rows, issues, checks = evaluate_execution_for_acceptance(
+        execution=execution,
+        recipe=recipe,
+        contract=contract,
+        entry=entry,
+        recipe_digest="sha256:" + "2" * 64,
+    )
+    assert checks["warningAllowlist"] is False
+    assert "MALFORMED_EXECUTION_WARNINGS" in {item["code"] for item in issues}
+
+
 def test_negative_allowed_warning_with_unmapped_output_routes_to_exception() -> None:
     execution, recipe, entry = valid_execution()
     first = execution["tables"][0]["rows"][0]

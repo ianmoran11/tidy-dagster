@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-4-normalized.xlsx",
+      "contentDigest": "sha256:7760296f9a5be0cf60b804761d1dc16f0be8b8998502c20a043cb987e07891d5",
+      "byteLength": 82957,
+      "sheet": "Table 17",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014-2023.response.txt",
+        "contentDigest": "sha256:ad949a9fbddbd58f6df631cfa0adb5e09f50d50369d8eca68b958b4315be1136",
+        "byteLength": 736,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-4-normalized.xlsx",
+      "contentDigest": "sha256:bbe132070a9ef7e45c70d31376d8b2c9ea7696b6f8775ca9f8bcad45041f29f6",
+      "byteLength": 95108,
+      "sheet": "Table 22",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014-2024.response.txt",
+        "contentDigest": "sha256:40ff675d10d60c99d3839af10b2fdc16b08243b63c55250a3ad78a8c3c860d7e",
+        "byteLength": 710,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

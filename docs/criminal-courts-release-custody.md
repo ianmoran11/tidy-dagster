@@ -132,8 +132,26 @@ panels produce reviewed ambiguity warnings bound to the exact six source header
 cells and canonical-output equivalence. Perturbation notes prevent invalid
 additive acceptance equations.
 
-The six clusters now cover 126 of 430 worksheets and produce 174,980 canonical
-observations; 304 worksheets remain pending reviewed contracts.
+## Seventh accepted New South Wales cluster
+
+The seventh cluster covers the complete 22-sheet New South Wales cube across
+2021–22 through 2024–25. Nine contracts keep the long-running summary family,
+the later method-of-finalisation family, selected-offence outcome families, and
+the broader 2024–25 all-offence families separate. Physical numbering drift is
+bound through exact family membership, and the literal 2021–22 and 2022–23
+worksheet name `Table 19 ` remains byte-faithful in provenance and CSV output.
+
+The cluster adds 17,691 canonical observations: defendant counts, mean and
+median defendant age in years, and mean and median case duration in weeks. It
+preserves 926 published zeros, 61 `..` not-applicable cells, and 52 `na`
+not-available cells. The source-bound `classification_context` dimension keeps
+ANZSOC 2011, ANZSOC 2023, and the mixed 2024–25 concorded historical series
+explicit alongside principal offence. All 10,807 repeated-panel ambiguity
+warnings are matched independently by dimension and exact year-specific source
+headers. Perturbation notes again preclude additive total equations.
+
+The seven clusters now cover 148 of 430 worksheets and produce 192,671 canonical
+observations; 282 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -155,7 +173,7 @@ observations; 304 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 126 assets replay with
+measures, value statuses, source cells, and warnings. All 148 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

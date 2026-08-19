@@ -6,6 +6,7 @@ import json
 import re
 import shutil
 import subprocess
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -67,6 +68,17 @@ PRELIMINARY_ANZSOC_2023_FAMILIES = (
     "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-preliminary-anzsoc-2023-principal-offence-by-method-of-finalisati-1ae417f119",
     "criminal-courts-preliminary-anzsoc-2023-defendants-with-a-guilty-outcome-sex-and-preliminary-anzsoc-2023-principal-offence-by--b7e20f2c51",
 )
+NEW_SOUTH_WALES_FAMILIES = (
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-new-s-4d8d4a9753",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-b264f70ae9",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--08d5fe90c2",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--3dc8642f72",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-06556eaa3c",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-ff440749dc",
+    "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014",
+    "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671",
+    "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-and-99870bae7c",
+)
 GUILTY_OUTCOME_FAMILIES = (
     "criminal-courts-guilty-outcome-summary-by-jurisdiction",
     "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
@@ -117,8 +129,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 126,
-        "pendingSemanticContractCount": 304,
+        "registeredMemberCount": 148,
+        "pendingSemanticContractCount": 282,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -160,7 +172,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 126
+        == 148
     )
 
 
@@ -185,7 +197,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 126
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 148
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -757,6 +769,133 @@ def test_preliminary_cluster_preserves_dual_classification_custody() -> None:
         for sources in warning_rule["expectedHeaderSourcesByYear"]["2023"].values()
         for header_source in sources
     } == {"R5C2", "R24C2", "R43C2", "R62C2", "R81C2", "R100C2"}
+
+
+def test_new_south_wales_cluster_preserves_source_and_classification() -> None:
+    membership = _load(MEMBERSHIP)
+    members = [
+        member
+        for family in membership["families"]
+        for member in family["members"]
+        if member["cubeId"] == "defendants-finalised-new-south-wales"
+    ]
+    assert len(members) == 22
+    assert Counter(member["releaseId"] for member in members) == {
+        "2021-22": 5,
+        "2022-23": 5,
+        "2023-24": 6,
+        "2024-25": 6,
+    }
+    assert all(member["registered"] for member in members)
+
+    source_books = {
+        release: load_workbook(
+            FIXTURES
+            / next(
+                member["sourcePath"]
+                for member in members
+                if member["releaseId"] == release
+            ),
+            data_only=False,
+            read_only=False,
+        )
+        for release in {member["releaseId"] for member in members}
+    }
+    rows: list[dict[str, object]] = []
+    source_cells: set[tuple[str, str, str]] = set()
+    warning_dimensions: set[str] = set()
+    warning_count = 0
+    for family_id in NEW_SOUTH_WALES_FAMILIES:
+        evidence = FIXTURES / f"{family_id}-evidence"
+        manifest = _load(evidence / "manifest.json")
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        run = _load(evidence / "run.json")
+        family_rows = json.loads((evidence / "canonical-observations.json").read_text())
+        assert manifest["providerCalls"] == 0
+        assert manifest["exceptionWorkbookCount"] == 0
+        assert manifest["canonicalObservationCount"] == len(family_rows)
+        assert contract["totalValidation"] == "not_applicable"
+        assert contract["totalEquations"] == []
+        assert (
+            manifest["warningCountsByYear"] == contract["expectedWarningCountsByYear"]
+        )
+        observed_warning_counts = {
+            str(workbook["year"]): workbook["executionWarningCount"]
+            for workbook in run["workbooks"]
+        }
+        assert observed_warning_counts == contract["expectedWarningCountsByYear"]
+        warning_count += sum(observed_warning_counts.values())
+        warning_dimensions.update(
+            rule["dimension"] for rule in contract["allowedExecutionWarnings"]
+        )
+        assert all(
+            rule["requireCanonicalOutputEquivalence"] is True
+            and set(rule["expectedHeaderSourcesByYear"])
+            == {str(year) for year in manifest["manualReplayYears"]}
+            for rule in contract["allowedExecutionWarnings"]
+        )
+
+        for row in family_rows:
+            match = re.fullmatch(r"R([0-9]+)C([0-9]+)", str(row["source_cell"]))
+            assert match is not None
+            release_start = int(str(row["publication_vintage_date"])[:4]) - 1
+            release = f"{release_start}-{str(release_start + 1)[-2:]}"
+            cell = source_books[release][str(row["source_sheet"])].cell(
+                row=int(match.group(1)), column=int(match.group(2))
+            )
+            assert cell.value == row["raw_value"]
+            source_key = (
+                str(row["source_workbook_digest"]),
+                str(row["source_sheet"]),
+                str(row["source_cell"]),
+            )
+            assert source_key not in source_cells
+            source_cells.add(source_key)
+            assert row["reference_date"] == row["observation_period_id"]
+            assert row["jurisdiction_id"] == "NSW"
+        rows.extend(family_rows)
+
+    assert len(rows) == 17_691
+    assert len(source_cells) == len(rows)
+    assert Counter(str(row["measure_id"]) for row in rows) == {
+        "defendant-count": 16_827,
+        "mean-case-duration": 216,
+        "mean-defendant-age": 216,
+        "median-case-duration": 216,
+        "median-defendant-age": 216,
+    }
+    assert Counter(str(row["value_status"]) for row in rows) == {
+        "observed": 17_578,
+        "not_applicable": 61,
+        "not_available": 52,
+    }
+    assert sum(row["value"] == 0 for row in rows) == 926
+    assert {str(row["classification_context_id"]) for row in rows} == {
+        "ANZSOC_2011",
+        "ANZSOC_2023",
+        "MIXED_CONCORDED_ANZSOC_2011_AND_ANZSOC_2023",
+    }
+    old_offences = {
+        str(row["principal_offence_id"])
+        for row in rows
+        if row.get("classification_context_id") == "ANZSOC_2011"
+        and "principal_offence_id" in row
+    }
+    new_offences = {
+        str(row["principal_offence_id"])
+        for row in rows
+        if row.get("classification_context_id") == "ANZSOC_2023"
+        and "principal_offence_id" in row
+    }
+    assert old_offences & new_offences
+    assert warning_dimensions == {"court_level", "observation_period"}
+    assert warning_count == 10_807
+    assert any(row["publication_vintage_date"] != row["reference_date"] for row in rows)
+    assert "Table 19 " in {str(row["source_sheet"]) for row in rows}
+    with (
+        FIXTURES / f"{NEW_SOUTH_WALES_FAMILIES[5]}-evidence/canonical-observations.csv"
+    ).open(newline="") as handle:
+        assert "Table 19 " in {row["source_sheet"] for row in csv.DictReader(handle)}
 
 
 def test_download_digest_mutation_fails_closed(tmp_path: Path) -> None:

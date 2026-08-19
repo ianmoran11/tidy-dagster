@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-4-normalized.xlsx",
+      "contentDigest": "sha256:bd6ff28f3da92133cdd82f143d77cfdf72be6d9e1be9eeb8a00bf3199259e476",
+      "byteLength": 99444,
+      "sheet": "Table 16",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671-2021.response.txt",
+        "contentDigest": "sha256:47321a702c73e60e832500a91eb7a68042caecd74a8398e27f84352c7ab0caf6",
+        "byteLength": 857,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-4-normalized.xlsx",
+      "contentDigest": "sha256:13b9f2a453d4ee84946cf0a39d0a621e117f952da1287ab4ee8f5fce7ea7503c",
+      "byteLength": 105172,
+      "sheet": "Table 16",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671-2022.response.txt",
+        "contentDigest": "sha256:b913c0025ab4a6289c90fbb0f9027d6b3e5d53d2d9cd8d5247e9a13c2b3ff8a9",
+        "byteLength": 870,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-4-normalized.xlsx",
+      "contentDigest": "sha256:7760296f9a5be0cf60b804761d1dc16f0be8b8998502c20a043cb987e07891d5",
+      "byteLength": 82957,
+      "sheet": "Table 16",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671-2023.response.txt",
+        "contentDigest": "sha256:3b724c66eb21d741131ada0f979653394cc6116a22601c3441e588e09e9271bb",
+        "byteLength": 922,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

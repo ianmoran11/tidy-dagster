@@ -12,6 +12,90 @@
   },
   "cohorts": [
     {
+      "cohortId": "prisoners-australia-indigenous-offence-2021-2025",
+      "label": "Prisoners in Australia — Indigenous status and offence/charge",
+      "cohortPath": "fixtures/product-prototype/prisoners-indigenous-offence-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/indigenous-offence-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_indigenous_offence_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-national-age-by-offence-charge",
+      "label": "Prisoners in Australia — National age by offence/charge",
+      "cohortPath": "fixtures/product-prototype/prisoners-national-age-by-offence-charge.json",
+      "evidenceManifestPath": "fixtures/product-prototype/national-age-by-offence-charge-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_national_age_by_offence_charge_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-national-age-by-sex",
+      "label": "Prisoners in Australia — National age by sex",
+      "cohortPath": "fixtures/product-prototype/prisoners-national-age-by-sex.json",
+      "evidenceManifestPath": "fixtures/product-prototype/national-age-by-sex-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_national_age_by_sex_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-national-country-of-birth-by-offence-charge",
+      "label": "Prisoners in Australia — National country of birth by offence/charge",
+      "cohortPath": "fixtures/product-prototype/prisoners-national-country-of-birth-by-offence-charge.json",
+      "evidenceManifestPath": "fixtures/product-prototype/national-country-of-birth-by-offence-charge-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_national_country_of_birth_by_offence_charge_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-national-selected-characteristics-by-offence-charge",
+      "label": "Prisoners in Australia — National selected characteristics by offence/charge",
+      "cohortPath": "fixtures/product-prototype/prisoners-national-selected-characteristics-by-offence-charge.json",
+      "evidenceManifestPath": "fixtures/product-prototype/national-selected-characteristics-by-offence-charge-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_national_selected_characteristics_by_offence_charge_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-national-sex-offence-charge-by-indigenous-status",
+      "label": "Prisoners in Australia — National sex/offence by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/prisoners-national-sex-offence-charge-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/national-sex-offence-charge-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_national_sex_offence_charge_by_indigenous_status_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-selected-characteristics-2021-2025",
+      "label": "Prisoners in Australia — selected characteristics",
+      "cohortPath": "fixtures/product-prototype/prisoners-selected-characteristics-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/selected-characteristics-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_selected_characteristics_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-age-standardised-rate-by-indigenous-status",
+      "label": "Prisoners in Australia — age-standardised rate by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-age-standardised-rate-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-age-standardised-rate-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_age_standardised_rate_by_indigenous_status_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-crude-imprisonment-rate",
+      "label": "Prisoners in Australia — crude imprisonment rate by state/territory",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-imprisonment-rate.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-crude-imprisonment-rate-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_crude_imprisonment_rate_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-crude-rate-by-indigenous-status",
+      "label": "Prisoners in Australia — crude rate by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-rate-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-crude-rate-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_crude_rate_by_indigenous_status_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-selected-characteristics-time-series",
+      "label": "Prisoners in Australia — state selected-characteristics time series",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-selected-characteristics-time-series.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-selected-characteristics-time-series-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_selected_characteristics_time_series_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-state-sex-by-indigenous-status",
+      "label": "Prisoners in Australia — sex by Indigenous status and state/territory",
+      "cohortPath": "fixtures/product-prototype/prisoners-state-sex-by-indigenous-status.json",
+      "evidenceManifestPath": "fixtures/product-prototype/state-sex-by-indigenous-status-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_state_sex_by_indigenous_status_replay"
+    },
+    {
       "cohortId": "prisoners-australia-table-21-2021-2025",
       "label": "Prisoners in Australia — Table 21 (age)",
       "cohortPath": "fixtures/product-prototype/prisoners-table-21-2021-2025.json",
@@ -31,42 +115,6 @@
       "cohortPath": "fixtures/product-prototype/prisoners-table-23-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-23-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_offence_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-table-30-2021-2025",
-      "label": "Prisoners in Australia — Table 30 (legal status)",
-      "cohortPath": "fixtures/product-prototype/prisoners-table-30-2021-2025.json",
-      "evidenceManifestPath": "fixtures/product-prototype/five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_replay",
-      "liveEvidence": {
-        "manifestPath": "fixtures/product-prototype/live-evidence/manifest.json",
-        "years": [
-          2023,
-          2024,
-          2025
-        ]
-      }
-    },
-    {
-      "cohortId": "prisoners-australia-table-31-2021-2025",
-      "label": "Prisoners in Australia — Table 31 (unsentenced charge)",
-      "cohortPath": "fixtures/product-prototype/prisoners-table-31-2021-2025.json",
-      "evidenceManifestPath": "fixtures/product-prototype/table-31-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_charge_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-selected-characteristics-2021-2025",
-      "label": "Prisoners in Australia — selected characteristics",
-      "cohortPath": "fixtures/product-prototype/prisoners-selected-characteristics-2021-2025.json",
-      "evidenceManifestPath": "fixtures/product-prototype/selected-characteristics-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_selected_characteristics_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-indigenous-offence-2021-2025",
-      "label": "Prisoners in Australia — Indigenous status and offence/charge",
-      "cohortPath": "fixtures/product-prototype/prisoners-indigenous-offence-2021-2025.json",
-      "evidenceManifestPath": "fixtures/product-prototype/indigenous-offence-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_indigenous_offence_replay"
     },
     {
       "cohortId": "prisoners-australia-table-24-2021-2025",
@@ -109,6 +157,28 @@
       "cohortPath": "fixtures/product-prototype/prisoners-table-29-2021-2025.json",
       "evidenceManifestPath": "fixtures/product-prototype/table-29-five-year-evidence/manifest.json",
       "dagsterAsset": "product_prototype_table_29_replay"
+    },
+    {
+      "cohortId": "prisoners-australia-table-30-2021-2025",
+      "label": "Prisoners in Australia — Table 30 (legal status)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-30-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_replay",
+      "liveEvidence": {
+        "manifestPath": "fixtures/product-prototype/live-evidence/manifest.json",
+        "years": [
+          2023,
+          2024,
+          2025
+        ]
+      }
+    },
+    {
+      "cohortId": "prisoners-australia-table-31-2021-2025",
+      "label": "Prisoners in Australia — Table 31 (unsentenced charge)",
+      "cohortPath": "fixtures/product-prototype/prisoners-table-31-2021-2025.json",
+      "evidenceManifestPath": "fixtures/product-prototype/table-31-five-year-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_charge_replay"
     },
     {
       "cohortId": "prisoners-australia-table-32-2021-2025",
@@ -174,207 +244,32 @@
       "dagsterAsset": "product_prototype_offenders_table_5_replay"
     },
     {
-      "cohortId": "prisoners-australia-state-selected-characteristics-time-series",
-      "label": "Prisoners in Australia — state selected-characteristics time series",
-      "cohortPath": "fixtures/product-prototype/prisoners-state-selected-characteristics-time-series.json",
-      "evidenceManifestPath": "fixtures/product-prototype/state-selected-characteristics-time-series-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_state_selected_characteristics_time_series_replay"
+      "cohortId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Community service/work length — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2011_replay"
     },
     {
-      "cohortId": "prisoners-australia-state-sex-by-indigenous-status",
-      "label": "Prisoners in Australia — sex by Indigenous status and state/territory",
-      "cohortPath": "fixtures/product-prototype/prisoners-state-sex-by-indigenous-status.json",
-      "evidenceManifestPath": "fixtures/product-prototype/state-sex-by-indigenous-status-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_state_sex_by_indigenous_status_replay"
+      "cohortId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Community service/work length — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2023_replay"
     },
     {
-      "cohortId": "prisoners-australia-state-age-standardised-rate-by-indigenous-status",
-      "label": "Prisoners in Australia — age-standardised rate by Indigenous status",
-      "cohortPath": "fixtures/product-prototype/prisoners-state-age-standardised-rate-by-indigenous-status.json",
-      "evidenceManifestPath": "fixtures/product-prototype/state-age-standardised-rate-by-indigenous-status-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_state_age_standardised_rate_by_indigenous_status_replay"
+      "cohortId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Custody sentence length by Indigenous status — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2011_replay"
     },
     {
-      "cohortId": "prisoners-australia-state-crude-imprisonment-rate",
-      "label": "Prisoners in Australia — crude imprisonment rate by state/territory",
-      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-imprisonment-rate.json",
-      "evidenceManifestPath": "fixtures/product-prototype/state-crude-imprisonment-rate-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_state_crude_imprisonment_rate_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-state-crude-rate-by-indigenous-status",
-      "label": "Prisoners in Australia — crude rate by Indigenous status",
-      "cohortPath": "fixtures/product-prototype/prisoners-state-crude-rate-by-indigenous-status.json",
-      "evidenceManifestPath": "fixtures/product-prototype/state-crude-rate-by-indigenous-status-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_state_crude_rate_by_indigenous_status_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-national-selected-characteristics-by-offence-charge",
-      "label": "Prisoners in Australia — National selected characteristics by offence/charge",
-      "cohortPath": "fixtures/product-prototype/prisoners-national-selected-characteristics-by-offence-charge.json",
-      "evidenceManifestPath": "fixtures/product-prototype/national-selected-characteristics-by-offence-charge-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_national_selected_characteristics_by_offence_charge_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-national-age-by-sex",
-      "label": "Prisoners in Australia — National age by sex",
-      "cohortPath": "fixtures/product-prototype/prisoners-national-age-by-sex.json",
-      "evidenceManifestPath": "fixtures/product-prototype/national-age-by-sex-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_national_age_by_sex_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-national-sex-offence-charge-by-indigenous-status",
-      "label": "Prisoners in Australia — National sex/offence by Indigenous status",
-      "cohortPath": "fixtures/product-prototype/prisoners-national-sex-offence-charge-by-indigenous-status.json",
-      "evidenceManifestPath": "fixtures/product-prototype/national-sex-offence-charge-by-indigenous-status-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_national_sex_offence_charge_by_indigenous_status_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-national-age-by-offence-charge",
-      "label": "Prisoners in Australia — National age by offence/charge",
-      "cohortPath": "fixtures/product-prototype/prisoners-national-age-by-offence-charge.json",
-      "evidenceManifestPath": "fixtures/product-prototype/national-age-by-offence-charge-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_national_age_by_offence_charge_replay"
-    },
-    {
-      "cohortId": "prisoners-australia-national-country-of-birth-by-offence-charge",
-      "label": "Prisoners in Australia — National country of birth by offence/charge",
-      "cohortPath": "fixtures/product-prototype/prisoners-national-country-of-birth-by-offence-charge.json",
-      "evidenceManifestPath": "fixtures/product-prototype/national-country-of-birth-by-offence-charge-five-year-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_national_country_of_birth_by_offence_charge_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-summary-by-court-level",
-      "label": "Criminal Courts, Australia — Defendants finalised — summary by court level",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-court-level.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-court-level-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_summary_by_court_level_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-summary-by-jurisdiction",
-      "label": "Criminal Courts, Australia — Defendants finalised — summary by jurisdiction",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-jurisdiction.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-jurisdiction-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_summary_by_jurisdiction_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011",
-      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by principal offence (ANZSOC 2011)",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2011_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023",
-      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by principal offence (ANZSOC 2023)",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2023_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011",
-      "label": "Criminal Courts, Australia — Defendants finalised — sex and principal offence by method (ANZSOC 2011)",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2011_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023",
-      "label": "Criminal Courts, Australia — Defendants finalised — sex and principal offence by method (ANZSOC 2023)",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2023_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-sex-age-by-method",
-      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by method",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-method.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-method-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_method_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-method-by-duration",
-      "label": "Criminal Courts, Australia — Defendants finalised — method by case duration",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-duration.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-duration-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_method_by_duration_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-summary-by-court-level",
-      "label": "Criminal Courts, Australia — Guilty outcome — summary by court level",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-court-level.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-court-level-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_summary_by_court_level_replay"
-    },
-    {
-      "cohortId": "criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023",
-      "label": "Criminal Courts, Australia — Defendants finalised — method by principal offence (ANZSOC 2023)",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_method_by_principal_offence_anzsoc_2023_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-summary-by-jurisdiction",
-      "label": "Criminal Courts, Australia — Guilty outcome — summary by jurisdiction",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-jurisdiction.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-jurisdiction-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_summary_by_jurisdiction_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
-      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence and court level",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_and_court_level_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts",
-      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — All Courts",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_all_courts_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
-      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Higher Courts",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_higher_courts_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts",
-      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Magistrates' Courts",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_magistrates_courts_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
-      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Children's Courts",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_childrens_courts_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-offence-by-sentence",
-      "label": "Criminal Courts, Australia — Guilty outcome — offence by sentence",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-sentence.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-sentence-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_offence_by_sentence_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-offence-by-duration",
-      "label": "Criminal Courts, Australia — Guilty outcome — offence by duration",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-duration.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-duration-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_offence_by_duration_replay"
-    },
-    {
-      "cohortId": "criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level",
-      "label": "Criminal Courts, Australia — Guilty outcome — principal sentence by length and court level",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_principal_sentence_by_length_and_court_level_replay"
+      "cohortId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Custody sentence length by Indigenous status — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2023_replay"
     },
     {
       "cohortId": "criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2011",
@@ -389,6 +284,20 @@
       "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023.json",
       "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-all-courts-anzsoc-2023-evidence/manifest.json",
       "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_all_courts_anzsoc_2023_replay"
+    },
+    {
+      "cohortId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Custody sentence length — Children's Courts — ANZSOC 2011",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2011_replay"
+    },
+    {
+      "cohortId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Custody sentence length — Children's Courts — ANZSOC 2023",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2023_replay"
     },
     {
       "cohortId": "criminal-courts-custody-by-offence-sentence-length-higher-courts-anzsoc-2011",
@@ -419,32 +328,67 @@
       "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_magistrates_courts_anzsoc_2023_replay"
     },
     {
-      "cohortId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011",
-      "label": "Criminal Courts, Australia — Custody sentence length — Children's Courts — ANZSOC 2011",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2011-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2011_replay"
+      "cohortId": "criminal-courts-defendants-finalised-method-by-duration",
+      "label": "Criminal Courts, Australia — Defendants finalised — method by case duration",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-duration.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-duration-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_method_by_duration_replay"
     },
     {
-      "cohortId": "criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023",
-      "label": "Criminal Courts, Australia — Custody sentence length — Children's Courts — ANZSOC 2023",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-sentence-length-childrens-courts-anzsoc-2023-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_sentence_length_childrens_courts_anzsoc_2023_replay"
+      "cohortId": "criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Defendants finalised — method by principal offence (ANZSOC 2023)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-method-by-principal-offence-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_method_by_principal_offence_anzsoc_2023_replay"
     },
     {
-      "cohortId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011",
-      "label": "Criminal Courts, Australia — Community service/work length — ANZSOC 2011",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2011-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2011_replay"
+      "cohortId": "criminal-courts-defendants-finalised-sex-age-by-method",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by method",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-method.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-method-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_method_replay"
     },
     {
-      "cohortId": "criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023",
-      "label": "Criminal Courts, Australia — Community service/work length — ANZSOC 2023",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-community-service-work-by-offence-length-court-jurisdiction-anzsoc-2023-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_community_service_work_by_offence_length_court_jurisdiction_anzsoc_2023_replay"
+      "cohortId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by principal offence (ANZSOC 2011)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2011_replay"
+    },
+    {
+      "cohortId": "criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and age by principal offence (ANZSOC 2023)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-age-by-principal-offence-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_age_by_principal_offence_anzsoc_2023_replay"
+    },
+    {
+      "cohortId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and principal offence by method (ANZSOC 2011)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2011-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2011_replay"
+    },
+    {
+      "cohortId": "criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023",
+      "label": "Criminal Courts, Australia — Defendants finalised — sex and principal offence by method (ANZSOC 2023)",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-sex-offence-by-method-anzsoc-2023-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_sex_offence_by_method_anzsoc_2023_replay"
+    },
+    {
+      "cohortId": "criminal-courts-defendants-finalised-summary-by-court-level",
+      "label": "Criminal Courts, Australia — Defendants finalised — summary by court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_summary_by_court_level_replay"
+    },
+    {
+      "cohortId": "criminal-courts-defendants-finalised-summary-by-jurisdiction",
+      "label": "Criminal Courts, Australia — Defendants finalised — summary by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-defendants-finalised-summary-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_defendants_finalised_summary_by_jurisdiction_replay"
     },
     {
       "cohortId": "criminal-courts-fines-by-offence-amount-court-jurisdiction-anzsoc-2011",
@@ -461,18 +405,116 @@
       "dagsterAsset": "product_prototype_criminal_courts_fines_by_offence_amount_court_jurisdiction_anzsoc_2023_replay"
     },
     {
-      "cohortId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011",
-      "label": "Criminal Courts, Australia — Custody sentence length by Indigenous status — ANZSOC 2011",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2011-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2011_replay"
+      "cohortId": "criminal-courts-guilty-outcome-offence-by-duration",
+      "label": "Criminal Courts, Australia — Guilty outcome — offence by duration",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-duration.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-duration-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_offence_by_duration_replay"
     },
     {
-      "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c",
-      "label": "Criminal Courts, Australia — Court level by Indigenous status",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_excluding_transfers_and_traffic_offences_court_level_by_indigenous_status_selected_s_95ed08966c_replay"
+      "cohortId": "criminal-courts-guilty-outcome-offence-by-sentence",
+      "label": "Criminal Courts, Australia — Guilty outcome — offence by sentence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-sentence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-offence-by-sentence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_offence_by_sentence_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level",
+      "label": "Criminal Courts, Australia — Guilty outcome — principal sentence by length and court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-principal-sentence-by-length-and-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_principal_sentence_by_length_and_court_level_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — All Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-all-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_all_courts_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence and court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_and_court_level_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Children's Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-childrens-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_childrens_courts_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Higher Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-higher-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_higher_courts_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts",
+      "label": "Criminal Courts, Australia — Guilty outcome — sex and age by sentence — Magistrates' Courts",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-sex-age-by-sentence-magistrates-courts-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_sex_age_by_sentence_magistrates_courts_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-summary-by-court-level",
+      "label": "Criminal Courts, Australia — Guilty outcome — summary by court level",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-court-level.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-court-level-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_summary_by_court_level_replay"
+    },
+    {
+      "cohortId": "criminal-courts-guilty-outcome-summary-by-jurisdiction",
+      "label": "Criminal Courts, Australia — Guilty outcome — summary by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-guilty-outcome-summary-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_guilty_outcome_summary_by_jurisdiction_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-new-s-4d8d4a9753",
+      "label": "Criminal Courts — New South Wales — Defendants finalised and with a guilty outcome, Summary outcomes by all principal offence, All Courts – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-new-s-4d8d4a9753.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-new-s-4d8d4a9753-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_and_with_a_guilty_outcome_summary_outcomes_by_all_principal_offence_all_courts_new_s_4d8d4a9753_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-b264f70ae9",
+      "label": "Criminal Courts — New South Wales — Defendants finalised and with a guilty outcome, Summary outcomes by all principal offence, Magistrates' Courts – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-b264f70ae9.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-b264f70ae9-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_and_with_a_guilty_outcome_summary_outcomes_by_all_principal_offence_magistrates_cour_b264f70ae9_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--08d5fe90c2",
+      "label": "Criminal Courts — New South Wales — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, All Courts – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--08d5fe90c2.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--08d5fe90c2-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_and_with_a_guilty_outcome_summary_outcomes_by_selected_principal_offence_all_courts_08d5fe90c2_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--3dc8642f72",
+      "label": "Criminal Courts — New South Wales — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--3dc8642f72.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--3dc8642f72-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_and_with_a_guilty_outcome_summary_outcomes_by_selected_principal_offence_children_s_3dc8642f72_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-06556eaa3c",
+      "label": "Criminal Courts — New South Wales — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-06556eaa3c.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-06556eaa3c-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_and_with_a_guilty_outcome_summary_outcomes_by_selected_principal_offence_higher_cour_06556eaa3c_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-ff440749dc",
+      "label": "Criminal Courts — New South Wales — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Magistrates' Courts – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-ff440749dc.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-ff440749dc-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_and_with_a_guilty_outcome_summary_outcomes_by_selected_principal_offence_magistrates_ff440749dc_replay"
     },
     {
       "cohortId": "criminal-courts-main-defendants-finalised-excluding-traffic-offences-summary-characteristics-by-indigenous-status-selected-sta-b7c24101f2",
@@ -482,11 +524,39 @@
       "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_excluding_traffic_offences_summary_characteristics_by_indigenous_status_selected_sta_b7c24101f2_replay"
     },
     {
+      "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c",
+      "label": "Criminal Courts, Australia — Court level by Indigenous status",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-court-level-by-indigenous-status-selected-s-95ed08966c-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_excluding_transfers_and_traffic_offences_court_level_by_indigenous_status_selected_s_95ed08966c_replay"
+    },
+    {
       "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d",
       "label": "Criminal Courts, Australia — Summary characteristics by Indigenous status",
       "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d.json",
       "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-excluding-transfers-and-traffic-offences-summary-characteristics-by-indigenous-statu-eb8b64429d-evidence/manifest.json",
       "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_excluding_transfers_and_traffic_offences_summary_characteristics_by_indigenous_statu_eb8b64429d_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014",
+      "label": "Criminal Courts — New South Wales — Defendants finalised, Principal offence by method of finalisation – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-new-south-wales-be08f0a014-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_principal_offence_by_method_of_finalisation_new_south_wales_be08f0a014_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671",
+      "label": "Criminal Courts — New South Wales — Defendants finalised, Summary characteristics by court level – New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-275c7f7671-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_summary_characteristics_by_court_level_new_south_wales_275c7f7671_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-and-99870bae7c",
+      "label": "Criminal Courts — New South Wales — Defendants finalised, summary characteristics by court level — mixed concorded history",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-and-99870bae7c.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-new-south-wales-and-99870bae7c-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_main_defendants_finalised_summary_characteristics_by_court_level_new_south_wales_and_99870bae7c_replay"
     },
     {
       "cohortId": "criminal-courts-main-defendants-with-a-guilty-outcome-excluding-traffic-offences-principal-sentence-and-age-by-indigenous-stat-904a1a9407",
@@ -501,76 +571,6 @@
       "cohortPath": "fixtures/product-prototype/criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab.json",
       "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-rate-of-defendants-finalised-excluding-transfers-and-traffic-offences-crude-and-age-standardised-by-selec-0ec1bf61ab-evidence/manifest.json",
       "dagsterAsset": "product_prototype_criminal_courts_main_rate_of_defendants_finalised_excluding_transfers_and_traffic_offences_crude_and_age_standardised_by_selec_0ec1bf61ab_replay"
-    },
-    {
-      "cohortId": "criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023",
-      "label": "Criminal Courts, Australia — Custody sentence length by Indigenous status — ANZSOC 2023",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-custody-by-offence-indigenous-status-length-jurisdiction-anzsoc-2023-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_custody_by_offence_indigenous_status_length_jurisdiction_anzsoc_2023_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-summary-characteristics-australia",
-      "label": "Criminal Courts — youth summary characteristics, Australia",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-australia.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-australia-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_summary_characteristics_australia_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-summary-characteristics-by-jurisdiction",
-      "label": "Criminal Courts — youth summary characteristics by jurisdiction",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_summary_characteristics_by_jurisdiction_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-finalised-sex-age-by-principal-offence",
-      "label": "Criminal Courts — youth finalised by sex, age and principal offence",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-finalised-sex-age-by-principal-offence.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-finalised-sex-age-by-principal-offence-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_finalised_sex_age_by_principal_offence_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-guilty-outcome-offence-by-principal-sentence",
-      "label": "Criminal Courts — youth guilty outcomes by offence and sentence",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_offence_by_principal_sentence_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence",
-      "label": "Criminal Courts — youth guilty outcomes by sex, age and sentence",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_sentence_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-indigenous-status-by-jurisdiction",
-      "label": "Criminal Courts — youth Indigenous status by jurisdiction",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-by-jurisdiction.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-by-jurisdiction-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_indigenous_status_by_jurisdiction_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
-      "label": "Criminal Courts — youth Indigenous status and age by jurisdiction",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-age-by-jurisdiction.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-age-by-jurisdiction-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_indigenous_status_age_by_jurisdiction_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence",
-      "label": "Criminal Courts — youth guilty outcomes by sex, age and offence",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_offence_replay"
-    },
-    {
-      "cohortId": "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction",
-      "label": "Criminal Courts — youth sentence length by jurisdiction",
-      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction.json",
-      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction-evidence/manifest.json",
-      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sentence_length_by_jurisdiction_replay"
     },
     {
       "cohortId": "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-and-traffic-offences-preliminary-anzsoc-2023--9011820c8c",
@@ -613,6 +613,69 @@
       "cohortPath": "fixtures/product-prototype/criminal-courts-preliminary-anzsoc-2023-defendants-with-a-guilty-outcome-sex-and-preliminary-anzsoc-2023-principal-offence-by--b7e20f2c51.json",
       "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-preliminary-anzsoc-2023-defendants-with-a-guilty-outcome-sex-and-preliminary-anzsoc-2023-principal-offence-by--b7e20f2c51-evidence/manifest.json",
       "dagsterAsset": "product_prototype_criminal_courts_preliminary_anzsoc_2023_defendants_with_a_guilty_outcome_sex_and_preliminary_anzsoc_2023_principal_offence_by_b7e20f2c51_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-finalised-sex-age-by-principal-offence",
+      "label": "Criminal Courts — youth finalised by sex, age and principal offence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-finalised-sex-age-by-principal-offence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-finalised-sex-age-by-principal-offence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_finalised_sex_age_by_principal_offence_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-guilty-outcome-offence-by-principal-sentence",
+      "label": "Criminal Courts — youth guilty outcomes by offence and sentence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-offence-by-principal-sentence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_offence_by_principal_sentence_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction",
+      "label": "Criminal Courts — youth sentence length by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sentence_length_by_jurisdiction_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence",
+      "label": "Criminal Courts — youth guilty outcomes by sex, age and offence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_offence_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence",
+      "label": "Criminal Courts — youth guilty outcomes by sex, age and sentence",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-guilty-outcome-sex-age-by-principal-sentence-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_guilty_outcome_sex_age_by_principal_sentence_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
+      "label": "Criminal Courts — youth Indigenous status and age by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-age-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-age-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_indigenous_status_age_by_jurisdiction_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-indigenous-status-by-jurisdiction",
+      "label": "Criminal Courts — youth Indigenous status by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-indigenous-status-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_indigenous_status_by_jurisdiction_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-summary-characteristics-australia",
+      "label": "Criminal Courts — youth summary characteristics, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-australia.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-australia-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_summary_characteristics_australia_replay"
+    },
+    {
+      "cohortId": "criminal-courts-youth-summary-characteristics-by-jurisdiction",
+      "label": "Criminal Courts — youth summary characteristics by jurisdiction",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_youth_summary_characteristics_by_jurisdiction_replay"
     }
   ],
   "publications": [

@@ -53,6 +53,7 @@ _DIMENSION_FIELDS = {
     "most_serious_charge": "most_serious_charge_id",
     "principal_offence": "principal_offence_id",
     "principal_offence_anzsoc_2011": "principal_offence_anzsoc_2011_id",
+    "classification_context": "classification_context_id",
     "statistic_basis": "statistic_basis_id",
     "rate_basis": "rate_basis_id",
     "characteristic_group": "characteristic_group_id",
@@ -82,6 +83,7 @@ _EXPECTED_CATEGORY_FIELDS = {
     "most_serious_charge": "mostSeriousCharges",
     "principal_offence": "principalOffences",
     "principal_offence_anzsoc_2011": "principalOffencesAnzsoc2011",
+    "classification_context": "classificationContexts",
     "statistic_basis": "statisticBases",
     "rate_basis": "rateBases",
     "characteristic_group": "characteristicGroups",
@@ -110,6 +112,7 @@ _DIMENSION_HEADER_PATTERNS = {
     "most_serious_offence": re.compile(r"most serious offence", re.I),
     "most_serious_charge": re.compile(r"most serious (?:charge|offence)", re.I),
     "principal_offence": re.compile(r"principal offence", re.I),
+    "classification_context": re.compile(r"classification context", re.I),
     "statistic_basis": re.compile(r"basis|measure(?:ment)? type|section", re.I),
     "rate_basis": re.compile(r"rate|basis|measure|statistic", re.I),
     "characteristic_group": re.compile(r"characteristic group|statistic", re.I),
@@ -930,6 +933,7 @@ def _interpret_accept_one(
 ) -> tuple[dict[str, Any], _AcceptedWorkbook | None]:
     entry = prepared.entry
     year = int(entry["year"])
+    execution_warning_count: int | None = None
     try:
         effective_limits = worker_limits or {
             "maxWarnings": DEFAULT_PROTOTYPE_MAX_WARNINGS
@@ -971,6 +975,10 @@ def _interpret_accept_one(
             execution, recipe, deterministic = execution_mutator(
                 year, execution, recipe, deterministic
             )
+        raw_warnings = execution.get("warnings")
+        execution_warning_count = (
+            len(raw_warnings) if isinstance(raw_warnings, list) else None
+        )
         recipe_digest = _output_digest(first, "normalized-recipe.json")
         execution_digest = _output_digest(first, "execution.json")
         observations, issues, checks, selection = _validate_execution(
@@ -1060,6 +1068,8 @@ def _interpret_accept_one(
         "checks": checks,
         "issues": issues,
     }
+    if "expectedWarningCountsByYear" in contract:
+        report["executionWarningCount"] = execution_warning_count
     accepted = (
         _AcceptedWorkbook(entry, prepared, first, report, observations)
         if first is not None and not issues
@@ -1278,17 +1288,44 @@ def _validate_execution(
     checks["totalEquations"] = not total_issues
     issues.extend(total_issues)
     allowed_rules = contract["allowedExecutionWarnings"]
-    warnings = execution.get("warnings", [])
-    warning_issues = _validate_warning_rules(
-        warnings if isinstance(warnings, list) else [],
-        allowed_rules if isinstance(allowed_rules, list) else [],
-        rows,
-        names,
-        contract,
-        year=int(entry["year"]),
+    raw_warnings = execution.get("warnings", [])
+    warnings = raw_warnings if isinstance(raw_warnings, list) else []
+    warning_issues = (
+        _validate_warning_rules(
+            warnings,
+            allowed_rules if isinstance(allowed_rules, list) else [],
+            rows,
+            names,
+            contract,
+            year=int(entry["year"]),
+        )
+        if isinstance(raw_warnings, list)
+        else [
+            _issue(
+                "MALFORMED_EXECUTION_WARNINGS",
+                "Execution warnings must be a list.",
+            )
+        ]
     )
     checks["warningAllowlist"] = not warning_issues
     issues.extend(warning_issues)
+    expected_warning_counts = contract.get("expectedWarningCountsByYear")
+    if isinstance(expected_warning_counts, dict):
+        expected_warning_count = expected_warning_counts.get(str(entry["year"]))
+        warning_count_matches = (
+            isinstance(expected_warning_count, int)
+            and not isinstance(expected_warning_count, bool)
+            and len(warnings) == expected_warning_count
+        )
+        checks["warningCount"] = warning_count_matches
+        if not warning_count_matches:
+            issues.append(
+                _issue(
+                    "WARNING_COUNT_MISMATCH",
+                    f"Expected {expected_warning_count} execution warnings; "
+                    f"got {len(warnings)}.",
+                )
+            )
     return tuple(canonical), _deduplicate_issues(issues), checks, selection
 
 
@@ -2064,6 +2101,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     optional = {
         "measure",
         "measures",
+        "expectedWarningCountsByYear",
         "excludedDimensionCodes",
         "dimensionHeaders",
         "referenceDateDimension",
@@ -2191,6 +2229,19 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "excludeMissingValues",
     }
     years = {str(item["year"]) for item in cohort["workbooks"]}
+    warning_counts = value.get("expectedWarningCountsByYear")
+    if warning_counts is not None and (
+        not isinstance(warning_counts, dict)
+        or set(warning_counts) != years
+        or any(
+            not isinstance(year, str)
+            or isinstance(count, bool)
+            or not isinstance(count, int)
+            or count < 0
+            for year, count in warning_counts.items()
+        )
+    ):
+        raise ProductPrototypeError("Acceptance warning counts are invalid")
     alias_codes = {
         dimension: set(aliases[dimension].values()) for dimension in dimensions
     }
