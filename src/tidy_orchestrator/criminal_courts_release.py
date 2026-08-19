@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 120
+EXPECTED_REGISTERED_COUNT = 126
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -81,6 +81,12 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
         "criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence",
         "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction",
+        "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-and-traffic-offences-preliminary-anzsoc-2023--9011820c8c",
+        "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-by--73da8de2bb",
+        "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-sta-44f35a79b0",
+        "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-sex-and-age-by-preliminary-anzsoc-2023-princi-e9e65af772",
+        "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-preliminary-anzsoc-2023-principal-offence-by-method-of-finalisati-1ae417f119",
+        "criminal-courts-preliminary-anzsoc-2023-defendants-with-a-guilty-outcome-sex-and-preliminary-anzsoc-2023-principal-offence-by--b7e20f2c51",
     }
 )
 

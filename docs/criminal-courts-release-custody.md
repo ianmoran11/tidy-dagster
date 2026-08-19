@@ -114,8 +114,26 @@ respectively not applicable, not available, and suppressed. The literal
 2022–23 worksheet name `Table 80 ` is preserved through source provenance and
 CSV projection.
 
-The five clusters now cover 120 of 430 worksheets and produce 172,609 canonical
-observations; 310 worksheets remain pending reviewed contracts.
+## Sixth accepted preliminary ANZSOC 2023 cluster
+
+The sixth cluster covers all six worksheets in the separately published
+2023–24 preliminary ANZSOC 2023 cube. Six singleton contracts preserve method of
+finalisation, court level, jurisdiction, sex and age, Indigenous status,
+principal sentence, and the source publication's preliminary-classification
+warning. Table 6 carries preliminary ANZSOC 2023 principal offence on one axis
+and ANZSOC 2011 principal offence on the other; the canonical output keeps those
+as two explicitly named dimensions rather than treating one as a charge or
+silently collapsing them.
+
+The cluster adds 2,371 defendant-count observations, including 204 published
+zeros. All values are numeric and observed; this cube contains none of the
+`..`, `na`, or `np` markers used elsewhere. The repeated method-of-finalisation
+panels produce reviewed ambiguity warnings bound to the exact six source header
+cells and canonical-output equivalence. Perturbation notes prevent invalid
+additive acceptance equations.
+
+The six clusters now cover 126 of 430 worksheets and produce 174,980 canonical
+observations; 304 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -137,7 +155,7 @@ observations; 310 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 120 assets replay with
+measures, value statuses, source cells, and warnings. All 126 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

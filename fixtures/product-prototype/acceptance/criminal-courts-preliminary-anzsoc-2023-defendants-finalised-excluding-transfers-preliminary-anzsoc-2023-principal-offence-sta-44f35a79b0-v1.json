@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-sta-44f35a79b0-v1",
+  "tableFamilyId": "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-sta-44f35a79b0",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2023": {
+          "principal_offence": [
+            "PRELIM_ANZSOC_2023_01_HOMICIDE",
+            "PRELIM_ANZSOC_2023_02_ASSAULT",
+            "PRELIM_ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "PRELIM_ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "PRELIM_ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "PRELIM_ANZSOC_2023_06_BURGLARY",
+            "PRELIM_ANZSOC_2023_07_THEFT",
+            "PRELIM_ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "PRELIM_ANZSOC_2023_09_DRUG_OFFENCES",
+            "PRELIM_ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "PRELIM_ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "PRELIM_ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "PRELIM_ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "PRELIM_ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "PRELIM_ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+            "PRELIM_ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+            "PRELIM_ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+            "PRELIM_ANZSOC_2023_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUS",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2023": 162
+      },
+      "expectedCombinationDigestsByYear": {
+        "2023": "sha256:f4ef8779830d292b9926358d67155256de3dca8d7abe6eaae0a00135b183b131"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "jurisdiction"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence\\ ANZSOC\\ 2023$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide": "PRELIM_ANZSOC_2023_01_HOMICIDE",
+      "02 Assault": "PRELIM_ANZSOC_2023_02_ASSAULT",
+      "03 Sexual offences": "PRELIM_ANZSOC_2023_03_SEXUAL_OFFENCES",
+      "04 Harm or endanger persons": "PRELIM_ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "05 Robbery, blackmail, and extortion": "PRELIM_ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "06 Burglary": "PRELIM_ANZSOC_2023_06_BURGLARY",
+      "07 Theft": "PRELIM_ANZSOC_2023_07_THEFT",
+      "08 Fraud and related offences": "PRELIM_ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+      "09 Drug offences": "PRELIM_ANZSOC_2023_09_DRUG_OFFENCES",
+      "10 Weapons and explosives offences": "PRELIM_ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "11 Property damage": "PRELIM_ANZSOC_2023_11_PROPERTY_DAMAGE",
+      "12 Public order, health, and safety offences": "PRELIM_ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "13 Traffic and vehicle offences": "PRELIM_ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "14 Offences against justice procedures and orders(a)": "PRELIM_ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "15 Offences against government": "PRELIM_ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+      "16 Environmental offences": "PRELIM_ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+      "17 Miscellaneous offences": "PRELIM_ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+      "Total finalised (excluding transfer to other court levels)(b)": "PRELIM_ANZSOC_2023_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+    },
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUS",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "jurisdiction_id",
+    "measure_id"
+  ],
+  "expected": {
+    "principalOffences": [
+      "PRELIM_ANZSOC_2023_01_HOMICIDE",
+      "PRELIM_ANZSOC_2023_02_ASSAULT",
+      "PRELIM_ANZSOC_2023_03_SEXUAL_OFFENCES",
+      "PRELIM_ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "PRELIM_ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "PRELIM_ANZSOC_2023_06_BURGLARY",
+      "PRELIM_ANZSOC_2023_07_THEFT",
+      "PRELIM_ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+      "PRELIM_ANZSOC_2023_09_DRUG_OFFENCES",
+      "PRELIM_ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "PRELIM_ANZSOC_2023_11_PROPERTY_DAMAGE",
+      "PRELIM_ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "PRELIM_ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "PRELIM_ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "PRELIM_ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+      "PRELIM_ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+      "PRELIM_ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+      "PRELIM_ANZSOC_2023_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+    ],
+    "jurisdictions": [
+      "ACT",
+      "AUS",
+      "NSW",
+      "NT",
+      "QLD",
+      "SA",
+      "TAS",
+      "VIC",
+      "WA"
+    ],
+    "minimumRows": 162,
+    "maximumRows": 162,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 10
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

@@ -45,15 +45,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-two-hundred-forty-nine-worksheets-v1"
-    assert registry.worksheet_count == 249
+    assert registry.batch_id == "justice-two-hundred-fifty-five-worksheets-v1"
+    assert registry.worksheet_count == 255
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 74
+    assert len(registry.entries) == 80
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 28
+    assert len(normalization["entries"]) == 29
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 27,
+        "trim-pathological-styled-blank-cells-v1": 28,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -68,9 +68,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 249
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 255
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 228626
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 230997
     assert sum(item["providerCalls"] for item in manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
@@ -141,6 +141,14 @@ def test_registry_pins_exact_exclusions_for_every_year() -> None:
 def test_registry_rejects_output_path_escape(tmp_path: Path) -> None:
     value = _registry_value()
     value["entries"][0]["outputDirectory"] = "../escape"
+    _write_registry(tmp_path, value)
+    with pytest.raises(LargeBatchError, match="entry is invalid"):
+        load_large_batch_registry(tmp_path)
+
+
+def test_registry_rejects_uncustodied_family_separator(tmp_path: Path) -> None:
+    value = _registry_value()
+    value["entries"][0]["familyId"] = "invalid---family"
     _write_registry(tmp_path, value)
     with pytest.raises(LargeBatchError, match="entry is invalid"):
         load_large_batch_registry(tmp_path)
@@ -413,9 +421,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 249
+    assert report["acceptedWorksheetCount"] == 255
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 228626
+    assert report["canonicalObservationCount"] == 230997
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -702,6 +710,7 @@ def test_prisoners_state_cluster_retains_vintages_totals_and_null_markers() -> N
         assert contract["totalEquations"] == []
 
 
+@pytest.mark.timeout(180)
 def test_large_batch_cli_verifies_committed_evidence() -> None:
     completed = subprocess.run(
         [str(PROJECT / "scripts/tidy-prototype-batch"), "verify"],
@@ -713,10 +722,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-two-hundred-forty-nine-worksheets-v1",
-        "worksheetCount": 249,
-        "cohortCount": 74,
-        "canonicalObservationCount": 228626,
+        "batchId": "justice-two-hundred-fifty-five-worksheets-v1",
+        "worksheetCount": 255,
+        "cohortCount": 80,
+        "canonicalObservationCount": 230997,
         "providerCalls": 0,
         "verified": True,
     }

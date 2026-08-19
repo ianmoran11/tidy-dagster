@@ -1,6 +1,6 @@
 {
   "schemaVersion": "tidy.product-prototype-workbook-normalization/v1",
-  "recordedAt": "2026-08-18T10:00:00Z",
+  "recordedAt": "2026-08-19T09:45:00+00:00",
   "scriptPath": "scripts/trim-prototype-workbook-formatting.py",
   "scriptDigest": "sha256:489859dad4e38248deedf5713032ec8ab05d6a5d3a90097072a42136c4d25e24",
   "entries": [
@@ -1002,10 +1002,47 @@
       ],
       "correction": null,
       "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-15-source.xlsx",
+      "sourceDigest": "sha256:78a4664291f0f941311a0a90cee10b2da45d7e7943f2a25a0e8da3e1ad0dfa7a",
+      "sourceByteLength": 91192,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-15-normalized.xlsx",
+      "outputDigest": "sha256:8b40705c7e50a212ae6bfc5e9b83460f203f5e5989682d76ab4ef222db61c8d9",
+      "outputByteLength": 84391,
+      "trimmedSheets": [
+        {
+          "sheet": "ANZSOC 2023 Table 1",
+          "retainedRange": "A1:E125"
+        },
+        {
+          "sheet": "ANZSOC 2023 Table 2",
+          "retainedRange": "A1:J29"
+        },
+        {
+          "sheet": "ANZSOC 2023 Table 3",
+          "retainedRange": "A1:S50"
+        },
+        {
+          "sheet": "ANZSOC 2023 Table 4",
+          "retainedRange": "A1:J74"
+        },
+        {
+          "sheet": "ANZSOC 2023 Table 5",
+          "retainedRange": "A1:X31"
+        },
+        {
+          "sheet": "ANZSOC 2023 Table 6",
+          "retainedRange": "A1:R31"
+        }
+      ],
+      "correction": null,
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     }
   ],
   "inRangeValuesChanged": true,
   "correctionScriptPath": "scripts/correct-known-workbook-artifacts.py",
   "correctionScriptDigest": "sha256:8dec705a2f80451836111aba77ad4b873bae15baf19d4906e7a385e9fdbb2e9c",
-  "manifestDigest": "sha256:a0e1e32d380e4b469368d2a4edde22f54927b9764044cdd5b023aeee1fba48b7"
+  "manifestDigest": "sha256:4752588ec74e49423edf07720138a4cf572444a7b523019b6e32b5bd7f091466"
 }

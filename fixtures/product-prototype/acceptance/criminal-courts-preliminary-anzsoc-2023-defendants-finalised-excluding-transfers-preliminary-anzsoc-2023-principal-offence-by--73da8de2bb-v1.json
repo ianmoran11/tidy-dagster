@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-by--73da8de2bb-v1",
+  "tableFamilyId": "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-by--73da8de2bb",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2023": {
+          "principal_offence": [
+            "PRELIM_ANZSOC_2023_01_HOMICIDE",
+            "PRELIM_ANZSOC_2023_02_ASSAULT",
+            "PRELIM_ANZSOC_2023_03_SEXUAL_OFFENCES",
+            "PRELIM_ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+            "PRELIM_ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "PRELIM_ANZSOC_2023_06_BURGLARY",
+            "PRELIM_ANZSOC_2023_07_THEFT",
+            "PRELIM_ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+            "PRELIM_ANZSOC_2023_09_DRUG_OFFENCES",
+            "PRELIM_ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "PRELIM_ANZSOC_2023_11_PROPERTY_DAMAGE",
+            "PRELIM_ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "PRELIM_ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "PRELIM_ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "PRELIM_ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+            "PRELIM_ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+            "PRELIM_ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+            "PRELIM_ANZSOC_2023_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "principal_offence_anzsoc_2011": [
+            "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+            "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+            "ANZSOC_2011_06_ROBBERY_EXTORTION",
+            "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "ANZSOC_2011_08_THEFT",
+            "ANZSOC_2011_09_FRAUD_DECEPTION",
+            "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+            "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+            "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+            "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+            "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+            "ANZSOC_2011_TOTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2023": 306
+      },
+      "expectedCombinationDigestsByYear": {
+        "2023": "sha256:1aa4a3ee59e4c363574fe4b77f7d7a071885c36c41fee6e6001e036dee02ed7a"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "principal_offence_anzsoc_2011"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "^principal\\ offence\\ ANZSOC\\ 2023$"
+    ],
+    "principal_offence_anzsoc_2011": [
+      "^principal\\ offence\\ ANZSOC\\ 2011$"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide": "PRELIM_ANZSOC_2023_01_HOMICIDE",
+      "02 Assault": "PRELIM_ANZSOC_2023_02_ASSAULT",
+      "03 Sexual offences": "PRELIM_ANZSOC_2023_03_SEXUAL_OFFENCES",
+      "04 Harm or endanger persons": "PRELIM_ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "05 Robbery, blackmail, and extortion": "PRELIM_ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "06 Burglary": "PRELIM_ANZSOC_2023_06_BURGLARY",
+      "07 Theft": "PRELIM_ANZSOC_2023_07_THEFT",
+      "08 Fraud and related offences": "PRELIM_ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+      "09 Drug offences": "PRELIM_ANZSOC_2023_09_DRUG_OFFENCES",
+      "10 Weapons and explosives offences": "PRELIM_ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "11 Property damage": "PRELIM_ANZSOC_2023_11_PROPERTY_DAMAGE",
+      "12 Public order, health, and safety offences": "PRELIM_ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "13 Traffic and vehicle offences": "PRELIM_ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "14 Offences against justice procedures and orders(e)": "PRELIM_ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "15 Offences against government": "PRELIM_ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+      "16 Environmental offences": "PRELIM_ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+      "17 Miscellaneous offences": "PRELIM_ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+      "Total finalised (excluding transfer to other court levels)(f)": "PRELIM_ANZSOC_2023_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+    },
+    "principal_offence_anzsoc_2011": {
+      "01 Homicide & related offences": "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "02 Acts intended to cause injury(a)": "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "03 Sexual assault & related offences": "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "04 Dangerous/ negligent acts(b)": "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/ harassment": "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "06 Robbery/ extortion": "ANZSOC_2011_06_ROBBERY_EXTORTION",
+      "07 Unlawful entry with intent": "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "08 Theft": "ANZSOC_2011_08_THEFT",
+      "09 Fraud/ deception": "ANZSOC_2011_09_FRAUD_DECEPTION",
+      "10 Illicit drug offences": "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+      "11 Weapons/ explosives": "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+      "12 Property damage & environmental pollution": "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "13 Public order offences": "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+      "14 Traffic & vehicle regulatory offences": "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "15 Offences against justice(c)": "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "16 Miscellaneous offences": "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+      "Total(d)": "ANZSOC_2011_TOTAL"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "principal_offence_anzsoc_2011_id",
+    "measure_id"
+  ],
+  "expected": {
+    "principalOffences": [
+      "PRELIM_ANZSOC_2023_01_HOMICIDE",
+      "PRELIM_ANZSOC_2023_02_ASSAULT",
+      "PRELIM_ANZSOC_2023_03_SEXUAL_OFFENCES",
+      "PRELIM_ANZSOC_2023_04_HARM_OR_ENDANGER_PERSONS",
+      "PRELIM_ANZSOC_2023_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "PRELIM_ANZSOC_2023_06_BURGLARY",
+      "PRELIM_ANZSOC_2023_07_THEFT",
+      "PRELIM_ANZSOC_2023_08_FRAUD_AND_RELATED_OFFENCES",
+      "PRELIM_ANZSOC_2023_09_DRUG_OFFENCES",
+      "PRELIM_ANZSOC_2023_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "PRELIM_ANZSOC_2023_11_PROPERTY_DAMAGE",
+      "PRELIM_ANZSOC_2023_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "PRELIM_ANZSOC_2023_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "PRELIM_ANZSOC_2023_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "PRELIM_ANZSOC_2023_15_OFFENCES_AGAINST_GOVERNMENT",
+      "PRELIM_ANZSOC_2023_16_ENVIRONMENTAL_OFFENCES",
+      "PRELIM_ANZSOC_2023_17_MISCELLANEOUS_OFFENCES",
+      "PRELIM_ANZSOC_2023_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+    ],
+    "principalOffencesAnzsoc2011": [
+      "ANZSOC_2011_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "ANZSOC_2011_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "ANZSOC_2011_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "ANZSOC_2011_04_DANGEROUS_NEGLIGENT_ACTS",
+      "ANZSOC_2011_05_ABDUCTION_HARASSMENT",
+      "ANZSOC_2011_06_ROBBERY_EXTORTION",
+      "ANZSOC_2011_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "ANZSOC_2011_08_THEFT",
+      "ANZSOC_2011_09_FRAUD_DECEPTION",
+      "ANZSOC_2011_10_ILLICIT_DRUG_OFFENCES",
+      "ANZSOC_2011_11_WEAPONS_EXPLOSIVES",
+      "ANZSOC_2011_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "ANZSOC_2011_13_PUBLIC_ORDER_OFFENCES",
+      "ANZSOC_2011_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "ANZSOC_2011_15_OFFENCES_AGAINST_JUSTICE",
+      "ANZSOC_2011_16_MISCELLANEOUS_OFFENCES",
+      "ANZSOC_2011_TOTAL"
+    ],
+    "minimumRows": 306,
+    "maximumRows": 306,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 18
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [],
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

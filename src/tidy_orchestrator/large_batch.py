@@ -21,6 +21,9 @@ NORMALIZATION_SCHEMA = "tidy.product-prototype-workbook-normalization/v1"
 REGISTRY_PATH = "fixtures/product-prototype/large-batch-assets-v1.json"
 _DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
 _SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+# Truncated release-family IDs may retain a `--` boundary before their digest.
+# Leading, trailing, and non-slug characters remain invalid.
+_CUSTODIED_FAMILY_ID = re.compile(r"^[a-z0-9]+(?:--?[a-z0-9]+)*$")
 _DAGSTER_NAME = re.compile(r"^[a-z][a-z0-9_]*$")
 _CELL_ADDRESS = re.compile(r"^([A-Z]+)([1-9][0-9]*)$")
 _CELL_RANGE = re.compile(r"^([A-Z]+)([1-9][0-9]*):([A-Z]+)([1-9][0-9]*)$")
@@ -194,7 +197,7 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
         )
         if (
             any(not isinstance(item.get(key), str) or not item[key] for key in strings)
-            or _SLUG.fullmatch(str(item.get("familyId"))) is None
+            or _CUSTODIED_FAMILY_ID.fullmatch(str(item.get("familyId"))) is None
             or _SLUG.fullmatch(str(item.get("outputDirectory"))) is None
             or _DAGSTER_NAME.fullmatch(str(item.get("dagsterAsset"))) is None
             or _DAGSTER_NAME.fullmatch(str(item.get("dagsterJob"))) is None

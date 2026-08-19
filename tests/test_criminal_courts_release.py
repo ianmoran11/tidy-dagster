@@ -3,11 +3,13 @@ from __future__ import annotations
 import copy
 import csv
 import json
+import re
 import shutil
 import subprocess
 from pathlib import Path
 
 import pytest
+from openpyxl import load_workbook
 
 from tidy_orchestrator.criminal_courts_release import (
     CriminalCourtsReleaseError,
@@ -56,6 +58,14 @@ YOUTH_FAMILIES = (
     "criminal-courts-youth-indigenous-status-age-by-jurisdiction",
     "criminal-courts-youth-guilty-outcome-sex-age-by-principal-offence",
     "criminal-courts-youth-guilty-outcome-sentence-length-by-jurisdiction",
+)
+PRELIMINARY_ANZSOC_2023_FAMILIES = (
+    "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-and-traffic-offences-preliminary-anzsoc-2023--9011820c8c",
+    "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-by--73da8de2bb",
+    "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-preliminary-anzsoc-2023-principal-offence-sta-44f35a79b0",
+    "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-excluding-transfers-sex-and-age-by-preliminary-anzsoc-2023-princi-e9e65af772",
+    "criminal-courts-preliminary-anzsoc-2023-defendants-finalised-preliminary-anzsoc-2023-principal-offence-by-method-of-finalisati-1ae417f119",
+    "criminal-courts-preliminary-anzsoc-2023-defendants-with-a-guilty-outcome-sex-and-preliminary-anzsoc-2023-principal-offence-by--b7e20f2c51",
 )
 GUILTY_OUTCOME_FAMILIES = (
     "criminal-courts-guilty-outcome-summary-by-jurisdiction",
@@ -107,8 +117,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 120,
-        "pendingSemanticContractCount": 310,
+        "registeredMemberCount": 126,
+        "pendingSemanticContractCount": 304,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -150,7 +160,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 120
+        == 126
     )
 
 
@@ -175,7 +185,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 120
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 126
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -652,6 +662,101 @@ def test_youth_cluster_preserves_classification_periods_measures_and_markers() -
         family_id: expected_warning_dimensions.get(family_id, set())
         for family_id in YOUTH_FAMILIES
     }
+
+
+def test_preliminary_cluster_preserves_dual_classification_custody() -> None:
+    membership = _load(MEMBERSHIP)
+    preliminary_members = [
+        member
+        for family in membership["families"]
+        for member in family["members"]
+        if member["cubeId"] == "preliminary-anzsoc-2023-principal-offence"
+    ]
+    assert len(preliminary_members) == 6
+    assert all(member["registered"] for member in preliminary_members)
+    assert {member["classificationContext"] for member in preliminary_members} == {
+        "preliminary-anzsoc-2023"
+    }
+
+    source = load_workbook(
+        FIXTURES / "workbooks/criminal-courts-2023-24-cube-15-source.xlsx",
+        data_only=False,
+        read_only=True,
+    )
+    rows: list[dict[str, object]] = []
+    source_cells: set[tuple[str, str]] = set()
+    warning_dimensions: dict[str, set[str]] = {}
+    for family_id in PRELIMINARY_ANZSOC_2023_FAMILIES:
+        evidence = FIXTURES / f"{family_id}-evidence"
+        manifest = _load(evidence / "manifest.json")
+        run = _load(evidence / "run.json")
+        family_rows = json.loads((evidence / "canonical-observations.json").read_text())
+        cohort = _load(FIXTURES / f"{family_id}.json")
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        replay = cohort["workbooks"][0]["replayResponse"]
+
+        assert manifest["providerCalls"] == 0
+        assert manifest["exceptionWorkbookCount"] == 0
+        assert manifest["canonicalObservationCount"] == len(family_rows)
+        assert run["acceptedWorkbookCount"] == 1
+        assert run["workbooks"][0]["decision"] == "prototype_auto_accepted"
+        assert replay["acceptanceAuthority"] is False
+        assert contract["trainingEligibility"] is False
+        assert contract["totalValidation"] == "not_applicable"
+        assert contract["totalEquations"] == []
+        warning_dimensions[family_id] = {
+            rule["dimension"] for rule in contract["allowedExecutionWarnings"]
+        }
+
+        for row in family_rows:
+            match = re.fullmatch(r"R([0-9]+)C([0-9]+)", row["source_cell"])
+            assert match is not None
+            source_key = (row["source_sheet"], row["source_cell"])
+            assert source_key not in source_cells
+            source_cells.add(source_key)
+            cell = source[row["source_sheet"]].cell(
+                row=int(match.group(1)), column=int(match.group(2))
+            )
+            assert cell.value == row["raw_value"] == row["value"]
+            assert row["publication_vintage_date"] == "2024-06-30"
+            assert row["reference_date"] == "2024-06-30"
+            assert row["measure_id"] == "defendant-count"
+            assert row["unit_id"] == "person"
+            assert row["value_status"] == "observed"
+            assert str(row["principal_offence_id"]).startswith("PRELIM_ANZSOC_2023_")
+        rows.extend(family_rows)
+
+    assert len(rows) == 2371
+    assert sum(row["value"] == 0 for row in rows) == 204
+    assert {row["source_sheet"] for row in rows} == {
+        f"ANZSOC 2023 Table {table}" for table in range(1, 7)
+    }
+    concordance_rows = [
+        row for row in rows if row["source_sheet"] == "ANZSOC 2023 Table 6"
+    ]
+    assert len(concordance_rows) == 306
+    assert all(
+        str(row["principal_offence_anzsoc_2011_id"]).startswith("ANZSOC_2011_")
+        for row in concordance_rows
+    )
+    assert all(
+        "principal_offence_anzsoc_2011_id" not in row
+        for row in rows
+        if row["source_sheet"] != "ANZSOC 2023 Table 6"
+    )
+    method_family = PRELIMINARY_ANZSOC_2023_FAMILIES[4]
+    assert warning_dimensions == {
+        family_id: ({"method_of_finalisation"} if family_id == method_family else set())
+        for family_id in PRELIMINARY_ANZSOC_2023_FAMILIES
+    }
+    method_contract = _load(FIXTURES / "acceptance" / f"{method_family}-v1.json")
+    warning_rule = method_contract["allowedExecutionWarnings"][0]
+    assert warning_rule["requireCanonicalOutputEquivalence"] is True
+    assert {
+        header_source
+        for sources in warning_rule["expectedHeaderSourcesByYear"]["2023"].values()
+        for header_source in sources
+    } == {"R5C2", "R24C2", "R43C2", "R62C2", "R81C2", "R100C2"}
 
 
 def test_download_digest_mutation_fails_closed(tmp_path: Path) -> None:
