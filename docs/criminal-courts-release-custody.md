@@ -150,8 +150,24 @@ explicit alongside principal offence. All 10,807 repeated-panel ambiguity
 warnings are matched independently by dimension and exact year-specific source
 headers. Perturbation notes again preclude additive total equations.
 
-The seven clusters now cover 148 of 430 worksheets and produce 192,671 canonical
-observations; 282 worksheets remain pending reviewed contracts.
+## Eighth accepted Victoria cluster
+
+The eighth cluster covers the complete 22-sheet Victoria cube across 2021–22
+through 2024–25. Its nine contracts independently bind the long-running summary,
+later method-of-finalisation, selected-offence, and 2024–25 all-offence families
+to the exact Cube 5 sheets and source cells.
+
+The cluster adds 17,524 canonical observations: 16,660 defendant counts plus 216
+each for mean and median defendant age and mean and median case duration. It
+preserves 1,419 published numeric zeros, 61 `..` not-applicable cells, and 52
+`na` not-available cells. Its source-bound classification context keeps ANZSOC
+2011, ANZSOC 2023, and the mixed concorded 2024–25 historical series distinct.
+All 10,720 repeated-panel ambiguity warnings are bound by dimension, year, exact
+header source, and canonical-output equivalence. Perturbation notes preclude
+speculative additive total equations.
+
+The eight clusters now cover 170 of 430 worksheets and produce 210,195 canonical
+observations; 260 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -173,7 +189,7 @@ observations; 282 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 148 assets replay with
+measures, value statuses, source cells, and warnings. All 170 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 from dagster import DagsterInstance, Definitions, build_sensor_context
 
+import tidy_orchestrator.dagster_defs as dagster_defs_module
 from tidy_orchestrator.artifacts import LocalArtifactRepository, domain_digest
 from tidy_orchestrator.dagster_defs import (
     EXPECTED_CATALOG_TAG,
@@ -19,6 +20,7 @@ from tidy_orchestrator.dagster_defs import (
     LARGE_BATCH_REGISTRY,
     WORK_UNIT_PARTITIONS,
     TidyRuntimeResource,
+    _check_large_batch_cohort,
     active_work_unit_projection,
     build_definitions,
     product_prototype_age_replay,
@@ -133,16 +135,16 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
 
 
-def test_definitions_include_277_worksheet_cross_publication_batch() -> None:
+def test_definitions_include_299_worksheet_cross_publication_batch() -> None:
     definitions = build_definitions(project_root=PROJECT)
     Definitions.validate_loadable(definitions)
-    assert LARGE_BATCH_REGISTRY.worksheet_count == 277
-    assert len(LARGE_BATCH_REGISTRY.entries) == 89
-    assert len(LARGE_BATCH_ASSETS) == 89
-    assert len(LARGE_BATCH_CHECKS) == 89
-    assert len(LARGE_BATCH_JOBS) == 89
+    assert LARGE_BATCH_REGISTRY.worksheet_count == 299
+    assert len(LARGE_BATCH_REGISTRY.entries) == 98
+    assert len(LARGE_BATCH_ASSETS) == 98
+    assert len(LARGE_BATCH_CHECKS) == 98
+    assert len(LARGE_BATCH_JOBS) == 98
     assert definitions.metadata["product_prototype_large_batch_supported"].value
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 277
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 299
     assert {
         spec.family_id
         for spec in LARGE_BATCH_REGISTRY.entries
@@ -153,7 +155,7 @@ def test_definitions_include_277_worksheet_cross_publication_batch() -> None:
             spec.family_id.startswith("criminal-courts-")
             for spec in LARGE_BATCH_REGISTRY.entries
         )
-        == 62
+        == 71
     )
     assert {asset.key.to_user_string() for asset in LARGE_BATCH_ASSETS} == {
         spec.dagster_asset for spec in LARGE_BATCH_REGISTRY.entries
@@ -174,14 +176,14 @@ def test_build_definitions_uses_requested_project_registry(tmp_path: Path) -> No
     registry = json.loads(
         (PROJECT / "fixtures/product-prototype/large-batch-assets-v1.json").read_text()
     )
-    registry["batchId"] = "alternate-two-hundred-seventy-seven-worksheets-v1"
+    registry["batchId"] = "alternate-two-hundred-ninety-nine-worksheets-v1"
     registry_path.write_text(json.dumps(registry))
     definitions = build_definitions(project_root=tmp_path)
     assert (
         definitions.metadata["product_prototype_large_batch_id"].value
-        == "alternate-two-hundred-seventy-seven-worksheets-v1"
+        == "alternate-two-hundred-ninety-nine-worksheets-v1"
     )
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 277
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 299
 
 
 def test_definitions_load_identity_and_share_one_partition_definition(
@@ -585,6 +587,7 @@ def test_product_prototype_offence_pair_dagster_jobs_materialize_and_pass_checks
 @pytest.mark.timeout(120)
 def test_large_batch_dagster_asset_materializes_and_passes_check(
     tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     subprocess.run(
         ["npm", "run", "build"], cwd=PROJECT, check=True, capture_output=True
@@ -610,6 +613,32 @@ def test_large_batch_dagster_asset_materializes_and_passes_check(
     evaluations = result.get_asset_check_evaluations()
     assert len(evaluations) == 1
     assert evaluations[0].passed
+
+    output_root = PROJECT / ".product-prototype" / spec.output_directory
+    run_path = output_root / "run.json"
+    original_run = run_path.read_bytes()
+    runtime = TidyRuntimeResource(
+        project_root=str(PROJECT),
+        repository_root=str(tmp_path / "repository"),
+    )
+    monkeypatch.setattr(
+        dagster_defs_module,
+        "verify_large_batch_reproduction",
+        lambda *_args: {},
+    )
+    try:
+        for flag in (
+            "historicalReplayIsAcceptanceAuthority",
+            "trainingEligibility",
+        ):
+            unsafe_run = json.loads(original_run)
+            unsafe_run[flag] = True
+            run_path.write_text(json.dumps(unsafe_run))
+            assert not _check_large_batch_cohort(
+                runtime, spec, LARGE_BATCH_REGISTRY.batch_id
+            ).passed
+    finally:
+        run_path.write_bytes(original_run)
 
 
 def test_run_rejects_recipe_revision_changed_after_dispatch(tmp_path: Path) -> None:

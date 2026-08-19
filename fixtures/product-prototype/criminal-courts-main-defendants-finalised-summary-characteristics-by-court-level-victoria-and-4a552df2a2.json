@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-and-4a552df2a2",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-and-4a552df2a2",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-and-4a552df2a2-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-5-normalized.xlsx",
+      "contentDigest": "sha256:e93188e7561bf68072d44cf5fe90911c963429fb4de8bd6873fcdfd4c545e02f",
+      "byteLength": 94621,
+      "sheet": "Table 27",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-and-4a552df2a2-2024.response.txt",
+        "contentDigest": "sha256:f241446182022c29d1a89109ff1fb6ffc6631569529f8d6cc614d9e04210cca4",
+        "byteLength": 850,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

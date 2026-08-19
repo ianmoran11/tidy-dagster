@@ -124,6 +124,14 @@ def _positive_counts(value: Any) -> dict[str, int] | None:
     return dict(value)
 
 
+def _run_authority_claims_are_safe(run: Any) -> bool:
+    return (
+        isinstance(run, dict)
+        and run.get("historicalReplayIsAcceptanceAuthority") is False
+        and run.get("trainingEligibility") is False
+    )
+
+
 def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
     project = project_root.resolve()
     value = _load_object(project / REGISTRY_PATH, "large-batch registry")
@@ -761,6 +769,7 @@ def verify_large_batch_evidence(
         or run.get("cohortDigest") != manifest["cohortDigest"]
         or run.get("acceptanceContractDigest") != manifest["acceptanceContractDigest"]
         or run.get("providerCalls") != 0
+        or not _run_authority_claims_are_safe(run)
         or run.get("acceptedWorkbookCount") != len(spec.expected_years)
         or run.get("exceptionWorkbookCount") != 0
         or run.get("canonicalObservationCount") != spec.expected_canonical_count
@@ -852,6 +861,9 @@ def verify_large_batch_reproduction(
     if len(declarations) != 4:
         raise LargeBatchError("Reproducible evidence declarations are incomplete")
     root = output_root.resolve()
+    generated_run = _load_object(root / "run.json", "generated large-batch run")
+    if not _run_authority_claims_are_safe(generated_run):
+        raise LargeBatchError("Generated run authority claims are invalid")
     for filename, declaration in declarations.items():
         generated = root / filename
         if generated.is_symlink() or not generated.is_file():

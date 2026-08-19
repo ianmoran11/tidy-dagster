@@ -32,6 +32,7 @@ from .large_batch import (
     REGISTRY_PATH,
     LargeBatchRegistry,
     LargeBatchSpec,
+    _run_authority_claims_are_safe,
     load_large_batch_registry,
     verify_large_batch_reproduction,
 )
@@ -810,6 +811,7 @@ def _check_large_batch_cohort(
         and report["canonicalObservationCount"] == spec.expected_canonical_count
         and report["crossYearIssues"] == []
         and report["providerCalls"] == 0
+        and _run_authority_claims_are_safe(report)
         and [item["year"] for item in report["workbooks"]] == list(spec.expected_years)
         and [item["rawObservationCount"] for item in report["workbooks"]]
         == list(spec.expected_year_counts)

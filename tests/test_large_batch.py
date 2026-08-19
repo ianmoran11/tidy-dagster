@@ -16,6 +16,7 @@ from tidy_orchestrator.large_batch import (
     load_large_batch_registry,
     verify_batch_normalization,
     verify_large_batch_evidence,
+    verify_large_batch_reproduction,
 )
 from tidy_orchestrator.large_batch_cli import run_batch
 from tidy_orchestrator.product_prototype import (
@@ -45,15 +46,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-two-hundred-seventy-seven-worksheets-v1"
-    assert registry.worksheet_count == 277
+    assert registry.batch_id == "justice-two-hundred-ninety-nine-worksheets-v1"
+    assert registry.worksheet_count == 299
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 89
+    assert len(registry.entries) == 98
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 33
+    assert len(normalization["entries"]) == 37
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 32,
+        "trim-pathological-styled-blank-cells-v1": 36,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -68,9 +69,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 277
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 299
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 248688
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 266212
     assert sum(item["providerCalls"] for item in manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
@@ -262,6 +263,13 @@ def test_normalization_manifest_rejects_wrong_cohort_identity(
         verify_batch_normalization(PROJECT, registry)
 
 
+def _bind_run_mutation(run: dict[str, object], manifest: dict[str, object]) -> None:
+    semantic = dict(run)
+    semantic.pop("runDigest")
+    run["runDigest"] = domain_digest(RUN_SCHEMA, semantic)
+    manifest["runDigest"] = run["runDigest"]
+
+
 def test_evidence_rejects_redistributed_per_year_exclusions(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -277,10 +285,7 @@ def test_evidence_rejects_redistributed_per_year_exclusions(
     run = json.loads((evidence_root / "run.json").read_text())
     run["workbooks"][0]["excludedObservationCount"] = 1
     run["workbooks"][1]["excludedObservationCount"] = 35
-    semantic = dict(run)
-    semantic.pop("runDigest")
-    run["runDigest"] = domain_digest(RUN_SCHEMA, semantic)
-    manifest["runDigest"] = run["runDigest"]
+    _bind_run_mutation(run, manifest)
     original_load = large_batch_module._load_object
 
     def load(path: Path, label: str) -> dict[str, object]:
@@ -293,6 +298,64 @@ def test_evidence_rejects_redistributed_per_year_exclusions(
     monkeypatch.setattr(large_batch_module, "_load_object", load)
     with pytest.raises(LargeBatchError, match="Run evidence is invalid"):
         verify_large_batch_evidence(PROJECT, spec)
+
+
+@pytest.mark.parametrize(
+    "flag",
+    ["historicalReplayIsAcceptanceAuthority", "trainingEligibility"],
+)
+def test_evidence_rejects_unsafe_run_authority_claims(
+    monkeypatch: pytest.MonkeyPatch,
+    flag: str,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = registry.entries[0]
+    manifest_path = (PROJECT / spec.evidence_manifest_path).resolve()
+    evidence_root = manifest_path.parent
+    manifest = json.loads(manifest_path.read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    run[flag] = True
+    _bind_run_mutation(run, manifest)
+    original_load = large_batch_module._load_object
+
+    def load(path: Path, label: str) -> dict[str, object]:
+        if path == manifest_path:
+            return manifest
+        if path == evidence_root / "run.json":
+            return run
+        return original_load(path, label)
+
+    monkeypatch.setattr(large_batch_module, "_load_object", load)
+    with pytest.raises(LargeBatchError, match="Run evidence is invalid"):
+        verify_large_batch_evidence(PROJECT, spec)
+
+
+@pytest.mark.parametrize(
+    "flag",
+    ["historicalReplayIsAcceptanceAuthority", "trainingEligibility"],
+)
+def test_reproduction_rejects_unsafe_generated_run_authority_claims(
+    tmp_path: Path,
+    flag: str,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = registry.entries[0]
+    evidence_root = (PROJECT / spec.evidence_manifest_path).parent
+    output_root = tmp_path / "reproduction"
+    output_root.mkdir()
+    for filename in (
+        "canonical-observations.csv",
+        "canonical-observations.json",
+        "collation-report.json",
+        "exceptions.json",
+    ):
+        (output_root / filename).write_bytes((evidence_root / filename).read_bytes())
+    run = json.loads((evidence_root / "run.json").read_text())
+    run[flag] = True
+    (output_root / "run.json").write_text(json.dumps(run))
+
+    with pytest.raises(LargeBatchError, match="run authority claims are invalid"):
+        verify_large_batch_reproduction(PROJECT, spec, output_root)
 
 
 def test_evidence_rejects_warning_count_drift(
@@ -445,9 +508,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 277
+    assert report["acceptedWorksheetCount"] == 299
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 248688
+    assert report["canonicalObservationCount"] == 266212
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -746,10 +809,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-two-hundred-seventy-seven-worksheets-v1",
-        "worksheetCount": 277,
-        "cohortCount": 89,
-        "canonicalObservationCount": 248688,
+        "batchId": "justice-two-hundred-ninety-nine-worksheets-v1",
+        "worksheetCount": 299,
+        "cohortCount": 98,
+        "canonicalObservationCount": 266212,
         "providerCalls": 0,
         "verified": True,
     }

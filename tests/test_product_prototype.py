@@ -1280,6 +1280,7 @@ def test_negative_allowed_warning_with_unmapped_output_routes_to_exception() -> 
     execution["warnings"] = [
         {
             "code": "AMBIGUOUS_HEADER",
+            "header": "Indigenous status",
             "address": first["_source"]["address"],
             "message": "Multiple candidates.",
         }
@@ -1291,6 +1292,7 @@ def test_negative_allowed_warning_with_unmapped_output_routes_to_exception() -> 
 def test_ambiguous_warning_can_pin_the_exact_selected_header_source() -> None:
     warning = {
         "code": "AMBIGUOUS_HEADER",
+        "header": "court level",
         "address": "R8C2",
         "message": "Multiple candidates.",
     }
@@ -1332,6 +1334,65 @@ def test_ambiguous_warning_can_pin_the_exact_selected_header_source() -> None:
     assert {issue["code"] for issue in issues} == {
         "AMBIGUOUS_WARNING_HEADER_SOURCE_MISMATCH"
     }
+
+
+@pytest.mark.parametrize("header", [None, "wrong output header"])
+def test_single_warning_rule_requires_its_exact_output_header(
+    header: str | None,
+) -> None:
+    warning = {
+        "code": "AMBIGUOUS_HEADER",
+        "address": "R8C2",
+        "message": "Multiple candidates.",
+    }
+    if header is not None:
+        warning["header"] = header
+    rows = [
+        {
+            "_source": {"address": "R8C2"},
+            "court level": "All Courts",
+            "court level_source": "R6C2",
+        }
+    ]
+    rule = {
+        "code": "AMBIGUOUS_HEADER",
+        "dimension": "court_level",
+        "requireCanonicalOutputEquivalence": True,
+        "expectedHeaderSourcesByYear": {"2024": {"ALL_COURTS": ["R6C2"]}},
+    }
+    issues = _validate_warning_rules(
+        [warning],
+        [rule],
+        rows,
+        {"court_level": ("court level", "court block")},
+        {"aliases": {"court_level": {"All Courts": "ALL_COURTS"}}},
+        year=2024,
+    )
+    assert {issue["code"] for issue in issues} == {"UNALLOWLISTED_WARNING"}
+
+
+def test_single_warning_rule_accepts_an_exact_tuple_output_header_member() -> None:
+    issues = _validate_warning_rules(
+        [
+            {
+                "code": "AMBIGUOUS_HEADER",
+                "header": "court level",
+                "address": "R8C2",
+            }
+        ],
+        [
+            {
+                "code": "AMBIGUOUS_HEADER",
+                "dimension": "court_level",
+                "requireCanonicalOutputEquivalence": True,
+            }
+        ],
+        [{"_source": {"address": "R8C2"}, "court level": "All Courts"}],
+        {"court_level": ("court level", "court block")},
+        {"aliases": {"court_level": {"All Courts": "ALL_COURTS"}}},
+        year=2024,
+    )
+    assert issues == []
 
 
 def test_ambiguous_warning_selects_the_exact_dimension_specific_rule() -> None:
@@ -1458,6 +1519,7 @@ def _mutate_pipeline_result(
             execution["warnings"] = [
                 {
                     "code": "AMBIGUOUS_HEADER",
+                    "header": indigenous,
                     "address": rows[0]["_source"]["address"],
                     "message": "Multiple candidates.",
                 }

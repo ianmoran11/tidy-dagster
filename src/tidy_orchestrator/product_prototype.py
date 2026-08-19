@@ -1641,19 +1641,23 @@ def _validate_warning_rules(
         if not isinstance(warning, dict):
             issues.append(_issue("UNALLOWLISTED_WARNING", "Malformed warning."))
             continue
+        warning_header = warning.get("header")
         matching = [
             rule
             for rule in rules
-            if isinstance(rule, dict) and rule.get("code") == warning.get("code")
+            if isinstance(warning_header, str)
+            and warning_header
+            and isinstance(rule, dict)
+            and rule.get("code") == warning.get("code")
+            and isinstance(rule.get("dimension"), str)
+            and (
+                names.get(rule["dimension"]) == warning_header
+                or (
+                    isinstance(names.get(rule["dimension"]), tuple)
+                    and warning_header in names[rule["dimension"]]
+                )
+            )
         ]
-        if len(matching) > 1:
-            warning_header = warning.get("header")
-            matching = [
-                rule
-                for rule in matching
-                if isinstance(rule.get("dimension"), str)
-                and names.get(rule["dimension"]) == warning_header
-            ]
         if len(matching) != 1:
             issues.append(_issue("UNALLOWLISTED_WARNING", str(warning.get("code"))))
             continue
@@ -1680,6 +1684,10 @@ def _validate_warning_rules(
                 )
             )
             continue
+        # Canonical output equivalence means the deterministic execution's selected
+        # output resolves to a pinned code from this reviewed exact header source. It
+        # does not equate competing candidate values: AMBIGUOUS_HEADER records their
+        # difference, while the workbook and replay bytes are digest-bound upstream.
         expected_sources_by_year = rule.get("expectedHeaderSourcesByYear")
         if expected_sources_by_year is not None:
             configured = (

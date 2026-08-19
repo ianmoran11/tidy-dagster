@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-victoria-3594164858",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-victoria-3594164858",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-victoria-3594164858-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-5-normalized.xlsx",
+      "contentDigest": "sha256:acff430314b644f187d28eab6db91e5f36b36a6c3da9a4f566a57a6bd15a68a3",
+      "byteLength": 84162,
+      "sheet": "Table 23",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-victoria-3594164858-2023.response.txt",
+        "contentDigest": "sha256:9aaa060dfe898772fee2df68135c0135e6ec9927488ce033d3f3d177b03944d0",
+        "byteLength": 729,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-5-normalized.xlsx",
+      "contentDigest": "sha256:e93188e7561bf68072d44cf5fe90911c963429fb4de8bd6873fcdfd4c545e02f",
+      "byteLength": 94621,
+      "sheet": "Table 28",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-victoria-3594164858-2024.response.txt",
+        "contentDigest": "sha256:ae9eb40d4524752e9194f9564ff51b8e8993838dd1b0dd540ab12bbf81d17ce0",
+        "byteLength": 703,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}
