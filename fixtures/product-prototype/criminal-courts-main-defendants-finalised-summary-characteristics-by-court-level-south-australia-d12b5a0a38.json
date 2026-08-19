@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-south-australia-d12b5a0a38",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-south-australia-d12b5a0a38",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-south-australia-d12b5a0a38-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-7-normalized.xlsx",
+      "contentDigest": "sha256:e7948fe1073b749487923af20accc1a482ef9107f629ecf52d4ec7b909c5dd94",
+      "byteLength": 97984,
+      "sheet": "Table 31",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-south-australia-d12b5a0a38-2021.response.txt",
+        "contentDigest": "sha256:225de3db306a6de7a8c20687e5d23af99877680e2d0156acf030a7fd363dfe40",
+        "byteLength": 844,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-7-normalized.xlsx",
+      "contentDigest": "sha256:550aaa60a245932e7a790a6c2fd6a8e0bf1badeddb68807bcafb0ca6aa2d4de0",
+      "byteLength": 103956,
+      "sheet": "Table 31",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-south-australia-d12b5a0a38-2022.response.txt",
+        "contentDigest": "sha256:5c8991cfaadb6378cee02128ff4eb5d9a8ca112576945fa2d0963dc2383490fb",
+        "byteLength": 857,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-7-normalized.xlsx",
+      "contentDigest": "sha256:c028253cb884189d887521a111628b5dd34204728810885257603e448feb0c39",
+      "byteLength": 83197,
+      "sheet": "Table 34",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-south-australia-d12b5a0a38-2023.response.txt",
+        "contentDigest": "sha256:25f00cb126e775f29e52e30c563a54443e055705f3e238bddfad0def3e91c15a",
+        "byteLength": 922,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

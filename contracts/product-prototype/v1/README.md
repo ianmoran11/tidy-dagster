@@ -28,15 +28,16 @@ the status snapshot, Dagster assets, and dashboard totals. The provider-free cus
 
 The Criminal Courts release inventory applies the same custody/completeness
 boundary to 69 downloads, 65 substantive cubes, 198 reviewed semantic families,
-and all 430 numbered sheets across 2021–22 through 2024–25. The first 170
+and all 430 numbered sheets across 2021–22 through 2024–25. The first 214
 registered assets are split where ANZSOC 2011, preliminary ANZSOC 2023, final
 ANZSOC 2023, and concorded historical identities cannot safely share one alias
-namespace. The remaining 260 sheets stay pending. The preliminary concordance contract uses the explicit
+namespace. The remaining 216 sheets stay pending. The preliminary concordance contract uses the explicit
 `principal_offence_anzsoc_2011` dimension beside the ordinary
 `principal_offence` dimension so the two principal-offence classifications are
-not collapsed or mislabeled as offence versus charge. The New South Wales and
-Victoria contracts add a source-bound `classification_context` dimension so identical
-principal-offence labels remain distinct when paired with ANZSOC 2011, ANZSOC
+not collapsed or mislabeled as offence versus charge. The complete New South
+Wales, Victoria, Queensland, and South Australia jurisdiction contracts add a
+source-bound `classification_context` dimension so identical principal-offence
+labels remain distinct when paired with ANZSOC 2011, ANZSOC
 2023, or the mixed concorded historical series. Run
 `scripts/tidy-criminal-courts-release verify` for the provider-free closure.
 

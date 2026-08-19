@@ -765,11 +765,11 @@ declaration. The manifest binds both scripts, original/derived identities,
 corrections, and retained ranges and reproduces all twelve shared derivatives
 byte-for-byte.
 
-The combined registered batch now contains 107 cohorts and 321 worksheets with
-283,627 canonical observations. The dashboard projects three publications, 112
-cohorts, 346 worksheet-assets, and 296,910 canonical observations through 346
-verified CSV routes. The complete New South Wales, Victoria, and Queensland
-Criminal Courts cubes contribute 66 worksheets and 52,630 rows while preserving
+The combined registered batch now contains 116 cohorts and 343 worksheets with
+301,122 canonical observations. The dashboard projects three publications, 121
+cohorts, 368 worksheet-assets, and 314,405 canonical observations through 368
+verified CSV routes. The complete New South Wales, Victoria, Queensland, and
+South Australia Criminal Courts cubes contribute 88 worksheets and 70,125 rows while preserving
 observation periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC
 2023, and concorded historical classification contexts. Dagster and the
 dashboard remain replaceable, read-only projections rather than evidence

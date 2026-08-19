@@ -1,0 +1,302 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-south-b87fdba651-v1",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-south-b87fdba651",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_01_HOMICIDE",
+            "OFFENCE_02_ASSAULT",
+            "OFFENCE_03_SEXUAL_OFFENCES",
+            "OFFENCE_04_HARM_OR_ENDANGER_PERSONS",
+            "OFFENCE_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "OFFENCE_06_BURGLARY",
+            "OFFENCE_07_THEFT",
+            "OFFENCE_08_FRAUD_AND_RELATED_OFFENCES",
+            "OFFENCE_09_DRUG_OFFENCES",
+            "OFFENCE_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+            "OFFENCE_11_PROPERTY_DAMAGE",
+            "OFFENCE_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "OFFENCE_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "OFFENCE_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+            "OFFENCE_15_OFFENCES_AGAINST_GOVERNMENT",
+            "OFFENCE_16_ENVIRONMENTAL_OFFENCES",
+            "OFFENCE_17_MISCELLANEOUS_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "SA"
+          ],
+          "court_level": [
+            "ALL_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2023"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 684
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:b64ad795992b35d113ddbef8f608b0de31df4d661be145a3c9380ba98ebfecc3"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "observation_period",
+    "principal_offence",
+    "jurisdiction",
+    "court_level",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "classification_context": [
+      "^classification\\ context$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "Adjudicated outcomes(c)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Acquitted": "CHAR_ACQUITTED",
+      "Guilty outcome(d)": "CHAR_GUILTY_OUTCOME",
+      "Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      "Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "Transfer to other court levels": "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "CHAR_WITHDRAWN_BY_PROSECUTION",
+      "Total finalised(e)": "CHAR_TOTAL_FINALISED",
+      "Custody in a correctional institution": "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Intensive penalty in the community": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Fully suspended sentence of imprisonment": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Community service / work": "CHAR_COMMUNITY_SERVICE_WORK",
+      "Moderate penalty in the community": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Monetary penalties(f)": "CHAR_MONETARY_PENALTIES",
+      "Fines": "CHAR_FINES",
+      "Good behaviour (incl. bonds)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Nominal and other penalties": "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+      "Total guilty outcome(g)": "CHAR_TOTAL_GUILTY_OUTCOME"
+    },
+    "characteristic_group": {
+      "Method of finalisation": "GROUP_METHOD_OF_FINALISATION",
+      "Principal sentence": "GROUP_PRINCIPAL_SENTENCE"
+    },
+    "observation_period": {
+      "2024–25": "2025-06-30",
+      "2023–24": "2024-06-30"
+    },
+    "principal_offence": {
+      "01 Homicide": "OFFENCE_01_HOMICIDE",
+      "02 Assault": "OFFENCE_02_ASSAULT",
+      "03 Sexual offences": "OFFENCE_03_SEXUAL_OFFENCES",
+      "04 Harm or endanger persons": "OFFENCE_04_HARM_OR_ENDANGER_PERSONS",
+      "05 Robbery, blackmail, and extortion": "OFFENCE_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "06 Burglary": "OFFENCE_06_BURGLARY",
+      "07 Theft": "OFFENCE_07_THEFT",
+      "08 Fraud and related offences": "OFFENCE_08_FRAUD_AND_RELATED_OFFENCES",
+      "09 Drug offences": "OFFENCE_09_DRUG_OFFENCES",
+      "10 Weapons and explosives offences": "OFFENCE_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+      "11 Property damage": "OFFENCE_11_PROPERTY_DAMAGE",
+      "12 Public order, health, and safety offences": "OFFENCE_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "13 Traffic and vehicle offences": "OFFENCE_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "14 Offences against justice procedures and orders(a)": "OFFENCE_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+      "15 Offences against government": "OFFENCE_15_OFFENCES_AGAINST_GOVERNMENT",
+      "16 Environmental offences": "OFFENCE_16_ENVIRONMENTAL_OFFENCES",
+      "17 Miscellaneous offences": "OFFENCE_17_MISCELLANEOUS_OFFENCES",
+      "Total(b)": "OFFENCE_TOTAL"
+    },
+    "jurisdiction": {
+      "Table 41 Defendants finalised and with a guilty outcome, Summary outcomes by all principal offence, All Courts – South Australia, 2023–24 to 2024–25": "SA"
+    },
+    "court_level": {
+      "Table 41 Defendants finalised and with a guilty outcome, Summary outcomes by all principal offence, All Courts – South Australia, 2023–24 to 2024–25": "ALL_COURTS"
+    },
+    "classification_context": {
+      "Table 41 Defendants finalised and with a guilty outcome, Summary outcomes by all principal offence, All Courts – South Australia, 2023–24 to 2024–25": "ANZSOC_2023"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "principal_offence_id",
+    "jurisdiction_id",
+    "court_level_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2024": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2024": [
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "principalOffencesByYear": {
+      "2024": [
+        "OFFENCE_01_HOMICIDE",
+        "OFFENCE_02_ASSAULT",
+        "OFFENCE_03_SEXUAL_OFFENCES",
+        "OFFENCE_04_HARM_OR_ENDANGER_PERSONS",
+        "OFFENCE_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+        "OFFENCE_06_BURGLARY",
+        "OFFENCE_07_THEFT",
+        "OFFENCE_08_FRAUD_AND_RELATED_OFFENCES",
+        "OFFENCE_09_DRUG_OFFENCES",
+        "OFFENCE_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+        "OFFENCE_11_PROPERTY_DAMAGE",
+        "OFFENCE_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+        "OFFENCE_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+        "OFFENCE_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+        "OFFENCE_15_OFFENCES_AGAINST_GOVERNMENT",
+        "OFFENCE_16_ENVIRONMENTAL_OFFENCES",
+        "OFFENCE_17_MISCELLANEOUS_OFFENCES",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2024": [
+        "SA"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2024": [
+        "ALL_COURTS"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2024": [
+        "ANZSOC_2023"
+      ]
+    },
+    "minimumRows": 684,
+    "maximumRows": 684,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 19
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "2024-06-30": [
+            "R29C2"
+          ],
+          "2025-06-30": [
+            "R6C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2024": 342
+  },
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "referenceDateDimension": "observation_period"
+}

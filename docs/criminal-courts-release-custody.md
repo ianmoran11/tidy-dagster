@@ -181,8 +181,25 @@ canonical-output equivalence, and pin the exact selected header source cells.
 The mixed 2024–25 concorded summary context remains separate from ANZSOC 2011
 and ANZSOC 2023. No additive total equations are imposed.
 
-The nine clusters now cover 192 of 430 worksheets and produce 227,610 canonical
-observations; 238 worksheets remain pending reviewed contracts.
+## Tenth accepted South Australia cluster
+
+The tenth cluster covers the complete 22-sheet South Australia cube across
+2021–22 through 2024–25. Nine contracts bind Cube 7 Tables 31–35, 31–35,
+34–39, and 39–44 respectively. The 2024–25 all-principal-offence All Courts and
+Magistrates' Courts tables remain singleton families, separate from the
+selected-offence continuations.
+
+The cluster adds 17,495 canonical rows: 16,631 defendant counts plus 216
+observations for each mean/median defendant age and mean/median case duration
+measure. It preserves 1,522 published numeric zeros separately from 57 `..`
+not-applicable and 148 `na` not-available cells. The source-bound classification
+context distinguishes ANZSOC 2011, ANZSOC 2023, and the mixed concorded 2024–25
+summary series. All 10,734 ambiguity warnings require canonical-output
+equivalence and exact year-specific selected header sources. Perturbation notes
+preclude additive total equations.
+
+The ten clusters now cover 214 of 430 worksheets and produce 245,105 canonical
+observations; 216 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -204,7 +221,7 @@ observations; 238 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 192 assets replay with
+measures, value statuses, source cells, and warnings. All 214 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh
