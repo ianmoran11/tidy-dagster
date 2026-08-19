@@ -90,6 +90,17 @@ VICTORIA_FAMILIES = (
     "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-and-4a552df2a2",
     "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-b85a0d076d",
 )
+QUEENSLAND_FAMILIES = (
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-queen-3ce9f383e3",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-7ae5115676",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--f8da01fb54",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--0841d7f5ad",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f847eba164",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-57f4983e16",
+    "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-queensland-bef784f7d8",
+    "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692",
+    "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-and-2925b8b521",
+)
 GUILTY_OUTCOME_FAMILIES = (
     "criminal-courts-guilty-outcome-summary-by-jurisdiction",
     "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
@@ -140,8 +151,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 170,
-        "pendingSemanticContractCount": 260,
+        "registeredMemberCount": 192,
+        "pendingSemanticContractCount": 238,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -183,7 +194,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 170
+        == 192
     )
 
 
@@ -208,7 +219,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 170
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 192
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -1075,6 +1086,153 @@ def test_victoria_cluster_preserves_source_and_classification() -> None:
         FIXTURES / f"{VICTORIA_FAMILIES[3]}-evidence/canonical-observations.csv"
     ).open(newline="") as handle:
         assert "Table 32" in {row["source_sheet"] for row in csv.DictReader(handle)}
+
+
+def test_queensland_cluster_preserves_source_classification_and_warnings() -> None:
+    membership = _load(MEMBERSHIP)
+    members = [
+        member
+        for family in membership["families"]
+        for member in family["members"]
+        if member["cubeId"] == "defendants-finalised-queensland"
+    ]
+    assert len(members) == 22
+    assert Counter(member["releaseId"] for member in members) == {
+        "2021-22": 5,
+        "2022-23": 5,
+        "2023-24": 6,
+        "2024-25": 6,
+    }
+    assert all(member["registered"] for member in members)
+
+    source_books = {
+        release: load_workbook(
+            FIXTURES
+            / next(
+                member["sourcePath"]
+                for member in members
+                if member["releaseId"] == release
+            ),
+            data_only=False,
+            read_only=False,
+        )
+        for release in {member["releaseId"] for member in members}
+    }
+    rows: list[dict[str, object]] = []
+    source_cells: set[tuple[str, str, str]] = set()
+    warning_dimensions: set[str] = set()
+    warning_header_sources: dict[str, set[str]] = {}
+    warning_count = 0
+    for family_id in QUEENSLAND_FAMILIES:
+        evidence = FIXTURES / f"{family_id}-evidence"
+        manifest = _load(evidence / "manifest.json")
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        cohort = _load(FIXTURES / f"{family_id}.json")
+        run = _load(evidence / "run.json")
+        family_rows = json.loads((evidence / "canonical-observations.json").read_text())
+        assert manifest["providerCalls"] == 0
+        assert manifest["exceptionWorkbookCount"] == 0
+        assert manifest["canonicalObservationCount"] == len(family_rows)
+        assert contract["totalValidation"] == "not_applicable"
+        assert contract["totalEquations"] == []
+        assert contract["trainingEligibility"] is False
+        assert all(
+            workbook["replayResponse"]["acceptanceAuthority"] is False
+            for workbook in cohort["workbooks"]
+        )
+        observed_warning_counts = {
+            str(workbook["year"]): workbook["executionWarningCount"]
+            for workbook in run["workbooks"]
+        }
+        assert observed_warning_counts == contract["expectedWarningCountsByYear"]
+        assert observed_warning_counts == manifest["warningCountsByYear"]
+        warning_count += sum(observed_warning_counts.values())
+        warning_dimensions.update(
+            rule["dimension"] for rule in contract["allowedExecutionWarnings"]
+        )
+        for rule in contract["allowedExecutionWarnings"]:
+            assert rule["requireCanonicalOutputEquivalence"] is True
+            assert set(rule["expectedHeaderSourcesByYear"]) == {
+                str(year) for year in manifest["manualReplayYears"]
+            }
+            warning_header_sources.setdefault(rule["dimension"], set()).update(
+                source
+                for aliases in rule["expectedHeaderSourcesByYear"].values()
+                for bound_sources in aliases.values()
+                for source in bound_sources
+            )
+
+        for row in family_rows:
+            match = re.fullmatch(r"R([0-9]+)C([0-9]+)", str(row["source_cell"]))
+            assert match is not None
+            release_start = int(str(row["publication_vintage_date"])[:4]) - 1
+            release = f"{release_start}-{str(release_start + 1)[-2:]}"
+            cell = source_books[release][str(row["source_sheet"])].cell(
+                row=int(match.group(1)), column=int(match.group(2))
+            )
+            assert cell.value == row["raw_value"]
+            source_key = (
+                str(row["source_workbook_digest"]),
+                str(row["source_sheet"]),
+                str(row["source_cell"]),
+            )
+            assert source_key not in source_cells
+            source_cells.add(source_key)
+            assert row["reference_date"] == row["observation_period_id"]
+            assert row["jurisdiction_id"] == "QLD"
+        rows.extend(family_rows)
+
+    assert len(rows) == 17_415
+    assert len(source_cells) == len(rows)
+    assert Counter(str(row["measure_id"]) for row in rows) == {
+        "defendant-count": 16_551,
+        "mean-case-duration": 216,
+        "mean-defendant-age": 216,
+        "median-case-duration": 216,
+        "median-defendant-age": 216,
+    }
+    assert Counter(str(row["value_status"]) for row in rows) == {
+        "observed": 17_162,
+        "not_available": 136,
+        "not_applicable": 117,
+    }
+    assert {
+        (row["raw_value"], row["value_status"])
+        for row in rows
+        if row["value_status"] != "observed"
+    } == {("..", "not_applicable"), ("na", "not_available")}
+    assert sum(row["value"] == 0 for row in rows) == 986
+    assert {str(row["classification_context_id"]) for row in rows} == {
+        "ANZSOC_2011",
+        "ANZSOC_2023",
+        "MIXED_CONCORDED_ANZSOC_2011_AND_ANZSOC_2023",
+    }
+    assert warning_dimensions == {"court_level", "observation_period"}
+    assert warning_header_sources == {
+        "court_level": {
+            "R5C2",
+            "R6C2",
+            "R55C2",
+            "R61C2",
+            "R62C2",
+            "R104C2",
+            "R117C2",
+            "R118C2",
+            "R153C2",
+            "R173C2",
+            "R174C2",
+        },
+        "observation_period": {
+            "R5C2",
+            "R6C2",
+            "R28C2",
+            "R29C2",
+            "R30C2",
+            "R31C2",
+        },
+    }
+    assert warning_count == 10_640
+    assert any(row["publication_vintage_date"] != row["reference_date"] for row in rows)
 
 
 def test_download_digest_mutation_fails_closed(tmp_path: Path) -> None:

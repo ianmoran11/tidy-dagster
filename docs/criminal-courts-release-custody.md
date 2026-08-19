@@ -166,8 +166,23 @@ All 10,720 repeated-panel ambiguity warnings are bound by dimension, year, exact
 header source, and canonical-output equivalence. Perturbation notes preclude
 speculative additive total equations.
 
-The eight clusters now cover 170 of 430 worksheets and produce 210,195 canonical
-observations; 260 worksheets remain pending reviewed contracts.
+## Ninth accepted Queensland cluster
+
+The ninth cluster covers the complete 22-sheet Queensland cube across 2021–22
+through 2024–25. Nine contracts bind Cube 6 Tables 26–30, 26–30, 28–33, and
+33–38 respectively, while keeping the long-running selected-offence families
+separate from the 2024–25 all-offence singletons. Its 17,415 canonical rows
+retain 16,551 defendant counts plus 216 observations for each mean/median age
+and mean/median case duration measure. Published numeric zeros remain distinct
+from 117 `..` and 136 `na` markers.
+
+The 10,640 repeated-panel warnings are frozen by year and dimension, require
+canonical-output equivalence, and pin the exact selected header source cells.
+The mixed 2024–25 concorded summary context remains separate from ANZSOC 2011
+and ANZSOC 2023. No additive total equations are imposed.
+
+The nine clusters now cover 192 of 430 worksheets and produce 227,610 canonical
+observations; 238 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -189,7 +204,7 @@ observations; 260 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 170 assets replay with
+measures, value statuses, source cells, and warnings. All 192 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

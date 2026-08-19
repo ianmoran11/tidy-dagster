@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-6-normalized.xlsx",
+      "contentDigest": "sha256:d0c12a4474f77d55de76e53745316742da948c88f320bed32f6d023665364057",
+      "byteLength": 100863,
+      "sheet": "Table 26",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692-2021.response.txt",
+        "contentDigest": "sha256:535a1f5fd8cb4be7c967f0d2c26d78671397b16b53bf2222a88dc8a9cb36fbd5",
+        "byteLength": 878,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-6-normalized.xlsx",
+      "contentDigest": "sha256:39d7962c96333d487c918e60c65341b242ef6e5ccbebf3fb76d2fdab8ace39da",
+      "byteLength": 103432,
+      "sheet": "Table 26",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692-2022.response.txt",
+        "contentDigest": "sha256:4044a6974d121a219ec341bb5da4a1e19fce61e3cfa87682a693132eaf6edde9",
+        "byteLength": 891,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-6-normalized.xlsx",
+      "contentDigest": "sha256:155a69c6c8712efdac4ce2a4eec7eed9adc207ea0245880e16ec8e309f62192c",
+      "byteLength": 81533,
+      "sheet": "Table 28",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692-2023.response.txt",
+        "contentDigest": "sha256:b888e91d0bcb98e4c64391b9d06cf4c818f625c0c8d3f4369b1fb347407bef50",
+        "byteLength": 943,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

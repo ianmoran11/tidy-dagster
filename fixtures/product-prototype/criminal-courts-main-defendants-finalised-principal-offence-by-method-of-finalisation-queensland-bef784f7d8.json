@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-queensland-bef784f7d8",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-queensland-bef784f7d8",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-queensland-bef784f7d8-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-6-normalized.xlsx",
+      "contentDigest": "sha256:155a69c6c8712efdac4ce2a4eec7eed9adc207ea0245880e16ec8e309f62192c",
+      "byteLength": 81533,
+      "sheet": "Table 29",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-queensland-bef784f7d8-2023.response.txt",
+        "contentDigest": "sha256:8159d1fa23093a7ab913736259e4557b41542f38816f9e687e927ae0d348b5cc",
+        "byteLength": 731,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-6-normalized.xlsx",
+      "contentDigest": "sha256:09f3c851795043d81e7a4a4f67d7d3f5204376e2686ea6b73556d9ded20adb23",
+      "byteLength": 94463,
+      "sheet": "Table 34",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-queensland-bef784f7d8-2024.response.txt",
+        "contentDigest": "sha256:c95e695f3114831b7f265e7d7b27822f10aeda60f6aaa8e80d149bd0e2b94250",
+        "byteLength": 705,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

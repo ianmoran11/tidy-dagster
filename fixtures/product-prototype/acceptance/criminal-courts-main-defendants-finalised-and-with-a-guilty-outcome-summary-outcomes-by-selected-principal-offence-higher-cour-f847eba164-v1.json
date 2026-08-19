@@ -1,0 +1,644 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v1",
+  "contractId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f847eba164-v1",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f847eba164",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_CUSTODY_IN_THE_COMMUNITY",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_CUSTODIAL_ORDERS",
+            "GROUP_GUILTY_EX_PARTE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_NON_CUSTODIAL_ORDERS"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "OFFENCE_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "OFFENCE_06_ROBBERY_EXTORTION",
+            "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "OFFENCE_09_FRAUD_DECEPTION",
+            "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "QLD"
+          ],
+          "court_level": [
+            "HIGHER_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_GUILTY_EX_PARTE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "OFFENCE_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "OFFENCE_06_ROBBERY_EXTORTION",
+            "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "OFFENCE_09_FRAUD_DECEPTION",
+            "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "QLD"
+          ],
+          "court_level": [
+            "HIGHER_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_GUILTY_EX_PARTE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "OFFENCE_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "OFFENCE_06_ROBBERY_EXTORTION",
+            "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "OFFENCE_09_FRAUD_DECEPTION",
+            "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "QLD"
+          ],
+          "court_level": [
+            "HIGHER_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_GUILTY_EX_PARTE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_01_HOMICIDE",
+            "OFFENCE_02_ASSAULT",
+            "OFFENCE_03_SEXUAL_OFFENCES",
+            "OFFENCE_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+            "OFFENCE_06_BURGLARY",
+            "OFFENCE_08_FRAUD_AND_RELATED_OFFENCES",
+            "OFFENCE_09_DRUG_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "QLD"
+          ],
+          "court_level": [
+            "HIGHER_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2023"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 272,
+        "2022": 288,
+        "2023": 304,
+        "2024": 304
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:4921f75d3922e8468ee6164e375276f5866d5571f35c69fd937ff3e18d4e3709",
+        "2022": "sha256:e915bd9ef9d7d720ade68301ef15e1f7dabf653ce4585a98bac76d2222f2e456",
+        "2023": "sha256:77fe76e3cbd54acf3e4eed7df172c98ee4414a7f9258511f940b04b29e85fb29",
+        "2024": "sha256:2e0e6c896c8153d85ff4725589d9d60a4f76ac693b51493c1d18633283dde478"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "observation_period",
+    "principal_offence",
+    "jurisdiction",
+    "court_level",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "classification_context": [
+      "^classification\\ context$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "Adjudicated outcomes": "CHAR_ADJUDICATED_OUTCOMES",
+      "Acquitted": "CHAR_ACQUITTED",
+      "Guilty outcome": "CHAR_GUILTY_OUTCOME",
+      "Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      "Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Transfer to other court levels": "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "CHAR_WITHDRAWN_BY_PROSECUTION",
+      "Total finalised": "CHAR_TOTAL_FINALISED",
+      "Custody in a correctional institution": "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Custody in the community": "CHAR_CUSTODY_IN_THE_COMMUNITY",
+      "Fully suspended sentence": "CHAR_FULLY_SUSPENDED_SENTENCE",
+      "Total": "CHAR_TOTAL",
+      "Community supervision/work orders": "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+      "Fines": "CHAR_FINES",
+      "Other non-custodial orders": "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+      "Total guilty outcome": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Intensive penalty in the community": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Fully suspended sentence of imprisonment": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Community service / work": "CHAR_COMMUNITY_SERVICE_WORK",
+      "Moderate penalty in the community": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Monetary penalties": "CHAR_MONETARY_PENALTIES",
+      "Good behaviour (incl. bonds)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Nominal and other penalties": "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+      "Adjudicated outcomes(c)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Guilty outcome(d)": "CHAR_GUILTY_OUTCOME",
+      "Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "Total finalised(e)": "CHAR_TOTAL_FINALISED",
+      "Monetary penalties(f)": "CHAR_MONETARY_PENALTIES",
+      "Total guilty outcome(g)": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Adjudicated outcomes(d)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Guilty outcome(e)": "CHAR_GUILTY_OUTCOME",
+      "Total finalised(f)": "CHAR_TOTAL_FINALISED",
+      "Monetary penalties(g)": "CHAR_MONETARY_PENALTIES",
+      "Total guilty outcome(h)": "CHAR_TOTAL_GUILTY_OUTCOME"
+    },
+    "characteristic_group": {
+      "Method of finalisation": "GROUP_METHOD_OF_FINALISATION",
+      "Guilty ex-parte": "GROUP_GUILTY_EX_PARTE",
+      "Custodial orders": "GROUP_CUSTODIAL_ORDERS",
+      "Non-custodial orders": "GROUP_NON_CUSTODIAL_ORDERS",
+      "Principal sentence": "GROUP_PRINCIPAL_SENTENCE"
+    },
+    "observation_period": {
+      "2021–22": "2022-06-30",
+      "2020–21": "2021-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "principal_offence": {
+      "01 Homicide & related offences": "OFFENCE_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "02 Acts intended to cause injury": "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "03 Sexual assault & related offences": "OFFENCE_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "06 Robbery/ extortion": "OFFENCE_06_ROBBERY_EXTORTION",
+      "07 Unlawful entry with intent": "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "09 Fraud/ deception": "OFFENCE_09_FRAUD_DECEPTION",
+      "10 Illicit drug offences": "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+      "Total": "OFFENCE_TOTAL",
+      "10 Illicit drug offences(a)": "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+      "Total(b)": "OFFENCE_TOTAL",
+      "01 Homicide(a)": "OFFENCE_01_HOMICIDE",
+      "02 Assault": "OFFENCE_02_ASSAULT",
+      "03 Sexual offences": "OFFENCE_03_SEXUAL_OFFENCES",
+      "05 Robbery, blackmail, and extortion": "OFFENCE_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+      "06 Burglary": "OFFENCE_06_BURGLARY",
+      "08 Fraud and related offences": "OFFENCE_08_FRAUD_AND_RELATED_OFFENCES",
+      "09 Drug offences(b)": "OFFENCE_09_DRUG_OFFENCES",
+      "Total(c)": "OFFENCE_TOTAL"
+    },
+    "jurisdiction": {
+      "Table 28 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2020–21 to 2021–22": "QLD",
+      "Table 28 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2021–22 to 2022–23": "QLD",
+      "Table 31 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2022–23 to 2023–24": "QLD",
+      "Table 36 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2023–24 to 2024–25": "QLD"
+    },
+    "court_level": {
+      "Table 28 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2020–21 to 2021–22": "HIGHER_COURTS",
+      "Table 28 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2021–22 to 2022–23": "HIGHER_COURTS",
+      "Table 31 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2022–23 to 2023–24": "HIGHER_COURTS",
+      "Table 36 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2023–24 to 2024–25": "HIGHER_COURTS"
+    },
+    "classification_context": {
+      "Table 28 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2020–21 to 2021–22": "ANZSOC_2011",
+      "Table 28 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2021–22 to 2022–23": "ANZSOC_2011",
+      "Table 31 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2022–23 to 2023–24": "ANZSOC_2011",
+      "Table 36 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Queensland, 2023–24 to 2024–25": "ANZSOC_2023"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "principal_offence_id",
+    "jurisdiction_id",
+    "court_level_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_CUSTODY_IN_THE_COMMUNITY",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2024": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "GROUP_CUSTODIAL_ORDERS",
+        "GROUP_GUILTY_EX_PARTE",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_NON_CUSTODIAL_ORDERS"
+      ],
+      "2022": [
+        "GROUP_GUILTY_EX_PARTE",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE"
+      ],
+      "2023": [
+        "GROUP_GUILTY_EX_PARTE",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE"
+      ],
+      "2024": [
+        "GROUP_GUILTY_EX_PARTE",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "OFFENCE_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "OFFENCE_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "OFFENCE_06_ROBBERY_EXTORTION",
+        "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "OFFENCE_09_FRAUD_DECEPTION",
+        "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2022": [
+        "OFFENCE_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "OFFENCE_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "OFFENCE_06_ROBBERY_EXTORTION",
+        "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "OFFENCE_09_FRAUD_DECEPTION",
+        "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2023": [
+        "OFFENCE_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "OFFENCE_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "OFFENCE_06_ROBBERY_EXTORTION",
+        "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "OFFENCE_09_FRAUD_DECEPTION",
+        "OFFENCE_10_ILLICIT_DRUG_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2024": [
+        "OFFENCE_01_HOMICIDE",
+        "OFFENCE_02_ASSAULT",
+        "OFFENCE_03_SEXUAL_OFFENCES",
+        "OFFENCE_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+        "OFFENCE_06_BURGLARY",
+        "OFFENCE_08_FRAUD_AND_RELATED_OFFENCES",
+        "OFFENCE_09_DRUG_OFFENCES",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "QLD"
+      ],
+      "2022": [
+        "QLD"
+      ],
+      "2023": [
+        "QLD"
+      ],
+      "2024": [
+        "QLD"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "HIGHER_COURTS"
+      ],
+      "2022": [
+        "HIGHER_COURTS"
+      ],
+      "2023": [
+        "HIGHER_COURTS"
+      ],
+      "2024": [
+        "HIGHER_COURTS"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2021": [
+        "ANZSOC_2011"
+      ],
+      "2022": [
+        "ANZSOC_2011"
+      ],
+      "2023": [
+        "ANZSOC_2011"
+      ],
+      "2024": [
+        "ANZSOC_2023"
+      ]
+    },
+    "minimumRows": 272,
+    "maximumRows": 304,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 9
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "2021-06-30": [
+            "R30C2"
+          ],
+          "2022-06-30": [
+            "R6C2"
+          ]
+        },
+        "2022": {
+          "2022-06-30": [
+            "R29C2"
+          ],
+          "2023-06-30": [
+            "R6C2"
+          ]
+        },
+        "2023": {
+          "2023-06-30": [
+            "R28C2"
+          ],
+          "2024-06-30": [
+            "R5C2"
+          ]
+        },
+        "2024": {
+          "2024-06-30": [
+            "R29C2"
+          ],
+          "2025-06-30": [
+            "R6C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2021": 136,
+    "2022": 144,
+    "2023": 152,
+    "2024": 152
+  },
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "referenceDateDimension": "observation_period"
+}

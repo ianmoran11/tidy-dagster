@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 170
+EXPECTED_REGISTERED_COUNT = 192
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -105,6 +105,15 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-victoria-3594164858",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-and-4a552df2a2",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-victoria-b85a0d076d",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-queen-3ce9f383e3",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-7ae5115676",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--f8da01fb54",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--0841d7f5ad",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f847eba164",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-57f4983e16",
+        "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-queensland-bef784f7d8",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-and-2925b8b521",
     }
 )
 

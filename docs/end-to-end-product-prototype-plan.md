@@ -762,14 +762,15 @@ changes and one out-of-range change rather than claiming no retained-range
 changes. The script refuses every other source identity or cell state and emits
 a receipt that the verifier requires to exactly match the manifest correction
 declaration. The manifest binds both scripts, original/derived identities,
-corrections, and retained ranges and reproduces all eight shared derivatives
+corrections, and retained ranges and reproduces all twelve shared derivatives
 byte-for-byte.
 
-The combined registered batch now contains 98 cohorts and 299 worksheets with
-266,212 canonical observations. The dashboard projects three publications, 103
-cohorts, 324 worksheet-assets, and 279,495 canonical observations through 324
-verified CSV routes. The complete New South Wales and Victoria Criminal Courts
-cubes contribute 44 worksheets and 35,215 rows while preserving observation
-periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC 2023, and
-concorded historical classification contexts. Dagster and the dashboard remain replaceable, read-only
-projections rather than evidence authority.
+The combined registered batch now contains 107 cohorts and 321 worksheets with
+283,627 canonical observations. The dashboard projects three publications, 112
+cohorts, 346 worksheet-assets, and 296,910 canonical observations through 346
+verified CSV routes. The complete New South Wales, Victoria, and Queensland
+Criminal Courts cubes contribute 66 worksheets and 52,630 rows while preserving
+observation periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC
+2023, and concorded historical classification contexts. Dagster and the
+dashboard remain replaceable, read-only projections rather than evidence
+authority.
