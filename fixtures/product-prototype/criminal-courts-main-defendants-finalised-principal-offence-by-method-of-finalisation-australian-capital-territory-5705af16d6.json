@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-australian-capital-territory-5705af16d6",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-australian-capital-territory-5705af16d6",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-australian-capital-territory-5705af16d6-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-11-normalized.xlsx",
+      "contentDigest": "sha256:8fa12098948cee2705a6a4e4306741e9c214beb63262f72e94db3b01c11f787e",
+      "byteLength": 73250,
+      "sheet": "Table 59",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-australian-capital-territory-5705af16d6-2023.response.txt",
+        "contentDigest": "sha256:8fa38eb1aaf60fc97eba8ad956998a4a8e9f8a3c89bc4e5e216c0952c632f991",
+        "byteLength": 750,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-11-normalized.xlsx",
+      "contentDigest": "sha256:a062c33cfe6fd96368ad04582f579efe09d7ce04d1a0debf3200f69101b5e18d",
+      "byteLength": 89249,
+      "sheet": "Table 64",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-australian-capital-territory-5705af16d6-2024.response.txt",
+        "contentDigest": "sha256:3c954b84cc75f7157978f297195ed3d51a57f044f02352cb0c241904f8403a0a",
+        "byteLength": 724,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

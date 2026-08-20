@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-1f84e9447d",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-1f84e9447d",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-1f84e9447d-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-11-normalized.xlsx",
+      "contentDigest": "sha256:8635cea4f8a99ed81d423aae198e89edf7f0d2c0f62271911b3743c735afbc05",
+      "byteLength": 92785,
+      "sheet": "Table 51",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-1f84e9447d-2021.response.txt",
+        "contentDigest": "sha256:937c9e2741927f070da0204d6f147d197804a3aebc049b61fe9ca76c4a726ac4",
+        "byteLength": 871,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-11-normalized.xlsx",
+      "contentDigest": "sha256:68f13a3de859e52ea263f9d1cd01d8b55e3db249ff135bc7493b28eecb8d01a8",
+      "byteLength": 94090,
+      "sheet": "Table 51",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-1f84e9447d-2022.response.txt",
+        "contentDigest": "sha256:43f74a4bb23c2e6d0f9bca0e4ffcc279448ccc8be6ee3d98b95a00c734bc86c2",
+        "byteLength": 884,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-11-normalized.xlsx",
+      "contentDigest": "sha256:8fa12098948cee2705a6a4e4306741e9c214beb63262f72e94db3b01c11f787e",
+      "byteLength": 73250,
+      "sheet": "Table 58",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-1f84e9447d-2023.response.txt",
+        "contentDigest": "sha256:f20a80b1a161f6a4c2cc640e3316e848f956d03951a42e276b289f88ff51e300",
+        "byteLength": 936,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

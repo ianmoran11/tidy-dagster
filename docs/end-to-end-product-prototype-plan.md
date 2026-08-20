@@ -756,21 +756,25 @@ normalized derivatives. The existing trim script still refuses to remove any
 valued or formula cell. A separate digest-bound correction script handles three
 reviewed isolated values outside the semantic observation/header regions:
 2023–24 `Table 5!AG1=0`, and 2024–25 `Table 4!XFC50=3` plus `Table 5!AI1=0`.
-The two row-1 cells are inside the retained rectangular worksheet ranges;
-`XFC50` is outside. The manifest therefore truthfully records two in-range value
-changes and one out-of-range change rather than claiming no retained-range
-changes. The script refuses every other source identity or cell state and emits
+It also corrects the ACT 2021–22 terminal period typo at `Table 51!M5` from the
+impossible `2022–22` to `2021–22` only in the normalized derivative. This
+replacement is bound to exact source bytes, style, shared-string type, cell, and
+old/new values. Three corrections are inside retained rectangular worksheet
+ranges; `XFC50` is outside. The manifest truthfully records these in-range and
+out-of-range changes rather than claiming no retained-range changes. The script
+refuses every other source identity or cell state and emits
 a receipt that the verifier requires to exactly match the manifest correction
 declaration. The manifest binds both scripts, original/derived identities,
-corrections, and retained ranges and reproduces all twelve shared derivatives
+corrections, and retained ranges and reproduces every declared derivative
 byte-for-byte.
 
-The combined registered batch now contains 134 cohorts and 387 worksheets with
-335,380 canonical observations. The dashboard projects three publications, 139
-cohorts, 412 worksheet-assets, and 348,663 canonical observations through 412
+The combined registered batch now contains 143 cohorts and 409 worksheets with
+351,437 canonical observations. The dashboard projects three publications, 148
+cohorts, 434 worksheet-assets, and 364,720 canonical observations through 434
 verified CSV routes. The complete New South Wales, Victoria, Queensland, South
-Australia, Western Australia, and Northern Territory Criminal Courts cubes
-contribute 132 worksheets and 104,383 rows while preserving observation
+Australia, Western Australia, Northern Territory, and Australian Capital
+Territory Criminal Courts cubes contribute 154 worksheets and 120,440 rows
+while preserving observation
 periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC 2023, and
 concorded historical classification contexts. Dagster and the dashboard remain
 replaceable, read-only projections rather than evidence authority.

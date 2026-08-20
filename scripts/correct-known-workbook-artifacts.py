@@ -17,9 +17,10 @@ PKG_REL = "http://schemas.openxmlformats.org/package/2006/relationships"
 ET.register_namespace("", MAIN)
 ET.register_namespace("r", DOC_REL)
 
-# Each removal is outside the publication's semantic data region and is
-# accepted only for the exact reviewed source bytes, style, scalar value, and
-# absence of a formula. The original source workbook remains committed.
+# Each correction is accepted only for the exact reviewed source bytes and
+# exact cell identity, style, scalar value, and absence of a formula. The
+# original source workbook remains committed. Replacements additionally bind
+# the shared-string cell type and exact old/new displayed values.
 CORRECTIONS = {
     "8dc16d0c7ac726e0eb8fc87a707f7616408f8be0cb009508afd6c737b1db692a": {
         "byteLength": 111_807,
@@ -62,6 +63,27 @@ CORRECTIONS = {
             },
         ],
     },
+    "319a19845565441e74073d62a6dcd9cf46491611e45c0ff9081ab2be94966cf7": {
+        "byteLength": 108_775,
+        "id": "criminal-courts-act-2021-22-period-header-v1",
+        "reason": (
+            "Correct the impossible Table 51 terminal period header "
+            "2022\N{EN DASH}22 to 2021\N{EN DASH}22; the publication title "
+            "and adjacent series establish "
+            "the intended period, while preserving the exact source separately."
+        ),
+        "replacedCells": [
+            {
+                "sheet": "Table 51",
+                "cell": "M5",
+                "expectedStyle": "7",
+                "expectedType": "s",
+                "expectedValue": "2022\N{EN DASH}22",
+                "replacementValue": "2021\N{EN DASH}22",
+                "insideRetainedRange": True,
+            }
+        ],
+    },
 }
 
 
@@ -97,7 +119,7 @@ def correct(source: Path, output: Path) -> dict[str, object]:
     with zipfile.ZipFile(source, "r") as archive:
         targets = sheet_targets(archive)
         replacements: dict[str, bytes] = {}
-        for artifact in declaration["cells"]:
+        for artifact in declaration.get("cells", []):
             sheet = str(artifact["sheet"])
             address = str(artifact["cell"])
             target = targets.get(sheet)
@@ -140,17 +162,73 @@ def correct(source: Path, output: Path) -> dict[str, object]:
             replacements[target] = ET.tostring(
                 root, encoding="utf-8", xml_declaration=True
             )
+
+        replaced_cells = declaration.get("replacedCells", [])
+        if replaced_cells:
+            shared_root = ET.fromstring(archive.read("xl/sharedStrings.xml"))
+            shared_values = [
+                "".join(text.text or "" for text in item.iter(f"{{{MAIN}}}t"))
+                for item in shared_root.findall(f"{{{MAIN}}}si")
+            ]
+            for artifact in replaced_cells:
+                sheet = str(artifact["sheet"])
+                address = str(artifact["cell"])
+                target = targets.get(sheet)
+                if target is None:
+                    raise ValueError(f"Workbook is missing {sheet}")
+                root = ET.fromstring(replacements.get(target, archive.read(target)))
+                matches = [
+                    cell
+                    for cell in root.findall(f".//{{{MAIN}}}c")
+                    if cell.get("r") == address
+                ]
+                if len(matches) != 1:
+                    raise ValueError(f"Expected exactly one {sheet}!{address} cell")
+                cell = matches[0]
+                formula = cell.find(f"{{{MAIN}}}f")
+                value = cell.find(f"{{{MAIN}}}v")
+                try:
+                    old_index = int(value.text) if value is not None else -1
+                except (TypeError, ValueError):
+                    old_index = -1
+                if (
+                    formula is not None
+                    or cell.get("s") != artifact["expectedStyle"]
+                    or cell.get("t") != artifact["expectedType"]
+                    or old_index < 0
+                    or old_index >= len(shared_values)
+                    or shared_values[old_index] != artifact["expectedValue"]
+                ):
+                    raise ValueError(
+                        f"{sheet}!{address} no longer matches {declaration['id']}"
+                    )
+                new_indices = [
+                    index
+                    for index, displayed in enumerate(shared_values)
+                    if displayed == artifact["replacementValue"]
+                ]
+                if len(new_indices) != 1:
+                    raise ValueError(
+                        f"Replacement shared string for {sheet}!{address} is not unique"
+                    )
+                assert value is not None
+                value.text = str(new_indices[0])
+                replacements[target] = ET.tostring(
+                    root, encoding="utf-8", xml_declaration=True
+                )
+
         with zipfile.ZipFile(output, "w") as destination:
             for entry in archive.infolist():
                 destination.writestr(
                     copy.copy(entry),
                     replacements.get(entry.filename, archive.read(entry.filename)),
                 )
-    return {
-        "id": declaration["id"],
-        "removedCells": declaration["cells"],
-        "reason": declaration["reason"],
-    }
+    receipt = {"id": declaration["id"], "reason": declaration["reason"]}
+    if replaced_cells:
+        receipt["replacedCells"] = replaced_cells
+    else:
+        receipt["removedCells"] = declaration["cells"]
+    return receipt
 
 
 def main() -> int:

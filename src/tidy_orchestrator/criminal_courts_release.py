@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 258
+EXPECTED_REGISTERED_COUNT = 280
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -141,6 +141,15 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-and-cd3b98cdfb",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-austr-4200e414a2",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-79856bc0b9",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--0b4eef6926",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--7c61d6c40e",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-6c72c5eba2",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-139aaf92e0",
+        "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-australian-capital-territory-5705af16d6",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-1f84e9447d",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-australian-capital-territory-and-b377949ac0",
     }
 )
 

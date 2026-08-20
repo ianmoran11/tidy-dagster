@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import re
+import runpy
 import shutil
 import subprocess
 from collections import Counter
@@ -10,6 +12,7 @@ from pathlib import Path
 
 import jsonschema
 import pytest
+from openpyxl import load_workbook
 
 import tidy_orchestrator.large_batch as large_batch_module
 import tidy_orchestrator.product_prototype as product_prototype_module
@@ -54,15 +57,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-three-hundred-eighty-seven-worksheets-v1"
-    assert registry.worksheet_count == 387
+    assert registry.batch_id == "justice-four-hundred-nine-worksheets-v1"
+    assert registry.worksheet_count == 409
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 134
+    assert len(registry.entries) == 143
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 53
+    assert len(normalization["entries"]) == 57
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 52,
+        "trim-pathological-styled-blank-cells-v1": 56,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -70,16 +73,23 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
         cell
         for entry in normalization["entries"]
         if entry["correction"] is not None
-        for cell in entry["correction"]["removedCells"]
+        for cell in entry["correction"].get("removedCells", [])
+    ]
+    replaced_cells = [
+        cell
+        for entry in normalization["entries"]
+        if entry["correction"] is not None
+        for cell in entry["correction"].get("replacedCells", [])
     ]
     assert sum(cell["insideRetainedRange"] for cell in removed_cells) == 2
     assert sum(not cell["insideRetainedRange"] for cell in removed_cells) == 1
+    assert sum(cell["insideRetainedRange"] for cell in replaced_cells) == 1
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 387
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 409
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 335380
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 351437
     assert sum(item["providerCalls"] for item in manifests) == 0
     nt_manifests = [
         item
@@ -102,6 +112,24 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     assert sum(item["acceptedWorkbookCount"] for item in nt_manifests) == 22
     assert sum(item["canonicalObservationCount"] for item in nt_manifests) == 16931
     assert sum(item["providerCalls"] for item in nt_manifests) == 0
+    act_suffixes = (
+        "4200e414a2",
+        "79856bc0b9",
+        "0b4eef6926",
+        "7c61d6c40e",
+        "6c72c5eba2",
+        "139aaf92e0",
+        "5705af16d6",
+        "1f84e9447d",
+        "b377949ac0",
+    )
+    act_manifests = [
+        item for item in manifests if item["familyId"].endswith(act_suffixes)
+    ]
+    assert len(act_manifests) == 9
+    assert sum(item["acceptedWorkbookCount"] for item in act_manifests) == 22
+    assert sum(item["canonicalObservationCount"] for item in act_manifests) == 16057
+    assert sum(item["providerCalls"] for item in act_manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
     ]
@@ -166,9 +194,12 @@ def test_registry_pins_acceptance_policy_and_v2_replay_timestamp() -> None:
         if spec.acceptance_policy_version == "tidy.table-family-acceptance/v2"
     ]
     assert len(v1) == 125
-    assert len(v2) == 9
+    assert len(v2) == 18
     assert all(spec.replay_recorded_at is None for spec in v1)
-    assert {spec.replay_recorded_at for spec in v2} == {"2026-08-15T09:00:00+00:00"}
+    assert Counter(spec.replay_recorded_at for spec in v2) == {
+        "2026-08-15T09:00:00+00:00": 9,
+        "2026-08-21T09:00:00+00:00": 9,
+    }
 
 
 @pytest.mark.parametrize("mutation", ["missing-policy", "v2-missing-timestamp"])
@@ -1416,9 +1447,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 387
+    assert report["acceptedWorksheetCount"] == 409
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 335380
+    assert report["canonicalObservationCount"] == 351437
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -1497,6 +1528,65 @@ def test_digest_bound_correction_emits_manifest_matching_receipt(
     )
     assert completed.returncode == 0, completed.stderr
     assert json.loads(receipt.read_text()) == entry["correction"]
+
+
+def test_act_period_header_correction_is_exact_and_fails_closed(
+    tmp_path: Path,
+) -> None:
+    script = PROJECT / "scripts/correct-known-workbook-artifacts.py"
+    namespace = runpy.run_path(str(script))
+    correct = namespace["correct"]
+    declarations = namespace["CORRECTIONS"]
+    source = (
+        PROJECT
+        / "fixtures/product-prototype/workbooks"
+        / "criminal-courts-2021-22-cube-11-source.xlsx"
+    )
+    source_digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    original = copy.deepcopy(declarations[source_digest])
+
+    output = tmp_path / "corrected.xlsx"
+    receipt = correct(source, output)
+    assert receipt["id"] == "criminal-courts-act-2021-22-period-header-v1"
+    assert (
+        load_workbook(source, read_only=True)["Table 51"]["M5"].value
+        == "2022\N{EN DASH}22"
+    )
+    assert (
+        load_workbook(output, read_only=True)["Table 51"]["M5"].value
+        == "2021\N{EN DASH}22"
+    )
+    normalized = (
+        PROJECT
+        / "fixtures/product-prototype/workbooks"
+        / "criminal-courts-2021-22-cube-11-normalized.xlsx"
+    )
+    assert (
+        load_workbook(normalized, read_only=True)["Table 51"]["M5"].value
+        == "2021\N{EN DASH}22"
+    )
+
+    tampered_source = tmp_path / "tampered-source.xlsx"
+    tampered_source.write_bytes(source.read_bytes() + b"tampered")
+    with pytest.raises(ValueError, match="exact reviewed correction source"):
+        correct(tampered_source, tmp_path / "wrong-digest.xlsx")
+
+    try:
+        wrong_cell = copy.deepcopy(original)
+        wrong_cell["replacedCells"][0]["cell"] = "ZZ999"
+        declarations[source_digest] = wrong_cell
+        with pytest.raises(
+            ValueError, match="Expected exactly one Table 51!ZZ999 cell"
+        ):
+            correct(source, tmp_path / "wrong-cell.xlsx")
+
+        wrong_value = copy.deepcopy(original)
+        wrong_value["replacedCells"][0]["expectedValue"] = "2020\N{EN DASH}21"
+        declarations[source_digest] = wrong_value
+        with pytest.raises(ValueError, match="no longer matches"):
+            correct(source, tmp_path / "wrong-value.xlsx")
+    finally:
+        declarations[source_digest] = original
 
 
 def _source_cell(address: str) -> str:
@@ -1717,10 +1807,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-three-hundred-eighty-seven-worksheets-v1",
-        "worksheetCount": 387,
-        "cohortCount": 134,
-        "canonicalObservationCount": 335380,
+        "batchId": "justice-four-hundred-nine-worksheets-v1",
+        "worksheetCount": 409,
+        "cohortCount": 143,
+        "canonicalObservationCount": 351437,
         "providerCalls": 0,
         "verified": True,
     }

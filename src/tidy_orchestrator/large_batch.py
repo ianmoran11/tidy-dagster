@@ -326,6 +326,52 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
     )
 
 
+def _valid_correction_claim(value: Any) -> bool:
+    if not isinstance(value, dict):
+        return False
+    common = {"id", "reason"}
+    if not all(isinstance(value.get(key), str) and value[key] for key in common):
+        return False
+    if set(value) == common | {"removedCells"}:
+        cells = value.get("removedCells")
+        expected_keys = {
+            "sheet",
+            "cell",
+            "expectedStyle",
+            "expectedValue",
+            "insideRetainedRange",
+        }
+        string_keys = {"sheet", "cell", "expectedStyle", "expectedValue"}
+    elif set(value) == common | {"replacedCells"}:
+        cells = value.get("replacedCells")
+        expected_keys = {
+            "sheet",
+            "cell",
+            "expectedStyle",
+            "expectedType",
+            "expectedValue",
+            "replacementValue",
+            "insideRetainedRange",
+        }
+        string_keys = expected_keys - {"insideRetainedRange"}
+    else:
+        return False
+    return (
+        isinstance(cells, list)
+        and bool(cells)
+        and all(
+            isinstance(cell, dict)
+            and set(cell) == expected_keys
+            and all(
+                isinstance(cell.get(key), str) and bool(cell[key])
+                for key in string_keys
+            )
+            and isinstance(cell.get("insideRetainedRange"), bool)
+            for cell in cells
+        )
+    )
+
+
 def verify_batch_normalization(
     project_root: Path,
     registry: LargeBatchRegistry,
@@ -414,38 +460,7 @@ def verify_batch_normalization(
             or not entry["trimmedSheets"]
             or (
                 entry.get("correction") is not None
-                and (
-                    not isinstance(entry["correction"], dict)
-                    or set(entry["correction"]) != {"id", "removedCells", "reason"}
-                    or not isinstance(entry["correction"].get("id"), str)
-                    or not entry["correction"]["id"]
-                    or not isinstance(entry["correction"].get("reason"), str)
-                    or not entry["correction"]["reason"]
-                    or not isinstance(entry["correction"].get("removedCells"), list)
-                    or not entry["correction"]["removedCells"]
-                    or any(
-                        not isinstance(cell, dict)
-                        or set(cell)
-                        != {
-                            "sheet",
-                            "cell",
-                            "expectedStyle",
-                            "expectedValue",
-                            "insideRetainedRange",
-                        }
-                        or not all(
-                            isinstance(cell.get(key), str) and cell[key]
-                            for key in (
-                                "sheet",
-                                "cell",
-                                "expectedStyle",
-                                "expectedValue",
-                            )
-                        )
-                        or not isinstance(cell.get("insideRetainedRange"), bool)
-                        for cell in entry["correction"]["removedCells"]
-                    )
-                )
+                and not _valid_correction_claim(entry["correction"])
             )
         ):
             raise LargeBatchError("Normalization manifest entry is invalid")
@@ -465,7 +480,10 @@ def verify_batch_normalization(
             raise LargeBatchError("Normalization trimmed-sheet declaration is invalid")
         retained_by_sheet = {item["sheet"]: item["retainedRange"] for item in trimmed}
         if entry["correction"] is not None:
-            for cell in entry["correction"]["removedCells"]:
+            corrected_cells = entry["correction"].get(
+                "removedCells", entry["correction"].get("replacedCells", [])
+            )
+            for cell in corrected_cells:
                 inside = cell["sheet"] in retained_by_sheet and _cell_in_range(
                     cell["cell"], retained_by_sheet[cell["sheet"]]
                 )
