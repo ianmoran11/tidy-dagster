@@ -198,8 +198,26 @@ summary series. All 10,734 ambiguity warnings require canonical-output
 equivalence and exact year-specific selected header sources. Perturbation notes
 preclude additive total equations.
 
-The ten clusters now cover 214 of 430 worksheets and produce 245,105 canonical
-observations; 216 worksheets remain pending reviewed contracts.
+## Eleventh accepted Western Australia cluster
+
+The eleventh cluster covers the complete 22-sheet Western Australia cube across
+2021–22 through 2024–25. Nine contracts bind Cube 8 Tables 36–40, 36–40,
+40–45, and 45–50 respectively. The 2024–25 all-principal-offence All Courts and
+Magistrates' Courts tables remain singleton families, separate from the
+selected-offence continuations.
+
+The cluster adds 17,327 canonical rows: 16,463 defendant counts plus 216
+observations for each mean/median defendant age and mean/median case duration
+measure. It preserves 1,441 published numeric zeros separately from 61 `..`
+not-applicable, 100 `na` not-available, and 198 `np` suppressed cells. The
+source-bound classification context distinguishes ANZSOC 2011, ANZSOC 2023,
+and the mixed concorded 2024–25 summary series. All 10,576 ambiguity warnings
+require canonical-output equivalence and exact year-specific selected header
+sources. Method-of-finalisation categories, including guilty ex-parte, retain
+`GROUP_METHOD_OF_FINALISATION`; perturbation notes preclude additive equations.
+
+The eleven clusters now cover 236 of 430 worksheets and produce 262,432
+canonical observations; 194 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -221,7 +239,7 @@ observations; 216 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 214 assets replay with
+measures, value statuses, source cells, and warnings. All 236 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

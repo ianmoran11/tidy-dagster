@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tidy.data-asset-status-registry/v1",
   "title": "Tidy Data Asset Status",
-  "recordedAt": "2026-08-19T09:45:00+00:00",
+  "recordedAt": "2026-08-20T09:00:00+00:00",
   "outputPath": "docs/data-asset-status/index.html",
   "server": {
     "host": "127.0.0.1",
@@ -865,6 +865,69 @@
       "cohortPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction.json",
       "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-youth-summary-characteristics-by-jurisdiction-evidence/manifest.json",
       "dagsterAsset": "product_prototype_criminal_courts_youth_summary_characteristics_by_jurisdiction_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-weste-dbc6bd4c00",
+      "label": "Criminal Courts — Western Australia — Defendants finalised and with a guilty outcome, Summary outcomes by all principal offence, All Courts – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-weste-dbc6bd4c00.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-weste-dbc6bd4c00-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_all_offence_all_courts_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-38195c8963",
+      "label": "Criminal Courts — Western Australia — Defendants finalised and with a guilty outcome, Summary outcomes by all principal offence, Magistrates' Courts – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-38195c8963.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-38195c8963-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_all_offence_magistrates_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--ff52555b4d",
+      "label": "Criminal Courts — Western Australia — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, All Courts – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--ff52555b4d.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--ff52555b4d-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_selected_offence_all_courts_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--5674ad07c6",
+      "label": "Criminal Courts — Western Australia — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--5674ad07c6.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--5674ad07c6-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_selected_offence_childrens_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c",
+      "label": "Criminal Courts — Western Australia — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Higher Courts – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_selected_offence_higher_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-b52ac75a8f",
+      "label": "Criminal Courts — Western Australia — Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Magistrates' Courts – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-b52ac75a8f.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-b52ac75a8f-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_selected_offence_magistrates_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-western-australia-3c7004c375",
+      "label": "Criminal Courts — Western Australia — Defendants finalised, Principal offence by method of finalisation – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-western-australia-3c7004c375.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-western-australia-3c7004c375-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_method_by_offence_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-and-be8fa3884d",
+      "label": "Criminal Courts — Western Australia — Defendants finalised, summary characteristics by court level — mixed concorded history — Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-and-be8fa3884d.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-and-be8fa3884d-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_summary_mixed_replay"
+    },
+    {
+      "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-df3797a707",
+      "label": "Criminal Courts — Western Australia — Defendants finalised, Summary characteristics by court level – Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-df3797a707.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-df3797a707-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_wa_summary_historical_replay"
     }
   ],
   "publications": [

@@ -135,16 +135,16 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
 
 
-def test_definitions_include_343_worksheet_cross_publication_batch() -> None:
+def test_definitions_include_365_worksheet_cross_publication_batch() -> None:
     definitions = build_definitions(project_root=PROJECT)
     Definitions.validate_loadable(definitions)
-    assert LARGE_BATCH_REGISTRY.worksheet_count == 343
-    assert len(LARGE_BATCH_REGISTRY.entries) == 116
-    assert len(LARGE_BATCH_ASSETS) == 116
-    assert len(LARGE_BATCH_CHECKS) == 116
-    assert len(LARGE_BATCH_JOBS) == 116
+    assert LARGE_BATCH_REGISTRY.worksheet_count == 365
+    assert len(LARGE_BATCH_REGISTRY.entries) == 125
+    assert len(LARGE_BATCH_ASSETS) == 125
+    assert len(LARGE_BATCH_CHECKS) == 125
+    assert len(LARGE_BATCH_JOBS) == 125
     assert definitions.metadata["product_prototype_large_batch_supported"].value
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 343
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 365
     assert {
         spec.family_id
         for spec in LARGE_BATCH_REGISTRY.entries
@@ -155,7 +155,7 @@ def test_definitions_include_343_worksheet_cross_publication_batch() -> None:
             spec.family_id.startswith("criminal-courts-")
             for spec in LARGE_BATCH_REGISTRY.entries
         )
-        == 89
+        == 98
     )
     assert {asset.key.to_user_string() for asset in LARGE_BATCH_ASSETS} == {
         spec.dagster_asset for spec in LARGE_BATCH_REGISTRY.entries
@@ -183,7 +183,7 @@ def test_build_definitions_uses_requested_project_registry(tmp_path: Path) -> No
         definitions.metadata["product_prototype_large_batch_id"].value
         == "alternate-three-hundred-twenty-one-worksheets-v1"
     )
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 343
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 365
 
 
 def test_definitions_load_identity_and_share_one_partition_definition(

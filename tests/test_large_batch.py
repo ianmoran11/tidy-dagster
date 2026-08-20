@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import shutil
 import subprocess
 from collections import Counter
 from pathlib import Path
@@ -47,15 +48,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-three-hundred-forty-three-worksheets-v1"
-    assert registry.worksheet_count == 343
+    assert registry.batch_id == "justice-three-hundred-sixty-five-worksheets-v1"
+    assert registry.worksheet_count == 365
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 116
+    assert len(registry.entries) == 125
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 45
+    assert len(normalization["entries"]) == 49
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 44,
+        "trim-pathological-styled-blank-cells-v1": 48,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -70,9 +71,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 343
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 365
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 301122
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 318449
     assert sum(item["providerCalls"] for item in manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
@@ -381,6 +382,84 @@ def test_evidence_rejects_warning_count_drift(
     monkeypatch.setattr(large_batch_module, "_load_object", load)
     with pytest.raises(LargeBatchError, match="warning counts do not match"):
         verify_large_batch_evidence(PROJECT, spec)
+
+
+def test_evidence_rejects_self_consistently_rebound_acceptance_mismatch(
+    tmp_path: Path,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = next(
+        item
+        for item in registry.entries
+        if item.family_id.endswith("western-australia-and-be8fa3884d")
+    )
+    cohort_source = PROJECT / spec.cohort_path
+    cohort = json.loads(cohort_source.read_text())
+    paths = [
+        Path(spec.cohort_path),
+        Path(spec.cohort_path).parent / cohort["acceptanceContract"],
+    ]
+    for workbook in cohort["workbooks"]:
+        paths.extend(
+            [
+                Path(spec.cohort_path).parent / workbook["path"],
+                Path(spec.cohort_path).parent / workbook["replayResponse"]["path"],
+            ]
+        )
+    for relative in paths:
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(PROJECT / relative, destination)
+
+    evidence_source = (PROJECT / spec.evidence_manifest_path).parent
+    evidence_root = (tmp_path / spec.evidence_manifest_path).parent
+    shutil.copytree(evidence_source, evidence_root)
+
+    canonical_path = evidence_root / "canonical-observations.json"
+    rows = json.loads(canonical_path.read_text())
+    assert (
+        rows[0]["publication_vintage_date"] == cohort["workbooks"][0]["referenceDate"]
+    )
+    rows[0]["acceptance_decision_digest"] = "sha256:" + "0" * 64
+    canonical_bytes = (
+        json.dumps(rows, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        + "\n"
+    ).encode()
+    canonical_path.write_bytes(canonical_bytes)
+
+    run_path = evidence_root / "run.json"
+    run = json.loads(run_path.read_text())
+    run["canonicalJsonDigest"] = "sha256:" + hashlib.sha256(canonical_bytes).hexdigest()
+    semantic_run = dict(run)
+    semantic_run.pop("runDigest")
+    run["runDigest"] = domain_digest(RUN_SCHEMA, semantic_run)
+    run_bytes = (
+        json.dumps(run, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        + "\n"
+    ).encode()
+    run_path.write_bytes(run_bytes)
+
+    manifest_path = evidence_root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["runDigest"] = run["runDigest"]
+    rebound = {
+        "canonical-observations.json": canonical_bytes,
+        "run.json": run_bytes,
+    }
+    for declaration in manifest["files"]:
+        if declaration["path"] in rebound:
+            content = rebound[declaration["path"]]
+            declaration["contentDigest"] = (
+                "sha256:" + hashlib.sha256(content).hexdigest()
+            )
+            declaration["byteLength"] = len(content)
+    manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+
+    with pytest.raises(
+        LargeBatchError,
+        match="Canonical acceptance decision does not match run evidence",
+    ):
+        verify_large_batch_evidence(tmp_path, spec)
 
 
 def test_multi_condition_measure_selection_rejects_overlap() -> None:
@@ -727,14 +806,166 @@ def test_south_australia_criminal_courts_cluster_is_source_bound_and_closed() ->
     assert len(corrected_rows) == 387
 
 
+def test_western_australia_criminal_courts_cluster_is_source_bound_and_closed() -> None:
+    base = PROJECT / "fixtures/product-prototype"
+    membership = json.loads(
+        (base / "criminal-courts-release-family-membership-v1.json").read_text()
+    )
+    families = []
+    for family in membership["families"]:
+        members = [
+            member
+            for member in family["members"]
+            if member["cubeId"] == "defendants-finalised-western-australia"
+        ]
+        if members:
+            families.append((family["familyId"], members))
+
+    expected_ids = {
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-weste-dbc6bd4c00",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-38195c8963",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--ff52555b4d",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--5674ad07c6",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-b52ac75a8f",
+        "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-western-australia-3c7004c375",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-and-be8fa3884d",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-df3797a707",
+    }
+    assert {family_id for family_id, _ in families} == expected_ids
+    assert Counter(
+        member["releaseId"] for _, members in families for member in members
+    ) == {"2021-22": 5, "2022-23": 5, "2023-24": 6, "2024-25": 6}
+    assert {
+        (member["releaseId"], member["physicalSheetName"])
+        for _, members in families
+        for member in members
+    } == {
+        *(("2021-22", f"Table {number}") for number in range(36, 41)),
+        *(("2022-23", f"Table {number}") for number in range(36, 41)),
+        *(("2023-24", f"Table {number}") for number in range(40, 46)),
+        *(("2024-25", f"Table {number}") for number in range(45, 51)),
+    }
+    assert all(
+        member["registered"] is True for _, members in families for member in members
+    )
+
+    rows = []
+    warning_count = 0
+    for family_id, members in families:
+        cohort = json.loads((base / f"{family_id}.json").read_text())
+        contract = json.loads(
+            (base / "acceptance" / f"{family_id}-v1.json").read_text()
+        )
+        run = json.loads((base / f"{family_id}-evidence/run.json").read_text())
+        manifest = json.loads(
+            (base / f"{family_id}-evidence/manifest.json").read_text()
+        )
+        canonical_rows = json.loads(
+            (base / f"{family_id}-evidence/canonical-observations.json").read_text()
+        )
+        rows.extend(canonical_rows)
+        warning_count += sum(item["executionWarningCount"] for item in run["workbooks"])
+        assert run["providerCalls"] == manifest["providerCalls"] == 0
+        assert run["historicalReplayIsAcceptanceAuthority"] is False
+        assert run["trainingEligibility"] is contract["trainingEligibility"] is False
+        assert contract["totalEquations"] == []
+        assert (
+            contract["expectedWarningCountsByYear"] == manifest["warningCountsByYear"]
+        )
+        assert all(
+            rule["code"] == "AMBIGUOUS_HEADER"
+            and rule["dimension"] in {"court_level", "observation_period"}
+            and rule["requireCanonicalOutputEquivalence"] is True
+            and all(
+                sources
+                for by_output in rule["expectedHeaderSourcesByYear"].values()
+                for sources in by_output.values()
+            )
+            for rule in contract["allowedExecutionWarnings"]
+        )
+        assert [item["sheet"] for item in cohort["workbooks"]] == [
+            member["physicalSheetName"] for member in members
+        ]
+        assert all(
+            item["replayResponse"]["acceptanceAuthority"] is False
+            and item["replayResponse"]["historicalModel"]
+            == "human-authored/deterministic-map-v1"
+            for item in cohort["workbooks"]
+        )
+        for member in members:
+            source = base / member["sourcePath"]
+            assert (
+                "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()
+                == member["sourceDigest"]
+            )
+
+    assert len(rows) == 17327
+    assert Counter(row["measure_id"] for row in rows) == {
+        "defendant-count": 16463,
+        "mean-case-duration": 216,
+        "mean-defendant-age": 216,
+        "median-case-duration": 216,
+        "median-defendant-age": 216,
+    }
+    assert Counter(row["value_status"] for row in rows) == {
+        "observed": 16968,
+        "suppressed": 198,
+        "not_available": 100,
+        "not_applicable": 61,
+    }
+    assert Counter(
+        (row["raw_value"], row["value_status"])
+        for row in rows
+        if row["value_status"] != "observed"
+    ) == {
+        ("np", "suppressed"): 198,
+        ("na", "not_available"): 100,
+        ("..", "not_applicable"): 61,
+    }
+    assert warning_count == 10576
+    assert (
+        sum(row["value"] == 0 and row["value_status"] == "observed" for row in rows)
+        == 1441
+    )
+    assert {row["jurisdiction_id"] for row in rows} == {"WA"}
+    assert {row["classification_context_id"] for row in rows} == {
+        "ANZSOC_2011",
+        "ANZSOC_2023",
+        "MIXED_CONCORDED_ANZSOC_2011_AND_ANZSOC_2023",
+    }
+    assert all(row["raw_value"] == 0 for row in rows if row["value"] == 0)
+
+    method_categories = {
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION",
+        "CHAR_TOTAL_FINALISED",
+    }
+    selected = [
+        row
+        for row in rows
+        if row.get("characteristic_category_id") in method_categories
+    ]
+    assert len(selected) == 2401
+    assert all(
+        row["characteristic_group_id"] == "GROUP_METHOD_OF_FINALISATION"
+        and row["raw_characteristic_group"] == "Method of finalisation"
+        for row in selected
+    )
+    assert all(
+        row.get("characteristic_group_id") != "GROUP_GUILTY_EX_PARTE" for row in rows
+    )
+
+
 @pytest.mark.timeout(900)
 def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 343
+    assert report["acceptedWorksheetCount"] == 365
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 301122
+    assert report["canonicalObservationCount"] == 318449
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -1033,10 +1264,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-three-hundred-forty-three-worksheets-v1",
-        "worksheetCount": 343,
-        "cohortCount": 116,
-        "canonicalObservationCount": 301122,
+        "batchId": "justice-three-hundred-sixty-five-worksheets-v1",
+        "worksheetCount": 365,
+        "cohortCount": 125,
+        "canonicalObservationCount": 318449,
         "providerCalls": 0,
         "verified": True,
     }

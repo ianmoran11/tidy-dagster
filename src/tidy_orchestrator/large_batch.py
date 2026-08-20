@@ -835,6 +835,52 @@ def verify_large_batch_evidence(
     vintage_present = all("publication_vintage_date" in row for row in rows)
     if vintage_present != spec.preserves_publication_vintage:
         raise LargeBatchError("Publication-vintage fields do not match policy")
+
+    acceptance_by_source: dict[tuple[str, str, str], str] = {}
+    for workbook in run_workbooks:
+        workbook_digest = workbook.get("workbookDigest")
+        sheet = workbook.get("sheet")
+        reference_date = workbook.get("referenceDate")
+        decision_id = workbook.get("decisionId")
+        if (
+            _DIGEST.fullmatch(str(workbook_digest)) is None
+            or not isinstance(sheet, str)
+            or not sheet
+            or not isinstance(reference_date, str)
+            or not reference_date
+            or _DIGEST.fullmatch(str(decision_id)) is None
+        ):
+            raise LargeBatchError("Run acceptance source identity is invalid")
+        identity = (workbook_digest, sheet, reference_date)
+        if identity in acceptance_by_source:
+            raise LargeBatchError("Run acceptance source identity is not unique")
+        acceptance_by_source[identity] = decision_id
+
+    represented_sources: set[tuple[str, str, str]] = set()
+    for row in rows:
+        workbook_digest = row.get("source_workbook_digest")
+        sheet = row.get("source_sheet")
+        reference_date = row.get("publication_vintage_date", row.get("reference_date"))
+        decision_id = row.get("acceptance_decision_digest")
+        if (
+            _DIGEST.fullmatch(str(workbook_digest)) is None
+            or not isinstance(sheet, str)
+            or not sheet
+            or not isinstance(reference_date, str)
+            or not reference_date
+            or _DIGEST.fullmatch(str(decision_id)) is None
+        ):
+            raise LargeBatchError("Canonical acceptance source identity is invalid")
+        identity = (workbook_digest, sheet, reference_date)
+        represented_sources.add(identity)
+        if acceptance_by_source.get(identity) != decision_id:
+            raise LargeBatchError(
+                "Canonical acceptance decision does not match run evidence"
+            )
+    if represented_sources != set(acceptance_by_source):
+        raise LargeBatchError(
+            "Canonical acceptance source identities do not match run evidence"
+        )
     return manifest
 
 

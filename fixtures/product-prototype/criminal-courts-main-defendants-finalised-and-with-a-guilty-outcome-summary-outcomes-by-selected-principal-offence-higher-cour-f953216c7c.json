@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-8-normalized.xlsx",
+      "contentDigest": "sha256:560baf91a3f44cd151402a5c4d061bd5febd263010c471911b7c40997df1611f",
+      "byteLength": 102959,
+      "sheet": "Table 38",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c-2021.response.txt",
+        "contentDigest": "sha256:e555458aae5a8ffb05585293f058386efb0faf311f7ec5240ebb8177b9fbcda8",
+        "byteLength": 957,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-8-normalized.xlsx",
+      "contentDigest": "sha256:d569584131574277d3d52c9de487aab9dcf03f0361113a3ce8056abce6cd5129",
+      "byteLength": 108575,
+      "sheet": "Table 38",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c-2022.response.txt",
+        "contentDigest": "sha256:7b0a8d1ca09a37ab9837fb42b8699c49b436fe1e19559ded827b1224ceaaeb1b",
+        "byteLength": 970,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-8-normalized.xlsx",
+      "contentDigest": "sha256:1bab52acae448e776de2924a66613335ceac1df7b6fb401b6ac9ddad44b96aef",
+      "byteLength": 78142,
+      "sheet": "Table 43",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c-2023.response.txt",
+        "contentDigest": "sha256:2e1e2bfddd2fa28b718125f99404e5648cc660257d81fb99cad20a45e6215f8c",
+        "byteLength": 1009,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-8-normalized.xlsx",
+      "contentDigest": "sha256:4df1a7d0df1a6d6f291af65beba7ee1e3704901a319c69edc1f60f5bff16f1ce",
+      "byteLength": 93915,
+      "sheet": "Table 48",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-f953216c7c-2024.response.txt",
+        "contentDigest": "sha256:9a074e8457cba92f930c12627c559c3e86f59c27460bd7ccae9f729d81f5b99b",
+        "byteLength": 957,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}
