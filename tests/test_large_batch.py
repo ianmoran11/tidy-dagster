@@ -12,7 +12,13 @@ import jsonschema
 import pytest
 
 import tidy_orchestrator.large_batch as large_batch_module
-from tidy_orchestrator.artifacts import domain_digest
+import tidy_orchestrator.product_prototype as product_prototype_module
+from tidy_orchestrator.artifacts import (
+    DecisionRecord,
+    canonical_json_bytes,
+    domain_digest,
+    sha256_digest,
+)
 from tidy_orchestrator.large_batch import (
     LargeBatchError,
     load_large_batch_registry,
@@ -48,15 +54,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-three-hundred-sixty-five-worksheets-v1"
-    assert registry.worksheet_count == 365
+    assert registry.batch_id == "justice-three-hundred-eighty-seven-worksheets-v1"
+    assert registry.worksheet_count == 387
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 125
+    assert len(registry.entries) == 134
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 49
+    assert len(normalization["entries"]) == 53
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 48,
+        "trim-pathological-styled-blank-cells-v1": 52,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -71,10 +77,31 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 365
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 387
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 318449
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 335380
     assert sum(item["providerCalls"] for item in manifests) == 0
+    nt_manifests = [
+        item
+        for item in manifests
+        if item["familyId"].endswith(
+            (
+                "9e1eae4d24",
+                "2dc791882d",
+                "dff73e6680",
+                "d4b9910476",
+                "fb8ea665a2",
+                "7b3957ee89",
+                "2e3b1c96f5",
+                "27c9d31040",
+                "cd3b98cdfb",
+            )
+        )
+    ]
+    assert len(nt_manifests) == 9
+    assert sum(item["acceptedWorkbookCount"] for item in nt_manifests) == 22
+    assert sum(item["canonicalObservationCount"] for item in nt_manifests) == 16931
+    assert sum(item["providerCalls"] for item in nt_manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
     ]
@@ -124,6 +151,40 @@ def _registry_value() -> dict[str, object]:
     return json.loads(
         (PROJECT / "fixtures/product-prototype/large-batch-assets-v1.json").read_text()
     )
+
+
+def test_registry_pins_acceptance_policy_and_v2_replay_timestamp() -> None:
+    registry = load_large_batch_registry(PROJECT)
+    v1 = [
+        spec
+        for spec in registry.entries
+        if spec.acceptance_policy_version == "tidy.table-family-acceptance/v1"
+    ]
+    v2 = [
+        spec
+        for spec in registry.entries
+        if spec.acceptance_policy_version == "tidy.table-family-acceptance/v2"
+    ]
+    assert len(v1) == 125
+    assert len(v2) == 9
+    assert all(spec.replay_recorded_at is None for spec in v1)
+    assert {spec.replay_recorded_at for spec in v2} == {"2026-08-15T09:00:00+00:00"}
+
+
+@pytest.mark.parametrize("mutation", ["missing-policy", "v2-missing-timestamp"])
+def test_registry_rejects_unpinned_policy_or_v2_timestamp(
+    tmp_path: Path, mutation: str
+) -> None:
+    value = _registry_value()
+    entry = value["entries"][-1]
+    if mutation == "missing-policy":
+        entry.pop("acceptancePolicyVersion")
+    else:
+        assert entry["acceptancePolicyVersion"].endswith("/v2")
+        entry.pop("replayRecordedAt")
+    _write_registry(tmp_path, value)
+    with pytest.raises(LargeBatchError, match="entry shape is invalid"):
+        load_large_batch_registry(tmp_path)
 
 
 def test_registry_pins_exact_exclusions_for_every_year() -> None:
@@ -270,6 +331,110 @@ def _bind_run_mutation(run: dict[str, object], manifest: dict[str, object]) -> N
     semantic.pop("runDigest")
     run["runDigest"] = domain_digest(RUN_SCHEMA, semantic)
     manifest["runDigest"] = run["runDigest"]
+
+
+def _v2_spec():
+    registry = load_large_batch_registry(PROJECT)
+    return next(
+        item
+        for item in registry.entries
+        if item.family_id.endswith("all-courts-north-9e1eae4d24")
+    )
+
+
+def _copy_evidence_closure(tmp_path: Path, spec) -> tuple[Path, Path, Path]:
+    cohort_relative = Path(spec.cohort_path)
+    cohort = json.loads((PROJECT / cohort_relative).read_text())
+    paths = [
+        cohort_relative,
+        cohort_relative.parent / cohort["acceptanceContract"],
+    ]
+    for workbook in cohort["workbooks"]:
+        paths.extend(
+            [
+                cohort_relative.parent / workbook["path"],
+                cohort_relative.parent / workbook["replayResponse"]["path"],
+            ]
+        )
+    for relative in paths:
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(PROJECT / relative, destination)
+    evidence_root = (tmp_path / spec.evidence_manifest_path).parent
+    shutil.copytree((PROJECT / spec.evidence_manifest_path).parent, evidence_root)
+    return (
+        tmp_path / cohort_relative,
+        tmp_path / paths[1],
+        evidence_root,
+    )
+
+
+def _rebind_copied_evidence(
+    cohort_path: Path,
+    contract_path: Path,
+    evidence_root: Path,
+    rows: list[dict[str, object]],
+    run: dict[str, object],
+    manifest: dict[str, object],
+) -> None:
+    contract = json.loads(contract_path.read_text())
+    canonical_bytes = canonical_json_bytes(rows) + b"\n"
+    csv_bytes = product_prototype_module._canonical_csv(rows, contract)
+    (evidence_root / "canonical-observations.json").write_bytes(canonical_bytes)
+    (evidence_root / "canonical-observations.csv").write_bytes(csv_bytes)
+    run["cohortDigest"] = sha256_digest(cohort_path.read_bytes())
+    run["acceptanceContractDigest"] = sha256_digest(contract_path.read_bytes())
+    run["canonicalJsonDigest"] = sha256_digest(canonical_bytes)
+    run["canonicalCsvDigest"] = sha256_digest(csv_bytes)
+    semantic_run = dict(run)
+    semantic_run.pop("runDigest", None)
+    run["runDigest"] = domain_digest(RUN_SCHEMA, semantic_run)
+    run_bytes = canonical_json_bytes(run) + b"\n"
+    (evidence_root / "run.json").write_bytes(run_bytes)
+    manifest["cohortDigest"] = run["cohortDigest"]
+    manifest["acceptanceContractDigest"] = run["acceptanceContractDigest"]
+    manifest["runDigest"] = run["runDigest"]
+    for declaration in manifest["files"]:
+        data = (evidence_root / declaration["path"]).read_bytes()
+        declaration["contentDigest"] = sha256_digest(data)
+        declaration["byteLength"] = len(data)
+    (evidence_root / "manifest.json").write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
+    )
+
+
+def _decision_id(
+    workbook: dict[str, object],
+    *,
+    subject_id: str,
+    policy_version: str,
+    policy_digest: str,
+    recorded_at: str,
+) -> str:
+    payload = {
+        "year": workbook["year"],
+        "workbookDigest": workbook["workbookDigest"],
+        "sheet": workbook["sheet"],
+        "checks": workbook["checks"],
+        "issues": workbook["issues"],
+        "acceptanceSource": "human-authored-table-family-contract",
+        "historicalReplayIsAuthority": False,
+        "trainingEligibility": False,
+    }
+    if policy_version.endswith("/v2"):
+        payload.update(
+            {
+                "acceptancePolicyVersion": policy_version,
+                "acceptancePolicyDigest": policy_digest,
+            }
+        )
+    return DecisionRecord.create(
+        subject_id=subject_id,
+        decision_type="prototype_auto_accepted",
+        payload=payload,
+        actor="tidy.product-prototype-policy/v1",
+        recorded_at=recorded_at,
+    ).decision_id
 
 
 def test_evidence_rejects_redistributed_per_year_exclusions(
@@ -458,6 +623,294 @@ def test_evidence_rejects_self_consistently_rebound_acceptance_mismatch(
     with pytest.raises(
         LargeBatchError,
         match="Canonical acceptance decision does not match run evidence",
+    ):
+        verify_large_batch_evidence(tmp_path, spec)
+
+
+def test_v2_contract_requires_exact_recipe_digest_year_map() -> None:
+    spec = _v2_spec()
+    cohort_path = PROJECT / spec.cohort_path
+    cohort = json.loads(cohort_path.read_text())
+    contract = json.loads(
+        (cohort_path.parent / cohort["acceptanceContract"]).read_text()
+    )
+    contract.pop("expectedRecipeDigestsByYear")
+    with pytest.raises(ProductPrototypeError, match="recipe digest pins are invalid"):
+        _validate_contract(contract, cohort)
+
+
+def test_v1_evidence_retains_canonical_contract_digest_compatibility() -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = registry.entries[0]
+    cohort_path = PROJECT / spec.cohort_path
+    cohort = json.loads(cohort_path.read_text())
+    contract_path = cohort_path.parent / cohort["acceptanceContract"]
+    contract = json.loads(contract_path.read_text())
+    assert contract["schemaVersion"] == "tidy.table-family-acceptance/v1"
+    expected_policy_digest = sha256_digest(canonical_json_bytes(contract))
+    manifest = verify_large_batch_evidence(PROJECT, spec)
+    assert expected_policy_digest != manifest["acceptanceContractDigest"]
+    rows = json.loads(
+        (
+            (PROJECT / spec.evidence_manifest_path).parent
+            / "canonical-observations.json"
+        ).read_text()
+    )
+    assert {row["acceptance_policy_version"] for row in rows} == {
+        contract["schemaVersion"]
+    }
+    assert {row["acceptance_policy_digest"] for row in rows} == {expected_policy_digest}
+
+
+def test_v2_evidence_rejects_fully_rebound_policy_downgrade(
+    tmp_path: Path,
+) -> None:
+    spec = _v2_spec()
+    cohort_path, contract_path, evidence_root = _copy_evidence_closure(tmp_path, spec)
+    contract = json.loads(contract_path.read_text())
+    contract["schemaVersion"] = "tidy.table-family-acceptance/v1"
+    contract.pop("expectedRecipeDigestsByYear")
+    contract_path.write_text(json.dumps(contract, indent=2, ensure_ascii=False) + "\n")
+    policy_digest = sha256_digest(canonical_json_bytes(contract))
+    rows = json.loads((evidence_root / "canonical-observations.json").read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    manifest = json.loads((evidence_root / "manifest.json").read_text())
+    workbook = run["workbooks"][0]
+    decision_id = _decision_id(
+        workbook,
+        subject_id=rows[0]["recipe_digest"],
+        policy_version=contract["schemaVersion"],
+        policy_digest=policy_digest,
+        recorded_at=manifest["recordedAt"],
+    )
+    workbook["decisionId"] = decision_id
+    for row in rows:
+        row["acceptance_policy_version"] = contract["schemaVersion"]
+        row["acceptance_policy_digest"] = policy_digest
+        row["acceptance_decision_digest"] = decision_id
+    _rebind_copied_evidence(
+        cohort_path, contract_path, evidence_root, rows, run, manifest
+    )
+
+    with pytest.raises(LargeBatchError, match="schema does not match registry pin"):
+        verify_large_batch_evidence(tmp_path, spec)
+
+
+def test_v2_evidence_rejects_fully_rebound_arbitrary_recipe_digest(
+    tmp_path: Path,
+) -> None:
+    spec = _v2_spec()
+    cohort_path, contract_path, evidence_root = _copy_evidence_closure(tmp_path, spec)
+    contract = json.loads(contract_path.read_text())
+    policy_digest = sha256_digest(contract_path.read_bytes())
+    rows = json.loads((evidence_root / "canonical-observations.json").read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    manifest = json.loads((evidence_root / "manifest.json").read_text())
+    arbitrary_digest = "sha256:" + "0" * 64
+    workbook = run["workbooks"][0]
+    decision_id = _decision_id(
+        workbook,
+        subject_id=arbitrary_digest,
+        policy_version=contract["schemaVersion"],
+        policy_digest=policy_digest,
+        recorded_at=manifest["recordedAt"],
+    )
+    workbook["decisionId"] = decision_id
+    for row in rows:
+        row["recipe_digest"] = arbitrary_digest
+        row["acceptance_decision_digest"] = decision_id
+    _rebind_copied_evidence(
+        cohort_path, contract_path, evidence_root, rows, run, manifest
+    )
+
+    with pytest.raises(
+        LargeBatchError, match="recipe identity does not match contract"
+    ):
+        verify_large_batch_evidence(tmp_path, spec)
+
+
+def test_v2_evidence_rejects_fully_rebound_substituted_workbook_identity(
+    tmp_path: Path,
+) -> None:
+    spec = _v2_spec()
+    cohort_path, contract_path, evidence_root = _copy_evidence_closure(tmp_path, spec)
+    contract = json.loads(contract_path.read_text())
+    policy_digest = sha256_digest(contract_path.read_bytes())
+    rows = json.loads((evidence_root / "canonical-observations.json").read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    manifest = json.loads((evidence_root / "manifest.json").read_text())
+    substituted_digest = "sha256:" + "1" * 64
+    workbook = run["workbooks"][0]
+    workbook["workbookDigest"] = substituted_digest
+    pinned_recipe = contract["expectedRecipeDigestsByYear"][str(workbook["year"])]
+    decision_id = _decision_id(
+        workbook,
+        subject_id=pinned_recipe,
+        policy_version=contract["schemaVersion"],
+        policy_digest=policy_digest,
+        recorded_at=manifest["recordedAt"],
+    )
+    workbook["decisionId"] = decision_id
+    for row in rows:
+        row["source_workbook_digest"] = substituted_digest
+        row["acceptance_decision_digest"] = decision_id
+    _rebind_copied_evidence(
+        cohort_path, contract_path, evidence_root, rows, run, manifest
+    )
+
+    with pytest.raises(LargeBatchError, match="Run evidence is invalid"):
+        verify_large_batch_evidence(tmp_path, spec)
+
+
+@pytest.mark.parametrize("mutation", ["empty", "missing", "extra", "truthy"])
+def test_v2_evidence_rejects_nonexact_checks(
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    spec = _v2_spec()
+    manifest_path = (PROJECT / spec.evidence_manifest_path).resolve()
+    evidence_root = manifest_path.parent
+    manifest = json.loads(manifest_path.read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    checks = run["workbooks"][0]["checks"]
+    if mutation == "empty":
+        run["workbooks"][0]["checks"] = {}
+    elif mutation == "missing":
+        checks.pop("coverage")
+    elif mutation == "extra":
+        checks["unrootedExtraCheck"] = True
+    else:
+        checks["coverage"] = 1
+    _bind_run_mutation(run, manifest)
+    original_load = large_batch_module._load_object
+
+    def load(path: Path, label: str) -> dict[str, object]:
+        if path == manifest_path:
+            return manifest
+        if path == evidence_root / "run.json":
+            return run
+        return original_load(path, label)
+
+    monkeypatch.setattr(large_batch_module, "_load_object", load)
+    with pytest.raises(LargeBatchError, match="Run evidence is invalid"):
+        verify_large_batch_evidence(PROJECT, spec)
+
+
+def test_v2_evidence_rejects_fully_rebound_manifest_timestamp(
+    tmp_path: Path,
+) -> None:
+    spec = _v2_spec()
+    cohort_path, contract_path, evidence_root = _copy_evidence_closure(tmp_path, spec)
+    contract = json.loads(contract_path.read_text())
+    policy_digest = sha256_digest(contract_path.read_bytes())
+    rows = json.loads((evidence_root / "canonical-observations.json").read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    manifest = json.loads((evidence_root / "manifest.json").read_text())
+    manifest["recordedAt"] = "2026-08-16T09:00:00+00:00"
+    workbook = run["workbooks"][0]
+    pinned_recipe = contract["expectedRecipeDigestsByYear"][str(workbook["year"])]
+    decision_id = _decision_id(
+        workbook,
+        subject_id=pinned_recipe,
+        policy_version=contract["schemaVersion"],
+        policy_digest=policy_digest,
+        recorded_at=manifest["recordedAt"],
+    )
+    workbook["decisionId"] = decision_id
+    for row in rows:
+        row["acceptance_decision_digest"] = decision_id
+    _rebind_copied_evidence(
+        cohort_path, contract_path, evidence_root, rows, run, manifest
+    )
+
+    with pytest.raises(LargeBatchError, match="timestamp does not match registry pin"):
+        verify_large_batch_evidence(tmp_path, spec)
+
+
+def test_v2_evidence_rejects_stale_decisions_after_exact_policy_rebind(
+    tmp_path: Path,
+) -> None:
+    registry = load_large_batch_registry(PROJECT)
+    spec = next(
+        item
+        for item in registry.entries
+        if item.family_id.endswith("all-courts-north-9e1eae4d24")
+    )
+    cohort_source = PROJECT / spec.cohort_path
+    cohort = json.loads(cohort_source.read_text())
+    assert len(cohort["workbooks"]) == 1
+    paths = [
+        Path(spec.cohort_path),
+        Path(spec.cohort_path).parent / cohort["acceptanceContract"],
+    ]
+    workbook = cohort["workbooks"][0]
+    paths.extend(
+        [
+            Path(spec.cohort_path).parent / workbook["path"],
+            Path(spec.cohort_path).parent / workbook["replayResponse"]["path"],
+        ]
+    )
+    for relative in paths:
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(PROJECT / relative, destination)
+
+    evidence_source = (PROJECT / spec.evidence_manifest_path).parent
+    evidence_root = (tmp_path / spec.evidence_manifest_path).parent
+    shutil.copytree(evidence_source, evidence_root)
+
+    contract_path = tmp_path / paths[1]
+    contract = json.loads(contract_path.read_text())
+    assert contract["schemaVersion"] == "tidy.table-family-acceptance/v2"
+    aliases = next(iter(contract["aliases"].values()))
+    aliases["Unused syntactically valid policy alias"] = next(iter(aliases.values()))
+    contract_bytes = (
+        json.dumps(contract, indent=2, ensure_ascii=False) + "\n"
+    ).encode()
+    contract_path.write_bytes(contract_bytes)
+    policy_digest = sha256_digest(contract_bytes)
+
+    canonical_path = evidence_root / "canonical-observations.json"
+    rows = json.loads(canonical_path.read_text())
+    stale_decisions = {row["acceptance_decision_digest"] for row in rows}
+    for row in rows:
+        row["acceptance_policy_digest"] = policy_digest
+    canonical_bytes = canonical_json_bytes(rows) + b"\n"
+    canonical_path.write_bytes(canonical_bytes)
+    csv_bytes = product_prototype_module._canonical_csv(rows, contract)
+    (evidence_root / "canonical-observations.csv").write_bytes(csv_bytes)
+
+    run_path = evidence_root / "run.json"
+    run = json.loads(run_path.read_text())
+    assert {item["decisionId"] for item in run["workbooks"]} == stale_decisions
+    run["acceptanceContractDigest"] = policy_digest
+    run["canonicalCsvDigest"] = sha256_digest(csv_bytes)
+    run["canonicalJsonDigest"] = sha256_digest(canonical_bytes)
+    semantic_run = dict(run)
+    semantic_run.pop("runDigest")
+    run["runDigest"] = domain_digest(RUN_SCHEMA, semantic_run)
+    run_bytes = canonical_json_bytes(run) + b"\n"
+    run_path.write_bytes(run_bytes)
+
+    manifest_path = evidence_root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["acceptanceContractDigest"] = policy_digest
+    manifest["runDigest"] = run["runDigest"]
+    rebound = {
+        "canonical-observations.csv": csv_bytes,
+        "canonical-observations.json": canonical_bytes,
+        "run.json": run_bytes,
+    }
+    for declaration in manifest["files"]:
+        content = rebound.get(declaration["path"])
+        if content is not None:
+            declaration["contentDigest"] = sha256_digest(content)
+            declaration["byteLength"] = len(content)
+    manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+
+    with pytest.raises(
+        LargeBatchError,
+        match="V2 acceptance decision does not bind acceptance policy",
     ):
         verify_large_batch_evidence(tmp_path, spec)
 
@@ -963,9 +1416,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 365
+    assert report["acceptedWorksheetCount"] == 387
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 318449
+    assert report["canonicalObservationCount"] == 335380
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -1264,10 +1717,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-three-hundred-sixty-five-worksheets-v1",
-        "worksheetCount": 365,
-        "cohortCount": 125,
-        "canonicalObservationCount": 318449,
+        "batchId": "justice-three-hundred-eighty-seven-worksheets-v1",
+        "worksheetCount": 387,
+        "cohortCount": 134,
+        "canonicalObservationCount": 335380,
         "providerCalls": 0,
         "verified": True,
     }

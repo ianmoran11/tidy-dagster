@@ -79,7 +79,13 @@ def run_batch(
     results: list[dict[str, Any]] = []
     with ThreadPoolExecutor(max_workers=concurrency) as executor:
         futures = {
-            executor.submit(_run_one, project, output, spec, recorded_at): spec
+            executor.submit(
+                _run_one,
+                project,
+                output,
+                spec,
+                spec.replay_recorded_at or registry.replay_recorded_at,
+            ): spec
             for spec in registry.entries
         }
         for future in as_completed(futures):

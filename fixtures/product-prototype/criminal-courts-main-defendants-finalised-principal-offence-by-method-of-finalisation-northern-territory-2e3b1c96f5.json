@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:1126c9aa658b790d8fa73c29e879a78d025a6142805f0b2193a7f575ddb1d22f",
+      "byteLength": 75894,
+      "sheet": "Table 53",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5-2023.response.txt",
+        "contentDigest": "sha256:2b25490c6a4dc5e6fa9d3b0a953f67741cdb4675fc90997b4e53537e16fae5cb",
+        "byteLength": 740,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:4088144794ac7799424fa34cf63bc2b03e91ae0666506fa5c4b64968f97bf249",
+      "byteLength": 92433,
+      "sheet": "Table 58",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5-2024.response.txt",
+        "contentDigest": "sha256:f03897afc04ae3ce68d2151d6426f98ecb8353ace83547e9d6f7ae57ff4c5825",
+        "byteLength": 714,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

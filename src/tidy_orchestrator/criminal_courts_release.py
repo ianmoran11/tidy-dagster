@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 236
+EXPECTED_REGISTERED_COUNT = 258
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -132,6 +132,15 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-western-australia-3c7004c375",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-and-be8fa3884d",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-western-australia-df3797a707",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-north-9e1eae4d24",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-2dc791882d",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--dff73e6680",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--d4b9910476",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-fb8ea665a2",
+        "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89",
+        "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-and-cd3b98cdfb",
+        "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040",
     }
 )
 

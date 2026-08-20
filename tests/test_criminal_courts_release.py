@@ -12,6 +12,7 @@ from pathlib import Path
 import pytest
 from openpyxl import load_workbook
 
+import tidy_orchestrator.product_prototype as product_prototype_module
 from tidy_orchestrator.criminal_courts_release import (
     CriminalCourtsReleaseError,
     build_family_membership,
@@ -101,6 +102,17 @@ QUEENSLAND_FAMILIES = (
     "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-7022b11692",
     "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-queensland-and-2925b8b521",
 )
+NORTHERN_TERRITORY_FAMILIES = (
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-all-courts-north-9e1eae4d24",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-all-principal-offence-magistrates-cour-2dc791882d",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-all-courts--dff73e6680",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--d4b9910476",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-higher-cour-fb8ea665a2",
+    "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89",
+    "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-northern-territory-2e3b1c96f5",
+    "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040",
+    "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-and-cd3b98cdfb",
+)
 GUILTY_OUTCOME_FAMILIES = (
     "criminal-courts-guilty-outcome-summary-by-jurisdiction",
     "criminal-courts-guilty-outcome-sex-age-by-sentence-and-court-level",
@@ -151,8 +163,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 236,
-        "pendingSemanticContractCount": 194,
+        "registeredMemberCount": 258,
+        "pendingSemanticContractCount": 172,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -194,7 +206,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 236
+        == 258
     )
     wa_mixed = next(
         family
@@ -204,6 +216,15 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
     assert wa_mixed["semanticTitle"] == (
         "Defendants finalised, summary characteristics by court level — "
         "mixed concorded history — Western Australia"
+    )
+    nt_mixed = next(
+        family
+        for family in membership["families"]
+        if family["familyId"].endswith("northern-territory-and-cd3b98cdfb")
+    )
+    assert nt_mixed["semanticTitle"] == (
+        "Defendants finalised, summary characteristics by court level — "
+        "mixed concorded history — Northern Territory"
     )
 
 
@@ -228,7 +249,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 236
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 258
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -1242,6 +1263,323 @@ def test_queensland_cluster_preserves_source_classification_and_warnings() -> No
     }
     assert warning_count == 10_640
     assert any(row["publication_vintage_date"] != row["reference_date"] for row in rows)
+
+
+def test_northern_territory_aliases_are_exhaustively_source_bound() -> None:
+    def normalize(value: str) -> str:
+        return " ".join(value.strip().split())
+
+    aliases: dict[tuple[str, str], str] = {}
+    aggregate_alias_count = 0
+    represented_aliases: set[tuple[str, str]] = set()
+    for family_id in NORTHERN_TERRITORY_FAMILIES:
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        for dimension, dimension_aliases in contract["aliases"].items():
+            aggregate_alias_count += len(dimension_aliases)
+            for raw, target in dimension_aliases.items():
+                identity = (dimension, normalize(raw))
+                previous = aliases.setdefault(identity, target)
+                assert previous == target, f"normalized alias collision: {identity}"
+
+        rows = json.loads(
+            (FIXTURES / f"{family_id}-evidence/canonical-observations.json").read_text()
+        )
+        for row in rows:
+            for dimension in contract["requiredDimensions"]:
+                raw_field = f"raw_{dimension}"
+                assert raw_field in row
+                identity = (dimension, normalize(str(row[raw_field])))
+                represented_aliases.add(identity)
+                assert identity in aliases
+                target_field = product_prototype_module._DIMENSION_FIELDS[dimension]
+                assert row[target_field] == aliases[identity]
+
+    assert aggregate_alias_count == 750
+
+    workbook_paths = {
+        FIXTURES / "workbooks" / f"criminal-courts-{release}-cube-10-{kind}.xlsx"
+        for release in ("2021-22", "2022-23", "2023-24", "2024-25")
+        for kind in ("source", "normalized")
+    }
+    assert len(workbook_paths) == 8
+    workbook_strings: set[str] = set()
+    for path in workbook_paths:
+        workbook = load_workbook(path, data_only=False, read_only=True)
+        try:
+            workbook_strings.update(
+                normalize(cell.value)
+                for sheet in workbook.worksheets
+                for row in sheet.iter_rows()
+                for cell in row
+                if isinstance(cell.value, str)
+            )
+        finally:
+            workbook.close()
+    assert {raw for _dimension, raw in aliases} <= workbook_strings
+
+    # No NT alias is justified only by a row excluded from canonical evidence. If
+    # that changes, the excluded-row source cells must be added as a separate
+    # authority rather than silently treating the contract as self-authorizing.
+    source_only_excluded_aliases = set(aliases) - represented_aliases
+    assert source_only_excluded_aliases == set()
+
+
+def test_northern_territory_cluster_preserves_exact_source_semantics() -> None:
+    membership = _load(MEMBERSHIP)
+    nt_families = {
+        family["familyId"]: family
+        for family in membership["families"]
+        if family["familyId"] in NORTHERN_TERRITORY_FAMILIES
+    }
+    assert set(nt_families) == set(NORTHERN_TERRITORY_FAMILIES)
+    members = [
+        member for family in nt_families.values() for member in family["members"]
+    ]
+    assert len(members) == 22
+    assert Counter(member["releaseId"] for member in members) == {
+        "2021-22": 5,
+        "2022-23": 5,
+        "2023-24": 6,
+        "2024-25": 6,
+    }
+    assert all(member["registered"] for member in members)
+    assert {member["cubeId"] for member in members} == {
+        "defendants-finalised-northern-territory"
+    }
+    assert all("Northern Territory" in member["publishedTitle"] for member in members)
+    assert nt_families[NORTHERN_TERRITORY_FAMILIES[-1]]["semanticTitle"] == (
+        "Defendants finalised, summary characteristics by court level — "
+        "mixed concorded history — Northern Territory"
+    )
+
+    expected_warning_counts = (
+        {"2024": 342},
+        {"2024": 342},
+        {"2021": 306, "2022": 323, "2023": 323},
+        {"2021": 144, "2022": 152, "2023": 152, "2024": 168},
+        {"2021": 85, "2022": 90, "2023": 95, "2024": 95},
+        {"2021": 306, "2022": 323, "2023": 323},
+        {"2023": 0, "2024": 0},
+        {"2021": 1308, "2022": 1690, "2023": 1862},
+        {"2024": 1995},
+    )
+    source_books = {
+        release: load_workbook(
+            FIXTURES
+            / next(
+                member["sourcePath"]
+                for member in members
+                if member["releaseId"] == release
+            ),
+            data_only=False,
+            read_only=False,
+        )
+        for release in {member["releaseId"] for member in members}
+    }
+    rows: list[dict[str, object]] = []
+    source_cells: set[tuple[str, str, str]] = set()
+    warning_sources: dict[str, set[str]] = {}
+    warning_count = 0
+    for family_id, expected_counts in zip(
+        NORTHERN_TERRITORY_FAMILIES, expected_warning_counts, strict=True
+    ):
+        evidence = FIXTURES / f"{family_id}-evidence"
+        manifest = _load(evidence / "manifest.json")
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        cohort = _load(FIXTURES / f"{family_id}.json")
+        run = _load(evidence / "run.json")
+        family_rows = json.loads((evidence / "canonical-observations.json").read_text())
+        assert manifest["canonicalObservationCount"] == len(family_rows)
+        assert manifest["providerCalls"] == run["providerCalls"] == 0
+        assert manifest["exceptionWorkbookCount"] == 0
+        assert run["historicalReplayIsAcceptanceAuthority"] is False
+        assert all(
+            workbook["decision"] == "prototype_auto_accepted"
+            for workbook in run["workbooks"]
+        )
+        assert all(
+            workbook["replayResponse"]["acceptanceAuthority"] is False
+            for workbook in cohort["workbooks"]
+        )
+        observed_warning_counts = {
+            str(workbook["year"]): workbook["executionWarningCount"]
+            for workbook in run["workbooks"]
+        }
+        assert observed_warning_counts == expected_counts
+        assert observed_warning_counts == contract["expectedWarningCountsByYear"]
+        assert observed_warning_counts == manifest["warningCountsByYear"]
+        warning_count += sum(observed_warning_counts.values())
+        for rule in contract["allowedExecutionWarnings"]:
+            assert rule["code"] == "AMBIGUOUS_HEADER"
+            assert rule["requireCanonicalOutputEquivalence"] is True
+            assert set(rule["expectedHeaderSourcesByYear"]) == set(expected_counts)
+            warning_sources.setdefault(rule["dimension"], set()).update(
+                source
+                for resolved_headers in rule["expectedHeaderSourcesByYear"].values()
+                for bound_sources in resolved_headers.values()
+                for source in bound_sources
+            )
+
+        decisions = {
+            (workbook["workbookDigest"], workbook["sheet"]): workbook["decisionId"]
+            for workbook in run["workbooks"]
+        }
+        for row in family_rows:
+            match = re.fullmatch(r"R([0-9]+)C([0-9]+)", str(row["source_cell"]))
+            assert match is not None
+            release_start = int(str(row["publication_vintage_date"])[:4]) - 1
+            release = f"{release_start}-{str(release_start + 1)[-2:]}"
+            cell = source_books[release][str(row["source_sheet"])].cell(
+                row=int(match.group(1)), column=int(match.group(2))
+            )
+            assert cell.value == row["raw_value"]
+            assert cell.data_type != "f"
+            source_key = (
+                str(row["source_workbook_digest"]),
+                str(row["source_sheet"]),
+                str(row["source_cell"]),
+            )
+            assert source_key not in source_cells
+            source_cells.add(source_key)
+            assert row["acceptance_decision_digest"] == decisions[source_key[:2]]
+            assert row["reference_date"] == row["observation_period_id"]
+            assert row["jurisdiction_id"] == "NT"
+        rows.extend(family_rows)
+
+    assert len(rows) == len(source_cells) == 16_931
+    assert Counter(str(row["measure_id"]) for row in rows) == {
+        "defendant-count": 16_067,
+        "mean-case-duration": 216,
+        "mean-defendant-age": 216,
+        "median-case-duration": 216,
+        "median-defendant-age": 216,
+    }
+    assert Counter(str(row["value_status"]) for row in rows) == {
+        "observed": 16_794,
+        "not_available": 88,
+        "not_applicable": 49,
+    }
+    assert {
+        (row["raw_value"], row["value_status"])
+        for row in rows
+        if row["value_status"] != "observed"
+    } == {("..", "not_applicable"), ("na", "not_available")}
+    assert sum(row["value"] == 0 for row in rows) == 2_913
+    assert {str(row["classification_context_id"]) for row in rows} == {
+        "ANZSOC_2011",
+        "ANZSOC_2023",
+        "MIXED_CONCORDED_ANZSOC_2011_AND_ANZSOC_2023",
+    }
+    assert warning_count == 10_424
+    assert warning_sources == {
+        "court_level": {
+            "R55C2",
+            "R61C2",
+            "R62C2",
+            "R104C2",
+            "R117C2",
+            "R118C2",
+            "R153C2",
+            "R173C2",
+            "R174C2",
+        },
+        "observation_period": {"R28C2", "R29C2", "R30C2", "R31C2"},
+    }
+
+    nbsp_offence = "14\u00a0Offences against justice procedures and orders(c)"
+    assert source_books["2024-25"]["Table 59"]["O5"].value == nbsp_offence
+    assert any(row.get("raw_principal_offence") == nbsp_offence for row in rows)
+    all_courts_contract = _load(
+        FIXTURES / "acceptance" / f"{NORTHERN_TERRITORY_FAMILIES[0]}-v1.json"
+    )
+    assert (
+        all_courts_contract["aliases"]["principal_offence"][nbsp_offence]
+        == "OFFENCE_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS"
+    )
+    mixed_contract = _load(
+        FIXTURES / "acceptance" / f"{NORTHERN_TERRITORY_FAMILIES[-1]}-v1.json"
+    )
+    mixed_sheet = source_books["2024-25"]["Table 57"]
+    mixed_variants = {
+        "A17": ("01 Homicide(e)", "CHAR_01_HOMICIDE"),
+        "A20": (
+            "04 Harm or endanger persons(f)",
+            "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+        ),
+        "A29": (
+            "13 Traffic and vehicle offences(g)",
+            "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+        ),
+        "A30": (
+            "14 Offences against justice procedures and orders(h)",
+            "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+        ),
+        "A34": (
+            "Total finalised (excluding transfer to other court levels)(i)",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        ),
+        "A37": ("Mean (weeks)(k)", "CHAR_MEAN_WEEKS"),
+        "A38": ("Median (weeks)(k)", "CHAR_MEDIAN_WEEKS"),
+        "A55": ("Community service / work(t)", "CHAR_COMMUNITY_SERVICE_WORK"),
+        "A56": (
+            "Moderate penalty in the community(t)",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        ),
+        "A57": ("Monetary penalties(u)", "CHAR_MONETARY_PENALTIES"),
+        "A58": ("Fines(g)", "CHAR_FINES"),
+        "A59": (
+            "Good behaviour (incl. bonds)(t)",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        ),
+        "A61": ("Total guilty outcome(v)", "CHAR_TOTAL_GUILTY_OUTCOME"),
+    }
+    for cell, (source_label, canonical_label) in mixed_variants.items():
+        assert mixed_sheet[cell].value == source_label
+        assert (
+            mixed_contract["aliases"]["characteristic_category"][source_label]
+            == canonical_label
+        )
+    assert mixed_sheet["A16"].value == "Principal offence (ANZSOC 2023)(d)"
+    assert (
+        mixed_contract["aliases"]["characteristic_group"][
+            "Principal offence (ANZSOC 2023)(d)"
+        ]
+        == "GROUP_PRINCIPAL_OFFENCE_ANZSOC_2023_WITH_CONCORDED_ANZSOC_2011_SERIES"
+    )
+    assert mixed_sheet["A36"].value == "Duration(j)"
+    assert (
+        mixed_contract["aliases"]["characteristic_group"]["Duration(j)"]
+        == "GROUP_DURATION"
+    )
+    assert not any(
+        row.get("characteristic_group_id") == "GROUP_GUILTY_EX_PARTE" for row in rows
+    )
+    method_rows = [
+        row
+        for row in rows
+        if row.get("characteristic_group_id") == "GROUP_METHOD_OF_FINALISATION"
+    ]
+    assert len(method_rows) == 5_372
+    assert len({str(row["characteristic_category_id"]) for row in method_rows}) == 10
+    assert (
+        sum(
+            row.get("characteristic_category_id") == "CHAR_GUILTY_EX_PARTE"
+            for row in method_rows
+        )
+        == 551
+    )
+    assert Counter(
+        str(row["method_of_finalisation_id"])
+        for row in rows
+        if "method_of_finalisation_id" in row
+    ) == {
+        "METHOD_ACQUITTED": 105,
+        "METHOD_GUILTY_OUTCOME": 105,
+        "METHOD_TOTAL": 105,
+        "METHOD_TOTAL_ADJUDICATED": 105,
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS": 105,
+        "METHOD_WITHDRAWN_BY_PROSECUTION": 105,
+    }
 
 
 def test_download_digest_mutation_fails_closed(tmp_path: Path) -> None:

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:edef3539d1f67d2df95e5f8c7bb2f0ebbc5a5c06d024cf16e766793c6c762e62",
+      "byteLength": 101410,
+      "sheet": "Table 49",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89-2021.response.txt",
+        "contentDigest": "sha256:ba796603d57f801417688cdf95edc026a86a29eba44d490cb7120d22edbd11ab",
+        "byteLength": 959,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:3448a181e0e75d897dd72eec8f594188018a71d4d66277b19c159f8c341a3bc6",
+      "byteLength": 102022,
+      "sheet": "Table 49",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89-2022.response.txt",
+        "contentDigest": "sha256:7a6745391f22455d904bbc4a7d22c75a25a53cf2e1ff9170323c7f2c27befedf",
+        "byteLength": 972,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:1126c9aa658b790d8fa73c29e879a78d025a6142805f0b2193a7f575ddb1d22f",
+      "byteLength": 75894,
+      "sheet": "Table 56",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-magistrates-7b3957ee89-2023.response.txt",
+        "contentDigest": "sha256:f553423044f8092008ed3bcec282145a3b63b7690aa4bf5a6ec0bef7a5445f6f",
+        "byteLength": 972,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

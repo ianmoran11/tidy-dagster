@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:edef3539d1f67d2df95e5f8c7bb2f0ebbc5a5c06d024cf16e766793c6c762e62",
+      "byteLength": 101410,
+      "sheet": "Table 46",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040-2021.response.txt",
+        "contentDigest": "sha256:454c04b30c486bd6f74574269d5ad3cf5ba59852138398985a1ef9e8296fe8b0",
+        "byteLength": 887,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:3448a181e0e75d897dd72eec8f594188018a71d4d66277b19c159f8c341a3bc6",
+      "byteLength": 102022,
+      "sheet": "Table 46",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040-2022.response.txt",
+        "contentDigest": "sha256:c1cf5326bccf1ae3b9e4ab82b4d99aa21b0a8d90d8ff2294cfcac01fa08b5d6c",
+        "byteLength": 900,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-10-normalized.xlsx",
+      "contentDigest": "sha256:1126c9aa658b790d8fa73c29e879a78d025a6142805f0b2193a7f575ddb1d22f",
+      "byteLength": 75894,
+      "sheet": "Table 52",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-northern-territory-27c9d31040-2023.response.txt",
+        "contentDigest": "sha256:730e891df66635f4b8094a86deb7d76e558dfb08abc38ef8a9b8348705a9e5fa",
+        "byteLength": 939,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

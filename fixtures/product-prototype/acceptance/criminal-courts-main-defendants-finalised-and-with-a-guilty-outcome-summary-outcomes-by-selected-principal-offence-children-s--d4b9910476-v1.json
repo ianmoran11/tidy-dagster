@@ -1,0 +1,665 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--d4b9910476-v1",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-and-with-a-guilty-outcome-summary-outcomes-by-selected-principal-offence-children-s--d4b9910476",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_CUSTODY_IN_THE_COMMUNITY",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+            "CHAR_TOTAL",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_CUSTODIAL_ORDERS",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_NON_CUSTODIAL_ORDERS"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+            "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "OFFENCE_08_THEFT",
+            "OFFENCE_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "OFFENCE_13_PUBLIC_ORDER_OFFENCES",
+            "OFFENCE_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "NT"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+            "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "OFFENCE_08_THEFT",
+            "OFFENCE_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "OFFENCE_13_PUBLIC_ORDER_OFFENCES",
+            "OFFENCE_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "NT"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_AGREEMENT_OF_WRONGDOING",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+            "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "OFFENCE_08_THEFT",
+            "OFFENCE_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "OFFENCE_13_PUBLIC_ORDER_OFFENCES",
+            "OFFENCE_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "NT"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_AGREEMENT_OF_WRONGDOING",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "principal_offence": [
+            "OFFENCE_02_ASSAULT",
+            "OFFENCE_04_HARM_OR_ENDANGER_PERSONS",
+            "OFFENCE_06_BURGLARY",
+            "OFFENCE_07_THEFT",
+            "OFFENCE_11_PROPERTY_DAMAGE",
+            "OFFENCE_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+            "OFFENCE_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+            "OFFENCE_TOTAL"
+          ],
+          "jurisdiction": [
+            "NT"
+          ],
+          "court_level": [
+            "CHILDRENS_COURTS"
+          ],
+          "classification_context": [
+            "ANZSOC_2023"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 336,
+        "2023": 320,
+        "2022": 304,
+        "2021": 288
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:5781e99f2cc29613e589a05b1857f9d03237bb2bd7414211fe353f6f7852dc72",
+        "2023": "sha256:155228330c16608ccffd3ebc23914f8e001f47ae1bf3f05dbdc56ce1571bfe4c",
+        "2022": "sha256:c379f44dc72ef94ae4acc43ac7a5eb9e42c3d6a099ce13d53e23e9337a96e0c0",
+        "2021": "sha256:eb1db33dbfeccf77d70e263f979fba0b865f3b3505fe8c61774850b6ab835c64"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "observation_period",
+    "principal_offence",
+    "jurisdiction",
+    "court_level",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "principal_offence": [
+      "^principal\\ offence$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "classification_context": [
+      "^classification\\ context$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "   Agreement of wrongdoing(e)": "CHAR_AGREEMENT_OF_WRONGDOING",
+      "   Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "   Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "   Guilty finding by court(d)": "CHAR_GUILTY_FINDING_BY_COURT",
+      "   Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      "Acquitted": "CHAR_ACQUITTED",
+      "Adjudicated outcomes": "CHAR_ADJUDICATED_OUTCOMES",
+      "Adjudicated outcomes(b)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Adjudicated outcomes(c)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Agreement of wrongdoing(e)": "CHAR_AGREEMENT_OF_WRONGDOING",
+      "Agreement of wrongdoing(f)": "CHAR_AGREEMENT_OF_WRONGDOING",
+      "Community service / work": "CHAR_COMMUNITY_SERVICE_WORK",
+      "Community service / work(h)": "CHAR_COMMUNITY_SERVICE_WORK",
+      "Community supervision/work orders": "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+      "Conference or diversion program(e)": "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+      "Conference or diversion program(f)": "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+      "Custody in a correctional institution": "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Custody in the community": "CHAR_CUSTODY_IN_THE_COMMUNITY",
+      "Fines": "CHAR_FINES",
+      "Fully suspended sentence": "CHAR_FULLY_SUSPENDED_SENTENCE",
+      "Fully suspended sentence of imprisonment": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Good behaviour (incl. bonds)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour (incl. bonds)(g)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Good behaviour (incl. bonds)(h)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Guilty finding by court(d)": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Guilty finding by court(e)": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Guilty outcome": "CHAR_GUILTY_OUTCOME",
+      "Guilty outcome(c)": "CHAR_GUILTY_OUTCOME",
+      "Guilty outcome(d)": "CHAR_GUILTY_OUTCOME",
+      "Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      "Intensive penalty in the community": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Intensive penalty in the community(h)": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Moderate penalty in the community": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Moderate penalty in the community(g)": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Moderate penalty in the community(h)": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Monetary penalties": "CHAR_MONETARY_PENALTIES",
+      "Monetary penalties(h)": "CHAR_MONETARY_PENALTIES",
+      "Monetary penalties(i)": "CHAR_MONETARY_PENALTIES",
+      "Nominal and other penalties": "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+      "Other non-custodial orders": "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+      "Total": "CHAR_TOTAL",
+      "Total finalised": "CHAR_TOTAL_FINALISED",
+      "Total finalised(f)": "CHAR_TOTAL_FINALISED",
+      "Total finalised(g)": "CHAR_TOTAL_FINALISED",
+      "Total guilty outcome": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(i)": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(j)": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Transfer to other court levels": "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "CHAR_WITHDRAWN_BY_PROSECUTION"
+    },
+    "characteristic_group": {
+      "Custodial orders": "GROUP_CUSTODIAL_ORDERS",
+      "Method of finalisation": "GROUP_METHOD_OF_FINALISATION",
+      "Non-custodial orders": "GROUP_NON_CUSTODIAL_ORDERS",
+      "Principal sentence": "GROUP_PRINCIPAL_SENTENCE"
+    },
+    "observation_period": {
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "principal_offence": {
+      "02 Acts intended to cause injury": "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Assault": "OFFENCE_02_ASSAULT",
+      "02 Assault": "OFFENCE_02_ASSAULT",
+      "04 Dangerous/ negligent acts": "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+      "04 Dangerous/ negligent acts ": "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+      "04 Harm or endanger persons(a)": "OFFENCE_04_HARM_OR_ENDANGER_PERSONS",
+      "04 Harm or endanger persons(a)": "OFFENCE_04_HARM_OR_ENDANGER_PERSONS",
+      "06 Burglary": "OFFENCE_06_BURGLARY",
+      "06 Burglary": "OFFENCE_06_BURGLARY",
+      "07 Theft": "OFFENCE_07_THEFT",
+      "07 Unlawful entry with intent": "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "07 Theft": "OFFENCE_07_THEFT",
+      "08 Theft": "OFFENCE_08_THEFT",
+      "11 Property damage": "OFFENCE_11_PROPERTY_DAMAGE",
+      "11 Property damage": "OFFENCE_11_PROPERTY_DAMAGE",
+      "12 Property damage & environmental pollution": "OFFENCE_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "12 Public order, health, and safety offences": "OFFENCE_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "12 Public order, health, and safety offences": "OFFENCE_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+      "13 Public order offences": "OFFENCE_13_PUBLIC_ORDER_OFFENCES",
+      "13 Traffic and vehicle offences": "OFFENCE_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "13 Traffic and vehicle offences": "OFFENCE_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+      "14 Traffic & vehicle regulatory offences": "OFFENCE_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "Total": "OFFENCE_TOTAL",
+      "Total(a)": "OFFENCE_TOTAL",
+      "Total(b)": "OFFENCE_TOTAL"
+    },
+    "jurisdiction": {
+      "Table 50 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2020–21 to 2021–22": "NT",
+      "Table 50 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2021–22 to 2022–23": "NT",
+      "Table 57 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2022–23 to 2023–24": "NT",
+      "Table 62 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2023–24 to 2024–25": "NT"
+    },
+    "court_level": {
+      "Table 50 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2020–21 to 2021–22": "CHILDRENS_COURTS",
+      "Table 50 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2021–22 to 2022–23": "CHILDRENS_COURTS",
+      "Table 57 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2022–23 to 2023–24": "CHILDRENS_COURTS",
+      "Table 62 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2023–24 to 2024–25": "CHILDRENS_COURTS"
+    },
+    "classification_context": {
+      "Table 50 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2020–21 to 2021–22": "ANZSOC_2011",
+      "Table 50 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2021–22 to 2022–23": "ANZSOC_2011",
+      "Table 57 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2022–23 to 2023–24": "ANZSOC_2011",
+      "Table 62 Defendants finalised and with a guilty outcome, Summary outcomes by selected principal offence, Children's Courts – Northern Territory, 2023–24 to 2024–25": "ANZSOC_2023"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "principal_offence_id",
+    "jurisdiction_id",
+    "court_level_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_CUSTODY_IN_THE_COMMUNITY",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+        "CHAR_TOTAL",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_AGREEMENT_OF_WRONGDOING",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2024": [
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_AGREEMENT_OF_WRONGDOING",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CONFERENCE_OR_DIVERSION_PROGRAM",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "GROUP_CUSTODIAL_ORDERS",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_NON_CUSTODIAL_ORDERS"
+      ],
+      "2022": [
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE"
+      ],
+      "2023": [
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE"
+      ],
+      "2024": [
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+        "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "OFFENCE_08_THEFT",
+        "OFFENCE_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "OFFENCE_13_PUBLIC_ORDER_OFFENCES",
+        "OFFENCE_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2022": [
+        "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+        "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "OFFENCE_08_THEFT",
+        "OFFENCE_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "OFFENCE_13_PUBLIC_ORDER_OFFENCES",
+        "OFFENCE_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2023": [
+        "OFFENCE_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "OFFENCE_04_DANGEROUS_NEGLIGENT_ACTS",
+        "OFFENCE_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "OFFENCE_08_THEFT",
+        "OFFENCE_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "OFFENCE_13_PUBLIC_ORDER_OFFENCES",
+        "OFFENCE_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "OFFENCE_TOTAL"
+      ],
+      "2024": [
+        "OFFENCE_02_ASSAULT",
+        "OFFENCE_04_HARM_OR_ENDANGER_PERSONS",
+        "OFFENCE_06_BURGLARY",
+        "OFFENCE_07_THEFT",
+        "OFFENCE_11_PROPERTY_DAMAGE",
+        "OFFENCE_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+        "OFFENCE_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+        "OFFENCE_TOTAL"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "NT"
+      ],
+      "2022": [
+        "NT"
+      ],
+      "2023": [
+        "NT"
+      ],
+      "2024": [
+        "NT"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "CHILDRENS_COURTS"
+      ],
+      "2022": [
+        "CHILDRENS_COURTS"
+      ],
+      "2023": [
+        "CHILDRENS_COURTS"
+      ],
+      "2024": [
+        "CHILDRENS_COURTS"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2021": [
+        "ANZSOC_2011"
+      ],
+      "2022": [
+        "ANZSOC_2011"
+      ],
+      "2023": [
+        "ANZSOC_2011"
+      ],
+      "2024": [
+        "ANZSOC_2023"
+      ]
+    },
+    "minimumRows": 288,
+    "maximumRows": 336,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 10
+    }
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "2021-06-30": [
+            "R30C2"
+          ]
+        },
+        "2022": {
+          "2022-06-30": [
+            "R29C2"
+          ]
+        },
+        "2023": {
+          "2023-06-30": [
+            "R30C2"
+          ]
+        },
+        "2024": {
+          "2024-06-30": [
+            "R31C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2021": 144,
+    "2022": 152,
+    "2023": 152,
+    "2024": 168
+  },
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "referenceDateDimension": "observation_period",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:3950d76ea5257a00905dca12b8b7399fc9f77262a39b395ff4a345ea8a9f813f",
+    "2022": "sha256:8516d9da6fe5312a6be9655710c63f1f552043c64654776a24e8b0c01735f17c",
+    "2023": "sha256:49afd77fc6b88d5f4196ed4ec48a389fe51d80a0817cba95a020f2e59f51bd46",
+    "2024": "sha256:d6a254d17b4a41794bba5922bcc9d0f44d9b0638e5836f9bd4a4cbef7bdf189f"
+  }
+}

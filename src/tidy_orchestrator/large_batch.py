@@ -12,8 +12,18 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .artifacts import domain_digest, sha256_digest
-from .product_prototype import RUN_SCHEMA
+from .artifacts import (
+    DecisionRecord,
+    canonical_json_bytes,
+    domain_digest,
+    sha256_digest,
+)
+from .product_prototype import (
+    ACCEPTANCE_SCHEMA_V2,
+    ACCEPTANCE_SCHEMAS,
+    BASE_ACCEPTANCE_CHECK_KEYS,
+    RUN_SCHEMA,
+)
 
 REGISTRY_SCHEMA = "tidy.product-prototype-large-batch-registry/v1"
 EVIDENCE_SCHEMA = "tidy.product-prototype-large-batch-evidence/v1"
@@ -70,6 +80,8 @@ class LargeBatchSpec:
     expected_value_status_counts: dict[str, int]
     expected_manual_replay_years: tuple[int, ...]
     preserves_publication_vintage: bool
+    acceptance_policy_version: str
+    replay_recorded_at: str | None
 
 
 @dataclass(frozen=True)
@@ -183,10 +195,19 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
         "expectedValueStatusCounts",
         "expectedManualReplayYears",
         "preservesPublicationVintage",
+        "acceptancePolicyVersion",
     }
     entries: list[LargeBatchSpec] = []
     for item in value["entries"]:
-        if not isinstance(item, dict) or set(item) != expected_keys:
+        if not isinstance(item, dict):
+            raise LargeBatchError("Large-batch entry shape is invalid")
+        policy_version = item.get("acceptancePolicyVersion")
+        item_keys = set(item)
+        if (
+            policy_version not in ACCEPTANCE_SCHEMAS
+            or item_keys - {"replayRecordedAt"} != expected_keys
+            or (policy_version == ACCEPTANCE_SCHEMA_V2) != ("replayRecordedAt" in item)
+        ):
             raise LargeBatchError("Large-batch entry shape is invalid")
         years = item.get("expectedYears")
         year_counts = item.get("expectedYearCounts")
@@ -242,6 +263,13 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
             or any(year not in years for year in manual_years)
             or len(manual_years) != len(set(manual_years))
             or not isinstance(item.get("preservesPublicationVintage"), bool)
+            or (
+                policy_version == ACCEPTANCE_SCHEMA_V2
+                and (
+                    not isinstance(item.get("replayRecordedAt"), str)
+                    or not item["replayRecordedAt"]
+                )
+            )
         ):
             raise LargeBatchError(
                 f"Large-batch entry is invalid: {item.get('familyId')}"
@@ -270,6 +298,8 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
                 expected_value_status_counts=status_counts,
                 expected_manual_replay_years=tuple(manual_years),
                 preserves_publication_vintage=item["preservesPublicationVintage"],
+                acceptance_policy_version=policy_version,
+                replay_recorded_at=item.get("replayRecordedAt"),
             )
         )
     for attribute in (
@@ -643,6 +673,8 @@ def verify_large_batch_evidence(
         or manifest.get("schemaVersion") != EVIDENCE_SCHEMA
         or manifest.get("familyId") != spec.family_id
         or manifest.get("cohortPath") != spec.cohort_path
+        or not isinstance(manifest.get("recordedAt"), str)
+        or not manifest["recordedAt"]
         or manifest.get("mode") != "replay"
         or manifest.get("providerCalls") != 0
         or manifest.get("acceptedWorkbookCount") != len(spec.expected_years)
@@ -704,21 +736,82 @@ def verify_large_batch_evidence(
     if manifest.get("acceptanceContractPath") != contract_relative:
         raise LargeBatchError("Evidence acceptance contract path does not match cohort")
     contract_path = _safe_path(project, contract_relative, "acceptance contract")
+    contract_bytes = contract_path.read_bytes()
     contract = _load_object(contract_path, "acceptance contract")
-    if sha256_digest(contract_path.read_bytes()) != manifest.get(
-        "acceptanceContractDigest"
-    ):
+    contract_file_digest = sha256_digest(contract_bytes)
+    if contract_file_digest != manifest.get("acceptanceContractDigest"):
         raise LargeBatchError("Evidence acceptance contract digest does not match")
+    policy_version = contract.get("schemaVersion")
+    if policy_version != spec.acceptance_policy_version:
+        raise LargeBatchError(
+            "Evidence acceptance contract schema does not match registry pin"
+        )
+    if policy_version not in ACCEPTANCE_SCHEMAS:
+        raise LargeBatchError("Evidence acceptance contract schema is unsupported")
+    if (
+        policy_version == ACCEPTANCE_SCHEMA_V2
+        and manifest.get("recordedAt") != spec.replay_recorded_at
+    ):
+        raise LargeBatchError("V2 evidence timestamp does not match registry pin")
+    policy_digest = (
+        contract_file_digest
+        if policy_version == ACCEPTANCE_SCHEMA_V2
+        else sha256_digest(canonical_json_bytes(contract))
+    )
+    expected_recipe_digests = contract.get("expectedRecipeDigestsByYear")
+    contract_years = {str(year) for year in spec.expected_years}
+    if (policy_version == ACCEPTANCE_SCHEMA_V2) != (
+        expected_recipe_digests is not None
+    ) or (
+        expected_recipe_digests is not None
+        and (
+            not isinstance(expected_recipe_digests, dict)
+            or set(expected_recipe_digests) != contract_years
+            or any(
+                _DIGEST.fullmatch(str(digest)) is None
+                for digest in expected_recipe_digests.values()
+            )
+        )
+    ):
+        raise LargeBatchError("Evidence acceptance recipe digest pins are invalid")
     expected_warning_counts = contract.get("expectedWarningCountsByYear")
     if (expected_warning_counts is None) != ("warningCountsByYear" not in manifest) or (
         expected_warning_counts is not None
         and manifest.get("warningCountsByYear") != expected_warning_counts
     ):
         raise LargeBatchError("Evidence warning counts do not match contract")
-    if len(cohort.get("workbooks", [])) != len(spec.expected_years):
-        raise LargeBatchError("Cohort workbook count does not match")
+    cohort_workbooks = cohort.get("workbooks")
+    if (
+        not isinstance(cohort_workbooks, list)
+        or len(cohort_workbooks) != len(spec.expected_years)
+        or [
+            workbook.get("year") if isinstance(workbook, dict) else None
+            for workbook in cohort_workbooks
+        ]
+        != list(spec.expected_years)
+    ):
+        raise LargeBatchError("Cohort workbook count or years do not match")
+    rooted_workbook_identities: list[tuple[int, str, str, str]] = []
     manual_years = []
-    for workbook in cohort["workbooks"]:
+    for workbook in cohort_workbooks:
+        identity = (
+            workbook.get("year"),
+            workbook.get("contentDigest"),
+            workbook.get("sheet"),
+            workbook.get("referenceDate"),
+        )
+        if (
+            isinstance(identity[0], bool)
+            or not isinstance(identity[0], int)
+            or _DIGEST.fullmatch(str(identity[1])) is None
+            or not isinstance(identity[2], str)
+            or not identity[2]
+            or not isinstance(identity[3], str)
+            or not identity[3]
+            or identity in rooted_workbook_identities
+        ):
+            raise LargeBatchError("Cohort workbook identity is invalid or repeated")
+        rooted_workbook_identities.append(identity)
         workbook_path = _safe_path(
             cohort_path.parent, workbook["path"], "workbook source"
         )
@@ -763,6 +856,22 @@ def verify_large_batch_evidence(
         for item in run_workbooks or []
         if isinstance(item, dict) and "executionWarningCount" in item
     }
+    expected_check_keys = set(BASE_ACCEPTANCE_CHECK_KEYS)
+    if expected_warning_counts is not None:
+        expected_check_keys.add("warningCount")
+    run_workbook_identities = (
+        [
+            (
+                item.get("year"),
+                item.get("workbookDigest"),
+                item.get("sheet"),
+                item.get("referenceDate"),
+            )
+            for item in run_workbooks
+        ]
+        if workbook_claims_valid
+        else []
+    )
     if (
         run_digest != domain_digest(RUN_SCHEMA, semantic)
         or run_digest != manifest["runDigest"]
@@ -775,7 +884,7 @@ def verify_large_batch_evidence(
         or run.get("canonicalObservationCount") != spec.expected_canonical_count
         or run.get("crossYearIssues") != []
         or not workbook_claims_valid
-        or [item.get("year") for item in run_workbooks] != list(spec.expected_years)
+        or run_workbook_identities != rooted_workbook_identities
         or [item.get("observationCount") for item in run_workbooks]
         != list(spec.expected_year_counts)
         or any(
@@ -791,7 +900,9 @@ def verify_large_batch_evidence(
         or (expected_warning_counts is None and observed_warning_counts)
         or any(
             item.get("decision") != "prototype_auto_accepted"
-            or not all(item.get("checks", {}).values())
+            or not isinstance(item.get("checks"), dict)
+            or set(item["checks"]) != expected_check_keys
+            or any(value is not True for value in item["checks"].values())
             or item.get("issues") != []
             for item in run.get("workbooks", [])
         )
@@ -863,6 +974,13 @@ def verify_large_batch_evidence(
         reference_date = row.get("publication_vintage_date", row.get("reference_date"))
         decision_id = row.get("acceptance_decision_digest")
         if (
+            row.get("acceptance_policy_version") != policy_version
+            or row.get("acceptance_policy_digest") != policy_digest
+        ):
+            raise LargeBatchError(
+                "Canonical acceptance policy does not match contract evidence"
+            )
+        if (
             _DIGEST.fullmatch(str(workbook_digest)) is None
             or not isinstance(sheet, str)
             or not sheet
@@ -881,6 +999,54 @@ def verify_large_batch_evidence(
         raise LargeBatchError(
             "Canonical acceptance source identities do not match run evidence"
         )
+
+    if policy_version == ACCEPTANCE_SCHEMA_V2:
+        rows_by_source: dict[tuple[str, str, str], list[dict[str, Any]]] = {
+            identity: [] for identity in acceptance_by_source
+        }
+        for row in rows:
+            identity = (
+                row["source_workbook_digest"],
+                row["source_sheet"],
+                row.get("publication_vintage_date", row["reference_date"]),
+            )
+            rows_by_source[identity].append(row)
+        for workbook in run_workbooks:
+            identity = (
+                workbook["workbookDigest"],
+                workbook["sheet"],
+                workbook["referenceDate"],
+            )
+            pinned_recipe_digest = expected_recipe_digests[str(workbook["year"])]
+            recipe_digests = {
+                row.get("recipe_digest") for row in rows_by_source[identity]
+            }
+            if recipe_digests != {pinned_recipe_digest}:
+                raise LargeBatchError(
+                    "V2 canonical recipe identity does not match contract pin"
+                )
+            expected_decision = DecisionRecord.create(
+                subject_id=pinned_recipe_digest,
+                decision_type="prototype_auto_accepted",
+                payload={
+                    "year": workbook["year"],
+                    "workbookDigest": workbook["workbookDigest"],
+                    "sheet": workbook["sheet"],
+                    "checks": workbook["checks"],
+                    "issues": workbook["issues"],
+                    "acceptanceSource": "human-authored-table-family-contract",
+                    "historicalReplayIsAuthority": False,
+                    "trainingEligibility": False,
+                    "acceptancePolicyVersion": policy_version,
+                    "acceptancePolicyDigest": policy_digest,
+                },
+                actor="tidy.product-prototype-policy/v1",
+                recorded_at=spec.replay_recorded_at,
+            )
+            if workbook["decisionId"] != expected_decision.decision_id:
+                raise LargeBatchError(
+                    "V2 acceptance decision does not bind acceptance policy"
+                )
     return manifest
 
 

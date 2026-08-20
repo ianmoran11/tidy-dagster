@@ -884,7 +884,11 @@ def _build_large_batch_check(
 
 def _build_large_batch_definitions(registry: LargeBatchRegistry):
     assets = tuple(
-        _build_large_batch_asset(spec, registry.batch_id, registry.replay_recorded_at)
+        _build_large_batch_asset(
+            spec,
+            registry.batch_id,
+            spec.replay_recorded_at or registry.replay_recorded_at,
+        )
         for spec in registry.entries
     )
     checks = tuple(

@@ -216,8 +216,31 @@ require canonical-output equivalence and exact year-specific selected header
 sources. Method-of-finalisation categories, including guilty ex-parte, retain
 `GROUP_METHOD_OF_FINALISATION`; perturbation notes preclude additive equations.
 
-The eleven clusters now cover 236 of 430 worksheets and produce 262,432
-canonical observations; 194 worksheets remain pending reviewed contracts.
+## Twelfth accepted Northern Territory cluster
+
+The twelfth cluster covers the complete 22-sheet Northern Territory Cube 10
+across 2021–22 through 2024–25. Nine stable families bind Tables 46–50,
+46–50, 52–57, and 57–62 respectively. The 2024–25 all-principal-offence All
+Courts and Magistrates' Courts tables remain singleton families, separate from
+the selected-offence continuations. Four normalized workbooks retain only each
+sheet's reviewed used range; their original Cube 10 downloads remain separately
+custodied, and no correction is applied.
+
+The cluster adds 16,931 canonical rows: 16,067 defendant counts plus 216
+observations for each mean/median defendant age and mean/median case duration
+measure. It preserves 2,913 published numeric zeros separately from 49 `..`
+not-applicable and 88 `na` not-available cells; no selected cell is suppressed.
+All 10,424 ambiguity warnings require canonical-output equivalence and exact
+year-specific header sources. The 2024 all-principal-offence headers preserve
+the published non-breaking spaces, including
+`14 Offences against justice procedures and orders(c)`, and the contracts bind
+the exact NT footnote variants rather than inferring suffixes. Guilty ex-parte
+is a category under `GROUP_METHOD_OF_FINALISATION`; blank cells on that source
+row never make it a parent for the following transfer, withdrawn, or total
+categories. Perturbation notes preclude additive total equations.
+
+The twelve clusters now cover 258 of 430 worksheets and produce 279,363
+canonical observations; 172 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -239,7 +262,7 @@ canonical observations; 194 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 236 assets replay with
+measures, value statuses, source cells, and warnings. All 258 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

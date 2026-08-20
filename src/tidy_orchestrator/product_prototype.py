@@ -36,11 +36,30 @@ from .worker import (
 
 COHORT_SCHEMA = "tidy.product-prototype-cohort/v1"
 ACCEPTANCE_SCHEMA = "tidy.table-family-acceptance/v1"
+ACCEPTANCE_SCHEMA_V2 = "tidy.table-family-acceptance/v2"
+ACCEPTANCE_SCHEMAS = frozenset({ACCEPTANCE_SCHEMA, ACCEPTANCE_SCHEMA_V2})
+BASE_ACCEPTANCE_CHECK_KEYS = frozenset(
+    {
+        "interpretation",
+        "deterministicReplay",
+        "nonEmpty",
+        "rowBounds",
+        "requiredDimensions",
+        "rowSelection",
+        "codelists",
+        "uniqueKeys",
+        "sourceCellUniqueness",
+        "totalEquations",
+        "warningAllowlist",
+        "coverage",
+    }
+)
 RUN_SCHEMA = "tidy.product-prototype-run/v1"
 MODEL = "openai-codex/gpt-5.6-luna"
 PROMPT_CONTRACT = "cell-role-semantic-map-v13-adjacent-year-aware"
 DEFAULT_PROTOTYPE_MAX_WARNINGS = 10_000
 COMBINATION_COVERAGE_SCHEMA = "tidy.product-prototype-dimension-combinations/v1"
+_SHA256_DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
 
 _DIMENSION_FIELDS = {
     "jurisdiction": "jurisdiction_id",
@@ -536,6 +555,13 @@ def run_product_prototype(
     contract_bytes = contract_path.read_bytes()
     contract = _load_object(contract_bytes, "acceptance contract")
     _validate_contract(contract, cohort)
+    acceptance_policy_version = str(contract["schemaVersion"])
+    contract_file_digest = sha256_digest(contract_bytes)
+    acceptance_policy_digest = (
+        contract_file_digest
+        if acceptance_policy_version == ACCEPTANCE_SCHEMA_V2
+        else sha256_digest(canonical_json_bytes(contract))
+    )
     worker_limits = _cohort_worker_limits(cohort)
     timestamp = recorded_at or datetime.now(UTC).isoformat()
 
@@ -552,7 +578,7 @@ def run_product_prototype(
         repository,
         contract_bytes,
         kind="table-family-acceptance-contract",
-        schema_version=ACCEPTANCE_SCHEMA,
+        schema_version=acceptance_policy_version,
         source=contract_path,
         project=project,
         timestamp=timestamp,
@@ -586,6 +612,8 @@ def run_product_prototype(
             repository=repository,
             gateway=active_gateway,
             contract=contract,
+            acceptance_policy_version=acceptance_policy_version,
+            acceptance_policy_digest=acceptance_policy_digest,
             prepared=prepared,
             publication_id=(
                 "prisoners-in-australia"
@@ -925,6 +953,8 @@ def _interpret_accept_one(
     repository: LocalArtifactRepository,
     gateway: WorkerGateway,
     contract: dict[str, Any],
+    acceptance_policy_version: str,
+    acceptance_policy_digest: str,
     prepared: _PreparedWorkbook,
     publication_id: str,
     timestamp: str,
@@ -1005,23 +1035,35 @@ def _interpret_accept_one(
 
     decision = "prototype_auto_accepted" if not issues else "exception_required"
     subject_id = (
-        _output_digest(first, "normalized-recipe.json")
-        if first is not None
-        else prepared.response.content_digest
+        contract["expectedRecipeDigestsByYear"][str(year)]
+        if acceptance_policy_version == ACCEPTANCE_SCHEMA_V2
+        else (
+            _output_digest(first, "normalized-recipe.json")
+            if first is not None
+            else prepared.response.content_digest
+        )
     )
+    decision_payload = {
+        "year": year,
+        "workbookDigest": prepared.workbook.content_digest,
+        "sheet": entry["sheet"],
+        "checks": checks,
+        "issues": issues,
+        "acceptanceSource": "human-authored-table-family-contract",
+        "historicalReplayIsAuthority": False,
+        "trainingEligibility": False,
+    }
+    if acceptance_policy_version == ACCEPTANCE_SCHEMA_V2:
+        decision_payload.update(
+            {
+                "acceptancePolicyVersion": acceptance_policy_version,
+                "acceptancePolicyDigest": acceptance_policy_digest,
+            }
+        )
     decision_record = DecisionRecord.create(
         subject_id=subject_id,
         decision_type=decision,
-        payload={
-            "year": year,
-            "workbookDigest": prepared.workbook.content_digest,
-            "sheet": entry["sheet"],
-            "checks": checks,
-            "issues": issues,
-            "acceptanceSource": "human-authored-table-family-contract",
-            "historicalReplayIsAuthority": False,
-            "trainingEligibility": False,
-        },
+        payload=decision_payload,
         actor="tidy.product-prototype-policy/v1",
         recorded_at=timestamp,
     )
@@ -1030,8 +1072,8 @@ def _interpret_accept_one(
         provenance = {
             "publication_id": publication_id,
             "execution_digest": execution_digest,
-            "acceptance_policy_version": ACCEPTANCE_SCHEMA,
-            "acceptance_policy_digest": sha256_digest(canonical_json_bytes(contract)),
+            "acceptance_policy_version": acceptance_policy_version,
+            "acceptance_policy_digest": acceptance_policy_digest,
             "acceptance_decision_digest": decision_record.decision_id,
             "prompt_package_digest": _output_digest(prepared.prepare, "prompt.txt"),
             "generation_model": (
@@ -1133,6 +1175,17 @@ def _validate_execution(
         "coverage": False,
     }
     selection = {"rawRowCount": 0, "excludedRowCount": 0}
+    if contract.get("schemaVersion") == ACCEPTANCE_SCHEMA_V2:
+        expected_recipe_digest = contract["expectedRecipeDigestsByYear"][
+            str(entry["year"])
+        ]
+        if recipe_digest != expected_recipe_digest:
+            issues.append(
+                _issue(
+                    "RECIPE_DIGEST_MISMATCH",
+                    "Generated recipe does not match the v2 contract digest pin.",
+                )
+            )
     if not deterministic:
         issues.append(_issue("NONDETERMINISTIC_REPLAY", "Repeated outputs differ."))
     tables = execution.get("tables")
@@ -2110,6 +2163,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "measure",
         "measures",
         "expectedWarningCountsByYear",
+        "expectedRecipeDigestsByYear",
         "excludedDimensionCodes",
         "dimensionHeaders",
         "referenceDateDimension",
@@ -2153,7 +2207,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     if (
         not required <= keys <= required | optional
         or ("measure" in value) == ("measures" in value)
-        or value.get("schemaVersion") != ACCEPTANCE_SCHEMA
+        or value.get("schemaVersion") not in ACCEPTANCE_SCHEMAS
         or value.get("tableFamilyId") != cohort.get("tableFamilyId")
         or value.get("automaticAcceptance") is not True
         or value.get("trainingEligibility") is not False
@@ -2237,6 +2291,23 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "excludeMissingValues",
     }
     years = {str(item["year"]) for item in cohort["workbooks"]}
+    recipe_digests = value.get("expectedRecipeDigestsByYear")
+    if (value.get("schemaVersion") == ACCEPTANCE_SCHEMA_V2) != (
+        recipe_digests is not None
+    ) or (
+        recipe_digests is not None
+        and (
+            not isinstance(recipe_digests, dict)
+            or set(recipe_digests) != years
+            or any(
+                not isinstance(year, str)
+                or not isinstance(digest, str)
+                or _SHA256_DIGEST.fullmatch(digest) is None
+                for year, digest in recipe_digests.items()
+            )
+        )
+    ):
+        raise ProductPrototypeError("Acceptance recipe digest pins are invalid")
     warning_counts = value.get("expectedWarningCountsByYear")
     if warning_counts is not None and (
         not isinstance(warning_counts, dict)
