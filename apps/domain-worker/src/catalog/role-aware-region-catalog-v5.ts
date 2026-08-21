@@ -535,14 +535,45 @@ export function buildRoleAwareSemanticRegionCatalog(
     .sort(compareCandidates);
   const retained = described.slice(0, maxCandidates);
 
+  // Marker-only rows can legitimately terminate a repeated observation panel.
+  // They cannot participate in numeric panel inference, and unlike marker rows
+  // before a later numeric panel they cannot be discovered as top anchors.
+  // Append narrowly corroborated terminal marker runs after the established
+  // sorted menu so every existing candidate ID remains stable.
+  const existingKeys = new Set(drafts.keys());
+  const terminalMarkerCandidates = deriveTerminalRepeatedMarkerDrafts({
+    context,
+    panels,
+    valueByAddress,
+    styleByAddress,
+    dataTypeByAddress,
+    mergeParentByAddress,
+  })
+    .filter(
+      (draft) =>
+        !existingKeys.has([...draft.segments].sort(compareRanges).join("|")),
+    )
+    .map((draft) => describeCandidate(draft, valueByAddress))
+    .sort((left, right) => compareRanges(left.segments[0], right.segments[0]));
+  const availableMarkerSlots = Math.max(0, maxCandidates - retained.length);
+  const retainedWithTerminalMarkers = [
+    ...retained,
+    ...terminalMarkerCandidates.slice(0, availableMarkerSlots),
+  ];
+
   return {
     version: ROLE_AWARE_REGION_CATALOG_VERSION,
     sheet: context.sheet,
-    candidates: retained.map((candidate, index) => ({
+    candidates: retainedWithTerminalMarkers.map((candidate, index) => ({
       id: `region-${String(index + 1).padStart(3, "0")}`,
       ...candidate,
     })),
-    omittedCandidateCount: Math.max(0, described.length - retained.length),
+    omittedCandidateCount: Math.max(
+      0,
+      described.length +
+        terminalMarkerCandidates.length -
+        retainedWithTerminalMarkers.length,
+    ),
     observationPanelCount: panels.length,
     formatFactCount: options.formattingFacts?.length ?? 0,
     cellDataFactCount: options.cellDataFacts?.length ?? 0,
@@ -1026,6 +1057,117 @@ function deriveObservationPanels(
   return panels
     .filter((panel) => rectangleCellCount(panelRange(panel)) > 0)
     .sort(comparePanels);
+}
+
+function deriveTerminalRepeatedMarkerDrafts({
+  context,
+  panels,
+  valueByAddress,
+  styleByAddress,
+  dataTypeByAddress,
+  mergeParentByAddress,
+}: {
+  context: CompactSemanticContext;
+  panels: readonly Panel[];
+  valueByAddress: ReadonlyMap<string, unknown>;
+  styleByAddress: ReadonlyMap<string, string>;
+  dataTypeByAddress: ReadonlyMap<string, string>;
+  mergeParentByAddress: ReadonlyMap<string, string>;
+}): CandidateDraft[] {
+  const drafts: CandidateDraft[] = [];
+  const byColumnSpan = groupBy(
+    [...panels],
+    (panel) => `${panel.col1}:${panel.col2}`,
+  );
+  for (const sameSpan of byColumnSpan.values()) {
+    if (sameSpan.length < 2) continue;
+    const ordered = [...sameSpan].sort(comparePanels);
+    const terminalPanel = ordered.reduce((latest, panel) =>
+      panel.row2 > latest.row2 ? panel : latest,
+    );
+    const startRow = terminalPanel.row2 + 1;
+    if (startRow > context.dimensions.rows) continue;
+
+    const isEligibleMarkerRow = (row: number): boolean => {
+      const label = valueByAddress.get(`R${row}C${terminalPanel.col1 - 1}`);
+      if (
+        terminalPanel.col1 <= 1 ||
+        typeof label !== "string" ||
+        !label.trim() ||
+        isExactRetainedMarker(label) ||
+        isObservationLike(label)
+      ) {
+        return false;
+      }
+      for (let col = terminalPanel.col1; col <= terminalPanel.col2; col += 1) {
+        const address = `R${row}C${col}`;
+        const dataType = dataTypeByAddress.get(address);
+        if (
+          !isExactRetainedMarker(valueByAddress.get(address)) ||
+          (dataType !== undefined && dataType !== "string") ||
+          mergeParentByAddress.has(address) ||
+          !styleByAddress.get(address)
+        ) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    const markerRunAfterPanel = (panel: Panel): number[] => {
+      const rows: number[] = [];
+      for (
+        let row = panel.row2 + 1;
+        row <= context.dimensions.rows && isEligibleMarkerRow(row);
+        row += 1
+      ) {
+        rows.push(row);
+      }
+      return rows;
+    };
+    const terminalRows = markerRunAfterPanel(terminalPanel);
+    if (!terminalRows.length) continue;
+
+    const styleVector = (row: number): string =>
+      Array.from(
+        { length: terminalPanel.col2 - terminalPanel.col1 + 1 },
+        (_, offset) =>
+          styleByAddress.get(`R${row}C${terminalPanel.col1 + offset}`) ?? "",
+      ).join("\u0000");
+    const isCorroborated = ordered.some((panel) => {
+      if (panel === terminalPanel) return false;
+      const earlierRows = markerRunAfterPanel(panel);
+      return (
+        earlierRows.length === terminalRows.length &&
+        earlierRows.every(
+          (row, index) => styleVector(row) === styleVector(terminalRows[index]),
+        )
+      );
+    });
+    if (!isCorroborated) continue;
+
+    const signatures = new Set<string>();
+    for (const row of terminalRows) {
+      for (let col = terminalPanel.col1; col <= terminalPanel.col2; col += 1) {
+        const signature = styleByAddress.get(`R${row}C${col}`);
+        if (signature) signatures.add(signature);
+      }
+    }
+    drafts.push({
+      segments: new Set([
+        range(
+          terminalRows[0],
+          terminalPanel.col1,
+          terminalRows[terminalRows.length - 1],
+          terminalPanel.col2,
+        ),
+      ]),
+      kinds: new Set(["terminal-repeated-marker-run"]),
+      roleHints: new Set(["observations"]),
+      formatSignatures: signatures,
+    });
+  }
+  return drafts;
 }
 
 function addRepeatedPanelGroups(
@@ -1603,6 +1745,10 @@ function isObservedDataCell(
 ): boolean {
   if (dataType === "numeric" || dataType === "boolean") return true;
   return typeof value === "number" || typeof value === "boolean";
+}
+
+function isExactRetainedMarker(value: unknown): boolean {
+  return typeof value === "string" && /^(?:\.\.|na|np)$/i.test(value.trim());
 }
 
 function isReportedMissingValueMarker(value: unknown): boolean {

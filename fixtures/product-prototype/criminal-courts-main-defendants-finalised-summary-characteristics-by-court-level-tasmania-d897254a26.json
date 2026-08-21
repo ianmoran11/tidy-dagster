@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-d897254a26",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-d897254a26",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-d897254a26-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-9-normalized.xlsx",
+      "contentDigest": "sha256:9a2e0823cfb70a2ae6b499557f92e45a0bfc2d0965d4c24da73496e2474dfd8d",
+      "byteLength": 93223,
+      "sheet": "Table 41",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-d897254a26-2021.response.txt",
+        "contentDigest": "sha256:4dfc5e1c41363db627b8eb7d542134ca167b1ae058dc3c71b314f1fc61246af0",
+        "byteLength": 851,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-9-normalized.xlsx",
+      "contentDigest": "sha256:7ebd91411a578763184ed01008318dfe501ab0ed3e8f2141111e041674e3f1d2",
+      "byteLength": 95878,
+      "sheet": "Table 41",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-d897254a26-2022.response.txt",
+        "contentDigest": "sha256:474a2b6507f7051190e0156d7e1482d80e061783061fcb0652276c371c75f206",
+        "byteLength": 864,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-9-normalized.xlsx",
+      "contentDigest": "sha256:b4b17c474bd69011e360b33c1312c8c85c677e0a5117e74097150beab40cd0a6",
+      "byteLength": 74287,
+      "sheet": "Table 46",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-d897254a26-2023.response.txt",
+        "contentDigest": "sha256:65b2c7484c54c96687e99f18f42379ebd974f496a8d478df8b679a96639eb8c9",
+        "byteLength": 903,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

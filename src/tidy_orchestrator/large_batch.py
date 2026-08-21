@@ -23,6 +23,9 @@ from .product_prototype import (
     ACCEPTANCE_SCHEMAS,
     BASE_ACCEPTANCE_CHECK_KEYS,
     RUN_SCHEMA,
+    ProductPrototypeError,
+    _validate_cohort,
+    _validate_contract,
 )
 
 REGISTRY_SCHEMA = "tidy.product-prototype-large-batch-registry/v1"
@@ -748,6 +751,10 @@ def verify_large_batch_evidence(
     cohort = _load_object(cohort_path, "large-batch cohort")
     if sha256_digest(cohort_bytes) != manifest.get("cohortDigest"):
         raise LargeBatchError("Evidence cohort digest does not match")
+    try:
+        _validate_cohort(cohort)
+    except ProductPrototypeError as error:
+        raise LargeBatchError("Evidence cohort is invalid") from error
     contract_relative = str(
         Path(spec.cohort_path).parent / cohort["acceptanceContract"]
     )
@@ -759,6 +766,10 @@ def verify_large_batch_evidence(
     contract_file_digest = sha256_digest(contract_bytes)
     if contract_file_digest != manifest.get("acceptanceContractDigest"):
         raise LargeBatchError("Evidence acceptance contract digest does not match")
+    try:
+        _validate_contract(contract, cohort)
+    except ProductPrototypeError as error:
+        raise LargeBatchError("Evidence acceptance contract is invalid") from error
     policy_version = contract.get("schemaVersion")
     if policy_version != spec.acceptance_policy_version:
         raise LargeBatchError(

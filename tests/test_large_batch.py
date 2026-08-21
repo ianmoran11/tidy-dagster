@@ -57,15 +57,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-four-hundred-nine-worksheets-v1"
-    assert registry.worksheet_count == 409
+    assert registry.batch_id == "justice-four-hundred-thirty-one-worksheets-v1"
+    assert registry.worksheet_count == 431
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 143
+    assert len(registry.entries) == 153
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 57
+    assert len(normalization["entries"]) == 61
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 56,
+        "trim-pathological-styled-blank-cells-v1": 60,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -87,9 +87,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 409
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 431
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 351437
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 367982
     assert sum(item["providerCalls"] for item in manifests) == 0
     nt_manifests = [
         item
@@ -130,6 +130,25 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     assert sum(item["acceptedWorkbookCount"] for item in act_manifests) == 22
     assert sum(item["canonicalObservationCount"] for item in act_manifests) == 16057
     assert sum(item["providerCalls"] for item in act_manifests) == 0
+    tas_suffixes = (
+        "1e1718730a",
+        "f2593de546",
+        "cdc489d600",
+        "34dbc091f5",
+        "08dd480268",
+        "0a5e590f31",
+        "0cd32616d1",
+        "1d97a0925b",
+        "4a82019ceb",
+        "d897254a26",
+    )
+    tas_manifests = [
+        item for item in manifests if item["familyId"].endswith(tas_suffixes)
+    ]
+    assert len(tas_manifests) == 10
+    assert sum(item["acceptedWorkbookCount"] for item in tas_manifests) == 22
+    assert sum(item["canonicalObservationCount"] for item in tas_manifests) == 16545
+    assert sum(item["providerCalls"] for item in tas_manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
     ]
@@ -194,11 +213,12 @@ def test_registry_pins_acceptance_policy_and_v2_replay_timestamp() -> None:
         if spec.acceptance_policy_version == "tidy.table-family-acceptance/v2"
     ]
     assert len(v1) == 125
-    assert len(v2) == 18
+    assert len(v2) == 28
     assert all(spec.replay_recorded_at is None for spec in v1)
     assert Counter(spec.replay_recorded_at for spec in v2) == {
         "2026-08-15T09:00:00+00:00": 9,
         "2026-08-21T09:00:00+00:00": 9,
+        "2026-08-22T09:00:00+00:00": 10,
     }
 
 
@@ -364,6 +384,15 @@ def _bind_run_mutation(run: dict[str, object], manifest: dict[str, object]) -> N
     manifest["runDigest"] = run["runDigest"]
 
 
+def _v1_spec():
+    registry = load_large_batch_registry(PROJECT)
+    return next(
+        item
+        for item in registry.entries
+        if item.acceptance_policy_version.endswith("/v1")
+    )
+
+
 def _v2_spec():
     registry = load_large_batch_registry(PROJECT)
     return next(
@@ -526,6 +555,50 @@ def test_evidence_rejects_unsafe_run_authority_claims(
     monkeypatch.setattr(large_batch_module, "_load_object", load)
     with pytest.raises(LargeBatchError, match="Run evidence is invalid"):
         verify_large_batch_evidence(PROJECT, spec)
+
+
+def test_evidence_rejects_fully_rebound_authoritative_replay_input(
+    tmp_path: Path,
+) -> None:
+    spec = _v1_spec()
+    cohort_path, contract_path, evidence_root = _copy_evidence_closure(tmp_path, spec)
+    cohort = json.loads(cohort_path.read_text())
+    cohort["workbooks"][0]["replayResponse"]["acceptanceAuthority"] = True
+    cohort_path.write_text(json.dumps(cohort, indent=2, ensure_ascii=False) + "\n")
+    rows = json.loads((evidence_root / "canonical-observations.json").read_text())
+    run = json.loads((evidence_root / "run.json").read_text())
+    manifest = json.loads((evidence_root / "manifest.json").read_text())
+    _rebind_copied_evidence(
+        cohort_path, contract_path, evidence_root, rows, run, manifest
+    )
+
+    with pytest.raises(LargeBatchError, match="Evidence cohort is invalid"):
+        verify_large_batch_evidence(tmp_path, spec)
+
+
+def test_evidence_rejects_fully_rebound_training_eligible_contract(
+    tmp_path: Path,
+) -> None:
+    spec = _v1_spec()
+    cohort_path, contract_path, evidence_root = _copy_evidence_closure(tmp_path, spec)
+    contract = json.loads(contract_path.read_text())
+    contract["trainingEligibility"] = True
+    contract_path.write_text(json.dumps(contract, indent=2, ensure_ascii=False) + "\n")
+    policy_digest = sha256_digest(canonical_json_bytes(contract))
+    rows = json.loads((evidence_root / "canonical-observations.json").read_text())
+    for row in rows:
+        row["acceptance_policy_digest"] = policy_digest
+    run = json.loads((evidence_root / "run.json").read_text())
+    manifest = json.loads((evidence_root / "manifest.json").read_text())
+    _rebind_copied_evidence(
+        cohort_path, contract_path, evidence_root, rows, run, manifest
+    )
+
+    with pytest.raises(
+        LargeBatchError,
+        match="Evidence acceptance contract is invalid",
+    ):
+        verify_large_batch_evidence(tmp_path, spec)
 
 
 @pytest.mark.parametrize(
@@ -1447,9 +1520,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 409
+    assert report["acceptedWorksheetCount"] == 431
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 351437
+    assert report["canonicalObservationCount"] == 367982
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -1807,10 +1880,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-four-hundred-nine-worksheets-v1",
-        "worksheetCount": 409,
-        "cohortCount": 143,
-        "canonicalObservationCount": 351437,
+        "batchId": "justice-four-hundred-thirty-one-worksheets-v1",
+        "worksheetCount": 431,
+        "cohortCount": 153,
+        "canonicalObservationCount": 367982,
         "providerCalls": 0,
         "verified": True,
     }

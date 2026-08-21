@@ -28,15 +28,15 @@ the status snapshot, Dagster assets, and dashboard totals. The provider-free cus
 
 The Criminal Courts release inventory applies the same custody/completeness
 boundary to 69 downloads, 65 substantive cubes, 198 reviewed semantic families,
-and all 430 numbered sheets across 2021–22 through 2024–25. The first 280
+and all 430 numbered sheets across 2021–22 through 2024–25. The first 302
 registered assets are split where ANZSOC 2011, preliminary ANZSOC 2023, final
 ANZSOC 2023, and concorded historical identities cannot safely share one alias
-namespace. The remaining 150 sheets stay pending. The preliminary concordance
+namespace. The remaining 128 sheets stay pending. The preliminary concordance
 contract uses the explicit `principal_offence_anzsoc_2011` dimension beside the
 ordinary `principal_offence` dimension so the two principal-offence
 classifications are not collapsed or mislabeled as offence versus charge. The
 complete New South Wales, Victoria, Queensland, South Australia, Western
-Australia, Northern Territory, and Australian Capital Territory jurisdiction
+Australia, Northern Territory, Australian Capital Territory, and Tasmania jurisdiction
 contracts add a source-bound `classification_context` dimension so identical
 principal-offence labels remain distinct when paired
 with ANZSOC 2011, ANZSOC 2023, or the mixed concorded historical series. Run
@@ -106,12 +106,12 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 409-worksheet cross-publication batch supports acceptance-policy v1 and v2
+The 431-worksheet cross-publication batch supports acceptance-policy v1 and v2
 without weakening existing cohorts. Policy v1 retains its legacy canonical-JSON
 contract digest and behavior unchanged. Policy v2 binds acceptance to the exact
 contract-file digest and recomputes decisions from contract-pinned recipe,
 workbook, check, and replay-timestamp identities. Northern Territory and
-Australian Capital Territory cohorts use v2; future clusters should use v2.
+Australian Capital Territory and Tasmania cohorts use v2; future clusters should use v2.
 
 The shared contract capabilities include:
 
@@ -141,7 +141,7 @@ The shared contract capabilities include:
   cell values or formulas.
 
 The batch registry is
-`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 143 cohort
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 153 cohort
 contracts pins exact annual dimensions, measure applicability, value statuses,
 combination counts, and source-header variants. Verification remains
 provider-free:

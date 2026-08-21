@@ -218,6 +218,178 @@ function separatedYearRunsSheet(): ParsedSheet {
   };
 }
 
+function terminalMarkerSheet({
+  includeCorroboratingMarkers = true,
+  includeTerminalMarkers = true,
+  detachedCorroboratingMarkers = false,
+  markerValue = "np",
+  terminalStyleMismatch = false,
+  terminalLabel = "string",
+  mergeTerminalMarker = false,
+}: {
+  includeCorroboratingMarkers?: boolean;
+  includeTerminalMarkers?: boolean;
+  detachedCorroboratingMarkers?: boolean;
+  markerValue?: ".." | "na" | "np";
+  terminalStyleMismatch?: boolean;
+  terminalLabel?: "string" | "blank" | "numeric" | "marker";
+  mergeTerminalMarker?: boolean;
+} = {}): ParsedSheet {
+  const cells: ParsedSheet["cells"] = [];
+  const markerStyle = { horizontalAlign: "right", fillColor: "FFF2CC" };
+  const mismatchedMarkerStyle = {
+    horizontalAlign: "right",
+    fillColor: "DDEBF7",
+  };
+  const add = (
+    row: number,
+    col: number,
+    value: string | number,
+    style?: ParsedSheet["cells"][number]["style"],
+  ) =>
+    cells.push({
+      sheet: "Sheet 1",
+      address: `R${row}C${col}`,
+      row,
+      col,
+      value,
+      data_type: typeof value === "number" ? "numeric" : "string",
+      ...(style ? { style } : {}),
+    });
+  const addNumericPanel = (row1: number, row2: number) => {
+    for (let row = row1; row <= row2; row += 1) {
+      add(row, 1, `Outcome ${row}`);
+      for (let col = 2; col <= 7; col += 1) add(row, col, row * 10 + col);
+    }
+  };
+  const addMarkerRow = (
+    row: number,
+    style = markerStyle,
+    label: string | number = `Published marker outcome ${row}`,
+  ) => {
+    add(row, 1, label);
+    for (let col = 2; col <= 7; col += 1) {
+      add(row, col, markerValue, style);
+    }
+  };
+
+  addNumericPanel(19, 26);
+  if (includeCorroboratingMarkers) {
+    addMarkerRow(27);
+    addMarkerRow(28);
+  }
+  if (detachedCorroboratingMarkers) {
+    addMarkerRow(35);
+    addMarkerRow(36);
+  }
+  addNumericPanel(42, 49);
+  // Keep valid row labels in the baseline context so appending values cannot
+  // change established format/header candidates.
+  for (const row of [50, 51]) {
+    if (terminalLabel === "string") {
+      add(row, 1, `Published marker outcome ${row}`);
+    } else if (terminalLabel === "numeric") {
+      add(row, 1, row);
+    } else if (terminalLabel === "marker") {
+      add(row, 1, markerValue);
+    }
+  }
+  if (includeTerminalMarkers) {
+    const terminalStyle = terminalStyleMismatch
+      ? mismatchedMarkerStyle
+      : markerStyle;
+    for (let col = 2; col <= 7; col += 1) {
+      add(50, col, markerValue, terminalStyle);
+      add(51, col, markerValue, terminalStyle);
+    }
+  }
+  add(52, 1, "Footnote np is descriptive text");
+  add(52, 2, markerValue, markerStyle);
+  add(53, 1, markerValue, markerStyle);
+
+  return {
+    name: "Sheet 1",
+    usedRange: "R1C1:R53C7",
+    rowCount: 53,
+    columnCount: 7,
+    nonEmptyCellCount: cells.length,
+    cells,
+    merges: mergeTerminalMarker
+      ? [{ parent: "R50C2", range: "R50C2:R50C3" }]
+      : [],
+  };
+}
+
+function multipleTerminalMarkerSheet(
+  includeTerminalMarkers = true,
+): ParsedSheet {
+  const cells: ParsedSheet["cells"] = [];
+  const markerStyle = { horizontalAlign: "right", fillColor: "FFF2CC" };
+  const add = (row: number, col: number, value: string | number) =>
+    cells.push({
+      sheet: "Sheet 1",
+      address: `R${row}C${col}`,
+      row,
+      col,
+      value,
+      data_type: typeof value === "number" ? "numeric" : "string",
+      ...(typeof value === "string" && ["..", "na", "np"].includes(value)
+        ? { style: markerStyle }
+        : {}),
+    });
+  const addPanelRow = (row: number) => {
+    add(row, 1, `Left outcome ${row}`);
+    add(row, 2, row * 10 + 2);
+    add(row, 3, row * 10 + 3);
+    add(row, 4, `Right outcome ${row}`);
+    add(row, 5, row * 10 + 5);
+    add(row, 6, row * 10 + 6);
+  };
+  const addMarkerRow = (row: number) => {
+    add(row, 1, `Left marker ${row}`);
+    add(row, 2, "np");
+    add(row, 3, "np");
+    add(row, 4, `Right marker ${row}`);
+    add(row, 5, "np");
+    add(row, 6, "np");
+  };
+  for (let row = 10; row <= 12; row += 1) addPanelRow(row);
+  addMarkerRow(13);
+  addMarkerRow(14);
+  for (let row = 20; row <= 22; row += 1) addPanelRow(row);
+  add(23, 1, "Left marker 23");
+  add(23, 4, "Right marker 23");
+  add(24, 1, "Left marker 24");
+  add(24, 4, "Right marker 24");
+  if (includeTerminalMarkers) {
+    for (const row of [23, 24]) {
+      for (const col of [2, 3, 5, 6]) add(row, col, "np");
+    }
+  }
+  return {
+    name: "Sheet 1",
+    usedRange: "R1C1:R24C6",
+    rowCount: 24,
+    columnCount: 6,
+    nonEmptyCellCount: cells.length,
+    cells,
+    merges: [],
+  };
+}
+
+function catalogFor(
+  sheet: ParsedSheet,
+  maxCandidates?: number,
+): RoleAwareSemanticRegionCatalog {
+  const snapshot = buildCompactContextSnapshot(sheet);
+  const context = parseCompactContext(snapshot.serialized);
+  return buildRoleAwareSemanticRegionCatalog(context, {
+    formattingFacts: buildSemanticCellFormattingFacts(sheet.cells),
+    cellDataFacts: buildSemanticCellDataFacts(sheet.cells),
+    ...(maxCandidates === undefined ? {} : { maxCandidates }),
+  });
+}
+
 function setup() {
   const sheet = repeatedPanelSheet();
   const snapshot = buildCompactContextSnapshot(sheet);
@@ -259,6 +431,117 @@ describe("role-aware semantic region catalog v5", () => {
     expect(renderRoleAwareSemanticRegionCatalog(catalog)).toContain(
       "use=direct-row-candidate",
     );
+  });
+
+  it.each(["np", "..", "na"] as const)(
+    "appends an exact terminal %s run without renumbering established regions",
+    (markerValue) => {
+      const baseline = catalogFor(
+        terminalMarkerSheet({
+          includeTerminalMarkers: false,
+          markerValue,
+        }),
+      );
+      const catalog = catalogFor(terminalMarkerSheet({ markerValue }));
+      const marker = candidate(catalog, "terminal-repeated-marker-run");
+
+      expect(marker).toMatchObject({
+        id: `region-${String(baseline.candidates.length + 1).padStart(3, "0")}`,
+        segments: ["R50C2:R51C7"],
+        roleHints: ["observations"],
+        selectedCellCount: 12,
+        nonblankCount: 12,
+        valueLikeCount: 12,
+      });
+      expect(marker.sample[0]).toBe(`R50C2=${JSON.stringify(markerValue)}`);
+      expect(catalog.candidates.slice(0, baseline.candidates.length)).toEqual(
+        baseline.candidates,
+      );
+      expect(marker.segments).not.toContain("R52C2:R52C2");
+      expect(marker.segments).not.toContain("R53C1:R53C1");
+    },
+  );
+
+  it("does not use a detached marker run to corroborate terminal markers", () => {
+    const catalog = catalogFor(
+      terminalMarkerSheet({
+        includeCorroboratingMarkers: false,
+        detachedCorroboratingMarkers: true,
+      }),
+    );
+
+    expect(
+      catalog.candidates.some((entry) =>
+        entry.kinds.includes("terminal-repeated-marker-run"),
+      ),
+    ).toBe(false);
+  });
+
+  it("rejects a terminal marker run whose per-column style vector differs", () => {
+    const catalog = catalogFor(
+      terminalMarkerSheet({ terminalStyleMismatch: true }),
+    );
+
+    expect(
+      catalog.candidates.some((entry) =>
+        entry.kinds.includes("terminal-repeated-marker-run"),
+      ),
+    ).toBe(false);
+  });
+
+  it.each(["blank", "numeric", "marker"] as const)(
+    "rejects a terminal marker run with a %s row label",
+    (terminalLabel) => {
+      const catalog = catalogFor(terminalMarkerSheet({ terminalLabel }));
+
+      expect(
+        catalog.candidates.some((entry) =>
+          entry.kinds.includes("terminal-repeated-marker-run"),
+        ),
+      ).toBe(false);
+    },
+  );
+
+  it("rejects a terminal run containing a merged marker cell", () => {
+    const catalog = catalogFor(
+      terminalMarkerSheet({ mergeTerminalMarker: true }),
+    );
+
+    expect(
+      catalog.candidates.some((entry) =>
+        entry.kinds.includes("terminal-repeated-marker-run"),
+      ),
+    ).toBe(false);
+  });
+
+  it("appends multiple terminal candidates deterministically and truncates only appended candidates", () => {
+    const baseline = catalogFor(multipleTerminalMarkerSheet(false));
+    const catalog = catalogFor(multipleTerminalMarkerSheet());
+    const markers = catalog.candidates.filter((entry) =>
+      entry.kinds.includes("terminal-repeated-marker-run"),
+    );
+
+    expect(markers.map((entry) => entry.segments)).toEqual([
+      ["R23C2:R24C3"],
+      ["R23C5:R24C6"],
+    ]);
+    expect(markers.map((entry) => entry.id)).toEqual([
+      `region-${String(baseline.candidates.length + 1).padStart(3, "0")}`,
+      `region-${String(baseline.candidates.length + 2).padStart(3, "0")}`,
+    ]);
+    expect(catalog.candidates.slice(0, baseline.candidates.length)).toEqual(
+      baseline.candidates,
+    );
+
+    const limited = catalogFor(
+      multipleTerminalMarkerSheet(),
+      baseline.candidates.length + 1,
+    );
+    const limitedMarkers = limited.candidates.filter((entry) =>
+      entry.kinds.includes("terminal-repeated-marker-run"),
+    );
+    expect(limitedMarkers).toEqual([markers[0]]);
+    expect(limited.omittedCandidateCount).toBeGreaterThanOrEqual(1);
   });
 
   it("offers a bold numeric leading row as a header and preserves both observation alternatives", () => {

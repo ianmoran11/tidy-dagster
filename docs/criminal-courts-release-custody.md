@@ -3,15 +3,15 @@
 ## Scope
 
 The checked inventory covers every official XLSX download in the 2021–22,
-2022–23, 2023–24, and 2024–25 ABS *Criminal Courts, Australia* releases.
+2022–23, 2023–24, and 2024–25 ABS _Criminal Courts, Australia_ releases.
 
-| Release | Downloads | Guide exclusions | Substantive cubes | Numbered sheets |
-| --- | ---: | ---: | ---: | ---: |
-| 2021–22 | 16 | 1 | 15 | 94 |
-| 2022–23 | 17 | 1 | 16 | 102 |
-| 2023–24 | 18 | 1 | 17 | 116 |
-| 2024–25 | 18 | 1 | 17 | 118 |
-| **Total** | **69** | **4** | **65** | **430** |
+| Release   | Downloads | Guide exclusions | Substantive cubes | Numbered sheets |
+| --------- | --------: | ---------------: | ----------------: | --------------: |
+| 2021–22   |        16 |                1 |                15 |              94 |
+| 2022–23   |        17 |                1 |                16 |             102 |
+| 2023–24   |        18 |                1 |                17 |             116 |
+| 2024–25   |        18 |                1 |                17 |             118 |
+| **Total** |    **69** |            **4** |            **65** |         **430** |
 
 The guides are exact custodied exclusions. Every substantive numbered main,
 preliminary ANZSOC 2023, and FDV sheet belongs to exactly one of 198 explicit
@@ -260,8 +260,38 @@ source headers. Classification context remains separated across 11,283 ANZSOC
 binds each decision to exact contract bytes, recipe, workbook identity, checks,
 and the pinned replay timestamp `2026-08-21T09:00:00+00:00`.
 
-The thirteen clusters now cover 280 of 430 worksheets and produce 295,420
-canonical observations; 150 worksheets remain pending reviewed contracts.
+## Fourteenth accepted Tasmania cluster
+
+The fourteenth cluster covers the complete 22-sheet Tasmania Cube 9 across
+2021–22 through 2024–25. Ten stable families bind Tables 41–45, 41–45, 46–51,
+and 51–56 respectively. Source-title changes deliberately keep the two selected
+Magistrates' families separate, and the 2024 all-principal-offence tables remain
+singletons. Four normalized workbooks retain exact reviewed ranges without
+changing any valued or formula cell.
+
+The cluster adds 16,545 canonical rows: 15,681 defendant counts plus 216
+observations for each mean/median defendant age and mean/median case duration
+measure. It preserves 2,342 numeric zeros separately from 129 `np` suppressed,
+53 `..` not-applicable, and 39 `na` not-available cells. All 10,231 ambiguity
+warnings require canonical-output equivalence and exact source headers.
+Classification context remains separated across 11,622 ANZSOC 2011, 2,268
+ANZSOC 2023, and 2,655 mixed-concorded observations. Policy v2 binds each
+decision to exact contract bytes, recipe, workbook identity, checks, and the
+pinned replay timestamp `2026-08-22T09:00:00+00:00`.
+
+A role-aware catalog addition exposes exact terminal repeated-panel marker runs
+only when an earlier same-span panel has an immediately following marker run
+with the same complete style vector. It is limited to exact `..`, `na`, and
+`np`, rejects detached/merged/unlabelled/style-mismatched rows, appends after
+established candidate IDs, and produced no catalog delta for all 409 previously
+registered worksheets. It preserves Tasmania Table 54's terminal 12 `np` cells
+without a workbook correction. Source `regulaton` remains raw provenance while
+the canonical offence identifier correctly uses `REGULATION`. Perturbation and
+residual-category footnotes make additive total equations inapplicable; explicit
+hierarchy checks preserve method and principal-offence aggregates instead.
+
+The fourteen clusters now cover 302 of 430 worksheets and produce 311,965
+canonical observations; 128 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -270,8 +300,7 @@ canonical observations; 150 worksheets remain pending reviewed contracts.
   2023 cube has its own namespace.
 - 2024–25 uses ANZSOC 2023. Where a title identifies earlier values as concorded
   from ANZSOC 2011, the inventory records that mixed publication context rather
-  than claiming the historical observations were originally coded to ANZSOC
-  2023.
+  than claiming the historical observations were originally coded to ANZSOC 2023.
 - The ANZSOC 2023 Indigenous-status sentence-length counterpart is 2024–25
   Table 19 in a different cube from its third-cluster predecessor. It remains a
   distinct accepted family rather than being silently folded into the
@@ -283,7 +312,7 @@ canonical observations; 150 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 280 assets replay with
+measures, value statuses, source cells, and warnings. All 302 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

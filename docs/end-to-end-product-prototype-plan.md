@@ -3,7 +3,7 @@
 - **Status:** implemented and checked; see the implementation record below
 - **Product model:** `openai-codex/gpt-5.6-luna`
 - **Reasoning level:** high
-- **Initial cohort:** *Prisoners in Australia*, Table 30, 2023–2025
+- **Initial cohort:** _Prisoners in Australia_, Table 30, 2023–2025
 - **Related architecture:**
   - `docs/reimplementation-plan.md`
   - `docs/post-m4-canonical-migration-and-generation-plan.md`
@@ -12,7 +12,7 @@
 ## 1. The simple goal
 
 Build a small working prototype using three related spreadsheets from the
-*Prisoners in Australia* publications for 2023, 2024, and 2025.
+_Prisoners in Australia_ publications for 2023, 2024, and 2025.
 
 The prototype must:
 
@@ -385,30 +385,30 @@ Do not call the product prototype complete until a clean, independently checked
 run proves all of the following:
 
 - [x] Exactly three real, related workbook sheets are bound by the cohort
-  manifest.
+      manifest.
 - [x] `openai-codex/gpt-5.6-luna` freshly generated all three candidate recipes
-  without seeing the historical recipes or outputs.
+      without seeing the historical recipes or outputs.
 - [x] Each candidate compiled into valid RecipeV01 and ran against its bound
-  prototype workbook. The 2025 prototype workbook is a deterministic formatting
-  normalization of the generation-time source; exact source-byte identity is not
-  a hobby-prototype completion gate.
+      prototype workbook. The 2025 prototype workbook is a deterministic formatting
+      normalization of the generation-time source; exact source-byte identity is not
+      a hobby-prototype completion gate.
 - [x] Re-running an accepted recipe requires no provider call and gives identical
-  deterministic output.
+      deterministic output.
 - [x] Passing results were accepted automatically without routine human review.
 - [x] Deliberately invalid results are routed to the exception queue.
 - [x] All three real years are included in one combined dataset.
 - [x] Every combined row passes the pinned schema and code-list checks.
 - [x] Duplicate keys, conflicts, omissions, and unmapped values are explicitly
-  reported.
+      reported.
 - [x] Every combined value can be traced to its workbook, sheet, source cell,
-  recipe, execution, and acceptance decision.
+      recipe, execution, and acceptance decision.
 - [x] Provider prompts and responses remain restricted.
 - [x] Provider cost stayed within the recorded hard campaign limit.
 - [x] The whole workflow runs from one tested command.
 - [x] Dagster displays checked replay and live-evidence states without owning the
-  authoritative records.
+      authoritative records.
 - [x] Historical replay artifacts remain separate and non-authoritative; they
-  were not inputs to fresh generation or automatic acceptance.
+      were not inputs to fresh generation or automatic acceptance.
 
 ## 8. Work deliberately deferred
 
@@ -660,21 +660,21 @@ both cohorts without becoming evidence authority.
 The next expansion processes 12 additional semantic table families across
 2021–2025, adding exactly 60 worksheet-assets:
 
-| Family | Canonical observations |
-|---|---:|
-| Selected characteristics (Table 14, renumbered Table 15 in 2025) | 1,260 |
-| Indigenous status and offence/charge (Table 16, renumbered Table 20 in 2025) | 2,430 |
-| Table 24 aggregate sentence by offence | 2,295 |
-| Table 25 expected time to serve by offence | 2,295 |
-| Table 26 aggregate sentence by Indigenous status | 1,890 |
-| Table 27 aggregate-sentence publication vintages | 3,402 |
-| Table 28 expected time by Indigenous status | 1,890 |
-| Table 29 prior imprisonment | 1,215 |
-| Table 32 time on remand | 693 |
-| Table 33 security classification | 675 |
-| Table 34 prison location | 793 |
-| Table 35 court level, legal status, and remand | 810 |
-| **Total** | **19,648** |
+| Family                                                                       | Canonical observations |
+| ---------------------------------------------------------------------------- | ---------------------: |
+| Selected characteristics (Table 14, renumbered Table 15 in 2025)             |                  1,260 |
+| Indigenous status and offence/charge (Table 16, renumbered Table 20 in 2025) |                  2,430 |
+| Table 24 aggregate sentence by offence                                       |                  2,295 |
+| Table 25 expected time to serve by offence                                   |                  2,295 |
+| Table 26 aggregate sentence by Indigenous status                             |                  1,890 |
+| Table 27 aggregate-sentence publication vintages                             |                  3,402 |
+| Table 28 expected time by Indigenous status                                  |                  1,890 |
+| Table 29 prior imprisonment                                                  |                  1,215 |
+| Table 32 time on remand                                                      |                    693 |
+| Table 33 security classification                                             |                    675 |
+| Table 34 prison location                                                     |                    793 |
+| Table 35 court level, legal status, and remand                               |                    810 |
+| **Total**                                                                    |             **19,648** |
 
 All 60 worksheets were automatically accepted with zero exceptions, excluded
 rows, cross-year issues, or provider calls. Forty `np`/`n.p.` cells in Tables
@@ -714,19 +714,19 @@ scripts/tidy-prototype-batch run \
 
 ## 18. Recorded Crime — Offenders cross-publication expansion
 
-A second publication adds Tables 1–5 from *Recorded Crime — Offenders* for
+A second publication adds Tables 1–5 from _Recorded Crime — Offenders_ for
 2021–22, 2022–23, 2023–24, and 2024–25. The 20 worksheet-assets are represented
 as five four-release semantic cohorts so each contract can validate layout and
 category drift across publication vintages:
 
-| Family | Canonical observations |
-|---|---:|
-| Table 1 principal-offence count and rate time series | 4,712 |
-| Table 2 sex, principal offence, count, and rate | 5,952 |
-| Table 3 principal offence by age, including mean and median age | 2,208 |
-| Table 4 principal-offence rates by age | 1,952 |
-| Table 5 sex and age count/rate time series | 6,444 |
-| **Total** | **21,268** |
+| Family                                                          | Canonical observations |
+| --------------------------------------------------------------- | ---------------------: |
+| Table 1 principal-offence count and rate time series            |                  4,712 |
+| Table 2 sex, principal offence, count, and rate                 |                  5,952 |
+| Table 3 principal offence by age, including mean and median age |                  2,208 |
+| Table 4 principal-offence rates by age                          |                  1,952 |
+| Table 5 sex and age count/rate time series                      |                  6,444 |
+| **Total**                                                       |             **21,268** |
 
 All four vintages in every cohort are automatically accepted with zero
 exceptions, excluded rows, cross-period issues, or provider calls. Counts,
@@ -766,14 +766,18 @@ refuses every other source identity or cell state and emits
 a receipt that the verifier requires to exactly match the manifest correction
 declaration. The manifest binds both scripts, original/derived identities,
 corrections, and retained ranges and reproduces every declared derivative
-byte-for-byte.
+byte-for-byte. A role-aware catalog extension also preserves exact terminal
+`..`, `na`, and `np` runs after repeated numeric panels only when an earlier
+same-span panel immediately precedes a marker run with an identical style
+vector. Detached, merged, unlabelled, or style-mismatched runs are rejected;
+all 409 previously registered worksheet catalogs remained byte-identical.
 
-The combined registered batch now contains 143 cohorts and 409 worksheets with
-351,437 canonical observations. The dashboard projects three publications, 148
-cohorts, 434 worksheet-assets, and 364,720 canonical observations through 434
+The combined registered batch now contains 153 cohorts and 431 worksheets with
+367,982 canonical observations. The dashboard projects three publications, 158
+cohorts, 456 worksheet-assets, and 381,265 canonical observations through 456
 verified CSV routes. The complete New South Wales, Victoria, Queensland, South
-Australia, Western Australia, Northern Territory, and Australian Capital
-Territory Criminal Courts cubes contribute 154 worksheets and 120,440 rows
+Australia, Western Australia, Northern Territory, Australian Capital Territory,
+and Tasmania Criminal Courts cubes contribute 176 worksheets and 136,985 rows
 while preserving observation
 periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC 2023, and
 concorded historical classification contexts. Dagster and the dashboard remain
