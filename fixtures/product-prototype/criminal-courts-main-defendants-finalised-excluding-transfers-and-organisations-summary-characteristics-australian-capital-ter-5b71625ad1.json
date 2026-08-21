@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1-v1.json",
+  "workerLimits": {
+    "maxWarnings": 10000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-12-source.xlsx",
+      "contentDigest": "sha256:5d7734110d0f6348c017e4b3ec2fad4118b95de47cb48b6e7b2cf51f4f57bcee",
+      "byteLength": 150845,
+      "sheet": "Table 64",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1-2021.response.txt",
+        "contentDigest": "sha256:c0767fad85e40274ffc70b30797b78fa21f5dc827ba7a8586c7c38501d648bde",
+        "byteLength": 845,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-12-source.xlsx",
+      "contentDigest": "sha256:4412ad57f73fe112e3c8d546bbd348f720aa72cd5abb422d54e5ee19fdd445ec",
+      "byteLength": 153282,
+      "sheet": "Table 64",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1-2022.response.txt",
+        "contentDigest": "sha256:4dfd5bd70571d388d06d9713ddf180ce4f3729674130c059f8282be5b799bb08",
+        "byteLength": 845,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-12-normalized.xlsx",
+      "contentDigest": "sha256:047a4e140fbddb5e48210be32c2fc0dc0baf8cfa1d2d181fed73d66ba3b67cc0",
+      "byteLength": 112078,
+      "sheet": "Table 72",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1-2023.response.txt",
+        "contentDigest": "sha256:087761acc5337087e28c1b25d85bdde6d6f59b2efe7d5385879092fba414161a",
+        "byteLength": 845,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

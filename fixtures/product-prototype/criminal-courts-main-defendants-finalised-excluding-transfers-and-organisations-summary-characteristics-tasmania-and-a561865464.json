@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-and-a561865464",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-and-a561865464",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-and-a561865464-v1.json",
+  "workerLimits": {
+    "maxWarnings": 10000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-12-source.xlsx",
+      "contentDigest": "sha256:f0411a3531d5c74ef68f24c6a9a57edfc24fdbf5d95faab0a8c73690f57bc8de",
+      "byteLength": 141503,
+      "sheet": "Table 75",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-and-a561865464-2024.response.txt",
+        "contentDigest": "sha256:4be48a9bdc53d4b5cac7657892664873d7b161ec77a7ef0492209eab8a017e66",
+        "byteLength": 809,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 302
+EXPECTED_REGISTERED_COUNT = 338
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -160,6 +160,24 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-main-defendants-finalised-principal-offence-by-method-of-finalisation-tasmania-1d97a0925b",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-and-4a82019ceb",
         "criminal-courts-main-defendants-finalised-summary-characteristics-by-court-level-tasmania-d897254a26",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-7f1899e604",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-and-04a7eabfc9",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-deef593a0e",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-new-south-wales-and-be5f5e8837",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-new-south-wales-cc3f4ad25c",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-northern-territory-3407ddb4e5",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-northern-territory-and-88fd1c42eb",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-queensland-and-c2ba08e992",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-queensland-ca54310c6d",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-and-12cc29caf3",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-05e6aa34d2",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-and-a561865464",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-victoria-and-94dc135eb2",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-victoria-e342ba2cd4",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-680a53f26b",
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-and-fddeb560ad",
     }
 )
 

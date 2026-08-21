@@ -1,0 +1,5 @@
+# Checked evidence: Criminal Courts — defendant counts and published rates
+
+This directory freezes provider-free deterministic replay evidence for `criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-victoria-e342ba2cd4`. The human-authored semantic maps are replay inputs only; the policy-v2 family acceptance contract binds its exact file bytes and is the authority for exact dimensions, categories, combinations, source cells, warnings, recipes, workbook identities, and publication-vintage preservation.
+
+Published defendant counts and published rates per 100,000 persons aged 10 years and over are retained as independent observations. No denominator, count/rate identity, additive offence total, or cross-vintage equality is inferred. All selected observations were accepted with zero provider calls and zero exceptions. Original source workbook bytes remain committed separately. The deterministic 2023 normalized derivative preserves retained values, formulas, types, styles, and legitimate merges while trimming only pathological empty geometry.

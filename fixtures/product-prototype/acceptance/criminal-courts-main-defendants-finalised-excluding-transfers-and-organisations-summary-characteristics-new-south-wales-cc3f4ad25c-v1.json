@@ -1,0 +1,815 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-new-south-wales-cc3f4ad25c-v1",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-new-south-wales-cc3f4ad25c",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "jurisdiction": [
+            "NSW"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "jurisdiction": [
+            "NSW"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "jurisdiction": [
+            "NSW"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 336,
+        "2022": 364,
+        "2023": 392
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:36ec2fb51b56f7d40482dc4d3f6a806057011bd1a91a6f4e2c0da32809cde2b2",
+        "2022": "sha256:a1e11fc5ceb7703550d6a36251874337df5c0d4d0617c08347cdac2d5a8fe804",
+        "2023": "sha256:ae79d9826d022dccb430e3cbbe8b890055c3a4f1b0dd43733faa0ffd9fce5e2b"
+      }
+    },
+    {
+      "id": "defendant-rate",
+      "unitId": "per-100000-persons-aged-10-plus",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "RATE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ],
+          "jurisdiction": [
+            "NSW"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ],
+          "jurisdiction": [
+            "NSW"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_06_ROBBERY_EXTORTION",
+            "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+            "CHAR_08_THEFT",
+            "CHAR_09_FRAUD_DECEPTION",
+            "CHAR_10_19_YEARS",
+            "CHAR_10_ILLICIT_DRUG_OFFENCES",
+            "CHAR_11_WEAPONS_EXPLOSIVES",
+            "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+            "CHAR_13_PUBLIC_ORDER_OFFENCES",
+            "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+            "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+            "CHAR_16_MISCELLANEOUS_OFFENCES",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2011-06-30",
+            "2012-06-30",
+            "2013-06-30",
+            "2014-06-30",
+            "2015-06-30",
+            "2016-06-30",
+            "2017-06-30",
+            "2018-06-30",
+            "2019-06-30",
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "statistic_basis": [
+            "RATE"
+          ],
+          "jurisdiction": [
+            "NSW"
+          ],
+          "classification_context": [
+            "ANZSOC_2011"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 336,
+        "2022": 364,
+        "2023": 392
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:444740122a4af224f7456a1e7060f27d9668194d7a873171b916ae5facff12cf",
+        "2022": "sha256:dfda0046672d1cb59da672eb5570fd9eebc9400aeb9b2e94d338b519569e4410",
+        "2023": "sha256:24049846935bd8991eb2bf21c3085d7a415e9a54bad81986107a4cb1e0789b13"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "observation_period",
+    "statistic_basis",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic category$"
+    ],
+    "characteristic_group": [
+      "^characteristic group$"
+    ],
+    "observation_period": [
+      "^observation period$"
+    ],
+    "statistic_basis": [
+      "^statistic basis$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "classification_context": [
+      "^jurisdiction$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "Males": "CHAR_MALES",
+      "Females": "CHAR_FEMALES",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "01 Homicide and related offences": "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "02 Acts intended to cause injury": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "03 Sexual assault and related offences": "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "04 Dangerous/negligent acts": "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/harassment": "CHAR_05_ABDUCTION_HARASSMENT",
+      "06 Robbery/extortion": "CHAR_06_ROBBERY_EXTORTION",
+      "07 Unlawful entry with intent": "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+      "08 Theft": "CHAR_08_THEFT",
+      "09 Fraud/deception": "CHAR_09_FRAUD_DECEPTION",
+      "10 Illicit drug offences": "CHAR_10_ILLICIT_DRUG_OFFENCES",
+      "11 Weapons/explosives": "CHAR_11_WEAPONS_EXPLOSIVES",
+      "12 Property damage and environmental pollution": "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+      "13 Public order offences": "CHAR_13_PUBLIC_ORDER_OFFENCES",
+      "14 Traffic and vehicle regulatory offences": "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "15 Offences against justice": "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+      "16 Miscellaneous offences": "CHAR_16_MISCELLANEOUS_OFFENCES",
+      "Total finalised (excluding transfer to other court levels)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "02 Acts intended to cause injury(b)": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "05 Abduction/harassment(c)": "CHAR_05_ABDUCTION_HARASSMENT",
+      "11 Weapons/explosives(d)": "CHAR_11_WEAPONS_EXPLOSIVES",
+      "13 Public order offences(d)": "CHAR_13_PUBLIC_ORDER_OFFENCES",
+      "14 Traffic and vehicle regulatory offences(e)": "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+      "15 Offences against justice(f)": "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+      "16 Miscellaneous offences(d)": "CHAR_16_MISCELLANEOUS_OFFENCES",
+      "Total finalised (excluding transfer to other court levels)(g)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+    },
+    "characteristic_group": {
+      "Sex": "GROUP_SEX",
+      "Age": "GROUP_AGE",
+      "Principal offence": "GROUP_PRINCIPAL_OFFENCE",
+      "Principal offence(a)": "GROUP_PRINCIPAL_OFFENCE"
+    },
+    "observation_period": {
+      "2010–11": "2011-06-30",
+      "2011–12": "2012-06-30",
+      "2012–13": "2013-06-30",
+      "2013–14": "2014-06-30",
+      "2014–15": "2015-06-30",
+      "2015–16": "2016-06-30",
+      "2016–17": "2017-06-30",
+      "2017–18": "2018-06-30",
+      "2018–19": "2019-06-30",
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30"
+    },
+    "statistic_basis": {
+      "Number of defendants finalised": "COUNT",
+      "Rate of defendants finalised": "RATE",
+      "Rate of defendants finalised(h)(i)": "RATE"
+    },
+    "jurisdiction": {
+      "Table 57 Defendants finalised (excluding transfers and organisations), Summary characteristics – New South Wales, 2010–11 to 2021–22": "NSW",
+      "Table 57 Defendants finalised (excluding transfers and organisations), Summary characteristics – New South Wales, 2010–11 to 2022–23": "NSW",
+      "Table 65 Defendants finalised (excluding transfers and organisations), Summary characteristics – New South Wales, 2010–11 to 2023–24": "NSW"
+    },
+    "classification_context": {
+      "Table 57 Defendants finalised (excluding transfers and organisations), Summary characteristics – New South Wales, 2010–11 to 2021–22": "ANZSOC_2011",
+      "Table 57 Defendants finalised (excluding transfers and organisations), Summary characteristics – New South Wales, 2010–11 to 2022–23": "ANZSOC_2011",
+      "Table 65 Defendants finalised (excluding transfers and organisations), Summary characteristics – New South Wales, 2010–11 to 2023–24": "ANZSOC_2011"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "statistic_basis_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_08_THEFT",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_10_19_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+      ],
+      "2022": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_08_THEFT",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_10_19_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+      ],
+      "2023": [
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_06_ROBBERY_EXTORTION",
+        "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+        "CHAR_08_THEFT",
+        "CHAR_09_FRAUD_DECEPTION",
+        "CHAR_10_19_YEARS",
+        "CHAR_10_ILLICIT_DRUG_OFFENCES",
+        "CHAR_11_WEAPONS_EXPLOSIVES",
+        "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+        "CHAR_13_PUBLIC_ORDER_OFFENCES",
+        "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+        "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+        "CHAR_16_MISCELLANEOUS_OFFENCES",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_OFFENCE",
+        "GROUP_SEX"
+      ],
+      "2022": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_OFFENCE",
+        "GROUP_SEX"
+      ],
+      "2023": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_OFFENCE",
+        "GROUP_SEX"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2011-06-30",
+        "2012-06-30",
+        "2013-06-30",
+        "2014-06-30",
+        "2015-06-30",
+        "2016-06-30",
+        "2017-06-30",
+        "2018-06-30",
+        "2019-06-30",
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "COUNT",
+        "RATE"
+      ],
+      "2022": [
+        "COUNT",
+        "RATE"
+      ],
+      "2023": [
+        "COUNT",
+        "RATE"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "NSW"
+      ],
+      "2022": [
+        "NSW"
+      ],
+      "2023": [
+        "NSW"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2021": [
+        "ANZSOC_2011"
+      ],
+      "2022": [
+        "ANZSOC_2011"
+      ],
+      "2023": [
+        "ANZSOC_2011"
+      ]
+    },
+    "minimumRows": 672,
+    "maximumRows": 784,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 15
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "statistic_basis",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "COUNT": [
+            "R6C2"
+          ],
+          "RATE": [
+            "R40C2"
+          ]
+        },
+        "2022": {
+          "COUNT": [
+            "R6C2"
+          ],
+          "RATE": [
+            "R40C2"
+          ]
+        },
+        "2023": {
+          "COUNT": [
+            "R5C2"
+          ],
+          "RATE": [
+            "R39C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2021": 336,
+    "2022": 364,
+    "2023": 392
+  },
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:63f998fb3840292a5871c8c71ebd143971a519f8e5b449c55f27512e91f02777",
+    "2022": "sha256:d8710a467b9bfea78e9e5c7b7f781297d870ff33a5d40e93f7ce164869bc367a",
+    "2023": "sha256:1380681bc8174834b1ae3a5e3d22e12072946ed0ceba3f1a3c9bc5574908d99c"
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14-v1.json",
+  "workerLimits": {
+    "maxWarnings": 10000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-12-source.xlsx",
+      "contentDigest": "sha256:5d7734110d0f6348c017e4b3ec2fad4118b95de47cb48b6e7b2cf51f4f57bcee",
+      "byteLength": 150845,
+      "sheet": "Table 60",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14-2021.response.txt",
+        "contentDigest": "sha256:3d33b60ff372e47fa7c5276d406e83bfeb705fc5d7d4dc8cab880b25920ef9e6",
+        "byteLength": 838,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-12-source.xlsx",
+      "contentDigest": "sha256:4412ad57f73fe112e3c8d546bbd348f720aa72cd5abb422d54e5ee19fdd445ec",
+      "byteLength": 153282,
+      "sheet": "Table 60",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14-2022.response.txt",
+        "contentDigest": "sha256:e8c68850ba4191a3e74af066692ee67bcaad7266ddc7f89e429eeb0bcafe6ee7",
+        "byteLength": 838,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-12-normalized.xlsx",
+      "contentDigest": "sha256:047a4e140fbddb5e48210be32c2fc0dc0baf8cfa1d2d181fed73d66ba3b67cc0",
+      "byteLength": 112078,
+      "sheet": "Table 68",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14-2023.response.txt",
+        "contentDigest": "sha256:8f90794ad045892ded6a032a7170f04717adbb29a06cac4364e2d4fbb02bd708",
+        "byteLength": 838,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-and-fddeb560ad",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-and-fddeb560ad",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-and-fddeb560ad-v1.json",
+  "workerLimits": {
+    "maxWarnings": 10000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-12-source.xlsx",
+      "contentDigest": "sha256:f0411a3531d5c74ef68f24c6a9a57edfc24fdbf5d95faab0a8c73690f57bc8de",
+      "byteLength": 141503,
+      "sheet": "Table 74",
+      "replayResponse": {
+        "path": "replay/criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-and-fddeb560ad-2024.response.txt",
+        "contentDigest": "sha256:c1ca5a3926e328f670d0ba88c828e18faec5f2f20f23f03ed93ebc81a5383054",
+        "byteLength": 818,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

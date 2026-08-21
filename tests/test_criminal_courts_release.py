@@ -6,19 +6,24 @@ import json
 import re
 import shutil
 import subprocess
+import zipfile
 from collections import Counter
 from pathlib import Path
+from xml.etree import ElementTree
 
 import pytest
 from openpyxl import load_workbook
+from openpyxl.utils.cell import coordinate_from_string, range_boundaries
 
 import tidy_orchestrator.product_prototype as product_prototype_module
+from tidy_orchestrator.artifacts import domain_digest, sha256_digest
 from tidy_orchestrator.criminal_courts_release import (
     CriminalCourtsReleaseError,
     build_family_membership,
     build_source_inventory,
     verify_criminal_courts_release,
 )
+from tidy_orchestrator.large_batch import LargeBatchSpec, verify_large_batch_evidence
 
 PROJECT = Path(__file__).parents[1]
 FIXTURES = PROJECT / "fixtures" / "product-prototype"
@@ -186,8 +191,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 302,
-        "pendingSemanticContractCount": 128,
+        "registeredMemberCount": 338,
+        "pendingSemanticContractCount": 92,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -229,7 +234,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 302
+        == 338
     )
     wa_mixed = next(
         family
@@ -281,7 +286,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 302
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 338
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -2058,3 +2063,1260 @@ def test_classification_context_is_exactly_custodied(tmp_path: Path) -> None:
     inventory = build_source_inventory(tmp_path)
     with pytest.raises(CriminalCourtsReleaseError, match="classification context"):
         build_family_membership(tmp_path, inventory)
+
+
+DEFENDANT_RATE_CUBE_FAMILIES = (
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-7f1899e604",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-and-04a7eabfc9",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-5b71625ad1",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-australian-capital-ter-deef593a0e",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-new-south-wales-and-be5f5e8837",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-new-south-wales-cc3f4ad25c",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-northern-territory-3407ddb4e5",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-northern-territory-and-88fd1c42eb",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-queensland-and-c2ba08e992",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-queensland-ca54310c6d",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-291078ff14",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-south-australia-and-12cc29caf3",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-05e6aa34d2",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-tasmania-and-a561865464",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-victoria-and-94dc135eb2",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-victoria-e342ba2cd4",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-680a53f26b",
+    "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-and-fddeb560ad",
+)
+
+# These expectations are deliberately literal and independent of the generated
+# contracts and evidence.  They freeze the source custody matrix that Cube 12
+# is permitted to represent.
+DEFENDANT_RATE_SOURCE_MATRIX = {
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-7f1899e604"
+    ): (
+        "AUS",
+        (2021, 2022, 2023),
+        ("Table 56", "Table 56", "Table 64"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-and-04a7eabfc9"
+    ): (
+        "AUS",
+        (2024,),
+        ("Table 69",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-australian-capital-ter-5b71625ad1"
+    ): (
+        "ACT",
+        (2021, 2022, 2023),
+        ("Table 64", "Table 64", "Table 72"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-australian-capital-ter-deef593a0e"
+    ): (
+        "ACT",
+        (2024,),
+        ("Table 77",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-new-south-wales-and-be5f5e8837"
+    ): (
+        "NSW",
+        (2024,),
+        ("Table 70",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-new-south-wales-cc3f4ad25c"
+    ): (
+        "NSW",
+        (2021, 2022, 2023),
+        ("Table 57", "Table 57", "Table 65"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-northern-territory-3407ddb4e5"
+    ): (
+        "NT",
+        (2021, 2022, 2023),
+        ("Table 63", "Table 63", "Table 71"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-northern-territory-and-88fd1c42eb"
+    ): (
+        "NT",
+        (2024,),
+        ("Table 76",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-queensland-and-c2ba08e992"
+    ): (
+        "QLD",
+        (2024,),
+        ("Table 72",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-queensland-ca54310c6d"
+    ): (
+        "QLD",
+        (2021, 2022, 2023),
+        ("Table 59", "Table 59", "Table 67"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-south-australia-291078ff14"
+    ): (
+        "SA",
+        (2021, 2022, 2023),
+        ("Table 60", "Table 60", "Table 68"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-south-australia-and-12cc29caf3"
+    ): (
+        "SA",
+        (2024,),
+        ("Table 73",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-tasmania-05e6aa34d2"
+    ): (
+        "TAS",
+        (2021, 2022, 2023),
+        ("Table 62", "Table 62", "Table 70"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-tasmania-and-a561865464"
+    ): (
+        "TAS",
+        (2024,),
+        ("Table 75",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-victoria-and-94dc135eb2"
+    ): (
+        "VIC",
+        (2024,),
+        ("Table 71",),
+        (870,),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-victoria-e342ba2cd4"
+    ): (
+        "VIC",
+        (2021, 2022, 2023),
+        ("Table 58", "Table 58", "Table 66"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-western-australia-680a53f26b"
+    ): (
+        "WA",
+        (2021, 2022, 2023),
+        ("Table 61", "Table 61", "Table 69"),
+        (672, 728, 784),
+    ),
+    (
+        "criminal-courts-main-defendants-finalised-excluding-transfers-and-"
+        "organisations-summary-characteristics-western-australia-and-fddeb560ad"
+    ): (
+        "WA",
+        (2024,),
+        ("Table 74",),
+        (870,),
+    ),
+}
+DEFENDANT_RATE_SOURCE_FILES = {
+    2021: (
+        "workbooks/criminal-courts-2021-22-cube-12-source.xlsx",
+        "sha256:5d7734110d0f6348c017e4b3ec2fad4118b95de47cb48b6e7b2cf51f4f57bcee",
+        "sha256:5d7734110d0f6348c017e4b3ec2fad4118b95de47cb48b6e7b2cf51f4f57bcee",
+    ),
+    2022: (
+        "workbooks/criminal-courts-2022-23-cube-12-source.xlsx",
+        "sha256:4412ad57f73fe112e3c8d546bbd348f720aa72cd5abb422d54e5ee19fdd445ec",
+        "sha256:4412ad57f73fe112e3c8d546bbd348f720aa72cd5abb422d54e5ee19fdd445ec",
+    ),
+    2023: (
+        "workbooks/criminal-courts-2023-24-cube-12-normalized.xlsx",
+        "sha256:047a4e140fbddb5e48210be32c2fc0dc0baf8cfa1d2d181fed73d66ba3b67cc0",
+        "sha256:1c800c30cf50594a0ece895882981cf109d36601cafcfcaaa9fd0aaece38d0f6",
+    ),
+    2024: (
+        "workbooks/criminal-courts-2024-25-cube-12-source.xlsx",
+        "sha256:f0411a3531d5c74ef68f24c6a9a57edfc24fdbf5d95faab0a8c73690f57bc8de",
+        "sha256:f0411a3531d5c74ef68f24c6a9a57edfc24fdbf5d95faab0a8c73690f57bc8de",
+    ),
+}
+DEFENDANT_RATE_COMMON_CATEGORIES = {
+    "GROUP_SEX": ("CHAR_MALES", "CHAR_FEMALES"),
+    "GROUP_AGE": (
+        "CHAR_10_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+    ),
+}
+DEFENDANT_RATE_LEGACY_OFFENCES = (
+    "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+    "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+    "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+    "CHAR_04_DANGEROUS_NEGLIGENT_ACTS",
+    "CHAR_05_ABDUCTION_HARASSMENT",
+    "CHAR_06_ROBBERY_EXTORTION",
+    "CHAR_07_UNLAWFUL_ENTRY_WITH_INTENT",
+    "CHAR_08_THEFT",
+    "CHAR_09_FRAUD_DECEPTION",
+    "CHAR_10_ILLICIT_DRUG_OFFENCES",
+    "CHAR_11_WEAPONS_EXPLOSIVES",
+    "CHAR_12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION",
+    "CHAR_13_PUBLIC_ORDER_OFFENCES",
+    "CHAR_14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES",
+    "CHAR_15_OFFENCES_AGAINST_JUSTICE",
+    "CHAR_16_MISCELLANEOUS_OFFENCES",
+    "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+)
+DEFENDANT_RATE_CONCORDED_OFFENCES = (
+    "CHAR_01_HOMICIDE",
+    "CHAR_02_ASSAULT",
+    "CHAR_03_SEXUAL_OFFENCES",
+    "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+    "CHAR_05_ROBBERY_BLACKMAIL_AND_EXTORTION",
+    "CHAR_06_BURGLARY",
+    "CHAR_07_THEFT",
+    "CHAR_08_FRAUD_AND_RELATED_OFFENCES",
+    "CHAR_09_DRUG_OFFENCES",
+    "CHAR_10_WEAPONS_AND_EXPLOSIVES_OFFENCES",
+    "CHAR_11_PROPERTY_DAMAGE",
+    "CHAR_12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES",
+    "CHAR_13_TRAFFIC_AND_VEHICLE_OFFENCES",
+    "CHAR_14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS",
+    "CHAR_15_OFFENCES_AGAINST_GOVERNMENT",
+    "CHAR_16_ENVIRONMENTAL_OFFENCES",
+    "CHAR_17_MISCELLANEOUS_OFFENCES",
+    "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+)
+DEFENDANT_RATE_SOURCE_GEOMETRY = {
+    2021: (
+        4,
+        5,
+        (
+            (
+                "COUNT",
+                6,
+                (
+                    ("GROUP_SEX", 7, (8, 9)),
+                    ("GROUP_AGE", 11, tuple(range(12, 21))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 22, tuple(range(23, 40))),
+                ),
+            ),
+            (
+                "RATE",
+                40,
+                (
+                    ("GROUP_SEX", 41, (42, 43)),
+                    ("GROUP_AGE", 45, tuple(range(46, 55))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 56, tuple(range(57, 74))),
+                ),
+            ),
+        ),
+    ),
+    2022: (
+        4,
+        5,
+        (
+            (
+                "COUNT",
+                6,
+                (
+                    ("GROUP_SEX", 7, (8, 9)),
+                    ("GROUP_AGE", 11, tuple(range(12, 21))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 22, tuple(range(23, 40))),
+                ),
+            ),
+            (
+                "RATE",
+                40,
+                (
+                    ("GROUP_SEX", 41, (42, 43)),
+                    ("GROUP_AGE", 45, tuple(range(46, 55))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 56, tuple(range(57, 74))),
+                ),
+            ),
+        ),
+    ),
+    2023: (
+        3,
+        4,
+        (
+            (
+                "COUNT",
+                5,
+                (
+                    ("GROUP_SEX", 6, (7, 8)),
+                    ("GROUP_AGE", 10, tuple(range(11, 20))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 21, tuple(range(22, 39))),
+                ),
+            ),
+            (
+                "RATE",
+                39,
+                (
+                    ("GROUP_SEX", 40, (41, 42)),
+                    ("GROUP_AGE", 44, tuple(range(45, 54))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 55, tuple(range(56, 73))),
+                ),
+            ),
+        ),
+    ),
+    2024: (
+        2,
+        5,
+        (
+            (
+                "RATE",
+                6,
+                (
+                    ("GROUP_SEX", 7, (8, 9)),
+                    ("GROUP_AGE", 11, tuple(range(12, 21))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 22, tuple(range(23, 41))),
+                ),
+            ),
+            (
+                "COUNT",
+                41,
+                (
+                    ("GROUP_SEX", 42, (43, 44)),
+                    ("GROUP_AGE", 46, tuple(range(47, 56))),
+                    ("GROUP_PRINCIPAL_OFFENCE", 57, tuple(range(58, 76))),
+                ),
+            ),
+        ),
+    ),
+}
+DEFENDANT_RATE_CSV_FIELDS = (
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id",
+    "unit_id",
+    "value",
+    "value_status",
+    "raw_value",
+    "source_workbook_digest",
+    "source_sheet",
+    "source_cell",
+    "recipe_digest",
+    "publication_id",
+    "execution_digest",
+    "acceptance_policy_version",
+    "acceptance_policy_digest",
+    "acceptance_decision_digest",
+    "prompt_package_digest",
+    "generation_model",
+    "generation_attempt_id",
+    "raw_characteristic_category",
+    "raw_characteristic_group",
+    "raw_observation_period",
+    "raw_statistic_basis",
+    "raw_jurisdiction",
+    "raw_classification_context",
+)
+
+
+def _defendant_rate_cube_members() -> dict[str, list[dict[str, object]]]:
+    membership = _load(MEMBERSHIP)
+    selected = {}
+    for family in membership["families"]:
+        members = [
+            member
+            for member in family["members"]
+            if member["cubeId"] == "rate-of-defendants-finalised-australia"
+        ]
+        if members:
+            selected[family["familyId"]] = members
+    return selected
+
+
+def _r1c1_parts(address: str) -> tuple[int, int]:
+    match = re.fullmatch(r"R([1-9][0-9]*)C([1-9][0-9]*)", address)
+    assert match is not None
+    return int(match.group(1)), int(match.group(2))
+
+
+def _defendant_rate_evidence_spec(family_id: str) -> LargeBatchSpec:
+    _, years, _, year_counts = DEFENDANT_RATE_SOURCE_MATRIX[family_id]
+    canonical_count = sum(year_counts)
+    assert canonical_count % 2 == 0
+    return LargeBatchSpec(
+        family_id=family_id,
+        label="Criminal Courts defendant counts and published rates",
+        cohort_path=f"fixtures/product-prototype/{family_id}.json",
+        evidence_manifest_path=(
+            f"fixtures/product-prototype/{family_id}-evidence/manifest.json"
+        ),
+        dagster_asset=f"cube_12_{years[-1]}_{len(years)}",
+        dagster_job=f"cube_12_{years[-1]}_{len(years)}_job",
+        output_directory=f".tmp/cube-12/{family_id}",
+        expected_years=years,
+        expected_year_counts=year_counts,
+        expected_canonical_count=canonical_count,
+        expected_excluded_observation_count=0,
+        expected_excluded_observation_counts_by_year={year: 0 for year in years},
+        expected_measure_counts={
+            "defendant-count": canonical_count // 2,
+            "defendant-rate": canonical_count // 2,
+        },
+        expected_value_status_counts={"observed": canonical_count},
+        expected_manual_replay_years=years,
+        preserves_publication_vintage=True,
+        acceptance_policy_version="tidy.table-family-acceptance/v2",
+        replay_recorded_at="2026-08-23T09:00:00+00:00",
+    )
+
+
+def _canonical_csv_scalar(field: str, value: object) -> str:
+    assert isinstance(value, str | int | float) and not isinstance(value, bool)
+    if isinstance(value, str) and field != "source_sheet":
+        return value.rstrip()
+    return str(value)
+
+
+def _assert_canonical_csv_matches_json(
+    csv_path: Path, rows: list[dict[str, object]]
+) -> None:
+    assert rows
+    with csv_path.open(newline="") as handle:
+        reader = csv.DictReader(handle)
+        expected_fields = reader.fieldnames
+        assert expected_fields == list(DEFENDANT_RATE_CSV_FIELDS)
+        csv_rows = list(reader)
+    assert all(set(row) == set(DEFENDANT_RATE_CSV_FIELDS) for row in rows)
+    assert csv_rows == [
+        {field: _canonical_csv_scalar(field, row[field]) for field in expected_fields}
+        for row in rows
+    ]
+
+
+def _defendant_rate_source_dimensions(
+    *,
+    year: int,
+    source_row: int,
+    source_column: int,
+    values: dict[tuple[int, int], object],
+    jurisdiction_id: str,
+) -> dict[str, tuple[object, str]]:
+    title_row, period_row, panels = DEFENDANT_RATE_SOURCE_GEOMETRY[year]
+    selected = None
+    for basis_id, basis_row, groups in panels:
+        for group_id, group_row, category_rows in groups:
+            if source_row in category_rows:
+                selected = (basis_id, basis_row, group_id, group_row, category_rows)
+                break
+        if selected is not None:
+            break
+    assert selected is not None
+    basis_id, basis_row, group_id, group_row, category_rows = selected
+    if group_id in DEFENDANT_RATE_COMMON_CATEGORIES:
+        category_ids = DEFENDANT_RATE_COMMON_CATEGORIES[group_id]
+    else:
+        category_ids = (
+            DEFENDANT_RATE_CONCORDED_OFFENCES
+            if year == 2024
+            else DEFENDANT_RATE_LEGACY_OFFENCES
+        )
+    category_id = category_ids[category_rows.index(source_row)]
+    period_id = f"{2009 + source_column:04d}-06-30"
+    title = values[(title_row, 1)]
+    return {
+        "characteristic_category": (values[(source_row, 1)], category_id),
+        "characteristic_group": (values[(group_row, 1)], group_id),
+        "observation_period": (values[(period_row, source_column)], period_id),
+        "statistic_basis": (values[(basis_row, 2)], basis_id),
+        "jurisdiction": (title, jurisdiction_id),
+        "classification_context": (
+            title,
+            (
+                "ANZSOC_2023_WITH_CONCORDED_ANZSOC_2011_SERIES"
+                if year == 2024
+                else "ANZSOC_2011"
+            ),
+        ),
+    }
+
+
+def _assert_defendant_rate_source_dimensions(
+    family_id: str,
+    cohort: dict[str, object],
+    contract: dict[str, object],
+    rows: list[dict[str, object]],
+) -> None:
+    jurisdiction_id, expected_years, expected_sheets, expected_counts = (
+        DEFENDANT_RATE_SOURCE_MATRIX[family_id]
+    )
+    expected_by_year = dict(zip(expected_years, expected_sheets, strict=True))
+    expected_count_by_year = dict(zip(expected_years, expected_counts, strict=True))
+    cohort_by_year = {workbook["year"]: workbook for workbook in cohort["workbooks"]}
+    assert tuple(cohort_by_year) == expected_years
+    tables: dict[int, dict[tuple[int, int], object]] = {}
+    for year in expected_years:
+        workbook = cohort_by_year[year]
+        expected_path, expected_digest, _ = DEFENDANT_RATE_SOURCE_FILES[year]
+        assert workbook["path"] == expected_path
+        assert workbook["contentDigest"] == expected_digest
+        assert workbook["sheet"] == expected_by_year[year]
+        source = load_workbook(
+            FIXTURES / expected_path, read_only=True, data_only=False
+        )
+        try:
+            worksheet = source[expected_by_year[year]]
+            tables[year] = {
+                (row_number, column_number): cell.value
+                for row_number, source_row in enumerate(
+                    worksheet.iter_rows(max_row=75, max_col=16), start=1
+                )
+                for column_number, cell in enumerate(source_row, start=1)
+            }
+        finally:
+            source.close()
+    rows_by_year = Counter()
+    raw_fields = {
+        "characteristic_category": "raw_characteristic_category",
+        "characteristic_group": "raw_characteristic_group",
+        "observation_period": "raw_observation_period",
+        "statistic_basis": "raw_statistic_basis",
+        "jurisdiction": "raw_jurisdiction",
+        "classification_context": "raw_classification_context",
+    }
+    publication_dates = {
+        2021: "2022-06-30",
+        2022: "2023-06-30",
+        2023: "2024-06-30",
+        2024: "2025-06-30",
+    }
+    digest_to_year = {
+        DEFENDANT_RATE_SOURCE_FILES[year][1]: year for year in expected_years
+    }
+    for row in rows:
+        year = digest_to_year[row["source_workbook_digest"]]
+        assert row["publication_vintage_date"] == publication_dates[year]
+        assert row["source_sheet"] == expected_by_year[year]
+        source_row, source_column = _r1c1_parts(row["source_cell"])
+        assert source_column >= 2
+        expected = _defendant_rate_source_dimensions(
+            year=year,
+            source_row=source_row,
+            source_column=source_column,
+            values=tables[year],
+            jurisdiction_id=jurisdiction_id,
+        )
+        for dimension, (raw, canonical_id) in expected.items():
+            assert row[raw_fields[dimension]] == raw
+            assert row[f"{dimension}_id"] == canonical_id
+            alias_key = " ".join(str(raw).strip().split())
+            assert contract["aliases"][dimension][alias_key] == canonical_id
+        assert row["reference_date"] == expected["observation_period"][1]
+        assert row["measure_id"] == (
+            "defendant-count"
+            if expected["statistic_basis"][1] == "COUNT"
+            else "defendant-rate"
+        )
+        assert row["unit_id"] == (
+            "person"
+            if expected["statistic_basis"][1] == "COUNT"
+            else "per-100000-persons-aged-10-plus"
+        )
+        rows_by_year[year] += 1
+    assert rows_by_year == expected_count_by_year
+
+
+def test_defendant_rate_cube_topology_contracts_and_frozen_evidence() -> None:
+    members_by_family = _defendant_rate_cube_members()
+    assert set(members_by_family) == set(DEFENDANT_RATE_CUBE_FAMILIES)
+    members = [member for family in members_by_family.values() for member in family]
+    assert len(members_by_family) == 18
+    assert Counter(len(family) for family in members_by_family.values()) == {3: 9, 1: 9}
+    assert Counter(member["releaseId"] for member in members) == {
+        "2021-22": 9,
+        "2022-23": 9,
+        "2023-24": 9,
+        "2024-25": 9,
+    }
+    assert {
+        release: sorted(
+            member["physicalTableNumber"]
+            for member in members
+            if member["releaseId"] == release
+        )
+        for release in ("2021-22", "2022-23", "2023-24", "2024-25")
+    } == {
+        "2021-22": list(range(56, 65)),
+        "2022-23": list(range(56, 65)),
+        "2023-24": list(range(64, 73)),
+        "2024-25": list(range(69, 78)),
+    }
+    source_digests = {
+        "2021-22": (
+            "sha256:5d7734110d0f6348c017e4b3ec2fad4118b95de47cb48b6e7b2cf51f4f57bcee"
+        ),
+        "2022-23": (
+            "sha256:4412ad57f73fe112e3c8d546bbd348f720aa72cd5abb422d54e5ee19fdd445ec"
+        ),
+        "2023-24": (
+            "sha256:1c800c30cf50594a0ece895882981cf109d36601cafcfcaaa9fd0aaece38d0f6"
+        ),
+        "2024-25": (
+            "sha256:f0411a3531d5c74ef68f24c6a9a57edfc24fdbf5d95faab0a8c73690f57bc8de"
+        ),
+    }
+    assert all(
+        member["physicalSheetName"] == f"Table {member['physicalTableNumber']}"
+        and member["sourceDigest"] == source_digests[member["releaseId"]]
+        and member["registered"] is True
+        for member in members
+    )
+    assert {
+        member["classificationContext"]
+        for member in members
+        if member["releaseId"] != "2024-25"
+    } == {"anzsoc-2011"}
+    assert {
+        member["classificationContext"]
+        for member in members
+        if member["releaseId"] == "2024-25"
+    } == {"anzsoc-2023-with-concorded-anzsoc-2011-series"}
+    release_years = {
+        "2021-22": 2021,
+        "2022-23": 2022,
+        "2023-24": 2023,
+        "2024-25": 2024,
+    }
+    for family_id, (
+        _,
+        expected_years,
+        expected_sheets,
+        _,
+    ) in DEFENDANT_RATE_SOURCE_MATRIX.items():
+        family_members = members_by_family[family_id]
+        assert tuple(
+            release_years[member["releaseId"]] for member in family_members
+        ) == (expected_years)
+        assert tuple(member["physicalSheetName"] for member in family_members) == (
+            expected_sheets
+        )
+        assert tuple(member["sourceDigest"] for member in family_members) == tuple(
+            DEFENDANT_RATE_SOURCE_FILES[year][2] for year in expected_years
+        )
+
+    all_rows = []
+    workbook_paths: dict[str, Path] = {}
+    title_by_source: dict[tuple[str, str], str] = {}
+    warning_counts = Counter()
+    aliases_declared = 0
+    for family_id in DEFENDANT_RATE_CUBE_FAMILIES:
+        cohort_path = FIXTURES / f"{family_id}.json"
+        contract_path = FIXTURES / "acceptance" / f"{family_id}-v1.json"
+        evidence = FIXTURES / f"{family_id}-evidence"
+        cohort = _load(cohort_path)
+        contract = _load(contract_path)
+        run = _load(evidence / "run.json")
+        rows = json.loads((evidence / "canonical-observations.json").read_text())
+        _assert_canonical_csv_matches_json(
+            evidence / "canonical-observations.csv", rows
+        )
+        _assert_defendant_rate_source_dimensions(family_id, cohort, contract, rows)
+        product_prototype_module._validate_cohort(cohort)
+        product_prototype_module._validate_contract(contract, cohort)
+        assert contract["schemaVersion"] == "tidy.table-family-acceptance/v2"
+        assert contract["strictAliasMatching"] is True
+        assert contract["trainingEligibility"] is False
+        assert contract["totalEquations"] == []
+        assert contract["totalValidation"] == "not_applicable"
+        assert contract["preservePublicationVintage"] is True
+        assert {measure["id"] for measure in contract["measures"]} == {
+            "defendant-count",
+            "defendant-rate",
+        }
+        assert {
+            (measure["id"], measure["unitId"]) for measure in contract["measures"]
+        } == {
+            ("defendant-count", "person"),
+            ("defendant-rate", "per-100000-persons-aged-10-plus"),
+        }
+        assert all(
+            workbook["replayResponse"]["acceptanceAuthority"] is False
+            for workbook in cohort["workbooks"]
+        )
+        assert run["providerCalls"] == 0
+        assert run["exceptionWorkbookCount"] == 0
+        assert run["trainingEligibility"] is False
+        assert run["historicalReplayIsAcceptanceAuthority"] is False
+        assert all(
+            workbook["issues"] == [] and all(workbook["checks"].values())
+            for workbook in run["workbooks"]
+        )
+        verify_large_batch_evidence(PROJECT, _defendant_rate_evidence_spec(family_id))
+        manifest = _load(evidence / "manifest.json")
+        assert manifest["recordedAt"] == "2026-08-23T09:00:00+00:00"
+        assert manifest["acceptanceContractDigest"] == sha256_digest(
+            contract_path.read_bytes()
+        )
+        assert manifest["cohortDigest"] == sha256_digest(cohort_path.read_bytes())
+        assert {path.name for path in evidence.iterdir()} == {
+            "README.md",
+            "canonical-observations.csv",
+            "canonical-observations.json",
+            "collation-report.json",
+            "exceptions.json",
+            "run.json",
+            "manifest.json",
+        }
+        assert (
+            contract["expectedWarningCountsByYear"] == manifest["warningCountsByYear"]
+        )
+        warning_counts.update(
+            {
+                int(year): count
+                for year, count in manifest["warningCountsByYear"].items()
+            }
+        )
+        run_by_year = {workbook["year"]: workbook for workbook in run["workbooks"]}
+        member_by_release = {
+            member["releaseId"]: member for member in members_by_family[family_id]
+        }
+        release_by_year = {
+            2021: "2021-22",
+            2022: "2022-23",
+            2023: "2023-24",
+            2024: "2024-25",
+        }
+        for workbook in cohort["workbooks"]:
+            year = workbook["year"]
+            member = member_by_release[release_by_year[year]]
+            assert workbook["sheet"] == member["physicalSheetName"]
+            assert run_by_year[year]["workbookDigest"] == workbook["contentDigest"]
+            assert run_by_year[year]["sheet"] == member["physicalSheetName"]
+            assert run_by_year[year]["referenceDate"] == workbook["referenceDate"]
+            response_path = FIXTURES / workbook["replayResponse"]["path"]
+            response = json.loads(response_path.read_text())
+            assert response["version"] == "semantic-table-map-v1"
+            assert response["table"]["values"]["regions"] == ["region-001"]
+            assert (
+                sha256_digest(response_path.read_bytes())
+                == workbook["replayResponse"]["contentDigest"]
+            )
+            assert (
+                len(response_path.read_bytes())
+                == workbook["replayResponse"]["byteLength"]
+            )
+            workbook_path = FIXTURES / workbook["path"]
+            assert (
+                sha256_digest(workbook_path.read_bytes()) == workbook["contentDigest"]
+            )
+            workbook_paths[workbook["contentDigest"]] = workbook_path
+            title_by_source[(workbook["contentDigest"], workbook["sheet"])] = member[
+                "publishedTitle"
+            ]
+        aliases_by_dimension = {}
+        raw_fields = {
+            "characteristic_category": "raw_characteristic_category",
+            "characteristic_group": "raw_characteristic_group",
+            "observation_period": "raw_observation_period",
+            "statistic_basis": "raw_statistic_basis",
+            "jurisdiction": "raw_jurisdiction",
+            "classification_context": "raw_classification_context",
+        }
+        for dimension, aliases in contract["aliases"].items():
+            normalized = {}
+            for raw, canonical in aliases.items():
+                key = " ".join(raw.strip().split())
+                assert " ".join(f"  {raw}\t ".split()) == key
+                assert key not in normalized or normalized[key] == canonical
+                normalized[key] = canonical
+                aliases_declared += 1
+            assert set(normalized) == {
+                " ".join(str(row[raw_fields[dimension]]).strip().split())
+                for row in rows
+            }
+            aliases_by_dimension[dimension] = normalized
+        for row in rows:
+            for dimension, raw_field in raw_fields.items():
+                key = " ".join(str(row[raw_field]).strip().split())
+                assert row[f"{dimension}_id"] == aliases_by_dimension[dimension][key]
+            year = int(row["publication_vintage_date"][:4]) - 1
+            assert (
+                row["recipe_digest"]
+                == contract["expectedRecipeDigestsByYear"][str(year)]
+            )
+            assert (
+                row["raw_jurisdiction"]
+                == title_by_source[(row["source_workbook_digest"], row["source_sheet"])]
+            )
+        all_rows.extend(rows)
+
+    assert aliases_declared == 999
+    assert len(all_rows) == 27486
+    assert warning_counts == {2021: 3024, 2022: 3276, 2023: 3528, 2024: 3915}
+    assert Counter((row["measure_id"], row["unit_id"]) for row in all_rows) == {
+        ("defendant-count", "person"): 13743,
+        ("defendant-rate", "per-100000-persons-aged-10-plus"): 13743,
+    }
+    assert Counter(row["characteristic_group_id"] for row in all_rows) == {
+        "GROUP_PRINCIPAL_OFFENCE": 16794,
+        "GROUP_AGE": 8748,
+        "GROUP_SEX": 1944,
+    }
+    assert Counter(row["classification_context_id"] for row in all_rows) == {
+        "ANZSOC_2011": 19656,
+        "ANZSOC_2023_WITH_CONCORDED_ANZSOC_2011_SERIES": 7830,
+    }
+    assert Counter(row["publication_vintage_date"] for row in all_rows) == {
+        "2022-06-30": 6048,
+        "2023-06-30": 6552,
+        "2024-06-30": 7056,
+        "2025-06-30": 7830,
+    }
+    assert Counter(row["value_status"] for row in all_rows) == {"observed": 27486}
+    assert all(
+        isinstance(row["raw_value"], int | float)
+        and not isinstance(row["raw_value"], bool)
+        and row["value"] == row["raw_value"]
+        for row in all_rows
+    )
+    assert sum(row["value"] == 0 for row in all_rows) == 20
+    assert {
+        row["statistic_basis_id"]
+        for row in all_rows
+        if row["measure_id"] == "defendant-count"
+    } == {"COUNT"}
+    assert {
+        row["statistic_basis_id"]
+        for row in all_rows
+        if row["measure_id"] == "defendant-rate"
+    } == {"RATE"}
+    assert (
+        len(
+            {
+                (row["source_workbook_digest"], row["source_sheet"], row["source_cell"])
+                for row in all_rows
+            }
+        )
+        == 27486
+    )
+
+    total_id = "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS"
+    total_rows = [
+        row for row in all_rows if row["characteristic_category_id"] == total_id
+    ]
+    assert len(total_rows) == 972
+    assert {row["characteristic_group_id"] for row in total_rows} == {
+        "GROUP_PRINCIPAL_OFFENCE"
+    }
+    assert all(
+        row["raw_characteristic_category"].startswith(
+            "Total finalised (excluding transfer to other court levels)"
+        )
+        for row in total_rows
+    )
+    markers = {
+        marker
+        for row in all_rows
+        for field, raw in row.items()
+        if field.startswith("raw_")
+        for marker in re.findall(r"\([a-z]\)", str(raw))
+    }
+    assert markers == {f"({letter})" for letter in "abcdefghijkl"}
+    legacy_offences = {
+        row["characteristic_category_id"]
+        for row in all_rows
+        if row["classification_context_id"] == "ANZSOC_2011"
+        and row["characteristic_group_id"] == "GROUP_PRINCIPAL_OFFENCE"
+    }
+    concorded_offences = {
+        row["characteristic_category_id"]
+        for row in all_rows
+        if row["classification_context_id"]
+        == "ANZSOC_2023_WITH_CONCORDED_ANZSOC_2011_SERIES"
+        and row["characteristic_group_id"] == "GROUP_PRINCIPAL_OFFENCE"
+    }
+    assert len(legacy_offences) == 17
+    assert len(concorded_offences) == 18
+    assert legacy_offences & concorded_offences == {total_id}
+
+    rows_by_workbook_sheet: dict[tuple[str, str], list[dict[str, object]]] = {}
+    for row in all_rows:
+        rows_by_workbook_sheet.setdefault(
+            (row["source_workbook_digest"], row["source_sheet"]), []
+        ).append(row)
+    open_workbooks = {
+        digest: load_workbook(path, read_only=True, data_only=False)
+        for digest, path in workbook_paths.items()
+    }
+    try:
+        for (digest, sheet), source_rows in rows_by_workbook_sheet.items():
+            worksheet = open_workbooks[digest][sheet]
+            requested = {_r1c1_parts(row["source_cell"]) for row in source_rows}
+            max_row = max(row for row, _ in requested)
+            max_col = max(column for _, column in requested)
+            cells = {
+                (row_number, column_number): cell
+                for row_number, row in enumerate(
+                    worksheet.iter_rows(max_row=max_row, max_col=max_col), start=1
+                )
+                for column_number, cell in enumerate(row, start=1)
+                if (row_number, column_number) in requested
+            }
+            assert len(cells) == len(requested)
+            title = title_by_source[(digest, sheet)]
+            assert (
+                sum(
+                    cell.value == title
+                    for row in worksheet.iter_rows(min_row=1, max_row=6, max_col=1)
+                    for cell in row
+                )
+                == 1
+            )
+            for row in source_rows:
+                cell = cells[_r1c1_parts(row["source_cell"])]
+                assert cell.data_type == "n"
+                assert cell.value == row["raw_value"]
+                assert type(cell.value) is type(row["raw_value"])
+    finally:
+        for workbook in open_workbooks.values():
+            workbook.close()
+
+
+def test_defendant_rate_source_and_csv_checks_reject_coordinated_mutations(
+    tmp_path: Path,
+) -> None:
+    family_id = DEFENDANT_RATE_CUBE_FAMILIES[0]
+    cohort = _load(FIXTURES / f"{family_id}.json")
+    contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+    evidence = FIXTURES / f"{family_id}-evidence"
+    rows = json.loads((evidence / "canonical-observations.json").read_text())
+
+    mutated_contract = copy.deepcopy(contract)
+    mutated_rows = copy.deepcopy(rows)
+    first = "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES"
+    second = "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY"
+    for raw, target in mutated_contract["aliases"]["characteristic_category"].items():
+        if target == first:
+            mutated_contract["aliases"]["characteristic_category"][raw] = second
+        elif target == second:
+            mutated_contract["aliases"]["characteristic_category"][raw] = first
+    for row in mutated_rows:
+        if row["characteristic_category_id"] == first:
+            row["characteristic_category_id"] = second
+        elif row["characteristic_category_id"] == second:
+            row["characteristic_category_id"] = first
+    with pytest.raises(AssertionError):
+        _assert_defendant_rate_source_dimensions(
+            family_id, cohort, mutated_contract, mutated_rows
+        )
+
+    csv_path = evidence / "canonical-observations.csv"
+    with csv_path.open(newline="") as handle:
+        reader = csv.DictReader(handle)
+        fieldnames = reader.fieldnames
+        assert fieldnames is not None
+        csv_rows = list(reader)
+    csv_rows[0]["value"] = "640" if csv_rows[0]["value"] != "640" else "641"
+    mutated_csv = tmp_path / "canonical-observations.csv"
+    with mutated_csv.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(csv_rows)
+    with pytest.raises(AssertionError):
+        _assert_canonical_csv_matches_json(mutated_csv, rows)
+
+
+def test_defendant_rate_warning_panels_are_exact_and_reverse_in_2024() -> None:
+    expected = {
+        2021: ("RATE", "R40C2", 3024),
+        2022: ("RATE", "R40C2", 3276),
+        2023: ("RATE", "R39C2", 3528),
+        2024: ("COUNT", "R41C2", 3915),
+    }
+    by_year = Counter()
+    header_values: dict[tuple[int, str, str], set[str]] = {}
+    for family_id in DEFENDANT_RATE_CUBE_FAMILIES:
+        contract = _load(FIXTURES / "acceptance" / f"{family_id}-v1.json")
+        cohort = _load(FIXTURES / f"{family_id}.json")
+        evidence = FIXTURES / f"{family_id}-evidence"
+        run = _load(evidence / "run.json")
+        rows = json.loads((evidence / "canonical-observations.json").read_text())
+        rule = contract["allowedExecutionWarnings"][0]
+        assert rule["code"] == "AMBIGUOUS_HEADER"
+        assert rule["dimension"] == "statistic_basis"
+        assert rule["requireCanonicalOutputEquivalence"] is True
+        run_by_year = {workbook["year"]: workbook for workbook in run["workbooks"]}
+        cohort_by_year = {
+            workbook["year"]: workbook for workbook in cohort["workbooks"]
+        }
+        for year in run_by_year:
+            ambiguous_code, header_source, count = expected[year]
+            assert contract["expectedWarningCountsByYear"][str(year)] == count // 9
+            assert rule["expectedHeaderSourcesByYear"][str(year)][ambiguous_code] == [
+                header_source
+            ]
+            year_rows = [
+                row
+                for row in rows
+                if int(row["publication_vintage_date"][:4]) - 1 == year
+            ]
+            ambiguous = [
+                row for row in year_rows if row["statistic_basis_id"] == ambiguous_code
+            ]
+            assert len(ambiguous) == run_by_year[year]["executionWarningCount"]
+            assert all(
+                _r1c1_parts(row["source_cell"])[0]
+                > int(header_source[1:].split("C")[0])
+                for row in ambiguous
+            )
+            other = [
+                row for row in year_rows if row["statistic_basis_id"] != ambiguous_code
+            ]
+            assert all(
+                _r1c1_parts(row["source_cell"])[0]
+                < int(header_source[1:].split("C")[0])
+                for row in other
+            )
+            workbook_path = FIXTURES / cohort_by_year[year]["path"]
+            workbook = load_workbook(workbook_path, read_only=True, data_only=False)
+            try:
+                row_number, column = _r1c1_parts(header_source)
+                header_value = (
+                    workbook[cohort_by_year[year]["sheet"]]
+                    .cell(row_number, column)
+                    .value
+                )
+            finally:
+                workbook.close()
+            normalized = " ".join(str(header_value).strip().split())
+            assert contract["aliases"]["statistic_basis"][normalized] == ambiguous_code
+            header_values.setdefault((year, ambiguous_code, header_source), set()).add(
+                normalized
+            )
+            by_year[year] += len(ambiguous)
+    assert by_year == {year: declaration[2] for year, declaration in expected.items()}
+    assert header_values == {
+        (2021, "RATE", "R40C2"): {"Rate of defendants finalised"},
+        (2022, "RATE", "R40C2"): {"Rate of defendants finalised"},
+        (2023, "RATE", "R39C2"): {
+            "Rate of defendants finalised(e)(f)",
+            "Rate of defendants finalised(f)(g)",
+            "Rate of defendants finalised(g)(h)",
+            "Rate of defendants finalised(h)(i)",
+        },
+        (2024, "COUNT", "R41C2"): {"Number of defendants finalised"},
+    }
+
+
+def _workbook_sheet_xml(
+    archive: zipfile.ZipFile, sheet_name: str
+) -> ElementTree.Element:
+    main = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+    relationships = (
+        "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    )
+    package_relationships = (
+        "http://schemas.openxmlformats.org/package/2006/relationships"
+    )
+    workbook = ElementTree.fromstring(archive.read("xl/workbook.xml"))
+    sheet = next(
+        item
+        for item in workbook.findall(f".//{{{main}}}sheet")
+        if item.attrib["name"] == sheet_name
+    )
+    relationship_id = sheet.attrib[f"{{{relationships}}}id"]
+    rels = ElementTree.fromstring(archive.read("xl/_rels/workbook.xml.rels"))
+    relationship = next(
+        item
+        for item in rels.findall(f"{{{package_relationships}}}Relationship")
+        if item.attrib["Id"] == relationship_id
+    )
+    target = relationship.attrib["Target"]
+    path = target.lstrip("/") if target.startswith("/xl/") else f"xl/{target}"
+    return ElementTree.fromstring(archive.read(path))
+
+
+def test_defendant_rate_normalization_is_exact_and_reproducible(tmp_path: Path) -> None:
+    manifest = _load(FIXTURES / "batch-workbook-normalization-v1.json")
+    semantic = {
+        key: value for key, value in manifest.items() if key != "manifestDigest"
+    }
+    assert (
+        domain_digest(manifest["schemaVersion"], semantic) == manifest["manifestDigest"]
+    )
+    entries = [
+        entry for entry in manifest["entries"] if "cube-12" in entry["sourcePath"]
+    ]
+    assert len(entries) == 1
+    entry = entries[0]
+    assert entry["correction"] is None
+    assert entry["trimmedSheets"] == [
+        {"sheet": "Table 68", "retainedRange": "A1:O84"},
+        {"sheet": "Table 71", "retainedRange": "A1:O82"},
+    ]
+    source = PROJECT / entry["sourcePath"]
+    normalized = PROJECT / entry["outputPath"]
+    assert sha256_digest(source.read_bytes()) == entry["sourceDigest"]
+    assert sha256_digest(normalized.read_bytes()) == entry["outputDigest"]
+    reproduced = tmp_path / "cube-12-normalized.xlsx"
+    completed = subprocess.run(
+        [
+            str(PROJECT / manifest["scriptPath"]),
+            str(source),
+            str(reproduced),
+            "--sheet",
+            "Table 68=A1:O84",
+            "--sheet",
+            "Table 71=A1:O82",
+        ],
+        cwd=PROJECT,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert reproduced.read_bytes() == normalized.read_bytes()
+
+    source_workbook = load_workbook(source, read_only=True, data_only=False)
+    normalized_workbook = load_workbook(normalized, read_only=True, data_only=False)
+    limits = {"Table 68": (84, 15), "Table 71": (82, 15)}
+    sheet_names = source_workbook.sheetnames
+    try:
+        assert sheet_names == normalized_workbook.sheetnames
+        for sheet_name in source_workbook.sheetnames:
+            source_sheet = source_workbook[sheet_name]
+            normalized_sheet = normalized_workbook[sheet_name]
+            max_row, max_column = limits.get(
+                sheet_name,
+                (
+                    max(source_sheet.max_row, normalized_sheet.max_row),
+                    max(source_sheet.max_column, normalized_sheet.max_column),
+                ),
+            )
+            source_rows = source_sheet.iter_rows(max_row=max_row, max_col=max_column)
+            normalized_rows = normalized_sheet.iter_rows(
+                max_row=max_row, max_col=max_column
+            )
+            for source_row, normalized_row in zip(
+                source_rows, normalized_rows, strict=True
+            ):
+                assert [
+                    (
+                        cell.value,
+                        getattr(cell, "data_type", "n"),
+                        getattr(cell, "_style_id", 0),
+                        getattr(cell, "number_format", "General"),
+                    )
+                    for cell in source_row
+                ] == [
+                    (
+                        cell.value,
+                        getattr(cell, "data_type", "n"),
+                        getattr(cell, "_style_id", 0),
+                        getattr(cell, "number_format", "General"),
+                    )
+                    for cell in normalized_row
+                ]
+    finally:
+        source_workbook.close()
+        normalized_workbook.close()
+
+    spreadsheet = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+    with (
+        zipfile.ZipFile(source) as source_archive,
+        zipfile.ZipFile(normalized) as normalized_archive,
+    ):
+        for sheet_name in sheet_names:
+            source_xml = _workbook_sheet_xml(source_archive, sheet_name)
+            normalized_xml = _workbook_sheet_xml(normalized_archive, sheet_name)
+            source_merges = {
+                item.attrib["ref"]
+                for item in source_xml.findall(f".//{{{spreadsheet}}}mergeCell")
+            }
+            normalized_merges = {
+                item.attrib["ref"]
+                for item in normalized_xml.findall(f".//{{{spreadsheet}}}mergeCell")
+            }
+            if sheet_name == "Table 71":
+                assert source_merges - normalized_merges == {"A82:O1048576"}
+                assert normalized_merges == source_merges - {"A82:O1048576"}
+            else:
+                assert normalized_merges == source_merges
+        source_outside_counts = {}
+        normalized_outside_counts = {}
+        for sheet_name, retained_range in {
+            "Table 68": "A1:O84",
+            "Table 71": "A1:O82",
+        }.items():
+            min_column, min_row, max_column, max_row = range_boundaries(retained_range)
+            outside_by_kind = {}
+            for kind, archive in (
+                ("source", source_archive),
+                ("normalized", normalized_archive),
+            ):
+                xml = _workbook_sheet_xml(archive, sheet_name)
+                outside = []
+                for cell in xml.findall(f".//{{{spreadsheet}}}c"):
+                    letters, row = coordinate_from_string(cell.attrib["r"])
+                    column = 0
+                    for character in letters:
+                        column = column * 26 + ord(character) - ord("A") + 1
+                    if not (
+                        min_row <= row <= max_row and min_column <= column <= max_column
+                    ):
+                        outside.append(cell)
+                outside_by_kind[kind] = outside
+            source_outside = outside_by_kind["source"]
+            normalized_outside = outside_by_kind["normalized"]
+            source_outside_counts[sheet_name] = len(source_outside)
+            normalized_outside_counts[sheet_name] = len(normalized_outside)
+            assert all(
+                cell.find(f"{{{spreadsheet}}}v") is None
+                and cell.find(f"{{{spreadsheet}}}f") is None
+                and cell.find(f"{{{spreadsheet}}}is") is None
+                for cell in source_outside
+            )
+            assert normalized_outside == []
+        assert source_outside_counts == {"Table 68": 186, "Table 71": 0}
+        assert normalized_outside_counts == {"Table 68": 0, "Table 71": 0}

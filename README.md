@@ -88,17 +88,20 @@ scripts/tidy-prisoners-release verify
 A second complete release inventory freezes all four official 2021–22 through
 2024–25 _Criminal Courts, Australia_ releases: 69 exact downloads, four
 custodied guide exclusions, 65 substantive cubes, 198 reviewed semantic
-families, and 430 numbered worksheets (94/102/116/118). Fourteen reviewed clusters
-register 302 worksheet-assets across 126 classification-aware cohorts. They keep
+families, and 430 numbered worksheets (94/102/116/118). Fifteen reviewed clusters
+register 338 worksheet-assets across 144 classification-aware cohorts. They keep
 ANZSOC 2011, preliminary ANZSOC 2023, ANZSOC 2023, concorded historical series,
-and experimental FDV namespaces explicit; 128 worksheets remain pending
+and experimental FDV namespaces explicit; 92 worksheets remain pending
 semantic contracts. The complete 22-worksheet New South Wales, Victoria,
 Queensland, South Australia, Western Australia, Northern Territory, Australian
 Capital Territory, and Tasmania clusters
 preserve court level, method and sentence outcomes, fiscal observation periods,
 literal worksheet names, and distinct ANZSOC 2011, ANZSOC 2023, and concorded
 historical classification contexts without treating principal offences as
-charges.
+charges. The complete 36-sheet defendant-rate Cube 12 preserves published count
+and rate panels independently, including the reversed 2024 panel order, without
+recomputing rates or inferring denominators, count/rate identities, or additive
+total equations.
 
 ```sh
 scripts/generate-criminal-courts-release-inventory.py --check
@@ -110,19 +113,19 @@ cohorts—109 worksheet-assets—including the five state/territory families and
 national snapshot families for characteristics, age, sex, Indigenous status,
 offence/charge, and country of birth. A second publication adds _Recorded Crime —
 Offenders_ Tables 1–5 across 2021–22 through 2024–25: 20 more worksheet-assets
-and 21,268 canonical observations. A third publication adds 302
-_Criminal Courts, Australia_ worksheet-assets and 311,965 observations,
+and 21,268 canonical observations. A third publication adds 338
+_Criminal Courts, Australia_ worksheet-assets and 339,451 observations,
 including the guilty-outcome, sentence, offence, age, duration, sentence-length,
 fine-amount, Indigenous-status, youth, preliminary-classification, New South
 Wales, Victoria, Queensland, South Australia, Western Australia, Northern
-Territory, Australian Capital Territory, and Tasmania clusters. The combined
-431-worksheet batch contains 367,982 canonical
+Territory, Australian Capital Territory, Tasmania, and defendant-rate clusters.
+The combined 467-worksheet batch contains 395,468 canonical
 observations with zero exceptions, cross-period issues, or provider calls. The national snapshot
 cluster contributes 6,695 rows and bounds
 2025 Tables 7/8 to A:R without changing nonblank or formula payload. The state
 cluster contributes 8,406 rows; its corrected 2025 Table 16 uses all ten B:K
-measures and contributes 900. The status dashboard now exposes 456 deterministic
-per-asset CSV routes and 381,265 canonical observations. Table 27
+measures and contributes 900. The status dashboard now exposes 492 deterministic
+per-asset CSV routes and 408,751 canonical observations. Table 27
 preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,
@@ -162,8 +165,8 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects three publications, 158 cohorts, and 456
-sheet-assets across 71 checked workbook byte identities. It
+A minimal read-only page projects three publications, 176 cohorts, and 492
+sheet-assets across 75 checked workbook byte identities. It
 derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The default
@@ -175,7 +178,7 @@ If a future cohort has multiple sheets in one year, one cell shows their count
 and least-complete state rather than expanding or silently dropping them.
 Selecting a heatmap cell switches to the filtered **Assets** tab, where every
 row has an **Open CSV** link for only that workbook/sheet asset's canonical rows.
-The foreground server derives these 456 allowlisted views
+The foreground server derives these 492 allowlisted views
 from the checked cohort CSV files using workbook digest, sheet, and publication
 date; it creates no new data authority or duplicate committed CSVs. Heatmap
 symbols and accessible labels accompany every colour, and the page states that

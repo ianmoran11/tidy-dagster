@@ -290,8 +290,43 @@ the canonical offence identifier correctly uses `REGULATION`. Perturbation and
 residual-category footnotes make additive total equations inapplicable; explicit
 hierarchy checks preserve method and principal-offence aggregates instead.
 
-The fourteen clusters now cover 302 of 430 worksheets and produce 311,965
-canonical observations; 128 worksheets remain pending reviewed contracts.
+## Fifteenth accepted defendant-rate cluster
+
+The fifteenth cluster covers the complete 36-sheet defendant-rate Cube 12 across
+2021–22 through 2024–25. Nine three-vintage ANZSOC 2011 families and nine
+2024–25 mixed-concorded singletons bind Tables 56–64, 56–64, 64–72, and 69–77.
+The 2024 singletons remain separate because the publication context concords
+earlier ANZSOC 2011 values into the ANZSOC 2023 presentation; no cross-vintage
+classification equivalence is asserted.
+
+The cluster retains 27,486 canonical observations: 13,743 published defendant
+counts in persons and 13,743 published rates per 100,000 persons aged 10 years
+and over. Both panels are accepted independently. Exact source headers identify
+the measure rather than row order because 2024 places the rate panel above the
+count panel, reversing the earlier releases. Rates are not recomputed, no
+population denominator or count/rate identity is inferred, and confidentialised
+components are not forced into additive equations. Published total rows remain
+source observations with `totalValidation: not_applicable`.
+
+All 27,486 selected observation cells are numeric, include 20 exact zeros, and
+contain no selected formula or marker; source workbooks still retain unrelated
+metadata formulas and raw footnote markers. The canonical rows and contracts
+preserve raw labels and footnote markers `(a)`–`(l)`; complete footnote prose
+remains in the digest-bound source workbooks. Their 13,743 exact lower-panel
+ambiguity warnings are bound to the reviewed RATE headers in 2021–23 and the
+COUNT header after the
+2024 reversal. Policy v2 binds exact contract bytes, recipes, workbook/sheet/date
+identities, checks, and replay time `2026-08-23T09:00:00+00:00`; replay maps
+remain non-authoritative and training-ineligible.
+
+Only the 2023–24 Cube 12 derivative is normalized. Table 68 is bounded to
+`A1:O84`, and Table 71 to `A1:O82`, removing empty full-width formatting and the
+pathological empty merge `A82:O1048576`. Reproduction is byte-identical, all
+retained values, formulas, types, styles, number formats, and legitimate merges
+are unchanged, and the original workbook remains immutable.
+
+The fifteen clusters now cover 338 of 430 worksheets and produce 339,451
+canonical observations; 92 worksheets remain pending reviewed contracts.
 
 ## Classification identity
 
@@ -312,7 +347,7 @@ canonical observations; 128 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 302 assets replay with
+measures, value statuses, source cells, and warnings. All 338 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

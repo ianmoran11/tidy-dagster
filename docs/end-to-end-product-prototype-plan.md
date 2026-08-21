@@ -772,13 +772,19 @@ same-span panel immediately precedes a marker run with an identical style
 vector. Detached, merged, unlabelled, or style-mismatched runs are rejected;
 all 409 previously registered worksheet catalogs remained byte-identical.
 
-The combined registered batch now contains 153 cohorts and 431 worksheets with
-367,982 canonical observations. The dashboard projects three publications, 158
-cohorts, 456 worksheet-assets, and 381,265 canonical observations through 456
+The combined registered batch now contains 171 cohorts and 467 worksheets with
+395,468 canonical observations. The dashboard projects three publications, 176
+cohorts, 492 worksheet-assets, and 408,751 canonical observations through 492
 verified CSV routes. The complete New South Wales, Victoria, Queensland, South
 Australia, Western Australia, Northern Territory, Australian Capital Territory,
-and Tasmania Criminal Courts cubes contribute 176 worksheets and 136,985 rows
-while preserving observation
+Tasmania, and defendant-rate Criminal Courts clusters contribute 212 worksheets
+and 164,471 rows while preserving observation
 periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC 2023, and
-concorded historical classification contexts. Dagster and the dashboard remain
-replaceable, read-only projections rather than evidence authority.
+concorded historical classification contexts. The 36-sheet defendant-rate Cube
+12 independently retains 13,743 published counts and 13,743 published rates,
+uses exact headers across the reversed 2024 panel order, and infers no
+denominator, count/rate equation, or additive total identity. Its 2024
+mixed-concorded singleton families remain separate from the ANZSOC 2011
+histories; selected observation cells have no formulas or markers, while source
+metadata formulas and raw footnotes remain intact. Dagster and the dashboard
+remain replaceable, read-only projections rather than evidence authority.
