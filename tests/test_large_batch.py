@@ -7,8 +7,10 @@ import re
 import runpy
 import shutil
 import subprocess
+import zipfile
 from collections import Counter
 from pathlib import Path
+from xml.etree import ElementTree
 
 import jsonschema
 import pytest
@@ -57,15 +59,15 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-four-hundred-sixty-seven-worksheets-v1"
-    assert registry.worksheet_count == 467
+    assert registry.batch_id == "justice-five-hundred-three-worksheets-v1"
+    assert registry.worksheet_count == 503
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 171
+    assert len(registry.entries) == 189
     normalization = verify_batch_normalization(PROJECT, registry)
-    assert len(normalization["entries"]) == 62
+    assert len(normalization["entries"]) == 63
     assert "normalization" not in normalization
     assert Counter(entry["normalization"] for entry in normalization["entries"]) == {
-        "trim-pathological-styled-blank-cells-v1": 61,
+        "trim-pathological-styled-blank-cells-v1": 62,
         "trim-pathological-full-width-formatting-merge-v1": 1,
     }
     assert normalization["inRangeValuesChanged"] is True
@@ -82,14 +84,33 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
         for cell in entry["correction"].get("replacedCells", [])
     ]
     assert sum(cell["insideRetainedRange"] for cell in removed_cells) == 2
-    assert sum(not cell["insideRetainedRange"] for cell in removed_cells) == 1
+    assert {
+        (entry["sourcePath"], cell["sheet"], cell["cell"])
+        for entry in normalization["entries"]
+        if entry["correction"] is not None
+        for cell in entry["correction"].get("removedCells", [])
+        if not cell["insideRetainedRange"]
+    } == {
+        (
+            "fixtures/product-prototype/workbooks/"
+            "recorded-crime-offenders-2024-25-source.xlsx",
+            "Table 4",
+            "XFC50",
+        ),
+        (
+            "fixtures/product-prototype/workbooks/"
+            "criminal-courts-2023-24-cube-17-source.xlsx",
+            "FDV Table 16",
+            "XEX59",
+        ),
+    }
     assert sum(cell["insideRetainedRange"] for cell in replaced_cells) == 1
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 467
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 503
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 395468
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 401931
     assert sum(item["providerCalls"] for item in manifests) == 0
     nt_manifests = [
         item
@@ -149,6 +170,35 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     assert sum(item["acceptedWorkbookCount"] for item in tas_manifests) == 22
     assert sum(item["canonicalObservationCount"] for item in tas_manifests) == 16545
     assert sum(item["providerCalls"] for item in tas_manifests) == 0
+    fdv_breach_suffixes = (
+        "00438881d8",
+        "0964025147",
+        "0e2d3059c2",
+        "4f8a6d549a",
+        "838adf447e",
+        "85ca3806a6",
+        "8d69cd5de3",
+        "9bdd94cf9f",
+        "ae9d5bfaeb",
+        "27caf21795",
+        "37a9caf571",
+        "59939c8e3d",
+        "6e7986a831",
+        "7ced84ab33",
+        "827a330079",
+        "829327a2a7",
+        "88e189a36b",
+        "8c70b71645",
+    )
+    fdv_breach_manifests = [
+        item for item in manifests if item["familyId"].endswith(fdv_breach_suffixes)
+    ]
+    assert len(fdv_breach_manifests) == 18
+    assert sum(item["acceptedWorkbookCount"] for item in fdv_breach_manifests) == 36
+    assert (
+        sum(item["canonicalObservationCount"] for item in fdv_breach_manifests) == 6463
+    )
+    assert sum(item["providerCalls"] for item in fdv_breach_manifests) == 0
     offender_manifests = [
         item for item in manifests if item["familyId"].startswith("offenders-table-")
     ]
@@ -213,13 +263,14 @@ def test_registry_pins_acceptance_policy_and_v2_replay_timestamp() -> None:
         if spec.acceptance_policy_version == "tidy.table-family-acceptance/v2"
     ]
     assert len(v1) == 125
-    assert len(v2) == 46
+    assert len(v2) == 64
     assert all(spec.replay_recorded_at is None for spec in v1)
     assert Counter(spec.replay_recorded_at for spec in v2) == {
         "2026-08-15T09:00:00+00:00": 9,
         "2026-08-21T09:00:00+00:00": 9,
         "2026-08-22T09:00:00+00:00": 10,
         "2026-08-23T09:00:00+00:00": 18,
+        "2026-08-24T09:00:00+00:00": 18,
     }
 
 
@@ -1521,9 +1572,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 467
+    assert report["acceptedWorksheetCount"] == 503
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 395468
+    assert report["canonicalObservationCount"] == 401931
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -1661,6 +1712,445 @@ def test_act_period_header_correction_is_exact_and_fails_closed(
             correct(source, tmp_path / "wrong-value.xlsx")
     finally:
         declarations[source_digest] = original
+
+
+def test_fdv_duplicate_footnote_correction_and_normalization_are_exact(
+    tmp_path: Path,
+) -> None:
+    manifest_path = (
+        PROJECT / "fixtures/product-prototype/batch-workbook-normalization-v1.json"
+    )
+    manifest = json.loads(manifest_path.read_text())
+    semantic = {
+        key: value for key, value in manifest.items() if key != "manifestDigest"
+    }
+    assert manifest["recordedAt"] == "2026-08-24T09:00:00+00:00"
+    assert (
+        domain_digest(manifest["schemaVersion"], semantic) == manifest["manifestDigest"]
+    )
+    entry = next(
+        item for item in manifest["entries"] if "cube-17" in item["sourcePath"]
+    )
+    footnote = (
+        "(f) Includes defendants for whom method of finalisation could not be "
+        "determined, defendants deceased or unfit to plead, transfers to non-court "
+        "agencies and other non-adjudicated finalisations n.e.c. "
+    )
+    assert entry["trimmedSheets"] == [
+        {"sheet": "FDV Table 15", "retainedRange": "A1:G69"},
+        {"sheet": "FDV Table 16", "retainedRange": "A1:G63"},
+        {"sheet": "FDV Table 17", "retainedRange": "A1:G66"},
+        {"sheet": "FDV Table 18", "retainedRange": "A1:F71"},
+        {"sheet": "FDV Table 19", "retainedRange": "A1:G64"},
+    ]
+    assert entry["correction"] == {
+        "id": "criminal-courts-fdv-2023-24-duplicate-footnote-v1",
+        "reason": (
+            "Remove the duplicate far-right Table 16 footnote at XEX59 before "
+            "format trimming; preserve the identical retained footnote at A58 "
+            "and the exact source workbook separately."
+        ),
+        "removedCells": [
+            {
+                "sheet": "FDV Table 16",
+                "cell": "XEX59",
+                "expectedStyle": "67",
+                "expectedValue": footnote,
+                "insideRetainedRange": False,
+            }
+        ],
+    }
+    source = PROJECT / entry["sourcePath"]
+    normalized = PROJECT / entry["outputPath"]
+    source_bytes = source.read_bytes()
+    assert len(source_bytes) == entry["sourceByteLength"] == 85_082
+    assert sha256_digest(source_bytes) == entry["sourceDigest"]
+    assert sha256_digest(normalized.read_bytes()) == entry["outputDigest"]
+
+    script_namespace = runpy.run_path(
+        str(PROJECT / "scripts/correct-known-workbook-artifacts.py")
+    )
+    correct = script_namespace["correct"]
+    sheet_targets = script_namespace["sheet_targets"]
+    corrected = tmp_path / "corrected.xlsx"
+    receipt = correct(source, corrected)
+    assert receipt == entry["correction"]
+    assert source.read_bytes() == source_bytes
+
+    spreadsheet = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+
+    def sheet_root(archive: zipfile.ZipFile, name: str) -> ElementTree.Element:
+        return ElementTree.fromstring(archive.read(sheet_targets(archive)[name]))
+
+    def valued_cells(root: ElementTree.Element) -> set[str]:
+        return {
+            cell.attrib["r"]
+            for cell in root.findall(f".//{{{spreadsheet}}}c")
+            if cell.find(f"{{{spreadsheet}}}f") is not None
+            or (
+                (value := cell.find(f"{{{spreadsheet}}}v")) is not None
+                and value.text not in {None, ""}
+            )
+            or (
+                (text := cell.find(f".//{{{spreadsheet}}}t")) is not None
+                and text.text not in {None, ""}
+            )
+        }
+
+    with (
+        zipfile.ZipFile(source) as source_archive,
+        zipfile.ZipFile(corrected) as corrected_archive,
+    ):
+        source_root = sheet_root(source_archive, "FDV Table 16")
+        corrected_root = sheet_root(corrected_archive, "FDV Table 16")
+        assert valued_cells(source_root) - valued_cells(corrected_root) == {"XEX59"}
+        assert valued_cells(corrected_root) - valued_cells(source_root) == set()
+        source_cells = {
+            cell.attrib["r"]: cell
+            for cell in source_root.findall(f".//{{{spreadsheet}}}c")
+        }
+        corrected_cells = {
+            cell.attrib["r"]: cell
+            for cell in corrected_root.findall(f".//{{{spreadsheet}}}c")
+        }
+        assert source_cells["XEX59"].attrib == {"r": "XEX59", "s": "67", "t": "s"}
+        assert source_cells["XEX59"].find(f"{{{spreadsheet}}}v").text == "89"
+        assert source_cells["A58"].find(f"{{{spreadsheet}}}v").text == "89"
+        assert corrected_cells["A58"].attrib == {"r": "A58", "s": "67", "t": "s"}
+        assert corrected_cells["A58"].find(f"{{{spreadsheet}}}v").text == "89"
+        for name in set(sheet_targets(source_archive)) - {"FDV Table 16"}:
+            assert source_archive.read(sheet_targets(source_archive)[name]) == (
+                corrected_archive.read(sheet_targets(corrected_archive)[name])
+            )
+
+    reproduced = tmp_path / "normalized.xlsx"
+    completed = subprocess.run(
+        [
+            str(PROJECT / manifest["scriptPath"]),
+            str(corrected),
+            str(reproduced),
+            *[
+                argument
+                for item in entry["trimmedSheets"]
+                for argument in (
+                    "--sheet",
+                    f"{item['sheet']}={item['retainedRange']}",
+                )
+            ],
+        ],
+        cwd=PROJECT,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert reproduced.read_bytes() == normalized.read_bytes()
+
+    limits = {
+        "FDV Table 15": (69, 7),
+        "FDV Table 16": (63, 7),
+        "FDV Table 17": (66, 7),
+        "FDV Table 18": (71, 6),
+        "FDV Table 19": (64, 7),
+    }
+    source_workbook = load_workbook(source, read_only=True, data_only=False)
+    normalized_workbook = load_workbook(normalized, read_only=True, data_only=False)
+    try:
+        assert source_workbook.sheetnames == normalized_workbook.sheetnames
+        for sheet_name, (max_row, max_column) in limits.items():
+            source_rows = source_workbook[sheet_name].iter_rows(
+                max_row=max_row, max_col=max_column
+            )
+            normalized_rows = normalized_workbook[sheet_name].iter_rows(
+                max_row=max_row, max_col=max_column
+            )
+            for source_row, normalized_row in zip(
+                source_rows, normalized_rows, strict=True
+            ):
+                assert [
+                    (
+                        cell.value,
+                        getattr(cell, "data_type", "n"),
+                        getattr(cell, "_style_id", 0),
+                        getattr(cell, "number_format", "General"),
+                    )
+                    for cell in source_row
+                ] == [
+                    (
+                        cell.value,
+                        getattr(cell, "data_type", "n"),
+                        getattr(cell, "_style_id", 0),
+                        getattr(cell, "number_format", "General"),
+                    )
+                    for cell in normalized_row
+                ]
+    finally:
+        source_workbook.close()
+        normalized_workbook.close()
+
+    expected_removed_merges = {
+        "FDV Table 15": {"A2:XFD2"},
+        "FDV Table 16": {"A2:XFD2", "XEX59:XFD59"},
+        "FDV Table 17": {"A2:XFD2"},
+        "FDV Table 18": {"A2:XFD2"},
+        "FDV Table 19": {"A2:XFD2"},
+    }
+    with (
+        zipfile.ZipFile(corrected) as corrected_archive,
+        zipfile.ZipFile(normalized) as normalized_archive,
+    ):
+        for sheet_name, (max_row, max_column) in limits.items():
+            corrected_root = sheet_root(corrected_archive, sheet_name)
+            normalized_root = sheet_root(normalized_archive, sheet_name)
+            corrected_merges = {
+                item.attrib["ref"]
+                for item in corrected_root.findall(f".//{{{spreadsheet}}}mergeCell")
+            }
+            normalized_merges = {
+                item.attrib["ref"]
+                for item in normalized_root.findall(f".//{{{spreadsheet}}}mergeCell")
+            }
+            assert (
+                corrected_merges - normalized_merges
+                == expected_removed_merges[sheet_name]
+            )
+            assert normalized_merges == (
+                corrected_merges - expected_removed_merges[sheet_name]
+            )
+            for cell in corrected_root.findall(f".//{{{spreadsheet}}}c"):
+                address = cell.attrib["r"]
+                match = re.fullmatch(r"([A-Z]+)([1-9][0-9]*)", address)
+                assert match is not None
+                column = 0
+                for character in match.group(1):
+                    column = column * 26 + ord(character) - ord("A") + 1
+                outside = int(match.group(2)) > max_row or column > max_column
+                assert not (outside and address in valued_cells(corrected_root))
+        for name in set(sheet_targets(corrected_archive)) - set(limits):
+            assert corrected_archive.read(sheet_targets(corrected_archive)[name]) == (
+                normalized_archive.read(sheet_targets(normalized_archive)[name])
+            )
+
+
+def test_fdv_duplicate_footnote_correction_fails_closed(tmp_path: Path) -> None:
+    script = PROJECT / "scripts/correct-known-workbook-artifacts.py"
+    namespace = runpy.run_path(str(script))
+    correct = namespace["correct"]
+    declarations = namespace["CORRECTIONS"]
+    source = (
+        PROJECT
+        / "fixtures/product-prototype/workbooks"
+        / "criminal-courts-2023-24-cube-17-source.xlsx"
+    )
+    source_digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    original = copy.deepcopy(declarations[source_digest])
+    spreadsheet = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+    rebound_digests: list[str] = []
+
+    def write_modified_workbook(
+        name: str, archive_path: str, replacement: bytes
+    ) -> Path:
+        modified = tmp_path / name
+        with (
+            zipfile.ZipFile(source) as archive,
+            zipfile.ZipFile(modified, "w") as destination,
+        ):
+            for info in archive.infolist():
+                destination.writestr(
+                    copy.copy(info),
+                    replacement
+                    if info.filename == archive_path
+                    else archive.read(info),
+                )
+        digest = hashlib.sha256(modified.read_bytes()).hexdigest()
+        declaration = copy.deepcopy(original)
+        declaration["byteLength"] = len(modified.read_bytes())
+        declarations[digest] = declaration
+        rebound_digests.append(digest)
+        return modified
+
+    tampered_source = tmp_path / "wrong-digest.xlsx"
+    tampered_source.write_bytes(source.read_bytes() + b"tampered")
+    with pytest.raises(ValueError, match="exact reviewed correction source"):
+        correct(tampered_source, tmp_path / "wrong-digest-output.xlsx")
+
+    try:
+        wrong_length = copy.deepcopy(original)
+        wrong_length["byteLength"] += 1
+        declarations[source_digest] = wrong_length
+        with pytest.raises(ValueError, match="exact reviewed correction source"):
+            correct(source, tmp_path / "wrong-length.xlsx")
+
+        wrong_sheet = copy.deepcopy(original)
+        wrong_sheet["cells"][0]["sheet"] = "FDV Table 15"
+        declarations[source_digest] = wrong_sheet
+        with pytest.raises(
+            ValueError,
+            match=r"Expected exactly one FDV Table 15!XEX59 cell",
+        ):
+            correct(source, tmp_path / "wrong-sheet.xlsx")
+
+        mutations = [
+            ("cell", "ZZ999", r"Expected exactly one FDV Table 16!ZZ999 cell"),
+            ("expectedStyle", "999", "no longer matches"),
+            ("expectedType", "str", "no longer matches"),
+            ("expectedValue", "different footnote", "no longer matches"),
+            ("expectedMerge", "XEX59:XFC59", "no longer matches"),
+            ("retainedRange", "B1:G63", "no longer matches"),
+            ("retainedRange", "A1B2:G63", "Invalid cell address"),
+        ]
+        for key, value, message in mutations:
+            changed = copy.deepcopy(original)
+            changed["cells"][0][key] = value
+            declarations[source_digest] = changed
+            with pytest.raises(ValueError, match=message):
+                correct(source, tmp_path / f"wrong-{key}.xlsx")
+        for key, value in [
+            ("cell", "A59"),
+            ("expectedStyle", "999"),
+            ("expectedType", "str"),
+            ("expectedValue", "different duplicate footnote"),
+            ("expectedMerge", "A59:G59"),
+        ]:
+            changed = copy.deepcopy(original)
+            changed["cells"][0]["duplicateOf"][key] = value
+            declarations[source_digest] = changed
+            with pytest.raises(ValueError, match="no longer matches"):
+                correct(source, tmp_path / f"wrong-duplicate-{key}.xlsx")
+
+        with zipfile.ZipFile(source) as archive:
+            target = namespace["sheet_targets"](archive)["FDV Table 16"]
+            source_sheet = archive.read(target)
+            root = ElementTree.fromstring(source_sheet)
+            cells = {
+                item.attrib["r"]: item
+                for item in root.findall(f".//{{{spreadsheet}}}c")
+            }
+            assert cells["XEX59"].find(f"{{{spreadsheet}}}f") is None
+            ElementTree.SubElement(cells["XEX59"], f"{{{spreadsheet}}}f").text = "1+1"
+            target_formula_source = write_modified_workbook(
+                "target-formula-drift.xlsx",
+                target,
+                ElementTree.tostring(root, encoding="utf-8", xml_declaration=True),
+            )
+        with pytest.raises(ValueError, match="no longer matches"):
+            correct(target_formula_source, tmp_path / "target-formula-output.xlsx")
+
+        root = ElementTree.fromstring(source_sheet)
+        duplicate_cell = next(
+            item
+            for item in root.findall(f".//{{{spreadsheet}}}c")
+            if item.attrib["r"] == "A58"
+        )
+        assert duplicate_cell.find(f"{{{spreadsheet}}}f") is None
+        ElementTree.SubElement(duplicate_cell, f"{{{spreadsheet}}}f").text = "1+1"
+        duplicate_formula_source = write_modified_workbook(
+            "duplicate-formula-drift.xlsx",
+            target,
+            ElementTree.tostring(root, encoding="utf-8", xml_declaration=True),
+        )
+        with pytest.raises(ValueError, match="no longer matches"):
+            correct(
+                duplicate_formula_source,
+                tmp_path / "duplicate-formula-output.xlsx",
+            )
+
+        root = ElementTree.fromstring(source_sheet)
+        target_cell = next(
+            item
+            for item in root.findall(f".//{{{spreadsheet}}}c")
+            if item.attrib["r"] == "XEX59"
+        )
+        target_value = target_cell.find(f"{{{spreadsheet}}}v")
+        assert target_value is not None and target_value.text == "89"
+        target_value.text = "212"
+        index_drift_source = write_modified_workbook(
+            "shared-string-index-drift.xlsx",
+            target,
+            ElementTree.tostring(root, encoding="utf-8", xml_declaration=True),
+        )
+        with pytest.raises(ValueError, match="no longer matches"):
+            correct(index_drift_source, tmp_path / "index-drift-output.xlsx")
+
+        with zipfile.ZipFile(source) as archive:
+            shared_strings_path = "xl/sharedStrings.xml"
+            shared_root = ElementTree.fromstring(archive.read(shared_strings_path))
+        shared_items = shared_root.findall(f"{{{spreadsheet}}}si")
+        shared_text = next(shared_items[89].iter(f"{{{spreadsheet}}}t"))
+        assert shared_text.text is not None and shared_text.text.startswith(
+            "(f) Includes defendants"
+        )
+        shared_text.text += "drift"
+        shared_value_drift_source = write_modified_workbook(
+            "shared-string-value-drift.xlsx",
+            shared_strings_path,
+            ElementTree.tostring(shared_root, encoding="utf-8", xml_declaration=True),
+        )
+        with pytest.raises(ValueError, match="no longer matches"):
+            correct(
+                shared_value_drift_source,
+                tmp_path / "shared-value-drift-output.xlsx",
+            )
+    finally:
+        declarations[source_digest] = original
+        for digest in rebound_digests:
+            declarations.pop(digest, None)
+
+
+def test_prior_digest_bound_correction_outputs_remain_byte_identical(
+    tmp_path: Path,
+) -> None:
+    manifest = json.loads(
+        (
+            PROJECT / "fixtures/product-prototype/batch-workbook-normalization-v1.json"
+        ).read_text()
+    )
+    entries = [
+        entry
+        for entry in manifest["entries"]
+        if entry["correction"] is not None and "cube-17" not in entry["sourcePath"]
+    ]
+    assert len(entries) == 3
+    for index, entry in enumerate(entries):
+        corrected = tmp_path / f"corrected-{index}.xlsx"
+        receipt = tmp_path / f"receipt-{index}.json"
+        correction = subprocess.run(
+            [
+                str(PROJECT / manifest["correctionScriptPath"]),
+                str(PROJECT / entry["sourcePath"]),
+                str(corrected),
+                "--receipt",
+                str(receipt),
+            ],
+            cwd=PROJECT,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert correction.returncode == 0, correction.stderr
+        assert json.loads(receipt.read_text()) == entry["correction"]
+        reproduced = tmp_path / f"normalized-{index}.xlsx"
+        trim = subprocess.run(
+            [
+                str(PROJECT / manifest["scriptPath"]),
+                str(corrected),
+                str(reproduced),
+                *[
+                    argument
+                    for item in entry["trimmedSheets"]
+                    for argument in (
+                        "--sheet",
+                        f"{item['sheet']}={item['retainedRange']}",
+                    )
+                ],
+            ],
+            cwd=PROJECT,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        assert trim.returncode == 0, trim.stderr
+        assert reproduced.read_bytes() == (PROJECT / entry["outputPath"]).read_bytes()
 
 
 def _source_cell(address: str) -> str:
@@ -1881,10 +2371,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-four-hundred-sixty-seven-worksheets-v1",
-        "worksheetCount": 467,
-        "cohortCount": 171,
-        "canonicalObservationCount": 395468,
+        "batchId": "justice-five-hundred-three-worksheets-v1",
+        "worksheetCount": 503,
+        "cohortCount": 189,
+        "canonicalObservationCount": 401931,
         "providerCalls": 0,
         "verified": True,
     }

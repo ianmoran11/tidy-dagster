@@ -1,0 +1,665 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079-v1",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": ["COUNT"]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": ["2021", "2022", "2023"],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_10_19_YEARS",
+            "CHAR_20_29_YEARS",
+            "CHAR_30_39_YEARS",
+            "CHAR_40_49_YEARS",
+            "CHAR_50_59_YEARS",
+            "CHAR_60_YEARS_AND_OVER",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_CHILDREN_S",
+            "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+            "CHAR_CUSTODIAL_ORDERS",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_THE_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA",
+            "CHAR_HIGHER",
+            "CHAR_MAGISTRATES",
+            "CHAR_MALES",
+            "CHAR_NON_CUSTODIAL_ORDERS",
+            "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_COURT_LEVEL",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": ["2020-06-30", "2021-06-30", "2022-06-30"],
+          "statistic_basis": ["COUNT"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_10_19_YEARS",
+            "CHAR_20_29_YEARS",
+            "CHAR_30_39_YEARS",
+            "CHAR_40_49_YEARS",
+            "CHAR_50_59_YEARS",
+            "CHAR_60_YEARS_AND_OVER",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_CHILDREN_S",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_THE_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA",
+            "CHAR_HIGHER",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MAGISTRATES",
+            "CHAR_MALES",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_COURT_LEVEL",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "statistic_basis": ["COUNT"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_10_19_YEARS",
+            "CHAR_20_29_YEARS",
+            "CHAR_30_39_YEARS",
+            "CHAR_40_49_YEARS",
+            "CHAR_50_59_YEARS",
+            "CHAR_60_YEARS_AND_OVER",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_AGREEMENT_OF_WRONGDOING",
+            "CHAR_CHILDREN_S",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_THE_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA",
+            "CHAR_HIGHER",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MAGISTRATES",
+            "CHAR_MALES",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_COURT_LEVEL",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "statistic_basis": ["COUNT"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 84,
+        "2022": 124,
+        "2023": 160
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:d2ff9a24e74b5bb51a5ff0d32c581a770abe1934001347cd94c7f69023c9d8ab",
+        "2022": "sha256:4047b70801f98231ba52099d640098ddec44a69fd5a9268835cdb0bee3e5fdcc",
+        "2023": "sha256:d3ff9e636e945d08a3faa0038abd9e244adf22dc53049148f83f769d1d62809f"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": ["MEAN_AGE"]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": ["2021", "2022", "2023"],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": ["CHAR_MEAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": ["2020-06-30", "2021-06-30", "2022-06-30"],
+          "statistic_basis": ["MEAN_AGE"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        },
+        "2022": {
+          "characteristic_category": ["CHAR_MEAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "statistic_basis": ["MEAN_AGE"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        },
+        "2023": {
+          "characteristic_category": ["CHAR_MEAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "statistic_basis": ["MEAN_AGE"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 3,
+        "2022": 4,
+        "2023": 5
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:b958bc8f2a1a2d9bff88e76672671c4789e7213cc51e662002461b0a98e1d097",
+        "2022": "sha256:ef09641f295f7e323ba5c5e0c5b20852c6a78dc9076d44cfade5496b3f55ad96",
+        "2023": "sha256:815ee7ca0ffe37d2209b8303a9c2323a250ebb7e45f31a368587b7804e000909"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": ["MEDIAN_AGE"]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": ["2021", "2022", "2023"],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": ["CHAR_MEDIAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": ["2020-06-30", "2021-06-30", "2022-06-30"],
+          "statistic_basis": ["MEDIAN_AGE"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        },
+        "2022": {
+          "characteristic_category": ["CHAR_MEDIAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "statistic_basis": ["MEDIAN_AGE"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        },
+        "2023": {
+          "characteristic_category": ["CHAR_MEDIAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "statistic_basis": ["MEDIAN_AGE"],
+          "jurisdiction": ["AUS"],
+          "classification_context": [
+            "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 3,
+        "2022": 4,
+        "2023": 5
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e77a15d707e40e22b0c09df93196a0c95b5220e4018467a2429128f32f381fc8",
+        "2022": "sha256:92fac60ef9532d555a3019f3737e028bbeef7171f64f52789716253372763c13",
+        "2023": "sha256:361a38f615a1de1b5ab280ab253af3e26bc2e2518da6cc8ab7543dfaf5b8fa41"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "observation_period",
+    "statistic_basis",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": ["^characteristic category$"],
+    "characteristic_group": ["^characteristic group$"],
+    "observation_period": ["^observation period$"],
+    "statistic_basis": ["^statistic basis$"],
+    "jurisdiction": ["^jurisdiction$"],
+    "classification_context": ["^classification context$"]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "Higher": "CHAR_HIGHER",
+      "Magistrates'": "CHAR_MAGISTRATES",
+      "Children's": "CHAR_CHILDREN_S",
+      "Males": "CHAR_MALES",
+      "Females": "CHAR_FEMALES",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "20–29 years": "CHAR_20_29_YEARS",
+      "30–39 years": "CHAR_30_39_YEARS",
+      "40–49 years": "CHAR_40_49_YEARS",
+      "50–59 years": "CHAR_50_59_YEARS",
+      "60 years and over": "CHAR_60_YEARS_AND_OVER",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Total finalised (excluding transfer to other court levels)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Adjudicated outcomes": "CHAR_ADJUDICATED_OUTCOMES",
+      "Acquitted": "CHAR_ACQUITTED",
+      "Guilty outcome": "CHAR_GUILTY_OUTCOME",
+      "Guilty finding by the court": "CHAR_GUILTY_FINDING_BY_THE_COURT",
+      "Guilty plea": "CHAR_GUILTY_PLEA",
+      "Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "Transfer to other court levels": "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "CHAR_WITHDRAWN_BY_PROSECUTION",
+      "Total finalised": "CHAR_TOTAL_FINALISED",
+      "Custodial orders": "CHAR_CUSTODIAL_ORDERS",
+      "Custody in a correctional institution": "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Non-custodial orders": "CHAR_NON_CUSTODIAL_ORDERS",
+      "Community supervision/ work orders": "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+      "Fines": "CHAR_FINES",
+      "Other non-custodial orders": "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+      "Total guilty outcome": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Intensive penalty in the community": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Fully suspended sentence of imprisonment": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Community service / work": "CHAR_COMMUNITY_SERVICE_WORK",
+      "Moderate penalty in the community": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Monetary penalties": "CHAR_MONETARY_PENALTIES",
+      "Good behaviour (incl. bonds)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Nominal and other penalties": "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+      "Total finalised (excluding transfer to other court levels)(b)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Adjudicated outcomes(c)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Guilty outcome(d)": "CHAR_GUILTY_OUTCOME",
+      "Agreement of wrongdoing(e)": "CHAR_AGREEMENT_OF_WRONGDOING",
+      "Total finalised(f)": "CHAR_TOTAL_FINALISED",
+      "Monetary penalties(h)": "CHAR_MONETARY_PENALTIES",
+      "Total guilty outcome(i)": "CHAR_TOTAL_GUILTY_OUTCOME"
+    },
+    "characteristic_group": {
+      "Court level": "GROUP_COURT_LEVEL",
+      "Sex": "GROUP_SEX",
+      "Age": "GROUP_AGE",
+      "Method of finalisation": "GROUP_METHOD_OF_FINALISATION",
+      "Principal sentence": "GROUP_PRINCIPAL_SENTENCE",
+      "Principal sentence(g)": "GROUP_PRINCIPAL_SENTENCE"
+    },
+    "observation_period": {
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2021–22(a)": "2022-06-30",
+      "2023–24": "2024-06-30"
+    },
+    "statistic_basis": {
+      "Higher": "COUNT",
+      "Magistrates'": "COUNT",
+      "Children's": "COUNT",
+      "Males": "COUNT",
+      "Females": "COUNT",
+      "10–19 years": "COUNT",
+      "20–29 years": "COUNT",
+      "30–39 years": "COUNT",
+      "40–49 years": "COUNT",
+      "50–59 years": "COUNT",
+      "60 years and over": "COUNT",
+      "Mean (years)": "MEAN_AGE",
+      "Median (years)": "MEDIAN_AGE",
+      "Total finalised (excluding transfer to other court levels)": "COUNT",
+      "Adjudicated outcomes": "COUNT",
+      "Acquitted": "COUNT",
+      "Guilty outcome": "COUNT",
+      "Guilty finding by the court": "COUNT",
+      "Guilty plea": "COUNT",
+      "Guilty ex-parte": "COUNT",
+      "Transfer to other court levels": "COUNT",
+      "Withdrawn by prosecution": "COUNT",
+      "Total finalised": "COUNT",
+      "Custodial orders": "COUNT",
+      "Custody in a correctional institution": "COUNT",
+      "Non-custodial orders": "COUNT",
+      "Community supervision/ work orders": "COUNT",
+      "Fines": "COUNT",
+      "Other non-custodial orders": "COUNT",
+      "Total guilty outcome": "COUNT",
+      "Intensive penalty in the community": "COUNT",
+      "Fully suspended sentence of imprisonment": "COUNT",
+      "Community service / work": "COUNT",
+      "Moderate penalty in the community": "COUNT",
+      "Monetary penalties": "COUNT",
+      "Good behaviour (incl. bonds)": "COUNT",
+      "Nominal and other penalties": "COUNT",
+      "Total finalised (excluding transfer to other court levels)(b)": "COUNT",
+      "Adjudicated outcomes(c)": "COUNT",
+      "Guilty outcome(d)": "COUNT",
+      "Agreement of wrongdoing(e)": "COUNT",
+      "Total finalised(f)": "COUNT",
+      "Monetary penalties(h)": "COUNT",
+      "Total guilty outcome(i)": "COUNT"
+    },
+    "jurisdiction": {
+      "FDV Table 14 – Experimental data – Family and domestic violence defendants finalised, Breach of violence orders, Summary characteristics, Australia, 2019–20 to 2021–22": "AUS",
+      "FDV Table 14 – Experimental data – Family and domestic violence defendants finalised, Breach of violence orders, Summary characteristics, Australia, 2019–20 to 2022–23": "AUS",
+      "FDV Table 14 Experimental data – Family and domestic violence defendants finalised, Breach of violence orders, Summary characteristics, Australia, 2019–20 to 2023–24": "AUS"
+    },
+    "classification_context": {
+      "FDV Table 14 – Experimental data – Family and domestic violence defendants finalised, Breach of violence orders, Summary characteristics, Australia, 2019–20 to 2021–22": "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL",
+      "FDV Table 14 – Experimental data – Family and domestic violence defendants finalised, Breach of violence orders, Summary characteristics, Australia, 2019–20 to 2022–23": "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL",
+      "FDV Table 14 Experimental data – Family and domestic violence defendants finalised, Breach of violence orders, Summary characteristics, Australia, 2019–20 to 2023–24": "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "statistic_basis_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_10_19_YEARS",
+        "CHAR_20_29_YEARS",
+        "CHAR_30_39_YEARS",
+        "CHAR_40_49_YEARS",
+        "CHAR_50_59_YEARS",
+        "CHAR_60_YEARS_AND_OVER",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_CHILDREN_S",
+        "CHAR_COMMUNITY_SUPERVISION_WORK_ORDERS",
+        "CHAR_CUSTODIAL_ORDERS",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_THE_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA",
+        "CHAR_HIGHER",
+        "CHAR_MAGISTRATES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_NON_CUSTODIAL_ORDERS",
+        "CHAR_OTHER_NON_CUSTODIAL_ORDERS",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "CHAR_10_19_YEARS",
+        "CHAR_20_29_YEARS",
+        "CHAR_30_39_YEARS",
+        "CHAR_40_49_YEARS",
+        "CHAR_50_59_YEARS",
+        "CHAR_60_YEARS_AND_OVER",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_CHILDREN_S",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_THE_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA",
+        "CHAR_HIGHER",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MAGISTRATES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "CHAR_10_19_YEARS",
+        "CHAR_20_29_YEARS",
+        "CHAR_30_39_YEARS",
+        "CHAR_40_49_YEARS",
+        "CHAR_50_59_YEARS",
+        "CHAR_60_YEARS_AND_OVER",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_AGREEMENT_OF_WRONGDOING",
+        "CHAR_CHILDREN_S",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_THE_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA",
+        "CHAR_HIGHER",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MAGISTRATES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "GROUP_AGE",
+        "GROUP_COURT_LEVEL",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE",
+        "GROUP_SEX"
+      ],
+      "2022": [
+        "GROUP_AGE",
+        "GROUP_COURT_LEVEL",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE",
+        "GROUP_SEX"
+      ],
+      "2023": [
+        "GROUP_AGE",
+        "GROUP_COURT_LEVEL",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE",
+        "GROUP_SEX"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": ["2020-06-30", "2021-06-30", "2022-06-30"],
+      "2022": ["2020-06-30", "2021-06-30", "2022-06-30", "2023-06-30"],
+      "2023": [
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": ["COUNT", "MEAN_AGE", "MEDIAN_AGE"],
+      "2022": ["COUNT", "MEAN_AGE", "MEDIAN_AGE"],
+      "2023": ["COUNT", "MEAN_AGE", "MEDIAN_AGE"]
+    },
+    "jurisdictionsByYear": {
+      "2021": ["AUS"],
+      "2022": ["AUS"],
+      "2023": ["AUS"]
+    },
+    "classificationContextsByYear": {
+      "2021": ["FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"],
+      "2022": ["FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"],
+      "2023": ["FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"]
+    },
+    "minimumRows": 90,
+    "maximumRows": 170,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 7
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0
+  },
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:a2bf4ede16df8eebe4aca4d44c359dd42574893f69e7bbe7b0b74eab7bda2a8b",
+    "2022": "sha256:97c9fba2e40a547860f95d49105678088d30106e71ffa86e3b54b92845936d05",
+    "2023": "sha256:0b38d11410c6513f863830cb92449b3b3fba0d2e2025437d0eb363dd31c0deb5"
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

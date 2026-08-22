@@ -760,7 +760,7 @@ It also corrects the ACT 2021–22 terminal period typo at `Table 51!M5` from th
 impossible `2022–22` to `2021–22` only in the normalized derivative. This
 replacement is bound to exact source bytes, style, shared-string type, cell, and
 old/new values. Three corrections are inside retained rectangular worksheet
-ranges; `XFC50` is outside. The manifest truthfully records these in-range and
+ranges; `XFC50` and the exact duplicate `FDV Table 16!XEX59` are outside. The manifest truthfully records these in-range and
 out-of-range changes rather than claiming no retained-range changes. The script
 refuses every other source identity or cell state and emits
 a receipt that the verifier requires to exactly match the manifest correction
@@ -772,13 +772,13 @@ same-span panel immediately precedes a marker run with an identical style
 vector. Detached, merged, unlabelled, or style-mismatched runs are rejected;
 all 409 previously registered worksheet catalogs remained byte-identical.
 
-The combined registered batch now contains 171 cohorts and 467 worksheets with
-395,468 canonical observations. The dashboard projects three publications, 176
-cohorts, 492 worksheet-assets, and 408,751 canonical observations through 492
+The combined registered batch now contains 189 cohorts and 503 worksheets with
+401,931 canonical observations. The dashboard projects three publications, 194
+cohorts, 528 worksheet-assets, and 415,214 canonical observations through 528
 verified CSV routes. The complete New South Wales, Victoria, Queensland, South
 Australia, Western Australia, Northern Territory, Australian Capital Territory,
-Tasmania, and defendant-rate Criminal Courts clusters contribute 212 worksheets
-and 164,471 rows while preserving observation
+Tasmania, defendant-rate, and FDV order-breach Criminal Courts clusters
+contribute 248 worksheets and 170,934 rows while preserving observation
 periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC 2023, and
 concorded historical classification contexts. The 36-sheet defendant-rate Cube
 12 independently retains 13,743 published counts and 13,743 published rates,
@@ -786,5 +786,12 @@ uses exact headers across the reversed 2024 panel order, and infers no
 denominator, count/rate equation, or additive total identity. Its 2024
 mixed-concorded singleton families remain separate from the ANZSOC 2011
 histories; selected observation cells have no formulas or markers, while source
-metadata formulas and raw footnotes remain intact. Dagster and the dashboard
+metadata formulas and raw footnotes remain intact. The 36-sheet FDV order-breach
+cluster keeps nine historical summary-characteristic families and nine 2024
+restraining-order singletons separate. It retains 6,097 counts, 183 mean ages,
+183 median ages, 94 exact `na` values, 12 exact `..` values, and 227 zeros, with
+no selected formulas, warnings, providers, exceptions, or inferred totals. Its
+2023 Cube 17 derivative removes only a digest-bound far-right duplicate footnote
+before safe geometry trimming while preserving the identical retained footnote
+and original source bytes. Dagster and the dashboard
 remain replaceable, read-only projections rather than evidence authority.

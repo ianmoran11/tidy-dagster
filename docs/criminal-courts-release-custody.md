@@ -325,8 +325,43 @@ pathological empty merge `A82:O1048576`. Reproduction is byte-identical, all
 retained values, formulas, types, styles, number formats, and legitimate merges
 are unchanged, and the original workbook remains immutable.
 
-The fifteen clusters now cover 338 of 430 worksheets and produce 339,451
-canonical observations; 92 worksheets remain pending reviewed contracts.
+### Complete FDV order-breach cube
+
+The complete FDV order-breach boundary adds 18 families and 36 worksheets:
+nine 2021–22 through 2023–24 `Breach of violence orders, Summary
+characteristics` histories (FDV Tables 14–22) and nine separate 2024–25 `Breach
+of restraining order – violence` singletons (FDV Tables 18–26). The split
+preserves the publication's changed experimental classification identity rather
+than implying cross-vintage equivalence.
+
+The cluster retains 6,463 observations: 6,097 published defendant counts, 183
+mean ages, and 183 median ages. It preserves 6,357 observed values, 94 exact
+`na` not-available nulls, 12 exact `..` not-applicable nulls, and 227 observed
+numeric zeros. No selected formula or execution warning exists. Era-specific
+age bands, method, sentence, outcome, and Indigenous-status categories remain
+separate; 2024 `Not stated` remains distinct, and the 2023 ACT published title's
+trailing space remains raw provenance. No additive total or other unsafe
+identity is inferred.
+
+The 2023–24 Cube 17 normalized derivative trims Tables 15–19 to their reviewed
+semantic ranges. Before trimming, the correction removes only the far-right
+`FDV Table 16!XEX59` footnote that is an exact duplicate of retained `A58`,
+bound to the exact workbook digest, byte length, sheet, cell, shared-string
+value/type, style, merge, and retained duplicate. The original source remains
+immutable, `A58` and `A59` remain exact, and all prior correction-bearing
+outputs reproduce byte-identically.
+
+Policy v2 binds all 18 exact contract files, 36 recipe pins, workbook/sheet/date
+identities, checks, and replay time `2026-08-24T09:00:00+00:00`. All replay maps
+remain explicitly non-authoritative and training-ineligible.
+
+The sixteen clusters now cover 374 of 430 worksheets and produce 345,914
+canonical observations. This boundary accepts four previously unregistered FDV
+Cube workbook byte identities (2021–22 Cube 15, 2022–23 Cube 16, and the
+2023–24 and 2024–25 Cube 17 workbooks), raising the cross-publication dashboard
+from 75 to 79 physical workbooks. Fifty-six worksheets remain pending reviewed
+contracts: 39 historical FDV-offence sheets, nine 2024 national FDV-offence
+sheets, and eight 2024 state/territory FDV-offence sheets.
 
 ## Classification identity
 
@@ -347,7 +382,7 @@ canonical observations; 92 worksheets remain pending reviewed contracts.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 338 assets replay with
+measures, value statuses, source cells, and warnings. All 374 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

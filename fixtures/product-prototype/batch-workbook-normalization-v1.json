@@ -1,6 +1,6 @@
 {
   "schemaVersion": "tidy.product-prototype-workbook-normalization/v1",
-  "recordedAt": "2026-08-23T09:00:00+00:00",
+  "recordedAt": "2026-08-24T09:00:00+00:00",
   "scriptPath": "scripts/trim-prototype-workbook-formatting.py",
   "scriptDigest": "sha256:489859dad4e38248deedf5713032ec8ab05d6a5d3a90097072a42136c4d25e24",
   "entries": [
@@ -2194,10 +2194,55 @@
       ],
       "correction": null,
       "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-17-source.xlsx",
+      "sourceDigest": "sha256:f5780d562b078756add08d13afe3a27413c1dd1c9eb9d188d77596f6b6c43a73",
+      "sourceByteLength": 85082,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+      "outputDigest": "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+      "outputByteLength": 76428,
+      "trimmedSheets": [
+        {
+          "sheet": "FDV Table 15",
+          "retainedRange": "A1:G69"
+        },
+        {
+          "sheet": "FDV Table 16",
+          "retainedRange": "A1:G63"
+        },
+        {
+          "sheet": "FDV Table 17",
+          "retainedRange": "A1:G66"
+        },
+        {
+          "sheet": "FDV Table 18",
+          "retainedRange": "A1:F71"
+        },
+        {
+          "sheet": "FDV Table 19",
+          "retainedRange": "A1:G64"
+        }
+      ],
+      "correction": {
+        "id": "criminal-courts-fdv-2023-24-duplicate-footnote-v1",
+        "reason": "Remove the duplicate far-right Table 16 footnote at XEX59 before format trimming; preserve the identical retained footnote at A58 and the exact source workbook separately.",
+        "removedCells": [
+          {
+            "sheet": "FDV Table 16",
+            "cell": "XEX59",
+            "expectedStyle": "67",
+            "expectedValue": "(f) Includes defendants for whom method of finalisation could not be determined, defendants deceased or unfit to plead, transfers to non-court agencies and other non-adjudicated finalisations n.e.c. ",
+            "insideRetainedRange": false
+          }
+        ]
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
     }
   ],
   "inRangeValuesChanged": true,
   "correctionScriptPath": "scripts/correct-known-workbook-artifacts.py",
-  "correctionScriptDigest": "sha256:7d65a5e3b77462724eec1c3c05f047ba028affd581b09198a9503d325aafafc6",
-  "manifestDigest": "sha256:864b11c61e344f938b83691b95245e1f4af4282a73e12fcd3c2b5eaa92f2c7ac"
+  "correctionScriptDigest": "sha256:191f007b9c87efad58777947bb62d0925219f256bcd8c5e61e5b533bf99dd295",
+  "manifestDigest": "sha256:1ab2ba85bfe01c64845401716ec6b6bc114bd2486b41db18ca2563f8945aea8d"
 }

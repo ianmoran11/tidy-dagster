@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 338
+EXPECTED_REGISTERED_COUNT = 374
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -178,6 +178,24 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-victoria-e342ba2cd4",
         "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-680a53f26b",
         "criminal-courts-main-defendants-finalised-excluding-transfers-and-organisations-summary-characteristics-western-australia-and-fddeb560ad",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-00438881d8",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0964025147",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0e2d3059c2",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-4f8a6d549a",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-838adf447e",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-85ca3806a6",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-8d69cd5de3",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-9bdd94cf9f",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645",
     }
 )
 

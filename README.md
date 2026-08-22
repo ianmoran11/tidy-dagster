@@ -88,10 +88,10 @@ scripts/tidy-prisoners-release verify
 A second complete release inventory freezes all four official 2021–22 through
 2024–25 _Criminal Courts, Australia_ releases: 69 exact downloads, four
 custodied guide exclusions, 65 substantive cubes, 198 reviewed semantic
-families, and 430 numbered worksheets (94/102/116/118). Fifteen reviewed clusters
-register 338 worksheet-assets across 144 classification-aware cohorts. They keep
+families, and 430 numbered worksheets (94/102/116/118). Sixteen reviewed clusters
+register 374 worksheet-assets across 162 classification-aware cohorts. They keep
 ANZSOC 2011, preliminary ANZSOC 2023, ANZSOC 2023, concorded historical series,
-and experimental FDV namespaces explicit; 92 worksheets remain pending
+and experimental FDV namespaces explicit; 56 worksheets remain pending
 semantic contracts. The complete 22-worksheet New South Wales, Victoria,
 Queensland, South Australia, Western Australia, Northern Territory, Australian
 Capital Territory, and Tasmania clusters
@@ -101,7 +101,10 @@ historical classification contexts without treating principal offences as
 charges. The complete 36-sheet defendant-rate Cube 12 preserves published count
 and rate panels independently, including the reversed 2024 panel order, without
 recomputing rates or inferring denominators, count/rate identities, or additive
-total equations.
+total equations. The complete 36-sheet FDV order-breach cluster preserves nine
+2021–22 through 2023–24 summary-characteristic histories and nine separate
+2024–25 restraining-order singletons, including published `na` and `..` typed
+nulls, mean and median ages, era-specific taxonomies, and exact title text.
 
 ```sh
 scripts/generate-criminal-courts-release-inventory.py --check
@@ -113,32 +116,35 @@ cohorts—109 worksheet-assets—including the five state/territory families and
 national snapshot families for characteristics, age, sex, Indigenous status,
 offence/charge, and country of birth. A second publication adds _Recorded Crime —
 Offenders_ Tables 1–5 across 2021–22 through 2024–25: 20 more worksheet-assets
-and 21,268 canonical observations. A third publication adds 338
-_Criminal Courts, Australia_ worksheet-assets and 339,451 observations,
+and 21,268 canonical observations. A third publication adds 374
+_Criminal Courts, Australia_ worksheet-assets and 345,914 observations,
 including the guilty-outcome, sentence, offence, age, duration, sentence-length,
 fine-amount, Indigenous-status, youth, preliminary-classification, New South
 Wales, Victoria, Queensland, South Australia, Western Australia, Northern
-Territory, Australian Capital Territory, Tasmania, and defendant-rate clusters.
-The combined 467-worksheet batch contains 395,468 canonical
-observations with zero exceptions, cross-period issues, or provider calls. The national snapshot
+Territory, Australian Capital Territory, Tasmania, defendant-rate, and FDV
+order-breach clusters. Accepting the FDV order-breach boundary brings four
+previously unregistered Cube workbook byte identities into checked asset
+coverage, raising the dashboard's physical-workbook count from 75 to 79. The
+combined 503-worksheet batch contains 401,931 canonical observations with zero
+exceptions, cross-period issues, or provider calls. The national snapshot
 cluster contributes 6,695 rows and bounds
 2025 Tables 7/8 to A:R without changing nonblank or formula payload. The state
 cluster contributes 8,406 rows; its corrected 2025 Table 16 uses all ten B:K
-measures and contributes 900. The status dashboard now exposes 492 deterministic
-per-asset CSV routes and 408,751 canonical observations. Table 27
+measures and contributes 900. The status dashboard now exposes 528 deterministic
+per-asset CSV routes and 415,214 canonical observations. Table 27
 preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,
 which remain non-authoritative. The Offenders maps are likewise deterministic,
 human-authored replay inputs judged only by independent acceptance contracts.
-Counts, rates, mean/median ages, fiscal observation periods, and 2,017 published
-`na` cells remain semantically distinct. Source/derived workbook digests, byte
+Counts, rates, mean/median ages, fiscal observation periods, 2,111 published
+`na` cells, and 12 published `..` cells remain semantically distinct. Source/derived workbook digests, byte
 lengths, retained ranges, per-output normalization identities, and exact
 normalization/correction-script digests are closed in the manifest. The batch
 registry independently pins exact excluded-observation counts for every year
 (`0/36/37/37/38` for national Table 1 and zero for the other cohorts). It
 records three reviewed correction cells
-inside retained rectangular ranges and one outside, and verifies an exact
+inside retained rectangular ranges and two outside, and verifies an exact
 script-emitted correction receipt in
 `fixtures/product-prototype/batch-workbook-normalization-v1.json`.
 
@@ -165,8 +171,8 @@ non-authoritative integration fixtures. See
 
 ### Tidy Data Asset Status
 
-A minimal read-only page projects three publications, 176 cohorts, and 492
-sheet-assets across 75 checked workbook byte identities. It
+A minimal read-only page projects three publications, 194 cohorts, and 528
+sheet-assets across 79 checked workbook byte identities. It
 derives `Identified`, `On disk`, `Tidied`,
 `Canonicalised`, `Integrated`, and automated-check status directly from the
 checked cohort, run, canonical-output, and collation evidence. The default
@@ -178,7 +184,7 @@ If a future cohort has multiple sheets in one year, one cell shows their count
 and least-complete state rather than expanding or silently dropping them.
 Selecting a heatmap cell switches to the filtered **Assets** tab, where every
 row has an **Open CSV** link for only that workbook/sheet asset's canonical rows.
-The foreground server derives these 492 allowlisted views
+The foreground server derives these 528 allowlisted views
 from the checked cohort CSV files using workbook digest, sheet, and publication
 date; it creates no new data authority or duplicate committed CSVs. Heatmap
 symbols and accessible labels accompany every colour, and the page states that

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b-v1.json",
+  "workerLimits": {
+    "maxWarnings": 10000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+      "contentDigest": "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+      "byteLength": 125006,
+      "sheet": "FDV Table 20",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b-2021.response.txt",
+        "contentDigest": "sha256:499948a8f3681e237b0c92eb162ea228ba17e42ca8cc80a2615ef9b3940b04c4",
+        "byteLength": 1064,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+      "contentDigest": "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+      "byteLength": 125663,
+      "sheet": "FDV Table 20",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b-2022.response.txt",
+        "contentDigest": "sha256:6e7d98e5e27a679c593cd0ce5a912ac23f1bc1851dea2a81505dd0939156ad5c",
+        "byteLength": 1064,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+      "contentDigest": "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+      "byteLength": 76428,
+      "sheet": "FDV Table 20",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b-2023.response.txt",
+        "contentDigest": "sha256:f2e1cecfe70f52935c3c230fff1ceca54ac99fb30284345990d8436628ed4146",
+        "byteLength": 1064,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-styled-blank-cells-v1"
+    }
+  ]
+}

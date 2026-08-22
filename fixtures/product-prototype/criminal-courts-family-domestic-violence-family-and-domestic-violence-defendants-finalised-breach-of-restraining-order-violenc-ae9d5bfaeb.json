@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb-v1.json",
+  "workerLimits": {
+    "maxWarnings": 10000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+      "contentDigest": "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+      "byteLength": 96631,
+      "sheet": "FDV Table 19",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb-2024.response.txt",
+        "contentDigest": "sha256:e5da8ce617622234b82e8d5c799c2db9cb2e071a04e914b91b74d47a3226011f",
+        "byteLength": 999,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

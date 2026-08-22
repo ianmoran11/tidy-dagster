@@ -191,8 +191,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 338,
-        "pendingSemanticContractCount": 92,
+        "registeredMemberCount": 374,
+        "pendingSemanticContractCount": 56,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -219,6 +219,20 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         for item in downloads
         for sheet in item["sheets"]
     )
+    membership = _load(MEMBERSHIP)
+    assert Counter(
+        member["cubeId"]
+        for family in membership["families"]
+        for member in family["members"]
+        if not member["registered"]
+    ) == {
+        "family-and-domestic-violence-offences-experimental-data": 39,
+        "family-and-domestic-violence-offences-australia-experimental-data": 9,
+        (
+            "family-and-domestic-violence-offences-states-and-territories-"
+            "experimental-data"
+        ): 8,
+    }
 
 
 def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
@@ -234,7 +248,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 338
+        == 374
     )
     wa_mixed = next(
         family
@@ -286,7 +300,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 338
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 374
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(
@@ -3320,3 +3334,1908 @@ def test_defendant_rate_normalization_is_exact_and_reproducible(tmp_path: Path) 
             assert normalized_outside == []
         assert source_outside_counts == {"Table 68": 186, "Table 71": 0}
         assert normalized_outside_counts == {"Table 68": 0, "Table 71": 0}
+
+
+FDV_BREACH_FAMILIES = (
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-00438881d8",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0964025147",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0e2d3059c2",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-4f8a6d549a",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-838adf447e",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-85ca3806a6",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-8d69cd5de3",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-9bdd94cf9f",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645",
+)
+FDV_BREACH_SOURCE_MATRIX = (
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-00438881d8",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 25",
+        71,
+        7,
+        240,
+        228,
+        6,
+        6,
+        235,
+        5,
+        0,
+        9,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-00438881d8-2024.response.txt",
+        "sha256:8b27cd2d82812e7c7e4e3eef2042deaa8d21fe7fa7fd027be412abe952b76e4f",
+        999,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0964025147",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 26",
+        71,
+        7,
+        240,
+        228,
+        6,
+        6,
+        225,
+        15,
+        0,
+        27,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0964025147-2024.response.txt",
+        "sha256:a36ea4266ca1c594ec38b148624c47c91a6c1ee711f13943aa09260da2e11e5f",
+        1038,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0e2d3059c2",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 21",
+        69,
+        7,
+        240,
+        228,
+        6,
+        6,
+        234,
+        0,
+        6,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-0e2d3059c2-2024.response.txt",
+        "sha256:aac8ff9e563ce336a9e96e590fbed2092aa96bcdf96f59583f2a945065e13b2f",
+        1038,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-4f8a6d549a",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 24",
+        72,
+        7,
+        240,
+        228,
+        6,
+        6,
+        230,
+        10,
+        0,
+        16,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-4f8a6d549a-2024.response.txt",
+        "sha256:6b24d4e091b205db38a482df8a5e4617a23a33d0a76afb275ea59d38d1815f3b",
+        999,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-838adf447e",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 23",
+        67,
+        7,
+        222,
+        210,
+        6,
+        6,
+        218,
+        4,
+        0,
+        9,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-838adf447e-2024.response.txt",
+        "sha256:fc27ae6cd8af3d98be4ca77353147604c24faec7c6b6507ded9bb8b560f24a9a",
+        999,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-85ca3806a6",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 22",
+        74,
+        7,
+        240,
+        228,
+        6,
+        6,
+        236,
+        4,
+        0,
+        12,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-85ca3806a6-2024.response.txt",
+        "sha256:c13839feea69472a4d22b623bddaed3f4ccf3fb344b267ddd5744e04ea8d01bd",
+        999,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-8d69cd5de3",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 20",
+        66,
+        7,
+        222,
+        210,
+        6,
+        6,
+        218,
+        4,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-8d69cd5de3-2024.response.txt",
+        "sha256:fcc7bf3cedabe1227b0c4b948191d11b8851d498f40004622060cb48c035c760",
+        999,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-9bdd94cf9f",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 18",
+        69,
+        7,
+        234,
+        222,
+        6,
+        6,
+        226,
+        8,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-9bdd94cf9f-2024.response.txt",
+        "sha256:6999c74ea0a9effe33b9771304a05b3f22521d547f13b0b5defb4b01a5f10aa2",
+        999,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb",
+        2024,
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+        96631,
+        "FDV Table 19",
+        72,
+        7,
+        240,
+        228,
+        6,
+        6,
+        236,
+        4,
+        0,
+        3,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-ae9d5bfaeb-2024.response.txt",
+        "sha256:e5da8ce617622234b82e8d5c799c2db9cb2e071a04e914b91b74d47a3226011f",
+        999,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 21",
+        76,
+        13,
+        128,
+        120,
+        4,
+        4,
+        128,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795-2021.response.txt",
+        "sha256:9fafda04051f59f0ca6f8997ba0f7ba84f7c974fff63b976ad0867a5352e43e0",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 21",
+        54,
+        13,
+        175,
+        165,
+        5,
+        5,
+        175,
+        0,
+        0,
+        10,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795-2022.response.txt",
+        "sha256:9b7f892f1872c8fdd4f8e51df901ec7b32847a39c2fcabb67f5292eaecd3373c",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 21",
+        66,
+        7,
+        210,
+        198,
+        6,
+        6,
+        210,
+        0,
+        0,
+        10,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-27caf21795-2023.response.txt",
+        "sha256:d57837d639c53ab3ad8a7684cdc71bec79d62f86936ca01ddf3d0ba7f542c58c",
+        1038,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 16",
+        72,
+        37,
+        120,
+        112,
+        4,
+        4,
+        120,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571-2021.response.txt",
+        "sha256:ca1c0e2d6a6082c42e09e0e34a46ebb6f8c8816c9534cba5d6ac862ae66a7a86",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 16",
+        50,
+        37,
+        165,
+        155,
+        5,
+        5,
+        165,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571-2022.response.txt",
+        "sha256:5b05120305de5dda7d07dfecbb4e753ef85d711c2e79f363b37a4bf946b8d707",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 16",
+        63,
+        7,
+        204,
+        192,
+        6,
+        6,
+        199,
+        5,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-37a9caf571-2023.response.txt",
+        "sha256:160279c44789255adf3691dce83fca597e8f0f67824c7c677de9e314ed0f3553",
+        1077,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 19",
+        63,
+        39,
+        120,
+        112,
+        4,
+        4,
+        120,
+        0,
+        0,
+        4,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d-2021.response.txt",
+        "sha256:e96242470d78b1a42b298eccb12fbdc558fde735e2321869de874dc1894406bc",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 19",
+        51,
+        39,
+        165,
+        155,
+        5,
+        5,
+        165,
+        0,
+        0,
+        10,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d-2022.response.txt",
+        "sha256:63c11384ba6dcac6b29b2177bb7a0030f323d7a2b4ff5771e9cdfca01bd54773",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 19",
+        64,
+        7,
+        204,
+        192,
+        6,
+        6,
+        199,
+        5,
+        0,
+        11,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-59939c8e3d-2023.response.txt",
+        "sha256:26131be55f901763e755f62de87ad6ce0a396ae565b8c2c44276c3c78954af38",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 22",
+        66,
+        14,
+        122,
+        114,
+        4,
+        4,
+        122,
+        0,
+        0,
+        8,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831-2021.response.txt",
+        "sha256:dd37d4c08080b854cec16929d67037bbf2f39d977f2a7f9b7ff8cd79140558be",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 22",
+        54,
+        14,
+        169,
+        159,
+        5,
+        5,
+        169,
+        0,
+        0,
+        18,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831-2022.response.txt",
+        "sha256:c79d759d1e527e27949e472cf3ce933d81eecba17f62ab5643cf6837a6737bf7",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 22",
+        67,
+        7,
+        210,
+        198,
+        6,
+        6,
+        204,
+        6,
+        0,
+        26,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831-2023.response.txt",
+        "sha256:10aa4f2edf2678bc29dd859783645b25a8e7a139ed50734406cf19320a7ece81",
+        1038,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 18",
+        67,
+        37,
+        96,
+        90,
+        3,
+        3,
+        96,
+        0,
+        0,
+        2,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33-2021.response.txt",
+        "sha256:4e8ed01209ba1189737879600885d5129038f820669db6b76a8a1fba5d3d98c9",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 18",
+        55,
+        37,
+        140,
+        132,
+        4,
+        4,
+        140,
+        0,
+        0,
+        3,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33-2022.response.txt",
+        "sha256:60358ad94b5c65568f417dbf6847fc17055e7e9bafc94f7efbcdf4efa011830a",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 18",
+        71,
+        6,
+        180,
+        170,
+        5,
+        5,
+        176,
+        4,
+        0,
+        11,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-7ced84ab33-2023.response.txt",
+        "sha256:39ea57bf3a0af3715a7e00e483740f8a1664d49f63c48977199e0b2fad0a276b",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 14",
+        71,
+        25,
+        90,
+        84,
+        3,
+        3,
+        90,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079-2021.response.txt",
+        "sha256:94dd25ee3edf38fbe16c7085c67856712cbbbe1cd0b77896f6a254b0174e0062",
+        1038,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 14",
+        59,
+        25,
+        132,
+        124,
+        4,
+        4,
+        132,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079-2022.response.txt",
+        "sha256:bbde412d85452241b536a6b58bd939ae1b030e270cb0853f4c84dd20706092eb",
+        1038,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 14",
+        62,
+        7,
+        170,
+        160,
+        5,
+        5,
+        166,
+        4,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-827a330079-2023.response.txt",
+        "sha256:bd1ff89b0edb7ac93c5d174a3073ef9392c996b34a7b54619b9938cd9d5054c5",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 15",
+        76,
+        38,
+        128,
+        120,
+        4,
+        4,
+        128,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7-2021.response.txt",
+        "sha256:bc8a58bcada62288da818d8a02d182c7f6cda796a819c266de79e06946d7c8a9",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 15",
+        54,
+        38,
+        175,
+        165,
+        5,
+        5,
+        175,
+        0,
+        0,
+        2,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7-2022.response.txt",
+        "sha256:202ddbe9fdd0f1620a71a06e06613abb479ef5abdc30edaa7ddf99c2be75dfd5",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 15",
+        69,
+        7,
+        216,
+        204,
+        6,
+        6,
+        211,
+        5,
+        0,
+        2,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7-2023.response.txt",
+        "sha256:8246e22756f81e5b3df0899e16416c5a8c3045f47eb7ebac636e646787315013",
+        1077,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 20",
+        72,
+        38,
+        122,
+        114,
+        4,
+        4,
+        122,
+        0,
+        0,
+        8,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b-2021.response.txt",
+        "sha256:499948a8f3681e237b0c92eb162ea228ba17e42ca8cc80a2615ef9b3940b04c4",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 20",
+        54,
+        38,
+        169,
+        159,
+        5,
+        5,
+        169,
+        0,
+        0,
+        10,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b-2022.response.txt",
+        "sha256:6e7d98e5e27a679c593cd0ce5a912ac23f1bc1851dea2a81505dd0939156ad5c",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 20",
+        70,
+        7,
+        216,
+        204,
+        6,
+        6,
+        205,
+        11,
+        0,
+        16,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b-2023.response.txt",
+        "sha256:f2e1cecfe70f52935c3c230fff1ceca54ac99fb30284345990d8436628ed4146",
+        1064,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645",
+        2021,
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+        125006,
+        "FDV Table 17",
+        76,
+        39,
+        128,
+        120,
+        4,
+        4,
+        128,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645-2021.response.txt",
+        "sha256:58a2a459129e795313ec737dc2139d1bb5e1f4fb9b1e20a915856af373014f0c",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645",
+        2022,
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+        125663,
+        "FDV Table 17",
+        65,
+        39,
+        175,
+        165,
+        5,
+        5,
+        175,
+        0,
+        0,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645-2022.response.txt",
+        "sha256:e08b348602f7742d06ea0c9666157f072b022f96cdb5801e42045f7ada851736",
+        1051,
+    ),
+    (
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645",
+        2023,
+        "workbooks/criminal-courts-2023-24-cube-17-normalized.xlsx",
+        "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580",
+        76428,
+        "FDV Table 17",
+        66,
+        7,
+        216,
+        204,
+        6,
+        6,
+        210,
+        0,
+        6,
+        0,
+        "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645-2023.response.txt",
+        "sha256:c1efdb1e6fa8472576f2d3b2580af97d3df3681ac39dc6aec79b9c0ed889773d",
+        1077,
+    ),
+)
+
+
+# These digests freeze the exact contract and cohort bytes independently of the
+# evidence they govern. Keys are the collision-resistant family suffixes.
+FDV_BREACH_IDENTITY_PINS = {
+    "00438881d8": (
+        "sha256:4cf92fde98037c0ac8327d3dff48c1c30a7918f25ffdf58c03d79a3204c9563d",
+        "sha256:b6179aac24823611ddfd3ef31fd7b3fbfc2fd14688aae9f6172d9495813f6148",
+    ),
+    "0964025147": (
+        "sha256:0b0e104b11ff8253a747277793de74405a7fdc386e16eb5fdbdb1070f987adff",
+        "sha256:03c4afb9ac9b5b8cb6839a3a6aba16624122b3441fac46e526d1482def6ff123",
+    ),
+    "0e2d3059c2": (
+        "sha256:6aaba7b9c8770314aad6f7d663c14dce42e067a4550db6b840376a30241bb0ee",
+        "sha256:0c8351f2b455cee5ee1282dfa89dad338e23822256b2d21f6ee140d24c424e1c",
+    ),
+    "4f8a6d549a": (
+        "sha256:6bcb73549e292f38077eae3c58460f7dfdba8fcca30b98dfca877f50df3db942",
+        "sha256:b17ef8b15693d5d7bf442f0d687760acab8430a8f43c4dfa06b569bb150dc30b",
+    ),
+    "838adf447e": (
+        "sha256:210929bec7bae4d7a543c757433ed17c899d3e4954287d62bc2d4abd79f66f27",
+        "sha256:c7dfa44ae0c7bd167695e7bf9733f17f177123d6fd6f79737def15f457c6c309",
+    ),
+    "85ca3806a6": (
+        "sha256:318a84e0a0c0538431c786d57e703fbedb250f73c827f64dd3a7bb9c10516f4c",
+        "sha256:eed4a445f10443e888e209617360460515aec5853e2f6776d2902169e817ff4f",
+    ),
+    "8d69cd5de3": (
+        "sha256:b1606be401951da72601121999e0b1d7c1cdff55233042034e1782d034b7be65",
+        "sha256:d5c4badaa71b2e0276429d0f4eda91f4b7cd5bdb20575ed23add23b701807283",
+    ),
+    "9bdd94cf9f": (
+        "sha256:4a66c27d8195de8f56c4bd56e7aa71a59c8f14af2871e0484e478ac2c2fd0ab7",
+        "sha256:d5e35a3507d3a5158f771e05bd5d5ebf24145f54277768ba8476b329be83cafc",
+    ),
+    "ae9d5bfaeb": (
+        "sha256:f4c15999645b331351e1e1566dd304471deaf2ce9ac5217f9797c9571cc9493e",
+        "sha256:5db2555cebcac9faed03391b49a11fcbf6b09e263a71f4fda7c734104a07aa58",
+    ),
+    "27caf21795": (
+        "sha256:c7b50fe5c764e257e4d6e804d463b82e1ff429a8873dab4efb9e00f322c73f88",
+        "sha256:c1452f939e9fb729c0de092f737145343a49fcc95dc788391d32cd2d61b9fb3e",
+    ),
+    "37a9caf571": (
+        "sha256:d3a0b61f613562a4a19624f08e0ecae4da325406b31b07f3a56509fef28ead93",
+        "sha256:55666c7cf53ebe50beb34c6e1bfb008de9dce4ae84105fdec550c703bf4ca357",
+    ),
+    "59939c8e3d": (
+        "sha256:2de02c2bdc7117c3aaebde749c419a718d441df284a2751b788cb266c883724a",
+        "sha256:e98cf47619400bc63061984f4bd1744040a75a7f55834e969bfaba64dbcfcb53",
+    ),
+    "6e7986a831": (
+        "sha256:32f7632f86e3cfbfba009d414a173675f7059ca96cd25f9d122da2942d497084",
+        "sha256:e5ad43ffd1ba8187d1bd0d2bb9e5e66e33a3df47b69edf5af1f63298a88d078a",
+    ),
+    "7ced84ab33": (
+        "sha256:bc2daf4b9d7aa45b4b2ba68498171a70565d13a31cf29be0e414fc691252959b",
+        "sha256:192327cb40f629ed72155fc311ed0a8e54e2c5e29b22a66a318d88d485c2e281",
+    ),
+    "827a330079": (
+        "sha256:6562de2bdb1c037b9021055d5418d29237988a9dcd5b1b81a457a1ac07f2f478",
+        "sha256:b3c5b918e79d52bb8e4b3e01700df5d9558c5ef5ec27f5c85e6f88e8a6645845",
+    ),
+    "829327a2a7": (
+        "sha256:64a0b56166e10965f75340afac3ef1cef1ceef0dfc88467755f23487fc77720f",
+        "sha256:296384f8ab4cc1761327ec4553e572c2bfd9aa4ab330bd6d23514da684eaa68a",
+    ),
+    "88e189a36b": (
+        "sha256:3e62541f3d828c191726b4bb77654d0f150648d3134786ad57fcdd568bb698d7",
+        "sha256:8fafa8e23a5695a26a8efcdf406452f93230ea76863fedb1c4fb04ff7c13adf6",
+    ),
+    "8c70b71645": (
+        "sha256:a6609027f2273e56b443cd3c01ca2f4a73f3aeb25bf5233394aabc370485f19f",
+        "sha256:c4ba0785d4ae87f7453c685bf6286bd70b655244506dea29311b78ba3becede5",
+    ),
+}
+
+FDV_BREACH_MEMBERSHIP_SOURCES = {
+    2021: (
+        "2021-22",
+        "workbooks/criminal-courts-2021-22-cube-15-source.xlsx",
+        "sha256:d6020cde88de403d1c86dee430db6000949d7eb87c29c05f0e9dd673f2149ac5",
+    ),
+    2022: (
+        "2022-23",
+        "workbooks/criminal-courts-2022-23-cube-16-source.xlsx",
+        "sha256:bece9e301160f84a1c98b1d3dc8842a53812211954b049f8004d21579729162d",
+    ),
+    2023: (
+        "2023-24",
+        "workbooks/criminal-courts-2023-24-cube-17-source.xlsx",
+        "sha256:f5780d562b078756add08d13afe3a27413c1dd1c9eb9d188d77596f6b6c43a73",
+    ),
+    2024: (
+        "2024-25",
+        "workbooks/criminal-courts-2024-25-cube-17-source.xlsx",
+        "sha256:a7de3c6f4ee210460ffcadcdded5f4d1b654220c97b3037383b88f2e9d8d8289",
+    ),
+}
+
+# Canonical JSON of every distinct (raw category, canonical category) pair for
+# each era/group. These pins freeze the complete age, Indigenous-status,
+# method, sentence, outcome, court-level, and sex taxonomies without deriving
+# expected truth from accepted contracts or evidence.
+FDV_BREACH_TAXONOMY_DIGESTS = {
+    "historical": {
+        "GROUP_AGE": (
+            15,
+            "sha256:d32405a80a8406e4222e14d5ff19b426ac52a25f6bfa471f445802d3616969fb",
+        ),
+        "GROUP_COURT_LEVEL": (
+            3,
+            "sha256:70de1ff358058c5a95dfd778482a388c5eb1187febb51f5e5dfc258045b432ec",
+        ),
+        "GROUP_INDIGENOUS_STATUS": (
+            8,
+            "sha256:4cb88e876490fcbdd81f281eaa58293b90da855868d775a11a5585528f5e72dc",
+        ),
+        "GROUP_METHOD_OF_FINALISATION": (
+            27,
+            "sha256:5b7ab5b52b0bcd5dae850629fc1dc62df960529ff9fac5bfb39bbb6645e2c08b",
+        ),
+        "GROUP_NON_INDIGENOUS": (
+            2,
+            "sha256:f611cce13b55c5cf55c349205925c93bc9eabb8a74f2aad1e19f2898271d2f2c",
+        ),
+        "GROUP_NON_INDIGENOUS_AND_NOT_STATED": (
+            2,
+            "sha256:caa182ccf79e1c2dc39954ba08eafe016be99a0fb479a23b51717d7ef0ee063c",
+        ),
+        "GROUP_PRINCIPAL_SENTENCE": (
+            37,
+            "sha256:958c03e3d16e2a34b6b81159fa6594da51c55497e57aa051b44d4fb34dc54c63",
+        ),
+        "GROUP_SEX": (
+            2,
+            "sha256:135173d2d0ec2c37e986678b5ade52a858e832f752ac3ba91888eccfe8f45eb1",
+        ),
+    },
+    "2024": {
+        "GROUP_AGE": (
+            13,
+            "sha256:ad5219e83aaaded3036bd888631573e74c2d6426cc9ce10f42014f5460954ba9",
+        ),
+        "GROUP_COURT_LEVEL": (
+            3,
+            "sha256:70de1ff358058c5a95dfd778482a388c5eb1187febb51f5e5dfc258045b432ec",
+        ),
+        "GROUP_INDIGENOUS_STATUS": (
+            8,
+            "sha256:def45b7b369cd7218f61838fc914a24d36780fd5c40fd6ad70b541934f5edde6",
+        ),
+        "GROUP_METHOD_OF_FINALISATION": (
+            22,
+            "sha256:6e9ab7cb81d3c38db202c955d31251b47deb1e2fe1a5cd59b98aabc93d5c3967",
+        ),
+        "GROUP_PRINCIPAL_SENTENCE": (
+            33,
+            "sha256:210fa5a6a21b79f0532a6c671c06c4981acbf82daa680dba6d14a7d27c5f304b",
+        ),
+        "GROUP_SEX": (
+            2,
+            "sha256:135173d2d0ec2c37e986678b5ade52a858e832f752ac3ba91888eccfe8f45eb1",
+        ),
+    },
+}
+
+FDV_BREACH_PHYSICAL_FORMULAS = {
+    (2021, "FDV Table 14"): (("A3", "=Contents!A3"), ("A48", "=Contents!B30")),
+    (2021, "FDV Table 15"): (("A3", "=Contents!A3"), ("A52", "=Contents!B30")),
+    (2021, "FDV Table 16"): (("A3", "=Contents!A3"), ("A48", "=Contents!B30")),
+    (2021, "FDV Table 17"): (("A3", "=Contents!A3"), ("A52", "=Contents!B30")),
+    (2021, "FDV Table 18"): (("A3", "=Contents!A3"), ("A52", "=Contents!B30")),
+    (2021, "FDV Table 19"): (("A3", "=Contents!A3"), ("A48", "=Contents!B30")),
+    (2021, "FDV Table 20"): (("A3", "=Contents!A3"), ("A52", "=Contents!B30")),
+    (2021, "FDV Table 21"): (("A3", "=Contents!A3"), ("A52", "=Contents!B30")),
+    (2021, "FDV Table 22"): (("A3", "=Contents!A3"), ("A52", "=Contents!B30")),
+    (2022, "FDV Table 14"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A50", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 15"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A54", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 16"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A50", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 17"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A54", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 18"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A54", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 19"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A50", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 20"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A54", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 21"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A54", "=Contents!B30"),
+    ),
+    (2022, "FDV Table 22"): (
+        ("A2", "=Contents!A2"),
+        ("A3", "=Contents!A3"),
+        ("A54", "=Contents!B30"),
+    ),
+    (2023, "FDV Table 14"): (),
+    (2023, "FDV Table 15"): (),
+    (2023, "FDV Table 16"): (),
+    (2023, "FDV Table 17"): (),
+    (2023, "FDV Table 18"): (),
+    (2023, "FDV Table 19"): (),
+    (2023, "FDV Table 20"): (),
+    (2023, "FDV Table 21"): (),
+    (2023, "FDV Table 22"): (),
+    (2024, "FDV Table 18"): (),
+    (2024, "FDV Table 19"): (),
+    (2024, "FDV Table 20"): (),
+    (2024, "FDV Table 21"): (),
+    (2024, "FDV Table 22"): (),
+    (2024, "FDV Table 23"): (),
+    (2024, "FDV Table 24"): (),
+    (2024, "FDV Table 25"): (),
+    (2024, "FDV Table 26"): (),
+}
+
+FDV_BREACH_CSV_FIELDS = (
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id",
+    "unit_id",
+    "value",
+    "value_status",
+    "raw_value",
+    "source_workbook_digest",
+    "source_sheet",
+    "source_cell",
+    "recipe_digest",
+    "publication_id",
+    "execution_digest",
+    "acceptance_policy_version",
+    "acceptance_policy_digest",
+    "acceptance_decision_digest",
+    "prompt_package_digest",
+    "generation_model",
+    "generation_attempt_id",
+    "raw_characteristic_category",
+    "raw_characteristic_group",
+    "raw_observation_period",
+    "raw_statistic_basis",
+    "raw_jurisdiction",
+    "raw_classification_context",
+)
+
+
+def _fdv_breach_matrix_by_family() -> dict[str, list[tuple[object, ...]]]:
+    result: dict[str, list[tuple[object, ...]]] = {
+        family_id: [] for family_id in FDV_BREACH_FAMILIES
+    }
+    for member in FDV_BREACH_SOURCE_MATRIX:
+        result[str(member[0])].append(member)
+    return result
+
+
+def _fdv_breach_spec(family_id: str) -> LargeBatchSpec:
+    members = _fdv_breach_matrix_by_family()[family_id]
+    years = tuple(int(item[1]) for item in members)
+    counts = tuple(int(item[8]) for item in members)
+    measures = {
+        "defendant-count": sum(int(item[9]) for item in members),
+        "mean-age": sum(int(item[10]) for item in members),
+        "median-age": sum(int(item[11]) for item in members),
+    }
+    statuses = Counter()
+    for item in members:
+        statuses.update(
+            {
+                "observed": int(item[12]),
+                "not_available": int(item[13]),
+                "not_applicable": int(item[14]),
+            }
+        )
+    return LargeBatchSpec(
+        family_id=family_id,
+        label="Criminal Courts FDV order breaches",
+        cohort_path=f"fixtures/product-prototype/{family_id}.json",
+        evidence_manifest_path=(
+            f"fixtures/product-prototype/{family_id}-evidence/manifest.json"
+        ),
+        dagster_asset=f"fdv_breach_{family_id[-10:]}",
+        dagster_job=f"fdv_breach_{family_id[-10:]}_job",
+        output_directory=f"fdv-breach-{family_id[-10:]}",
+        expected_years=years,
+        expected_year_counts=counts,
+        expected_canonical_count=sum(counts),
+        expected_excluded_observation_count=0,
+        expected_excluded_observation_counts_by_year={year: 0 for year in years},
+        expected_measure_counts=measures,
+        expected_value_status_counts={
+            key: value for key, value in statuses.items() if value
+        },
+        expected_manual_replay_years=years,
+        preserves_publication_vintage=True,
+        acceptance_policy_version="tidy.table-family-acceptance/v2",
+        replay_recorded_at="2026-08-24T09:00:00+00:00",
+    )
+
+
+FDV_BREACH_RAW_FIELDS = {
+    "characteristic_category": "raw_characteristic_category",
+    "characteristic_group": "raw_characteristic_group",
+    "observation_period": "raw_observation_period",
+    "statistic_basis": "raw_statistic_basis",
+    "jurisdiction": "raw_jurisdiction",
+    "classification_context": "raw_classification_context",
+}
+FDV_BREACH_ACT_2023_FAMILY = (
+    "criminal-courts-family-domestic-violence-family-and-domestic-violence-"
+    "defendants-finalised-breach-of-violence-orders-summary-c-6e7986a831"
+)
+FDV_BREACH_ACT_2023_TITLE = (
+    "FDV Table 22 Experimental data \N{EN DASH} Family and domestic violence "
+    "defendants finalised, Breach of violence orders, Summary characteristics, "
+    "Australian Capital Territory, 2018\N{EN DASH}19 to 2023\N{EN DASH}24 "
+)
+FDV_BREACH_TITLE_ROWS = {2021: 4, 2022: 4, 2023: 3, 2024: 2}
+
+
+def _fdv_normalize_label(value: str) -> str:
+    return " ".join(value.strip().split())
+
+
+def _fdv_without_terminal_footnote(value: str) -> str:
+    normalized = _fdv_normalize_label(value)
+    while re.search(r"\s*\([a-z]\)$", normalized, re.IGNORECASE):
+        normalized = re.sub(r"\s*\([a-z]\)$", "", normalized, flags=re.IGNORECASE)
+    return normalized
+
+
+def _fdv_slug(prefix: str, value: str) -> str:
+    normalized = _fdv_without_terminal_footnote(value)
+    normalized = (
+        normalized.replace("&", " and ")
+        .replace("n.e.c.", "nec")
+        .replace("N.E.C.", "NEC")
+        .replace("'", "")
+        .replace("\N{RIGHT SINGLE QUOTATION MARK}", "")
+    )
+    slug = re.sub(r"[^A-Za-z0-9]+", "_", normalized).strip("_").upper()
+    return f"{prefix}{slug}"
+
+
+def _fdv_expected_alias_target(dimension: str, raw: str) -> str:
+    if dimension == "characteristic_category":
+        if _fdv_normalize_label(raw) == "Children's":
+            return "CHAR_CHILDREN_S"
+        return _fdv_slug("CHAR_", raw)
+    if dimension == "characteristic_group":
+        return _fdv_slug("GROUP_", raw)
+    if dimension == "observation_period":
+        match = re.fullmatch(
+            r"([0-9]{4})\N{EN DASH}([0-9]{2})(?:\([a-z]\))?",
+            _fdv_normalize_label(raw),
+            re.IGNORECASE,
+        )
+        assert match is not None
+        return f"20{match.group(2)}-06-30"
+    if dimension == "statistic_basis":
+        normalized = _fdv_without_terminal_footnote(raw)
+        if normalized == "Mean (years)":
+            return "MEAN_AGE"
+        if normalized == "Median (years)":
+            return "MEDIAN_AGE"
+        return "COUNT"
+    if dimension in {"jurisdiction", "classification_context"}:
+        title = _fdv_normalize_label(raw)
+        if dimension == "classification_context":
+            if "Breach of restraining order \N{EN DASH} violence" in title:
+                return "FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL"
+            assert "Breach of violence orders" in title
+            return "FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"
+        jurisdictions = {
+            "Australia": "AUS",
+            "New South Wales": "NSW",
+            "Victoria": "VIC",
+            "Queensland": "QLD",
+            "South Australia": "SA",
+            "Western Australia": "WA",
+            "Tasmania": "TAS",
+            "Northern Territory": "NT",
+            "Australian Capital Territory": "ACT",
+        }
+        matches = [
+            canonical
+            for published, canonical in jurisdictions.items()
+            if f", {published}," in title
+        ]
+        assert len(matches) == 1
+        return matches[0]
+    raise AssertionError(f"Unknown FDV breach dimension: {dimension}")
+
+
+def _assert_fdv_aliases_against_source_truth(
+    contract: dict[str, object], rows: list[dict[str, object]]
+) -> int:
+    alias_count = 0
+    for dimension, raw_field in FDV_BREACH_RAW_FIELDS.items():
+        aliases = contract["aliases"][dimension]
+        normalized: dict[str, str] = {}
+        for raw, target in aliases.items():
+            key = _fdv_normalize_label(raw)
+            assert key not in normalized
+            assert target == _fdv_expected_alias_target(dimension, raw)
+            normalized[key] = target
+            alias_count += 1
+        used = {_fdv_normalize_label(str(row[raw_field])) for row in rows}
+        assert set(normalized) == used
+        for row in rows:
+            raw = str(row[raw_field])
+            assert row[f"{dimension}_id"] == _fdv_expected_alias_target(dimension, raw)
+            assert normalized[_fdv_normalize_label(raw)] == row[f"{dimension}_id"]
+    return alias_count
+
+
+def _fdv_csv_serialized_scalar(field: str, value: object) -> str:
+    """Mirror the named production CSV serialization without claiming byte identity."""
+    if value is None:
+        return ""
+    if isinstance(value, str) and field != "source_sheet":
+        return value.rstrip()
+    if value is True:
+        return "true"
+    if value is False:
+        return "false"
+    return str(value)
+
+
+def _assert_fdv_csv_matches_json(
+    csv_path: Path, rows: list[dict[str, object]]
+) -> list[tuple[str, str, str, str]]:
+    assert rows
+    with csv_path.open(newline="") as handle:
+        reader = csv.DictReader(handle)
+        fields = reader.fieldnames
+        assert fields == list(FDV_BREACH_CSV_FIELDS)
+        csv_rows = list(reader)
+    assert len(csv_rows) == len(rows)
+    assert all(set(row) == set(FDV_BREACH_CSV_FIELDS) for row in rows)
+    whitespace_differences: list[tuple[str, str, str, str]] = []
+    for csv_row, row in zip(csv_rows, rows, strict=True):
+        for field in fields:
+            expected = _fdv_csv_serialized_scalar(field, row[field])
+            assert csv_row[field] == expected
+            if isinstance(row[field], str) and csv_row[field] != row[field]:
+                assert row[field] != row[field].rstrip()
+                assert csv_row[field] == row[field].rstrip()
+                whitespace_differences.append(
+                    (
+                        str(row["publication_vintage_date"]),
+                        field,
+                        row[field],
+                        csv_row[field],
+                    )
+                )
+    return whitespace_differences
+
+
+def _fdv_taxonomy_digest(
+    rows: list[dict[str, object]], group_id: str
+) -> tuple[int, str]:
+    pairs = sorted(
+        {
+            (
+                str(row["raw_characteristic_category"]),
+                str(row["characteristic_category_id"]),
+            )
+            for row in rows
+            if row["characteristic_group_id"] == group_id
+        }
+    )
+    payload = json.dumps(pairs, separators=(",", ":"), ensure_ascii=False).encode()
+    return len(pairs), sha256_digest(payload)
+
+
+def _assert_exact_sha(data: bytes, expected: str) -> None:
+    assert sha256_digest(data) == expected
+
+
+def test_fdv_order_breach_cube_source_matrix_and_frozen_evidence() -> None:
+    matrix_by_family = _fdv_breach_matrix_by_family()
+    assert set(matrix_by_family) == set(FDV_BREACH_FAMILIES)
+    assert len(FDV_BREACH_SOURCE_MATRIX) == 36
+    assert Counter(len(items) for items in matrix_by_family.values()) == {1: 9, 3: 9}
+    membership = _load(MEMBERSHIP)
+    membership_by_family = {
+        family["familyId"]: family for family in membership["families"]
+    }
+    all_rows: list[dict[str, object]] = []
+    rows_by_release = Counter()
+    aliases_declared = 0
+    selected_formula_count = 0
+    physical_formula_count = 0
+    csv_whitespace_difference_count = 0
+    csv_whitespace_differences: set[tuple[str, str, str, str]] = set()
+    workbook_cache: dict[str, object] = {}
+    data_cache: dict[str, object] = {}
+    membership_workbook_cache: dict[str, object] = {}
+    normalization_manifest = _load(FIXTURES / "batch-workbook-normalization-v1.json")
+    normalization_entry = next(
+        entry
+        for entry in normalization_manifest["entries"]
+        if entry["sourcePath"] == "fixtures/product-prototype/workbooks/"
+        "criminal-courts-2023-24-cube-17-source.xlsx"
+    )
+    assert {
+        key: normalization_entry[key]
+        for key in (
+            "sourceDigest",
+            "sourceByteLength",
+            "outputPath",
+            "outputDigest",
+            "outputByteLength",
+            "trimmedSheets",
+            "correction",
+            "normalization",
+        )
+    } == {
+        "sourceDigest": (
+            "sha256:f5780d562b078756add08d13afe3a27413c1dd1c9eb9d188d77596f6b6c43a73"
+        ),
+        "sourceByteLength": 85082,
+        "outputPath": (
+            "fixtures/product-prototype/workbooks/"
+            "criminal-courts-2023-24-cube-17-normalized.xlsx"
+        ),
+        "outputDigest": (
+            "sha256:ac87ce9a09d4da630aa02b1d7e711ca801e3ac022986584ef1864e8370f9d580"
+        ),
+        "outputByteLength": 76428,
+        "trimmedSheets": [
+            {"sheet": "FDV Table 15", "retainedRange": "A1:G69"},
+            {"sheet": "FDV Table 16", "retainedRange": "A1:G63"},
+            {"sheet": "FDV Table 17", "retainedRange": "A1:G66"},
+            {"sheet": "FDV Table 18", "retainedRange": "A1:F71"},
+            {"sheet": "FDV Table 19", "retainedRange": "A1:G64"},
+        ],
+        "correction": {
+            "id": "criminal-courts-fdv-2023-24-duplicate-footnote-v1",
+            "reason": (
+                "Remove the duplicate far-right Table 16 footnote at XEX59 before "
+                "format trimming; preserve the identical retained footnote at A58 "
+                "and the exact source workbook separately."
+            ),
+            "removedCells": [
+                {
+                    "sheet": "FDV Table 16",
+                    "cell": "XEX59",
+                    "expectedStyle": "67",
+                    "expectedValue": (
+                        "(f) Includes defendants for whom method of finalisation "
+                        "could not be determined, defendants deceased or unfit to "
+                        "plead, transfers to non-court agencies and other "
+                        "non-adjudicated finalisations n.e.c. "
+                    ),
+                    "insideRetainedRange": False,
+                }
+            ],
+        },
+        "normalization": "trim-pathological-styled-blank-cells-v1",
+    }
+    publication_dates = {
+        2021: "2022-06-30",
+        2022: "2023-06-30",
+        2023: "2024-06-30",
+        2024: "2025-06-30",
+    }
+    markers = {
+        "na": "not_available",
+        "n.a.": "not_available",
+        "..": "not_applicable",
+        "np": "suppressed",
+        "n.p.": "suppressed",
+    }
+    try:
+        for family_id in FDV_BREACH_FAMILIES:
+            matrix = matrix_by_family[family_id]
+            cohort_path = FIXTURES / f"{family_id}.json"
+            contract_path = FIXTURES / "acceptance" / f"{family_id}-v1.json"
+            evidence = FIXTURES / f"{family_id}-evidence"
+            identity_pins = FDV_BREACH_IDENTITY_PINS[family_id[-10:]]
+            _assert_exact_sha(contract_path.read_bytes(), identity_pins[0])
+            _assert_exact_sha(cohort_path.read_bytes(), identity_pins[1])
+            cohort = _load(cohort_path)
+            contract = _load(contract_path)
+            run = _load(evidence / "run.json")
+            rows = json.loads((evidence / "canonical-observations.json").read_text())
+            differences = _assert_fdv_csv_matches_json(
+                evidence / "canonical-observations.csv", rows
+            )
+            csv_whitespace_difference_count += len(differences)
+            for date, field, json_value, csv_value in differences:
+                assert csv_value == json_value.rstrip()
+                csv_whitespace_differences.add((family_id, date, field, json_value))
+            aliases_declared += _assert_fdv_aliases_against_source_truth(contract, rows)
+            verify_large_batch_evidence(PROJECT, _fdv_breach_spec(family_id))
+            product_prototype_module._validate_cohort(cohort)
+            product_prototype_module._validate_contract(contract, cohort)
+            assert contract["schemaVersion"] == "tidy.table-family-acceptance/v2"
+            assert contract["strictAliasMatching"] is True
+            assert contract["trainingEligibility"] is False
+            assert contract["totalEquations"] == []
+            assert contract["totalValidation"] == "not_applicable"
+            assert contract["allowedExecutionWarnings"] == []
+            assert contract["expectedWarningCountsByYear"] == {
+                str(item[1]): 0 for item in matrix
+            }
+            assert run["providerCalls"] == 0
+            assert run["exceptionWorkbookCount"] == 0
+            assert run["trainingEligibility"] is False
+            assert run["historicalReplayIsAcceptanceAuthority"] is False
+            assert all(
+                workbook["executionWarningCount"] == 0
+                and workbook["issues"] == []
+                and all(workbook["checks"].values())
+                for workbook in run["workbooks"]
+            )
+            family_members = [
+                member
+                for member in membership_by_family[family_id]["members"]
+                if member["cubeId"]
+                == "family-and-domestic-violence-order-breaches-experimental-data"
+            ]
+            assert len(family_members) == len(matrix)
+            membership_by_release = {
+                member["releaseId"]: member for member in family_members
+            }
+            assert len(membership_by_release) == len(family_members)
+            assert set(membership_by_release) == {
+                FDV_BREACH_MEMBERSHIP_SOURCES[int(item[1])][0] for item in matrix
+            }
+            cohort_by_year = {item["year"]: item for item in cohort["workbooks"]}
+            rows_by_year: dict[int, list[dict[str, object]]] = {
+                int(item[1]): [] for item in matrix
+            }
+            digest_to_year = {str(item[3]): int(item[1]) for item in matrix}
+            for row in rows:
+                year = digest_to_year[str(row["source_workbook_digest"])]
+                rows_by_year[year].append(row)
+                assert row["publication_vintage_date"] == publication_dates[year]
+                assert row["acceptance_policy_version"] == (
+                    "tidy.table-family-acceptance/v2"
+                )
+                assert row["acceptance_policy_digest"] == identity_pins[0]
+                assert (
+                    row["recipe_digest"]
+                    == contract["expectedRecipeDigestsByYear"][str(year)]
+                )
+            for item in matrix:
+                (
+                    _,
+                    year,
+                    workbook_path,
+                    workbook_digest,
+                    workbook_length,
+                    sheet,
+                    max_row,
+                    max_column,
+                    expected_rows,
+                    count_rows,
+                    mean_rows,
+                    median_rows,
+                    observed_rows,
+                    na_rows,
+                    not_applicable_rows,
+                    zeros,
+                    map_path,
+                    map_digest,
+                    map_length,
+                ) = item
+                release_id, member_source_path, member_source_digest = (
+                    FDV_BREACH_MEMBERSHIP_SOURCES[year]
+                )
+                member = membership_by_release[release_id]
+                assert {
+                    "releaseId": member["releaseId"],
+                    "cubeId": member["cubeId"],
+                    "tableNamespace": member["tableNamespace"],
+                    "physicalSheetName": member["physicalSheetName"],
+                    "physicalTableNumber": member["physicalTableNumber"],
+                    "sourcePath": member["sourcePath"],
+                    "sourceDigest": member["sourceDigest"],
+                    "classificationContext": member["classificationContext"],
+                    "registered": member["registered"],
+                } == {
+                    "releaseId": release_id,
+                    "cubeId": (
+                        "family-and-domestic-violence-order-breaches-experimental-data"
+                    ),
+                    "tableNamespace": "family-domestic-violence",
+                    "physicalSheetName": sheet,
+                    "physicalTableNumber": int(sheet.rsplit(" ", 1)[1]),
+                    "sourcePath": member_source_path,
+                    "sourceDigest": member_source_digest,
+                    "classificationContext": "experimental-fdv-publication-namespace",
+                    "registered": True,
+                }
+                member_source = FIXTURES / member_source_path
+                _assert_exact_sha(member_source.read_bytes(), member_source_digest)
+                member_key = str(member_source)
+                if member_key not in membership_workbook_cache:
+                    membership_workbook_cache[member_key] = load_workbook(
+                        member_source, read_only=False, data_only=False
+                    )
+                assert (
+                    member["publishedTitle"]
+                    == membership_workbook_cache[member_key][sheet]
+                    .cell(FDV_BREACH_TITLE_ROWS[year], 1)
+                    .value
+                )
+
+                workbook_decl = cohort_by_year[year]
+                assert workbook_decl["path"] == workbook_path
+                assert workbook_decl["contentDigest"] == workbook_digest
+                assert workbook_decl["byteLength"] == workbook_length
+                assert workbook_decl["sheet"] == sheet
+                if year == 2023:
+                    assert (
+                        workbook_decl["normalization"]
+                        == normalization_entry["normalization"]
+                    )
+                    assert (
+                        workbook_decl["path"]
+                        == Path(normalization_entry["outputPath"])
+                        .relative_to("fixtures/product-prototype")
+                        .as_posix()
+                    )
+                    assert (
+                        workbook_decl["contentDigest"]
+                        == normalization_entry["outputDigest"]
+                    )
+                    assert (
+                        workbook_decl["byteLength"]
+                        == normalization_entry["outputByteLength"]
+                    )
+                    assert (
+                        member["sourcePath"]
+                        == Path(normalization_entry["sourcePath"])
+                        .relative_to("fixtures/product-prototype")
+                        .as_posix()
+                    )
+                    assert member["sourceDigest"] == normalization_entry["sourceDigest"]
+                else:
+                    assert "normalization" not in workbook_decl
+                assert workbook_decl["replayResponse"] == {
+                    "path": map_path,
+                    "contentDigest": map_digest,
+                    "byteLength": map_length,
+                    "historicalModel": "human-authored/deterministic-map-v1",
+                    "acceptanceAuthority": False,
+                }
+                source_path = FIXTURES / workbook_path
+                _assert_exact_sha(source_path.read_bytes(), workbook_digest)
+                assert source_path.stat().st_size == workbook_length
+                replay_path = FIXTURES / map_path
+                _assert_exact_sha(replay_path.read_bytes(), map_digest)
+                assert replay_path.stat().st_size == map_length
+                assert json.loads(replay_path.read_text())["version"] == (
+                    "semantic-table-map-v1"
+                )
+                key = str(source_path)
+                if key not in workbook_cache:
+                    workbook_cache[key] = load_workbook(
+                        source_path, read_only=False, data_only=False
+                    )
+                    data_cache[key] = load_workbook(
+                        source_path, read_only=False, data_only=True
+                    )
+                worksheet = workbook_cache[key][sheet]
+                data_sheet = data_cache[key][sheet]
+                assert (worksheet.max_row, worksheet.max_column) == (
+                    max_row,
+                    max_column,
+                )
+                physical_formulas = tuple(
+                    (cell.coordinate, cell.value)
+                    for source_row in worksheet.iter_rows()
+                    for cell in source_row
+                    if cell.data_type == "f"
+                )
+                assert physical_formulas == FDV_BREACH_PHYSICAL_FORMULAS[(year, sheet)]
+                physical_formula_count += len(physical_formulas)
+                year_rows = rows_by_year[year]
+                assert len(year_rows) == expected_rows
+                assert Counter(row["measure_id"] for row in year_rows) == {
+                    "defendant-count": count_rows,
+                    "mean-age": mean_rows,
+                    "median-age": median_rows,
+                }
+                expected_statuses = {
+                    key: value
+                    for key, value in {
+                        "observed": observed_rows,
+                        "not_available": na_rows,
+                        "not_applicable": not_applicable_rows,
+                    }.items()
+                    if value
+                }
+                assert Counter(row["value_status"] for row in year_rows) == (
+                    expected_statuses
+                )
+                assert (
+                    sum(
+                        row["raw_value"] == 0 and not isinstance(row["raw_value"], bool)
+                        for row in year_rows
+                    )
+                    == zeros
+                )
+                selected = {row["source_cell"] for row in year_rows}
+                candidates = {
+                    f"R{cell.row}C{cell.column}"
+                    for source_row in worksheet.iter_rows()
+                    for cell in source_row
+                    if (
+                        isinstance(cell.value, int | float)
+                        and not isinstance(cell.value, bool)
+                    )
+                    or (
+                        isinstance(cell.value, str)
+                        and cell.value.strip().lower() in markers
+                    )
+                }
+                assert selected == candidates
+                formula_sources = {
+                    f"R{cell.row}C{cell.column}"
+                    for source_row in worksheet.iter_rows()
+                    for cell in source_row
+                    if cell.data_type == "f"
+                }
+                assert selected.isdisjoint(formula_sources)
+                source_strings = {
+                    cell.value
+                    for source in (worksheet, data_sheet)
+                    for source_row in source.iter_rows()
+                    for cell in source_row
+                    if isinstance(cell.value, str)
+                }
+                for row in year_rows:
+                    source_row, source_column = _r1c1_parts(str(row["source_cell"]))
+                    cell = worksheet.cell(source_row, source_column)
+                    assert cell.value == row["raw_value"]
+                    selected_formula_count += cell.data_type == "f"
+                    assert cell.data_type != "f"
+                    if row["value_status"] == "observed":
+                        assert cell.data_type == "n"
+                        assert type(cell.value) is type(row["raw_value"])
+                        assert row["value"] == row["raw_value"]
+                    else:
+                        assert cell.data_type == "s"
+                        assert (
+                            markers[str(cell.value).strip().lower()]
+                            == (row["value_status"])
+                        )
+                        assert row["value"] is None
+                    assert (
+                        worksheet.cell(source_row, 1).value
+                        == row["raw_characteristic_category"]
+                    )
+                    assert (
+                        row["raw_statistic_basis"] == row["raw_characteristic_category"]
+                    )
+                    assert all(
+                        row[field] in source_strings
+                        for field in FDV_BREACH_RAW_FIELDS.values()
+                    )
+                rows_by_release[year] += len(year_rows)
+            all_rows.extend(rows)
+    finally:
+        for workbook in (
+            list(workbook_cache.values())
+            + list(data_cache.values())
+            + list(membership_workbook_cache.values())
+        ):
+            workbook.close()
+
+    assert aliases_declared == 1882
+    assert physical_formula_count == 45
+    assert selected_formula_count == 0
+    assert len(all_rows) == 6463
+    assert rows_by_release == {2021: 1054, 2022: 1465, 2023: 1826, 2024: 2118}
+    assert Counter(row["measure_id"] for row in all_rows) == {
+        "defendant-count": 6097,
+        "mean-age": 183,
+        "median-age": 183,
+    }
+    assert Counter(row["value_status"] for row in all_rows) == {
+        "observed": 6357,
+        "not_available": 94,
+        "not_applicable": 12,
+    }
+    assert (
+        sum(
+            row["raw_value"] == 0 and not isinstance(row["raw_value"], bool)
+            for row in all_rows
+        )
+        == 227
+    )
+    assert (
+        len(
+            {
+                (row["source_workbook_digest"], row["source_sheet"], row["source_cell"])
+                for row in all_rows
+            }
+        )
+        == 6463
+    )
+    assert {
+        row["classification_context_id"]
+        for row in all_rows
+        if row["publication_vintage_date"] < "2025-01-01"
+    } == {"FDV_BREACH_OF_VIOLENCE_ORDERS_EXPERIMENTAL"}
+    historical_rows = [
+        row for row in all_rows if row["publication_vintage_date"] < "2025-01-01"
+    ]
+    rows_2024 = [
+        row for row in all_rows if row["publication_vintage_date"] == "2025-06-30"
+    ]
+    assert {row["classification_context_id"] for row in rows_2024} == {
+        "FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL"
+    }
+    for era, era_rows in (("historical", historical_rows), ("2024", rows_2024)):
+        assert {str(row["characteristic_group_id"]) for row in era_rows} == set(
+            FDV_BREACH_TAXONOMY_DIGESTS[era]
+        )
+        for group_id, expected in FDV_BREACH_TAXONOMY_DIGESTS[era].items():
+            assert _fdv_taxonomy_digest(era_rows, group_id) == expected
+    assert {
+        row["characteristic_category_id"]
+        for row in historical_rows
+        if row["characteristic_group_id"] == "GROUP_AGE"
+    } == {
+        "CHAR_10_19_YEARS",
+        "CHAR_20_29_YEARS",
+        "CHAR_30_39_YEARS",
+        "CHAR_40_49_YEARS",
+        "CHAR_50_59_YEARS",
+        "CHAR_60_YEARS_AND_OVER",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+    }
+    assert {
+        row["characteristic_category_id"]
+        for row in rows_2024
+        if row["characteristic_group_id"] == "GROUP_AGE"
+    } == {
+        "CHAR_10_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+    }
+    assert {
+        row["characteristic_category_id"]
+        for row in historical_rows
+        if row["characteristic_group_id"] == "GROUP_INDIGENOUS_STATUS"
+    } == {
+        "CHAR_ABORIGINAL_AND_TORRES_STRAIT_ISLANDER",
+        "CHAR_NON_INDIGENOUS",
+        "CHAR_NON_INDIGENOUS_AND_NOT_STATED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+    }
+    assert {
+        row["characteristic_category_id"]
+        for row in rows_2024
+        if row["characteristic_group_id"] == "GROUP_INDIGENOUS_STATUS"
+    } == {
+        "CHAR_ABORIGINAL_AND_TORRES_STRAIT_ISLANDER",
+        "CHAR_NON_INDIGENOUS",
+        "CHAR_NOT_STATED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+    }
+    act_2023_rows = [
+        row
+        for row in all_rows
+        if row["source_sheet"] == "FDV Table 22"
+        and row["publication_vintage_date"] == "2024-06-30"
+        and row["jurisdiction_id"] == "ACT"
+    ]
+    assert act_2023_rows
+    assert {row["raw_jurisdiction"] for row in act_2023_rows} == {
+        FDV_BREACH_ACT_2023_TITLE
+    }
+    assert {row["raw_classification_context"] for row in act_2023_rows} == {
+        FDV_BREACH_ACT_2023_TITLE
+    }
+    assert csv_whitespace_difference_count == 3087
+    assert len(csv_whitespace_differences) == 446
+    assert {item[2] for item in csv_whitespace_differences} == {
+        "raw_characteristic_category",
+        "raw_characteristic_group",
+        "raw_statistic_basis",
+        "raw_jurisdiction",
+        "raw_classification_context",
+    }
+    whitespace_payload = json.dumps(
+        sorted(csv_whitespace_differences),
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode()
+    assert sha256_digest(whitespace_payload) == (
+        "sha256:6df3b55535510df2046e654b8b9063e495409693ba5f169ce7990ffbbf518aeb"
+    )
+    assert {
+        item
+        for item in csv_whitespace_differences
+        if item[2] in {"raw_jurisdiction", "raw_classification_context"}
+    } == {
+        (
+            FDV_BREACH_ACT_2023_FAMILY,
+            "2024-06-30",
+            "raw_jurisdiction",
+            FDV_BREACH_ACT_2023_TITLE,
+        ),
+        (
+            FDV_BREACH_ACT_2023_FAMILY,
+            "2024-06-30",
+            "raw_classification_context",
+            FDV_BREACH_ACT_2023_TITLE,
+        ),
+    }
+
+
+def test_fdv_breach_source_truth_rejects_coordinated_and_digest_mutations() -> None:
+    family_id = next(
+        item for item in FDV_BREACH_FAMILIES if item.endswith("88e189a36b")
+    )
+    contract_path = FIXTURES / "acceptance" / f"{family_id}-v1.json"
+    cohort_path = FIXTURES / f"{family_id}.json"
+    evidence = FIXTURES / f"{family_id}-evidence"
+    contract = _load(contract_path)
+    cohort = _load(cohort_path)
+    rows = json.loads((evidence / "canonical-observations.json").read_text())
+    title = str(rows[0]["raw_jurisdiction"])
+    mutation_cases = (
+        ("characteristic_category", "20\N{EN DASH}29 years", "CHAR_30_39_YEARS"),
+        ("characteristic_group", "Age", "GROUP_SEX"),
+        ("observation_period", "2018\N{EN DASH}19", "2020-06-30"),
+        ("statistic_basis", "Mean (years)", "MEDIAN_AGE"),
+        ("jurisdiction", title, "AUS"),
+        (
+            "classification_context",
+            title,
+            "FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL",
+        ),
+    )
+    for dimension, normalized_raw, wrong_target in mutation_cases:
+        mutated_contract = copy.deepcopy(contract)
+        mutated_rows = copy.deepcopy(rows)
+        alias_raw = next(
+            raw
+            for raw in mutated_contract["aliases"][dimension]
+            if _fdv_normalize_label(raw) == _fdv_normalize_label(normalized_raw)
+        )
+        mutated_contract["aliases"][dimension][alias_raw] = wrong_target
+        raw_field = FDV_BREACH_RAW_FIELDS[dimension]
+        id_field = f"{dimension}_id"
+        changed = 0
+        for row in mutated_rows:
+            if _fdv_normalize_label(str(row[raw_field])) == _fdv_normalize_label(
+                normalized_raw
+            ):
+                row[id_field] = wrong_target
+                changed += 1
+        assert changed > 0
+        with pytest.raises(AssertionError):
+            _assert_fdv_aliases_against_source_truth(mutated_contract, mutated_rows)
+
+    colliding_contract = copy.deepcopy(contract)
+    colliding_contract["aliases"]["characteristic_category"]["  Males  "] = "CHAR_MALES"
+    with pytest.raises(AssertionError):
+        _assert_fdv_aliases_against_source_truth(colliding_contract, rows)
+
+    matrix = _fdv_breach_matrix_by_family()[family_id]
+    replay_path = FIXTURES / str(matrix[0][16])
+    identity_pins = FDV_BREACH_IDENTITY_PINS[family_id[-10:]]
+    for source, expected in (
+        (contract_path, identity_pins[0]),
+        (cohort_path, identity_pins[1]),
+        (replay_path, str(matrix[0][17])),
+    ):
+        tampered = source.read_bytes() + b"tampered"
+        with pytest.raises(AssertionError):
+            _assert_exact_sha(tampered, expected)
+    assert cohort["workbooks"][0]["replayResponse"]["acceptanceAuthority"] is False

@@ -28,10 +28,10 @@ the status snapshot, Dagster assets, and dashboard totals. The provider-free cus
 
 The Criminal Courts release inventory applies the same custody/completeness
 boundary to 69 downloads, 65 substantive cubes, 198 reviewed semantic families,
-and all 430 numbered sheets across 2021–22 through 2024–25. The first 338
+and all 430 numbered sheets across 2021–22 through 2024–25. The first 374
 registered assets are split where ANZSOC 2011, preliminary ANZSOC 2023, final
 ANZSOC 2023, and concorded historical identities cannot safely share one alias
-namespace. The remaining 92 sheets stay pending. The preliminary concordance
+namespace. The remaining 56 sheets stay pending. The preliminary concordance
 contract uses the explicit `principal_offence_anzsoc_2011` dimension beside the
 ordinary `principal_offence` dimension so the two principal-offence
 classifications are not collapsed or mislabeled as offence versus charge. The
@@ -46,8 +46,13 @@ identify panels from exact headers rather than position because 2024 reverses
 them; they infer no denominator, count/rate equation, or additive total identity.
 Published total rows remain observations under `totalValidation: not_applicable`,
 and the nine 2024 mixed-concorded singletons remain separate from the nine
-ANZSOC 2011 histories. Run `scripts/tidy-criminal-courts-release verify` for the
-provider-free closure.
+ANZSOC 2011 histories. The 36-sheet FDV order-breach cluster likewise keeps nine
+2021–22 through 2023–24 summary-characteristic histories separate from nine
+2024–25 restraining-order singletons. It preserves published counts, mean and
+median ages, `na` and `..` typed nulls, era-specific age, outcome, Indigenous
+status, and sentence taxonomies, and the exact ACT title trailing space without
+inferring additive totals. Run `scripts/tidy-criminal-courts-release verify` for
+the provider-free closure.
 
 The completed safe live-evidence closure is at
 `fixtures/product-prototype/live-evidence/manifest.json`. It binds three fresh
@@ -113,12 +118,13 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 467-worksheet cross-publication batch supports acceptance-policy v1 and v2
+The 503-worksheet cross-publication batch supports acceptance-policy v1 and v2
 without weakening existing cohorts. Policy v1 retains its legacy canonical-JSON
 contract digest and behavior unchanged. Policy v2 binds acceptance to the exact
 contract-file digest and recomputes decisions from contract-pinned recipe,
 workbook, check, and replay-timestamp identities. Northern Territory, Australian
-Capital Territory, Tasmania, and the defendant-rate Cube 12 cohorts use v2;
+Capital Territory, Tasmania, defendant-rate Cube 12, and FDV order-breach
+cohorts use v2;
 future clusters should use v2.
 
 The shared contract capabilities include:
@@ -145,11 +151,18 @@ The shared contract capabilities include:
 - cohort normalization now also recognizes
   `trim-pathological-styled-blank-cells-v1` and the reviewed full-width
   formatting variant, which trim out-of-range styled blanks and pathological
-  merge/column formatting while refusing to remove
-  cell values or formulas.
+  merge/column formatting while refusing to remove cell values or formulas.
+  Before trimming, the separate correction step supports three reviewed,
+  fail-closed modes: digest-, length-, sheet-, cell-, style-, and value-bound
+  removal of isolated Recorded Crime cells; exact shared-string replacement of
+  the impossible ACT `2022–22` period header with `2021–22`; and removal of the
+  FDV Cube 17 far-right duplicate footnote only when its shared-string type and
+  value, merge, retained range, and identical retained `A58` duplicate all
+  match. Original source bytes remain committed, and no correction is inferred
+  for unrecognized workbook bytes or cell state.
 
 The batch registry is
-`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 171 cohort
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 189 cohort
 contracts pins exact annual dimensions, measure applicability, value statuses,
 combination counts, and source-header variants. Verification remains
 provider-free:

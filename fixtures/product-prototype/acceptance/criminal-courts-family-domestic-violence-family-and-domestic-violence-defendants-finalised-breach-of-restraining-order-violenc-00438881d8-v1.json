@@ -1,0 +1,418 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-00438881d8-v1",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-restraining-order-violenc-00438881d8",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": ["COUNT"]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": ["2024"],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_10_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ABORIGINAL_AND_TORRES_STRAIT_ISLANDER",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_AGREEMENT_OF_WRONGDOING",
+            "CHAR_CHILDREN_S",
+            "CHAR_COMMUNITY_SERVICE_WORK",
+            "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "CHAR_FEMALES",
+            "CHAR_FINES",
+            "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_HIGHER",
+            "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MAGISTRATES",
+            "CHAR_MALES",
+            "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "CHAR_MONETARY_PENALTIES",
+            "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+            "CHAR_NON_INDIGENOUS",
+            "CHAR_NOT_STATED",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TOTAL_GUILTY_OUTCOME",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_COURT_LEVEL",
+            "GROUP_INDIGENOUS_STATUS",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_SENTENCE",
+            "GROUP_SEX"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "statistic_basis": ["COUNT"],
+          "jurisdiction": ["NT"],
+          "classification_context": [
+            "FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 228
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:f25146df2772ac6e8a8ea497b9967aa72966e42375afb2aaea8b5be2efd29224"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": ["MEAN_AGE"]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": ["2024"],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": ["CHAR_MEAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "statistic_basis": ["MEAN_AGE"],
+          "jurisdiction": ["NT"],
+          "classification_context": [
+            "FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 6
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:626b5ac4c216014397ad74a97188102546a5c31941f7387d6a96a47427edc424"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "..": "not_applicable",
+        "na": "not_available",
+        "n.a.": "not_available",
+        "np": "suppressed",
+        "n.p.": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": ["MEDIAN_AGE"]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": ["2024"],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": ["CHAR_MEDIAN_YEARS"],
+          "characteristic_group": ["GROUP_AGE"],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30",
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "statistic_basis": ["MEDIAN_AGE"],
+          "jurisdiction": ["NT"],
+          "classification_context": [
+            "FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 6
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:440fd0b38b224580207c525de169f7c42b4333787e6ba7a92d65e267f97f7a82"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "observation_period",
+    "statistic_basis",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": ["^characteristic category$"],
+    "characteristic_group": ["^characteristic group$"],
+    "observation_period": ["^observation period$"],
+    "statistic_basis": ["^statistic basis$"],
+    "jurisdiction": ["^jurisdiction$"],
+    "classification_context": ["^classification context$"]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "Higher": "CHAR_HIGHER",
+      "Magistrates'": "CHAR_MAGISTRATES",
+      "Children's": "CHAR_CHILDREN_S",
+      "Males": "CHAR_MALES",
+      "Females": "CHAR_FEMALES",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Aboriginal and Torres Strait Islander": "CHAR_ABORIGINAL_AND_TORRES_STRAIT_ISLANDER",
+      "Non-Indigenous": "CHAR_NON_INDIGENOUS",
+      "Not stated": "CHAR_NOT_STATED",
+      "Total finalised (excluding transfer to other court levels)(b)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Adjudicated outcomes(c)": "CHAR_ADJUDICATED_OUTCOMES",
+      "Acquitted": "CHAR_ACQUITTED",
+      "Guilty outcome(d)(e)": "CHAR_GUILTY_OUTCOME",
+      "Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      "Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "Agreement of wrongdoing(e)": "CHAR_AGREEMENT_OF_WRONGDOING",
+      "Transfer to other court levels": "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "CHAR_WITHDRAWN_BY_PROSECUTION",
+      "Total finalised(f)": "CHAR_TOTAL_FINALISED",
+      "Custody in a correctional institution": "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Intensive penalty in the community(h)": "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Fully suspended sentence of imprisonment": "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Community service / work(h)": "CHAR_COMMUNITY_SERVICE_WORK",
+      "Moderate penalty in the community(h)": "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Monetary penalties(i)": "CHAR_MONETARY_PENALTIES",
+      "Fines": "CHAR_FINES",
+      "Good behaviour (incl. bonds)(h)": "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Nominal and other penalties": "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+      "Total guilty outcome(j)": "CHAR_TOTAL_GUILTY_OUTCOME"
+    },
+    "characteristic_group": {
+      "Court level": "GROUP_COURT_LEVEL",
+      "Sex": "GROUP_SEX",
+      "Age": "GROUP_AGE",
+      "Indigenous status(a)": "GROUP_INDIGENOUS_STATUS",
+      "Method of finalisation": "GROUP_METHOD_OF_FINALISATION",
+      "Principal sentence(g)": "GROUP_PRINCIPAL_SENTENCE"
+    },
+    "observation_period": {
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "statistic_basis": {
+      "Higher": "COUNT",
+      "Magistrates'": "COUNT",
+      "Children's": "COUNT",
+      "Males": "COUNT",
+      "Females": "COUNT",
+      "10–19 years": "COUNT",
+      "20–24 years": "COUNT",
+      "25–29 years": "COUNT",
+      "30–34 years": "COUNT",
+      "35–39 years": "COUNT",
+      "40–44 years": "COUNT",
+      "45–49 years": "COUNT",
+      "50–54 years": "COUNT",
+      "55 years and over": "COUNT",
+      "Mean (years)": "MEAN_AGE",
+      "Median (years)": "MEDIAN_AGE",
+      "Aboriginal and Torres Strait Islander": "COUNT",
+      "Non-Indigenous": "COUNT",
+      "Not stated": "COUNT",
+      "Total finalised (excluding transfer to other court levels)(b)": "COUNT",
+      "Adjudicated outcomes(c)": "COUNT",
+      "Acquitted": "COUNT",
+      "Guilty outcome(d)(e)": "COUNT",
+      "Guilty plea by defendant": "COUNT",
+      "Guilty finding by court": "COUNT",
+      "Guilty ex-parte": "COUNT",
+      "Agreement of wrongdoing(e)": "COUNT",
+      "Transfer to other court levels": "COUNT",
+      "Withdrawn by prosecution": "COUNT",
+      "Total finalised(f)": "COUNT",
+      "Custody in a correctional institution": "COUNT",
+      "Intensive penalty in the community(h)": "COUNT",
+      "Fully suspended sentence of imprisonment": "COUNT",
+      "Community service / work(h)": "COUNT",
+      "Moderate penalty in the community(h)": "COUNT",
+      "Monetary penalties(i)": "COUNT",
+      "Fines": "COUNT",
+      "Good behaviour (incl. bonds)(h)": "COUNT",
+      "Nominal and other penalties": "COUNT",
+      "Total guilty outcome(j)": "COUNT"
+    },
+    "jurisdiction": {
+      "FDV Table 25 Experimental data – Family and domestic violence defendants finalised, Breach of restraining order – violence, Northern Territory, 2019–20 to 2024–25": "NT"
+    },
+    "classification_context": {
+      "FDV Table 25 Experimental data – Family and domestic violence defendants finalised, Breach of restraining order – violence, Northern Territory, 2019–20 to 2024–25": "FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "statistic_basis_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "characteristicCategoriesByYear": {
+      "2024": [
+        "CHAR_10_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ABORIGINAL_AND_TORRES_STRAIT_ISLANDER",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_AGREEMENT_OF_WRONGDOING",
+        "CHAR_CHILDREN_S",
+        "CHAR_COMMUNITY_SERVICE_WORK",
+        "CHAR_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "CHAR_FEMALES",
+        "CHAR_FINES",
+        "CHAR_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "CHAR_GOOD_BEHAVIOUR_INCL_BONDS",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_HIGHER",
+        "CHAR_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MAGISTRATES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "CHAR_MONETARY_PENALTIES",
+        "CHAR_NOMINAL_AND_OTHER_PENALTIES",
+        "CHAR_NON_INDIGENOUS",
+        "CHAR_NOT_STATED",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TOTAL_GUILTY_OUTCOME",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2024": [
+        "GROUP_AGE",
+        "GROUP_COURT_LEVEL",
+        "GROUP_INDIGENOUS_STATUS",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_SENTENCE",
+        "GROUP_SEX"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2024": [
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2024": ["COUNT", "MEAN_AGE", "MEDIAN_AGE"]
+    },
+    "jurisdictionsByYear": {
+      "2024": ["NT"]
+    },
+    "classificationContextsByYear": {
+      "2024": ["FDV_BREACH_OF_RESTRAINING_ORDER_VIOLENCE_EXPERIMENTAL"]
+    },
+    "minimumRows": 240,
+    "maximumRows": 240,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 7
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "expectedWarningCountsByYear": {
+    "2024": 0
+  },
+  "expectedRecipeDigestsByYear": {
+    "2024": "sha256:edfeeea61e358166f829acb6cec85b07dac74471446cfe8cb1a76e40a10a3607"
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}
