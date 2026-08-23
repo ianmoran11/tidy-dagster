@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tidy.data-asset-status-registry/v1",
   "title": "Tidy Data Asset Status",
-  "recordedAt": "2026-08-24T09:00:00+00:00",
+  "recordedAt": "2026-08-25T09:00:00+00:00",
   "outputPath": "docs/data-asset-status/index.html",
   "server": {
     "host": "127.0.0.1",
@@ -166,7 +166,11 @@
       "dagsterAsset": "product_prototype_replay",
       "liveEvidence": {
         "manifestPath": "fixtures/product-prototype/live-evidence/manifest.json",
-        "years": [2023, 2024, 2025]
+        "years": [
+          2023,
+          2024,
+          2025
+        ]
       }
     },
     {
@@ -1372,6 +1376,223 @@
       "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645.json",
       "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645-evidence/manifest.json",
       "dagsterAsset": "product_prototype_criminal_courts_fdv_breach_8c70b71645_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Sex and age by method of finalisation, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_495144b1c0_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-australia-a-2b0213845d",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics, Australia, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-australia-a-2b0213845d.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-australia-a-2b0213845d-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_2b0213845d_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-2e7452beac",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by court level and state and territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-2e7452beac.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-2e7452beac-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_2e7452beac_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by court level and by state and territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_6503902682_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-5011962985",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Indigenous status and by state and territories",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-5011962985.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-5011962985-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_5011962985_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Indigenous status and by selected states and territories",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_b87073df14_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_3381eed82c_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-05308946c9",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-05308946c9.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-05308946c9-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_05308946c9_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-0fb53f7a10",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, South Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-0fb53f7a10.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-0fb53f7a10-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_0fb53f7a10_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3668ca7649",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Queensland",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3668ca7649.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3668ca7649-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_3668ca7649_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-388c0b61d8",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Northern Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-388c0b61d8.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-388c0b61d8-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_388c0b61d8_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3f42f9bedf",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Victoria",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3f42f9bedf.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3f42f9bedf-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_3f42f9bedf_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-473ec58d23",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Australian Capital Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-473ec58d23.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-473ec58d23-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_473ec58d23_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-485304c0e6",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Australian Capital Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-485304c0e6.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-485304c0e6-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_485304c0e6_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-4fb12fc024",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Northern Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-4fb12fc024.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-4fb12fc024-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_4fb12fc024_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-65c505b5c4",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-65c505b5c4.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-65c505b5c4-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_65c505b5c4_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_70470aec72_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-8cbad48526",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Victoria",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-8cbad48526.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-8cbad48526-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_8cbad48526_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-947fbe6da4",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Tasmania",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-947fbe6da4.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-947fbe6da4-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_947fbe6da4_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c60814e93a",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c60814e93a.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c60814e93a-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_c60814e93a_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c72f15c218",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c72f15c218.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c72f15c218-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_c72f15c218_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-dad36f6b4d",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Tasmania",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-dad36f6b4d.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-dad36f6b4d-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_dad36f6b4d_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-e13be2cc2f",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-e13be2cc2f.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-e13be2cc2f-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_e13be2cc2f_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-ef51d64efa",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Queensland",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-ef51d64efa.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-ef51d64efa-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_ef51d64efa_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-fde1621019",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, South Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-fde1621019.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-fde1621019-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_fde1621019_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-490955c6ce",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – Magistrates' Court, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-490955c6ce.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-490955c6ce-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_490955c6ce_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-600f50f8e9",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – Children's Courts, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-600f50f8e9.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-600f50f8e9-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_600f50f8e9_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – All Courts, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_bc5ea543eb_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-e06014d131",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – Higher Courts, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-e06014d131.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-e06014d131-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_e06014d131_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-c135720f56",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants with a guilty outcome, Summary characteristics by sentence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-c135720f56.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-c135720f56-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_c135720f56_replay"
+    },
+    {
+      "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants with a guilty outcome, Summary characteristics by principal sentence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_d3029e28a1_replay"
     }
   ],
   "publications": [

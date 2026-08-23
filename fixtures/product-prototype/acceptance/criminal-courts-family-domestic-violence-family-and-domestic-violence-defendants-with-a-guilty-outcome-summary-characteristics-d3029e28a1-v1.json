@@ -1,0 +1,684 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "contractId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1-v1",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "np": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2023": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_10_19_YEARS",
+            "CHAR_121_PROPERTY_DAMAGE",
+            "CHAR_1531_BREACH_OF_VIOLENCE_ORDER",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_FDV_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2023_24"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_01_HOMICIDE",
+            "CHAR_0211_CHOKING_AND_STRANGULATION",
+            "CHAR_021_SERIOUS_ASSAULT",
+            "CHAR_02_ASSAULT",
+            "CHAR_03_SEXUAL_OFFENCES",
+            "CHAR_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+            "CHAR_049_OTHER_ACTS_THAT_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+            "CHAR_10_19_YEARS",
+            "CHAR_11_PROPERTY_DAMAGE",
+            "CHAR_1411_BREACH_OF_RESTRAINING_ORDER_VIOLENCE",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_GUILTY_OUTCOME"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_PENALTY",
+            "SENTENCE_TOTAL"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_FDV_OFFENCE_ANZSOC_2023",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_ANZSOC_2023"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2023": 450,
+        "2024": 480
+      },
+      "expectedCombinationDigestsByYear": {
+        "2023": "sha256:ab554cbecc87306fc8a20b3f065f394279a2892792213a255dbcdb18ab3ab546",
+        "2024": "sha256:ba7f6534a123a38a1a71c6dc4b9a2b4f07dce02abc66269a189d4a8622a1aaba"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "np": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2023_24"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_PENALTY",
+            "SENTENCE_TOTAL"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_ANZSOC_2023"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2023": 18,
+        "2024": 20
+      },
+      "expectedCombinationDigestsByYear": {
+        "2023": "sha256:29ade415c426517c9c4cab06721e73bd7eda5881d2f3b2a752e45ea3e13f7ca0",
+        "2024": "sha256:64b5192d9d4cea32ed99c41442a5aa420c69565333b6d615fbad09245fa52d06"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "np": "suppressed"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2023",
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+            "SENTENCE_TOTAL"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2023_24"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sentence_statistic": [
+            "SENTENCE_COMMUNITY_SERVICE_WORK",
+            "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+            "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+            "SENTENCE_FINES",
+            "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+            "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+            "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+            "SENTENCE_NOMINAL_PENALTY",
+            "SENTENCE_TOTAL"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_ANZSOC_2023"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2023": 18,
+        "2024": 20
+      },
+      "expectedCombinationDigestsByYear": {
+        "2023": "sha256:5e4c05c486dc5b976a318ab2492433bb5a05e05ea4d36df9cb1d696d5ce5f150",
+        "2024": "sha256:461a6036742c52f51f27927b4aee1913ce881b7fd05bb711ccb903d1a1d7845d"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "statistic_basis",
+    "observation_period",
+    "sentence_statistic",
+    "characteristic_group",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "statistic_basis": [
+      "^statistic\\ basis$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "sentence_statistic": [
+      "^principal\\ sentence$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "classification_context": [
+      "^classification\\ context$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      " 0291 Stalking & 053 Harassment and threatening behaviour": "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "01 Homicide": "CHAR_01_HOMICIDE",
+      "01 Homicide and related offences(b)": "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "011 Murder": "CHAR_011_MURDER",
+      "012 Attempted murder": "CHAR_012_ATTEMPTED_MURDER",
+      "02 Acts intended to cause injury": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "02 Assault(d)": "CHAR_02_ASSAULT",
+      "021 Assault": "CHAR_021_ASSAULT",
+      "021 Serious assault": "CHAR_021_SERIOUS_ASSAULT",
+      "0211 Choking and strangulation": "CHAR_0211_CHOKING_AND_STRANGULATION",
+      "029 Other acts intended to cause injury": "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "0291 Stalking & 053 Harassment and threatening behaviour": "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "0291 Stalking(c)": "CHAR_0291_STALKING",
+      "03 Sexual assault and related offences(b)": "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "03 Sexual offences(e)": "CHAR_03_SEXUAL_OFFENCES",
+      "04 Harm or endanger persons(f)": "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+      "044 Acts that threaten, harass, or control": "CHAR_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+      "049 Other acts that harm or endanger persons": "CHAR_049_OTHER_ACTS_THAT_HARM_OR_ENDANGER_PERSONS",
+      "049 Other dangerous/negligent acts": "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/harassment(d)": "CHAR_05_ABDUCTION_HARASSMENT",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "11 Property damage": "CHAR_11_PROPERTY_DAMAGE",
+      "121 Property damage": "CHAR_121_PROPERTY_DAMAGE",
+      "1411 Breach of restraining order – violence": "CHAR_1411_BREACH_OF_RESTRAINING_ORDER_VIOLENCE",
+      "1531 Breach of violence order": "CHAR_1531_BREACH_OF_VIOLENCE_ORDER",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Females": "CHAR_FEMALES",
+      "Males": "CHAR_MALES",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Total guilty outcome(e)": "CHAR_TOTAL_GUILTY_OUTCOME",
+      "Total guilty outcome(g)": "CHAR_TOTAL_GUILTY_OUTCOME"
+    },
+    "statistic_basis": {
+      " 0291 Stalking & 053 Harassment and threatening behaviour": "COUNT",
+      "01 Homicide": "COUNT",
+      "01 Homicide and related offences(b)": "COUNT",
+      "011 Murder": "COUNT",
+      "012 Attempted murder": "COUNT",
+      "02 Acts intended to cause injury": "COUNT",
+      "02 Assault(d)": "COUNT",
+      "021 Assault": "COUNT",
+      "021 Serious assault": "COUNT",
+      "0211 Choking and strangulation": "COUNT",
+      "029 Other acts intended to cause injury": "COUNT",
+      "0291 Stalking & 053 Harassment and threatening behaviour": "COUNT",
+      "0291 Stalking(c)": "COUNT",
+      "03 Sexual assault and related offences(b)": "COUNT",
+      "03 Sexual offences(e)": "COUNT",
+      "04 Harm or endanger persons(f)": "COUNT",
+      "044 Acts that threaten, harass, or control": "COUNT",
+      "049 Other acts that harm or endanger persons": "COUNT",
+      "049 Other dangerous/negligent acts": "COUNT",
+      "05 Abduction/harassment(d)": "COUNT",
+      "10–19 years": "COUNT",
+      "11 Property damage": "COUNT",
+      "121 Property damage": "COUNT",
+      "1411 Breach of restraining order – violence": "COUNT",
+      "1531 Breach of violence order": "COUNT",
+      "20–24 years": "COUNT",
+      "25–29 years": "COUNT",
+      "30–34 years": "COUNT",
+      "35–39 years": "COUNT",
+      "40–44 years": "COUNT",
+      "45–49 years": "COUNT",
+      "50–54 years": "COUNT",
+      "55 years and over": "COUNT",
+      "Females": "COUNT",
+      "Males": "COUNT",
+      "Mean (years)": "MEAN_AGE",
+      "Median (years)": "MEDIAN_AGE",
+      "Total guilty outcome(e)": "COUNT",
+      "Total guilty outcome(g)": "COUNT"
+    },
+    "observation_period": {
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "sentence_statistic": {
+      "Community service / work": "SENTENCE_COMMUNITY_SERVICE_WORK",
+      "Conference or diversion program(b)": "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+      "Custody in a correctional institution": "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+      "Fines": "SENTENCE_FINES",
+      "Fully suspended sentence of imprisonment": "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+      "Good behaviour (incl. bonds)": "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+      "Intensive penalty in the community": "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+      "Moderate penalty in the community": "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+      "Nominal and other penalties": "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+      "Nominal penalty(a)": "SENTENCE_NOMINAL_PENALTY",
+      "Total(a)": "SENTENCE_TOTAL",
+      "Total(a)(c)": "SENTENCE_TOTAL"
+    },
+    "characteristic_group": {
+      "Age": "GROUP_AGE",
+      "Principal FDV offence": "GROUP_PRINCIPAL_FDV_OFFENCE",
+      "Principal FDV offence (ANZSOC 2023)": "GROUP_PRINCIPAL_FDV_OFFENCE_ANZSOC_2023",
+      "Sex": "GROUP_SEX"
+    },
+    "jurisdiction": {
+      "FDV Table 3 Experimental data – Family and domestic violence defendants with a guilty outcome, Summary characteristics by principal sentence, Australia, 2022–23 to 2023–24": "AUSTRALIA",
+      "FDV Table 4 Experimental data – Family and domestic violence defendants with a guilty outcome, Summary characteristics by principal sentence, Australia, 2023–24 to 2024–25": "AUSTRALIA"
+    },
+    "classification_context": {
+      "FDV Table 3 Experimental data – Family and domestic violence defendants with a guilty outcome, Summary characteristics by principal sentence, Australia, 2022–23 to 2023–24": "FDV_EXPERIMENTAL_RELEASE_2023_24",
+      "FDV Table 4 Experimental data – Family and domestic violence defendants with a guilty outcome, Summary characteristics by principal sentence, Australia, 2023–24 to 2024–25": "FDV_EXPERIMENTAL_ANZSOC_2023"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "statistic_basis_id",
+    "sentence_statistic_id",
+    "characteristic_group_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 486,
+    "maximumRows": 520,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 11
+    },
+    "characteristicCategoriesByYear": {
+      "2023": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING",
+        "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_10_19_YEARS",
+        "CHAR_121_PROPERTY_DAMAGE",
+        "CHAR_1531_BREACH_OF_VIOLENCE_ORDER",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ],
+      "2024": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_01_HOMICIDE",
+        "CHAR_0211_CHOKING_AND_STRANGULATION",
+        "CHAR_021_SERIOUS_ASSAULT",
+        "CHAR_02_ASSAULT",
+        "CHAR_03_SEXUAL_OFFENCES",
+        "CHAR_044_ACTS_THAT_THREATEN_HARASS_OR_CONTROL",
+        "CHAR_049_OTHER_ACTS_THAT_HARM_OR_ENDANGER_PERSONS",
+        "CHAR_04_HARM_OR_ENDANGER_PERSONS",
+        "CHAR_10_19_YEARS",
+        "CHAR_11_PROPERTY_DAMAGE",
+        "CHAR_1411_BREACH_OF_RESTRAINING_ORDER_VIOLENCE",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_GUILTY_OUTCOME"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2023": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEDIAN_AGE"
+      ],
+      "2024": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEDIAN_AGE"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2023": [
+        "2023-06-30",
+        "2024-06-30"
+      ],
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "sentenceStatisticsByYear": {
+      "2023": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_AND_OTHER_PENALTIES",
+        "SENTENCE_TOTAL"
+      ],
+      "2024": [
+        "SENTENCE_COMMUNITY_SERVICE_WORK",
+        "SENTENCE_CONFERENCE_OR_DIVERSION_PROGRAM",
+        "SENTENCE_CUSTODY_IN_A_CORRECTIONAL_INSTITUTION",
+        "SENTENCE_FINES",
+        "SENTENCE_FULLY_SUSPENDED_SENTENCE_OF_IMPRISONMENT",
+        "SENTENCE_GOOD_BEHAVIOUR_INCL_BONDS",
+        "SENTENCE_INTENSIVE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_MODERATE_PENALTY_IN_THE_COMMUNITY",
+        "SENTENCE_NOMINAL_PENALTY",
+        "SENTENCE_TOTAL"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2023": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_FDV_OFFENCE",
+        "GROUP_SEX"
+      ],
+      "2024": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_FDV_OFFENCE_ANZSOC_2023",
+        "GROUP_SEX"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2023": [
+        "AUSTRALIA"
+      ],
+      "2024": [
+        "AUSTRALIA"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2023": [
+        "FDV_EXPERIMENTAL_RELEASE_2023_24"
+      ],
+      "2024": [
+        "FDV_EXPERIMENTAL_ANZSOC_2023"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2023": {
+          "2023-06-30": [
+            "R38C2"
+          ]
+        },
+        "2024": {
+          "2024-06-30": [
+            "R38C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2023": 243,
+    "2024": 260
+  },
+  "expectedRecipeDigestsByYear": {
+    "2023": "sha256:8e413cca51067501de2ea3a4b7654f49192dfee1bdac392a339a1b5ac5a8908e",
+    "2024": "sha256:8545307277c337ada14e4d4f6a54f6213d55be99f78c6d1ecaa7711c42ec39be"
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

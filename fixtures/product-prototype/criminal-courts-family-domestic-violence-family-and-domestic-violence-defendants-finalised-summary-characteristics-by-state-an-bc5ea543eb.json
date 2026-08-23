@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-15-source.xlsx",
+      "contentDigest": "sha256:058cdc00df31d87c3137d56b6320abb88b0172995ffb23b35238410c1d3dc028",
+      "byteLength": 179913,
+      "sheet": "FDV Table 5",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb-2024.response.txt",
+        "contentDigest": "sha256:828a07ae0ff90f15589a3865cf17555d18e78839c852fb7b4ccf5cd69bfeefe0",
+        "byteLength": 1111,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

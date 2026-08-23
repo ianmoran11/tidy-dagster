@@ -1,6 +1,6 @@
 {
   "schemaVersion": "tidy.product-prototype-workbook-normalization/v1",
-  "recordedAt": "2026-08-24T09:00:00+00:00",
+  "recordedAt": "2026-08-25T09:00:00+00:00",
   "scriptPath": "scripts/trim-prototype-workbook-formatting.py",
   "scriptDigest": "sha256:489859dad4e38248deedf5713032ec8ab05d6a5d3a90097072a42136c4d25e24",
   "entries": [
@@ -2239,10 +2239,48 @@
         ]
       },
       "normalization": "trim-pathological-styled-blank-cells-v1"
+    },
+    {
+      "year": 2023,
+      "sourcePath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-16-source.xlsx",
+      "sourceDigest": "sha256:65e4e00dc4062415fb33e6716135b5f18751a1b6589ed01af1943542c5b59815",
+      "sourceByteLength": 413928,
+      "outputPath": "fixtures/product-prototype/workbooks/criminal-courts-2023-24-cube-16-normalized.xlsx",
+      "outputDigest": "sha256:52118023aefddf18a8197ea44c2de441050383c083d1505c99a41e0fd2a146fc",
+      "outputByteLength": 252687,
+      "trimmedSheets": [
+        {
+          "sheet": "FDV Table 8",
+          "retainedRange": "A1:L256"
+        },
+        {
+          "sheet": "FDV Table 13",
+          "retainedRange": "A1:K261"
+        }
+      ],
+      "correction": {
+        "id": "criminal-courts-fdv-offence-2023-24-geometry-v1",
+        "reason": "Validate the exact empty far-right Table 8 merge geometry and the full-width Table 13 title merge before format trimming; preserve the legitimate Table 8 A2:L2 title merge and exact source workbook.",
+        "validatedTrim": [
+          {
+            "sheet": "FDV Table 8",
+            "retainedRange": "A1:L256",
+            "removedMergeCount": 4680,
+            "removedMergeDigest": "db11301c90f1ff90c226aaf0daa186375e0926908a3cb70c5939763cde410e26"
+          },
+          {
+            "sheet": "FDV Table 13",
+            "retainedRange": "A1:K261",
+            "removedMergeCount": 1,
+            "removedMergeDigest": "a6b604395e7a58579c5654f026de5ed1507c32b78d5a8480ed738c5444e7fd58"
+          }
+        ]
+      },
+      "normalization": "trim-pathological-full-width-formatting-merge-v1"
     }
   ],
   "inRangeValuesChanged": true,
   "correctionScriptPath": "scripts/correct-known-workbook-artifacts.py",
-  "correctionScriptDigest": "sha256:191f007b9c87efad58777947bb62d0925219f256bcd8c5e61e5b533bf99dd295",
-  "manifestDigest": "sha256:1ab2ba85bfe01c64845401716ec6b6bc114bd2486b41db18ca2563f8945aea8d"
+  "correctionScriptDigest": "sha256:41289ea31101a87e333b1f357730835a6efc860068310be5402ea90eb3f9db2d",
+  "manifestDigest": "sha256:26a278d737a594bb5216623229d5cd959489a190d0daffeda4bb12e2a894ead4"
 }

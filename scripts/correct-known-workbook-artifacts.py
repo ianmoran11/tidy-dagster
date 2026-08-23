@@ -21,7 +21,9 @@ ET.register_namespace("r", DOC_REL)
 # Each correction is accepted only for the exact reviewed source bytes and
 # exact cell identity, style, scalar value, and absence of a formula. The
 # original source workbook remains committed. Replacements additionally bind
-# the shared-string cell type and exact old/new displayed values.
+# the shared-string cell type and exact old/new displayed values. Geometry-only
+# corrections bind exact worksheet XML plus independently reviewed cell,
+# formula, merge, and retained-range facts before the trim script may run.
 CORRECTIONS = {
     "8dc16d0c7ac726e0eb8fc87a707f7616408f8be0cb009508afd6c737b1db692a": {
         "byteLength": 111_807,
@@ -123,6 +125,61 @@ CORRECTIONS = {
             }
         ],
     },
+    "65e4e00dc4062415fb33e6716135b5f18751a1b6589ed01af1943542c5b59815": {
+        "byteLength": 413_928,
+        "id": "criminal-courts-fdv-offence-2023-24-geometry-v1",
+        "reason": (
+            "Validate the exact empty far-right Table 8 merge geometry and the "
+            "full-width Table 13 title merge before format trimming; preserve "
+            "the legitimate Table 8 A2:L2 title merge and exact source workbook."
+        ),
+        "trimGuards": [
+            {
+                "sheet": "FDV Table 8",
+                "retainedRange": "A1:L256",
+                "expectedSheetDigest": (
+                    "5829d8d36d84a76eab3d34f24e5a014aa557bd7438962cba0c9704cf8dc20ca7"
+                ),
+                "expectedDimension": "A1:XFD256",
+                "expectedCellCount": 35_552,
+                "expectedValuedCellCount": 2_040,
+                "expectedFormulaCount": 0,
+                "expectedOutOfRangeCellCount": 32_744,
+                "expectedOutOfRangeValuedCellCount": 0,
+                "expectedMergeCount": 4_697,
+                "expectedRetainedMergeCount": 17,
+                "expectedRetainedMergeDigest": (
+                    "1f48cea330dacb894a04410a6022d24782bbf0e92c402f59861a899412b4a088"
+                ),
+                "expectedRemovedMergeCount": 4_680,
+                "expectedRemovedMergeDigest": (
+                    "db11301c90f1ff90c226aaf0daa186375e0926908a3cb70c5939763cde410e26"
+                ),
+            },
+            {
+                "sheet": "FDV Table 13",
+                "retainedRange": "A1:K261",
+                "expectedSheetDigest": (
+                    "8d60d3553172e8576f599a34617a2143790afbe8dde8a735e416d38e2a9aaf39"
+                ),
+                "expectedDimension": "A1:AT261",
+                "expectedCellCount": 2_896,
+                "expectedValuedCellCount": 2_045,
+                "expectedFormulaCount": 0,
+                "expectedOutOfRangeCellCount": 35,
+                "expectedOutOfRangeValuedCellCount": 0,
+                "expectedMergeCount": 24,
+                "expectedRetainedMergeCount": 23,
+                "expectedRetainedMergeDigest": (
+                    "64640f23d331823d0e705280a5dc685d339bae7ed06ea0dd80a9822b5e821e08"
+                ),
+                "expectedRemovedMergeCount": 1,
+                "expectedRemovedMergeDigest": (
+                    "a6b604395e7a58579c5654f026de5ed1507c32b78d5a8480ed738c5444e7fd58"
+                ),
+            },
+        ],
+    },
 }
 
 
@@ -165,6 +222,83 @@ def cell_in_range(address: str, retained_range: str) -> bool:
     return start_row <= row <= end_row and start_column <= column <= end_column
 
 
+def cell_has_content(cell: ET.Element) -> bool:
+    return any(
+        descendant.tag.rsplit("}", 1)[-1] == "f"
+        or (
+            descendant.tag.rsplit("}", 1)[-1] in {"v", "t"}
+            and descendant.text not in {None, ""}
+        )
+        for descendant in cell.iter()
+    )
+
+
+def merge_is_within(merge: str, retained_range: str) -> bool:
+    addresses = merge.split(":")
+    if len(addresses) not in {1, 2}:
+        raise ValueError(f"Invalid merge range: {merge}")
+    return all(cell_in_range(address, retained_range) for address in addresses)
+
+
+def sequence_digest(values: list[str]) -> str:
+    payload = "\n".join(sorted(values)) + "\n"
+    return hashlib.sha256(payload.encode()).hexdigest()
+
+
+def validate_trim_guard(
+    archive: zipfile.ZipFile,
+    targets: dict[str, str],
+    declaration_id: str,
+    guard: dict[str, object],
+) -> dict[str, object]:
+    sheet = str(guard["sheet"])
+    retained_range = str(guard["retainedRange"])
+    target = targets.get(sheet)
+    if target is None:
+        raise ValueError(f"Workbook is missing {sheet}")
+    sheet_bytes = archive.read(target)
+    root = ET.fromstring(sheet_bytes)
+    dimension = root.find(f"{{{MAIN}}}dimension")
+    cells = root.findall(f".//{{{MAIN}}}c")
+    valued_cells = [cell for cell in cells if cell_has_content(cell)]
+    formulas = root.findall(f".//{{{MAIN}}}f")
+    outside_cells = [
+        cell for cell in cells if not cell_in_range(str(cell.get("r")), retained_range)
+    ]
+    outside_valued_cells = [cell for cell in outside_cells if cell_has_content(cell)]
+    merges = [
+        str(merge.get("ref")) for merge in root.findall(f".//{{{MAIN}}}mergeCell")
+    ]
+    retained_merges = [
+        merge for merge in merges if merge_is_within(merge, retained_range)
+    ]
+    removed_merges = [
+        merge for merge in merges if not merge_is_within(merge, retained_range)
+    ]
+    actual = {
+        "expectedSheetDigest": hashlib.sha256(sheet_bytes).hexdigest(),
+        "expectedDimension": dimension.get("ref") if dimension is not None else None,
+        "expectedCellCount": len(cells),
+        "expectedValuedCellCount": len(valued_cells),
+        "expectedFormulaCount": len(formulas),
+        "expectedOutOfRangeCellCount": len(outside_cells),
+        "expectedOutOfRangeValuedCellCount": len(outside_valued_cells),
+        "expectedMergeCount": len(merges),
+        "expectedRetainedMergeCount": len(retained_merges),
+        "expectedRetainedMergeDigest": sequence_digest(retained_merges),
+        "expectedRemovedMergeCount": len(removed_merges),
+        "expectedRemovedMergeDigest": sequence_digest(removed_merges),
+    }
+    if any(actual[key] != guard.get(key) for key in actual):
+        raise ValueError(f"{sheet} no longer matches {declaration_id} trim guard")
+    return {
+        "sheet": sheet,
+        "retainedRange": retained_range,
+        "removedMergeCount": actual["expectedRemovedMergeCount"],
+        "removedMergeDigest": actual["expectedRemovedMergeDigest"],
+    }
+
+
 def correct(source: Path, output: Path) -> dict[str, object]:
     source_bytes = source.read_bytes()
     source_digest = hashlib.sha256(source_bytes).hexdigest()
@@ -176,6 +310,15 @@ def correct(source: Path, output: Path) -> dict[str, object]:
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(source, "r") as archive:
         targets = sheet_targets(archive)
+        validated_trim = [
+            validate_trim_guard(
+                archive,
+                targets,
+                str(declaration["id"]),
+                guard,
+            )
+            for guard in declaration.get("trimGuards", [])
+        ]
         replacements: dict[str, bytes] = {}
         shared_values: list[str] | None = None
         for artifact in declaration.get("cells", []):
@@ -332,15 +475,20 @@ def correct(source: Path, output: Path) -> dict[str, object]:
                     root, encoding="utf-8", xml_declaration=True
                 )
 
-        with zipfile.ZipFile(output, "w") as destination:
-            for entry in archive.infolist():
-                destination.writestr(
-                    copy.copy(entry),
-                    replacements.get(entry.filename, archive.read(entry.filename)),
-                )
+        if validated_trim and not replacements and not replaced_cells:
+            output.write_bytes(source_bytes)
+        else:
+            with zipfile.ZipFile(output, "w") as destination:
+                for entry in archive.infolist():
+                    destination.writestr(
+                        copy.copy(entry),
+                        replacements.get(entry.filename, archive.read(entry.filename)),
+                    )
     receipt = {"id": declaration["id"], "reason": declaration["reason"]}
     if replaced_cells:
         receipt["replacedCells"] = replaced_cells
+    elif validated_trim:
+        receipt["validatedTrim"] = validated_trim
     else:
         receipt["removedCells"] = [
             {

@@ -31,7 +31,7 @@ EXPECTED_DOWNLOAD_COUNT = 69
 EXPECTED_CUBE_COUNT = 65
 EXPECTED_NUMBERED_COUNT = 430
 EXPECTED_FAMILY_COUNT = 198
-EXPECTED_REGISTERED_COUNT = 374
+EXPECTED_REGISTERED_COUNT = 430
 REGISTERED_FAMILY_IDS = frozenset(
     {
         "criminal-courts-defendants-finalised-summary-by-court-level",
@@ -196,6 +196,37 @@ REGISTERED_FAMILY_IDS = frozenset(
         "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-829327a2a7",
         "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-88e189a36b",
         "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-breach-of-violence-orders-summary-c-8c70b71645",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-australia-a-2b0213845d",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-2e7452beac",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-5011962985",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-05308946c9",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-0fb53f7a10",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3668ca7649",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-388c0b61d8",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3f42f9bedf",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-473ec58d23",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-485304c0e6",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-4fb12fc024",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-65c505b5c4",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-8cbad48526",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-947fbe6da4",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c60814e93a",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c72f15c218",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-dad36f6b4d",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-e13be2cc2f",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-ef51d64efa",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-fde1621019",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-490955c6ce",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-600f50f8e9",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-e06014d131",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-c135720f56",
+        "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1",
     }
 )
 

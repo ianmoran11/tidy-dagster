@@ -355,13 +355,52 @@ Policy v2 binds all 18 exact contract files, 36 recipe pins, workbook/sheet/date
 identities, checks, and replay time `2026-08-24T09:00:00+00:00`. All replay maps
 remain explicitly non-authoritative and training-ineligible.
 
-The sixteen clusters now cover 374 of 430 worksheets and produce 345,914
-canonical observations. This boundary accepts four previously unregistered FDV
-Cube workbook byte identities (2021–22 Cube 15, 2022–23 Cube 16, and the
-2023–24 and 2024–25 Cube 17 workbooks), raising the cross-publication dashboard
-from 75 to 79 physical workbooks. Fifty-six worksheets remain pending reviewed
-contracts: 39 historical FDV-offence sheets, nine 2024 national FDV-offence
-sheets, and eight 2024 state/territory FDV-offence sheets.
+The seventeenth and final cluster accepts all remaining FDV-offence worksheets
+as one indivisible 31-family boundary: 13 sheets from each of 2021–22 Cube 14,
+2022–23 Cube 15, and 2023–24 Cube 16, plus nine national 2024–25 Cube 15 sheets
+and eight state/territory 2024–25 Cube 16 sheets. The semantic families cross
+the physical 39/9/8 inventory split, so partial registration would have broken
+family lifecycle and classification identity.
+
+The cluster retains 76,189 source observations: 67,425 defendant counts, 2,331
+each of mean and median age, and 2,051 each of mean and median duration. It
+preserves 75,320 observed values, 633 exact `na` not-available nulls, 118 exact
+`..` not-applicable nulls, 118 exact `np` suppressed nulls, and 10,152 observed
+numeric zeros. The 53,808 exact source-grounded header warnings are allowed by
+contract. Every complete raw-dimension tuple is unique; no selected cell is a
+formula. All 78 historical metadata formulas (39 in each of 2021–22 and
+2022–23) remain exact source provenance.
+
+Release-specific classification remains explicit. True historical
+principal-offence titles use the FDV ANZSOC 2011 context; the 2023–24 titles
+that make no concordance claim use a neutral 2023–24 release context; and 2024
+ANZSOC 2023, mixed-concorded, and release-specific panels remain distinct. No
+rate, denominator, total, residual, additive identity, or cross-vintage
+equivalence is inferred. Canonical JSON and source provenance preserve exact
+whitespace. CSV follows the existing string `rstrip` projection except that
+`source_sheet` is byte-faithful; 3,484 projected fields across 110 exact raw
+labels exercise that documented distinction.
+
+The only new derivative is 2023–24 Cube 16. Its exact 413,928-byte source
+(`sha256:65e4e00d…9815`) remains immutable. A digest-bound correction receipt
+validates and removes 4,680 empty pathological Table 8 merges outside retained
+`A1:L256` and the one pathological Table 13 `A2:XFD2` merge outside retained
+`A1:K261`; legitimate Table 8 `A2:L2` remains. The 252,687-byte derivative is
+`sha256:52118023…a146fc`, all removed cells are empty and formula-free, and all
+non-target ZIP members remain exact.
+
+All 31 v2 decisions bind exact contract bytes, 56 recipe pins, workbook, sheet,
+reference date, checks, and replay time `2026-08-25T09:00:00+00:00` through the
+explicit date-bound decision identity. Seven-file evidence bundles total 217
+files and reproduce byte-identically with zero providers, retries, exceptions,
+or exclusions; replay maps remain non-authoritative and training-ineligible.
+
+The seventeen clusters now cover all 198 families and 430 of 430 worksheets,
+produce 422,103 Criminal Courts observations, and leave zero pending semantic
+contracts. This final boundary accepts five previously unregistered physical
+workbooks (2021–22 Cube 14, 2022–23 Cube 15, 2023–24 Cube 16, and 2024–25 Cubes
+15 and 16), raising the cross-publication dashboard from 79 to 84 physical
+workbooks.
 
 ## Classification identity
 
@@ -382,7 +421,7 @@ sheets, and eight 2024 state/territory FDV-offence sheets.
 
 Human-authored replay maps are deterministic inputs, not acceptance authority.
 Family-specific contracts independently check exact categories, combinations,
-measures, value statuses, source cells, and warnings. All 374 assets replay with
+measures, value statuses, source cells, and warnings. All 430 assets replay with
 zero provider calls and zero exceptions.
 
 ```sh

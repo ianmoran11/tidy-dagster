@@ -1,0 +1,404 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "contractId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0-v1",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_10_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_TOTAL"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_AGREEMENT_OF_WRONGDOING",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING_BY_COURT",
+            "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sex": [
+            "SEX_FEMALES",
+            "SEX_MALES",
+            "SEX_PERSONS"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2024_25"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 660
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:9e340e89d5280ca0c9119da1bb6a2b28347008c78fecf3ceae0641c78a72bd18"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_AGREEMENT_OF_WRONGDOING",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING_BY_COURT",
+            "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sex": [
+            "SEX_FEMALES",
+            "SEX_MALES",
+            "SEX_PERSONS"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2024_25"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 66
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:e3d48d2b51cb49c20c3c611d5c5653771cda412eb14a8c300a8850ce45e58630"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2024"
+      ],
+      "expectedDimensionsByYear": {
+        "2024": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_AGREEMENT_OF_WRONGDOING",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING_BY_COURT",
+            "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2024-06-30",
+            "2025-06-30"
+          ],
+          "sex": [
+            "SEX_FEMALES",
+            "SEX_MALES",
+            "SEX_PERSONS"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2024_25"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2024": 66
+      },
+      "expectedCombinationDigestsByYear": {
+        "2024": "sha256:c7068d98badcc42873eb372753f52591f7a4f888427ab69dac1b26b1512a727b"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "statistic_basis",
+    "method_of_finalisation",
+    "observation_period",
+    "sex",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "statistic_basis": [
+      "^statistic\\ basis$"
+    ],
+    "method_of_finalisation": [
+      "^method\\ of\\ finalisation$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "sex": [
+      "^sex$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "classification_context": [
+      "^classification\\ context$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "10–19 years": "CHAR_10_19_YEARS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Total(f)": "CHAR_TOTAL"
+    },
+    "statistic_basis": {
+      "10–19 years": "COUNT",
+      "20–24 years": "COUNT",
+      "25–29 years": "COUNT",
+      "30–34 years": "COUNT",
+      "35–39 years": "COUNT",
+      "40–44 years": "COUNT",
+      "45–49 years": "COUNT",
+      "50–54 years": "COUNT",
+      "55 years and over": "COUNT",
+      "Mean (years)": "MEAN_AGE",
+      "Median (years)": "MEDIAN_AGE",
+      "Total(f)": "COUNT"
+    },
+    "method_of_finalisation": {
+      "   Agreement of wrongdoing(a)": "METHOD_AGREEMENT_OF_WRONGDOING",
+      "Acquitted": "METHOD_ACQUITTED",
+      "Agreement of wrongdoing(a)": "METHOD_AGREEMENT_OF_WRONGDOING",
+      "All guilty outcome(b)": "METHOD_ALL_GUILTY_OUTCOME",
+      "Guilty ex-parte": "METHOD_GUILTY_EX_PARTE",
+      "Guilty finding\nby court": "METHOD_GUILTY_FINDING_BY_COURT",
+      "Guilty finding by court": "METHOD_GUILTY_FINDING_BY_COURT",
+      "Guilty plea\nby defendant": "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+      "Guilty plea by defendant": "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+      "Total adjudicated(c)": "METHOD_TOTAL_ADJUDICATED",
+      "Total defendants finalised(e)": "METHOD_TOTAL_DEFENDANTS_FINALISED",
+      "Total non-adjudicated(d)": "METHOD_TOTAL_NON_ADJUDICATED",
+      "Transfer to other court levels": "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "METHOD_WITHDRAWN_BY_PROSECUTION"
+    },
+    "observation_period": {
+      "2023–24": "2024-06-30",
+      "2024–25": "2025-06-30"
+    },
+    "sex": {
+      "Females": "SEX_FEMALES",
+      "Males": "SEX_MALES",
+      "Persons(g)": "SEX_PERSONS"
+    },
+    "jurisdiction": {
+      "FDV Table 3 Experimental data – Family and domestic violence defendants finalised, Sex and age by method of finalisation, Australia, 2023–24 to 2024–25": "AUSTRALIA"
+    },
+    "classification_context": {
+      "FDV Table 3 Experimental data – Family and domestic violence defendants finalised, Sex and age by method of finalisation, Australia, 2023–24 to 2024–25": "FDV_EXPERIMENTAL_RELEASE_2024_25"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "statistic_basis_id",
+    "method_of_finalisation_id",
+    "sex_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 792,
+    "maximumRows": 792,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 12
+    },
+    "characteristicCategoriesByYear": {
+      "2024": [
+        "CHAR_10_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2024": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEDIAN_AGE"
+      ]
+    },
+    "methodsOfFinalisationByYear": {
+      "2024": [
+        "METHOD_ACQUITTED",
+        "METHOD_AGREEMENT_OF_WRONGDOING",
+        "METHOD_ALL_GUILTY_OUTCOME",
+        "METHOD_GUILTY_EX_PARTE",
+        "METHOD_GUILTY_FINDING_BY_COURT",
+        "METHOD_GUILTY_PLEA_BY_DEFENDANT",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TOTAL_DEFENDANTS_FINALISED",
+        "METHOD_TOTAL_NON_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2024": [
+        "2024-06-30",
+        "2025-06-30"
+      ]
+    },
+    "sexesByYear": {
+      "2024": [
+        "SEX_FEMALES",
+        "SEX_MALES",
+        "SEX_PERSONS"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2024": [
+        "AUSTRALIA"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2024": [
+        "FDV_EXPERIMENTAL_RELEASE_2024_25"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2024": {
+          "2024-06-30": [
+            "R48C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2024": 396
+  },
+  "expectedRecipeDigestsByYear": {
+    "2024": "sha256:7b131f29155c1724fb130200104052a153357e41b036b20e33fea1f1962df3a1"
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

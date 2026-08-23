@@ -561,18 +561,90 @@ export function buildRoleAwareSemanticRegionCatalog(
     ...terminalMarkerCandidates.slice(0, availableMarkerSlots),
   ];
 
+  // A marker-only observation row can be omitted from ordinary row projection
+  // even though its exact column-A label is required to interpret the marker.
+  // Add only labels not covered by the retained bounded catalog whose complete
+  // marker span and adjacent anchor geometry recur with identical cell types,
+  // merge state, and style evidence.
+  const retainedKeys = new Set(
+    retainedWithTerminalMarkers.map((candidate) =>
+      [...candidate.segments].sort(compareRanges).join("|"),
+    ),
+  );
+  const coveredDirectLabels = coveredAddressesForRole(
+    retainedWithTerminalMarkers,
+    "direct-row-candidate",
+  );
+  const coveredCascadingRowAnchors = coveredAddressesForRole(
+    retainedWithTerminalMarkers,
+    "cascading-row-candidate",
+  );
+  const markerRowCandidates = deriveCorroboratedMarkerRowDrafts({
+    context,
+    coveredDirectLabels,
+    coveredCascadingRowAnchors,
+    retainedSegmentKeys: retainedKeys,
+    valueByAddress,
+    styleByAddress,
+    dataTypeByAddress,
+    mergeParentByAddress,
+  })
+    .filter(
+      (draft) =>
+        !retainedKeys.has([...draft.segments].sort(compareRanges).join("|")),
+    )
+    .map((draft) => describeCandidate(draft, valueByAddress));
+
+  // An exact published FDV table title can be an ordinary low-priority format
+  // draft that falls just beyond the bounded menu. Promote only that existing
+  // draft: never synthesize title text and never treat the publisher row as a
+  // classification/header anchor.
+  const publishedTitleCandidates = deriveOmittedFdvPublishedTitleDrafts({
+    context,
+    retained: retainedWithTerminalMarkers,
+    valueByAddress,
+    styleByAddress,
+    dataTypeByAddress,
+    mergeParentByAddress,
+  }).map((draft) => describeCandidate(draft, valueByAddress));
+
+  const promotedCandidates = [
+    ...markerRowCandidates,
+    ...publishedTitleCandidates,
+  ].sort((left, right) => compareRanges(left.segments[0], right.segments[0]));
+  let retainedWithPromotions = retainedWithTerminalMarkers;
+  if (promotedCandidates.length > 0) {
+    const appendedTerminalMarkers = retainedWithTerminalMarkers.slice(
+      retained.length,
+    );
+    const promotionSlots = Math.min(
+      promotedCandidates.length,
+      Math.max(0, maxCandidates - appendedTerminalMarkers.length),
+    );
+    const retainedSlots = Math.max(
+      0,
+      maxCandidates - appendedTerminalMarkers.length - promotionSlots,
+    );
+    retainedWithPromotions = [
+      ...retained.slice(0, retainedSlots),
+      ...appendedTerminalMarkers,
+      ...promotedCandidates.slice(0, promotionSlots),
+    ];
+  }
+
   return {
     version: ROLE_AWARE_REGION_CATALOG_VERSION,
     sheet: context.sheet,
-    candidates: retainedWithTerminalMarkers.map((candidate, index) => ({
+    candidates: retainedWithPromotions.map((candidate, index) => ({
       id: `region-${String(index + 1).padStart(3, "0")}`,
       ...candidate,
     })),
     omittedCandidateCount: Math.max(
       0,
       described.length +
-        terminalMarkerCandidates.length -
-        retainedWithTerminalMarkers.length,
+        terminalMarkerCandidates.length +
+        promotedCandidates.length -
+        retainedWithPromotions.length,
     ),
     observationPanelCount: panels.length,
     formatFactCount: options.formattingFacts?.length ?? 0,
@@ -1165,6 +1237,218 @@ function deriveTerminalRepeatedMarkerDrafts({
       kinds: new Set(["terminal-repeated-marker-run"]),
       roleHints: new Set(["observations"]),
       formatSignatures: signatures,
+    });
+  }
+  return drafts;
+}
+
+function deriveCorroboratedMarkerRowDrafts({
+  context,
+  coveredDirectLabels,
+  coveredCascadingRowAnchors,
+  retainedSegmentKeys,
+  valueByAddress,
+  styleByAddress,
+  dataTypeByAddress,
+  mergeParentByAddress,
+}: {
+  context: CompactSemanticContext;
+  coveredDirectLabels: ReadonlySet<string>;
+  coveredCascadingRowAnchors: ReadonlySet<string>;
+  retainedSegmentKeys: ReadonlySet<string>;
+  valueByAddress: ReadonlyMap<string, unknown>;
+  styleByAddress: ReadonlyMap<string, string>;
+  dataTypeByAddress: ReadonlyMap<string, string>;
+  mergeParentByAddress: ReadonlyMap<string, string>;
+}): CandidateDraft[] {
+  type Eligible = {
+    labelAddress: string;
+    labelStyle: string;
+    anchorAddress: string;
+    anchorStyle: string;
+    signature: string;
+  };
+  const eligible: Eligible[] = [];
+  for (let row = 2; row <= context.dimensions.rows; row += 1) {
+    const labelAddress = `R${row}C1`;
+    const label = valueByAddress.get(labelAddress);
+    const labelStyle = styleByAddress.get(labelAddress);
+    const anchorAddress = `R${row - 1}C1`;
+    const anchor = valueByAddress.get(anchorAddress);
+    const anchorStyle = styleByAddress.get(anchorAddress);
+    const labelDataType = dataTypeByAddress.get(labelAddress);
+    const anchorDataType = dataTypeByAddress.get(anchorAddress);
+    if (
+      typeof label !== "string" ||
+      !label.trim() ||
+      isExactRetainedMarker(label) ||
+      isObservationLike(label) ||
+      (labelDataType !== undefined && labelDataType !== "string") ||
+      !labelStyle ||
+      mergeParentByAddress.has(labelAddress) ||
+      typeof anchor !== "string" ||
+      !anchor.trim() ||
+      isExactRetainedMarker(anchor) ||
+      isObservationLike(anchor) ||
+      (anchorDataType !== undefined && anchorDataType !== "string") ||
+      !anchorStyle ||
+      mergeParentByAddress.has(anchorAddress)
+    ) {
+      continue;
+    }
+
+    const markerColumns: number[] = [];
+    let hasOtherNonblank = false;
+    for (let col = 2; col <= context.dimensions.columns; col += 1) {
+      const value = valueByAddress.get(`R${row}C${col}`);
+      if (!isNonblank(value)) continue;
+      if (value === "na") markerColumns.push(col);
+      else hasOtherNonblank = true;
+    }
+    if (
+      hasOtherNonblank ||
+      markerColumns.length < 2 ||
+      markerColumns[0] !== 2 ||
+      markerColumns.some((col, index) => col !== index + 2)
+    ) {
+      continue;
+    }
+    const markerEvidence = markerColumns.map((col) => {
+      const address = `R${row}C${col}`;
+      return {
+        value: valueByAddress.get(address),
+        dataType: dataTypeByAddress.get(address),
+        style: styleByAddress.get(address),
+        merged: mergeParentByAddress.has(address),
+      };
+    });
+    if (
+      markerEvidence.some(
+        (item) =>
+          (item.dataType !== undefined && item.dataType !== "string") ||
+          !item.style ||
+          item.merged === true,
+      )
+    ) {
+      continue;
+    }
+    eligible.push({
+      labelAddress,
+      labelStyle,
+      anchorAddress,
+      anchorStyle,
+      signature: JSON.stringify({
+        label,
+        labelType: labelDataType,
+        labelStyle,
+        labelMerged: mergeParentByAddress.has(labelAddress),
+        anchor,
+        anchorType: anchorDataType,
+        anchorStyle,
+        anchorMerged: mergeParentByAddress.has(anchorAddress),
+        adjacency: 1,
+        markerColumns,
+        markerEvidence,
+      }),
+    });
+  }
+
+  const drafts: CandidateDraft[] = [];
+  for (const group of groupBy(eligible, (item) => item.signature).values()) {
+    if (group.length < 2) continue;
+    const uncoveredLabels = group.filter(
+      (item) => !coveredDirectLabels.has(item.labelAddress),
+    );
+    if (uncoveredLabels.length === 0) continue;
+    const labelSegments = compressAddresses(
+      uncoveredLabels.map((item) => item.labelAddress),
+    );
+    if (retainedSegmentKeys.has(labelSegments.join("|"))) continue;
+    drafts.push({
+      segments: new Set(labelSegments),
+      kinds: new Set(["corroborated-marker-row-label-group"]),
+      roleHints: new Set(["direct-row-candidate"]),
+      formatSignatures: new Set(uncoveredLabels.map((item) => item.labelStyle)),
+    });
+    const uncoveredAnchors = uncoveredLabels.filter(
+      (item) => !coveredCascadingRowAnchors.has(item.anchorAddress),
+    );
+    if (uncoveredAnchors.length > 0) {
+      drafts.push({
+        segments: new Set(
+          compressAddresses(uncoveredAnchors.map((item) => item.anchorAddress)),
+        ),
+        kinds: new Set(["corroborated-marker-row-anchor-group"]),
+        roleHints: new Set(["cascading-row-candidate"]),
+        formatSignatures: new Set(
+          uncoveredAnchors.map((item) => item.anchorStyle),
+        ),
+      });
+    }
+  }
+  return drafts;
+}
+
+function coveredAddressesForRole(
+  candidates: ReadonlyArray<Omit<RoleAwareSemanticRegionCandidate, "id">>,
+  role: GeometricRoleHint,
+): Set<string> {
+  const covered = new Set<string>();
+  for (const candidate of candidates) {
+    if (!candidate.roleHints.includes(role)) continue;
+    for (const segment of candidate.segments) {
+      for (const address of expandRange(segment)) covered.add(address);
+    }
+  }
+  return covered;
+}
+
+function deriveOmittedFdvPublishedTitleDrafts({
+  context,
+  retained,
+  valueByAddress,
+  styleByAddress,
+  dataTypeByAddress,
+  mergeParentByAddress,
+}: {
+  context: CompactSemanticContext;
+  retained: ReadonlyArray<Omit<RoleAwareSemanticRegionCandidate, "id">>;
+  valueByAddress: ReadonlyMap<string, unknown>;
+  styleByAddress: ReadonlyMap<string, string>;
+  dataTypeByAddress: ReadonlyMap<string, string>;
+  mergeParentByAddress: ReadonlyMap<string, string>;
+}): CandidateDraft[] {
+  const sheetMatch = /^FDV Table ([1-9]\d*)$/.exec(context.sheet);
+  if (!sheetMatch) return [];
+  const tableNumber = sheetMatch[1];
+  const exactTitlePattern = new RegExp(
+    `^FDV Table ${tableNumber} – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by court level and by state and territory, \\d{4}–\\d{2} to \\d{4}–\\d{2}$`,
+  );
+  const retainedKeys = new Set(
+    retained.map((candidate) => candidate.segments.join("|")),
+  );
+  const drafts: CandidateDraft[] = [];
+  for (let row = 2; row <= Math.min(6, context.dimensions.rows); row += 1) {
+    const address = `R${row}C1`;
+    const key = cellRange(address);
+    const value = valueByAddress.get(address);
+    const style = styleByAddress.get(address);
+    const dataType = dataTypeByAddress.get(address);
+    if (
+      typeof value !== "string" ||
+      !exactTitlePattern.test(value) ||
+      (dataType !== undefined && dataType !== "string") ||
+      !style ||
+      mergeParentByAddress.has(address) ||
+      retainedKeys.has(key)
+    ) {
+      continue;
+    }
+    drafts.push({
+      segments: new Set([key]),
+      kinds: new Set(["published-fdv-table-title-anchor"]),
+      roleHints: new Set(["cascading-column-candidate"]),
+      formatSignatures: new Set([style]),
     });
   }
   return drafts;

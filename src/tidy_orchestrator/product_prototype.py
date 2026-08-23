@@ -38,6 +38,7 @@ COHORT_SCHEMA = "tidy.product-prototype-cohort/v1"
 ACCEPTANCE_SCHEMA = "tidy.table-family-acceptance/v1"
 ACCEPTANCE_SCHEMA_V2 = "tidy.table-family-acceptance/v2"
 ACCEPTANCE_SCHEMAS = frozenset({ACCEPTANCE_SCHEMA, ACCEPTANCE_SCHEMA_V2})
+V2_REFERENCE_DATE_DECISION_IDENTITY = "v2-reference-date-v1"
 BASE_ACCEPTANCE_CHECK_KEYS = frozenset(
     {
         "interpretation",
@@ -948,6 +949,47 @@ def _prepare_fresh_live_with_ml(
     }
 
 
+def _acceptance_decision_payload(
+    *,
+    contract: dict[str, Any],
+    acceptance_policy_version: str,
+    acceptance_policy_digest: str,
+    year: int,
+    workbook_digest: str,
+    sheet: str,
+    reference_date: str,
+    checks: dict[str, Any],
+    issues: list[dict[str, Any]],
+) -> dict[str, Any]:
+    payload = {
+        "year": year,
+        "workbookDigest": workbook_digest,
+        "sheet": sheet,
+        "checks": checks,
+        "issues": issues,
+        "acceptanceSource": "human-authored-table-family-contract",
+        "historicalReplayIsAuthority": False,
+        "trainingEligibility": False,
+    }
+    if acceptance_policy_version == ACCEPTANCE_SCHEMA_V2:
+        payload.update(
+            {
+                "acceptancePolicyVersion": acceptance_policy_version,
+                "acceptancePolicyDigest": acceptance_policy_digest,
+            }
+        )
+        if (
+            contract.get("decisionIdentityVersion")
+            == V2_REFERENCE_DATE_DECISION_IDENTITY
+        ):
+            payload["referenceDate"] = reference_date
+    # Replay maps are digest-custodied cohort inputs and reproduction inputs, not
+    # acceptance authority. The accepted normalized recipe is the subject; the
+    # source identity, exact contract, optional date, checks, and timestamp bind
+    # the decision without promoting replay-map bytes to policy authority.
+    return payload
+
+
 def _interpret_accept_one(
     *,
     repository: LocalArtifactRepository,
@@ -1043,23 +1085,17 @@ def _interpret_accept_one(
             else prepared.response.content_digest
         )
     )
-    decision_payload = {
-        "year": year,
-        "workbookDigest": prepared.workbook.content_digest,
-        "sheet": entry["sheet"],
-        "checks": checks,
-        "issues": issues,
-        "acceptanceSource": "human-authored-table-family-contract",
-        "historicalReplayIsAuthority": False,
-        "trainingEligibility": False,
-    }
-    if acceptance_policy_version == ACCEPTANCE_SCHEMA_V2:
-        decision_payload.update(
-            {
-                "acceptancePolicyVersion": acceptance_policy_version,
-                "acceptancePolicyDigest": acceptance_policy_digest,
-            }
-        )
+    decision_payload = _acceptance_decision_payload(
+        contract=contract,
+        acceptance_policy_version=acceptance_policy_version,
+        acceptance_policy_digest=acceptance_policy_digest,
+        year=year,
+        workbook_digest=prepared.workbook.content_digest,
+        sheet=entry["sheet"],
+        reference_date=entry["referenceDate"],
+        checks=checks,
+        issues=issues,
+    )
     decision_record = DecisionRecord.create(
         subject_id=subject_id,
         decision_type=decision,
@@ -2171,6 +2207,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "preserveRawValueText",
         "strictAliasMatching",
         "totalValidation",
+        "decisionIdentityVersion",
     }
     dimensions = value.get("requiredDimensions")
     expected = value.get("expected")
@@ -2181,6 +2218,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     reference_dimension = value.get("referenceDateDimension")
     preserve_vintage = value.get("preservePublicationVintage")
     total_validation = value.get("totalValidation", "equations")
+    decision_identity_version = value.get("decisionIdentityVersion")
     preserve_vintage_enabled = preserve_vintage is True
     reference_dimension_enabled = (
         isinstance(reference_dimension, str)
@@ -2211,6 +2249,13 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         or value.get("tableFamilyId") != cohort.get("tableFamilyId")
         or value.get("automaticAcceptance") is not True
         or value.get("trainingEligibility") is not False
+        or (
+            "decisionIdentityVersion" in value
+            and (
+                value.get("schemaVersion") != ACCEPTANCE_SCHEMA_V2
+                or decision_identity_version != V2_REFERENCE_DATE_DECISION_IDENTITY
+            )
+        )
         or (
             "preserveRawValueText" in value
             and value.get("preserveRawValueText") is not True

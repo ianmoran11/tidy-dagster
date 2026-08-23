@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import csv
+import io
 import json
 import re
 import subprocess
@@ -24,6 +26,8 @@ from .product_prototype import (
     BASE_ACCEPTANCE_CHECK_KEYS,
     RUN_SCHEMA,
     ProductPrototypeError,
+    _acceptance_decision_payload,
+    _canonical_csv,
     _validate_cohort,
     _validate_contract,
 )
@@ -357,6 +361,36 @@ def _valid_correction_claim(value: Any) -> bool:
             "insideRetainedRange",
         }
         string_keys = expected_keys - {"insideRetainedRange"}
+    elif set(value) == common | {"validatedTrim"}:
+        trims = value.get("validatedTrim")
+        return (
+            isinstance(trims, list)
+            and bool(trims)
+            and all(
+                isinstance(trim, dict)
+                and set(trim)
+                == {
+                    "sheet",
+                    "retainedRange",
+                    "removedMergeCount",
+                    "removedMergeDigest",
+                }
+                and isinstance(trim.get("sheet"), str)
+                and bool(trim["sheet"])
+                and isinstance(trim.get("retainedRange"), str)
+                and re.fullmatch(
+                    r"[A-Z]+[1-9][0-9]*:[A-Z]+[1-9][0-9]*",
+                    trim["retainedRange"],
+                )
+                is not None
+                and isinstance(trim.get("removedMergeCount"), int)
+                and not isinstance(trim["removedMergeCount"], bool)
+                and trim["removedMergeCount"] > 0
+                and re.fullmatch(r"[0-9a-f]{64}", str(trim.get("removedMergeDigest")))
+                is not None
+                for trim in trims
+            )
+        )
     else:
         return False
     return (
@@ -483,6 +517,13 @@ def verify_batch_normalization(
             raise LargeBatchError("Normalization trimmed-sheet declaration is invalid")
         retained_by_sheet = {item["sheet"]: item["retainedRange"] for item in trimmed}
         if entry["correction"] is not None:
+            validated_trim = entry["correction"].get("validatedTrim")
+            if validated_trim is not None and {
+                (item["sheet"], item["retainedRange"]) for item in validated_trim
+            } != set(retained_by_sheet.items()):
+                raise LargeBatchError(
+                    "Correction validated-trim declaration is invalid"
+                )
             corrected_cells = entry["correction"].get(
                 "removedCells", entry["correction"].get("replacedCells", [])
             )
@@ -656,6 +697,46 @@ def _verify_declared_file(root: Path, entry: Any) -> str:
     ):
         raise LargeBatchError(f"Evidence file digest mismatch: {entry['path']}")
     return entry["path"]
+
+
+def _verify_canonical_csv_projection(
+    csv_bytes: bytes,
+    rows: list[dict[str, Any]],
+    contract: dict[str, Any],
+) -> None:
+    try:
+        actual = list(
+            csv.reader(io.StringIO(csv_bytes.decode("utf-8"), newline=""), strict=True)
+        )
+        expected_header = next(
+            csv.reader(
+                io.StringIO(_canonical_csv([], contract).decode("utf-8"), newline=""),
+                strict=True,
+            )
+        )
+    except (UnicodeDecodeError, csv.Error, StopIteration) as error:
+        raise LargeBatchError("Canonical CSV is not valid UTF-8 CSV") from error
+    if not actual or actual[0] != expected_header:
+        raise LargeBatchError("Canonical CSV field order does not match contract")
+    if len(expected_header) != len(set(expected_header)):
+        raise LargeBatchError("Canonical CSV repeats a field")
+    expected_rows: list[list[str]] = []
+    expected_fields = set(expected_header)
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != expected_fields:
+            raise LargeBatchError("Canonical JSON field set does not match CSV")
+        projected: list[str] = []
+        for field in expected_header:
+            value = row[field]
+            if value is None:
+                projected.append("")
+            elif isinstance(value, str):
+                projected.append(value if field == "source_sheet" else value.rstrip())
+            else:
+                projected.append(str(value))
+        expected_rows.append(projected)
+    if actual[1:] != expected_rows:
+        raise LargeBatchError("Canonical CSV rows do not match JSON projection")
 
 
 def verify_large_batch_evidence(
@@ -947,6 +1028,13 @@ def verify_large_batch_evidence(
             raise LargeBatchError(f"Run does not bind {filename}")
 
     rows = json.loads((root / "canonical-observations.json").read_text())
+    if not isinstance(rows, list):
+        raise LargeBatchError(
+            f"Canonical or collation evidence is invalid: {spec.family_id}"
+        )
+    _verify_canonical_csv_projection(
+        (root / "canonical-observations.csv").read_bytes(), rows, contract
+    )
     exceptions = json.loads((root / "exceptions.json").read_text())
     collation = _load_object(root / "collation-report.json", "collation report")
     clean_fields = (
@@ -1057,18 +1145,17 @@ def verify_large_batch_evidence(
             expected_decision = DecisionRecord.create(
                 subject_id=pinned_recipe_digest,
                 decision_type="prototype_auto_accepted",
-                payload={
-                    "year": workbook["year"],
-                    "workbookDigest": workbook["workbookDigest"],
-                    "sheet": workbook["sheet"],
-                    "checks": workbook["checks"],
-                    "issues": workbook["issues"],
-                    "acceptanceSource": "human-authored-table-family-contract",
-                    "historicalReplayIsAuthority": False,
-                    "trainingEligibility": False,
-                    "acceptancePolicyVersion": policy_version,
-                    "acceptancePolicyDigest": policy_digest,
-                },
+                payload=_acceptance_decision_payload(
+                    contract=contract,
+                    acceptance_policy_version=policy_version,
+                    acceptance_policy_digest=policy_digest,
+                    year=workbook["year"],
+                    workbook_digest=workbook["workbookDigest"],
+                    sheet=workbook["sheet"],
+                    reference_date=workbook["referenceDate"],
+                    checks=workbook["checks"],
+                    issues=workbook["issues"],
+                ),
                 actor="tidy.product-prototype-policy/v1",
                 recorded_at=spec.replay_recorded_at,
             )
@@ -1076,6 +1163,62 @@ def verify_large_batch_evidence(
                 raise LargeBatchError(
                     "V2 acceptance decision does not bind acceptance policy"
                 )
+    return manifest
+
+
+def verify_large_batch_complete_reproduction(
+    project_root: Path,
+    spec: LargeBatchSpec,
+    generated_bundle_root: Path,
+) -> dict[str, Any]:
+    manifest = verify_large_batch_evidence(project_root, spec)
+    evidence_root = _safe_path(
+        project_root.resolve(), spec.evidence_manifest_path, "evidence manifest"
+    ).parent
+    expected_files = {
+        "README.md",
+        "canonical-observations.csv",
+        "canonical-observations.json",
+        "collation-report.json",
+        "exceptions.json",
+        "manifest.json",
+        "run.json",
+    }
+    declared = {item["path"] for item in manifest["files"]}
+    if declared | {"manifest.json"} != expected_files:
+        raise LargeBatchError("Complete evidence declarations are incomplete")
+    if generated_bundle_root.is_symlink() or not generated_bundle_root.is_dir():
+        raise LargeBatchError(
+            "Generated complete reproduction root must be a real directory"
+        )
+    root = generated_bundle_root.resolve()
+    if (
+        root == evidence_root
+        or evidence_root in root.parents
+        or root in evidence_root.parents
+    ):
+        raise LargeBatchError(
+            "Generated complete reproduction root overlaps checked evidence"
+        )
+    actual = {
+        item.relative_to(root).as_posix()
+        for item in root.rglob("*")
+        if item.is_file() or item.is_symlink()
+    }
+    if actual != expected_files:
+        raise LargeBatchError(
+            "Generated complete reproduction has missing or extra files"
+        )
+    for filename in sorted(expected_files):
+        generated = root / filename
+        checked = evidence_root / filename
+        if generated.is_symlink() or not generated.is_file():
+            raise LargeBatchError(f"Generated reproduction is missing: {filename}")
+        if generated.read_bytes() != checked.read_bytes():
+            raise LargeBatchError(
+                "Generated complete reproduction differs from checked evidence: "
+                f"{filename}"
+            )
     return manifest
 
 

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/criminal-courts-2023-24-cube-16-normalized.xlsx",
+      "contentDigest": "sha256:52118023aefddf18a8197ea44c2de441050383c083d1505c99a41e0fd2a146fc",
+      "byteLength": 252687,
+      "sheet": "FDV Table 5",
+      "normalization": "trim-pathological-full-width-formatting-merge-v1",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14-2023.response.txt",
+        "contentDigest": "sha256:727f839c12d8de15ecfed1a2cb0274d04ad7fa7a039758f252da81c731da7bfa",
+        "byteLength": 1143,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/criminal-courts-2024-25-cube-15-source.xlsx",
+      "contentDigest": "sha256:058cdc00df31d87c3137d56b6320abb88b0172995ffb23b35238410c1d3dc028",
+      "byteLength": 179913,
+      "sheet": "FDV Table 9",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14-2024.response.txt",
+        "contentDigest": "sha256:da4b4c9cef8db5fe529f965852036eb6ce1fc0c085d5d62f93b0eb02af7263cd",
+        "byteLength": 1156,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

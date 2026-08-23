@@ -28,10 +28,11 @@ the status snapshot, Dagster assets, and dashboard totals. The provider-free cus
 
 The Criminal Courts release inventory applies the same custody/completeness
 boundary to 69 downloads, 65 substantive cubes, 198 reviewed semantic families,
-and all 430 numbered sheets across 2021–22 through 2024–25. The first 374
-registered assets are split where ANZSOC 2011, preliminary ANZSOC 2023, final
-ANZSOC 2023, and concorded historical identities cannot safely share one alias
-namespace. The remaining 56 sheets stay pending. The preliminary concordance
+and all 430 numbered sheets across 2021–22 through 2024–25. All 430 registered
+assets are split where ANZSOC 2011, preliminary ANZSOC 2023, final ANZSOC 2023,
+concorded historical, and release-specific experimental FDV identities cannot
+safely share one alias namespace. No Criminal Courts sheet remains pending. The
+preliminary concordance
 contract uses the explicit `principal_offence_anzsoc_2011` dimension beside the
 ordinary `principal_offence` dimension so the two principal-offence
 classifications are not collapsed or mislabeled as offence versus charge. The
@@ -51,8 +52,17 @@ ANZSOC 2011 histories. The 36-sheet FDV order-breach cluster likewise keeps nine
 2024–25 restraining-order singletons. It preserves published counts, mean and
 median ages, `na` and `..` typed nulls, era-specific age, outcome, Indigenous
 status, and sentence taxonomies, and the exact ACT title trailing space without
-inferring additive totals. Run `scripts/tidy-criminal-courts-release verify` for
-the provider-free closure.
+inferring additive totals. The final 56-sheet FDV-offence boundary is atomic
+across 31 families and five newly accepted physical workbooks. It contributes
+76,189 rows, retains the source-grounded 2023 release taxonomy separately from
+2024 ANZSOC 2023 and mixed-concorded contexts, preserves all 78 historical
+metadata formulas while selecting zero formulas, and infers no totals, rates,
+denominators, residuals, or cross-vintage equivalence. Its 2023–24 Cube 16
+normalization removes only exact digest-guarded pathological Table 8/Table 13
+merge geometry, retaining `A1:L256`, `A1:K261`, and the legitimate Table 8
+`A2:L2` merge. Frozen evidence preserves JSON and source whitespace exactly;
+CSV applies string `rstrip` except to byte-faithful `source_sheet`. Run
+`scripts/tidy-criminal-courts-release verify` for the provider-free closure.
 
 The completed safe live-evidence closure is at
 `fixtures/product-prototype/live-evidence/manifest.json`. It binds three fresh
@@ -118,14 +128,16 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 503-worksheet cross-publication batch supports acceptance-policy v1 and v2
+The 559-worksheet cross-publication batch supports acceptance-policy v1 and v2
 without weakening existing cohorts. Policy v1 retains its legacy canonical-JSON
 contract digest and behavior unchanged. Policy v2 binds acceptance to the exact
 contract-file digest and recomputes decisions from contract-pinned recipe,
 workbook, check, and replay-timestamp identities. Northern Territory, Australian
-Capital Territory, Tasmania, defendant-rate Cube 12, and FDV order-breach
-cohorts use v2;
-future clusters should use v2.
+Capital Territory, Tasmania, defendant-rate Cube 12, FDV order-breach, and FDV-offence
+cohorts use v2. The 31 FDV-offence contracts additionally opt into
+`decisionIdentityVersion: v2-reference-date-v1`, which includes each exact
+cohort `referenceDate` in decision identity while preserving prior v1/v2
+identities. Future date-sensitive clusters should use this explicit identity.
 
 The shared contract capabilities include:
 
@@ -158,11 +170,12 @@ The shared contract capabilities include:
   the impossible ACT `2022–22` period header with `2021–22`; and removal of the
   FDV Cube 17 far-right duplicate footnote only when its shared-string type and
   value, merge, retained range, and identical retained `A58` duplicate all
-  match. Original source bytes remain committed, and no correction is inferred
+  match; and exact validated-trim receipts for the FDV Cube 16 Table 8/Table 13
+  merge geometry. Original source bytes remain committed, and no correction is inferred
   for unrecognized workbook bytes or cell state.
 
 The batch registry is
-`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 189 cohort
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 220 cohort
 contracts pins exact annual dimensions, measure applicability, value statuses,
 combination counts, and source-header variants. Verification remains
 provider-free:

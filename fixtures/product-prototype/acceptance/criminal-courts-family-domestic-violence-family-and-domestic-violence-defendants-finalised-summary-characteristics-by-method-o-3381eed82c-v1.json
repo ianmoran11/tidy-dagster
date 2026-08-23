@@ -1,0 +1,895 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "contractId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c-v1",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "na": "not_available"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_10_19_YEARS",
+            "CHAR_121_PROPERTY_DAMAGE",
+            "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_FDV_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_10_19_YEARS",
+            "CHAR_121_PROPERTY_DAMAGE",
+            "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_FDV_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING",
+            "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_10_19_YEARS",
+            "CHAR_121_PROPERTY_DAMAGE",
+            "CHAR_1531_BREACH_OF_VIOLENCE_ORDER",
+            "CHAR_20_24_YEARS",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_FEMALES",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_AGREEMENT_OF_WRONGDOING",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_PRINCIPAL_FDV_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2023_24"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 500,
+        "2022": 500,
+        "2023": 550
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:51cc2818a66cddbb096665542454d24078ad5b8077dddb703e139585d64b2a51",
+        "2022": "sha256:22028aa222eab3033265bb00660022a838e2f99097e1802064f10c1ad9668022",
+        "2023": "sha256:7e5830548f0f3dc4f3c812c839dcb55ae52b66b26474c0d4b7d9e86b3f3c4b0b"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "na": "not_available"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_AGREEMENT_OF_WRONGDOING",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2023_24"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 20,
+        "2022": 20,
+        "2023": 22
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:94c302bb7bd33824a4f5852f9b5dda0bda09cdc821caca8b2ccb17fa649a9f10",
+        "2022": "sha256:3f7ae31737a06bed4ecd9e52c3b242cebafa31e15cbdc51dbcda72e31b6823a1",
+        "2023": "sha256:502af1429cdb69c8a195cf39a4b163dd13c865e9bd612c1ebdf46573e46ca708"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {
+        "na": "not_available"
+      },
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "method_of_finalisation": [
+            "METHOD_ACQUITTED",
+            "METHOD_AGREEMENT_OF_WRONGDOING",
+            "METHOD_ALL_GUILTY_OUTCOME",
+            "METHOD_GUILTY_EX_PARTE",
+            "METHOD_GUILTY_FINDING",
+            "METHOD_GUILTY_PLEA",
+            "METHOD_TOTAL_ADJUDICATED",
+            "METHOD_TOTAL_DEFENDANTS_FINALISED",
+            "METHOD_TOTAL_NON_ADJUDICATED",
+            "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "METHOD_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "observation_period": [
+            "2023-06-30",
+            "2024-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "jurisdiction": [
+            "AUSTRALIA"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2023_24"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 20,
+        "2022": 20,
+        "2023": 22
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:345bddcd6b95ee8d821187255952de6694b46432ec51b1dbe1672389353ee8bb",
+        "2022": "sha256:50709d43f074c5fd486b8d76c7c3d04a15449dbde4864954fd37c87d0ac24259",
+        "2023": "sha256:b4206886d8f229a64a82c5a3fd244c2cb5d351e4907bc622ac6b94afa8ac3215"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "statistic_basis",
+    "method_of_finalisation",
+    "observation_period",
+    "characteristic_group",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "statistic_basis": [
+      "^statistic\\ basis$"
+    ],
+    "method_of_finalisation": [
+      "^method\\ of\\ finalisation$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "classification_context": [
+      "^classification\\ context$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      " 0291 Stalking & 053 Harassment and threatening behaviour": "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "01 Homicide and related offences": "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "01 Homicide and related offences(f)": "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "011 Murder": "CHAR_011_MURDER",
+      "012 Attempted murder": "CHAR_012_ATTEMPTED_MURDER",
+      "02 Acts intended to cause injury": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "021 Assault": "CHAR_021_ASSAULT",
+      "029 Other acts intended to cause injury": "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "0291 Stalking": "CHAR_0291_STALKING",
+      "0291 Stalking & 053 Harassment and threatening behaviour": "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "0291 Stalking(g)": "CHAR_0291_STALKING",
+      "03 Sexual assault and related offences": "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "03 Sexual assault and related offences(f)": "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "049 Other dangerous/negligent acts": "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/harassment": "CHAR_05_ABDUCTION_HARASSMENT",
+      "05 Abduction/harassment(h)": "CHAR_05_ABDUCTION_HARASSMENT",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "121 Property damage": "CHAR_121_PROPERTY_DAMAGE",
+      "1531 Breach of violence order": "CHAR_1531_BREACH_OF_VIOLENCE_ORDER",
+      "1531 Breach of violence orders": "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Females": "CHAR_FEMALES",
+      "Males": "CHAR_MALES",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Total finalised": "CHAR_TOTAL_FINALISED",
+      "Total finalised ": "CHAR_TOTAL_FINALISED",
+      "Total finalised(i)": "CHAR_TOTAL_FINALISED"
+    },
+    "statistic_basis": {
+      " 0291 Stalking & 053 Harassment and threatening behaviour": "COUNT",
+      "01 Homicide and related offences": "COUNT",
+      "01 Homicide and related offences(f)": "COUNT",
+      "011 Murder": "COUNT",
+      "012 Attempted murder": "COUNT",
+      "02 Acts intended to cause injury": "COUNT",
+      "021 Assault": "COUNT",
+      "029 Other acts intended to cause injury": "COUNT",
+      "0291 Stalking": "COUNT",
+      "0291 Stalking & 053 Harassment and threatening behaviour": "COUNT",
+      "0291 Stalking(g)": "COUNT",
+      "03 Sexual assault and related offences": "COUNT",
+      "03 Sexual assault and related offences(f)": "COUNT",
+      "049 Other dangerous/negligent acts": "COUNT",
+      "05 Abduction/harassment": "COUNT",
+      "05 Abduction/harassment(h)": "COUNT",
+      "10–19 years": "COUNT",
+      "121 Property damage": "COUNT",
+      "1531 Breach of violence order": "COUNT",
+      "1531 Breach of violence orders": "COUNT",
+      "20–24 years": "COUNT",
+      "25–29 years": "COUNT",
+      "30–34 years": "COUNT",
+      "35–39 years": "COUNT",
+      "40–44 years": "COUNT",
+      "45–49 years": "COUNT",
+      "50–54 years": "COUNT",
+      "55 years and over": "COUNT",
+      "Females": "COUNT",
+      "Males": "COUNT",
+      "Mean (years)": "MEAN_AGE",
+      "Median (years)": "MEDIAN_AGE",
+      "Total finalised": "COUNT",
+      "Total finalised ": "COUNT",
+      "Total finalised(i)": "COUNT"
+    },
+    "method_of_finalisation": {
+      "   Agreement of wrongdoing(a)": "METHOD_AGREEMENT_OF_WRONGDOING",
+      "Acquitted": "METHOD_ACQUITTED",
+      "Agreement of wrongdoing(a)": "METHOD_AGREEMENT_OF_WRONGDOING",
+      "All guilty outcome": "METHOD_ALL_GUILTY_OUTCOME",
+      "All guilty outcome(b)": "METHOD_ALL_GUILTY_OUTCOME",
+      "Guilty ex-parte": "METHOD_GUILTY_EX_PARTE",
+      "Guilty finding": "METHOD_GUILTY_FINDING",
+      "Guilty plea": "METHOD_GUILTY_PLEA",
+      "Total adjudicated": "METHOD_TOTAL_ADJUDICATED",
+      "Total adjudicated(c)": "METHOD_TOTAL_ADJUDICATED",
+      "Total defendants finalised": "METHOD_TOTAL_DEFENDANTS_FINALISED",
+      "Total defendants finalised(e)": "METHOD_TOTAL_DEFENDANTS_FINALISED",
+      "Total non-adjudicated": "METHOD_TOTAL_NON_ADJUDICATED",
+      "Total non-adjudicated ": "METHOD_TOTAL_NON_ADJUDICATED",
+      "Total non-adjudicated(d)": "METHOD_TOTAL_NON_ADJUDICATED",
+      "Transfer to other court levels": "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "METHOD_WITHDRAWN_BY_PROSECUTION"
+    },
+    "observation_period": {
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30",
+      "2023–24": "2024-06-30"
+    },
+    "characteristic_group": {
+      "Age": "GROUP_AGE",
+      "Principal FDV offence": "GROUP_PRINCIPAL_FDV_OFFENCE",
+      "Sex": "GROUP_SEX"
+    },
+    "jurisdiction": {
+      "FDV Table 1 Experimental data – Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia, 2022–23 to 2023–24": "AUSTRALIA",
+      "FDV Table 1 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia, 2020–21 to 2021–22": "AUSTRALIA",
+      "FDV Table 1 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia, 2021–22 to 2022–23": "AUSTRALIA"
+    },
+    "classification_context": {
+      "FDV Table 1 Experimental data – Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia, 2022–23 to 2023–24": "FDV_EXPERIMENTAL_RELEASE_2023_24",
+      "FDV Table 1 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia, 2020–21 to 2021–22": "FDV_EXPERIMENTAL_RELEASE_2021_22",
+      "FDV Table 1 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia, 2021–22 to 2022–23": "FDV_EXPERIMENTAL_RELEASE_2022_23"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "statistic_basis_id",
+    "method_of_finalisation_id",
+    "characteristic_group_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 540,
+    "maximumRows": 594,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 12
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING",
+        "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_10_19_YEARS",
+        "CHAR_121_PROPERTY_DAMAGE",
+        "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED"
+      ],
+      "2022": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING",
+        "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_10_19_YEARS",
+        "CHAR_121_PROPERTY_DAMAGE",
+        "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED"
+      ],
+      "2023": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING",
+        "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "CHAR_029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_10_19_YEARS",
+        "CHAR_121_PROPERTY_DAMAGE",
+        "CHAR_1531_BREACH_OF_VIOLENCE_ORDER",
+        "CHAR_20_24_YEARS",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_FEMALES",
+        "CHAR_MALES",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEDIAN_AGE"
+      ],
+      "2022": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEDIAN_AGE"
+      ],
+      "2023": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEDIAN_AGE"
+      ]
+    },
+    "methodsOfFinalisationByYear": {
+      "2021": [
+        "METHOD_ACQUITTED",
+        "METHOD_ALL_GUILTY_OUTCOME",
+        "METHOD_GUILTY_EX_PARTE",
+        "METHOD_GUILTY_FINDING",
+        "METHOD_GUILTY_PLEA",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TOTAL_DEFENDANTS_FINALISED",
+        "METHOD_TOTAL_NON_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "METHOD_ACQUITTED",
+        "METHOD_ALL_GUILTY_OUTCOME",
+        "METHOD_GUILTY_EX_PARTE",
+        "METHOD_GUILTY_FINDING",
+        "METHOD_GUILTY_PLEA",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TOTAL_DEFENDANTS_FINALISED",
+        "METHOD_TOTAL_NON_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2023": [
+        "METHOD_ACQUITTED",
+        "METHOD_AGREEMENT_OF_WRONGDOING",
+        "METHOD_ALL_GUILTY_OUTCOME",
+        "METHOD_GUILTY_EX_PARTE",
+        "METHOD_GUILTY_FINDING",
+        "METHOD_GUILTY_PLEA",
+        "METHOD_TOTAL_ADJUDICATED",
+        "METHOD_TOTAL_DEFENDANTS_FINALISED",
+        "METHOD_TOTAL_NON_ADJUDICATED",
+        "METHOD_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "METHOD_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2022-06-30",
+        "2023-06-30"
+      ],
+      "2023": [
+        "2023-06-30",
+        "2024-06-30"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_FDV_OFFENCE",
+        "GROUP_SEX"
+      ],
+      "2022": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_FDV_OFFENCE",
+        "GROUP_SEX"
+      ],
+      "2023": [
+        "GROUP_AGE",
+        "GROUP_PRINCIPAL_FDV_OFFENCE",
+        "GROUP_SEX"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIA"
+      ],
+      "2022": [
+        "AUSTRALIA"
+      ],
+      "2023": [
+        "AUSTRALIA"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2021": [
+        "FDV_EXPERIMENTAL_RELEASE_2021_22"
+      ],
+      "2022": [
+        "FDV_EXPERIMENTAL_RELEASE_2022_23"
+      ],
+      "2023": [
+        "FDV_EXPERIMENTAL_RELEASE_2023_24"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "observation_period",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "2021-06-30": [
+            "R39C2"
+          ]
+        },
+        "2022": {
+          "2022-06-30": [
+            "R39C2"
+          ]
+        },
+        "2023": {
+          "2023-06-30": [
+            "R38C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2021": 270,
+    "2022": 270,
+    "2023": 297
+  },
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:003db04f53626cc0b054d7450678f547ec200e5954ab145e74f53b60b8d3d2b1",
+    "2022": "sha256:c79b35dc096b1e17acc5e77a536c965cc20f3da8b0d3e6e625536d6e026195b0",
+    "2023": "sha256:7985af0e24ac2b6b0de8f61661b45e96a07c8d722a84000cf08f117a6bbc6ea6"
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}

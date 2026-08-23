@@ -377,6 +377,209 @@ function multipleTerminalMarkerSheet(
   };
 }
 
+type MarkerRowLabelMutation =
+  | "one-occurrence"
+  | "label"
+  | "label-type"
+  | "label-style"
+  | "label-merge"
+  | "anchor"
+  | "anchor-type"
+  | "anchor-style"
+  | "anchor-merge"
+  | "adjacency"
+  | "span"
+  | "marker-value"
+  | "non-na-marker"
+  | "dotdot-marker"
+  | "marker-type"
+  | "style"
+  | "merge"
+  | "noncontiguous"
+  | "other-value";
+
+function corroboratedMarkerRowLabelSheet(
+  mutation?: MarkerRowLabelMutation,
+): ParsedSheet {
+  const cells: ParsedSheet["cells"] = [];
+  const markerStyle = {
+    horizontalAlign: "right" as const,
+    fillColor: "FFF2CC",
+  };
+  const labelStyle = {
+    fontSize: 12,
+    fontColor: "theme:1",
+    fontIndent: 1,
+    horizontalAlign: "left" as const,
+  };
+  const anchorStyle = { italic: true, horizontalAlign: "left" as const };
+  const add = (
+    row: number,
+    col: number,
+    value: string | number,
+    style?: ParsedSheet["cells"][number]["style"],
+    dataType: "string" | "numeric" = typeof value === "number"
+      ? "numeric"
+      : "string",
+  ) =>
+    cells.push({
+      sheet: "FDV Table 13",
+      address: `R${row}C${col}`,
+      row,
+      col,
+      value,
+      data_type: dataType,
+      ...(style ? { style } : {}),
+    });
+  const addNumericPanel = (row1: number, row2: number) => {
+    for (let row = row1; row <= row2; row += 1) {
+      add(row, 1, `Published category ${row}`);
+      for (let col = 2; col <= 8; col += 1) add(row, col, row * 10 + col);
+    }
+  };
+  const addMarkerBlock = (
+    anchorRow: number,
+    targetRow: number,
+    second: boolean,
+  ) => {
+    const mutated =
+      second || mutation === "non-na-marker" || mutation === "dotdot-marker"
+        ? mutation
+        : undefined;
+    add(
+      mutated === "adjacency" ? anchorRow - 4 : anchorRow,
+      1,
+      mutated === "anchor"
+        ? "Unknown Indigenous status"
+        : "Indigenous status(a)",
+      mutated === "anchor-style"
+        ? { italic: true, horizontalAlign: "right" }
+        : anchorStyle,
+      mutated === "anchor-type" ? "numeric" : "string",
+    );
+    add(
+      targetRow,
+      1,
+      mutated === "label"
+        ? "Aboriginal or Torres Strait Islander"
+        : "Aboriginal and Torres Strait Islander",
+      mutated === "label-style" ? { ...labelStyle, fontIndent: 2 } : labelStyle,
+      mutated === "label-type" ? "numeric" : "string",
+    );
+    const lastMarkerColumn = mutated === "span" ? 5 : 6;
+    for (let col = 2; col <= lastMarkerColumn; col += 1) {
+      if (mutated === "noncontiguous" && col === 4) continue;
+      add(
+        targetRow,
+        col,
+        mutated === "marker-value" || mutated === "non-na-marker"
+          ? "np"
+          : mutated === "dotdot-marker"
+            ? ".."
+            : "na",
+        mutated === "style" && col === 4
+          ? { horizontalAlign: "right", fillColor: "DDEBF7" }
+          : markerStyle,
+        mutated === "marker-type" && col === 4 ? "numeric" : "string",
+      );
+    }
+    if (mutated === "other-value") add(targetRow, 7, 0);
+    add(targetRow + 1, 1, "Non-Indigenous and Not stated", labelStyle);
+    for (let col = 2; col <= 6; col += 1) {
+      add(targetRow + 1, col, "na", markerStyle);
+    }
+  };
+
+  add(1, 1, "Family and domestic violence defendants", { bold: true });
+  addNumericPanel(4, 6);
+  addMarkerBlock(7, 8, false);
+  addNumericPanel(10, 12);
+  if (mutation !== "one-occurrence") {
+    addNumericPanel(15, 17);
+    addMarkerBlock(18, 19, true);
+    addNumericPanel(21, 23);
+  }
+
+  return {
+    name: "FDV Table 13",
+    usedRange: "R1C1:R23C8",
+    rowCount: 23,
+    columnCount: 8,
+    nonEmptyCellCount: cells.length,
+    cells,
+    merges:
+      mutation === "merge"
+        ? [{ parent: "R19C2", range: "R19C2:R19C3" }]
+        : mutation === "label-merge"
+          ? [{ parent: "R19C1", range: "R19C1:R19C1" }]
+          : mutation === "anchor-merge"
+            ? [{ parent: "R18C1", range: "R18C1:R18C1" }]
+            : [],
+  };
+}
+
+type PublishedTitleMutation =
+  | "malformed"
+  | "non-fdv"
+  | "publisher"
+  | "publisher-row"
+  | "wrong-table";
+
+function fdvPublishedTitleSheet(
+  mutation?: PublishedTitleMutation,
+): ParsedSheet {
+  const cells: ParsedSheet["cells"] = [];
+  const sheetName = mutation === "non-fdv" ? "Table 4" : "FDV Table 4";
+  const add = (
+    row: number,
+    col: number,
+    value: string | number,
+    style?: ParsedSheet["cells"][number]["style"],
+  ) =>
+    cells.push({
+      sheet: sheetName,
+      address: `R${row}C${col}`,
+      row,
+      col,
+      value,
+      data_type: typeof value === "number" ? "numeric" : "string",
+      ...(style ? { style } : {}),
+    });
+  if (mutation !== "publisher-row") {
+    add(1, 1, "            Australian Bureau of Statistics", { bold: true });
+  }
+  add(2, 1, "Criminal Courts, Australia", { italic: true });
+  add(3, 1, "Family and domestic violence", { fontSize: 11 });
+  const title =
+    mutation === "malformed"
+      ? "FDV Table 4 - Experimental data - malformed punctuation"
+      : mutation === "publisher"
+        ? "Australian Bureau of Statistics"
+        : mutation === "wrong-table"
+          ? "FDV Table 5 – Experimental data – Wrong table"
+          : "FDV Table 4 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by court level and by state and territory, 2019–20 to 2021–22";
+  add(mutation === "publisher-row" ? 1 : 4, 1, title, {
+    bold: true,
+    fontSize: 16,
+    fontColor: "theme:1",
+  });
+  add(5, 1, "Summary characteristics", { bold: true, fontSize: 12 });
+  add(6, 1, "Court level", { bold: true, fontSize: 13 });
+  for (let row = 10; row <= 15; row += 1) {
+    add(row, 1, `Published category ${row}`);
+    for (let col = 2; col <= 5; col += 1) add(row, col, row * 10 + col);
+  }
+  return {
+    name: sheetName,
+    usedRange: "R1C1:R15C5",
+    rowCount: 15,
+    columnCount: 5,
+    nonEmptyCellCount: cells.length,
+    cells,
+    merges: [],
+  };
+}
+
 function catalogFor(
   sheet: ParsedSheet,
   maxCandidates?: number,
@@ -433,6 +636,167 @@ describe("role-aware semantic region catalog v5", () => {
     );
   });
 
+  it("promotes only the corroborated marker-row labels and anchors at the bounded cap", () => {
+    const sheet = corroboratedMarkerRowLabelSheet();
+    const promotionKinds = new Set([
+      "corroborated-marker-row-label-group",
+      "corroborated-marker-row-anchor-group",
+    ]);
+    const roomy = catalogFor(sheet, 100);
+    const established = roomy.candidates.filter(
+      (entry) => !entry.kinds.some((kind) => promotionKinds.has(kind)),
+    );
+    const bounded = catalogFor(sheet, established.length);
+    const promotedLabel = candidate(
+      bounded,
+      "corroborated-marker-row-label-group",
+    );
+    const promotedAnchor = candidate(
+      bounded,
+      "corroborated-marker-row-anchor-group",
+    );
+    const displaced = established.slice(-2);
+
+    expect(displaced).toEqual([
+      expect.objectContaining({
+        roleHints: ["header-format-candidate"],
+        kinds: expect.arrayContaining(["format-header-group"]),
+      }),
+      expect.objectContaining({
+        roleHints: ["header-format-candidate"],
+        kinds: expect.arrayContaining(["format-header-group"]),
+      }),
+    ]);
+    expect(bounded.candidates).toHaveLength(established.length);
+    expect(bounded.candidates.slice(0, -2)).toEqual(established.slice(0, -2));
+    expect(promotedAnchor).toEqual({
+      id: displaced[0]?.id,
+      segments: ["R7C1:R7C1", "R18C1:R18C1"],
+      kinds: ["corroborated-marker-row-anchor-group"],
+      roleHints: ["cascading-row-candidate"],
+      formatSignatures: ["i|hleft"],
+      formatting: ["italic,horizontal=left"],
+      selectedCellCount: 2,
+      nonblankCount: 2,
+      valueLikeCount: 0,
+      sample: ['R7C1="Indigenous status(a)"', 'R18C1="Indigenous status(a)"'],
+    });
+    expect(promotedLabel).toEqual({
+      id: displaced[1]?.id,
+      segments: ["R8C1:R8C1", "R19C1:R19C1"],
+      kinds: ["corroborated-marker-row-label-group"],
+      roleHints: ["direct-row-candidate"],
+      formatSignatures: ["s12|fctheme:1|in1|hleft"],
+      formatting: ["font-size=12,font-color=theme:1,indent=1,horizontal=left"],
+      selectedCellCount: 2,
+      nonblankCount: 2,
+      valueLikeCount: 0,
+      sample: [
+        'R8C1="Aboriginal and Torres Strait Islander"',
+        'R19C1="Aboriginal and Torres Strait Islander"',
+      ],
+    });
+    for (const kind of promotionKinds) {
+      expect(
+        bounded.candidates.filter((entry) => entry.kinds.includes(kind)),
+      ).toHaveLength(1);
+    }
+  });
+
+  it.each([
+    "one-occurrence",
+    "label",
+    "label-type",
+    "label-style",
+    "label-merge",
+    "anchor",
+    "anchor-type",
+    "anchor-style",
+    "anchor-merge",
+    "adjacency",
+    "span",
+    "marker-value",
+    "non-na-marker",
+    "dotdot-marker",
+    "marker-type",
+    "style",
+    "merge",
+    "noncontiguous",
+    "other-value",
+  ] as const)(
+    "does not promote marker-row labels or anchors when corroboration differs by %s",
+    (mutation) => {
+      const catalog = catalogFor(corroboratedMarkerRowLabelSheet(mutation));
+
+      for (const kind of [
+        "corroborated-marker-row-label-group",
+        "corroborated-marker-row-anchor-group",
+      ]) {
+        expect(
+          catalog.candidates.some((entry) => entry.kinds.includes(kind)),
+        ).toBe(false);
+      }
+    },
+  );
+
+  it("promotes an exact omitted FDV published title without synthesizing or renumbering the retained prefix", () => {
+    const sheet = fdvPublishedTitleSheet();
+    const roomy = catalogFor(sheet, 100);
+    const titleIndex = roomy.candidates.findIndex(
+      (entry) =>
+        entry.segments.join("|") === "R4C1:R4C1" &&
+        entry.sample[0]?.startsWith('R4C1="FDV Table 4 – Experimental data –'),
+    );
+    expect(titleIndex).toBeGreaterThan(0);
+    expect(
+      roomy.candidates.some((entry) =>
+        entry.kinds.includes("published-fdv-table-title-anchor"),
+      ),
+    ).toBe(false);
+
+    const bounded = catalogFor(sheet, titleIndex);
+    const promoted = candidate(bounded, "published-fdv-table-title-anchor");
+    const displaced = roomy.candidates[titleIndex - 1];
+    expect(displaced).toMatchObject({
+      roleHints: ["header-format-candidate"],
+      kinds: expect.arrayContaining(["format-header-group"]),
+    });
+    expect(bounded.candidates).toHaveLength(titleIndex);
+    expect(bounded.candidates.slice(0, -1)).toEqual(
+      roomy.candidates.slice(0, titleIndex - 1),
+    );
+    expect(promoted).toMatchObject({
+      id: displaced.id,
+      segments: ["R4C1:R4C1"],
+      kinds: ["published-fdv-table-title-anchor"],
+      roleHints: ["cascading-column-candidate"],
+      selectedCellCount: 1,
+      nonblankCount: 1,
+      valueLikeCount: 0,
+      sample: [
+        'R4C1="FDV Table 4 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by court level and by state and territory, 2019–20 to 2021–22"',
+      ],
+    });
+  });
+
+  it.each([
+    "malformed",
+    "non-fdv",
+    "publisher",
+    "publisher-row",
+    "wrong-table",
+  ] as const)(
+    "does not promote a malformed, non-FDV, publisher, out-of-bounds, or mismatched title (%s)",
+    (mutation) => {
+      const catalog = catalogFor(fdvPublishedTitleSheet(mutation), 1);
+      expect(
+        catalog.candidates.some((entry) =>
+          entry.kinds.includes("published-fdv-table-title-anchor"),
+        ),
+      ).toBe(false);
+    },
+  );
+
   it.each(["np", "..", "na"] as const)(
     "appends an exact terminal %s run without renumbering established regions",
     (markerValue) => {
@@ -445,6 +809,11 @@ describe("role-aware semantic region catalog v5", () => {
       const catalog = catalogFor(terminalMarkerSheet({ markerValue }));
       const marker = candidate(catalog, "terminal-repeated-marker-run");
 
+      expect(
+        catalog.candidates.some((entry) =>
+          entry.kinds.includes("corroborated-marker-row-label-group"),
+        ),
+      ).toBe(false);
       expect(marker).toMatchObject({
         id: `region-${String(baseline.candidates.length + 1).padStart(3, "0")}`,
         segments: ["R50C2:R51C7"],
@@ -521,6 +890,11 @@ describe("role-aware semantic region catalog v5", () => {
       entry.kinds.includes("terminal-repeated-marker-run"),
     );
 
+    expect(
+      catalog.candidates.some((entry) =>
+        entry.kinds.includes("corroborated-marker-row-label-group"),
+      ),
+    ).toBe(false);
     expect(markers.map((entry) => entry.segments)).toEqual([
       ["R23C2:R24C3"],
       ["R23C5:R24C6"],

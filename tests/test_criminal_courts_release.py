@@ -191,8 +191,8 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         "substantiveCubeCount": 65,
         "numberedDataSheetCount": 430,
         "familyCount": 198,
-        "registeredMemberCount": 374,
-        "pendingSemanticContractCount": 56,
+        "registeredMemberCount": 430,
+        "pendingSemanticContractCount": 0,
         "providerCalls": 0,
         "inventoryDigest": report["inventoryDigest"],
         "membershipDigest": report["membershipDigest"],
@@ -220,19 +220,15 @@ def test_release_verifier_proves_complete_four_release_custody() -> None:
         for sheet in item["sheets"]
     )
     membership = _load(MEMBERSHIP)
-    assert Counter(
-        member["cubeId"]
-        for family in membership["families"]
-        for member in family["members"]
-        if not member["registered"]
-    ) == {
-        "family-and-domestic-violence-offences-experimental-data": 39,
-        "family-and-domestic-violence-offences-australia-experimental-data": 9,
-        (
-            "family-and-domestic-violence-offences-states-and-territories-"
-            "experimental-data"
-        ): 8,
-    }
+    assert (
+        Counter(
+            member["cubeId"]
+            for family in membership["families"]
+            for member in family["members"]
+            if not member["registered"]
+        )
+        == {}
+    )
 
 
 def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
@@ -248,7 +244,7 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
             for family in membership["families"]
             for member in family["members"]
         )
-        == 374
+        == 430
     )
     wa_mixed = next(
         family
@@ -279,6 +275,40 @@ def test_generated_inventory_and_membership_are_byte_reproducible() -> None:
     )
 
 
+def test_fdv_offence_cube_lifecycle_is_registered_as_one_complete_boundary() -> None:
+    membership = _load(MEMBERSHIP)
+    families = [
+        family
+        for family in membership["families"]
+        if family["members"]
+        and all(
+            member["cubeId"].startswith("family-and-domestic-violence-offences")
+            for member in family["members"]
+        )
+    ]
+    assert len(families) == 31
+    members = [member for family in families for member in family["members"]]
+    assert len(members) == 56
+    assert all(member["registered"] is True for member in members)
+    assert Counter(member["releaseId"] for member in members) == {
+        "2021-22": 13,
+        "2022-23": 13,
+        "2023-24": 13,
+        "2024-25": 17,
+    }
+    assert Counter(member["cubeId"] for member in members) == {
+        "family-and-domestic-violence-offences-experimental-data": 39,
+        "family-and-domestic-violence-offences-australia-experimental-data": 9,
+        (
+            "family-and-domestic-violence-offences-states-and-territories-"
+            "experimental-data"
+        ): 8,
+    }
+    assert {member["classificationContext"] for member in members} == {
+        "experimental-fdv-publication-namespace"
+    }
+
+
 def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
     generated = subprocess.run(
         [
@@ -300,7 +330,7 @@ def test_generator_check_and_cli_are_cwd_independent(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    assert json.loads(cli.stdout)["registeredMemberCount"] == 374
+    assert json.loads(cli.stdout)["registeredMemberCount"] == 430
     assert json.loads(cli.stdout)["providerCalls"] == 0
 
     registered_cli = subprocess.run(

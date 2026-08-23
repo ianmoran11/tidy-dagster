@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72",
+  "publicationId": "criminal-courts-australia",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/criminal-courts-2021-22-cube-14-source.xlsx",
+      "contentDigest": "sha256:c715e6c9cd27e52dbf5b7cd5bafd54ea49972649c8f679496e1ccce169c426b4",
+      "byteLength": 341173,
+      "sheet": "FDV Table 2",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72-2021.response.txt",
+        "contentDigest": "sha256:c9789e562436ce43304c671c7a535adaaf90bf7d54cb0955fca68649b3184f43",
+        "byteLength": 1156,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/criminal-courts-2022-23-cube-15-source.xlsx",
+      "contentDigest": "sha256:d68421b80c9d7c2c90184fa22c6951224c036361c378c11d607129bae75ea54e",
+      "byteLength": 406585,
+      "sheet": "FDV Table 2",
+      "replayResponse": {
+        "path": "replay/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72-2022.response.txt",
+        "contentDigest": "sha256:7df3c478021b1cd1bb6bc9ee86b1b93dc33357853555b6c66e910464853fd7f9",
+        "byteLength": 1130,
+        "historicalModel": "human-authored/deterministic-map-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

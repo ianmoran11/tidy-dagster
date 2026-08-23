@@ -1,8 +1,8 @@
 {
   "schemaVersion": "tidy.product-prototype-large-batch-registry/v1",
-  "batchId": "justice-five-hundred-three-worksheets-v1",
-  "recordedAt": "2026-08-24T09:00:00+00:00",
-  "worksheetCount": 503,
+  "batchId": "justice-five-hundred-fifty-nine-worksheets-v1",
+  "recordedAt": "2026-08-25T09:00:00+00:00",
+  "worksheetCount": 559,
   "providerCalls": 0,
   "entries": [
     {
@@ -5478,6 +5478,971 @@
       },
       "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
       "replayRecordedAt": "2026-08-24T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Sex and age by method of finalisation, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-sex-and-age-by-method-of-finalisati-495144b1c0-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_495144b1c0_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_495144b1c0_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-495144b1c0-replay",
+      "expectedYears": [2024],
+      "expectedYearCounts": [792],
+      "expectedCanonicalCount": 792,
+      "expectedMeasureCounts": {
+        "defendant-count": 660,
+        "mean-age": 66,
+        "median-age": 66
+      },
+      "expectedValueStatusCounts": {
+        "observed": 792
+      },
+      "expectedManualReplayYears": [2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-australia-a-2b0213845d",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics, Australia, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-australia-a-2b0213845d.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-australia-a-2b0213845d-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_2b0213845d_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_2b0213845d_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-2b0213845d-replay",
+      "expectedYears": [2024],
+      "expectedYearCounts": [216],
+      "expectedCanonicalCount": 216,
+      "expectedMeasureCounts": {
+        "defendant-count": 192,
+        "mean-age": 6,
+        "mean-duration": 6,
+        "median-age": 6,
+        "median-duration": 6
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 4,
+        "observed": 212
+      },
+      "expectedManualReplayYears": [2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-2e7452beac",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by court level and state and territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-2e7452beac.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-2e7452beac-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_2e7452beac_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_2e7452beac_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-2e7452beac-replay",
+      "expectedYears": [2023],
+      "expectedYearCounts": [6345],
+      "expectedCanonicalCount": 6345,
+      "expectedMeasureCounts": {
+        "defendant-count": 5625,
+        "mean-age": 180,
+        "mean-duration": 180,
+        "median-age": 180,
+        "median-duration": 180
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 50,
+        "not_available": 34,
+        "observed": 6261
+      },
+      "expectedManualReplayYears": [2023],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by court level and by state and territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_6503902682_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_6503902682_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-6503902682-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [3753, 5004],
+      "expectedCanonicalCount": 8757,
+      "expectedMeasureCounts": {
+        "defendant-count": 7749,
+        "mean-age": 288,
+        "mean-duration": 216,
+        "median-age": 288,
+        "median-duration": 216
+      },
+      "expectedValueStatusCounts": {
+        "observed": 8757
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-5011962985",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Indigenous status and by state and territories",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-5011962985.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-5011962985-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_5011962985_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_5011962985_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-5011962985-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [1386, 1980],
+      "expectedCanonicalCount": 3366,
+      "expectedMeasureCounts": {
+        "defendant-count": 2958,
+        "mean-age": 102,
+        "mean-duration": 102,
+        "median-age": 102,
+        "median-duration": 102
+      },
+      "expectedValueStatusCounts": {
+        "observed": 3366
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Indigenous status and by selected states and territories",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-indigeno-b87073df14-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_b87073df14_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_b87073df14_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-b87073df14-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [2988, 1680],
+      "expectedCanonicalCount": 4668,
+      "expectedMeasureCounts": {
+        "defendant-count": 4116,
+        "mean-age": 138,
+        "mean-duration": 138,
+        "median-age": 138,
+        "median-duration": 138
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 8,
+        "not_available": 442,
+        "observed": 4218
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by method of finalisation, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-method-o-3381eed82c-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_3381eed82c_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_3381eed82c_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-3381eed82c-replay",
+      "expectedYears": [2021, 2022, 2023],
+      "expectedYearCounts": [540, 540, 594],
+      "expectedCanonicalCount": 1674,
+      "expectedMeasureCounts": {
+        "defendant-count": 1550,
+        "mean-age": 62,
+        "median-age": 62
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 27,
+        "observed": 1647
+      },
+      "expectedManualReplayYears": [2021, 2022, 2023],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-05308946c9",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-05308946c9.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-05308946c9-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_05308946c9_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_05308946c9_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-05308946c9-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1710, 770],
+      "expectedCanonicalCount": 2480,
+      "expectedMeasureCounts": {
+        "defendant-count": 2192,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2480
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-0fb53f7a10",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, South Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-0fb53f7a10.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-0fb53f7a10-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_0fb53f7a10_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_0fb53f7a10_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-0fb53f7a10-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1810, 836],
+      "expectedCanonicalCount": 2646,
+      "expectedMeasureCounts": {
+        "defendant-count": 2358,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2628,
+        "suppressed": 18
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3668ca7649",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Queensland",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3668ca7649.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3668ca7649-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_3668ca7649_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_3668ca7649_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-3668ca7649-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1800, 814],
+      "expectedCanonicalCount": 2614,
+      "expectedMeasureCounts": {
+        "defendant-count": 2326,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2614
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-388c0b61d8",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Northern Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-388c0b61d8.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-388c0b61d8-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_388c0b61d8_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_388c0b61d8_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-388c0b61d8-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1800, 836],
+      "expectedCanonicalCount": 2636,
+      "expectedMeasureCounts": {
+        "defendant-count": 2348,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 11,
+        "observed": 2621,
+        "suppressed": 4
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3f42f9bedf",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Victoria",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3f42f9bedf.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-3f42f9bedf-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_3f42f9bedf_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_3f42f9bedf_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-3f42f9bedf-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1710, 770],
+      "expectedCanonicalCount": 2480,
+      "expectedMeasureCounts": {
+        "defendant-count": 2192,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2480
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-473ec58d23",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Australian Capital Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-473ec58d23.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-473ec58d23-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_473ec58d23_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_473ec58d23_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-473ec58d23-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [946, 1388],
+      "expectedCanonicalCount": 2334,
+      "expectedMeasureCounts": {
+        "defendant-count": 2070,
+        "mean-age": 67,
+        "mean-duration": 65,
+        "median-age": 67,
+        "median-duration": 65
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2334
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-485304c0e6",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Australian Capital Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-485304c0e6.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-485304c0e6-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_485304c0e6_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_485304c0e6_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-485304c0e6-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1800, 803],
+      "expectedCanonicalCount": 2603,
+      "expectedMeasureCounts": {
+        "defendant-count": 2315,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 40,
+        "observed": 2541,
+        "suppressed": 22
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-4fb12fc024",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Northern Territory",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-4fb12fc024.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-4fb12fc024-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_4fb12fc024_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_4fb12fc024_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-4fb12fc024-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [990, 1438],
+      "expectedCanonicalCount": 2428,
+      "expectedMeasureCounts": {
+        "defendant-count": 2150,
+        "mean-age": 69,
+        "mean-duration": 70,
+        "median-age": 69,
+        "median-duration": 70
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2428
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-65c505b5c4",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-65c505b5c4.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-65c505b5c4-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_65c505b5c4_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_65c505b5c4_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-65c505b5c4-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [540, 676],
+      "expectedCanonicalCount": 1216,
+      "expectedMeasureCounts": {
+        "defendant-count": 1032,
+        "mean-age": 46,
+        "mean-duration": 46,
+        "median-age": 46,
+        "median-duration": 46
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1216
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-70470aec72-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_70470aec72_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_70470aec72_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-70470aec72-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [480, 540],
+      "expectedCanonicalCount": 1020,
+      "expectedMeasureCounts": {
+        "defendant-count": 860,
+        "mean-age": 40,
+        "mean-duration": 40,
+        "median-age": 40,
+        "median-duration": 40
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1020
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-8cbad48526",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Victoria",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-8cbad48526.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-8cbad48526-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_8cbad48526_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_8cbad48526_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-8cbad48526-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [930, 1360],
+      "expectedCanonicalCount": 2290,
+      "expectedMeasureCounts": {
+        "defendant-count": 2010,
+        "mean-age": 70,
+        "mean-duration": 70,
+        "median-age": 70,
+        "median-duration": 70
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2290
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-947fbe6da4",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Tasmania",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-947fbe6da4.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-947fbe6da4-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_947fbe6da4_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_947fbe6da4_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-947fbe6da4-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [946, 1398],
+      "expectedCanonicalCount": 2344,
+      "expectedMeasureCounts": {
+        "defendant-count": 2070,
+        "mean-age": 69,
+        "mean-duration": 68,
+        "median-age": 69,
+        "median-duration": 68
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2344
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c60814e93a",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c60814e93a.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c60814e93a-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_c60814e93a_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_c60814e93a_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-c60814e93a-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [990, 1440],
+      "expectedCanonicalCount": 2430,
+      "expectedMeasureCounts": {
+        "defendant-count": 2150,
+        "mean-age": 70,
+        "mean-duration": 70,
+        "median-age": 70,
+        "median-duration": 70
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2430
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c72f15c218",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Western Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c72f15c218.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-c72f15c218-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_c72f15c218_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_c72f15c218_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-c72f15c218-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [930, 1360],
+      "expectedCanonicalCount": 2290,
+      "expectedMeasureCounts": {
+        "defendant-count": 2010,
+        "mean-age": 70,
+        "mean-duration": 70,
+        "median-age": 70,
+        "median-duration": 70
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2290
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-dad36f6b4d",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, Tasmania",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-dad36f6b4d.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-dad36f6b4d-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_dad36f6b4d_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_dad36f6b4d_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-dad36f6b4d-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1810, 836],
+      "expectedCanonicalCount": 2646,
+      "expectedMeasureCounts": {
+        "defendant-count": 2358,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "not_available": 40,
+        "observed": 2546,
+        "suppressed": 60
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-e13be2cc2f",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by principal FDV offence, New South Wales",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-e13be2cc2f.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-e13be2cc2f-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_e13be2cc2f_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_e13be2cc2f_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-e13be2cc2f-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [1810, 836],
+      "expectedCanonicalCount": 2646,
+      "expectedMeasureCounts": {
+        "defendant-count": 2358,
+        "mean-age": 72,
+        "mean-duration": 72,
+        "median-age": 72,
+        "median-duration": 72
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2646
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-ef51d64efa",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, Queensland",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-ef51d64efa.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-ef51d64efa-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_ef51d64efa_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_ef51d64efa_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-ef51d64efa-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [990, 1440],
+      "expectedCanonicalCount": 2430,
+      "expectedMeasureCounts": {
+        "defendant-count": 2130,
+        "mean-age": 80,
+        "mean-duration": 70,
+        "median-age": 80,
+        "median-duration": 70
+      },
+      "expectedValueStatusCounts": {
+        "observed": 2430
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-fde1621019",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by Principal FDV offence, South Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-fde1621019.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-principa-fde1621019-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_fde1621019_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_fde1621019_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-fde1621019-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [654, 1078],
+      "expectedCanonicalCount": 1732,
+      "expectedMeasureCounts": {
+        "defendant-count": 1540,
+        "mean-age": 48,
+        "mean-duration": 48,
+        "median-age": 48,
+        "median-duration": 48
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1732
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-490955c6ce",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – Magistrates' Court, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-490955c6ce.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-490955c6ce-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_490955c6ce_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_490955c6ce_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-490955c6ce-replay",
+      "expectedYears": [2024],
+      "expectedYearCounts": [1782],
+      "expectedCanonicalCount": 1782,
+      "expectedMeasureCounts": {
+        "defendant-count": 1566,
+        "mean-age": 54,
+        "mean-duration": 54,
+        "median-age": 54,
+        "median-duration": 54
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1782
+      },
+      "expectedManualReplayYears": [2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-600f50f8e9",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – Children's Courts, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-600f50f8e9.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-600f50f8e9-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_600f50f8e9_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_600f50f8e9_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-600f50f8e9-replay",
+      "expectedYears": [2024],
+      "expectedYearCounts": [1944],
+      "expectedCanonicalCount": 1944,
+      "expectedMeasureCounts": {
+        "defendant-count": 1728,
+        "mean-age": 54,
+        "mean-duration": 54,
+        "median-age": 54,
+        "median-duration": 54
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 6,
+        "not_available": 35,
+        "observed": 1903
+      },
+      "expectedManualReplayYears": [2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – All Courts, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-bc5ea543eb-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_bc5ea543eb_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_bc5ea543eb_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-bc5ea543eb-replay",
+      "expectedYears": [2024],
+      "expectedYearCounts": [1782],
+      "expectedCanonicalCount": 1782,
+      "expectedMeasureCounts": {
+        "defendant-count": 1566,
+        "mean-age": 54,
+        "mean-duration": 54,
+        "median-age": 54,
+        "median-duration": 54
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1782
+      },
+      "expectedManualReplayYears": [2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-e06014d131",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants finalised, Summary characteristics by state and territory – Higher Courts, and",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-e06014d131.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-state-an-e06014d131-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_e06014d131_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_e06014d131_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-e06014d131-replay",
+      "expectedYears": [2024],
+      "expectedYearCounts": [1782],
+      "expectedCanonicalCount": 1782,
+      "expectedMeasureCounts": {
+        "defendant-count": 1566,
+        "mean-age": 54,
+        "mean-duration": 54,
+        "median-age": 54,
+        "median-duration": 54
+      },
+      "expectedValueStatusCounts": {
+        "not_applicable": 54,
+        "observed": 1716,
+        "suppressed": 12
+      },
+      "expectedManualReplayYears": [2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-c135720f56",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants with a guilty outcome, Summary characteristics by sentence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-c135720f56.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-c135720f56-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_c135720f56_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_c135720f56_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-c135720f56-replay",
+      "expectedYears": [2021, 2022],
+      "expectedYearCounts": [324, 486],
+      "expectedCanonicalCount": 810,
+      "expectedMeasureCounts": {
+        "defendant-count": 750,
+        "mean-age": 30,
+        "median-age": 30
+      },
+      "expectedValueStatusCounts": {
+        "observed": 810
+      },
+      "expectedManualReplayYears": [2021, 2022],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2021": 0,
+        "2022": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
+    },
+    {
+      "familyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1",
+      "label": "Criminal Courts — FDV offence cube — Family and domestic violence defendants with a guilty outcome, Summary characteristics by principal sentence, Australia",
+      "cohortPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1.json",
+      "evidenceManifestPath": "fixtures/product-prototype/criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-with-a-guilty-outcome-summary-characteristics-d3029e28a1-evidence/manifest.json",
+      "dagsterAsset": "product_prototype_criminal_courts_fdv_offence_d3029e28a1_replay",
+      "dagsterJob": "product_prototype_criminal_courts_fdv_offence_d3029e28a1_replay_job",
+      "outputDirectory": "dagster-criminal-courts-fdv-offence-d3029e28a1-replay",
+      "expectedYears": [2023, 2024],
+      "expectedYearCounts": [486, 520],
+      "expectedCanonicalCount": 1006,
+      "expectedMeasureCounts": {
+        "defendant-count": 930,
+        "mean-age": 38,
+        "median-age": 38
+      },
+      "expectedValueStatusCounts": {
+        "observed": 1004,
+        "suppressed": 2
+      },
+      "expectedManualReplayYears": [2023, 2024],
+      "preservesPublicationVintage": true,
+      "expectedExcludedObservationCount": 0,
+      "expectedExcludedObservationCountsByYear": {
+        "2023": 0,
+        "2024": 0
+      },
+      "acceptancePolicyVersion": "tidy.table-family-acceptance/v2",
+      "replayRecordedAt": "2026-08-25T09:00:00+00:00"
     }
   ],
   "normalizationManifestPath": "fixtures/product-prototype/batch-workbook-normalization-v1.json",

@@ -770,15 +770,16 @@ byte-for-byte. A role-aware catalog extension also preserves exact terminal
 `..`, `na`, and `np` runs after repeated numeric panels only when an earlier
 same-span panel immediately precedes a marker run with an identical style
 vector. Detached, merged, unlabelled, or style-mismatched runs are rejected;
-all 409 previously registered worksheet catalogs remained byte-identical.
+all 503 previously accepted worksheet catalogs remained byte-identical.
 
-The combined registered batch now contains 189 cohorts and 503 worksheets with
-401,931 canonical observations. The dashboard projects three publications, 194
-cohorts, 528 worksheet-assets, and 415,214 canonical observations through 528
-verified CSV routes. The complete New South Wales, Victoria, Queensland, South
-Australia, Western Australia, Northern Territory, Australian Capital Territory,
-Tasmania, defendant-rate, and FDV order-breach Criminal Courts clusters
-contribute 248 worksheets and 170,934 rows while preserving observation
+The combined registered batch now contains 220 cohorts and 559 worksheets with
+478,120 canonical observations. The dashboard projects three publications, 225
+cohorts, 584 worksheet-assets, and 491,403 canonical observations through 584
+verified CSV routes across 84 physical workbooks. The complete New South Wales,
+Victoria, Queensland, South Australia, Western Australia, Northern Territory,
+Australian Capital Territory, Tasmania, defendant-rate, FDV order-breach, and
+FDV-offence Criminal Courts clusters contribute 304 worksheets and 247,123 rows
+while preserving observation
 periods, exact worksheet names, and explicit ANZSOC 2011, ANZSOC 2023, and
 concorded historical classification contexts. The 36-sheet defendant-rate Cube
 12 independently retains 13,743 published counts and 13,743 published rates,
@@ -793,5 +794,16 @@ restraining-order singletons separate. It retains 6,097 counts, 183 mean ages,
 no selected formulas, warnings, providers, exceptions, or inferred totals. Its
 2023 Cube 17 derivative removes only a digest-bound far-right duplicate footnote
 before safe geometry trimming while preserving the identical retained footnote
-and original source bytes. Dagster and the dashboard
-remain replaceable, read-only projections rather than evidence authority.
+and original source bytes. The final FDV-offence cube registers 56 sheets as one
+atomic 31-family cross-workbook boundary and contributes 76,189 rows. It keeps
+2023 release-specific taxonomy separate from 2024 ANZSOC 2023 and mixed
+concordance, preserves 78 non-observation metadata formulas with zero selected
+formulas, and infers no equations. Its sole new normalized derivative retains
+exact Table 8 `A1:L256` and Table 13 `A1:K261` geometry after digest-bound merge
+validation. Date-bound v2 decisions pin exact reference dates; zero-provider
+seven-file evidence preserves JSON/source whitespace and documents CSV string
+`rstrip` except byte-faithful `source_sheet`. The five newly accepted source
+workbook identities raise physical coverage from 79 to 84, Criminal Courts
+reaches 430/430 registered sheets, and pending Criminal Courts contracts become
+zero. Dagster and the dashboard remain replaceable, read-only projections
+rather than evidence authority.

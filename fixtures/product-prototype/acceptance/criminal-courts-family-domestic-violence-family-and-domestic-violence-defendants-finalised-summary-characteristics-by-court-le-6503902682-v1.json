@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "contractId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682-v1",
+  "tableFamilyId": "criminal-courts-family-domestic-violence-family-and-domestic-violence-defendants-finalised-summary-characteristics-by-court-le-6503902682",
+  "measures": [
+    {
+      "id": "defendant-count",
+      "unitId": "person",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "COUNT"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_10_12_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_121_PROPERTY_DAMAGE",
+            "CHAR_13_YEARS",
+            "CHAR_14_YEARS",
+            "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+            "CHAR_15_YEARS",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_18_YEARS",
+            "CHAR_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_20_YEARS_AND_OVER",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_FEMALES",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_FDV_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_011_MURDER",
+            "CHAR_012_ATTEMPTED_MURDER",
+            "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+            "CHAR_021_ASSAULT",
+            "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+            "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+            "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+            "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+            "CHAR_05_ABDUCTION_HARASSMENT",
+            "CHAR_10_12_YEARS",
+            "CHAR_10_19_YEARS",
+            "CHAR_121_PROPERTY_DAMAGE",
+            "CHAR_13_YEARS",
+            "CHAR_14_YEARS",
+            "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+            "CHAR_15_YEARS",
+            "CHAR_16_YEARS",
+            "CHAR_17_YEARS",
+            "CHAR_18_YEARS",
+            "CHAR_19_YEARS",
+            "CHAR_20_24_YEARS",
+            "CHAR_20_YEARS_AND_OVER",
+            "CHAR_25_29_YEARS",
+            "CHAR_30_34_YEARS",
+            "CHAR_35_39_YEARS",
+            "CHAR_40_44_YEARS",
+            "CHAR_45_49_YEARS",
+            "CHAR_50_54_YEARS",
+            "CHAR_55_YEARS_AND_OVER",
+            "CHAR_ACQUITTED",
+            "CHAR_ADJUDICATED_OUTCOMES",
+            "CHAR_FEMALES",
+            "CHAR_GUILTY_EX_PARTE",
+            "CHAR_GUILTY_FINDING_BY_COURT",
+            "CHAR_GUILTY_OUTCOME",
+            "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+            "CHAR_MALES",
+            "CHAR_TOTAL_FINALISED",
+            "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+            "CHAR_WITHDRAWN_BY_PROSECUTION"
+          ],
+          "statistic_basis": [
+            "COUNT"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_METHOD_OF_FINALISATION",
+            "GROUP_PRINCIPAL_FDV_OFFENCE",
+            "GROUP_SEX"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 3321,
+        "2022": 4428
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:888ea44ff40645d4f6a742dc19f8a602cb0d1c4b737074dd539f804e6c8cd018",
+        "2022": "sha256:b66ec7c8606c9e7c46d58c49e320bda2b2a35d7d2e0c217f5e84559e9c30eb7c"
+      }
+    },
+    {
+      "id": "mean-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEAN_AGE"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_DURATION"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 108,
+        "2022": 180
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:beb4a62084e7903b5a94cbe5ba0943802e4385dccb0e082aea3a64a24f339619",
+        "2022": "sha256:b8edbb1d7f9516a5118a5bcb81283b3372472263fa5c127e4891d77d5cc10233"
+      }
+    },
+    {
+      "id": "median-age",
+      "unitId": "year",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_YEARS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_AGE"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_AGE",
+            "GROUP_DURATION"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 108,
+        "2022": 180
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:ef916ad5fe0b7da9da0b328d830d1d34867580fd3810c6d38bc39f6590430b0f",
+        "2022": "sha256:3dd6c6987ab369a691f4047d1743ed89d1d7865bbc6f1f8af99fb87dc29c667c"
+      }
+    },
+    {
+      "id": "mean-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEAN_DURATION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "statistic_basis": [
+            "MEAN_DURATION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEAN_WEEKS"
+          ],
+          "statistic_basis": [
+            "MEAN_DURATION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 108,
+        "2022": 108
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:6c793535eda6a39ab448fb3ea09d617b3d87aea1e857ec799eaac68e3fb3aed7",
+        "2022": "sha256:b80ff28a5159b2dc99d59f35e2b4634469d25619f0756c105fc463c19fcb577b"
+      }
+    },
+    {
+      "id": "median-duration",
+      "unitId": "week",
+      "numeric": true,
+      "minimum": 0,
+      "missingValues": {},
+      "selection": {
+        "conditions": {
+          "statistic_basis": [
+            "MEDIAN_DURATION"
+          ]
+        },
+        "dimensionOverrides": {}
+      },
+      "applicableYears": [
+        "2021",
+        "2022"
+      ],
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_DURATION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "HIGHER_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2021_22"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "CHAR_MEDIAN_WEEKS"
+          ],
+          "statistic_basis": [
+            "MEDIAN_DURATION"
+          ],
+          "court_level": [
+            "ALL_COURTS",
+            "CHILDRENS_COURTS",
+            "MAGISTRATES_COURTS"
+          ],
+          "jurisdiction": [
+            "ACT",
+            "AUSTRALIA",
+            "NSW",
+            "NT",
+            "QLD",
+            "SA",
+            "TAS",
+            "VIC",
+            "WA"
+          ],
+          "observation_period": [
+            "2020-06-30",
+            "2021-06-30",
+            "2022-06-30",
+            "2023-06-30"
+          ],
+          "characteristic_group": [
+            "GROUP_DURATION"
+          ],
+          "classification_context": [
+            "FDV_EXPERIMENTAL_RELEASE_2022_23"
+          ]
+        }
+      },
+      "expectedCombinationCountsByYear": {
+        "2021": 108,
+        "2022": 108
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e41880eefad7575b518b075ee56afadf27d3740bf3c09d4c3bace542440b4c30",
+        "2022": "sha256:00739d5e5361cc1447843a2fcf55e12fbe9f64919e71567f4a74b70bf7010263"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "statistic_basis",
+    "court_level",
+    "jurisdiction",
+    "observation_period",
+    "characteristic_group",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "^characteristic\\ category$"
+    ],
+    "statistic_basis": [
+      "^statistic\\ basis$"
+    ],
+    "court_level": [
+      "^court\\ level$"
+    ],
+    "jurisdiction": [
+      "^jurisdiction$"
+    ],
+    "observation_period": [
+      "^observation\\ period$"
+    ],
+    "characteristic_group": [
+      "^characteristic\\ group$"
+    ],
+    "classification_context": [
+      "^classification\\ context$"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "   Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "   Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "   Guilty finding by court ": "CHAR_GUILTY_FINDING_BY_COURT",
+      "   Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      " 0291 Stalking & 053 Harassment and threatening behaviour": "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "01 Homicide and related offences": "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+      "011 Murder": "CHAR_011_MURDER",
+      "012 Attempted murder": "CHAR_012_ATTEMPTED_MURDER",
+      "02 Acts intended to cause injury": "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+      "021 Assault": "CHAR_021_ASSAULT",
+      "0291 Stalking & 053 Harassment and threatening behaviour": "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+      "03 Sexual assault and related offences": "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+      "049 Other dangerous/negligent acts": "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+      "05 Abduction/harassment": "CHAR_05_ABDUCTION_HARASSMENT",
+      "10–12 years": "CHAR_10_12_YEARS",
+      "10–19 years": "CHAR_10_19_YEARS",
+      "121 Property damage": "CHAR_121_PROPERTY_DAMAGE",
+      "13 years": "CHAR_13_YEARS",
+      "14 years": "CHAR_14_YEARS",
+      "15 years": "CHAR_15_YEARS",
+      "1531 Breach of violence orders": "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+      "16 years": "CHAR_16_YEARS",
+      "17 years": "CHAR_17_YEARS",
+      "18 years": "CHAR_18_YEARS",
+      "19 years": "CHAR_19_YEARS",
+      "20 years and over": "CHAR_20_YEARS_AND_OVER",
+      "20–24 years": "CHAR_20_24_YEARS",
+      "25–29 years": "CHAR_25_29_YEARS",
+      "30–34 years": "CHAR_30_34_YEARS",
+      "35–39 years": "CHAR_35_39_YEARS",
+      "40–44 years": "CHAR_40_44_YEARS",
+      "45–49 years": "CHAR_45_49_YEARS",
+      "50–54 years": "CHAR_50_54_YEARS",
+      "55 years and over": "CHAR_55_YEARS_AND_OVER",
+      "Acquitted": "CHAR_ACQUITTED",
+      "Adjudicated outcomes": "CHAR_ADJUDICATED_OUTCOMES",
+      "Females": "CHAR_FEMALES",
+      "Guilty ex-parte": "CHAR_GUILTY_EX_PARTE",
+      "Guilty finding by court": "CHAR_GUILTY_FINDING_BY_COURT",
+      "Guilty outcome": "CHAR_GUILTY_OUTCOME",
+      "Guilty plea by defendant": "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+      "Males": "CHAR_MALES",
+      "Mean (weeks)": "CHAR_MEAN_WEEKS",
+      "Mean (years)": "CHAR_MEAN_YEARS",
+      "Median (weeks)": "CHAR_MEDIAN_WEEKS",
+      "Median (years)": "CHAR_MEDIAN_YEARS",
+      "Total finalised": "CHAR_TOTAL_FINALISED",
+      "Total finalised ": "CHAR_TOTAL_FINALISED",
+      "Total finalised (excluding transfer to other court levels)": "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Transfer to other court levels": "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+      "Withdrawn by prosecution": "CHAR_WITHDRAWN_BY_PROSECUTION"
+    },
+    "statistic_basis": {
+      "   Guilty ex-parte": "COUNT",
+      "   Guilty finding by court": "COUNT",
+      "   Guilty finding by court ": "COUNT",
+      "   Guilty plea by defendant": "COUNT",
+      " 0291 Stalking & 053 Harassment and threatening behaviour": "COUNT",
+      "01 Homicide and related offences": "COUNT",
+      "011 Murder": "COUNT",
+      "012 Attempted murder": "COUNT",
+      "02 Acts intended to cause injury": "COUNT",
+      "021 Assault": "COUNT",
+      "0291 Stalking & 053 Harassment and threatening behaviour": "COUNT",
+      "03 Sexual assault and related offences": "COUNT",
+      "049 Other dangerous/negligent acts": "COUNT",
+      "05 Abduction/harassment": "COUNT",
+      "10–12 years": "COUNT",
+      "10–19 years": "COUNT",
+      "121 Property damage": "COUNT",
+      "13 years": "COUNT",
+      "14 years": "COUNT",
+      "15 years": "COUNT",
+      "1531 Breach of violence orders": "COUNT",
+      "16 years": "COUNT",
+      "17 years": "COUNT",
+      "18 years": "COUNT",
+      "19 years": "COUNT",
+      "20 years and over": "COUNT",
+      "20–24 years": "COUNT",
+      "25–29 years": "COUNT",
+      "30–34 years": "COUNT",
+      "35–39 years": "COUNT",
+      "40–44 years": "COUNT",
+      "45–49 years": "COUNT",
+      "50–54 years": "COUNT",
+      "55 years and over": "COUNT",
+      "Acquitted": "COUNT",
+      "Adjudicated outcomes": "COUNT",
+      "Females": "COUNT",
+      "Guilty ex-parte": "COUNT",
+      "Guilty finding by court": "COUNT",
+      "Guilty outcome": "COUNT",
+      "Guilty plea by defendant": "COUNT",
+      "Males": "COUNT",
+      "Mean (weeks)": "MEAN_DURATION",
+      "Mean (years)": "MEAN_AGE",
+      "Median (weeks)": "MEDIAN_DURATION",
+      "Median (years)": "MEDIAN_AGE",
+      "Total finalised": "COUNT",
+      "Total finalised ": "COUNT",
+      "Total finalised (excluding transfer to other court levels)": "COUNT",
+      "Transfer to other court levels": "COUNT",
+      "Withdrawn by prosecution": "COUNT"
+    },
+    "court_level": {
+      "All Courts": "ALL_COURTS",
+      "Children's Courts": "CHILDRENS_COURTS",
+      "Higher Courts": "HIGHER_COURTS",
+      "Magistrates' Court": "MAGISTRATES_COURTS"
+    },
+    "jurisdiction": {
+      "ACT": "ACT",
+      "Aust.": "AUSTRALIA",
+      "NSW": "NSW",
+      "NT": "NT",
+      "Qld": "QLD",
+      "SA": "SA",
+      "Tas.": "TAS",
+      "Vic.": "VIC",
+      "WA": "WA"
+    },
+    "observation_period": {
+      "2019–20": "2020-06-30",
+      "2020–21": "2021-06-30",
+      "2021–22": "2022-06-30",
+      "2022–23": "2023-06-30"
+    },
+    "characteristic_group": {
+      "Age": "GROUP_AGE",
+      "Duration": "GROUP_DURATION",
+      "Method of finalisation": "GROUP_METHOD_OF_FINALISATION",
+      "Principal FDV offence": "GROUP_PRINCIPAL_FDV_OFFENCE",
+      "Sex": "GROUP_SEX"
+    },
+    "classification_context": {
+      "FDV Table 4 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by court level and by state and territory, 2019–20 to 2021–22": "FDV_EXPERIMENTAL_RELEASE_2021_22",
+      "FDV Table 4 – Experimental data – Family and domestic violence defendants finalised, Summary characteristics by court level and by state and territory, 2019–20 to 2022–23": "FDV_EXPERIMENTAL_RELEASE_2022_23"
+    }
+  },
+  "strictAliasMatching": true,
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "statistic_basis_id",
+    "court_level_id",
+    "jurisdiction_id",
+    "characteristic_group_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 3753,
+    "maximumRows": 5004,
+    "sourceColumns": {
+      "minimum": 2,
+      "maximum": 37
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_10_12_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_121_PROPERTY_DAMAGE",
+        "CHAR_13_YEARS",
+        "CHAR_14_YEARS",
+        "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+        "CHAR_15_YEARS",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_18_YEARS",
+        "CHAR_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_20_YEARS_AND_OVER",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_FEMALES",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ],
+      "2022": [
+        "CHAR_011_MURDER",
+        "CHAR_012_ATTEMPTED_MURDER",
+        "CHAR_01_HOMICIDE_AND_RELATED_OFFENCES",
+        "CHAR_021_ASSAULT",
+        "CHAR_0291_STALKING_AND_053_HARASSMENT_AND_THREATENING_BEHAVIOUR",
+        "CHAR_02_ACTS_INTENDED_TO_CAUSE_INJURY",
+        "CHAR_03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES",
+        "CHAR_049_OTHER_DANGEROUS_NEGLIGENT_ACTS",
+        "CHAR_05_ABDUCTION_HARASSMENT",
+        "CHAR_10_12_YEARS",
+        "CHAR_10_19_YEARS",
+        "CHAR_121_PROPERTY_DAMAGE",
+        "CHAR_13_YEARS",
+        "CHAR_14_YEARS",
+        "CHAR_1531_BREACH_OF_VIOLENCE_ORDERS",
+        "CHAR_15_YEARS",
+        "CHAR_16_YEARS",
+        "CHAR_17_YEARS",
+        "CHAR_18_YEARS",
+        "CHAR_19_YEARS",
+        "CHAR_20_24_YEARS",
+        "CHAR_20_YEARS_AND_OVER",
+        "CHAR_25_29_YEARS",
+        "CHAR_30_34_YEARS",
+        "CHAR_35_39_YEARS",
+        "CHAR_40_44_YEARS",
+        "CHAR_45_49_YEARS",
+        "CHAR_50_54_YEARS",
+        "CHAR_55_YEARS_AND_OVER",
+        "CHAR_ACQUITTED",
+        "CHAR_ADJUDICATED_OUTCOMES",
+        "CHAR_FEMALES",
+        "CHAR_GUILTY_EX_PARTE",
+        "CHAR_GUILTY_FINDING_BY_COURT",
+        "CHAR_GUILTY_OUTCOME",
+        "CHAR_GUILTY_PLEA_BY_DEFENDANT",
+        "CHAR_MALES",
+        "CHAR_MEAN_WEEKS",
+        "CHAR_MEAN_YEARS",
+        "CHAR_MEDIAN_WEEKS",
+        "CHAR_MEDIAN_YEARS",
+        "CHAR_TOTAL_FINALISED",
+        "CHAR_TOTAL_FINALISED_EXCLUDING_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_TRANSFER_TO_OTHER_COURT_LEVELS",
+        "CHAR_WITHDRAWN_BY_PROSECUTION"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEAN_DURATION",
+        "MEDIAN_AGE",
+        "MEDIAN_DURATION"
+      ],
+      "2022": [
+        "COUNT",
+        "MEAN_AGE",
+        "MEAN_DURATION",
+        "MEDIAN_AGE",
+        "MEDIAN_DURATION"
+      ]
+    },
+    "courtLevelsByYear": {
+      "2021": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ],
+      "2022": [
+        "ALL_COURTS",
+        "CHILDRENS_COURTS",
+        "HIGHER_COURTS",
+        "MAGISTRATES_COURTS"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT",
+        "AUSTRALIA",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ],
+      "2022": [
+        "ACT",
+        "AUSTRALIA",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30"
+      ],
+      "2022": [
+        "2020-06-30",
+        "2021-06-30",
+        "2022-06-30",
+        "2023-06-30"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_FDV_OFFENCE",
+        "GROUP_SEX"
+      ],
+      "2022": [
+        "GROUP_AGE",
+        "GROUP_DURATION",
+        "GROUP_METHOD_OF_FINALISATION",
+        "GROUP_PRINCIPAL_FDV_OFFENCE",
+        "GROUP_SEX"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2021": [
+        "FDV_EXPERIMENTAL_RELEASE_2021_22"
+      ],
+      "2022": [
+        "FDV_EXPERIMENTAL_RELEASE_2022_23"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [
+    {
+      "code": "AMBIGUOUS_HEADER",
+      "dimension": "court_level",
+      "requireCanonicalOutputEquivalence": true,
+      "expectedHeaderSourcesByYear": {
+        "2021": {
+          "CHILDRENS_COURTS": [
+            "R145C2"
+          ],
+          "HIGHER_COURTS": [
+            "R53C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R99C2"
+          ]
+        },
+        "2022": {
+          "CHILDRENS_COURTS": [
+            "R145C2"
+          ],
+          "HIGHER_COURTS": [
+            "R53C2"
+          ],
+          "MAGISTRATES_COURTS": [
+            "R99C2"
+          ]
+        }
+      }
+    }
+  ],
+  "expectedWarningCountsByYear": {
+    "2021": 2781,
+    "2022": 3708
+  },
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:34201197f32b19421a1c11402dce9dde5fd805079f75e2283d785e07b8456a81",
+    "2022": "sha256:167ae5c61f9d19152ab3420238495046ada1cac4f2f6ec8f22ff1e95ee2d18e2"
+  },
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true,
+  "referenceDateDimension": "observation_period"
+}
