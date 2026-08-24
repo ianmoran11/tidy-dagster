@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-national-unsentenced-indigenous-charge-by-time-on-remand",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "national-unsentenced-indigenous-charge-by-time-on-remand",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-national-unsentenced-indigenous-charge-by-time-on-remand-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-national-source.xlsx",
+      "contentDigest": "sha256:264b018d9ab5584ebc44774cf349283c072b0eb1304a0b865dadffe40d5d2d7a",
+      "byteLength": 195239,
+      "sheet": "Table_13",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-13-2021.response.txt",
+        "contentDigest": "sha256:3655b50ff32387bdc3afeb8dbefee8f13d7782537ef41a3a5f9184c77ddc2c4e",
+        "byteLength": 520,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-national-source.xlsx",
+      "contentDigest": "sha256:0b6f14ccf90fded702181e26e023262afbb01016986c630e8bf27648fd7828be",
+      "byteLength": 212754,
+      "sheet": "Table_13",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-13-2022.response.txt",
+        "contentDigest": "sha256:b95bcc21ec68d92e08c88838997b9c93151f17c7c0ef5ae0acd856356f24c88e",
+        "byteLength": 520,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-national-source.xlsx",
+      "contentDigest": "sha256:6e640bf65399eaa405e48acda86be9403bc2b8196ff2ccd926906a2e76527e2b",
+      "byteLength": 209379,
+      "sheet": "Table_13",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-13-2023.response.txt",
+        "contentDigest": "sha256:9e1d8ae2e286c31317333d6292e18e2067eb8db411007a7e1a890d9746cbea62",
+        "byteLength": 520,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024-national-source.xlsx",
+      "contentDigest": "sha256:23f0677e705e9bf88bf4cffed42d1f263772dd38bd2409d2a000d1f9fc79667e",
+      "byteLength": 180975,
+      "sheet": "Table 13",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-13-2024.response.txt",
+        "contentDigest": "sha256:f53fe8b4a55a352e631579063f28d29541cfe21af239c39f19d8e0184163458f",
+        "byteLength": 546,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-national-remaining-bounded.xlsx",
+      "contentDigest": "sha256:fea82708f82cef5e8d58b44edc16e56158f9416755d69336e36c6ce03cb95a93",
+      "byteLength": 115014,
+      "sheet": "Table 14",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-14-2025.response.txt",
+        "contentDigest": "sha256:edc15db22f60ad2a83abb4b3dac8f8b0a7e8b114e5d3ae8f1f4a2a4f35846db1",
+        "byteLength": 546,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-full-width-formatting-merge-v1"
+    }
+  ]
+}

@@ -772,10 +772,13 @@ same-span panel immediately precedes a marker run with an identical style
 vector. Detached, merged, unlabelled, or style-mismatched runs are rejected;
 all 503 previously accepted worksheet catalogs remained byte-identical.
 
-The combined registered batch now contains 220 cohorts and 559 worksheets with
-478,120 canonical observations. The dashboard projects three publications, 225
-cohorts, 584 worksheet-assets, and 491,403 canonical observations through 584
-verified CSV routes across 84 physical workbooks. The complete New South Wales,
+The combined registered batch now contains 241 cohorts and 628 worksheets with
+512,957 canonical observations. The dashboard projects three publications, 246
+cohorts, 653 worksheet-assets, and 526,240 canonical observations through 653
+verified CSV routes across 91 physical workbooks. Prisoners in Australia is
+complete at 48 cohorts, 203/203 worksheets, and 82,869 observations; the final
+21-family atomic boundary contributes 69 worksheets and 34,837 rows with zero
+providers, warnings, issues, exclusions, or exceptions. The complete New South Wales,
 Victoria, Queensland, South Australia, Western Australia, Northern Territory,
 Australian Capital Territory, Tasmania, defendant-rate, FDV order-breach, and
 FDV-offence Criminal Courts clusters contribute 304 worksheets and 247,123 rows

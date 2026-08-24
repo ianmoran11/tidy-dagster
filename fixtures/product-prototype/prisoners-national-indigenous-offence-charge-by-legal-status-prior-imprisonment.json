@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-national-indigenous-offence-charge-by-legal-status-prior-imprisonment",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "national-indigenous-offence-charge-by-legal-status-prior-imprisonment",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-national-indigenous-offence-charge-by-legal-status-prior-imprisonment-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-national-source.xlsx",
+      "contentDigest": "sha256:264b018d9ab5584ebc44774cf349283c072b0eb1304a0b865dadffe40d5d2d7a",
+      "byteLength": 195239,
+      "sheet": "Table_9",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-9-2021.response.txt",
+        "contentDigest": "sha256:d2a6b272eef30e642e5e2ee27554d1e54405b855ab2b83948f1a719aa0e9dd36",
+        "byteLength": 659,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-national-source.xlsx",
+      "contentDigest": "sha256:0b6f14ccf90fded702181e26e023262afbb01016986c630e8bf27648fd7828be",
+      "byteLength": 212754,
+      "sheet": "Table_9",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-9-2022.response.txt",
+        "contentDigest": "sha256:c4dc1f60f7082053fafbd08c6684a929c71c2c541d88fe219d9b853536b88bcb",
+        "byteLength": 659,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-national-source.xlsx",
+      "contentDigest": "sha256:6e640bf65399eaa405e48acda86be9403bc2b8196ff2ccd926906a2e76527e2b",
+      "byteLength": 209379,
+      "sheet": "Table_9",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-9-2023.response.txt",
+        "contentDigest": "sha256:dd6501529310643488f51c4b981ac54d4c755077f9cbb6c68923f1cfde86527f",
+        "byteLength": 659,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024-national-source.xlsx",
+      "contentDigest": "sha256:23f0677e705e9bf88bf4cffed42d1f263772dd38bd2409d2a000d1f9fc79667e",
+      "byteLength": 180975,
+      "sheet": "Table 9",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-9-2024.response.txt",
+        "contentDigest": "sha256:6d4a3c3905ddea1505ce1e1081bfb7aa709e6c64cb8319a8bea596782816f5dd",
+        "byteLength": 659,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-national-remaining-bounded.xlsx",
+      "contentDigest": "sha256:fea82708f82cef5e8d58b44edc16e56158f9416755d69336e36c6ce03cb95a93",
+      "byteLength": 115014,
+      "sheet": "Table 10",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-10-2025.response.txt",
+        "contentDigest": "sha256:ac74f3b9e6fb887cf0f906805e107f26f4f801bb36dc76b5903fb77fd498436e",
+        "byteLength": 659,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-full-width-formatting-merge-v1"
+    }
+  ]
+}

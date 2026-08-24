@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-state-indigenous-sex-prisoner-count-time-series",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "state-indigenous-sex-prisoner-count-time-series",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-state-indigenous-sex-prisoner-count-time-series-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-indigenous-sex-series-source.xlsx",
+      "contentDigest": "sha256:fed7b3fdf9480058893f0219939a32c50b1bed552987506f2efaa4aaa564fb38",
+      "byteLength": 123290,
+      "sheet": "Table_40",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-indigenous-sex-series-40-2021.response.txt",
+        "contentDigest": "sha256:31bd37ca47f5728fb3fd81b198df7b594b32b3215440ce1f264770019e231cfc",
+        "byteLength": 577,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ],
+  "workerLimits": {
+    "maxWarnings": 100000
+  }
+}

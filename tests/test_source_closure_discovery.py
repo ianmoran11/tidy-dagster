@@ -52,6 +52,15 @@ CHECKED_REPLAY = (
     PROJECT / "fixtures/source-closure/summary-prompt-closure-v1.replay.json"
 )
 FROZEN_AT = "2026-08-11T01:00:00Z"
+CURRENT_MANIFEST_DIGEST = (
+    "sha256:71535242ef44cb3a486c4fef7f1493b4e838b89a7d947b3a13a8ad0734f89a3d"
+)
+HISTORICAL_COPY_MANIFEST_DIGEST = (
+    "sha256:3ac83cc30cedc9edcf2f68b31c51297a914c755e117ee2b3887f5c90abd7de17"
+)
+HISTORICAL_COPY_COMMIT_DIGEST = (
+    "sha256:579ca12438a6a0a89bbf54fdbb7d9c2b4f506db9c98a5f65e9d8697192e92799"
+)
 
 
 def _git(root: Path, *arguments: str) -> str:
@@ -410,9 +419,7 @@ def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> 
     validator_for(review_schema).check_schema(review_schema)
     validator_for(review_schema)(review_schema).validate(review)
 
-    assert canonical_manifest_digest(manifest) == (
-        "sha256:3ac83cc30cedc9edcf2f68b31c51297a914c755e117ee2b3887f5c90abd7de17"
-    )
+    assert canonical_manifest_digest(manifest) == CURRENT_MANIFEST_DIGEST
     assert manifest["totals"] == {
         "sourceCount": 2,
         "itemCount": 140,
@@ -449,10 +456,11 @@ def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> 
     )
     validator_for(copy_schema).check_schema(copy_schema)
     validator_for(copy_schema)(copy_schema).validate(copied)
-    assert copied["closureManifestDigest"] == manifest["manifestDigest"]
-    assert copied["commitDigest"] == (
-        "sha256:579ca12438a6a0a89bbf54fdbb7d9c2b4f506db9c98a5f65e9d8697192e92799"
-    )
+    # The copied custody bundle is immutable historical evidence. Refreshing
+    # the no-copy discovery producer binding must not rewrite that executed
+    # copy/replay lineage or pretend it was produced by the current checker.
+    assert copied["closureManifestDigest"] == HISTORICAL_COPY_MANIFEST_DIGEST
+    assert copied["commitDigest"] == HISTORICAL_COPY_COMMIT_DIGEST
     assert copied["runtimeAuthorized"] is False
     assert copied["parityEstablished"] is False
 
@@ -469,8 +477,8 @@ def test_checked_in_real_discovery_and_self_review_are_internally_verified() -> 
     assert replay_identity == domain_digest(
         "tidy.source-closure-replay/v1", replay_semantic
     )
-    assert replay["closureManifestDigest"] == manifest["manifestDigest"]
-    assert replay["copyCommitDigest"] == copied["commitDigest"]
+    assert replay["closureManifestDigest"] == HISTORICAL_COPY_MANIFEST_DIGEST
+    assert replay["copyCommitDigest"] == HISTORICAL_COPY_COMMIT_DIGEST
     assert replay["testFileCount"] == 13
     assert replay["testCount"] == replay["passedTestCount"] == 117
     assert replay["failedTestCount"] == replay["skippedTestCount"] == 0

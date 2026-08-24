@@ -903,6 +903,7 @@ def build_dashboard(
     observed_publications: set[str] = set()
     cohorts: list[CohortStatus] = []
     physical_workbooks: set[tuple[str, str]] = set()
+    bounded_derivatives: list[tuple[tuple[str, str], str]] = []
     for cohort_config in registry["cohorts"]:
         cohort_path = _safe_relative_path(
             root, cohort_config["cohortPath"], "cohort manifest"
@@ -954,7 +955,12 @@ def build_dashboard(
             for workbook in cohort["workbooks"]
         ]
         for asset in assets:
-            physical_workbooks.add((asset.source_path, asset.source_digest))
+            identity = (asset.source_path, asset.source_digest)
+            physical_workbooks.add(identity)
+            suffix = "-remaining-bounded.xlsx"
+            if asset.normalization and asset.source_path.endswith(suffix):
+                source_path = asset.source_path.removesuffix(suffix) + "-source.xlsx"
+                bounded_derivatives.append((identity, source_path))
         assets.sort(
             key=lambda item: (
                 {"issues": 0, "no_evidence": 1, "pass": 2}[item.checks_state],
@@ -998,6 +1004,12 @@ def build_dashboard(
             item.label,
         )
     )
+    # A bounded derivative and its registered original are one physical workbook.
+    # Keep a derivative as its own checked identity when its original is not registered.
+    physical_paths = {path for path, _digest in physical_workbooks}
+    for derivative, source_path in bounded_derivatives:
+        if source_path in physical_paths:
+            physical_workbooks.discard(derivative)
     server = registry["server"]
     return DashboardStatus(
         title=registry["title"],

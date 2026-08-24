@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-national-indigenous-status-by-sex-time-series",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "national-indigenous-status-by-sex-time-series",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-national-indigenous-status-by-sex-time-series-v1.json",
+  "workbooks": [
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-national-source.xlsx",
+      "contentDigest": "sha256:28af3897513142d7080f02a0cee4a21d763f1b633aaf8e0cee9e53561f0a317c",
+      "byteLength": 125447,
+      "sheet": "Table 3",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-3-2025.response.txt",
+        "contentDigest": "sha256:df7c358c4b36eab8436498719ace3911c335901fc50c5bc71b9ddb154838a490",
+        "byteLength": 591,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

@@ -35,6 +35,10 @@ from .product_prototype import (
 REGISTRY_SCHEMA = "tidy.product-prototype-large-batch-registry/v1"
 EVIDENCE_SCHEMA = "tidy.product-prototype-large-batch-evidence/v1"
 NORMALIZATION_SCHEMA = "tidy.product-prototype-workbook-normalization/v1"
+PRISONERS_NORMALIZATION_SCHEMA = "tidy.prisoners-remaining-workbook-normalization/v1"
+PRISONERS_NORMALIZATION_PATH = (
+    "fixtures/product-prototype/prisoners-remaining-workbook-normalization-v1.json"
+)
 REGISTRY_PATH = "fixtures/product-prototype/large-batch-assets-v1.json"
 _DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
 _SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -409,6 +413,115 @@ def _valid_correction_claim(value: Any) -> bool:
     )
 
 
+def _verify_prisoners_remaining_normalization(
+    project: Path,
+) -> dict[str, tuple[str, int, str, int]]:
+    path = _safe_path(
+        project, PRISONERS_NORMALIZATION_PATH, "Prisoners normalization manifest"
+    )
+    manifest = _load_object(path, "Prisoners normalization manifest")
+    expected_keys = {
+        "schemaVersion",
+        "recordedAt",
+        "generatorPath",
+        "generatorDigest",
+        "entries",
+        "manifestDigest",
+    }
+    semantic = dict(manifest)
+    manifest_digest = semantic.pop("manifestDigest", None)
+    if (
+        set(manifest) != expected_keys
+        or manifest.get("schemaVersion") != PRISONERS_NORMALIZATION_SCHEMA
+        or not isinstance(manifest.get("recordedAt"), str)
+        or manifest_digest != domain_digest(PRISONERS_NORMALIZATION_SCHEMA, semantic)
+        or not isinstance(manifest.get("entries"), list)
+        or len(manifest["entries"]) != 3
+    ):
+        raise LargeBatchError("Prisoners normalization manifest header is invalid")
+    generator = _safe_path(
+        project, manifest.get("generatorPath"), "Prisoners normalization generator"
+    )
+    if (
+        generator.is_symlink()
+        or not generator.is_file()
+        or sha256_digest(generator.read_bytes()) != manifest.get("generatorDigest")
+    ):
+        raise LargeBatchError("Prisoners normalization generator digest mismatch")
+    completed = subprocess.run(
+        [sys.executable, str(generator), "--check"],
+        cwd=project,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    if completed.returncode != 0:
+        raise LargeBatchError(
+            "Prisoners bounded workbook reproduction failed: "
+            f"{completed.stderr.strip() or completed.stdout.strip()}"
+        )
+    entry_keys = {
+        "normalization",
+        "year",
+        "sourcePath",
+        "sourceDigest",
+        "sourceByteLength",
+        "outputPath",
+        "outputDigest",
+        "outputByteLength",
+        "coordinateValueFormulaParity",
+        "sourceSemanticCellCount",
+        "outputSemanticCellCount",
+    }
+    outputs: dict[str, tuple[str, int, str, int]] = {}
+    for entry in manifest["entries"]:
+        if (
+            not isinstance(entry, dict)
+            or set(entry) != entry_keys
+            or not isinstance(entry.get("normalization"), str)
+            or not entry["normalization"]
+            or isinstance(entry.get("year"), bool)
+            or not isinstance(entry.get("year"), int)
+            or entry.get("coordinateValueFormulaParity") is not True
+            or isinstance(entry.get("sourceSemanticCellCount"), bool)
+            or not isinstance(entry.get("sourceSemanticCellCount"), int)
+            or entry["sourceSemanticCellCount"] <= 0
+            or entry.get("outputSemanticCellCount") != entry["sourceSemanticCellCount"]
+            or _DIGEST.fullmatch(str(entry.get("sourceDigest"))) is None
+            or _DIGEST.fullmatch(str(entry.get("outputDigest"))) is None
+        ):
+            raise LargeBatchError("Prisoners normalization entry is invalid")
+        for prefix in ("source", "output"):
+            declared_length = entry.get(f"{prefix}ByteLength")
+            file_path = _safe_path(
+                project, entry.get(f"{prefix}Path"), f"Prisoners {prefix} workbook"
+            )
+            if (
+                isinstance(declared_length, bool)
+                or not isinstance(declared_length, int)
+                or declared_length <= 0
+                or file_path.is_symlink()
+                or not file_path.is_file()
+            ):
+                raise LargeBatchError("Prisoners normalization file is invalid")
+            data = file_path.read_bytes()
+            if (
+                len(data) != declared_length
+                or sha256_digest(data) != entry[f"{prefix}Digest"]
+            ):
+                raise LargeBatchError("Prisoners normalization file digest mismatch")
+        output_path = entry["outputPath"]
+        if output_path in outputs:
+            raise LargeBatchError("Prisoners normalization repeats an output")
+        outputs[output_path] = (
+            entry["normalization"],
+            entry["year"],
+            entry["outputDigest"],
+            entry["outputByteLength"],
+        )
+    return outputs
+
+
 def verify_batch_normalization(
     project_root: Path,
     registry: LargeBatchRegistry,
@@ -632,7 +745,9 @@ def verify_batch_normalization(
     if manifest["inRangeValuesChanged"] is not in_range_values_changed:
         raise LargeBatchError("Normalization in-range value-change claim is invalid")
 
+    prisoners_outputs = _verify_prisoners_remaining_normalization(project)
     used_outputs: set[str] = set()
+    used_prisoners_outputs: set[str] = set()
     for spec in registry.entries:
         cohort_path = _safe_path(project, spec.cohort_path, "cohort")
         cohort = _load_object(cohort_path, "large-batch cohort")
@@ -649,7 +764,7 @@ def verify_batch_normalization(
             )
             relative_output = output.relative_to(project).as_posix()
             if workbook.get("normalization") is None:
-                if relative_output in outputs:
+                if relative_output in outputs or relative_output in prisoners_outputs:
                     raise LargeBatchError(
                         "Normalized workbook is missing its normalization declaration"
                     )
@@ -660,18 +775,28 @@ def verify_batch_normalization(
             ):
                 raise LargeBatchError("Large-batch workbook normalization is invalid")
             expected = outputs.get(relative_output)
-            if expected != (
+            if expected is None:
+                expected = prisoners_outputs.get(relative_output)
+            observed = (
                 workbook["normalization"],
                 workbook.get("year"),
                 workbook.get("contentDigest"),
                 workbook.get("byteLength"),
-            ):
+            )
+            if expected != observed:
                 raise LargeBatchError(
                     "Large-batch workbook does not match normalization manifest"
                 )
-            used_outputs.add(relative_output)
+            if relative_output in prisoners_outputs:
+                used_prisoners_outputs.add(relative_output)
+            else:
+                used_outputs.add(relative_output)
     if used_outputs != set(outputs):
         raise LargeBatchError("Normalization manifest contains unused outputs")
+    if used_prisoners_outputs != set(prisoners_outputs):
+        raise LargeBatchError(
+            "Prisoners normalization manifest contains unused outputs"
+        )
     return manifest
 
 

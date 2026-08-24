@@ -66,10 +66,10 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-five-hundred-fifty-nine-worksheets-v1"
-    assert registry.worksheet_count == 559
+    assert registry.batch_id == "justice-six-hundred-twenty-eight-worksheets-v1"
+    assert registry.worksheet_count == 628
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 220
+    assert len(registry.entries) == 241
     normalization = verify_batch_normalization(PROJECT, registry)
     assert len(normalization["entries"]) == 64
     assert "normalization" not in normalization
@@ -115,9 +115,9 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 559
+    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 628
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 478120
+    assert sum(item["canonicalObservationCount"] for item in manifests) == 512957
     assert sum(item["providerCalls"] for item in manifests) == 0
     criminal_specs = [
         spec
@@ -129,7 +129,7 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     assert sum(spec.expected_canonical_count for spec in criminal_specs) == 422_103
     assert Counter(spec.acceptance_policy_version for spec in registry.entries) == {
         "tidy.table-family-acceptance/v1": 125,
-        "tidy.table-family-acceptance/v2": 95,
+        "tidy.table-family-acceptance/v2": 116,
     }
     nt_manifests = [
         item
@@ -295,7 +295,7 @@ def test_registry_pins_acceptance_policy_and_v2_replay_timestamp() -> None:
         if spec.acceptance_policy_version == "tidy.table-family-acceptance/v2"
     ]
     assert len(v1) == 125
-    assert len(v2) == 95
+    assert len(v2) == 116
     assert all(spec.replay_recorded_at is None for spec in v1)
     assert Counter(spec.replay_recorded_at for spec in v2) == {
         "2026-08-15T09:00:00+00:00": 9,
@@ -304,6 +304,7 @@ def test_registry_pins_acceptance_policy_and_v2_replay_timestamp() -> None:
         "2026-08-23T09:00:00+00:00": 18,
         "2026-08-24T09:00:00+00:00": 18,
         "2026-08-25T09:00:00+00:00": 31,
+        "2026-08-25T12:00:00+00:00": 21,
     }
 
 
@@ -2009,9 +2010,9 @@ def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
     assert report["passed"] is True
     assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 559
+    assert report["acceptedWorksheetCount"] == 628
     assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 478120
+    assert report["canonicalObservationCount"] == 512957
     assert {item["familyId"] for item in report["cohorts"]} == {
         item.family_id for item in load_large_batch_registry(PROJECT).entries
     }
@@ -3677,10 +3678,10 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
     assert report == {
-        "batchId": "justice-five-hundred-fifty-nine-worksheets-v1",
-        "worksheetCount": 559,
-        "cohortCount": 220,
-        "canonicalObservationCount": 478120,
+        "batchId": "justice-six-hundred-twenty-eight-worksheets-v1",
+        "worksheetCount": 628,
+        "cohortCount": 241,
+        "canonicalObservationCount": 512957,
         "providerCalls": 0,
         "verified": True,
     }

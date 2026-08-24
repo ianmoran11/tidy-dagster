@@ -1,0 +1,575 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-national-sentenced-indigenous-offence-by-expected-time-v1",
+  "tableFamilyId": "national-sentenced-indigenous-offence-by-expected-time",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 765,
+        "2022": 765,
+        "2023": 765,
+        "2024": 765,
+        "2025": 765
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "expected_time_to_serve": [
+            "10_UNDER_15_YEARS_c3f4adc6",
+            "15_UNDER_20_YEARS_52a374dc",
+            "1_UNDER_2_YEARS_ada57682",
+            "20_YEARS_OVER_d9ed9a94",
+            "2_UNDER_5_YEARS_c6777906",
+            "3_UNDER_6_MONTHS_87c804fe",
+            "5_UNDER_10_YEARS_febfe63e",
+            "6_UNDER_12_MONTHS_3db9707f",
+            "LIFE_0c23e313",
+            "MEAN_YEARS_6cb1f395",
+            "MEDIAN_YEARS_51edc4af",
+            "OTHER_1c55d9b8",
+            "TOTAL_1d7c16e5",
+            "TOTAL_ab2882c8",
+            "UNDER_3_MONTHS_51315264"
+          ]
+        },
+        "2022": {
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "expected_time_to_serve": [
+            "10_UNDER_15_YEARS_c3f4adc6",
+            "15_UNDER_20_YEARS_52a374dc",
+            "1_UNDER_2_YEARS_ada57682",
+            "20_YEARS_OVER_d9ed9a94",
+            "2_UNDER_5_YEARS_c6777906",
+            "3_UNDER_6_MONTHS_87c804fe",
+            "5_UNDER_10_YEARS_febfe63e",
+            "6_UNDER_12_MONTHS_3db9707f",
+            "LIFE_0c23e313",
+            "MEAN_YEARS_6cb1f395",
+            "MEDIAN_YEARS_51edc4af",
+            "OTHER_1c55d9b8",
+            "TOTAL_1d7c16e5",
+            "TOTAL_ab2882c8",
+            "UNDER_3_MONTHS_51315264"
+          ]
+        },
+        "2023": {
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "expected_time_to_serve": [
+            "10_UNDER_15_YEARS_c3f4adc6",
+            "15_UNDER_20_YEARS_52a374dc",
+            "1_UNDER_2_YEARS_ada57682",
+            "20_YEARS_OVER_d9ed9a94",
+            "2_UNDER_5_YEARS_c6777906",
+            "3_UNDER_6_MONTHS_87c804fe",
+            "5_UNDER_10_YEARS_febfe63e",
+            "6_UNDER_12_MONTHS_3db9707f",
+            "LIFE_0c23e313",
+            "MEAN_YEARS_6cb1f395",
+            "MEDIAN_YEARS_51edc4af",
+            "OTHER_1c55d9b8",
+            "TOTAL_1d7c16e5",
+            "TOTAL_ab2882c8",
+            "UNDER_3_MONTHS_51315264"
+          ]
+        },
+        "2024": {
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "expected_time_to_serve": [
+            "10_TO_UNDER_15_YEARS_128cc285",
+            "15_TO_UNDER_20_YEARS_d711a388",
+            "1_TO_UNDER_2_YEARS_50ec4c59",
+            "20_YEARS_OVER_d9ed9a94",
+            "2_TO_UNDER_5_YEARS_54118536",
+            "3_TO_UNDER_6_MONTHS_bf1c800b",
+            "5_TO_UNDER_10_YEARS_a36098d5",
+            "6_TO_UNDER_12_MONTHS_8b05dfb4",
+            "LIFE_0c23e313",
+            "MEAN_YEARS_6cb1f395",
+            "MEDIAN_YEARS_51edc4af",
+            "OTHER_1c55d9b8",
+            "TOTAL_1d7c16e5",
+            "TOTAL_ab2882c8",
+            "UNDER_3_MONTHS_51315264"
+          ]
+        },
+        "2025": {
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "expected_time_to_serve": [
+            "10_TO_UNDER_15_YEARS_128cc285",
+            "15_TO_UNDER_20_YEARS_d711a388",
+            "1_TO_UNDER_2_YEARS_50ec4c59",
+            "20_YEARS_AND_OVER_e7d4bebb",
+            "2_TO_UNDER_5_YEARS_54118536",
+            "3_TO_UNDER_6_MONTHS_bf1c800b",
+            "5_TO_UNDER_10_YEARS_a36098d5",
+            "6_TO_UNDER_12_MONTHS_8b05dfb4",
+            "LIFE_0c23e313",
+            "MEAN_YEARS_6cb1f395",
+            "MEDIAN_YEARS_51edc4af",
+            "OTHER_1c55d9b8",
+            "TOTAL_1d7c16e5",
+            "TOTAL_ab2882c8",
+            "UNDER_3_MONTHS_51315264"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:1fcee554de0e33c0746b7ee70d0c688843c62267c9a5d65516181b1c64416dcc",
+        "2022": "sha256:1fcee554de0e33c0746b7ee70d0c688843c62267c9a5d65516181b1c64416dcc",
+        "2023": "sha256:1fcee554de0e33c0746b7ee70d0c688843c62267c9a5d65516181b1c64416dcc",
+        "2024": "sha256:8852910c0f2640ae038d35756e7b3085a21f5fda87b808fb6026e2893763fb5c",
+        "2025": "sha256:de98b244950930c399928149925b7b9223a141376db7410b58d69fc95775bb47"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "most_serious_offence",
+    "indigenous_status",
+    "expected_time_to_serve"
+  ],
+  "dimensionHeaders": {
+    "most_serious_offence": [
+      "most serious offence"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ],
+    "expected_time_to_serve": [
+      "expected time to serve"
+    ]
+  },
+  "aliases": {
+    "most_serious_offence": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "04 Dangerous/negligent acts": "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+      "05 Abduction/harassment": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "06 Robbery/extortion": "06_ROBBERY_EXTORTION_4b18f837",
+      "07 Unlawful entry with intent": "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+      "08 Theft": "08_THEFT_eba67dd5",
+      "09 Fraud/deception": "09_FRAUD_DECEPTION_82cf4169",
+      "10 Illicit drug offences": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+      "11 Weapons/explosives": "11_WEAPONS_EXPLOSIVES_70c89162",
+      "12 Property damage and environmental pollution": "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+      "13 Public order offences": "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+      "14 Traffic and vehicle regulatory offences": "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+      "15 Offences against justice": "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+      "16 Miscellaneous offences": "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+      "Total": "TOTAL_ab2882c8",
+      "Total (d)": "TOTAL_ab2882c8"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "NON-INDIGENOUS": "NON_INDIGENOUS_2f231fea",
+      "TOTAL": "TOTAL_ab2882c8",
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Total": "TOTAL_ab2882c8",
+      "Total (e)": "TOTAL_ab2882c8"
+    },
+    "expected_time_to_serve": {
+      "Under 3 months": "UNDER_3_MONTHS_51315264",
+      "3 & under 6 months": "3_UNDER_6_MONTHS_87c804fe",
+      "6 & under 12 months": "6_UNDER_12_MONTHS_3db9707f",
+      "1 & under 2 years": "1_UNDER_2_YEARS_ada57682",
+      "2 & under 5 years": "2_UNDER_5_YEARS_c6777906",
+      "5 & under 10 years": "5_UNDER_10_YEARS_febfe63e",
+      "10 & under 15 years": "10_UNDER_15_YEARS_c3f4adc6",
+      "15 & under 20 years": "15_UNDER_20_YEARS_52a374dc",
+      "20 years & over": "20_YEARS_OVER_d9ed9a94",
+      "Life": "LIFE_0c23e313",
+      "Other": "OTHER_1c55d9b8",
+      "Total": "TOTAL_ab2882c8",
+      "Total (%)": "TOTAL_1d7c16e5",
+      "Mean (years)": "MEAN_YEARS_6cb1f395",
+      "Median (years)": "MEDIAN_YEARS_51edc4af",
+      "3 to under 6 months": "3_TO_UNDER_6_MONTHS_bf1c800b",
+      "6 to under 12 months": "6_TO_UNDER_12_MONTHS_8b05dfb4",
+      "1 to under 2 years": "1_TO_UNDER_2_YEARS_50ec4c59",
+      "2 to under 5 years": "2_TO_UNDER_5_YEARS_54118536",
+      "5 to under 10 years": "5_TO_UNDER_10_YEARS_a36098d5",
+      "10 to under 15 years": "10_TO_UNDER_15_YEARS_128cc285",
+      "15 to under 20 years": "15_TO_UNDER_20_YEARS_d711a388",
+      "20 years and over": "20_YEARS_AND_OVER_e7d4bebb",
+      "Life (f)": "LIFE_0c23e313",
+      "Other (g)": "OTHER_1c55d9b8",
+      "Total (h)": "TOTAL_ab2882c8",
+      "Mean (years) (i)": "MEAN_YEARS_6cb1f395",
+      "Median (years) (i)": "MEDIAN_YEARS_51edc4af"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:7e74cf05eb8d9ea03608f9978657492182c26b5149854d86a0e558dad677466d",
+    "2022": "sha256:a815baa7b1a4fa540f2033c4657b73af2ec8ca92fc1e1a2be860b72f609a1d61",
+    "2023": "sha256:8bd5692a25383dd6d7d99a4dce16eb96ecc6364d246ed206c1d2356d95991493",
+    "2024": "sha256:fafbe3b96dc7e9162e8aa43f000791a0326ef6ae1abefb3cacab3f0184c8de48",
+    "2025": "sha256:eb2b78ca3a60379b614244bc96291c04f21778ec114ecf0bc5c517547ed27107"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "most_serious_offence_id",
+    "indigenous_status_id",
+    "expected_time_to_serve_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 765,
+    "maximumRows": 765,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "mostSeriousOffencesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2025": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2025": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "expectedTimesToServeByYear": {
+      "2021": [
+        "10_UNDER_15_YEARS_c3f4adc6",
+        "15_UNDER_20_YEARS_52a374dc",
+        "1_UNDER_2_YEARS_ada57682",
+        "20_YEARS_OVER_d9ed9a94",
+        "2_UNDER_5_YEARS_c6777906",
+        "3_UNDER_6_MONTHS_87c804fe",
+        "5_UNDER_10_YEARS_febfe63e",
+        "6_UNDER_12_MONTHS_3db9707f",
+        "LIFE_0c23e313",
+        "MEAN_YEARS_6cb1f395",
+        "MEDIAN_YEARS_51edc4af",
+        "OTHER_1c55d9b8",
+        "TOTAL_1d7c16e5",
+        "TOTAL_ab2882c8",
+        "UNDER_3_MONTHS_51315264"
+      ],
+      "2022": [
+        "10_UNDER_15_YEARS_c3f4adc6",
+        "15_UNDER_20_YEARS_52a374dc",
+        "1_UNDER_2_YEARS_ada57682",
+        "20_YEARS_OVER_d9ed9a94",
+        "2_UNDER_5_YEARS_c6777906",
+        "3_UNDER_6_MONTHS_87c804fe",
+        "5_UNDER_10_YEARS_febfe63e",
+        "6_UNDER_12_MONTHS_3db9707f",
+        "LIFE_0c23e313",
+        "MEAN_YEARS_6cb1f395",
+        "MEDIAN_YEARS_51edc4af",
+        "OTHER_1c55d9b8",
+        "TOTAL_1d7c16e5",
+        "TOTAL_ab2882c8",
+        "UNDER_3_MONTHS_51315264"
+      ],
+      "2023": [
+        "10_UNDER_15_YEARS_c3f4adc6",
+        "15_UNDER_20_YEARS_52a374dc",
+        "1_UNDER_2_YEARS_ada57682",
+        "20_YEARS_OVER_d9ed9a94",
+        "2_UNDER_5_YEARS_c6777906",
+        "3_UNDER_6_MONTHS_87c804fe",
+        "5_UNDER_10_YEARS_febfe63e",
+        "6_UNDER_12_MONTHS_3db9707f",
+        "LIFE_0c23e313",
+        "MEAN_YEARS_6cb1f395",
+        "MEDIAN_YEARS_51edc4af",
+        "OTHER_1c55d9b8",
+        "TOTAL_1d7c16e5",
+        "TOTAL_ab2882c8",
+        "UNDER_3_MONTHS_51315264"
+      ],
+      "2024": [
+        "10_TO_UNDER_15_YEARS_128cc285",
+        "15_TO_UNDER_20_YEARS_d711a388",
+        "1_TO_UNDER_2_YEARS_50ec4c59",
+        "20_YEARS_OVER_d9ed9a94",
+        "2_TO_UNDER_5_YEARS_54118536",
+        "3_TO_UNDER_6_MONTHS_bf1c800b",
+        "5_TO_UNDER_10_YEARS_a36098d5",
+        "6_TO_UNDER_12_MONTHS_8b05dfb4",
+        "LIFE_0c23e313",
+        "MEAN_YEARS_6cb1f395",
+        "MEDIAN_YEARS_51edc4af",
+        "OTHER_1c55d9b8",
+        "TOTAL_1d7c16e5",
+        "TOTAL_ab2882c8",
+        "UNDER_3_MONTHS_51315264"
+      ],
+      "2025": [
+        "10_TO_UNDER_15_YEARS_128cc285",
+        "15_TO_UNDER_20_YEARS_d711a388",
+        "1_TO_UNDER_2_YEARS_50ec4c59",
+        "20_YEARS_AND_OVER_e7d4bebb",
+        "2_TO_UNDER_5_YEARS_54118536",
+        "3_TO_UNDER_6_MONTHS_bf1c800b",
+        "5_TO_UNDER_10_YEARS_a36098d5",
+        "6_TO_UNDER_12_MONTHS_8b05dfb4",
+        "LIFE_0c23e313",
+        "MEAN_YEARS_6cb1f395",
+        "MEDIAN_YEARS_51edc4af",
+        "OTHER_1c55d9b8",
+        "TOTAL_1d7c16e5",
+        "TOTAL_ab2882c8",
+        "UNDER_3_MONTHS_51315264"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

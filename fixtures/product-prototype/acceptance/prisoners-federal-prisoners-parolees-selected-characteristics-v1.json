@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-federal-prisoners-parolees-selected-characteristics-v1",
+  "tableFamilyId": "federal-prisoners-parolees-selected-characteristics",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 135,
+        "2022": 135,
+        "2023": 135,
+        "2024": 135,
+        "2025": 126
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "prisoner_statistic": [
+            "FEDERAL_PAROLEES_12a2e4f6",
+            "FEDERAL_PRISONERS_c3845d4b"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a",
+            "TOTAL_PRISONERS_718941a8",
+            "UNKNOWN_23759997"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "prisoner_statistic": [
+            "FEDERAL_PAROLEES_12a2e4f6",
+            "FEDERAL_PRISONERS_c3845d4b"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a",
+            "TOTAL_PRISONERS_718941a8",
+            "UNKNOWN_23759997"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "prisoner_statistic": [
+            "FEDERAL_PAROLEES_12a2e4f6",
+            "FEDERAL_PRISONERS_c3845d4b"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a",
+            "TOTAL_PRISONERS_718941a8",
+            "UNKNOWN_23759997"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUSTRALIA_80f94363",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "prisoner_statistic": [
+            "FEDERAL_PAROLEES_12a2e4f6",
+            "FEDERAL_PRISONERS_c3845d4b"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a",
+            "TOTAL_PRISONERS_718941a8",
+            "UNKNOWN_23759997"
+          ]
+        },
+        "2025": {
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "prisoner_statistic": [
+            "FEDERAL_PAROLEES_12a2e4f6",
+            "FEDERAL_PRISONERS_c3845d4b"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a",
+            "TOTAL_PRISONERS_718941a8"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:4664a1c0031a1b9a1cfe2b9aa4151ccb06eadb9f8eedbbdb92fe4962d3174296",
+        "2022": "sha256:4664a1c0031a1b9a1cfe2b9aa4151ccb06eadb9f8eedbbdb92fe4962d3174296",
+        "2023": "sha256:4664a1c0031a1b9a1cfe2b9aa4151ccb06eadb9f8eedbbdb92fe4962d3174296",
+        "2024": "sha256:ce610afd1263f636cc0dbc3504e03d5e28a1719ebcce533ea5f1b00ec7b87d02",
+        "2025": "sha256:ad7e2c47e42d1f0057f8097b6187420f682db1a3cec2ca88ab4ec1780c565879"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "prisoner_statistic",
+    "characteristic_category"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "prisoner_statistic": [
+      "prisoner statistic"
+    ],
+    "characteristic_category": [
+      "characteristic category"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "NSW": "NSW_647faf01",
+      "Vic.": "VIC_c5916b82",
+      "Qld": "QLD_cfd8a309",
+      "SA": "SA_360bf3a8",
+      "WA": "WA_d8689b62",
+      "Tas.": "TAS_71b7c8af",
+      "NT": "NT_ff9ec9f7",
+      "ACT": "ACT_ee71241e",
+      "Aust.": "AUST_895ceebd",
+      "Australia": "AUSTRALIA_80f94363"
+    },
+    "prisoner_statistic": {
+      "FEDERAL PRISONERS": "FEDERAL_PRISONERS_c3845d4b",
+      "FEDERAL PAROLEES": "FEDERAL_PAROLEES_12a2e4f6",
+      "Federal Prisoners": "FEDERAL_PRISONERS_c3845d4b",
+      "Federal Parolees": "FEDERAL_PAROLEES_12a2e4f6"
+    },
+    "characteristic_category": {
+      "Total prisoners": "TOTAL_PRISONERS_718941a8",
+      "Male": "MALE_9050711d",
+      "Female": "FEMALE_cf112cb6",
+      "Mean age (years)": "MEAN_AGE_YEARS_54827fe2",
+      "Median age (years)": "MEDIAN_AGE_YEARS_ada3abad",
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Unknown": "UNKNOWN_23759997",
+      "Total parolees": "TOTAL_PAROLEES_2d9e5d9a",
+      "Total prisoners (b)": "TOTAL_PRISONERS_718941a8",
+      "Total parolees (c)": "TOTAL_PAROLEES_2d9e5d9a"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:a505e98add431cff07c032d7fa6f7af576d270a847eb94ff9ebcfd758c65216c",
+    "2022": "sha256:48ffe819cbf8538a183eae5c53621aad79aaa015a940f1067f9d2a2cdb91695b",
+    "2023": "sha256:3c35a90b068905597aa2c307268307b08d71360856f17c9c6c6efcd019a503e6",
+    "2024": "sha256:aa9dde2227b42d287b0eefafe84624c085f5f68848fea884dc61b8e09a775e5c",
+    "2025": "sha256:fe4043f3ebb8ff651d92b68e8d721066b39ee5b35f05ad05bc6039bddd85d389"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "jurisdiction_id",
+    "prisoner_statistic_id",
+    "characteristic_category_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 126,
+    "maximumRows": 135,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2022": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2023": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2024": [
+        "ACT_ee71241e",
+        "AUSTRALIA_80f94363",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2025": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ]
+    },
+    "prisonerStatisticsByYear": {
+      "2021": [
+        "FEDERAL_PAROLEES_12a2e4f6",
+        "FEDERAL_PRISONERS_c3845d4b"
+      ],
+      "2022": [
+        "FEDERAL_PAROLEES_12a2e4f6",
+        "FEDERAL_PRISONERS_c3845d4b"
+      ],
+      "2023": [
+        "FEDERAL_PAROLEES_12a2e4f6",
+        "FEDERAL_PRISONERS_c3845d4b"
+      ],
+      "2024": [
+        "FEDERAL_PAROLEES_12a2e4f6",
+        "FEDERAL_PRISONERS_c3845d4b"
+      ],
+      "2025": [
+        "FEDERAL_PAROLEES_12a2e4f6",
+        "FEDERAL_PRISONERS_c3845d4b"
+      ]
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a",
+        "TOTAL_PRISONERS_718941a8",
+        "UNKNOWN_23759997"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a",
+        "TOTAL_PRISONERS_718941a8",
+        "UNKNOWN_23759997"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a",
+        "TOTAL_PRISONERS_718941a8",
+        "UNKNOWN_23759997"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a",
+        "TOTAL_PRISONERS_718941a8",
+        "UNKNOWN_23759997"
+      ],
+      "2025": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a",
+        "TOTAL_PRISONERS_718941a8"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

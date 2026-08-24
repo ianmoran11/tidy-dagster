@@ -1,0 +1,517 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-national-selected-characteristics-time-series-v1",
+  "tableFamilyId": "national-selected-characteristics-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": -10,
+      "expectedCombinationCountsByYear": {
+        "2021": 220,
+        "2022": 220,
+        "2023": 220,
+        "2024": 220,
+        "2025": 190
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "observation_period": [
+            "2011_72d1b5da",
+            "2012_4b9a7f50",
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "IMPRISONMENT_RATE_d11d8a61",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "NO_38306492",
+            "NO_PRIOR_IMPRISONMENT_f5169890",
+            "PRIOR_IMPRISONMENT_4f82e765",
+            "SENTENCED_aec7ff9e",
+            "UNSENTENCED_88c001c6"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "LEGAL_STATUS_65031c8e",
+            "PRIOR_IMPRISONMENT_STATUS_95130881",
+            "SEX_b4bed028",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+            "NUMBER_a081e07b"
+          ]
+        },
+        "2022": {
+          "observation_period": [
+            "2012_4b9a7f50",
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "IMPRISONMENT_RATE_d11d8a61",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "NO_38306492",
+            "NO_PRIOR_IMPRISONMENT_f5169890",
+            "PRIOR_IMPRISONMENT_4f82e765",
+            "SENTENCED_aec7ff9e",
+            "UNSENTENCED_88c001c6"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "LEGAL_STATUS_65031c8e",
+            "PRIOR_IMPRISONMENT_STATUS_95130881",
+            "SEX_b4bed028",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+            "NUMBER_a081e07b"
+          ]
+        },
+        "2023": {
+          "observation_period": [
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "IMPRISONMENT_RATE_d11d8a61",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "NO_38306492",
+            "NO_PRIOR_IMPRISONMENT_f5169890",
+            "PRIOR_IMPRISONMENT_4f82e765",
+            "SENTENCED_aec7ff9e",
+            "UNSENTENCED_88c001c6"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "LEGAL_STATUS_65031c8e",
+            "PRIOR_IMPRISONMENT_STATUS_95130881",
+            "SEX_b4bed028",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+            "NUMBER_a081e07b"
+          ]
+        },
+        "2024": {
+          "observation_period": [
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d",
+            "2024_6557739a"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "IMPRISONMENT_RATE_d11d8a61",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "NO_38306492",
+            "NO_PRIOR_IMPRISONMENT_f5169890",
+            "PRIOR_IMPRISONMENT_4f82e765",
+            "SENTENCED_aec7ff9e",
+            "UNSENTENCED_88c001c6"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "LEGAL_STATUS_65031c8e",
+            "PRIOR_IMPRISONMENT_STATUS_95130881",
+            "SEX_b4bed028",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+            "NUMBER_a081e07b"
+          ]
+        },
+        "2025": {
+          "observation_period": [
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d",
+            "2024_6557739a",
+            "2025_b2b2f104"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "IMPRISONMENT_RATE_d11d8a61",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "NO_38306492",
+            "NO_PRIOR_IMPRISONMENT_f5169890",
+            "PRIOR_IMPRISONMENT_4f82e765",
+            "SENTENCED_aec7ff9e",
+            "UNSENTENCED_88c001c6"
+          ],
+          "characteristic_group": [
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "LEGAL_STATUS_65031c8e",
+            "PRIOR_IMPRISONMENT_STATUS_95130881",
+            "SEX_b4bed028",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+            "NUMBER_a081e07b"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:71e8236f563ea18fdd51cf838fb05107d0cbd6942d9eda2e02369298deb53bdb",
+        "2022": "sha256:a1622b8bba87f8308333c1f868622c1f4e6456a9b93718f82b1cbe226c071534",
+        "2023": "sha256:060e5d9d6fe64a9d60520b5d579b217ae146f0bc6bf6001dc4904b16f525c7a6",
+        "2024": "sha256:2f32f90e22d37f0c6b961c273462a2748dbbb29dcf3d92da03cb445651882e0b",
+        "2025": "sha256:8d1661c453f687ac108d869bb887a7474855db1f0d4f9c85f8c5ce2e99367a30"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      },
+      "allowNegative": true
+    }
+  ],
+  "requiredDimensions": [
+    "observation_period",
+    "characteristic_category",
+    "characteristic_group",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "observation_period": [
+      "observation period"
+    ],
+    "characteristic_category": [
+      "characteristic category"
+    ],
+    "characteristic_group": [
+      "characteristic group"
+    ],
+    "statistic_basis": [
+      "statistic basis"
+    ]
+  },
+  "aliases": {
+    "observation_period": {
+      "2011": "2011_72d1b5da",
+      "2012": "2012_4b9a7f50",
+      "2013": "2013_7931aa2a",
+      "2014": "2014_96da37e9",
+      "2015": "2015_a85e9db4",
+      "2016": "2016_da6e2f53",
+      "2017": "2017_46e67c52",
+      "2018": "2018_152e69cf",
+      "2019": "2019_023e3350",
+      "2020": "2020_73a2af88",
+      "2021": "2021_1bea20e1",
+      "2022": "2022_b1ab1e89",
+      "2023": "2023_d398b29d",
+      "2024": "2024_6557739a",
+      "2025": "2025_b2b2f104"
+    },
+    "characteristic_category": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Sentenced": "SENTENCED_aec7ff9e",
+      "Unsentenced": "UNSENTENCED_88c001c6",
+      "Prior imprisonment": "PRIOR_IMPRISONMENT_4f82e765",
+      "No prior imprisonment": "NO_PRIOR_IMPRISONMENT_f5169890",
+      "no.": "NO_38306492",
+      "Imprisonment rate": "IMPRISONMENT_RATE_d11d8a61",
+      "Imprisonment rate (e)": "IMPRISONMENT_RATE_d11d8a61"
+    },
+    "characteristic_group": {
+      "Sex": "SEX_b4bed028",
+      "Indigenous status": "INDIGENOUS_STATUS_4f4c3e8b",
+      "Legal status": "LEGAL_STATUS_65031c8e",
+      "Prior imprisonment status": "PRIOR_IMPRISONMENT_STATUS_95130881",
+      "Total": "TOTAL_ab2882c8",
+      "Prior imprisonment status (c)": "PRIOR_IMPRISONMENT_STATUS_95130881",
+      "Total (d)": "TOTAL_ab2882c8"
+    },
+    "statistic_basis": {
+      "NUMBER": "NUMBER_a081e07b",
+      "% CHANGE (FROM PREVIOUS YEAR)": "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+      "Number": "NUMBER_a081e07b",
+      "% change (from previous year)": "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:f1bcb615c07700a2598541c1f5a47e52914fc409a3d7ed238b535148cd6bfb91",
+    "2022": "sha256:3f8ed81c2dd6cf7aca1fa273a819a1bcd2de9b0680cd2013e6f89870f5b081a1",
+    "2023": "sha256:91c56f90afac7dcbfb56cfae6fcf640b5789946ad48d1fa1b6a53c83db8a7e8f",
+    "2024": "sha256:dda91220fd4a230f0161e8249512ec82726186e05a07ecdca35284274861d7f3",
+    "2025": "sha256:27b94bf28b97e581e65b7f843279606518cfd2768f4739816d441ac0edfa8906"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "observation_period_id",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 190,
+    "maximumRows": 220,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011_72d1b5da",
+        "2012_4b9a7f50",
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1"
+      ],
+      "2022": [
+        "2012_4b9a7f50",
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89"
+      ],
+      "2023": [
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d"
+      ],
+      "2024": [
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d",
+        "2024_6557739a"
+      ],
+      "2025": [
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d",
+        "2024_6557739a",
+        "2025_b2b2f104"
+      ]
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "IMPRISONMENT_RATE_d11d8a61",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "NO_38306492",
+        "NO_PRIOR_IMPRISONMENT_f5169890",
+        "PRIOR_IMPRISONMENT_4f82e765",
+        "SENTENCED_aec7ff9e",
+        "UNSENTENCED_88c001c6"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "IMPRISONMENT_RATE_d11d8a61",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "NO_38306492",
+        "NO_PRIOR_IMPRISONMENT_f5169890",
+        "PRIOR_IMPRISONMENT_4f82e765",
+        "SENTENCED_aec7ff9e",
+        "UNSENTENCED_88c001c6"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "IMPRISONMENT_RATE_d11d8a61",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "NO_38306492",
+        "NO_PRIOR_IMPRISONMENT_f5169890",
+        "PRIOR_IMPRISONMENT_4f82e765",
+        "SENTENCED_aec7ff9e",
+        "UNSENTENCED_88c001c6"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "IMPRISONMENT_RATE_d11d8a61",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "NO_38306492",
+        "NO_PRIOR_IMPRISONMENT_f5169890",
+        "PRIOR_IMPRISONMENT_4f82e765",
+        "SENTENCED_aec7ff9e",
+        "UNSENTENCED_88c001c6"
+      ],
+      "2025": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "IMPRISONMENT_RATE_d11d8a61",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "NO_38306492",
+        "NO_PRIOR_IMPRISONMENT_f5169890",
+        "PRIOR_IMPRISONMENT_4f82e765",
+        "SENTENCED_aec7ff9e",
+        "UNSENTENCED_88c001c6"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "LEGAL_STATUS_65031c8e",
+        "PRIOR_IMPRISONMENT_STATUS_95130881",
+        "SEX_b4bed028",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "LEGAL_STATUS_65031c8e",
+        "PRIOR_IMPRISONMENT_STATUS_95130881",
+        "SEX_b4bed028",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "LEGAL_STATUS_65031c8e",
+        "PRIOR_IMPRISONMENT_STATUS_95130881",
+        "SEX_b4bed028",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "LEGAL_STATUS_65031c8e",
+        "PRIOR_IMPRISONMENT_STATUS_95130881",
+        "SEX_b4bed028",
+        "TOTAL_ab2882c8"
+      ],
+      "2025": [
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "LEGAL_STATUS_65031c8e",
+        "PRIOR_IMPRISONMENT_STATUS_95130881",
+        "SEX_b4bed028",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+        "NUMBER_a081e07b"
+      ],
+      "2022": [
+        "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+        "NUMBER_a081e07b"
+      ],
+      "2023": [
+        "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+        "NUMBER_a081e07b"
+      ],
+      "2024": [
+        "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+        "NUMBER_a081e07b"
+      ],
+      "2025": [
+        "CHANGE_FROM_PREVIOUS_YEAR_d946d9c9",
+        "NUMBER_a081e07b"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

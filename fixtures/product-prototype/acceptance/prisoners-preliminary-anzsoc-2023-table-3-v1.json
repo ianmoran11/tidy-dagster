@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-preliminary-anzsoc-2023-table-3-v1",
+  "tableFamilyId": "preliminary-anzsoc-2023-table-3",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2025": 126
+      },
+      "expectedDimensionsByYear": {
+        "2025": {
+          "most_serious_charge": [
+            "01_HOMICIDE_2ad35483",
+            "02_ASSAULT_294c4580",
+            "03_SEXUAL_OFFENCES_6fb153ef",
+            "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+            "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+            "06_BURGLARY_bb37cc2e",
+            "07_THEFT_2ddf8175",
+            "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+            "09_DRUG_OFFENCES_86dc45c2",
+            "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+            "11_PROPERTY_DAMAGE_cd09ba73",
+            "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+            "13_TRAFFIC_AND_VEHICLE_OFFENCES_1b5e3170",
+            "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+            "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+            "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+            "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "WA_d8689b62"
+          ],
+          "classification_context": [
+            "PRELIMINARY_ANZSOC_2023_MOST_SERIOUS_CHARGE_07bb8601"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2025": "sha256:9b15a96b937eebd045c872c558838cbd032905f8771a3bb4f6f52caead5a8d4a"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "most_serious_charge",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "most_serious_charge": [
+      "most serious charge"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "classification_context": [
+      "classification context"
+    ]
+  },
+  "aliases": {
+    "most_serious_charge": {
+      "01 Homicide": "01_HOMICIDE_2ad35483",
+      "02 Assault": "02_ASSAULT_294c4580",
+      "03 Sexual offences": "03_SEXUAL_OFFENCES_6fb153ef",
+      "04 Harm or endanger persons": "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+      "05 Robbery, blackmail, and extortion": "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+      "06 Burglary": "06_BURGLARY_bb37cc2e",
+      "07 Theft": "07_THEFT_2ddf8175",
+      "08 Fraud and related offences": "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+      "09 Drug offences": "09_DRUG_OFFENCES_86dc45c2",
+      "10 Weapons and explosives offences": "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+      "11 Property damage": "11_PROPERTY_DAMAGE_cd09ba73",
+      "12 Public order, health, and safety offences": "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+      "13 Traffic and vehicle offences": "13_TRAFFIC_AND_VEHICLE_OFFENCES_1b5e3170",
+      "14 Offences against justice procedures and orders": "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+      "15 Offences against government": "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+      "16 Environmental offences": "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+      "17 Miscellaneous offences": "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+      "Total (c)": "TOTAL_ab2882c8"
+    },
+    "jurisdiction": {
+      "NSW": "NSW_647faf01",
+      "Qld": "QLD_cfd8a309",
+      "SA": "SA_360bf3a8",
+      "WA": "WA_d8689b62",
+      "Tas.": "TAS_71b7c8af",
+      "NT": "NT_ff9ec9f7",
+      "ACT": "ACT_ee71241e"
+    },
+    "classification_context": {
+      "Preliminary ANZSOC 2023 most serious charge": "PRELIMINARY_ANZSOC_2023_MOST_SERIOUS_CHARGE_07bb8601"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2025": "sha256:ac81d7af172e3c9066bae7daf49a8b36f2c00e841ed274a112171961f701ee22"
+  },
+  "expectedWarningCountsByYear": {
+    "2025": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "most_serious_charge_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 126,
+    "maximumRows": 126,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "mostSeriousChargesByYear": {
+      "2025": [
+        "01_HOMICIDE_2ad35483",
+        "02_ASSAULT_294c4580",
+        "03_SEXUAL_OFFENCES_6fb153ef",
+        "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+        "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+        "06_BURGLARY_bb37cc2e",
+        "07_THEFT_2ddf8175",
+        "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+        "09_DRUG_OFFENCES_86dc45c2",
+        "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+        "11_PROPERTY_DAMAGE_cd09ba73",
+        "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+        "13_TRAFFIC_AND_VEHICLE_OFFENCES_1b5e3170",
+        "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+        "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+        "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+        "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2025": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "WA_d8689b62"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2025": [
+        "PRELIMINARY_ANZSOC_2023_MOST_SERIOUS_CHARGE_07bb8601"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

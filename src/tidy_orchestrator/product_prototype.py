@@ -2138,6 +2138,8 @@ def _validate_cohort(value: dict[str, Any]) -> None:
             None,
             "trim-pathological-full-width-formatting-merge-v1",
             "trim-pathological-styled-blank-cells-v1",
+            "isolate-repeated-total-label-formatting-v1",
+            "trim-table-37-and-isolate-repeated-total-label-formatting-v1",
         }:
             raise ProductPrototypeError("Workbook normalization is invalid")
         replay = entry.get("replayResponse")
@@ -2334,6 +2336,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "applicableYears",
         "missingValues",
         "excludeMissingValues",
+        "allowNegative",
     }
     years = {str(item["year"]) for item in cohort["workbooks"]}
     recipe_digests = value.get("expectedRecipeDigestsByYear")
@@ -2388,9 +2391,10 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
                 "excludeMissingValues" in measure
                 and measure.get("excludeMissingValues") is not True
             )
+            or ("allowNegative" in measure and measure.get("allowNegative") is not True)
             or isinstance(measure.get("minimum"), bool)
             or not isinstance(measure.get("minimum"), int | float)
-            or measure["minimum"] < 0
+            or (measure["minimum"] < 0 and measure.get("allowNegative") is not True)
             for measure in measures
         )
     ):

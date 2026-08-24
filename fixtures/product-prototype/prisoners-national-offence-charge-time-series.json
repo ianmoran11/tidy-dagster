@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-national-offence-charge-time-series",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "national-offence-charge-time-series",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-national-offence-charge-time-series-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-national-source.xlsx",
+      "contentDigest": "sha256:264b018d9ab5584ebc44774cf349283c072b0eb1304a0b865dadffe40d5d2d7a",
+      "byteLength": 195239,
+      "sheet": "Table_3",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-3-2021.response.txt",
+        "contentDigest": "sha256:b9a2c781f46f8fa919a3d5a375b528fce06232dd5f9384e98a3c78c2e84df6ec",
+        "byteLength": 525,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-national-source.xlsx",
+      "contentDigest": "sha256:0b6f14ccf90fded702181e26e023262afbb01016986c630e8bf27648fd7828be",
+      "byteLength": 212754,
+      "sheet": "Table_3",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-3-2022.response.txt",
+        "contentDigest": "sha256:d99fa9d0c9f1a51d6ba9a71a339934f57a0d7cca7029557f9b1f7f282b770bb0",
+        "byteLength": 525,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-national-source.xlsx",
+      "contentDigest": "sha256:6e640bf65399eaa405e48acda86be9403bc2b8196ff2ccd926906a2e76527e2b",
+      "byteLength": 209379,
+      "sheet": "Table_3",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-3-2023.response.txt",
+        "contentDigest": "sha256:6888f5e717220778872adce3f618cfab8374c50da78be3169ca84b021c0aba86",
+        "byteLength": 525,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024-national-source.xlsx",
+      "contentDigest": "sha256:23f0677e705e9bf88bf4cffed42d1f263772dd38bd2409d2a000d1f9fc79667e",
+      "byteLength": 180975,
+      "sheet": "Table 3",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-3-2024.response.txt",
+        "contentDigest": "sha256:f10de4b6a39268d5465199f2e91bc69af4d56a662cc5f74c04a5b63ffe6123fa",
+        "byteLength": 512,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-national-source.xlsx",
+      "contentDigest": "sha256:28af3897513142d7080f02a0cee4a21d763f1b633aaf8e0cee9e53561f0a317c",
+      "byteLength": 125447,
+      "sheet": "Table 5",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-5-2025.response.txt",
+        "contentDigest": "sha256:4c6de63086781d0986df974abe6c9ab495da3173e8b6c9a98dc74e1ac62d2599",
+        "byteLength": 525,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ]
+}

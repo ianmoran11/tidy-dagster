@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-federal-parolees-selected-characteristics-time-series",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "federal-parolees-selected-characteristics-time-series",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-federal-parolees-selected-characteristics-time-series-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-federal-source.xlsx",
+      "contentDigest": "sha256:93258fdf5a2a5180c724ee5ae3d977bc456acb665895f444f16cd3521e7af4cb",
+      "byteLength": 105015,
+      "sheet": "Table_39",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-federal-39-2021.response.txt",
+        "contentDigest": "sha256:95f10d6f02fd24f382554d66ce11043207cf7bb2fd25841004521ff700d84e04",
+        "byteLength": 962,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-federal-source.xlsx",
+      "contentDigest": "sha256:744da30a18814493146a5a301e698c68d8d13fe1086f564442b1312e2632b325",
+      "byteLength": 102014,
+      "sheet": "Table_39",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-federal-39-2022.response.txt",
+        "contentDigest": "sha256:e2cdfd758deaa61524e6ed018ec7d36db5ef922bb5e1a6d8c93b7c988aefec81",
+        "byteLength": 962,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-federal-source.xlsx",
+      "contentDigest": "sha256:be04427b7f4b4970d2b67b71b07105a31ac6845e587d31bfc4ec24beac570ede",
+      "byteLength": 104019,
+      "sheet": "Table_39",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-federal-39-2023.response.txt",
+        "contentDigest": "sha256:56aa1cd8a71b518ad93a05b230f3f1835ec7555eecb6f56ee92ad7b19e81d195",
+        "byteLength": 962,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024-federal-remaining-bounded.xlsx",
+      "contentDigest": "sha256:cc84df5591282fea5380980b17cce94e3700bdf3ec798b3d2c7aa739de2b5c63",
+      "byteLength": 86012,
+      "sheet": "Table 39",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-federal-39-2024.response.txt",
+        "contentDigest": "sha256:77b1899c0beb7021192e0ef7e4488b3fe8c70640dbe8bae0e11eb3496ceb19b3",
+        "byteLength": 949,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "isolate-repeated-total-label-formatting-v1"
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-federal-remaining-bounded.xlsx",
+      "contentDigest": "sha256:c90bed80eabd8ab3134b40122e232db5514e05330a534a0bdf50dda3fcfe1348",
+      "byteLength": 52746,
+      "sheet": "Table 39",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-federal-39-2025.response.txt",
+        "contentDigest": "sha256:c7f81f88726dad536a4e7e3afc335ee53f46371c5722634868deaa0425370aa4",
+        "byteLength": 949,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-table-37-and-isolate-repeated-total-label-formatting-v1"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-state-indigenous-sex-prisoner-count-time-series-v1",
+  "tableFamilyId": "state-indigenous-sex-prisoner-count-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 1296
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "observation_period": [
+            "2006_6f6a4e56",
+            "2007_f1cfa5eb",
+            "2008_e5e53c78",
+            "2009_f37f3f2b",
+            "2010_7d12ba56",
+            "2011_72d1b5da",
+            "2012_4b9a7f50",
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:9e765e3f43bdb042dd6da9663a6d3fd36f5011db4615176cc102afa665413a5b"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "observation_period",
+    "jurisdiction",
+    "indigenous_status",
+    "sex"
+  ],
+  "dimensionHeaders": {
+    "observation_period": [
+      "observation period"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ],
+    "sex": [
+      "sex"
+    ]
+  },
+  "aliases": {
+    "observation_period": {
+      "2006": "2006_6f6a4e56",
+      "2007": "2007_f1cfa5eb",
+      "2008": "2008_e5e53c78",
+      "2009": "2009_f37f3f2b",
+      "2010": "2010_7d12ba56",
+      "2011": "2011_72d1b5da",
+      "2012": "2012_4b9a7f50",
+      "2013": "2013_7931aa2a",
+      "2014": "2014_96da37e9",
+      "2015": "2015_a85e9db4",
+      "2016": "2016_da6e2f53",
+      "2017": "2017_46e67c52",
+      "2018": "2018_152e69cf",
+      "2019": "2019_023e3350",
+      "2020": "2020_73a2af88",
+      "2021": "2021_1bea20e1"
+    },
+    "jurisdiction": {
+      "NSW": "NSW_647faf01",
+      "Vic.": "VIC_c5916b82",
+      "Qld": "QLD_cfd8a309",
+      "SA": "SA_360bf3a8",
+      "WA": "WA_d8689b62",
+      "Tas.": "TAS_71b7c8af",
+      "NT": "NT_ff9ec9f7",
+      "ACT": "ACT_ee71241e",
+      "Aust.": "AUST_895ceebd"
+    },
+    "indigenous_status": {
+      "ABORIGINAL AND TORRES STRAIT ISLANDER": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "NON-INDIGENOUS": "NON_INDIGENOUS_2f231fea",
+      "TOTAL": "TOTAL_ab2882c8"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons": "PERSONS_4d6dccab"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:dac5028559c41954d34347b50705a9b5aa4279569b98168948150914513875ee"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "observation_period_id",
+    "jurisdiction_id",
+    "indigenous_status_id",
+    "sex_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1296,
+    "maximumRows": 1296,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2006_6f6a4e56",
+        "2007_f1cfa5eb",
+        "2008_e5e53c78",
+        "2009_f37f3f2b",
+        "2010_7d12ba56",
+        "2011_72d1b5da",
+        "2012_4b9a7f50",
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

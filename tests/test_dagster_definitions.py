@@ -135,16 +135,16 @@ def test_definitions_include_provider_free_product_prototype_projection(
     )
 
 
-def test_definitions_include_559_worksheet_cross_publication_batch() -> None:
+def test_definitions_include_628_worksheet_cross_publication_batch() -> None:
     definitions = build_definitions(project_root=PROJECT)
     Definitions.validate_loadable(definitions)
-    assert LARGE_BATCH_REGISTRY.worksheet_count == 559
-    assert len(LARGE_BATCH_REGISTRY.entries) == 220
-    assert len(LARGE_BATCH_ASSETS) == 220
-    assert len(LARGE_BATCH_CHECKS) == 220
-    assert len(LARGE_BATCH_JOBS) == 220
+    assert LARGE_BATCH_REGISTRY.worksheet_count == 628
+    assert len(LARGE_BATCH_REGISTRY.entries) == 241
+    assert len(LARGE_BATCH_ASSETS) == 241
+    assert len(LARGE_BATCH_CHECKS) == 241
+    assert len(LARGE_BATCH_JOBS) == 241
     assert definitions.metadata["product_prototype_large_batch_supported"].value
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 559
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 628
     assert {
         spec.family_id
         for spec in LARGE_BATCH_REGISTRY.entries
@@ -183,7 +183,7 @@ def test_build_definitions_uses_requested_project_registry(tmp_path: Path) -> No
         definitions.metadata["product_prototype_large_batch_id"].value
         == "alternate-three-hundred-twenty-one-worksheets-v1"
     )
-    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 559
+    assert definitions.metadata["product_prototype_large_batch_worksheets"].value == 628
 
 
 def test_definitions_load_identity_and_share_one_partition_definition(

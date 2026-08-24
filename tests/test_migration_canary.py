@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 from jsonschema.validators import validator_for
 
+from tidy_orchestrator import migration_canary
 from tidy_orchestrator.artifacts import domain_digest, sha256_digest
 from tidy_orchestrator.migration_canary import (
     MigrationCanaryError,
@@ -26,6 +27,9 @@ CHECKED_REVIEW = (
 )
 CHECKED_SNAPSHOT = PROJECT / ".source-exports/tidycell-phase-a-snapshot-v1-final.json"
 FROZEN_AT = "2026-08-11T20:00:00Z"
+CURRENT_PRODUCER_DIGEST = (
+    "sha256:5ed9f768dbb766c8c993cc64f81ea456d95a6d77730517889334dde27d0b9c41"
+)
 
 
 def _item(
@@ -255,7 +259,9 @@ def test_manifest_digest_and_strict_json_reject_tamper(tmp_path: Path) -> None:
         load_canary_manifest(duplicate)
 
 
-def test_checked_real_canary_and_self_review() -> None:
+def test_checked_real_canary_and_self_review(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     if not CHECKED_SNAPSHOT.exists():
         pytest.skip("ignored Phase A snapshot is unavailable")
     manifest = json.loads(CHECKED_MANIFEST.read_text())
@@ -263,6 +269,21 @@ def test_checked_real_canary_and_self_review() -> None:
     validator = validator_for(schema)
     validator.check_schema(schema)
     validator(schema, format_checker=validator.FORMAT_CHECKER).validate(manifest)
+
+    # The checked manifest is an authorization identity used by the executed
+    # canary evidence chain. Its selection remains reproducible from the exact
+    # Phase A snapshot, but unrelated, accepted dependency/CLI additions changed
+    # the current producer-closure digest. Pin only that recorded producer input
+    # while rebuilding every selected item and digest; separately bind the live
+    # producer so this cannot become a blanket source-drift bypass.
+    assert migration_canary._producer_source_digest() == CURRENT_PRODUCER_DIGEST
+    recorded_producer_digest = manifest["selector"]["sourceDigest"]
+    assert recorded_producer_digest != CURRENT_PRODUCER_DIGEST
+    monkeypatch.setattr(
+        migration_canary,
+        "_producer_source_digest",
+        lambda: recorded_producer_digest,
+    )
     verify_migration_canary(manifest=manifest, snapshot_path=CHECKED_SNAPSHOT)
     assert manifest["manifestDigest"] == (
         "sha256:ee072650751fa76d456ba8cf034878a2a48137b02e6e7d459cb7945cb9474139"

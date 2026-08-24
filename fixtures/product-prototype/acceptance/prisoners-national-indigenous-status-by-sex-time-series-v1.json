@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-national-indigenous-status-by-sex-time-series-v1",
+  "tableFamilyId": "national-indigenous-status-by-sex-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 17.2,
+      "expectedCombinationCountsByYear": {
+        "2025": 180
+      },
+      "expectedDimensionsByYear": {
+        "2025": {
+          "observation_period": [
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d",
+            "2024_6557739a",
+            "2025_b2b2f104"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "statistic_basis": [
+            "AGE_STANDARDISED_RATE_81289a4f",
+            "CRUDE_RATE_6a584428",
+            "NUMBER_a081e07b"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2025": "sha256:9e3668ffc061513f8a621399b85ab323b17cb9fc164f30abe955b5d5ce92938e"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "observation_period",
+    "indigenous_status",
+    "sex",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "observation_period": [
+      "observation period"
+    ],
+    "indigenous_status": [
+      "indigenous status"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "statistic_basis": [
+      "statistic basis"
+    ]
+  },
+  "aliases": {
+    "observation_period": {
+      "2016 (d)": "2016_da6e2f53",
+      "2017": "2017_46e67c52",
+      "2018": "2018_152e69cf",
+      "2019": "2019_023e3350",
+      "2020": "2020_73a2af88",
+      "2021": "2021_1bea20e1",
+      "2022": "2022_b1ab1e89",
+      "2023": "2023_d398b29d",
+      "2024": "2024_6557739a",
+      "2025": "2025_b2b2f104"
+    },
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons": "PERSONS_4d6dccab"
+    },
+    "statistic_basis": {
+      "Number (c)": "NUMBER_a081e07b",
+      "Crude rate (e)": "CRUDE_RATE_6a584428",
+      "Age standardised rate (f)": "AGE_STANDARDISED_RATE_81289a4f"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2025": "sha256:d334450093cf3c33a14207a5c764f50546cb5be13403bb79a5e4f6d6a43cf587"
+  },
+  "expectedWarningCountsByYear": {
+    "2025": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "observation_period_id",
+    "indigenous_status_id",
+    "sex_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 180,
+    "maximumRows": 180,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "observationPeriodsByYear": {
+      "2025": [
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d",
+        "2024_6557739a",
+        "2025_b2b2f104"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2025": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea"
+      ]
+    },
+    "sexesByYear": {
+      "2025": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2025": [
+        "AGE_STANDARDISED_RATE_81289a4f",
+        "CRUDE_RATE_6a584428",
+        "NUMBER_a081e07b"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

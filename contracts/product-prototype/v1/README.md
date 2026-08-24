@@ -128,7 +128,8 @@ scripts/tidy-prototype run \
   --output .product-prototype/table-31-five-year-replay
 ```
 
-The 559-worksheet cross-publication batch supports acceptance-policy v1 and v2
+The 628-worksheet cross-publication batch spans 241 cohorts and 512,957
+canonical observations. It supports acceptance-policy v1 and v2
 without weakening existing cohorts. Policy v1 retains its legacy canonical-JSON
 contract digest and behavior unchanged. Policy v2 binds acceptance to the exact
 contract-file digest and recomputes decisions from contract-pinned recipe,
@@ -160,10 +161,11 @@ The shared contract capabilities include:
   before the workbook can pass;
 - `strictAliasMatching` prevents unreviewed footnote-suffix inference, while
   `excludeMissingValues` accounts for reviewed non-observation markers; and
-- cohort normalization now also recognizes
-  `trim-pathological-styled-blank-cells-v1` and the reviewed full-width
-  formatting variant, which trim out-of-range styled blanks and pathological
-  merge/column formatting while refusing to remove cell values or formulas.
+- cohort normalization recognizes `trim-pathological-styled-blank-cells-v1`,
+  the reviewed full-width formatting variant, and the two bounded Prisoners
+  repeated-total-label variants. These digest-pinned transformations trim only
+  pathological geometry or isolate formatting while preserving every semantic
+  cell, formula, and value.
   Before trimming, the separate correction step supports three reviewed,
   fail-closed modes: digest-, length-, sheet-, cell-, style-, and value-bound
   removal of isolated Recorded Crime cells; exact shared-string replacement of
@@ -175,7 +177,7 @@ The shared contract capabilities include:
   for unrecognized workbook bytes or cell state.
 
 The batch registry is
-`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 220 cohort
+`fixtures/product-prototype/large-batch-assets-v1.json`. Each of its 241 cohort
 contracts pins exact annual dimensions, measure applicability, value statuses,
 combination counts, and source-header variants. Verification remains
 provider-free:

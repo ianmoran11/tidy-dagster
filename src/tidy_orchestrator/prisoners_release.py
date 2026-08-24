@@ -505,6 +505,55 @@ def _registered_members(
     return registered
 
 
+def _validate_atomic_remaining_registration(
+    project: Path,
+    membership: dict[str, Any],
+    registered: set[tuple[int, int, str]],
+) -> None:
+    plan_path = (
+        project
+        / "fixtures"
+        / "product-prototype"
+        / "prisoners-remaining-semantic-map-plan-v1.json"
+    )
+    if not plan_path.exists():
+        return
+    plan = _load(plan_path, "remaining Prisoners plan")
+    families = plan.get("families")
+    if (
+        plan.get("acceptanceAuthority") is not False
+        or plan.get("trainingEligibility") is not False
+        or not isinstance(families, list)
+        or len(families) != 21
+        or sum(len(item.get("members", [])) for item in families) != 69
+    ):
+        raise PrisonersReleaseError("remaining Prisoners campaign plan is invalid")
+    source = {
+        (member["year"], member["sheet"], family["familyId"]): (
+            member["year"],
+            member["downloadOrdinal"],
+            member["sheet"],
+        )
+        for family in membership["families"]
+        for member in family["members"]
+    }
+    planned: set[tuple[int, int, str]] = set()
+    for family in families:
+        family_id = family.get("familyId")
+        for member in family.get("members", []):
+            key = source.get((member.get("year"), member.get("sheet"), family_id))
+            if key is None or key in planned:
+                raise PrisonersReleaseError(
+                    "remaining Prisoners campaign member is invalid"
+                )
+            planned.add(key)
+    selected = registered & planned
+    if selected and selected != planned:
+        raise PrisonersReleaseError(
+            "remaining Prisoners campaign registration must be atomic"
+        )
+
+
 def verify_prisoners_release(project_root: Path) -> dict[str, Any]:
     project = project_root.resolve()
     fixture_root = project / "fixtures" / "product-prototype"
@@ -532,6 +581,7 @@ def verify_prisoners_release(project_root: Path) -> dict[str, Any]:
         for member in family["members"]
     }
     registered = _registered_members(project, membership)
+    _validate_atomic_remaining_registration(project, membership, registered)
     if not registered <= source_keys:
         raise PrisonersReleaseError("registered Prisoners coverage escapes membership")
     pending = len(source_keys) - len(registered)

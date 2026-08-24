@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-preliminary-anzsoc-2023-table-5",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "preliminary-anzsoc-2023-table-5",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-preliminary-anzsoc-2023-table-5-v1.json",
+  "workbooks": [
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-preliminary-anzsoc-2023-source.xlsx",
+      "contentDigest": "sha256:73d729ea81b95e9d8e09f3c26fa980b120bcf033cfae5831e3cf2f50f8ae29dc",
+      "byteLength": 64466,
+      "sheet": "ANZSOC 2023 Table 5",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-preliminary-anzsoc-2023-5-2025.response.txt",
+        "contentDigest": "sha256:5c1f476fd0cfb4b665dd445ad0855a30c4449568d29b4200c2463549e228a81a",
+        "byteLength": 490,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    }
+  ],
+  "workerLimits": {
+    "maxWarnings": 100000
+  }
+}

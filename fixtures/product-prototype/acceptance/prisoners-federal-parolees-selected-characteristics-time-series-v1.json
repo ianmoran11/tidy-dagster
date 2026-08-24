@@ -1,0 +1,457 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-federal-parolees-selected-characteristics-time-series-v1",
+  "tableFamilyId": "federal-parolees-selected-characteristics-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 517,
+        "2022": 517,
+        "2023": 517,
+        "2024": 517,
+        "2025": 470
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "observation_period": [
+            "2011_72d1b5da",
+            "2012_4b9a7f50",
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a"
+          ]
+        },
+        "2022": {
+          "observation_period": [
+            "2012_4b9a7f50",
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a"
+          ]
+        },
+        "2023": {
+          "observation_period": [
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a"
+          ]
+        },
+        "2024": {
+          "observation_period": [
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d",
+            "2024_6557739a"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a"
+          ]
+        },
+        "2025": {
+          "observation_period": [
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d",
+            "2024_6557739a",
+            "2025_b2b2f104"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "characteristic_category": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALE_cf112cb6",
+            "MALE_9050711d",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_PAROLEES_2d9e5d9a"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:2fdc5077a0d72acde67b4edddddbeb164eed7e0d2428308175f71f482d133cee",
+        "2022": "sha256:7f01b4178306c10b6b91ddb3d8e7658c93d224d29c637865f6e3534b1d841e3c",
+        "2023": "sha256:75d4c35d37922bd2a8294565f571399a6da99cc76bd32e374498aa5d2e0d8185",
+        "2024": "sha256:32cd9fa5145c7356d572e171458f856f6575728f18513572d02b8d6f58f3777e",
+        "2025": "sha256:1d66470e7b086dbad3b2f7b701c25a76b5b197bfabe87b11d98fa89c094e5ac0"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "observation_period",
+    "jurisdiction",
+    "characteristic_category"
+  ],
+  "dimensionHeaders": {
+    "observation_period": [
+      "observation period"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "characteristic_category": [
+      "characteristic category"
+    ]
+  },
+  "aliases": {
+    "observation_period": {
+      "2011": "2011_72d1b5da",
+      "2012": "2012_4b9a7f50",
+      "2013": "2013_7931aa2a",
+      "2014": "2014_96da37e9",
+      "2015": "2015_a85e9db4",
+      "2016": "2016_da6e2f53",
+      "2017": "2017_46e67c52",
+      "2018": "2018_152e69cf",
+      "2019": "2019_023e3350",
+      "2020": "2020_73a2af88",
+      "2021": "2021_1bea20e1",
+      "2022": "2022_b1ab1e89",
+      "2023": "2023_d398b29d",
+      "2024": "2024_6557739a",
+      "2025": "2025_b2b2f104"
+    },
+    "jurisdiction": {
+      "NEW SOUTH WALES": "NEW_SOUTH_WALES_92f089b8",
+      "QUEENSLAND": "QUEENSLAND_8f0791ed",
+      "SOUTH AUSTRALIA": "SOUTH_AUSTRALIA_0abd141a",
+      "WESTERN AUSTRALIA": "WESTERN_AUSTRALIA_74f6e5af",
+      "TASMANIA": "TASMANIA_412e51e6",
+      "NORTHERN TERRITORY": "NORTHERN_TERRITORY_a1d418fe",
+      "AUSTRALIAN CAPITAL TERRITORY": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "New South Wales": "NEW_SOUTH_WALES_92f089b8",
+      "Queensland": "QUEENSLAND_8f0791ed",
+      "South Australia": "SOUTH_AUSTRALIA_0abd141a",
+      "Western Australia": "WESTERN_AUSTRALIA_74f6e5af",
+      "Tasmania": "TASMANIA_412e51e6",
+      "Northern Territory": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a"
+    },
+    "characteristic_category": {
+      "Total parolees": "TOTAL_PAROLEES_2d9e5d9a",
+      "Male": "MALE_9050711d",
+      "Female": "FEMALE_cf112cb6",
+      "Mean age (years)": "MEAN_AGE_YEARS_54827fe2",
+      "Median age (years)": "MEDIAN_AGE_YEARS_ada3abad",
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Total parolees (b)": "TOTAL_PAROLEES_2d9e5d9a"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:50d0edc1d5daaa08fe4fe705234743e5c44e79a500858d849549567ef88f33d0",
+    "2022": "sha256:73976a98c8b7fa30b6adaf5227b2d458f7739c9f29a3a48a48f3faa215950ea1",
+    "2023": "sha256:09f78751bb5c2197226a192c932f37b8ef81184046a5e14c38a8a1bada2a5167",
+    "2024": "sha256:b69f03d9e2ae86019fe51d935f57695ddbce95f205efcc5b2307e23695922899",
+    "2025": "sha256:0337b1bac2d43c01b06acf2c9182a42074640d5e72cbbc7c1582ec4117c39c17"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "observation_period_id",
+    "jurisdiction_id",
+    "characteristic_category_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 470,
+    "maximumRows": 517,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011_72d1b5da",
+        "2012_4b9a7f50",
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1"
+      ],
+      "2022": [
+        "2012_4b9a7f50",
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89"
+      ],
+      "2023": [
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d"
+      ],
+      "2024": [
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d",
+        "2024_6557739a"
+      ],
+      "2025": [
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d",
+        "2024_6557739a",
+        "2025_b2b2f104"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2025": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ]
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a"
+      ],
+      "2025": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALE_cf112cb6",
+        "MALE_9050711d",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_PAROLEES_2d9e5d9a"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

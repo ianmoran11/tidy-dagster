@@ -1,0 +1,39 @@
+#!/bin/sh
+set -eu
+
+usage() {
+  cat <<'EOF'
+Usage: scripts/generate-prisoners-remaining --checked
+
+Regenerate and verify the checked remaining Prisoners campaign.
+EOF
+}
+
+case "${1-}" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  --checked)
+    [ "$#" -eq 1 ] || { usage >&2; exit 2; }
+    ;;
+  *)
+    usage >&2
+    exit 2
+    ;;
+esac
+
+cd "$(dirname "$0")/.."
+uv run python scripts/generate-prisoners-remaining-workbooks.py
+rm -rf .product-prototype/prisoners-remaining-phase1/catalogs
+mkdir -p .product-prototype/prisoners-remaining-phase1/catalogs
+npx tsx scripts/generate-prisoners-remaining-catalogs.ts
+uv run python scripts/build-prisoners-remaining-manifests.py
+rm -rf .product-prototype/prisoners-remaining-phase1/direct
+npx tsx scripts/compile-prisoners-remaining.ts
+# Direct compilation supplies the observed dimensions and recipe digests. Finalize
+# every contract before either policy acceptance or the acceptance audit runs.
+uv run python scripts/finalize-prisoners-remaining-contracts.py
+uv run python scripts/audit-prisoners-remaining.py
+uv run python scripts/check-prisoners-remaining.py
+uv run python scripts/audit-prisoners-remaining.py --check

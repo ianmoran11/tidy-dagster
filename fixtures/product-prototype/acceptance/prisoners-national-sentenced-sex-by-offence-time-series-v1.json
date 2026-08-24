@@ -1,0 +1,570 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "prisoners-national-sentenced-sex-by-offence-time-series-v1",
+  "tableFamilyId": "national-sentenced-sex-by-offence-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 1089,
+        "2022": 1089,
+        "2023": 1089,
+        "2024": 1089,
+        "2025": 510
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "observation_period": [
+            "2011_72d1b5da",
+            "2012_4b9a7f50",
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1"
+          ],
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+            "05_ABDUCTION_HARASSMENT_cc01aad8",
+            "06_ROBBERY_EXTORTION_5edb0492",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_d0197667",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_3666eb44",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NO_38306492",
+            "VALUE_bbf3f11c"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ]
+        },
+        "2022": {
+          "observation_period": [
+            "2012_4b9a7f50",
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89"
+          ],
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+            "05_ABDUCTION_HARASSMENT_cc01aad8",
+            "06_ROBBERY_EXTORTION_5edb0492",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_d0197667",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_3666eb44",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NO_38306492",
+            "VALUE_bbf3f11c"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ]
+        },
+        "2023": {
+          "observation_period": [
+            "2013_7931aa2a",
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d"
+          ],
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+            "05_ABDUCTION_HARASSMENT_cc01aad8",
+            "06_ROBBERY_EXTORTION_5edb0492",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_d0197667",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_3666eb44",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NO_38306492",
+            "VALUE_bbf3f11c"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ]
+        },
+        "2024": {
+          "observation_period": [
+            "2014_96da37e9",
+            "2015_a85e9db4",
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d",
+            "2024_6557739a"
+          ],
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+            "05_ABDUCTION_HARASSMENT_cc01aad8",
+            "06_ROBBERY_EXTORTION_5edb0492",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_d0197667",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_3666eb44",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NO_38306492",
+            "VALUE_bbf3f11c"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ]
+        },
+        "2025": {
+          "observation_period": [
+            "2016_da6e2f53",
+            "2017_46e67c52",
+            "2018_152e69cf",
+            "2019_023e3350",
+            "2020_73a2af88",
+            "2021_1bea20e1",
+            "2022_b1ab1e89",
+            "2023_d398b29d",
+            "2024_6557739a",
+            "2025_b2b2f104"
+          ],
+          "most_serious_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+            "05_ABDUCTION_HARASSMENT_cc01aad8",
+            "06_ROBBERY_EXTORTION_5edb0492",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_d0197667",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_3666eb44",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "THIS_TAB_HAS_ONE_TABLE_WITH_THE_NUMBER_AND_PERCENTAGE_OF_SENTENCED_PRISONERS_GRO_1919b4bf"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:6f9ab0d91dbf439c49ae1fefbe13b261b0a62005ece79471cb868a4d7032c762",
+        "2022": "sha256:797cb2d4b61a873b67e4dd9862ca20a3fbcec767f1c409648970334c51eab88e",
+        "2023": "sha256:3972150d3c163100e06190890d2ac969f62b43b998bdda7f3703bac66b6686ed",
+        "2024": "sha256:e21aa66d6a1f1b4bf00801b980936d5b13736f8973ef2ed0476ba8c044520401",
+        "2025": "sha256:5c535ee2d2875a64e01599fbb53b5edda68c7b4bda8b00188cf3ac9ad19297ac"
+      },
+      "missingValues": {
+        "n.a.": "not_applicable",
+        "na": "not_available",
+        "n.p.": "suppressed",
+        "np": "suppressed",
+        "..": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "observation_period",
+    "most_serious_offence",
+    "statistic_basis",
+    "sex"
+  ],
+  "dimensionHeaders": {
+    "observation_period": [
+      "observation period"
+    ],
+    "most_serious_offence": [
+      "most serious offence"
+    ],
+    "statistic_basis": [
+      "statistic basis"
+    ],
+    "sex": [
+      "sex"
+    ]
+  },
+  "aliases": {
+    "observation_period": {
+      "2011": "2011_72d1b5da",
+      "2012": "2012_4b9a7f50",
+      "2013": "2013_7931aa2a",
+      "2014": "2014_96da37e9",
+      "2015": "2015_a85e9db4",
+      "2016": "2016_da6e2f53",
+      "2017": "2017_46e67c52",
+      "2018": "2018_152e69cf",
+      "2019": "2019_023e3350",
+      "2020": "2020_73a2af88",
+      "2021": "2021_1bea20e1",
+      "2022": "2022_b1ab1e89",
+      "2023": "2023_d398b29d",
+      "2024": "2024_6557739a",
+      "2025 (e)": "2025_b2b2f104"
+    },
+    "most_serious_offence": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "04 Dangerous/ negligent acts": "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+      "05 Abduction/ harassment": "05_ABDUCTION_HARASSMENT_cc01aad8",
+      "06 Robbery/ extortion": "06_ROBBERY_EXTORTION_5edb0492",
+      "07 Unlawful entry with intent": "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+      "08 Theft": "08_THEFT_eba67dd5",
+      "09 Fraud/ deception": "09_FRAUD_DECEPTION_d0197667",
+      "10 Illicit drug offences": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+      "11 Weapons/ explosives": "11_WEAPONS_EXPLOSIVES_3666eb44",
+      "12 Property damage and environmental pollution": "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+      "13 Public order offences": "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+      "14 Traffic and vehicle regulatory offences": "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+      "15 Offences against justice": "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+      "16 Miscellaneous offences": "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+      "Total": "TOTAL_ab2882c8",
+      "Total (d)": "TOTAL_ab2882c8"
+    },
+    "statistic_basis": {
+      "no.": "NO_38306492",
+      "%": "VALUE_bbf3f11c",
+      "This tab has one table with the number and percentage of sentenced prisoners grouped by sex and most serious offence/charge, from the reference period 2016 to the reference period 2025. It ranges from cell A1 to R45.": "THIS_TAB_HAS_ONE_TABLE_WITH_THE_NUMBER_AND_PERCENTAGE_OF_SENTENCED_PRISONERS_GRO_1919b4bf"
+    },
+    "sex": {
+      "MALES": "MALES_66d5f994",
+      "FEMALES": "FEMALES_29864773",
+      "PERSONS": "PERSONS_4d6dccab",
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons": "PERSONS_4d6dccab",
+      "Persons (f)": "PERSONS_4d6dccab"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:d3620e111a554662bfac2dca8fa4790342a3b94a3b513e1e35b82d6b0b888cf0",
+    "2022": "sha256:24733c592d1fe002d965c250b0f5ae3736624bb1ae896e762a2df14472b4c983",
+    "2023": "sha256:52eae0841fe6ff265127d0e7677f154d55a1645b6dd899b76429cce34ecf32f9",
+    "2024": "sha256:4ce38cf14718f72c4814c4f44347432a4fefad1ba76b35ecad8184cc6f932cda",
+    "2025": "sha256:6bacd90d34b170ffffbad17d58fa36d344bf62443e9c984d78e1a795929f41cf"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0
+  },
+  "uniqueKey": [
+    "reference_date",
+    "observation_period_id",
+    "most_serious_offence_id",
+    "statistic_basis_id",
+    "sex_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 510,
+    "maximumRows": 1089,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2011_72d1b5da",
+        "2012_4b9a7f50",
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1"
+      ],
+      "2022": [
+        "2012_4b9a7f50",
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89"
+      ],
+      "2023": [
+        "2013_7931aa2a",
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d"
+      ],
+      "2024": [
+        "2014_96da37e9",
+        "2015_a85e9db4",
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d",
+        "2024_6557739a"
+      ],
+      "2025": [
+        "2016_da6e2f53",
+        "2017_46e67c52",
+        "2018_152e69cf",
+        "2019_023e3350",
+        "2020_73a2af88",
+        "2021_1bea20e1",
+        "2022_b1ab1e89",
+        "2023_d398b29d",
+        "2024_6557739a",
+        "2025_b2b2f104"
+      ]
+    },
+    "mostSeriousOffencesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+        "05_ABDUCTION_HARASSMENT_cc01aad8",
+        "06_ROBBERY_EXTORTION_5edb0492",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_d0197667",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_3666eb44",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+        "05_ABDUCTION_HARASSMENT_cc01aad8",
+        "06_ROBBERY_EXTORTION_5edb0492",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_d0197667",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_3666eb44",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+        "05_ABDUCTION_HARASSMENT_cc01aad8",
+        "06_ROBBERY_EXTORTION_5edb0492",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_d0197667",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_3666eb44",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+        "05_ABDUCTION_HARASSMENT_cc01aad8",
+        "06_ROBBERY_EXTORTION_5edb0492",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_d0197667",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_3666eb44",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ],
+      "2025": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_e20f5885",
+        "05_ABDUCTION_HARASSMENT_cc01aad8",
+        "06_ROBBERY_EXTORTION_5edb0492",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_d0197667",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_3666eb44",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "14_TRAFFIC_AND_VEHICLE_REGULATORY_OFFENCES_69dc8109",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NO_38306492",
+        "VALUE_bbf3f11c"
+      ],
+      "2022": [
+        "NO_38306492",
+        "VALUE_bbf3f11c"
+      ],
+      "2023": [
+        "NO_38306492",
+        "VALUE_bbf3f11c"
+      ],
+      "2024": [
+        "NO_38306492",
+        "VALUE_bbf3f11c"
+      ],
+      "2025": [
+        "THIS_TAB_HAS_ONE_TABLE_WITH_THE_NUMBER_AND_PERCENTAGE_OF_SENTENCED_PRISONERS_GRO_1919b4bf"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2022": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2023": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2024": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2025": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false
+}

@@ -65,7 +65,7 @@ The selected `tidycell-tidybank-summary-prompt-closure-v1` manifest is committed
 at `fixtures/source-closure/summary-prompt-closure-v1.discovery.json`:
 
 - manifest digest:
-  `sha256:3ac83cc30cedc9edcf2f68b31c51297a914c755e117ee2b3887f5c90abd7de17`;
+  `sha256:71535242ef44cb3a486c4fef7f1493b4e838b89a7d947b3a13a8ad0734f89a3d`;
 - 140 exact items and 4,781,394 bytes;
 - 128 TidyCell items exactly matching Phase A snapshot
   `sha256:2628b98976791c1996c0baafb22b2f8c9ee87a03e60b6cf0f4fbc5ff45ce8f4d`;
@@ -92,7 +92,7 @@ metadata, and exact Git executable/version with before/after stability checks.
 
 `summary-prompt-closure-v1.self-review.json` records implementing-agent
 self-review digest
-`sha256:7d4c8e23a0085b66dc836ef2e03673f01efa38998326b829190d680c0b838369`.
+`sha256:44598aa19eb6d8101dc56c7646364b4bfd06f730f7c58cb489cfc740a79b1d5f`.
 It accepts the manifest only for bounded copy and parity implementation. It
 explicitly claims neither independent review nor parity. Its
 `sourceBytesCopied: false` claim describes the review-time no-copy state, not the
@@ -100,7 +100,12 @@ subsequent separately committed custody event.
 
 ## Repository-local reference custody
 
-`tidy-source-closure-copy` copied exactly the 140 reviewed items to:
+The current no-copy discovery refresh changed only its checked producer binding;
+the selected 140 source items and bytes are unchanged. The already executed copy
+and replay remain immutable historical evidence under their original discovery
+and review identities rather than being relabelled as newly executed evidence.
+
+`tidy-source-closure-copy` copied exactly the 140 historically reviewed items to:
 
 `reference/source-closures/sha256-3ac83cc30cedc9edcf2f68b31c51297a914c755e117ee2b3887f5c90abd7de17/`
 
@@ -211,9 +216,9 @@ A separate network-denied relocated harness also freezes four historical
 catalogues with reference digest
 `sha256:7632516d91c47855105d72b072df7368bf67b2167c0e74a4ab4833f6b5a954df`.
 The candidate source closure digest is
-`sha256:642319362bdc654d2b37ca9ed69b3234dd9fa41b756cfabc423404e054760da4`
+`sha256:d8ca64f2396b7b6db441a29a3944f92e5f41c92d8ce36736f3bd860a67994e6c`
 and the implementing-agent self-reviewed scoped parity digest is
-`sha256:1ff8c4be2c785745f1e2c8fbd839160da659f56c6a571911368526047b76c0a1`.
+`sha256:a8a4467cccc4217530f32e27015da98aca372dfcdef9a69b7859ceb6987ccc64`.
 The historical record remains provenance-only and false for candidate/full
 parity; the separate candidate record establishes only exact four-catalogue
 compatibility.

@@ -14,15 +14,6 @@ const referenceSchema = "tidy.historical-source-region-catalog-reference/v1";
 const caseSchema = "tidy.historical-source-region-catalog-reference-case/v1";
 const paritySchema = "tidy.candidate-region-catalog-parity/v1";
 const sourceDomain = "tidy.candidate-region-catalog-source-closure/v1";
-// Keep the historical parity fixture immutable while binding this narrowly
-// approved additive source revision; exact frozen catalogs are still compared
-// below, so any output delta in the historical scope remains a hard failure.
-const approvedCatalogPromotionExtensionPath =
-  "apps/domain-worker/src/catalog/role-aware-region-catalog-v5.ts";
-const approvedCatalogPromotionExtensionDigest =
-  "sha256:4e0e5655c76855da770188d8dabe673f4af5d544dbab18546289516a5e515b49";
-const approvedCandidateSourceDigest =
-  "sha256:d8ca64f2396b7b6db441a29a3944f92e5f41c92d8ce36736f3bd860a67994e6c";
 const referenceDigest =
   "sha256:7632516d91c47855105d72b072df7368bf67b2167c0e74a4ab4833f6b5a954df";
 
@@ -71,16 +62,12 @@ describe("historical source role-aware region catalogue parity", () => {
         const contentDigest = sha256Bytes(
           readFileSync(path.join(process.cwd(), file.relativePath)),
         );
-        expect(contentDigest).toBe(
-          file.relativePath === approvedCatalogPromotionExtensionPath
-            ? approvedCatalogPromotionExtensionDigest
-            : file.contentDigest,
-        );
+        expect(contentDigest).toBe(file.contentDigest);
         return { relativePath: file.relativePath, contentDigest };
       },
     );
     expect(domainDigest(sourceDomain, currentFiles)).toBe(
-      approvedCandidateSourceDigest,
+      parity.candidateSourceDigest,
     );
     expect(parity.referenceDigest).toBe(referenceDigest);
     expect(parity.referenceCaseDigests).toEqual(

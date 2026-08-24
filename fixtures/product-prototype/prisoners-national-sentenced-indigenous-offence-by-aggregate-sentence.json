@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "prisoners-australia-national-sentenced-indigenous-offence-by-aggregate-sentence",
+  "publicationId": "prisoners-australia",
+  "tableFamilyId": "national-sentenced-indigenous-offence-by-aggregate-sentence",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 10,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/prisoners-national-sentenced-indigenous-offence-by-aggregate-sentence-v1.json",
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2021-06-30",
+      "path": "workbooks/prisoners-australia-2021-national-source.xlsx",
+      "contentDigest": "sha256:264b018d9ab5584ebc44774cf349283c072b0eb1304a0b865dadffe40d5d2d7a",
+      "byteLength": 195239,
+      "sheet": "Table_11",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-11-2021.response.txt",
+        "contentDigest": "sha256:c2b8cf2a494e8a13169775987939df41e1d166342ffda0cd5f1d8f6a3fd9b51a",
+        "byteLength": 535,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/prisoners-australia-2022-national-source.xlsx",
+      "contentDigest": "sha256:0b6f14ccf90fded702181e26e023262afbb01016986c630e8bf27648fd7828be",
+      "byteLength": 212754,
+      "sheet": "Table_11",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-11-2022.response.txt",
+        "contentDigest": "sha256:7b15dd09e272b222dd4c5594ce138ba8ce38f4f667760c013905d2c5bd4ac671",
+        "byteLength": 548,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/prisoners-australia-2023-national-source.xlsx",
+      "contentDigest": "sha256:6e640bf65399eaa405e48acda86be9403bc2b8196ff2ccd926906a2e76527e2b",
+      "byteLength": 209379,
+      "sheet": "Table_11",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-11-2023.response.txt",
+        "contentDigest": "sha256:7274a37ff3b2a81f68f0f468f5eda75f066b4bdb2cf70476804387d7f6c31a64",
+        "byteLength": 548,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/prisoners-australia-2024-national-source.xlsx",
+      "contentDigest": "sha256:23f0677e705e9bf88bf4cffed42d1f263772dd38bd2409d2a000d1f9fc79667e",
+      "byteLength": 180975,
+      "sheet": "Table 11",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-11-2024.response.txt",
+        "contentDigest": "sha256:42f3aeaf0290946753670794377385b9488ce98249773c906c82a56ca2c82ec8",
+        "byteLength": 561,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      }
+    },
+    {
+      "year": 2025,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/prisoners-australia-2025-national-remaining-bounded.xlsx",
+      "contentDigest": "sha256:fea82708f82cef5e8d58b44edc16e56158f9416755d69336e36c6ce03cb95a93",
+      "byteLength": 115014,
+      "sheet": "Table 12",
+      "replayResponse": {
+        "path": "replay/prisoners-australia-national-12-2025.response.txt",
+        "contentDigest": "sha256:26de6d9573bf2f61b3b44849e9a6be64d125d0c00afa09a607af531615b13d18",
+        "byteLength": 561,
+        "historicalModel": "human-authored/deterministic-geometry-v1",
+        "acceptanceAuthority": false
+      },
+      "normalization": "trim-pathological-full-width-formatting-merge-v1"
+    }
+  ]
+}
