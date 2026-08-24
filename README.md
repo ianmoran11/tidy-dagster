@@ -229,6 +229,24 @@ The Tailnet URL is
 `https://ians-mac-mini-1.taild519de.ts.net:3031/`. It has no application-level
 authentication and relies on the Tailnet identity boundary.
 
+### Consolidated SQLite export
+
+The complete explicit status registry can also be projected into one ignored,
+local SQLite database, with typed query columns and semantically lossless
+canonical-row JSON:
+
+```sh
+scripts/tidy-sqlite-export build
+scripts/tidy-sqlite-export check
+scripts/tidy-sqlite-export package
+```
+
+The projection is not acceptance authority or training-eligible and makes no
+provider calls. The fixed-header gzip command enforces GitHub's strict
+under-2-GiB asset boundary and reports checksums; publication remains manual.
+See [`docs/sqlite-export.md`](docs/sqlite-export.md) for schema, query, rebuild,
+release, attribution, and licensing guidance.
+
 `tidy-dagster` is a staged, standalone reimplementation of TidyCell's spreadsheet-to-recipe pipeline and its future semantic-data and microsimulation-calibration workflow.
 
 ## Current status

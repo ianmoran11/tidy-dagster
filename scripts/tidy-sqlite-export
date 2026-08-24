@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec uv run --project "$ROOT" python -m tidy_orchestrator.sqlite_export_cli \
+  --project-root "$ROOT" "$@"
