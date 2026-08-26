@@ -1,6 +1,6 @@
 /* Federal Defendants-only grouped-panel semantic map and replay runtime. */
 import { createHash } from "node:crypto";
-import { types as utilTypes } from "node:util";
+import { TextDecoder, TextEncoder, types as utilTypes } from "node:util";
 import { z } from "zod";
 import {
   expandRange,
@@ -58,6 +58,26 @@ const semanticValueSchema = z
   .min(1)
   .max(240)
   .regex(/^[a-z0-9][a-z0-9._:|+-]{0,239}$/);
+const MAX_FEDERAL_PANEL_KEY_SOURCE_BYTES = 1_024;
+const MAX_FEDERAL_PANEL_KEY_ENCODED_LENGTH =
+  MAX_FEDERAL_PANEL_KEY_SOURCE_BYTES * 3;
+const panelKeyEncodedValueSchema = z
+  .string()
+  .min(1)
+  .max(MAX_FEDERAL_PANEL_KEY_ENCODED_LENGTH)
+  .regex(/^(?:[A-Za-z0-9._~-]|%[0-9A-F]{2})+$/);
+const panelKeySchema = z
+  .string()
+  .min(3)
+  .max(80 + 1 + MAX_FEDERAL_PANEL_KEY_ENCODED_LENGTH)
+  .refine((value) => {
+    const separator = value.indexOf(":");
+    if (separator <= 0) return false;
+    return (
+      idSchema.safeParse(value.slice(0, separator)).success &&
+      panelKeyEncodedValueSchema.safeParse(value.slice(separator + 1)).success
+    );
+  }, "Expected a dimension ID and canonical percent-encoded source value");
 const addressSchema = z.string().refine((value) => {
   try {
     return formatCell(parseCell(value)) === value;
@@ -226,7 +246,7 @@ const panelSchema = z
   .object({
     id: idSchema,
     order: z.number().int().min(1).max(1_000),
-    key: semanticValueSchema,
+    key: panelKeySchema,
     keySource: z
       .object({
         dimensionId: idSchema,
@@ -303,7 +323,13 @@ export type FederalDefendantsGroupedRecipeV1 = {
     id: string;
     order: number;
     key: string;
-    keySource: { dimensionId: string; selectedAddress: string };
+    keySource: {
+      dimensionId: string;
+      selectedAddress: string;
+      rawValue: string;
+      encodedValue: string;
+      source: CellProof;
+    };
     name: string;
     targetAddresses: string[];
   }>;
@@ -344,11 +370,31 @@ const recipeSchema: z.ZodType<FederalDefendantsGroupedRecipeV1> = z
           .object({
             id: idSchema,
             order: z.number().int().positive(),
-            key: semanticValueSchema,
+            key: panelKeySchema,
             keySource: z
               .object({
                 dimensionId: idSchema,
                 selectedAddress: addressSchema,
+                rawValue: z.string().min(1),
+                encodedValue: panelKeyEncodedValueSchema,
+                source: z
+                  .object({
+                    sheet: z.string().min(1),
+                    address: addressSchema,
+                    row: z.number().int().positive(),
+                    col: z.number().int().positive(),
+                    data_type: z.enum([
+                      "blank",
+                      "string",
+                      "numeric",
+                      "boolean",
+                      "date",
+                      "error",
+                    ]),
+                    formula: z.string().nullable(),
+                    formatted: z.string().nullable(),
+                  })
+                  .strict(),
               })
               .strict(),
             name: z.string().min(1).max(200),
@@ -384,9 +430,19 @@ const recipeSchema: z.ZodType<FederalDefendantsGroupedRecipeV1> = z
   })
   .strict();
 
+export type FederalPanelKeyAttachmentProof = {
+  dimensionId: string;
+  key: string;
+  selectedAddress: string;
+  rawValue: string;
+  encodedValue: string;
+  source: CellProof;
+};
+
 export type FederalDefendantsGroupedAttachmentProof = {
   targetAddress: string;
   vectorId: string;
+  panelKeyAttachment: FederalPanelKeyAttachmentProof;
   dimensions: Array<{
     dimensionId: string;
     direction: HeaderDirection;
@@ -470,6 +526,7 @@ export type FederalDefendantsGroupedExecutionV1 = {
         rawValue: string | number;
         valueStatus: FederalValueStatus;
         provenanceProfileId: string;
+        panelKeyAttachment: FederalPanelKeyAttachmentProof;
         attachments: Array<{
           dimensionId: string;
           dimensionName: string;
@@ -714,6 +771,14 @@ function compileOrThrow(input: {
   )
     fail("ownership", "FEDERAL_TARGET_COVERAGE_MISMATCH");
 
+  // Panel identity must be derivable from an exact non-empty Unicode string.
+  // Validate it before generic universe validation so invalid panel-key cells
+  // cannot be reported as ordinary dimension-source failures.
+  for (const panel of map.panels)
+    encodeFederalPanelKeySourceValue(
+      bounded.byAddress.get(panel.keySource.selectedAddress)?.value,
+    );
+
   const universes = uniqueById(
     map.sourceUniverses,
     "FEDERAL_DUPLICATE_SOURCE_UNIVERSE",
@@ -779,6 +844,8 @@ function compileOrThrow(input: {
   if (universeByPanelDimension.size !== panelIds.size * cellDimensions.length)
     fail("ownership", "FEDERAL_PANEL_DIMENSION_UNIVERSE_COVERAGE_MISMATCH");
 
+  const panelKeyProofs = new Map<string, FederalPanelKeyAttachmentProof>();
+  const derivedPanelKeys = new Set<string>();
   for (const panel of map.panels) {
     const keyUniverse = universeByPanelDimension.get(
       `${panel.id}:${panel.keySource.dimensionId}`,
@@ -790,11 +857,24 @@ function compileOrThrow(input: {
     if (
       !keyUniverse ||
       !keyAddresses?.has(panel.keySource.selectedAddress) ||
-      !isDimensionValue(keyCell) ||
-      panel.key !==
-        `${panel.keySource.dimensionId}:${semanticKeyValue(keyCell.value)}`
+      keyCell === undefined
     )
       fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_MISMATCH");
+    const encodedValue = encodeFederalPanelKeySourceValue(keyCell.value);
+    const derivedKey = `${panel.keySource.dimensionId}:${encodedValue}`;
+    if (panel.key !== derivedKey)
+      fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_MISMATCH");
+    if (derivedPanelKeys.has(derivedKey))
+      fail("ownership", "FEDERAL_DUPLICATE_PANEL");
+    derivedPanelKeys.add(derivedKey);
+    panelKeyProofs.set(panel.id, {
+      dimensionId: panel.keySource.dimensionId,
+      key: derivedKey,
+      selectedAddress: panel.keySource.selectedAddress,
+      rawValue: keyCell.value as string,
+      encodedValue,
+      source: cellProof(keyCell),
+    });
   }
   const panelDefinitions = new Map(
     map.panels.map((panel) => [panel.id, panel]),
@@ -888,6 +968,7 @@ function compileOrThrow(input: {
     attachmentProof.push({
       targetAddress: target.address,
       vectorId: target.vectorId,
+      panelKeyAttachment: structuredClone(panelKeyProofs.get(panel.id)!),
       dimensions,
     });
   }
@@ -919,7 +1000,13 @@ function compileOrThrow(input: {
       id: panel.id,
       order: panel.order,
       key: panel.key,
-      keySource: { ...panel.keySource },
+      keySource: {
+        dimensionId: panel.keySource.dimensionId,
+        selectedAddress: panel.keySource.selectedAddress,
+        rawValue: panelKeyProofs.get(panel.id)!.rawValue,
+        encodedValue: panelKeyProofs.get(panel.id)!.encodedValue,
+        source: structuredClone(panelKeyProofs.get(panel.id)!.source),
+      },
       name: panel.name,
       targetAddresses: [...panelAddresses.get(panel.id)!],
     })),
@@ -1057,6 +1144,30 @@ function executeRecipe(
     recipe.provenanceProfiles.map((entry) => [entry.id, entry.values]),
   );
   const panels = new Map(recipe.panels.map((entry) => [entry.id, entry]));
+  const panelKeyAttachments = new Map<string, FederalPanelKeyAttachmentProof>();
+  for (const panel of recipe.panels) {
+    const sourceCell = cells.get(panel.keySource.selectedAddress);
+    if (sourceCell === undefined)
+      throw new Error("FEDERAL_RECIPE_PANEL_KEY_SOURCE_MISSING");
+    const encodedValue = encodeFederalPanelKeySourceValue(sourceCell.value);
+    const sourceProof = cellProof(sourceCell);
+    if (
+      panel.key !== `${panel.keySource.dimensionId}:${encodedValue}` ||
+      panel.keySource.rawValue !== sourceCell.value ||
+      panel.keySource.encodedValue !== encodedValue ||
+      digestFederalDefendantsCanonical(panel.keySource.source) !==
+        digestFederalDefendantsCanonical(sourceProof)
+    )
+      throw new Error("FEDERAL_RECIPE_PANEL_KEY_SOURCE_DRIFT");
+    panelKeyAttachments.set(panel.id, {
+      dimensionId: panel.keySource.dimensionId,
+      key: panel.key,
+      selectedAddress: panel.keySource.selectedAddress,
+      rawValue: sourceCell.value as string,
+      encodedValue,
+      source: sourceProof,
+    });
+  }
   const universeGroups = new Map(
     recipe.sourceUniverses.map((entry) => {
       const panel = panels.get(entry.panelId);
@@ -1158,6 +1269,7 @@ function executeRecipe(
       rawValue: targetCell.value as string | number,
       valueStatus: status,
       provenanceProfileId: target.provenanceProfileId,
+      panelKeyAttachment: structuredClone(panelKeyAttachments.get(panel.id)!),
       attachments: attachmentTrace,
     });
   }
@@ -1748,16 +1860,87 @@ function validateCompleteUniverse(input: {
   // value position is blank; completeness, not forced use, is authoritative.
 }
 
-function semanticKeyValue(value: string | number): string {
-  const normalized = String(value)
-    .normalize("NFKC")
-    .trim()
-    .toLowerCase()
-    .replace(/[–—−]/g, "-")
-    .replace(/\s+/g, "-");
-  if (!/^[a-z0-9][a-z0-9._:|+-]{0,239}$/.test(normalized))
+function hasOnlyUnicodeScalarValues(value: string): boolean {
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index);
+    if (code >= 0xd800 && code <= 0xdbff) {
+      const next = value.charCodeAt(index + 1);
+      if (!(next >= 0xdc00 && next <= 0xdfff)) return false;
+      index += 1;
+    } else if (code >= 0xdc00 && code <= 0xdfff) return false;
+  }
+  return true;
+}
+
+function isRfc3986UnreservedByte(byte: number): boolean {
+  return (
+    (byte >= 0x41 && byte <= 0x5a) ||
+    (byte >= 0x61 && byte <= 0x7a) ||
+    (byte >= 0x30 && byte <= 0x39) ||
+    byte === 0x2d ||
+    byte === 0x2e ||
+    byte === 0x5f ||
+    byte === 0x7e
+  );
+}
+
+export function encodeFederalPanelKeySourceValue(value: unknown): string {
+  if (
+    typeof value !== "string" ||
+    value.length === 0 ||
+    !hasOnlyUnicodeScalarValues(value)
+  )
     fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_INVALID");
-  return normalized;
+  const bytes = new TextEncoder().encode(value);
+  if (bytes.length === 0 || bytes.length > MAX_FEDERAL_PANEL_KEY_SOURCE_BYTES)
+    fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_INVALID");
+  let encoded = "";
+  for (const byte of bytes)
+    encoded += isRfc3986UnreservedByte(byte)
+      ? String.fromCharCode(byte)
+      : `%${byte.toString(16).toUpperCase().padStart(2, "0")}`;
+  if (!panelKeyEncodedValueSchema.safeParse(encoded).success)
+    fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_INVALID");
+  return encoded;
+}
+
+export function decodeFederalPanelKeySourceValue(encoded: unknown): string {
+  if (
+    typeof encoded !== "string" ||
+    !panelKeyEncodedValueSchema.safeParse(encoded).success
+  )
+    fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_INVALID");
+  const bytes: number[] = [];
+  for (let index = 0; index < encoded.length; ) {
+    const code = encoded.charCodeAt(index);
+    if (code <= 0x7f && isRfc3986UnreservedByte(code)) {
+      bytes.push(code);
+      index += 1;
+      continue;
+    }
+    if (
+      encoded[index] !== "%" ||
+      !/^[0-9A-F]{2}$/.test(encoded.slice(index + 1, index + 3))
+    )
+      fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_INVALID");
+    bytes.push(Number.parseInt(encoded.slice(index + 1, index + 3), 16));
+    index += 3;
+  }
+  let decoded: string;
+  try {
+    decoded = new TextDecoder("utf-8", { fatal: true }).decode(
+      Uint8Array.from(bytes),
+    );
+  } catch {
+    fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_INVALID");
+  }
+  if (
+    decoded.length === 0 ||
+    !hasOnlyUnicodeScalarValues(decoded) ||
+    encodeFederalPanelKeySourceValue(decoded) !== encoded
+  )
+    fail("ownership", "FEDERAL_PANEL_KEY_SOURCE_INVALID");
+  return decoded;
 }
 
 function classifyTargetValue(cell: TidyCell | undefined): FederalValueStatus {

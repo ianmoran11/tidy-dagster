@@ -25,6 +25,8 @@ import {
   MAX_FEDERAL_GROUPED_JSON_DEPTH,
   MAX_FEDERAL_GROUPED_JSON_NODES,
   assertFederalGroupedJsonBudget,
+  decodeFederalPanelKeySourceValue,
+  encodeFederalPanelKeySourceValue,
   parseFederalDefendantsGroupedSemanticMapV1,
   type FederalDefendantsGeometryAuthorityV1,
   type FederalDefendantsGroupedSemanticMapV1,
@@ -722,7 +724,7 @@ function realCanaryMap(digest: string): FederalDefendantsGroupedSemanticMapV1 {
         {
           id: "current",
           order: 1,
-          key: "observation-period:2024-25",
+          key: "observation-period:2024%E2%80%9325",
           keySource: {
             dimensionId: "observation-period",
             selectedAddress: "R7C2",
@@ -733,7 +735,7 @@ function realCanaryMap(digest: string): FederalDefendantsGroupedSemanticMapV1 {
         {
           id: "previous",
           order: 2,
-          key: "observation-period:2023-24",
+          key: "observation-period:2023%E2%80%9324",
           keySource: {
             dimensionId: "observation-period",
             selectedAddress: "R35C2",
@@ -809,6 +811,134 @@ async function realFixture() {
 }
 
 describe("Federal Defendants grouped RecipeV1", () => {
+  it("percent-encodes exact raw UTF-8 panel keys reversibly without normalization", () => {
+    const examples = [
+      [
+        "Latest 5 years (2017–18 to 2021–22)",
+        "Latest%205%20years%20%282017%E2%80%9318%20to%202021%E2%80%9322%29",
+      ],
+      [
+        "Previous 5 years ( 2012–13...)",
+        "Previous%205%20years%20%28%202012%E2%80%9313...%29",
+      ],
+      ["Vic.(a)", "Vic.%28a%29"],
+      ["2010–11(a)", "2010%E2%80%9311%28a%29"],
+      [
+        "Total finalised (excluding transfer to other court levels)",
+        "Total%20finalised%20%28excluding%20transfer%20to%20other%20court%20levels%29",
+      ],
+      ["A/B?C#D% E", "A%2FB%3FC%23D%25%20E"],
+      [
+        "é|e\u0301|Ａ|A|–|-",
+        "%C3%A9%7Ce%CC%81%7C%EF%BC%A1%7CA%7C%E2%80%93%7C-",
+      ],
+      ["AZaz09-._~", "AZaz09-._~"],
+    ] as const;
+    const encodedExamples = examples.map(([raw, encoded]) => {
+      expect(encodeFederalPanelKeySourceValue(raw), raw).toBe(encoded);
+      expect(decodeFederalPanelKeySourceValue(encoded), encoded).toBe(raw);
+      return encoded;
+    });
+    expect(new Set(encodedExamples).size).toBe(examples.length);
+
+    expect(encodeFederalPanelKeySourceValue("A")).not.toBe(
+      encodeFederalPanelKeySourceValue("a"),
+    );
+    expect(encodeFederalPanelKeySourceValue("é")).not.toBe(
+      encodeFederalPanelKeySourceValue("e\u0301"),
+    );
+    expect(encodeFederalPanelKeySourceValue("–")).not.toBe(
+      encodeFederalPanelKeySourceValue("-"),
+    );
+    expect(encodeFederalPanelKeySourceValue(" leading")).toBe("%20leading");
+    for (const invalid of ["", 1, true, null, "\ud800", "\udc00"])
+      expect(() => encodeFederalPanelKeySourceValue(invalid)).toThrow(
+        "FEDERAL_PANEL_KEY_SOURCE_INVALID",
+      );
+    for (const invalid of ["%41", "%c3%A9", "%FF", "A/B", "%", "%0"])
+      expect(() => decodeFederalPanelKeySourceValue(invalid)).toThrow(
+        "FEDERAL_PANEL_KEY_SOURCE_INVALID",
+      );
+
+    for (const invalid of ["", 1, "\ud800"] as const) {
+      const sheet = syntheticSheet();
+      const keyCell = sheet.cells.find((entry) => entry.address === "R3C2")!;
+      keyCell.value = invalid;
+      keyCell.data_type = typeof invalid === "number" ? "numeric" : "string";
+      expect(compile(baseMap(), sheet).result).toMatchObject({
+        ok: false,
+        code: "FEDERAL_PANEL_KEY_SOURCE_INVALID",
+      });
+    }
+  });
+
+  it("binds official punctuated panel keys to exact raw source evidence", () => {
+    const examples = [
+      "Latest 5 years (2017–18 to 2021–22)",
+      "Previous 5 years ( 2012–13...)",
+      "Vic.(a)",
+      "2010–11(a)",
+      "Total finalised (excluding transfer to other court levels)",
+    ];
+    for (const rawValue of examples) {
+      const sheet = syntheticSheet();
+      const keyCell = sheet.cells.find((entry) => entry.address === "R3C2")!;
+      keyCell.value = rawValue;
+      keyCell.formula = `=${JSON.stringify(rawValue)}`;
+      keyCell.formatted = rawValue;
+      const map = baseMap();
+      const encodedValue = encodeFederalPanelKeySourceValue(rawValue);
+      map.panels[0].key = `observation-period:${encodedValue}`;
+      const compiled = compile(map, sheet);
+      expect(compiled.result.ok, rawValue).toBe(true);
+      if (!compiled.result.ok) continue;
+      const panel = compiled.result.envelope.recipe.panels[0];
+      expect(panel.key).toBe(`observation-period:${encodedValue}`);
+      expect(panel.keySource).toMatchObject({
+        dimensionId: "observation-period",
+        selectedAddress: "R3C2",
+        rawValue,
+        encodedValue,
+        source: {
+          sheet: "Table 7",
+          address: "R3C2",
+          row: 3,
+          col: 2,
+          data_type: "string",
+          formula: `=${JSON.stringify(rawValue)}`,
+          formatted: rawValue,
+        },
+      });
+      const firstProof =
+        compiled.result.envelope.attachmentManifest.attachments[0]
+          .panelKeyAttachment;
+      expect(firstProof).toEqual({
+        dimensionId: "observation-period",
+        key: `observation-period:${encodedValue}`,
+        selectedAddress: "R3C2",
+        rawValue,
+        encodedValue,
+        source: panel.keySource.source,
+      });
+      const execution = executeFederalDefendantsGroupedRecipeV1(
+        compiled.result.envelope,
+        {
+          mapRaw: compiled.raw,
+          sheet,
+          expectedExecutionWorkbookDigest: map.source.executionWorkbookDigest,
+          expectedSourceWorkbookDigest: map.source.sourceWorkbookDigest,
+          trustedEnvelopeDigest: compiled.result.envelope.envelopeDigest,
+        },
+      );
+      expect(
+        execution.tables[0].trace.value_cells[0].panelKeyAttachment,
+      ).toEqual(firstProof);
+      expect(execution.tables[0].rows[0]._panel_key).toBe(
+        `observation-period:${encodedValue}`,
+      );
+    }
+  });
+
   it("compiles repeated panels, grouped headers, sparse cells, formulas, markers and zeros", () => {
     const map = baseMap();
     const { raw, result } = compile(map);
@@ -1262,7 +1392,7 @@ describe("Federal Defendants grouped RecipeV1", () => {
       expectedExecutionWorkbookDigest: digest,
       expectedSourceWorkbookDigest: digest,
     });
-    expect(first.ok).toBe(true);
+    expect(first.ok, JSON.stringify(first)).toBe(true);
     expect(second).toEqual(first);
     if (!first.ok) return;
     const execution = executeFederalDefendantsGroupedRecipeV1(first.envelope, {
@@ -1552,7 +1682,7 @@ describe("Federal Defendants grouped RecipeV1", () => {
       },
     };
     const result = await runPrototypeAwareWorker(request, input, output);
-    expect(result.ok).toBe(true);
+    expect(result.ok, JSON.stringify(result)).toBe(true);
     if (!result.ok) return;
     expect(result.warnings).toEqual([]);
     const execution = JSON.parse(
