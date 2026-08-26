@@ -42,8 +42,15 @@ import { resolveRecipeSelectors } from "../recipe/resolveSelectors.js";
 import { buildSheetSummary } from "../summary/buildSheetSummary.js";
 import { parseWorkbook } from "../workbook/parseWorkbook.js";
 import {
+  FederalDefendantsBoundedWorkbookError,
+  parseFederalDefendantsBoundedRawWorkbook,
+  preflightFederalDefendantsWorkbookRoute,
+  type FederalDefendantsWorkbookRouteResult,
+} from "../workbook/parseFederalDefendantsBoundedWorkbook.js";
+import {
   enforceRecipeSelectorLimit,
   enforceWorkbookLimits,
+  LimitViolation,
   preflightXlsxZip,
 } from "./resourceLimits.js";
 import type { RecipeV01 } from "../recipe/types.js";
@@ -343,6 +350,7 @@ export async function interpretSemanticMapV13(
   let federalMap:
     | ReturnType<typeof parseFederalDefendantsGroupedSemanticMapV1>
     | undefined;
+  let federalWorkbookRoute: FederalDefendantsWorkbookRouteResult | undefined;
   if (isFederalGrouped) {
     try {
       federalMap = parseFederalDefendantsGroupedSemanticMapV1(mapRaw);
@@ -388,6 +396,20 @@ export async function interpretSemanticMapV13(
         geometryPreflight.message,
         { stage: geometryPreflight.stage },
       );
+    federalWorkbookRoute = preflightFederalDefendantsWorkbookRoute({
+      source: federalMap!.source,
+      requestedSheet: request.parameters.sheet,
+      declaredWorkbookDigest: workbookInput.contentDigest,
+      declaredWorkbookBytes: workbookInput.byteLength,
+    });
+    if (!federalWorkbookRoute.ok)
+      return failure(
+        request.requestId,
+        federalWorkbookRoute.code,
+        "semantic-map",
+        federalWorkbookRoute.message,
+        { stage: federalWorkbookRoute.stage },
+      );
   } else {
     try {
       map = parseSemanticTableMapJson(mapRaw);
@@ -401,8 +423,44 @@ export async function interpretSemanticMapV13(
     }
   }
   const workbookBytes = await readVerifiedInput(inputRoot, workbookInput);
-  await preflightXlsxZip(workbookBytes, request.limits);
-  const parsedWorkbook = await parseWorkbook(workbookBytes);
+  let parsedWorkbook;
+  if (
+    isFederalGrouped &&
+    federalWorkbookRoute?.ok &&
+    federalWorkbookRoute.bounded
+  ) {
+    try {
+      parsedWorkbook = await parseFederalDefendantsBoundedRawWorkbook({
+        bytes: workbookBytes,
+        source: federalMap!.source,
+        requestedSheet: request.parameters.sheet,
+        declaredWorkbookDigest: workbookInput.contentDigest,
+        declaredWorkbookBytes: workbookInput.byteLength,
+        limits: request.limits,
+      });
+    } catch (error) {
+      if (error instanceof FederalDefendantsBoundedWorkbookError)
+        return failure(
+          request.requestId,
+          error.code,
+          error.stage === "source" ? "semantic-map" : error.stage,
+          error.message,
+        );
+      if (error instanceof LimitViolation)
+        return failure(request.requestId, error.code, "limit", error.message);
+      return failure(
+        request.requestId,
+        "INVALID_WORKBOOK",
+        "parse",
+        error instanceof Error
+          ? error.message
+          : "Bounded workbook parsing failed.",
+      );
+    }
+  } else {
+    await preflightXlsxZip(workbookBytes, request.limits);
+    parsedWorkbook = await parseWorkbook(workbookBytes);
+  }
   if (!parsedWorkbook.ok)
     return failure(
       request.requestId,

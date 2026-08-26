@@ -46,6 +46,27 @@ export async function preflightXlsxZip(
   bytes: Uint8Array,
   limits: WorkerLimits,
 ): Promise<void> {
+  await preflightXlsxZipWithMode(bytes, limits, true);
+}
+
+/**
+ * Validate ZIP paths, compression, declared and actual byte limits, entry
+ * counts, and worksheet counts without expanding worksheet cell/merge
+ * geometry. This is only for a caller that separately performs a bounded
+ * direct worksheet parse under an immutable workbook digest.
+ */
+export async function preflightXlsxZipArchive(
+  bytes: Uint8Array,
+  limits: WorkerLimits,
+): Promise<void> {
+  await preflightXlsxZipWithMode(bytes, limits, false);
+}
+
+async function preflightXlsxZipWithMode(
+  bytes: Uint8Array,
+  limits: WorkerLimits,
+  inspectWorksheetStructure: boolean,
+): Promise<void> {
   if (bytes.byteLength > limits.maxWorkbookCompressedBytes)
     throw new LimitViolation(
       "WORKBOOK_COMPRESSED_LIMIT_EXCEEDED",
@@ -56,7 +77,7 @@ export async function preflightXlsxZip(
   let zip: ZipFile | undefined;
   try {
     zip = await openZip(buffer);
-    await scanZip(zip, limits);
+    await scanZip(zip, limits, inspectWorksheetStructure);
   } catch (error) {
     if (error instanceof LimitViolation) throw error;
     throw new LimitViolation(
@@ -87,7 +108,11 @@ async function openZip(buffer: Buffer): Promise<ZipFile> {
   });
 }
 
-async function scanZip(zip: ZipFile, limits: WorkerLimits): Promise<void> {
+async function scanZip(
+  zip: ZipFile,
+  limits: WorkerLimits,
+  inspectWorksheetStructure: boolean,
+): Promise<void> {
   const structure: StructureCounts = {
     sheets: 0,
     cells: 0,
@@ -146,7 +171,7 @@ async function scanZip(zip: ZipFile, limits: WorkerLimits): Promise<void> {
           entry,
           limits,
           actualTotal,
-          worksheet ? structure : undefined,
+          inspectWorksheetStructure && worksheet ? structure : undefined,
         );
         actualTotal += actualEntry;
         if (actualTotal > limits.maxZipTotalUncompressedBytes)
