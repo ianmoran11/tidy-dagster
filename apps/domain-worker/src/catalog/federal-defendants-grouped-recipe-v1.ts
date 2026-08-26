@@ -272,12 +272,20 @@ const bindingSchema = z
 const vectorSchema = z
   .object({ id: idSchema, bindingIds: z.array(idSchema).min(1).max(64) })
   .strict();
+const targetValueStatusAuthoritySchema = z
+  .object({
+    kind: z.literal("exact-comment"),
+    rawComment: z.literal("not published\n"),
+    status: z.literal("not-published"),
+  })
+  .strict();
 const targetSchema = z
   .object({
     address: addressSchema,
     panelId: idSchema,
     vectorId: idSchema,
     provenanceProfileId: idSchema,
+    valueStatusAuthority: targetValueStatusAuthoritySchema.optional(),
   })
   .strict();
 
@@ -393,6 +401,7 @@ const recipeSchema: z.ZodType<FederalDefendantsGroupedRecipeV1> = z
                     ]),
                     formula: z.string().nullable(),
                     formatted: z.string().nullable(),
+                    comment: z.string().nullable(),
                   })
                   .strict(),
               })
@@ -489,6 +498,7 @@ export type FederalDefendantsGroupedEnvelopeV1 = {
   targetManifest: {
     count: number;
     markerCount: number;
+    notPublishedCount: number;
     zeroCount: number;
     digest: string;
   };
@@ -523,8 +533,13 @@ export type FederalDefendantsGroupedExecutionV1 = {
       value_cells: Array<{
         panelId: string;
         target: CellProof;
-        rawValue: string | number;
+        rawValue: string | number | null;
         valueStatus: FederalValueStatus;
+        markerSource: FederalMarkerSource;
+        sourceComment: string | null;
+        valueStatusAuthority: z.infer<
+          typeof targetValueStatusAuthoritySchema
+        > | null;
         provenanceProfileId: string;
         panelKeyAttachment: FederalPanelKeyAttachmentProof;
         attachments: Array<{
@@ -554,7 +569,9 @@ type CellProof = {
   data_type: TidyCell["data_type"];
   formula: string | null;
   formatted: string | null;
+  comment: string | null;
 };
+export type FederalMarkerSource = "cell-value" | "cell-comment" | null;
 export type FederalValueStatus =
   | "observed"
   | "not-published"
@@ -715,6 +732,11 @@ function compileOrThrow(input: {
       dimension.source.kind === "cell",
   );
   const cellDimensionIds = new Set(cellDimensions.map((entry) => entry.id));
+  const declaredTargets = new Map(
+    map.targets.map((target) => [target.address, target]),
+  );
+  if (declaredTargets.size !== map.targets.length)
+    fail("ownership", "FEDERAL_DUPLICATE_TARGET");
   const targetAddresses = new Set<string>();
   const panelAddresses = new Map<string, string[]>();
   const panelAddressSets = new Map<string, Set<string>>();
@@ -742,10 +764,8 @@ function compileOrThrow(input: {
         fail("ownership", "FEDERAL_DUPLICATE_TARGET_OWNER");
       targetAddresses.add(address);
       const cell = bounded.byAddress.get(address);
-      if (!isBlank(cell)) {
-        classifyTargetValue(cell);
-        active.push(address);
-      }
+      const declaredTarget = declaredTargets.get(address);
+      if (isActiveTarget(cell, declaredTarget)) active.push(address);
     }
     if (!active.length) fail("ownership", "FEDERAL_EMPTY_PANEL");
     activeTargetCount += active.length;
@@ -759,11 +779,6 @@ function compileOrThrow(input: {
     panelAddressSets.set(panel.id, new Set(sortedActive));
   }
 
-  const declaredTargets = new Map(
-    map.targets.map((target) => [target.address, target]),
-  );
-  if (declaredTargets.size !== map.targets.length)
-    fail("ownership", "FEDERAL_DUPLICATE_TARGET");
   const activeTargets = new Set([...panelAddresses.values()].flat());
   if (
     activeTargets.size !== declaredTargets.size ||
@@ -894,6 +909,7 @@ function compileOrThrow(input: {
   const usedUniverseAddresses = new Map<string, Set<string>>();
   const attachmentProof: FederalDefendantsGroupedAttachmentProof[] = [];
   let markerCount = 0;
+  let notPublishedCount = 0;
   let zeroCount = 0;
   for (const target of map.targets) {
     const panelTargets = panelAddressSets.get(target.panelId);
@@ -907,8 +923,9 @@ function compileOrThrow(input: {
     usedVectors.add(target.vectorId);
     usedProfiles.add(target.provenanceProfileId);
     const targetCell = bounded.byAddress.get(target.address);
-    const status = classifyTargetValue(targetCell);
-    if (status !== "observed") markerCount += 1;
+    const observation = classifyTargetObservation(targetCell, target);
+    if (observation.valueStatus !== "observed") markerCount += 1;
+    if (observation.valueStatus === "not-published") notPublishedCount += 1;
     if (targetCell?.value === 0) zeroCount += 1;
     const dimensions: FederalDefendantsGroupedAttachmentProof["dimensions"] =
       [];
@@ -1068,12 +1085,17 @@ function compileOrThrow(input: {
     targetManifest: {
       count: map.targets.length,
       markerCount,
+      notPublishedCount,
       zeroCount,
       digest: digestFederalDefendantsCanonical(
         execution.tables[0].trace.value_cells.map((entry) => ({
           address: entry.target.address,
           rawValue: entry.rawValue,
           valueStatus: entry.valueStatus,
+          markerSource: entry.markerSource,
+          sourceComment: entry.sourceComment,
+          valueStatusAuthority: entry.valueStatusAuthority,
+          targetProof: entry.target,
           provenanceProfileId: entry.provenanceProfileId,
         })),
       ),
@@ -1201,7 +1223,7 @@ function executeRecipe(
   for (const target of targets) {
     const targetCell = cells.get(target.address);
     if (!targetCell) throw new Error("FEDERAL_RECIPE_TARGET_MISSING");
-    const status = classifyTargetValue(targetCell);
+    const observation = classifyTargetObservation(targetCell, target);
     const vector = vectors.get(target.vectorId);
     const profile = profiles.get(target.provenanceProfileId);
     const panel = panels.get(target.panelId);
@@ -1215,10 +1237,12 @@ function executeRecipe(
       }),
     );
     const row: Record<string, unknown> = {
-      [recipe.table.valuesName]: targetCell.value,
+      [recipe.table.valuesName]: observation.rawValue,
       [`${recipe.table.valuesName} numeric`]:
-        typeof targetCell.value === "number" ? targetCell.value : null,
-      [`${recipe.table.valuesName} status`]: status,
+        typeof observation.rawValue === "number" ? observation.rawValue : null,
+      [`${recipe.table.valuesName} status`]: observation.valueStatus,
+      [`${recipe.table.valuesName} marker source`]: observation.markerSource,
+      [`${recipe.table.valuesName} source comment`]: observation.sourceComment,
       _panel_id: panel.id,
       _panel_key: panel.key,
       _panel_name: panel.name,
@@ -1266,8 +1290,13 @@ function executeRecipe(
     trace.push({
       panelId: panel.id,
       target: cellProof(targetCell),
-      rawValue: targetCell.value as string | number,
-      valueStatus: status,
+      rawValue: observation.rawValue,
+      valueStatus: observation.valueStatus,
+      markerSource: observation.markerSource,
+      sourceComment: observation.sourceComment,
+      valueStatusAuthority: target.valueStatusAuthority
+        ? structuredClone(target.valueStatusAuthority)
+        : null,
       provenanceProfileId: target.provenanceProfileId,
       panelKeyAttachment: structuredClone(panelKeyAttachments.get(panel.id)!),
       attachments: attachmentTrace,
@@ -1347,6 +1376,8 @@ function validateDimensions(
     valuesName,
     `${valuesName} numeric`,
     `${valuesName} status`,
+    `${valuesName} marker source`,
+    `${valuesName} source comment`,
     "_panel_id",
     "_panel_key",
     "_panel_name",
@@ -1943,6 +1974,60 @@ export function decodeFederalPanelKeySourceValue(encoded: unknown): string {
   return decoded;
 }
 
+type FederalTargetObservation = {
+  rawValue: string | number | null;
+  valueStatus: FederalValueStatus;
+  markerSource: FederalMarkerSource;
+  sourceComment: string | null;
+};
+
+function isActiveTarget(
+  cell: TidyCell | undefined,
+  target: FederalDefendantsGroupedSemanticMapV1["targets"][number] | undefined,
+): boolean {
+  if (!isBlank(cell)) {
+    if (target?.valueStatusAuthority)
+      fail("ownership", "FEDERAL_COMMENT_STATUS_VALUE_CONFLICT");
+    if (target) classifyTargetObservation(cell, target);
+    else classifyTargetValue(cell);
+    return true;
+  }
+  if (!target?.valueStatusAuthority) return false;
+  classifyTargetObservation(cell, target);
+  return true;
+}
+
+function classifyTargetObservation(
+  cell: TidyCell | undefined,
+  target: FederalDefendantsGroupedSemanticMapV1["targets"][number],
+): FederalTargetObservation {
+  const authority = target.valueStatusAuthority;
+  if (authority) {
+    if (!isBlank(cell))
+      fail("ownership", "FEDERAL_COMMENT_STATUS_VALUE_CONFLICT");
+    if (
+      cell === undefined ||
+      cell.data_type !== "blank" ||
+      cell.value !== null ||
+      cell.comment !== authority.rawComment
+    )
+      fail("ownership", "FEDERAL_COMMENT_STATUS_AUTHORITY_MISMATCH");
+    return {
+      rawValue: null,
+      valueStatus: authority.status,
+      markerSource: "cell-comment",
+      sourceComment: cell.comment,
+    };
+  }
+  const valueStatus = classifyTargetValue(cell);
+  return {
+    rawValue: cell!.value as string | number,
+    valueStatus,
+    markerSource: valueStatus === "observed" ? null : "cell-value",
+    sourceComment: cell?.comment ?? null,
+  };
+}
+
 function classifyTargetValue(cell: TidyCell | undefined): FederalValueStatus {
   const value = cell?.value;
   if (typeof value === "number" && Number.isFinite(value)) return "observed";
@@ -1997,6 +2082,7 @@ function cellProof(cell: TidyCell): CellProof {
     data_type: cell.data_type,
     formula: cell.formula ?? null,
     formatted: cell.formatted ?? null,
+    comment: cell.comment ?? null,
   };
 }
 function sourceCoordinates(cell: TidyCell): {

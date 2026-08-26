@@ -233,6 +233,7 @@ function addTarget(
     sex: string;
     statistic: string;
     period: string;
+    valueStatusAuthority?: FederalDefendantsGroupedSemanticMapV1["targets"][number]["valueStatusAuthority"];
   },
 ): void {
   const suffix = input.address.toLowerCase();
@@ -303,6 +304,9 @@ function addTarget(
     panelId: input.panelId,
     vectorId,
     provenanceProfileId: input.profileId,
+    ...(input.valueStatusAuthority
+      ? { valueStatusAuthority: structuredClone(input.valueStatusAuthority) }
+      : {}),
   });
 }
 
@@ -754,6 +758,173 @@ function realCanaryMap(digest: string): FederalDefendantsGroupedSemanticMapV1 {
   );
 }
 
+const commentStatusAddresses = new Set([
+  "R19C6",
+  "R19C7",
+  "R24C6",
+  "R24C7",
+  "R28C6",
+  "R28C7",
+  "R52C6",
+  "R52C7",
+]);
+
+function realCommentStatusMap(
+  digest: string,
+): FederalDefendantsGroupedSemanticMapV1 {
+  const builder: Builder = {
+    geometryBands: [],
+    sourceUniverses: [],
+    bindings: [],
+    vectors: [],
+    targets: [],
+  };
+  const profiles = new Map<string, FederalTargetProvenance>();
+  const panelSpecs: Array<[string, number, number, string]> = [
+    ["current", 8, 34, "R7C2"],
+    ["previous", 36, 62, "R35C2"],
+  ];
+  for (const [panelId, startRow, endRow, period] of panelSpecs) {
+    for (let row = startRow; row <= endRow; row += 1) {
+      for (let col = 2; col <= 10; col += 1) {
+        const statisticKind = [2, 5, 8].includes(col)
+          ? "count"
+          : [3, 6, 9].includes(col)
+            ? "mean"
+            : "median";
+        const sexTotalColumn = col >= 8;
+        const includesOrganisations = col === 8;
+        const grandTotal = row === endRow;
+        const entityType = includesOrganisations
+          ? "persons-and-organisations"
+          : "persons-only";
+        const hierarchy = grandTotal
+          ? sexTotalColumn
+            ? "grand-total-and-sex-total"
+            : "grand-total"
+          : sexTotalColumn
+            ? "sex-total"
+            : "leaf";
+        const totalStatus = grandTotal
+          ? "published-grand-total"
+          : sexTotalColumn
+            ? "published-sex-total"
+            : "not-total";
+        const profileId = [
+          statisticKind,
+          entityType,
+          hierarchy,
+          totalStatus,
+        ].join("-");
+        if (!profiles.has(profileId))
+          profiles.set(
+            profileId,
+            profile(
+              statisticKind === "count"
+                ? "defendant-count"
+                : `${statisticKind}-age`,
+              statisticKind,
+              statisticKind === "count" ? "defendants" : "years",
+              entityType,
+              [],
+              hierarchy,
+              totalStatus,
+            ),
+          );
+        const address = `R${row}C${col}`;
+        addTarget(builder, {
+          address,
+          panelId,
+          profileId,
+          row: `R${row}C1`,
+          sex: col <= 4 ? "R5C2" : col <= 7 ? "R5C5" : "R5C8",
+          statistic: `R6C${col}`,
+          period,
+          ...(commentStatusAddresses.has(address)
+            ? {
+                valueStatusAuthority: {
+                  kind: "exact-comment" as const,
+                  rawComment: "not published\n" as const,
+                  status: "not-published" as const,
+                },
+              }
+            : {}),
+        });
+      }
+    }
+  }
+  return finalizeMap(
+    {
+      version: FEDERAL_DEFENDANTS_GROUPED_SEMANTIC_MAP_V1,
+      source: {
+        version: FEDERAL_DEFENDANTS_SOURCE_CONTEXT_V1,
+        sourceWorkbookDigest: digest,
+        executionWorkbookDigest: digest,
+        physicalSheet: "Table 7",
+        authoritativeRange: "R1C1:R65C10",
+      },
+      logicalTable: {
+        id: "federal-defendants-comment-status",
+        name: "Federal defendants comment-status canary",
+        valuesName: "published value",
+        dimensions: [
+          {
+            id: "offence-group",
+            name: "principal federal offence group raw",
+            source: { kind: "cell" },
+          },
+          { id: "sex", name: "sex raw", source: { kind: "cell" } },
+          {
+            id: "statistic",
+            name: "statistic raw",
+            source: { kind: "cell" },
+          },
+          {
+            id: "observation-period",
+            name: "observation period raw",
+            source: { kind: "cell" },
+          },
+          ...provenanceDimensions.map(([id, name, field]) => ({
+            id,
+            name,
+            source: { kind: "provenance" as const, field },
+          })),
+        ],
+      },
+      panels: [
+        {
+          id: "current",
+          order: 1,
+          key: "observation-period:Latest%205%20years%20%282018%E2%80%9319%20to%202022%E2%80%9323%29",
+          keySource: {
+            dimensionId: "observation-period",
+            selectedAddress: "R7C2",
+          },
+          name: "Latest 5 years (2018–19 to 2022–23)",
+          selectors: [{ range: "R8C2:R34C10" }],
+        },
+        {
+          id: "previous",
+          order: 2,
+          key: "observation-period:Previous%205%20years%20%282013%E2%80%9314%20to%202017%E2%80%9318%29",
+          keySource: {
+            dimensionId: "observation-period",
+            selectedAddress: "R35C2",
+          },
+          name: "Previous 5 years (2013–14 to 2017–18)",
+          selectors: [{ range: "R36C2:R62C10" }],
+        },
+      ],
+      sourceUniverses: builder.sourceUniverses,
+      bindings: builder.bindings,
+      vectors: builder.vectors,
+      provenanceProfiles: [...profiles].map(([id, values]) => ({ id, values })),
+      targets: builder.targets,
+    },
+    builder.geometryBands,
+  );
+}
+
 const realWorkbookPath = path.resolve(
   "fixtures/product-prototype/workbooks/federal-defendants-australia-2024-25-federal-offence-group-source.xlsx",
 );
@@ -767,6 +938,13 @@ const REAL_TABLE7_SEMANTIC_DIGEST =
   "sha256:60ca87fa038b905aa49b4e48452916beda58de25e2dcb180710c64dccc97b3cc";
 const REAL_TABLE7_STRUCTURE_DIGEST =
   "sha256:e25482880beebb62a0c959dec4d0e363b6946d900f50c4ad14ad50f22222db4b";
+
+const commentStatusWorkbookPath = path.resolve(
+  "fixtures/product-prototype/workbooks/federal-defendants-australia-2022-23-federal-offence-group-source.xlsx",
+);
+const COMMENT_STATUS_WORKBOOK_BYTES = 101_012;
+const COMMENT_STATUS_WORKBOOK_DIGEST =
+  "sha256:53f1ad72587a0769aef06d82b123b40f9ce921a6e2607e506b56853e848e4fed";
 
 async function realFixture() {
   const bytes = await readFile(realWorkbookPath);
@@ -806,6 +984,29 @@ async function realFixture() {
     (entry) => entry.name === "Table 7",
   )!;
   const map = realCanaryMap(digest);
+  const raw = `${JSON.stringify(map)}\n`;
+  return { bytes, digest, sheet, map, raw };
+}
+
+async function commentStatusFixture() {
+  const bytes = await readFile(commentStatusWorkbookPath);
+  const digest = `sha256:${createHash("sha256").update(bytes).digest("hex")}`;
+  expect(bytes.byteLength).toBe(COMMENT_STATUS_WORKBOOK_BYTES);
+  expect(digest).toBe(COMMENT_STATUS_WORKBOOK_DIGEST);
+  const parsed = await parseWorkbook(bytes);
+  if (!parsed.ok) throw new Error(parsed.errors[0].message);
+  const sheet = parsed.workbook.sheets.find(
+    (entry) => entry.name === "Table 7",
+  )!;
+  for (const address of commentStatusAddresses)
+    expect(
+      sheet.cells.find((entry) => entry.address === address),
+    ).toMatchObject({
+      value: null,
+      data_type: "blank",
+      comment: "not published\n",
+    });
+  const map = realCommentStatusMap(digest);
   const raw = `${JSON.stringify(map)}\n`;
   return { bytes, digest, sheet, map, raw };
 }
@@ -1042,6 +1243,12 @@ describe("Federal Defendants grouped RecipeV1", () => {
     }, "FEDERAL_AMBIGUOUS_DIMENSION_SOURCE");
     expectFailure((map) => {
       map.logicalTable.dimensions[0].name = "published value numeric";
+    }, "FEDERAL_DUPLICATE_OR_RESERVED_OUTPUT_NAME");
+    expectFailure((map) => {
+      map.logicalTable.dimensions[0].name = "published value marker source";
+    }, "FEDERAL_DUPLICATE_OR_RESERVED_OUTPUT_NAME");
+    expectFailure((map) => {
+      map.logicalTable.dimensions[0].name = "published value source comment";
     }, "FEDERAL_DUPLICATE_OR_RESERVED_OUTPUT_NAME");
     expectFailure((map) => {
       map.source.authoritativeRange = "R1C1:R3C3";
@@ -1445,6 +1652,8 @@ describe("Federal Defendants grouped RecipeV1", () => {
       "published value": "np",
       "published value numeric": null,
       "published value status": "not-published",
+      "published value marker source": "cell-value",
+      "published value source comment": null,
       "entity type": "persons-only",
       denominator: "published-age-eligible-person-defendants",
       "measure id": "mean-age",
@@ -1472,10 +1681,306 @@ describe("Federal Defendants grouped RecipeV1", () => {
     expect(first.envelope.targetManifest).toMatchObject({
       count: 486,
       markerCount: 36,
+      notPublishedCount: 36,
       zeroCount: 52,
     });
     expect(first.envelope.formulaProof.count).toBe(0);
     expect(map.source.authoritativeRange).toBe("R1C1:R70C10");
+  });
+
+  it("preserves all eight exact comment-sourced not-published observations from real 2022-23 Table 7", async () => {
+    const { bytes, digest, sheet, map, raw } = await commentStatusFixture();
+    const compileOnce = () =>
+      compileFederalDefendantsGroupedRecipeV1({
+        mapRaw: raw,
+        expectedMapBytesDigest: digestFederalDefendantsBytes(raw),
+        sheet,
+        expectedExecutionWorkbookDigest: digest,
+        expectedSourceWorkbookDigest: digest,
+      });
+    const first = compileOnce();
+    const second = compileOnce();
+    expect(first.ok, JSON.stringify(first)).toBe(true);
+    expect(second).toEqual(first);
+    if (!first.ok) return;
+    const executeOnce = () =>
+      executeFederalDefendantsGroupedRecipeV1(first.envelope, {
+        mapRaw: raw,
+        sheet,
+        expectedExecutionWorkbookDigest: digest,
+        expectedSourceWorkbookDigest: digest,
+        trustedEnvelopeDigest: first.envelope.envelopeDigest,
+      });
+    const executionA = executeOnce();
+    const executionB = executeOnce();
+    expect(executionB).toEqual(executionA);
+    expect(first.envelope.targetManifest).toMatchObject({
+      count: 486,
+      markerCount: 8,
+      notPublishedCount: 8,
+      zeroCount: 9,
+    });
+    // The bounded sheet retains one non-target source/header formula; every
+    // published target, including all comment-status targets, is formula-free.
+    expect(first.envelope.formulaProof.count).toBe(1);
+    expect(
+      executionA.tables[0].trace.value_cells.filter(
+        (entry) => entry.target.formula !== null,
+      ),
+    ).toEqual([]);
+    const statusRows = executionA.tables[0].rows.filter(
+      (row) => row["published value marker source"] === "cell-comment",
+    );
+    expect(statusRows).toHaveLength(8);
+    expect(
+      statusRows.map((row) => (row._source as { address: string }).address),
+    ).toEqual([...commentStatusAddresses]);
+    for (const row of statusRows)
+      expect(row).toMatchObject({
+        "published value": null,
+        "published value numeric": null,
+        "published value status": "not-published",
+        "published value marker source": "cell-comment",
+        "published value source comment": "not published\n",
+      });
+    const statusTrace = executionA.tables[0].trace.value_cells.filter(
+      (entry) => entry.markerSource === "cell-comment",
+    );
+    expect(statusTrace).toHaveLength(8);
+    for (const entry of statusTrace)
+      expect(entry).toMatchObject({
+        rawValue: null,
+        valueStatus: "not-published",
+        markerSource: "cell-comment",
+        sourceComment: "not published\n",
+        valueStatusAuthority: {
+          kind: "exact-comment",
+          rawComment: "not published\n",
+          status: "not-published",
+        },
+        target: {
+          data_type: "blank",
+          comment: "not published\n",
+          formula: null,
+          formatted: null,
+        },
+      });
+    expect(
+      rowsToCsv(
+        executionA.tables[0].rows as unknown as Parameters<typeof rowsToCsv>[0],
+      ),
+    ).toContain('"not published\n"');
+    expect(parseFederalDefendantsGroupedSemanticMapV1(raw).targets).toEqual(
+      map.targets,
+    );
+
+    const root = await mkdtemp(
+      path.join(tmpdir(), "federal-comment-status-worker-"),
+    );
+    roots.push(root);
+    const input = path.join(root, "input");
+    const output = path.join(root, "output");
+    await mkdir(input);
+    await mkdir(output);
+    await writeFile(path.join(input, "workbook.xlsx"), bytes);
+    await writeFile(path.join(input, "semantic-map.json"), raw);
+    const descriptor = (
+      name: string,
+      relativePath: string,
+      data: Uint8Array | string,
+    ) => ({
+      name,
+      relativePath,
+      contentDigest: `sha256:${createHash("sha256").update(data).digest("hex")}`,
+      byteLength: Buffer.byteLength(data),
+    });
+    const workerResult = await runPrototypeAwareWorker(
+      {
+        protocolVersion: "tidy.worker/v1",
+        requestId: "federal-comment-status-canary",
+        operation: "interpret-semantic-map-v13",
+        inputs: [
+          descriptor("workbook", "workbook.xlsx", bytes),
+          descriptor("semantic-map", "semantic-map.json", raw),
+        ],
+        parameters: { sheet: "Table 7" },
+        limits: {
+          timeoutMs: 300_000,
+          maxInputBytes: 50_000_000,
+          maxOutputBytes: 50_000_000,
+          maxOutputFiles: 100,
+          maxWarnings: 100,
+          maxWorkbookCompressedBytes: 25_000_000,
+          maxZipEntries: 10_000,
+          maxZipEntryUncompressedBytes: 50_000_000,
+          maxZipTotalUncompressedBytes: 200_000_000,
+          maxSheets: 256,
+          maxCells: 1_000_000,
+          maxMerges: 100_000,
+          maxMergeExpansionCells: 1_000_000,
+          maxSelectorCells: 1_000_000,
+          maxOutputRows: 1_000_000,
+        },
+      },
+      input,
+      output,
+    );
+    expect(workerResult.ok, JSON.stringify(workerResult)).toBe(true);
+    if (!workerResult.ok) return;
+    expect(workerResult.warnings).toEqual([]);
+    expect(workerResult.outputs).toHaveLength(6);
+    const workerExecution = JSON.parse(
+      await readFile(path.join(output, "execution.json"), "utf8"),
+    );
+    expect(workerExecution).toMatchObject({
+      providerCalls: 0,
+      acceptanceAuthority: false,
+      trainingEligibility: false,
+    });
+    expect(
+      workerExecution.tables[0].rows.filter(
+        (row: Record<string, unknown>) =>
+          row["published value marker source"] === "cell-comment",
+      ),
+    ).toHaveLength(8);
+    const csvDescriptor = workerResult.outputs.find((entry) =>
+      entry.relativePath.endsWith(".csv"),
+    )!;
+    expect(
+      await readFile(path.join(output, csvDescriptor.relativePath), "utf8"),
+    ).toContain('"not published\n"');
+  });
+
+  it("fails closed on stale, conflicting, mutated, or undeclared comment-status authority", async () => {
+    const { digest, sheet, map } = await commentStatusFixture();
+    const compileFixture = (
+      candidateMap: FederalDefendantsGroupedSemanticMapV1,
+      candidateSheet: ParsedSheet,
+    ) => {
+      const candidateRaw = `${JSON.stringify(candidateMap)}\n`;
+      return compileFederalDefendantsGroupedRecipeV1({
+        mapRaw: candidateRaw,
+        expectedMapBytesDigest: digestFederalDefendantsBytes(candidateRaw),
+        sheet: candidateSheet,
+        expectedExecutionWorkbookDigest: digest,
+        expectedSourceWorkbookDigest: digest,
+      });
+    };
+    for (const comment of [
+      "not published",
+      "Not published\n",
+      "not published \n",
+      null,
+    ]) {
+      const mutatedSheet = structuredClone(sheet);
+      mutatedSheet.cells.find((cell) => cell.address === "R19C6")!.comment =
+        comment;
+      expect(compileFixture(map, mutatedSheet)).toMatchObject({
+        ok: false,
+        code: "FEDERAL_COMMENT_STATUS_AUTHORITY_MISMATCH",
+      });
+    }
+
+    const nonblankSheet = structuredClone(sheet);
+    const conflicted = nonblankSheet.cells.find(
+      (cell) => cell.address === "R19C6",
+    )!;
+    conflicted.value = "np";
+    conflicted.data_type = "string";
+    expect(compileFixture(map, nonblankSheet)).toMatchObject({
+      ok: false,
+      code: "FEDERAL_COMMENT_STATUS_VALUE_CONFLICT",
+    });
+
+    const undeclared = structuredClone(map);
+    delete undeclared.targets.find((target) => target.address === "R19C6")!
+      .valueStatusAuthority;
+    expect(compileFixture(undeclared, sheet)).toMatchObject({
+      ok: false,
+      code: "FEDERAL_TARGET_COVERAGE_MISMATCH",
+    });
+
+    const moved = structuredClone(map);
+    const movedTarget = moved.targets.find(
+      (target) => target.address === "R19C6",
+    )!;
+    moved.targets = moved.targets.filter(
+      (target) => target.address !== "R18C6",
+    );
+    movedTarget.address = "R18C6";
+    expect(compileFixture(moved, sheet)).toMatchObject({
+      ok: false,
+      code: "FEDERAL_COMMENT_STATUS_VALUE_CONFLICT",
+    });
+
+    const styledBlankFixture = multiRowWestFixture("W");
+    const styledBlank = styledBlankFixture.sheet.cells.find(
+      (cell) => cell.address === "R5C2",
+    )!;
+    styledBlank.value = null;
+    styledBlank.data_type = "blank";
+    styledBlank.comment = "not published\n";
+    expect(
+      compile(styledBlankFixture.map, styledBlankFixture.sheet).result,
+    ).toMatchObject({
+      ok: false,
+      code: "FEDERAL_TARGET_COVERAGE_MISMATCH",
+    });
+
+    const extraCommentSheet = structuredClone(sheet);
+    extraCommentSheet.cells.find((cell) => cell.address === "R8C2")!.comment =
+      "explanatory source note\n";
+    const withExtraComment = compileFixture(map, extraCommentSheet);
+    expect(withExtraComment.ok).toBe(true);
+    if (!withExtraComment.ok) return;
+    expect(withExtraComment.envelope.targetManifest).toMatchObject({
+      count: 486,
+      markerCount: 8,
+      notPublishedCount: 8,
+    });
+    const extraTrace = withExtraComment.envelope.attachmentManifest;
+    expect(extraTrace.count).toBeGreaterThan(0);
+
+    const baseline = compileFixture(map, sheet);
+    expect(baseline.ok).toBe(true);
+    if (!baseline.ok) return;
+    expect(withExtraComment.envelope.envelopeDigest).not.toBe(
+      baseline.envelope.envelopeDigest,
+    );
+    const extraRaw = `${JSON.stringify(map)}\n`;
+    const extraExecution = executeFederalDefendantsGroupedRecipeV1(
+      withExtraComment.envelope,
+      {
+        mapRaw: extraRaw,
+        sheet: extraCommentSheet,
+        expectedExecutionWorkbookDigest: digest,
+        expectedSourceWorkbookDigest: digest,
+        trustedEnvelopeDigest: withExtraComment.envelope.envelopeDigest,
+      },
+    );
+    expect(
+      extraExecution.tables[0].trace.value_cells.find(
+        (entry) => entry.target.address === "R8C2",
+      ),
+    ).toMatchObject({
+      valueStatus: "observed",
+      markerSource: null,
+      sourceComment: "explanatory source note\n",
+      target: { comment: "explanatory source note\n" },
+    });
+    const staleSheet = structuredClone(sheet);
+    staleSheet.cells.find((cell) => cell.address === "R19C6")!.comment =
+      "not published";
+    const candidateRaw = `${JSON.stringify(map)}\n`;
+    expect(() =>
+      executeFederalDefendantsGroupedRecipeV1(baseline.envelope, {
+        mapRaw: candidateRaw,
+        sheet: staleSheet,
+        expectedExecutionWorkbookDigest: digest,
+        expectedSourceWorkbookDigest: digest,
+        trustedEnvelopeDigest: baseline.envelope.envelopeDigest,
+      }),
+    ).toThrow("FEDERAL_COMMENT_STATUS_AUTHORITY_MISMATCH");
   });
 
   it("rejects malformed and node-oversized Federal maps before workbook parsing", async () => {
