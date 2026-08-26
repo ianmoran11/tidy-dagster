@@ -7,6 +7,14 @@ import {
 } from "../catalog/role-aware-region-catalog-v5.js";
 import { parseSemanticTableMapJson } from "../catalog/semantic-map-v1.js";
 import {
+  compileFederalDefendantsGroupedRecipeV1,
+  estimateFederalGroupedOutputPreflightBytes,
+  executeFederalDefendantsGroupedRecipeV1,
+  isFederalDefendantsGroupedMapRaw,
+  parseFederalDefendantsGroupedSemanticMapV1,
+  preflightFederalDefendantsGroupedMapV1,
+} from "../catalog/federal-defendants-grouped-recipe-v1.js";
+import {
   buildSemanticMapV13CorrectionPrompt,
   buildSemanticMapV13Prompt,
   formatSemanticMapCorrectionDiagnostics,
@@ -29,6 +37,7 @@ import {
 import { executeRecipe } from "../executor/executeRecipe.js";
 import { buildGeometryEvidence } from "../executor/geometryEvidence.js";
 import { rowsToCsv } from "../export/formatters.js";
+import type { TidyOutputRow } from "../executor/types.js";
 import { resolveRecipeSelectors } from "../recipe/resolveSelectors.js";
 import { buildSheetSummary } from "../summary/buildSheetSummary.js";
 import { parseWorkbook } from "../workbook/parseWorkbook.js";
@@ -306,30 +315,93 @@ export async function interpretSemanticMapV13(
       "input",
       "interpret-semantic-map-v13 requires workbook and semantic-map inputs.",
     );
+  const declaredInputBytes = request.inputs.reduce(
+    (total, input) => total + input.byteLength,
+    0,
+  );
+  if (
+    !Number.isSafeInteger(declaredInputBytes) ||
+    declaredInputBytes > request.limits.maxInputBytes
+  )
+    throw new ProtocolError(
+      "INPUT_LIMIT_EXCEEDED",
+      "limit",
+      `Declared inputs require ${declaredInputBytes} bytes, exceeding limit ${request.limits.maxInputBytes}.`,
+    );
   const workbookInput = inputByName.get("workbook")!;
+  const mapInput = inputByName.get("semantic-map")!;
   if (workbookInput.byteLength > request.limits.maxWorkbookCompressedBytes)
     throw new ProtocolError(
       "WORKBOOK_COMPRESSED_LIMIT_EXCEEDED",
       "limit",
       `Declared workbook size exceeds limit ${request.limits.maxWorkbookCompressedBytes}.`,
     );
+  const mapBytes = await readVerifiedInput(inputRoot, mapInput);
+  const mapRaw = mapBytes.toString("utf8");
+  const isFederalGrouped = isFederalDefendantsGroupedMapRaw(mapRaw);
+  let map: ReturnType<typeof parseSemanticTableMapJson> | undefined;
+  let federalMap:
+    | ReturnType<typeof parseFederalDefendantsGroupedSemanticMapV1>
+    | undefined;
+  if (isFederalGrouped) {
+    try {
+      federalMap = parseFederalDefendantsGroupedSemanticMapV1(mapRaw);
+    } catch (error) {
+      return failure(
+        request.requestId,
+        "FEDERAL_GROUPED_SCHEMA_INVALID",
+        "semantic-map",
+        error instanceof Error
+          ? error.message
+          : "Federal grouped map is invalid.",
+      );
+    }
+    if (request.limits.maxOutputFiles < 6)
+      throw new ProtocolError(
+        "OUTPUT_DESCRIPTOR_LIMIT_EXCEEDED",
+        "limit",
+        "Federal grouped execution requires exactly six output descriptors.",
+      );
+    const outputPreflightBytes = estimateFederalGroupedOutputPreflightBytes(
+      mapRaw,
+      federalMap!,
+      workbookInput.byteLength,
+    );
+    if (request.limits.maxOutputBytes < outputPreflightBytes)
+      throw new ProtocolError(
+        "OUTPUT_LIMIT_EXCEEDED",
+        "limit",
+        `Federal grouped execution requires a preflight budget of at least ${outputPreflightBytes} bytes.`,
+      );
+    const geometryPreflight = preflightFederalDefendantsGroupedMapV1(
+      federalMap!,
+      {
+        maxSelectorCells: request.limits.maxSelectorCells,
+        maxOutputRows: request.limits.maxOutputRows,
+      },
+    );
+    if (!geometryPreflight.ok)
+      return failure(
+        request.requestId,
+        geometryPreflight.code,
+        "semantic-map",
+        geometryPreflight.message,
+        { stage: geometryPreflight.stage },
+      );
+  } else {
+    try {
+      map = parseSemanticTableMapJson(mapRaw);
+    } catch (error) {
+      return failure(
+        request.requestId,
+        "SEMANTIC_MAP_SCHEMA_INVALID",
+        "semantic-map",
+        error instanceof Error ? error.message : "Semantic map is invalid.",
+      );
+    }
+  }
   const workbookBytes = await readVerifiedInput(inputRoot, workbookInput);
   await preflightXlsxZip(workbookBytes, request.limits);
-  const mapBytes = await readVerifiedInput(
-    inputRoot,
-    inputByName.get("semantic-map")!,
-  );
-  let map: ReturnType<typeof parseSemanticTableMapJson>;
-  try {
-    map = parseSemanticTableMapJson(mapBytes.toString("utf8"));
-  } catch (error) {
-    return failure(
-      request.requestId,
-      "SEMANTIC_MAP_SCHEMA_INVALID",
-      "semantic-map",
-      error instanceof Error ? error.message : "Semantic map is invalid.",
-    );
-  }
   const parsedWorkbook = await parseWorkbook(workbookBytes);
   if (!parsedWorkbook.ok)
     return failure(
@@ -350,12 +422,126 @@ export async function interpretSemanticMapV13(
       "parse",
       `Sheet ${JSON.stringify(request.parameters.sheet)} was not found.`,
     );
+  if (isFederalGrouped) {
+    if (request.parameters.correction === true)
+      return failure(
+        request.requestId,
+        "FEDERAL_GROUPED_CORRECTION_UNSUPPORTED",
+        "semantic-map",
+        "Federal Defendants grouped replay is provider-free and does not permit correction prompts.",
+      );
+    const compiled = compileFederalDefendantsGroupedRecipeV1({
+      mapRaw,
+      expectedMapBytesDigest: mapInput.contentDigest,
+      sheet,
+      expectedExecutionWorkbookDigest: workbookInput.contentDigest,
+      expectedSourceWorkbookDigest: workbookInput.contentDigest,
+      limits: {
+        maxSelectorCells: request.limits.maxSelectorCells,
+        maxOutputRows: request.limits.maxOutputRows,
+      },
+    });
+    if (!compiled.ok)
+      return failure(
+        request.requestId,
+        compiled.code,
+        "semantic-map",
+        compiled.message,
+        { stage: compiled.stage },
+      );
+    const execution = executeFederalDefendantsGroupedRecipeV1(
+      compiled.envelope,
+      {
+        mapRaw,
+        sheet,
+        expectedExecutionWorkbookDigest: workbookInput.contentDigest,
+        expectedSourceWorkbookDigest: workbookInput.contentDigest,
+        trustedEnvelopeDigest: compiled.envelope.envelopeDigest,
+      },
+    );
+    const table = execution.tables[0];
+    let renderedFederalBytes = 0;
+    const withinFederalBudget = (
+      render: (maximum: number) => Buffer,
+    ): Buffer => {
+      const remaining = request.limits.maxOutputBytes - renderedFederalBytes;
+      if (remaining < 0)
+        throw new ProtocolError(
+          "OUTPUT_LIMIT_EXCEEDED",
+          "limit",
+          "Federal grouped outputs exceeded the cumulative byte budget.",
+        );
+      const bytes = render(remaining);
+      renderedFederalBytes += bytes.byteLength;
+      return bytes;
+    };
+    const federalJson = (value: unknown): Buffer =>
+      withinFederalBudget((maximum) => budgetedPrettyJsonBytes(value, maximum));
+    return await publish(request, roots, [
+      {
+        name: "semantic-map.json",
+        relativePath: "semantic-map.json",
+        render: () =>
+          federalJson(parseFederalDefendantsGroupedSemanticMapV1(mapRaw)),
+      },
+      {
+        name: "normalized-recipe.json",
+        relativePath: "normalized-recipe.json",
+        render: () => federalJson(compiled.envelope.recipe),
+      },
+      {
+        name: "selectors.json",
+        relativePath: "selectors.json",
+        render: () =>
+          federalJson({
+            panels: compiled.envelope.recipe.panels,
+            sourceUniverses: compiled.envelope.recipe.sourceUniverses,
+          }),
+      },
+      {
+        name: "geometry.json",
+        relativePath: "geometry.json",
+        render: () =>
+          federalJson({
+            geometryAuthorityProof: compiled.envelope.geometryAuthorityProof,
+            boundedSheetProof: compiled.envelope.boundedSheetProof,
+            formulaProof: compiled.envelope.formulaProof,
+            targetManifest: compiled.envelope.targetManifest,
+            attachmentManifest: compiled.envelope.attachmentManifest,
+            envelopeDigest: compiled.envelope.envelopeDigest,
+          }),
+      },
+      {
+        name: "execution.json",
+        relativePath: "execution.json",
+        render: () => federalJson(execution),
+      },
+      {
+        name: prototypeCsvOutputPath(table.table),
+        relativePath: prototypeCsvOutputPath(table.table),
+        render: () =>
+          withinFederalBudget((maximum) =>
+            budgetedCsvBytes(
+              table.rows as TidyOutputRow[],
+              compiled.envelope.recipe.table.valuesName,
+              maximum,
+            ),
+          ),
+      },
+    ]);
+  }
+
+  const legacyMap = map!;
   const context = buildCompactSemanticContext(sheet);
   const catalog = buildRoleAwareSemanticRegionCatalog(context, {
     formattingFacts: buildSemanticCellFormattingFacts(sheet.cells),
     cellDataFacts: buildSemanticCellDataFacts(sheet.cells),
   });
-  const compiled = compileRoleAwareSemanticTableMap({ map, catalog, context });
+  const compiled = compileRoleAwareSemanticTableMap({
+    map: legacyMap,
+    catalog,
+    context,
+  });
   if (!compiled.ok) {
     if (
       request.parameters.correction === true &&
@@ -364,13 +550,13 @@ export async function interpretSemanticMapV13(
       const snapshot = buildCompactContextSnapshot(sheet);
       const correctionCatalog = correctionCandidateSubset({
         catalog,
-        map,
+        map: legacyMap,
         geometryDiagnostics: compiled.diagnostics,
         completenessDiagnostics: [],
       });
       const correctionPrompt = buildSemanticMapV13CorrectionPrompt({
         context: snapshot,
-        previousMap: map,
+        previousMap: legacyMap,
         diagnostics: formatSemanticMapCorrectionDiagnostics({
           failure: compiled,
           completenessDiagnostics: [],
@@ -513,6 +699,139 @@ function enforcePrototypePredictedExecutionLimits(
       `Execution could produce more than ${request.limits.maxWarnings} warnings.`,
     );
   void recipe;
+}
+
+function budgetedPrettyJsonBytes(value: unknown, maximum: number): Buffer {
+  const chunks: string[] = [];
+  let byteLength = 0;
+  const append = (chunk: string): void => {
+    byteLength += Buffer.byteLength(chunk, "utf8");
+    if (byteLength > maximum)
+      throw new ProtocolError(
+        "OUTPUT_LIMIT_EXCEEDED",
+        "limit",
+        "Federal JSON output exceeded the remaining byte budget.",
+      );
+    chunks.push(chunk);
+  };
+  const render = (candidate: unknown, depth: number): void => {
+    if (Array.isArray(candidate)) {
+      if (candidate.length === 0) {
+        append("[]");
+        return;
+      }
+      append("[\n");
+      candidate.forEach((entry, index) => {
+        append("  ".repeat(depth + 1));
+        render(entry === undefined ? null : entry, depth + 1);
+        append(index + 1 === candidate.length ? "\n" : ",\n");
+      });
+      append(`${"  ".repeat(depth)}]`);
+      return;
+    }
+    if (candidate !== null && typeof candidate === "object") {
+      const record = candidate as Record<string, unknown>;
+      const keys = Object.keys(record).filter(
+        (key) =>
+          record[key] !== undefined &&
+          typeof record[key] !== "function" &&
+          typeof record[key] !== "symbol",
+      );
+      if (keys.length === 0) {
+        append("{}");
+        return;
+      }
+      append("{\n");
+      keys.forEach((key, index) => {
+        append(`${"  ".repeat(depth + 1)}${JSON.stringify(key)}: `);
+        render(record[key], depth + 1);
+        append(index + 1 === keys.length ? "\n" : ",\n");
+      });
+      append(`${"  ".repeat(depth)}}`);
+      return;
+    }
+    const rendered = JSON.stringify(candidate);
+    append(rendered === undefined ? "null" : rendered);
+  };
+  render(value, 0);
+  append("\n");
+  return Buffer.from(chunks.join(""), "utf8");
+}
+
+function budgetedCsvBytes(
+  rows: TidyOutputRow[],
+  valueColumn: string,
+  maximum: number,
+): Buffer {
+  const headers = collectFederalCsvHeaders(rows, valueColumn);
+  const chunks: string[] = [];
+  let byteLength = 0;
+  const append = (chunk: string): void => {
+    byteLength += Buffer.byteLength(chunk, "utf8");
+    if (byteLength > maximum)
+      throw new ProtocolError(
+        "OUTPUT_LIMIT_EXCEEDED",
+        "limit",
+        "Federal CSV output exceeded the remaining byte budget.",
+      );
+    chunks.push(chunk);
+  };
+  const escape = (value: string | number | boolean | null): string => {
+    if (value === null) return "";
+    const text = String(value);
+    return /[",\n\r]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+  };
+  const writeValue = (
+    value: string | number | boolean | null,
+    index: number,
+  ): void => {
+    if (index > 0) append(",");
+    append(escape(value));
+  };
+  headers.forEach(writeValue);
+  append("\n");
+  for (const row of rows) {
+    headers.forEach((header, index) =>
+      writeValue(federalCsvRowValue(row, header, valueColumn), index),
+    );
+    append("\n");
+  }
+  return Buffer.from(chunks.join(""), "utf8");
+}
+
+function collectFederalCsvHeaders(
+  rows: TidyOutputRow[],
+  valueColumn: string,
+): string[] {
+  const headers = new Set<string>();
+  for (const row of rows) {
+    for (const header of ["row", "col", "address"]) headers.add(header);
+    headers.add(".value");
+    for (const key of Object.keys(row)) {
+      if (key !== "_source" && key !== valueColumn) headers.add(key);
+    }
+  }
+  return [...headers];
+}
+
+function federalCsvRowValue(
+  row: TidyOutputRow,
+  header: string,
+  valueColumn: string,
+): string | number | boolean | null {
+  if (header === "row") return row._source?.row ?? null;
+  if (header === "col") return row._source?.col ?? null;
+  if (header === "address") return row._source?.address ?? null;
+  if (header === ".value") return federalCsvScalar(row[valueColumn]);
+  return federalCsvScalar(row[header]);
+}
+
+function federalCsvScalar(
+  value: TidyOutputRow[string],
+): string | number | boolean | null {
+  return value === undefined || value === null || typeof value === "object"
+    ? null
+    : value;
 }
 
 function prototypeCsvOutputPath(tableName: string): string {

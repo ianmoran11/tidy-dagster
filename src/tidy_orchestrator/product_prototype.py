@@ -8,6 +8,7 @@ import json
 import re
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from functools import lru_cache
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -49,6 +50,24 @@ _C4_REPLAY_MODELS = {
     "TargetScopedRecipeV02": frozenset(
         {"provider-free/offenders-c4/target-scoped-recipe-v02"}
     ),
+}
+_FEDERAL_DEFENDANTS_PUBLICATION = "federal-defendants-australia"
+_FEDERAL_DEFENDANTS_RECIPE_PROTOCOL = "FederalDefendantsGroupedRecipeV1"
+_FEDERAL_DEFENDANTS_REPLAY_MODEL = "provider-free/federal-defendants/grouped-recipe-v1"
+_FEDERAL_DEFENDANTS_NORMALIZATION = "digest-pinned-bounded-federal-defendants-v1"
+_FEDERAL_DEFENDANTS_EXECUTION_VERSION = (
+    "federal-defendants-grouped-logical-execution/v1"
+)
+_FEDERAL_DEFENDANTS_SOURCE_CONTEXT_VERSION = "federal-defendants-source-context/v1"
+_FEDERAL_DEFENDANTS_INVENTORY = (
+    Path(__file__).resolve().parents[2]
+    / "fixtures/product-prototype/federal-defendants-release-source-inventory-v1.json"
+)
+_FEDERAL_DEFENDANTS_RELEASE_DATES = {
+    "2021-22": "2023-05-04",
+    "2022-23": "2024-05-09",
+    "2023-24": "2025-05-01",
+    "2024-25": "2026-04-30",
 }
 ACCEPTANCE_SCHEMA = "tidy.table-family-acceptance/v1"
 ACCEPTANCE_SCHEMA_V2 = "tidy.table-family-acceptance/v2"
@@ -572,6 +591,13 @@ def run_product_prototype(
     cohort_bytes = cohort_file.read_bytes()
     cohort = _load_object(cohort_bytes, "cohort")
     _validate_cohort(cohort)
+    if (
+        cohort.get("publicationId") == _FEDERAL_DEFENDANTS_PUBLICATION
+        and mode != "replay"
+    ):
+        raise ProductPrototypeError(
+            "Federal Defendants grouped protocol is provider-free replay only"
+        )
     base = cohort_file.parent
     contract_path = _safe_join(base, str(cohort["acceptanceContract"]))
     contract_bytes = contract_path.read_bytes()
@@ -1081,6 +1107,9 @@ def _interpret_accept_one(
             entry=entry,
             recipe_digest=recipe_digest,
             deterministic=deterministic,
+            declared_recipe_protocol=entry["replayResponse"].get(
+                "recipeProtocol", "RecipeV01"
+            ),
         )
     except Exception as error:
         observations = ()
@@ -1195,7 +1224,7 @@ def evaluate_execution_for_acceptance(
         contract=contract,
         entry=entry,
         recipe_digest=recipe_digest,
-        recipe_protocol=recipe_protocol,
+        declared_recipe_protocol=recipe_protocol,
         deterministic=deterministic,
     )
     injected = list(extra_issues or [])
@@ -1212,7 +1241,7 @@ def _validate_execution(
     entry: dict[str, Any],
     recipe_digest: str,
     deterministic: bool,
-    recipe_protocol: str = "RecipeV01",
+    declared_recipe_protocol: str | None = None,
 ) -> tuple[
     tuple[dict[str, Any], ...],
     list[dict[str, Any]],
@@ -1235,6 +1264,76 @@ def _validate_execution(
         "coverage": False,
     }
     selection = {"rawRowCount": 0, "excludedRowCount": 0}
+    raw_recipe_version = recipe.get("version")
+    recipe_protocol = "RecipeV01" if raw_recipe_version == "0.1" else raw_recipe_version
+    if not isinstance(recipe_protocol, str) or not recipe_protocol:
+        issues.append(
+            _issue(
+                "RECIPE_PROTOCOL_MISSING",
+                "Generated recipe has no protocol identity.",
+            )
+        )
+        recipe_protocol = "INVALID"
+    if (
+        declared_recipe_protocol is not None
+        and declared_recipe_protocol != recipe_protocol
+    ):
+        issues.append(
+            _issue(
+                "RECIPE_PROTOCOL_DECLARATION_MISMATCH",
+                "Declared replay protocol does not match the generated recipe.",
+            )
+        )
+    declared_protocols = contract.get("expectedRecipeProtocolsByYear")
+    federal_declared = (
+        declared_recipe_protocol == _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL
+        or (
+            isinstance(declared_protocols, dict)
+            and declared_protocols.get(str(entry["year"]))
+            == _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL
+        )
+    )
+    execution_source = execution.get("source")
+    recipe_source = recipe.get("source")
+    federal_custody = (
+        _federal_defendants_custody_index().get(
+            (entry.get("releaseId"), entry.get("downloadOrdinal"), entry.get("sheet"))
+        )
+        if federal_declared
+        else None
+    )
+    expected_federal_source = (
+        {
+            "version": _FEDERAL_DEFENDANTS_SOURCE_CONTEXT_VERSION,
+            "sourceWorkbookDigest": entry.get("contentDigest"),
+            "executionWorkbookDigest": entry.get("contentDigest"),
+            "physicalSheet": entry.get("sheet"),
+            "authoritativeRange": federal_custody.get("authoritativeRange"),
+        }
+        if isinstance(federal_custody, dict)
+        else None
+    )
+    if federal_declared and (
+        recipe_protocol != _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL
+        or execution.get("version") != _FEDERAL_DEFENDANTS_EXECUTION_VERSION
+        or execution.get("recipeProtocol") != _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL
+        or type(execution.get("providerCalls")) is not int
+        or execution.get("providerCalls") != 0
+        or execution.get("acceptanceAuthority") is not False
+        or execution.get("trainingEligibility") is not False
+        or not isinstance(execution_source, dict)
+        or not isinstance(recipe_source, dict)
+        or expected_federal_source is None
+        or execution_source != expected_federal_source
+        or recipe_source != expected_federal_source
+        or execution.get("sheet") != entry.get("sheet")
+    ):
+        issues.append(
+            _issue(
+                "FEDERAL_EXECUTION_AUTHORITY_INVALID",
+                "Federal execution identity or authority boundary is invalid.",
+            )
+        )
     if contract.get("schemaVersion") == ACCEPTANCE_SCHEMA_V2:
         expected_recipe_digest = contract["expectedRecipeDigestsByYear"][
             str(entry["year"])
@@ -1249,6 +1348,11 @@ def _validate_execution(
         expected_protocols = contract.get("expectedRecipeProtocolsByYear")
         if isinstance(expected_protocols, dict) and (
             expected_protocols.get(str(entry["year"])) != recipe_protocol
+            or (
+                declared_recipe_protocol is not None
+                and expected_protocols.get(str(entry["year"]))
+                != declared_recipe_protocol
+            )
         ):
             issues.append(
                 _issue(
@@ -1256,6 +1360,26 @@ def _validate_execution(
                     "Generated recipe protocol does not match the v2 contract pin.",
                 )
             )
+        if federal_declared:
+            expected_geometry_digests = contract.get(
+                "expectedFederalGeometryAuthorityDigestsByYear"
+            )
+            expected_geometry_digest = (
+                expected_geometry_digests.get(str(entry["year"]))
+                if isinstance(expected_geometry_digests, dict)
+                else None
+            )
+            if (
+                not isinstance(expected_geometry_digest, str)
+                or recipe.get("geometryAuthorityDigest") != expected_geometry_digest
+                or execution.get("geometryAuthorityDigest") != expected_geometry_digest
+            ):
+                issues.append(
+                    _issue(
+                        "FEDERAL_GEOMETRY_AUTHORITY_MISMATCH",
+                        "Federal geometry authority does not match the policy-v2 pin.",
+                    )
+                )
     if not deterministic:
         issues.append(_issue("NONDETERMINISTIC_REPLAY", "Repeated outputs differ."))
     tables = execution.get("tables")
@@ -1458,7 +1582,10 @@ def _resolve_output_names(
     recipe: dict[str, Any], contract: dict[str, Any]
 ) -> dict[str, Any]:
     try:
-        if recipe.get("version") == "TargetScopedRecipeV02":
+        if recipe.get("version") in {
+            "TargetScopedRecipeV02",
+            _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL,
+        }:
             table = recipe["table"]
             headers = [str(item["name"]) for item in recipe["dimensions"]]
             value = str(table["valuesName"])
@@ -2005,11 +2132,7 @@ def _canonical_csv(rows: list[dict[str, Any]], contract: dict[str, Any]) -> byte
         "source_sheet",
         "source_cell",
         "recipe_digest",
-        *(
-            ["recipe_protocol"]
-            if "expectedRecipeProtocolsByYear" in contract
-            else []
-        ),
+        *(["recipe_protocol"] if "expectedRecipeProtocolsByYear" in contract else []),
         *(
             ["replay_map_digest"]
             if "expectedReplayMapDigestsByYear" in contract
@@ -2191,34 +2314,46 @@ def _validate_cohort(value: dict[str, Any]) -> None:
         historical_model = (
             replay.get("historicalModel") if isinstance(replay, dict) else None
         )
+        protocol = replay.get("recipeProtocol") if isinstance(replay, dict) else None
+        is_federal = bool(
+            value.get("publicationId") == _FEDERAL_DEFENDANTS_PUBLICATION
+            or protocol == _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL
+            or entry.get("normalization") == _FEDERAL_DEFENDANTS_NORMALIZATION
+            or historical_model == _FEDERAL_DEFENDANTS_REPLAY_MODEL
+        )
         is_c4 = bool(
-            keys & _C4_WORKBOOK_METADATA
-            or "recipeProtocol" in observed_replay_keys
-            or entry.get("normalization") == _C4_NORMALIZATION
-            or (
-                isinstance(historical_model, str)
-                and historical_model.startswith("provider-free/offenders-c4/")
+            not is_federal
+            and (
+                keys & _C4_WORKBOOK_METADATA
+                or "recipeProtocol" in observed_replay_keys
+                or entry.get("normalization") == _C4_NORMALIZATION
+                or (
+                    isinstance(historical_model, str)
+                    and historical_model.startswith("provider-free/offenders-c4/")
+                )
             )
         )
+        extended = is_c4 or is_federal
         expected_entry_keys = workbook_keys | (
-            _C4_WORKBOOK_METADATA if is_c4 else set()
+            _C4_WORKBOOK_METADATA if extended else set()
         )
-        expected_replay_keys = replay_keys | ({"recipeProtocol"} if is_c4 else set())
-        if (
-            not isinstance(entry, dict)
-            or keys
-            not in (expected_entry_keys, expected_entry_keys | {"normalization"})
+        expected_replay_keys = replay_keys | ({"recipeProtocol"} if extended else set())
+        if keys not in (
+            expected_entry_keys,
+            expected_entry_keys | {"normalization"},
         ):
             raise ProductPrototypeError("Workbook manifest entry is invalid")
         normalization = entry.get("normalization")
-        if normalization not in {
+        allowed_normalizations = {
             None,
             "trim-pathological-full-width-formatting-merge-v1",
             "trim-pathological-styled-blank-cells-v1",
             "isolate-repeated-total-label-formatting-v1",
             "trim-table-37-and-isolate-repeated-total-label-formatting-v1",
             *({_C4_NORMALIZATION} if is_c4 else set()),
-        }:
+            *({_FEDERAL_DEFENDANTS_NORMALIZATION} if is_federal else set()),
+        }
+        if normalization not in allowed_normalizations:
             raise ProductPrototypeError("Workbook normalization is invalid")
         if (
             not isinstance(replay, dict)
@@ -2230,6 +2365,8 @@ def _validate_cohort(value: dict[str, Any]) -> None:
             raise ProductPrototypeError("Replay response must be non-authoritative")
         if is_c4:
             _validate_c4_workbook_entry(value, entry, replay)
+        elif is_federal:
+            _validate_federal_defendants_workbook_entry(value, entry, replay)
 
 
 def _validate_c4_workbook_entry(
@@ -2284,6 +2421,166 @@ def _validate_c4_workbook_entry(
         raise ProductPrototypeError("C4 workbook metadata is invalid")
 
 
+def _federal_authoritative_range(sheet: dict[str, Any]) -> str:
+    explicit = sheet.get("authoritativeRange")
+    if explicit is not None:
+        if not isinstance(explicit, str):
+            raise ProductPrototypeError(
+                "Federal Defendants source inventory is invalid"
+            )
+        match = re.fullmatch(r"A1:([A-Z]+)([1-9][0-9]*)", explicit)
+        if match is None:
+            raise ProductPrototypeError(
+                "Federal Defendants source inventory is invalid"
+            )
+        column = 0
+        for character in match.group(1):
+            column = column * 26 + ord(character) - ord("A") + 1
+        return f"R1C1:R{int(match.group(2))}C{column}"
+    row = sheet.get("semanticMaxRow")
+    column = sheet.get("semanticMaxColumn")
+    if (
+        isinstance(row, bool)
+        or not isinstance(row, int)
+        or row < 1
+        or isinstance(column, bool)
+        or not isinstance(column, int)
+        or column < 1
+    ):
+        raise ProductPrototypeError("Federal Defendants source inventory is invalid")
+    return f"R1C1:R{row}C{column}"
+
+
+@lru_cache(maxsize=1)
+def _federal_defendants_custody_index() -> dict[tuple[str, int, str], dict[str, Any]]:
+    try:
+        inventory = _load_object(
+            _FEDERAL_DEFENDANTS_INVENTORY.read_bytes(),
+            "Federal Defendants source inventory",
+        )
+    except (OSError, ProductPrototypeError) as error:
+        raise ProductPrototypeError(
+            "Federal Defendants source inventory is unavailable"
+        ) from error
+    downloads = inventory.get("downloads")
+    if not isinstance(downloads, list):
+        raise ProductPrototypeError("Federal Defendants source inventory is invalid")
+    result: dict[tuple[str, int, str], dict[str, Any]] = {}
+    for download in downloads:
+        if not isinstance(download, dict) or download.get("kind") != "cube":
+            continue
+        release_id = download.get("releaseId")
+        ordinal = download.get("downloadOrdinal")
+        sheets = download.get("sheets")
+        if (
+            not isinstance(release_id, str)
+            or isinstance(ordinal, bool)
+            or not isinstance(ordinal, int)
+            or not isinstance(sheets, list)
+        ):
+            raise ProductPrototypeError(
+                "Federal Defendants source inventory is invalid"
+            )
+        for sheet in sheets:
+            if (
+                not isinstance(sheet, dict)
+                or sheet.get("classification") != "numbered-data"
+            ):
+                continue
+            sheet_name = sheet.get("name")
+            if not isinstance(sheet_name, str) or not sheet_name:
+                raise ProductPrototypeError(
+                    "Federal Defendants source inventory is invalid"
+                )
+            key = (release_id, ordinal, sheet_name)
+            if key in result:
+                raise ProductPrototypeError(
+                    "Federal Defendants source inventory collides"
+                )
+            result[key] = {
+                "year": int(release_id.split("-")[0]),
+                "referenceDate": _FEDERAL_DEFENDANTS_RELEASE_DATES.get(release_id),
+                "path": download.get("path"),
+                "contentDigest": download.get("contentDigest"),
+                "byteLength": download.get("byteLength"),
+                "cubeId": download.get("cubeId"),
+                "tableNamespace": sheet.get("tableNamespace"),
+                "authoritativeRange": _federal_authoritative_range(sheet),
+            }
+    if len(result) != 36:
+        raise ProductPrototypeError("Federal Defendants source inventory is incomplete")
+    return result
+
+
+def _validate_federal_defendants_workbook_entry(
+    cohort: dict[str, Any], entry: dict[str, Any], replay: dict[str, Any]
+) -> None:
+    release_id = entry.get("releaseId")
+    year = entry.get("year")
+    ordinal = entry.get("downloadOrdinal")
+    byte_length = entry.get("byteLength")
+    replay_byte_length = replay.get("byteLength")
+    cube_id = entry.get("cubeId")
+    expected_cube = {1: "national", 2: "federal-offence-group"}.get(ordinal)
+    custody = (
+        _federal_defendants_custody_index().get(
+            (release_id, ordinal, entry.get("sheet"))
+        )
+        if isinstance(release_id, str)
+        and isinstance(ordinal, int)
+        and not isinstance(ordinal, bool)
+        and isinstance(entry.get("sheet"), str)
+        else None
+    )
+    if (
+        cohort.get("publicationId") != _FEDERAL_DEFENDANTS_PUBLICATION
+        or isinstance(year, bool)
+        or not isinstance(year, int)
+        or release_id not in _FEDERAL_DEFENDANTS_RELEASE_DATES
+        or year != int(str(release_id).split("-")[0])
+        or entry.get("referenceDate")
+        != _FEDERAL_DEFENDANTS_RELEASE_DATES.get(release_id)
+        or expected_cube is None
+        or cube_id != expected_cube
+        or entry.get("tableNamespace") != "main"
+        or any(
+            not isinstance(entry.get(field), str) or not entry[field]
+            for field in ("path", "sheet")
+        )
+        or not isinstance(entry.get("contentDigest"), str)
+        or _SHA256_DIGEST.fullmatch(entry["contentDigest"]) is None
+        or isinstance(byte_length, bool)
+        or not isinstance(byte_length, int)
+        or byte_length < 1
+        or any(
+            not isinstance(replay.get(field), str) or not replay[field]
+            for field in ("path", "historicalModel")
+        )
+        or not isinstance(replay.get("contentDigest"), str)
+        or _SHA256_DIGEST.fullmatch(replay["contentDigest"]) is None
+        or isinstance(replay_byte_length, bool)
+        or not isinstance(replay_byte_length, int)
+        or replay_byte_length < 1
+        or replay.get("recipeProtocol") != _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL
+        or replay.get("historicalModel") != _FEDERAL_DEFENDANTS_REPLAY_MODEL
+        or entry.get("normalization") not in {None, _FEDERAL_DEFENDANTS_NORMALIZATION}
+        or custody is None
+        or any(
+            entry.get(field) != custody.get(field)
+            for field in (
+                "year",
+                "referenceDate",
+                "path",
+                "contentDigest",
+                "byteLength",
+                "cubeId",
+                "tableNamespace",
+            )
+        )
+    ):
+        raise ProductPrototypeError("Federal Defendants workbook metadata is invalid")
+
+
 def _cohort_worker_limits(cohort: dict[str, Any]) -> dict[str, int]:
     raw = cohort.get("workerLimits", {})
     if not isinstance(raw, dict) or set(raw) - {"maxWarnings"}:
@@ -2327,6 +2624,7 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "expectedWarningCountsByYear",
         "expectedRecipeDigestsByYear",
         "expectedRecipeProtocolsByYear",
+        "expectedFederalGeometryAuthorityDigestsByYear",
         "expectedReplayMapDigestsByYear",
         "expectedC3RowTraceDigestsByYear",
         "excludedDimensionCodes",
@@ -2486,10 +2784,15 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
     for pin_name in (
         "expectedReplayMapDigestsByYear",
         "expectedC3RowTraceDigestsByYear",
+        "expectedFederalGeometryAuthorityDigestsByYear",
     ):
         pins = value.get(pin_name)
         if pins is not None and (
             value.get("schemaVersion") != ACCEPTANCE_SCHEMA_V2
+            or (
+                pin_name == "expectedFederalGeometryAuthorityDigestsByYear"
+                and cohort.get("publicationId") != _FEDERAL_DEFENDANTS_PUBLICATION
+            )
             or not isinstance(pins, dict)
             or set(pins) != years
             or any(
@@ -2499,13 +2802,47 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         ):
             raise ProductPrototypeError(f"Acceptance {pin_name} pins are invalid")
     recipe_protocols = value.get("expectedRecipeProtocolsByYear")
+    geometry_authority_digests = value.get(
+        "expectedFederalGeometryAuthorityDigestsByYear"
+    )
+    if cohort.get("publicationId") == _FEDERAL_DEFENDANTS_PUBLICATION and (
+        value.get("schemaVersion") != ACCEPTANCE_SCHEMA_V2
+        or not isinstance(recipe_protocols, dict)
+        or set(recipe_protocols.values()) != {_FEDERAL_DEFENDANTS_RECIPE_PROTOCOL}
+        or not isinstance(geometry_authority_digests, dict)
+        or set(geometry_authority_digests) != years
+        or any(
+            not isinstance(digest, str) or _SHA256_DIGEST.fullmatch(digest) is None
+            for digest in geometry_authority_digests.values()
+        )
+    ):
+        raise ProductPrototypeError(
+            "Federal Defendants acceptance protocol pins are invalid"
+        )
     if recipe_protocols is not None and (
         value.get("schemaVersion") != ACCEPTANCE_SCHEMA_V2
         or not isinstance(recipe_protocols, dict)
         or set(recipe_protocols) != years
         or any(
-            protocol not in {"RecipeV01", "TargetScopedRecipeV02"}
+            protocol
+            not in {
+                "RecipeV01",
+                "TargetScopedRecipeV02",
+                _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL,
+            }
             for protocol in recipe_protocols.values()
+        )
+        or (
+            _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL in recipe_protocols.values()
+            and (
+                cohort.get("publicationId") != _FEDERAL_DEFENDANTS_PUBLICATION
+                or set(recipe_protocols.values())
+                != {_FEDERAL_DEFENDANTS_RECIPE_PROTOCOL}
+            )
+        )
+        or (
+            cohort.get("publicationId") != _FEDERAL_DEFENDANTS_PUBLICATION
+            and _FEDERAL_DEFENDANTS_RECIPE_PROTOCOL in recipe_protocols.values()
         )
     ):
         raise ProductPrototypeError("Acceptance recipe protocol pins are invalid")

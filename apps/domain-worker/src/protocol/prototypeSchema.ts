@@ -169,6 +169,15 @@ function prototypeCapabilitiesValue(): unknown {
         "sha256:7632516d91c47855105d72b072df7368bf67b2167c0e74a4ab4833f6b5a954df",
       scope: "historical-default-four-catalog-parity-v1",
     },
+    federalDefendantsGroupedReplay: {
+      supported: true,
+      operation: "interpret-semantic-map-v13",
+      mapProtocol: "federal-defendants-grouped-semantic-map-v1",
+      recipeProtocol: "FederalDefendantsGroupedRecipeV1",
+      historicalModel: "provider-free/federal-defendants/grouped-recipe-v1",
+      networkRequired: false,
+      acceptanceAuthority: false,
+    },
     mlHints: {
       supported: true,
       featureOperation: "extract-ml-features-v1",

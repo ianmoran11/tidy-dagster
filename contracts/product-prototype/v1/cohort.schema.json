@@ -14,16 +14,34 @@
     "workbooks"
   ],
   "properties": {
-    "schemaVersion": { "const": "tidy.product-prototype-cohort/v1" },
-    "cohortId": { "type": "string", "minLength": 1 },
-    "publicationId": { "type": "string", "minLength": 1 },
-    "tableFamilyId": { "type": "string", "minLength": 1 },
-    "acceptanceContract": { "type": "string", "minLength": 1 },
+    "schemaVersion": {
+      "const": "tidy.product-prototype-cohort/v1"
+    },
+    "cohortId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publicationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tableFamilyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acceptanceContract": {
+      "type": "string",
+      "minLength": 1
+    },
     "workerLimits": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "maxWarnings": { "type": "integer", "minimum": 1, "maximum": 100000 }
+        "maxWarnings": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        }
       }
     },
     "generation": {
@@ -39,14 +57,27 @@
         "correctionPolicy"
       ],
       "properties": {
-        "provider": { "const": "openai-codex" },
-        "model": { "const": "openai-codex/gpt-5.6-luna" },
-        "reasoning": { "const": "high" },
+        "provider": {
+          "const": "openai-codex"
+        },
+        "model": {
+          "const": "openai-codex/gpt-5.6-luna"
+        },
+        "reasoning": {
+          "const": "high"
+        },
         "promptContract": {
           "const": "cell-role-semantic-map-v13-adjacent-year-aware"
         },
-        "maximumCalls": { "type": "integer", "minimum": 2, "maximum": 24 },
-        "maximumCostUsd": { "type": "number", "exclusiveMinimum": 0 },
+        "maximumCalls": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 24
+        },
+        "maximumCostUsd": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
         "correctionPolicy": {
           "const": "one-pre-execution-compilation-correction-only"
         }
@@ -69,22 +100,39 @@
           "replayResponse"
         ],
         "properties": {
-          "year": { "type": "integer", "minimum": 1900, "maximum": 2100 },
-          "referenceDate": { "type": "string", "format": "date" },
-          "path": { "type": "string", "minLength": 1 },
+          "year": {
+            "type": "integer",
+            "minimum": 1900,
+            "maximum": 2100
+          },
+          "referenceDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
           "contentDigest": {
             "type": "string",
             "pattern": "^sha256:[0-9a-f]{64}$"
           },
-          "byteLength": { "type": "integer", "minimum": 1 },
-          "sheet": { "type": "string", "minLength": 1 },
+          "byteLength": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sheet": {
+            "type": "string",
+            "minLength": 1
+          },
           "normalization": {
             "enum": [
               "isolate-repeated-total-label-formatting-v1",
               "trim-pathological-full-width-formatting-merge-v1",
               "trim-pathological-styled-blank-cells-v1",
               "trim-table-37-and-isolate-repeated-total-label-formatting-v1",
-              "digest-pinned-bounded-offenders-remaining-v1"
+              "digest-pinned-bounded-offenders-remaining-v1",
+              "digest-pinned-bounded-federal-defendants-v1"
             ]
           },
           "releaseId": {
@@ -96,8 +144,14 @@
             "minimum": 1,
             "maximum": 9
           },
-          "cubeId": { "type": "string", "minLength": 1 },
-          "tableNamespace": { "type": "string", "minLength": 1 },
+          "cubeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tableNamespace": {
+            "type": "string",
+            "minLength": 1
+          },
           "replayResponse": {
             "type": "object",
             "additionalProperties": false,
@@ -109,16 +163,31 @@
               "acceptanceAuthority"
             ],
             "properties": {
-              "path": { "type": "string", "minLength": 1 },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
               "contentDigest": {
                 "type": "string",
                 "pattern": "^sha256:[0-9a-f]{64}$"
               },
-              "byteLength": { "type": "integer", "minimum": 1 },
-              "historicalModel": { "type": "string", "minLength": 1 },
-              "acceptanceAuthority": { "const": false },
+              "byteLength": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "historicalModel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "acceptanceAuthority": {
+                "const": false
+              },
               "recipeProtocol": {
-                "enum": ["RecipeV01", "TargetScopedRecipeV02"]
+                "enum": [
+                  "RecipeV01",
+                  "TargetScopedRecipeV02",
+                  "FederalDefendantsGroupedRecipeV1"
+                ]
               }
             }
           }
@@ -127,10 +196,18 @@
           {
             "if": {
               "anyOf": [
-                { "required": ["releaseId"] },
-                { "required": ["downloadOrdinal"] },
-                { "required": ["cubeId"] },
-                { "required": ["tableNamespace"] },
+                {
+                  "required": ["releaseId"]
+                },
+                {
+                  "required": ["downloadOrdinal"]
+                },
+                {
+                  "required": ["cubeId"]
+                },
+                {
+                  "required": ["tableNamespace"]
+                },
                 {
                   "required": ["replayResponse"],
                   "properties": {
@@ -155,7 +232,9 @@
                 {
                   "required": ["replayResponse"],
                   "properties": {
-                    "replayResponse": { "required": ["recipeProtocol"] }
+                    "replayResponse": {
+                      "required": ["recipeProtocol"]
+                    }
                   }
                 }
               ]
@@ -173,7 +252,9 @@
                   "oneOf": [
                     {
                       "properties": {
-                        "recipeProtocol": { "const": "RecipeV01" },
+                        "recipeProtocol": {
+                          "const": "RecipeV01"
+                        },
                         "historicalModel": {
                           "enum": [
                             "provider-free/offenders-c4/semantic-map-v1-recipe-v01",
@@ -191,10 +272,220 @@
                           "const": "provider-free/offenders-c4/target-scoped-recipe-v02"
                         }
                       }
+                    },
+                    {
+                      "properties": {
+                        "recipeProtocol": {
+                          "const": "FederalDefendantsGroupedRecipeV1"
+                        },
+                        "historicalModel": {
+                          "const": "provider-free/federal-defendants/grouped-recipe-v1"
+                        }
+                      }
                     }
                   ]
                 }
               }
+            }
+          },
+          {
+            "if": {
+              "required": ["replayResponse"],
+              "properties": {
+                "replayResponse": {
+                  "required": ["recipeProtocol"],
+                  "properties": {
+                    "recipeProtocol": {
+                      "const": "FederalDefendantsGroupedRecipeV1"
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "normalization": {
+                  "const": "digest-pinned-bounded-federal-defendants-v1"
+                }
+              },
+              "oneOf": [
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2021
+                    },
+                    "referenceDate": {
+                      "const": "2023-05-04"
+                    },
+                    "releaseId": {
+                      "const": "2021-22"
+                    },
+                    "downloadOrdinal": {
+                      "const": 1
+                    },
+                    "cubeId": {
+                      "const": "national"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2021
+                    },
+                    "referenceDate": {
+                      "const": "2023-05-04"
+                    },
+                    "releaseId": {
+                      "const": "2021-22"
+                    },
+                    "downloadOrdinal": {
+                      "const": 2
+                    },
+                    "cubeId": {
+                      "const": "federal-offence-group"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2022
+                    },
+                    "referenceDate": {
+                      "const": "2024-05-09"
+                    },
+                    "releaseId": {
+                      "const": "2022-23"
+                    },
+                    "downloadOrdinal": {
+                      "const": 1
+                    },
+                    "cubeId": {
+                      "const": "national"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2022
+                    },
+                    "referenceDate": {
+                      "const": "2024-05-09"
+                    },
+                    "releaseId": {
+                      "const": "2022-23"
+                    },
+                    "downloadOrdinal": {
+                      "const": 2
+                    },
+                    "cubeId": {
+                      "const": "federal-offence-group"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2023
+                    },
+                    "referenceDate": {
+                      "const": "2025-05-01"
+                    },
+                    "releaseId": {
+                      "const": "2023-24"
+                    },
+                    "downloadOrdinal": {
+                      "const": 1
+                    },
+                    "cubeId": {
+                      "const": "national"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2023
+                    },
+                    "referenceDate": {
+                      "const": "2025-05-01"
+                    },
+                    "releaseId": {
+                      "const": "2023-24"
+                    },
+                    "downloadOrdinal": {
+                      "const": 2
+                    },
+                    "cubeId": {
+                      "const": "federal-offence-group"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2024
+                    },
+                    "referenceDate": {
+                      "const": "2026-04-30"
+                    },
+                    "releaseId": {
+                      "const": "2024-25"
+                    },
+                    "downloadOrdinal": {
+                      "const": 1
+                    },
+                    "cubeId": {
+                      "const": "national"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "year": {
+                      "const": 2024
+                    },
+                    "referenceDate": {
+                      "const": "2026-04-30"
+                    },
+                    "releaseId": {
+                      "const": "2024-25"
+                    },
+                    "downloadOrdinal": {
+                      "const": 2
+                    },
+                    "cubeId": {
+                      "const": "federal-offence-group"
+                    },
+                    "tableNamespace": {
+                      "const": "main"
+                    }
+                  }
+                }
+              ]
             }
           }
         ]
@@ -208,10 +499,6 @@
           "workbooks": {
             "contains": {
               "anyOf": [
-                { "required": ["releaseId"] },
-                { "required": ["downloadOrdinal"] },
-                { "required": ["cubeId"] },
-                { "required": ["tableNamespace"] },
                 {
                   "required": ["replayResponse"],
                   "properties": {
@@ -236,7 +523,14 @@
                 {
                   "required": ["replayResponse"],
                   "properties": {
-                    "replayResponse": { "required": ["recipeProtocol"] }
+                    "replayResponse": {
+                      "required": ["recipeProtocol"],
+                      "properties": {
+                        "recipeProtocol": {
+                          "enum": ["RecipeV01", "TargetScopedRecipeV02"]
+                        }
+                      }
+                    }
                   }
                 }
               ]
@@ -247,7 +541,100 @@
       },
       "then": {
         "properties": {
-          "publicationId": { "const": "recorded-crime-offenders" }
+          "publicationId": {
+            "const": "recorded-crime-offenders"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "workbooks": {
+            "contains": {
+              "anyOf": [
+                {
+                  "required": ["replayResponse"],
+                  "properties": {
+                    "replayResponse": {
+                      "required": ["historicalModel"],
+                      "properties": {
+                        "historicalModel": {
+                          "const": "provider-free/federal-defendants/grouped-recipe-v1"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "required": ["normalization"],
+                  "properties": {
+                    "normalization": {
+                      "const": "digest-pinned-bounded-federal-defendants-v1"
+                    }
+                  }
+                },
+                {
+                  "required": ["replayResponse"],
+                  "properties": {
+                    "replayResponse": {
+                      "required": ["recipeProtocol"],
+                      "properties": {
+                        "recipeProtocol": {
+                          "const": "FederalDefendantsGroupedRecipeV1"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "required": ["workbooks"]
+      },
+      "then": {
+        "properties": {
+          "publicationId": {
+            "const": "federal-defendants-australia"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": ["publicationId"],
+        "properties": {
+          "publicationId": {
+            "const": "federal-defendants-australia"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "workbooks": {
+            "items": {
+              "required": [
+                "releaseId",
+                "downloadOrdinal",
+                "cubeId",
+                "tableNamespace"
+              ],
+              "properties": {
+                "replayResponse": {
+                  "required": ["recipeProtocol"],
+                  "properties": {
+                    "recipeProtocol": {
+                      "const": "FederalDefendantsGroupedRecipeV1"
+                    },
+                    "historicalModel": {
+                      "const": "provider-free/federal-defendants/grouped-recipe-v1"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
