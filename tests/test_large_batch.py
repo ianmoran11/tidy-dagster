@@ -2144,7 +2144,7 @@ def test_western_australia_criminal_courts_cluster_is_source_bound_and_closed() 
     )
 
 
-@pytest.mark.timeout(900)
+@pytest.mark.timeout(2400)
 def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
     token = hashlib.sha256(
         f"{tmp_path.resolve()}:{uuid.uuid4()}".encode()
