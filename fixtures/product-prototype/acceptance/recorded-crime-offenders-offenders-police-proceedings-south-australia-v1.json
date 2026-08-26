@@ -1,0 +1,549 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-offenders-police-proceedings-south-australia-v1",
+  "tableFamilyId": "offenders-police-proceedings-south-australia",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 1428,
+        "2022": 1530,
+        "2023": 1632,
+        "2024": 1734
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "FARE_EVASION_ea4f796c",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "FARE_EVASION_ea4f796c",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "FARE_EVASION_ea4f796c",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_cb6f8507"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "FARE_EVASION_ea4f796c",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:3cb1366c0540b19301d8cfd4d3aedf3780ad01f65cced7a63b3d64249962a2c6",
+        "2022": "sha256:f59bfffc07cf3c06b54af875410a9cb537a2b0ed0febda9143fd06a43cdbd942",
+        "2023": "sha256:5b325b2d8139c31b5a2c495380399d36d6e667505001400f9ddf02b9002157e7",
+        "2024": "sha256:94a6b08a1a03058b08dc2f9fd2639b44d531edf3b1b685335cb4adbb5669f97c"
+      },
+      "missingValues": {
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "method_of_proceeding",
+    "observation_period",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "principal\\ offence"
+    ],
+    "method_of_proceeding": [
+      "method\\ of\\ proceeding"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "04 Dangerous/negligent acts(e)": "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+      "05 Abduction/harassment": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "06 Robbery/extortion": "06_ROBBERY_EXTORTION_4b18f837",
+      "07 Unlawful entry with intent": "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+      "08 Theft(f)": "08_THEFT_eba67dd5",
+      "Fare evasion": "FARE_EVASION_ea4f796c",
+      "09 Fraud/deception": "09_FRAUD_DECEPTION_82cf4169",
+      "10 Illicit drug offences(g)": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+      "11 Weapons/explosives": "11_WEAPONS_EXPLOSIVES_70c89162",
+      "12 Property damage and environmental pollution": "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+      "13 Public order offences": "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+      "15 Offences against justice(h)": "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+      "16 Miscellaneous offences": "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+      "Total(i)": "TOTAL_ab2882c8",
+      "13 Public order offences(g)": "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+      "04 Dangerous/negligent acts(f)": "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+      "08 Theft(g)": "08_THEFT_eba67dd5",
+      "10 Illicit drug offences(h)": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+      "13 Public order offences(h)": "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+      "15 Offences against justice(i)": "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+      "Total(j)": "TOTAL_ab2882c8"
+    },
+    "method_of_proceeding": {
+      "Court action": "COURT_ACTION_f2f508e1",
+      "Non-court action": "NON_COURT_ACTION_7d43f004",
+      "Total proceedings": "TOTAL_PROCEEDINGS_53c1eee4",
+      "Total proceedings(j)": "TOTAL_PROCEEDINGS_53c1eee4",
+      "Total proceedings(k)": "TOTAL_PROCEEDINGS_53c1eee4"
+    },
+    "observation_period": {
+      "2008–09": "2008_09_f695681e",
+      "2009–10": "2009_10_d4eb8e50",
+      "2010–11": "2010_11_bcb455ae",
+      "2011–12": "2011_12_dd65d86c",
+      "2012–13": "2012_13_94552411",
+      "2013–14": "2013_14_4115b20a",
+      "2014–15": "2014_15_392dc544",
+      "2015–16": "2015_16_ecc4ae2a",
+      "2016–17": "2016_17_14c8c17c",
+      "2017–18": "2017_18_e0619229",
+      "2018–19(c)(d)": "2018_19_3fe15a03",
+      "2019–20(c)": "2019_20_6d3dcb6c",
+      "2020–21(c)": "2020_21_d6db3b1d",
+      "2021–22(c)": "2021_22_dd8903a1",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2022–23(c)": "2022_23_0d9e498b",
+      "2022–23(e)": "2022_23_0d9e498b",
+      "2023-24": "2023_24_cb6f8507",
+      "2022–23": "2022_23_0d9e498b",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Proportion (%)": "PROPORTION_13745b70"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:91362710e0ec1123f283f84c64cbbef2d5f03bee063b24edd629c3464ee85d90",
+    "2022": "sha256:a0095fa71b59fc48e72e9ab83bf1634484f6a7ba5cc64669b56ec41a7e1dad09",
+    "2023": "sha256:50d8d5a56cd3dea343eca04b3c61d1ee10dc8a9e8bcb4d98fdcc25068e09660c",
+    "2024": "sha256:1e5a36f7c4d7332cc3dac7ee2c2bb4cc94884f9c34996b42cafe4aaa87494041"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:32b850cb2d88eb7a4811f63ea5d57908aeabb2214843b4915d115c2241035b71",
+    "2022": "sha256:8a7144e7b660c1d0b9f2f0bf53628592093c8c0ba6901f9ae4b7ac813353e487",
+    "2023": "sha256:4abf566ca5337a52c00ab4fdd9080ab0483d55c2dedce127bfefe9d7efb76778",
+    "2024": "sha256:af9e5bebefba302e81ed29f67e33673313a7323ba6b630c321c30a5e17b6abca"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:5b5feae260c59abc78a728cec90e5b8dd3ee0a12e54f6fae635c5ebdf2c95486",
+    "2022": "sha256:5497fba629a3abfb1c1ac8adab2c7abb1abee9747fd52fde7ea6471b1190c6ea",
+    "2023": "sha256:95e2e60ca6d9034c47f2968cca471f6ca1e223b73dbeb0936e58ea49490e8b10",
+    "2024": "sha256:3a1085ff5686abffc7efcb736cee15eaa66d9605871e834e667578701d2d6355"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "method_of_proceeding_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1428,
+    "maximumRows": 1734,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "FARE_EVASION_ea4f796c",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "FARE_EVASION_ea4f796c",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "FARE_EVASION_ea4f796c",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "FARE_EVASION_ea4f796c",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "methodsOfProceedingByYear": {
+      "2021": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ],
+      "2022": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ],
+      "2023": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ],
+      "2024": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

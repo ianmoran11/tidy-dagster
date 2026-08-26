@@ -1,0 +1,2768 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:2c9e00ddf228045100b7f5cc7290e2a12e506b8043a702769141f461f92d6154"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R25C35"
+            },
+            {
+              "range": "R27C2:R44C35"
+            },
+            {
+              "range": "R46C2:R63C35"
+            },
+            {
+              "range": "R65C2:R82C35"
+            },
+            {
+              "range": "R84C2:R100C35"
+            },
+            {
+              "range": "R102C2:R118C35"
+            },
+            {
+              "range": "R120C2:R136C35"
+            },
+            {
+              "range": "R138C2:R154C35"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "principal offence"
+      },
+      {
+        "id": "d02",
+        "name": "observation period"
+      },
+      {
+        "id": "d03",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R84C2:R100C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R84C1:R98C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R99C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R100C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R83C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R102C2:R118C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R102C1:R116C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R117C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R118C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R101C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R120C2:R136C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R120C1:R134C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R135C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R136C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R119C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R138C2:R154C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R138C1:R152C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R153C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R154C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R137C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R25C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R8C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R25C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R27C2:R44C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R27C1:R29C1"
+                },
+                {
+                  "range": "R31C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R43C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R26C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R46C2:R63C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R46C1:R48C1"
+                },
+                {
+                  "range": "R50C1:R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R63C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R49C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R45C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R65C2:R82C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R65C1:R67C1"
+                },
+                {
+                  "range": "R69C1:R74C1"
+                },
+                {
+                  "range": "R76C1:R80C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R81C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R82C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R68C1"
+                },
+                {
+                  "address": "R75C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R64C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R84C3:R100C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R84C1:R98C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R99C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R100C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R83C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-010",
+      "order": 10,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p10",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R102C3:R118C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R102C1:R116C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R117C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R118C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R101C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-011",
+      "order": 11,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p11",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R120C3:R136C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R120C1:R134C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R135C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R136C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R119C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-012",
+      "order": 12,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p12",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R138C3:R154C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R138C1:R152C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R153C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R154C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R137C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-013",
+      "order": 13,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p13",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C3:R25C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R8C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R25C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-014",
+      "order": 14,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p14",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R27C3:R44C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R27C1:R29C1"
+                },
+                {
+                  "range": "R31C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R43C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R26C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-015",
+      "order": 15,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p15",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R46C3:R63C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R46C1:R48C1"
+                },
+                {
+                  "range": "R50C1:R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R63C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R49C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R45C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-016",
+      "order": 16,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p16",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R65C3:R82C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R65C1:R67C1"
+                },
+                {
+                  "range": "R69C1:R74C1"
+                },
+                {
+                  "range": "R76C1:R80C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R81C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R82C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R68C1"
+                },
+                {
+                  "address": "R75C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R64C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-017",
+      "order": 17,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p17",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R84C19:R100C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R84C1:R98C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R99C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R100C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R83C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-018",
+      "order": 18,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p18",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R102C19:R118C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R102C1:R116C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R117C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R118C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R101C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-019",
+      "order": 19,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p19",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R120C19:R136C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R120C1:R134C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R135C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R136C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R119C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-020",
+      "order": 20,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p20",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R138C19:R154C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R138C1:R152C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R153C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R154C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R137C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-021",
+      "order": 21,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p21",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C19:R25C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R8C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R25C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-022",
+      "order": 22,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p22",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R27C19:R44C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R27C1:R29C1"
+                },
+                {
+                  "range": "R31C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R43C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R26C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-023",
+      "order": 23,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p23",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R46C19:R63C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R46C1:R48C1"
+                },
+                {
+                  "range": "R50C1:R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R63C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R49C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R45C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-024",
+      "order": 24,
+      "tableName": "Offenders youth-offenders-by-principal-offence-jurisdiction-and-period 2024-25 p24",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R65C19:R82C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R65C1:R67C1"
+                },
+                {
+                  "range": "R69C1:R74C1"
+                },
+                {
+                  "range": "R76C1:R80C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R81C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R82C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R68C1"
+                },
+                {
+                  "address": "R75C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "range": "R6C19:R6C26"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "range": "R6C28:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R6C27"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R64C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

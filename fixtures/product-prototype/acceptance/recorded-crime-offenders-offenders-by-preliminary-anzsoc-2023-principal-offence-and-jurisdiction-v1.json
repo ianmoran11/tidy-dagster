@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction-v1",
+  "tableFamilyId": "offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2023": 126,
+        "2024": 126
+      },
+      "expectedDimensionsByYear": {
+        "2023": {
+          "principal_offence": [
+            "01_HOMICIDE_2ad35483",
+            "02_ASSAULT_294c4580",
+            "03_SEXUAL_OFFENCES_6fb153ef",
+            "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+            "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+            "06_BURGLARY_bb37cc2e",
+            "07_THEFT_2ddf8175",
+            "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+            "09_DRUG_OFFENCES_86dc45c2",
+            "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+            "11_PROPERTY_DAMAGE_cd09ba73",
+            "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+            "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+            "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+            "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+            "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+            "FARE_EVASION_ea4f796c",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "classification_context": [
+            "PRINCIPAL_OFFENCE_ANZSOC_2023_c490ac3f"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "01_HOMICIDE_2ad35483",
+            "02_ASSAULT_294c4580",
+            "03_SEXUAL_OFFENCES_6fb153ef",
+            "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+            "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+            "06_BURGLARY_bb37cc2e",
+            "07_THEFT_2ddf8175",
+            "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+            "09_DRUG_OFFENCES_86dc45c2",
+            "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+            "11_PROPERTY_DAMAGE_cd09ba73",
+            "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+            "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+            "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+            "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+            "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+            "FARE_EVASION_ea4f796c",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "classification_context": [
+            "PRINCIPAL_OFFENCE_ANZSOC_2023_c490ac3f"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2023": "sha256:3d995b39fc6085dfefd550c25c4e6738f412bce09b23a2b2e46605e2cc57cb0c",
+        "2024": "sha256:3d995b39fc6085dfefd550c25c4e6738f412bce09b23a2b2e46605e2cc57cb0c"
+      },
+      "missingValues": {
+        "na": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "jurisdiction",
+    "classification_context"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "principal\\ offence"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "classification_context": [
+      "classification\\ context"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide": "01_HOMICIDE_2ad35483",
+      "02 Assault": "02_ASSAULT_294c4580",
+      "03 Sexual offences": "03_SEXUAL_OFFENCES_6fb153ef",
+      "04 Harm or endanger persons(b)": "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+      "05 Robbery, blackmail, and extortion": "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+      "06 Burglary": "06_BURGLARY_bb37cc2e",
+      "07 Theft (c)": "07_THEFT_2ddf8175",
+      "Fare evasion (d)": "FARE_EVASION_ea4f796c",
+      "08 Fraud and related offences": "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+      "09 Drug offences": "09_DRUG_OFFENCES_86dc45c2",
+      "10 Weapons and explosives offences": "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+      "11 Property damage": "11_PROPERTY_DAMAGE_cd09ba73",
+      "12 Public order, health, and safety offences": "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+      "14 Offences against justice procedures and orders (e)": "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+      "15 Offences against government": "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+      "16 Environmental offences": "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+      "17 Miscellaneous offences": "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+      "Total(f)": "TOTAL_ab2882c8",
+      "04 Harm or endanger persons(c)": "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+      "07 Theft (d)": "07_THEFT_2ddf8175",
+      "Fare evasion (e)": "FARE_EVASION_ea4f796c",
+      "14 Offences against justice procedures and orders (f)": "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+      "Total(g)": "TOTAL_ab2882c8"
+    },
+    "jurisdiction": {
+      "NSW": "NSW_647faf01",
+      "Vic.": "VIC_c5916b82",
+      "Qld": "QLD_cfd8a309",
+      "WA": "WA_d8689b62",
+      "Tas.": "TAS_71b7c8af",
+      "NT": "NT_ff9ec9f7",
+      "ACT": "ACT_ee71241e"
+    },
+    "classification_context": {
+      "Principal offence (ANZSOC 2023)(a)": "PRINCIPAL_OFFENCE_ANZSOC_2023_c490ac3f",
+      "Principal offence (ANZSOC 2023)(b)": "PRINCIPAL_OFFENCE_ANZSOC_2023_c490ac3f"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2023": "sha256:b62dbf7ad3a033ff497e7f9bc1247b45ca2e30548306765275e15cca4d7a4904",
+    "2024": "sha256:27d9ba3d0064c9ccbe22675a8300a19b2d4a55bb783e7348ef73d850cba68ce6"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2023": "sha256:5fd35274cc9ae4c35a37418fcc35b48e15b391fc38e69f975486e44605467a62",
+    "2024": "sha256:b7e173d871e180940dae3d34fd4159c531ab586dbacb952934db34e31b8fed77"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2023": "sha256:b6accf1765b5e7a9aa397cb2de330eac3653b8705fd0b8563ea72a2aedc0b8e2",
+    "2024": "sha256:dbf851e21a908069fea5f5a874b65d504e683111555fe0a7ede122a2ec4b32fc"
+  },
+  "expectedWarningCountsByYear": {
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "jurisdiction_id",
+    "classification_context_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 126,
+    "maximumRows": 126,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "principalOffencesByYear": {
+      "2023": [
+        "01_HOMICIDE_2ad35483",
+        "02_ASSAULT_294c4580",
+        "03_SEXUAL_OFFENCES_6fb153ef",
+        "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+        "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+        "06_BURGLARY_bb37cc2e",
+        "07_THEFT_2ddf8175",
+        "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+        "09_DRUG_OFFENCES_86dc45c2",
+        "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+        "11_PROPERTY_DAMAGE_cd09ba73",
+        "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+        "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+        "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+        "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+        "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+        "FARE_EVASION_ea4f796c",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_2ad35483",
+        "02_ASSAULT_294c4580",
+        "03_SEXUAL_OFFENCES_6fb153ef",
+        "04_HARM_OR_ENDANGER_PERSONS_0c955db8",
+        "05_ROBBERY_BLACKMAIL_AND_EXTORTION_815b716e",
+        "06_BURGLARY_bb37cc2e",
+        "07_THEFT_2ddf8175",
+        "08_FRAUD_AND_RELATED_OFFENCES_e2838775",
+        "09_DRUG_OFFENCES_86dc45c2",
+        "10_WEAPONS_AND_EXPLOSIVES_OFFENCES_eac323ea",
+        "11_PROPERTY_DAMAGE_cd09ba73",
+        "12_PUBLIC_ORDER_HEALTH_AND_SAFETY_OFFENCES_0fcb5dd8",
+        "14_OFFENCES_AGAINST_JUSTICE_PROCEDURES_AND_ORDERS_dd2b934d",
+        "15_OFFENCES_AGAINST_GOVERNMENT_9be2457c",
+        "16_ENVIRONMENTAL_OFFENCES_9888dd68",
+        "17_MISCELLANEOUS_OFFENCES_a2fe8001",
+        "FARE_EVASION_ea4f796c",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2023": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2024": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ]
+    },
+    "classificationContextsByYear": {
+      "2023": [
+        "PRINCIPAL_OFFENCE_ANZSOC_2023_c490ac3f"
+      ],
+      "2024": [
+        "PRINCIPAL_OFFENCE_ANZSOC_2023_c490ac3f"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

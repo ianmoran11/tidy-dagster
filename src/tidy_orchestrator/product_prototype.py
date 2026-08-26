@@ -35,6 +35,21 @@ from .worker import (
 )
 
 COHORT_SCHEMA = "tidy.product-prototype-cohort/v1"
+_C4_WORKBOOK_METADATA = frozenset(
+    {"releaseId", "downloadOrdinal", "cubeId", "tableNamespace"}
+)
+_C4_NORMALIZATION = "digest-pinned-bounded-offenders-remaining-v1"
+_C4_REPLAY_MODELS = {
+    "RecipeV01": frozenset(
+        {
+            "provider-free/offenders-c4/semantic-map-v1-recipe-v01",
+            "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        }
+    ),
+    "TargetScopedRecipeV02": frozenset(
+        {"provider-free/offenders-c4/target-scoped-recipe-v02"}
+    ),
+}
 ACCEPTANCE_SCHEMA = "tidy.table-family-acceptance/v1"
 ACCEPTANCE_SCHEMA_V2 = "tidy.table-family-acceptance/v2"
 ACCEPTANCE_SCHEMAS = frozenset({ACCEPTANCE_SCHEMA, ACCEPTANCE_SCHEMA_V2})
@@ -90,6 +105,8 @@ _DIMENSION_FIELDS = {
     "prison_location": "prison_location_id",
     "court_level": "court_level_id",
     "method_of_finalisation": "method_of_finalisation_id",
+    "method_of_proceeding": "method_of_proceeding_id",
+    "times_proceeded": "times_proceeded_id",
     "prisoner_statistic": "prisoner_statistic_id",
 }
 _EXPECTED_CATEGORY_FIELDS = {
@@ -120,6 +137,8 @@ _EXPECTED_CATEGORY_FIELDS = {
     "prison_location": "prisonLocations",
     "court_level": "courtLevels",
     "method_of_finalisation": "methodsOfFinalisation",
+    "method_of_proceeding": "methodsOfProceeding",
+    "times_proceeded": "timesProceeded",
     "prisoner_statistic": "prisonerStatistics",
 }
 _DIMENSION_HEADER_PATTERNS = {
@@ -151,6 +170,8 @@ _DIMENSION_HEADER_PATTERNS = {
     "prison_location": re.compile(r"prison location", re.I),
     "court_level": re.compile(r"court level", re.I),
     "method_of_finalisation": re.compile(r"method of finalisation", re.I),
+    "method_of_proceeding": re.compile(r"method of proceeding", re.I),
+    "times_proceeded": re.compile(r"times proceeded|number of times", re.I),
     "prisoner_statistic": re.compile(r"prisoner|statistic|measure", re.I),
 }
 
@@ -1163,6 +1184,7 @@ def evaluate_execution_for_acceptance(
     contract: dict[str, Any],
     entry: dict[str, Any],
     recipe_digest: str,
+    recipe_protocol: str = "RecipeV01",
     deterministic: bool = True,
     extra_issues: list[dict[str, Any]] | None = None,
 ) -> tuple[tuple[dict[str, Any], ...], list[dict[str, Any]], dict[str, bool]]:
@@ -1173,6 +1195,7 @@ def evaluate_execution_for_acceptance(
         contract=contract,
         entry=entry,
         recipe_digest=recipe_digest,
+        recipe_protocol=recipe_protocol,
         deterministic=deterministic,
     )
     injected = list(extra_issues or [])
@@ -1189,6 +1212,7 @@ def _validate_execution(
     entry: dict[str, Any],
     recipe_digest: str,
     deterministic: bool,
+    recipe_protocol: str = "RecipeV01",
 ) -> tuple[
     tuple[dict[str, Any], ...],
     list[dict[str, Any]],
@@ -1220,6 +1244,16 @@ def _validate_execution(
                 _issue(
                     "RECIPE_DIGEST_MISMATCH",
                     "Generated recipe does not match the v2 contract digest pin.",
+                )
+            )
+        expected_protocols = contract.get("expectedRecipeProtocolsByYear")
+        if isinstance(expected_protocols, dict) and (
+            expected_protocols.get(str(entry["year"])) != recipe_protocol
+        ):
+            issues.append(
+                _issue(
+                    "RECIPE_PROTOCOL_MISMATCH",
+                    "Generated recipe protocol does not match the v2 contract pin.",
                 )
             )
     if not deterministic:
@@ -1337,6 +1371,8 @@ def _validate_execution(
             "source_cell": address,
             "recipe_digest": recipe_digest,
         }
+        if "expectedRecipeProtocolsByYear" in contract:
+            observation["recipe_protocol"] = recipe_protocol
         if contract.get("preservePublicationVintage") is True:
             observation["publication_vintage_date"] = entry["referenceDate"]
         if contract.get("preserveRawValueText") is True:
@@ -1422,9 +1458,14 @@ def _resolve_output_names(
     recipe: dict[str, Any], contract: dict[str, Any]
 ) -> dict[str, Any]:
     try:
-        table = recipe["tables"][0]
-        headers = [str(item["name"]) for item in table["headers"]]
-        value = str(table["values"]["name"])
+        if recipe.get("version") == "TargetScopedRecipeV02":
+            table = recipe["table"]
+            headers = [str(item["name"]) for item in recipe["dimensions"]]
+            value = str(table["valuesName"])
+        else:
+            table = recipe["tables"][0]
+            headers = [str(item["name"]) for item in table["headers"]]
+            value = str(table["values"]["name"])
     except (KeyError, IndexError, TypeError):
         return {}
     resolved: dict[str, Any] = {"measure": value}
@@ -1964,6 +2005,21 @@ def _canonical_csv(rows: list[dict[str, Any]], contract: dict[str, Any]) -> byte
         "source_sheet",
         "source_cell",
         "recipe_digest",
+        *(
+            ["recipe_protocol"]
+            if "expectedRecipeProtocolsByYear" in contract
+            else []
+        ),
+        *(
+            ["replay_map_digest"]
+            if "expectedReplayMapDigestsByYear" in contract
+            else []
+        ),
+        *(
+            ["c3_row_trace_digest"]
+            if "expectedC3RowTraceDigestsByYear" in contract
+            else []
+        ),
         "publication_id",
         "execution_digest",
         "acceptance_policy_version",
@@ -2110,27 +2166,48 @@ def _validate_cohort(value: dict[str, Any]) -> None:
         != "one-pre-execution-compilation-correction-only"
     ):
         raise ProductPrototypeError("Generation policy is not the pinned Luna policy")
+    workbook_keys = {
+        "year",
+        "referenceDate",
+        "path",
+        "contentDigest",
+        "byteLength",
+        "sheet",
+        "replayResponse",
+    }
+    replay_keys = {
+        "path",
+        "contentDigest",
+        "byteLength",
+        "historicalModel",
+        "acceptanceAuthority",
+    }
     for entry in workbooks:
-        if not isinstance(entry, dict) or set(entry) not in (
-            {
-                "year",
-                "referenceDate",
-                "path",
-                "contentDigest",
-                "byteLength",
-                "sheet",
-                "replayResponse",
-            },
-            {
-                "year",
-                "referenceDate",
-                "path",
-                "contentDigest",
-                "byteLength",
-                "sheet",
-                "normalization",
-                "replayResponse",
-            },
+        if not isinstance(entry, dict):
+            raise ProductPrototypeError("Workbook manifest entry is invalid")
+        keys = set(entry)
+        replay = entry.get("replayResponse")
+        observed_replay_keys = set(replay) if isinstance(replay, dict) else set()
+        historical_model = (
+            replay.get("historicalModel") if isinstance(replay, dict) else None
+        )
+        is_c4 = bool(
+            keys & _C4_WORKBOOK_METADATA
+            or "recipeProtocol" in observed_replay_keys
+            or entry.get("normalization") == _C4_NORMALIZATION
+            or (
+                isinstance(historical_model, str)
+                and historical_model.startswith("provider-free/offenders-c4/")
+            )
+        )
+        expected_entry_keys = workbook_keys | (
+            _C4_WORKBOOK_METADATA if is_c4 else set()
+        )
+        expected_replay_keys = replay_keys | ({"recipeProtocol"} if is_c4 else set())
+        if (
+            not isinstance(entry, dict)
+            or keys
+            not in (expected_entry_keys, expected_entry_keys | {"normalization"})
         ):
             raise ProductPrototypeError("Workbook manifest entry is invalid")
         normalization = entry.get("normalization")
@@ -2140,24 +2217,71 @@ def _validate_cohort(value: dict[str, Any]) -> None:
             "trim-pathological-styled-blank-cells-v1",
             "isolate-repeated-total-label-formatting-v1",
             "trim-table-37-and-isolate-repeated-total-label-formatting-v1",
+            *({_C4_NORMALIZATION} if is_c4 else set()),
         }:
             raise ProductPrototypeError("Workbook normalization is invalid")
-        replay = entry.get("replayResponse")
         if (
             not isinstance(replay, dict)
-            or set(replay)
-            != {
-                "path",
-                "contentDigest",
-                "byteLength",
-                "historicalModel",
-                "acceptanceAuthority",
-            }
+            or observed_replay_keys != expected_replay_keys
             or not isinstance(replay.get("historicalModel"), str)
             or not replay["historicalModel"]
             or replay.get("acceptanceAuthority") is not False
         ):
             raise ProductPrototypeError("Replay response must be non-authoritative")
+        if is_c4:
+            _validate_c4_workbook_entry(value, entry, replay)
+
+
+def _validate_c4_workbook_entry(
+    cohort: dict[str, Any], entry: dict[str, Any], replay: dict[str, Any]
+) -> None:
+    reference_date = entry.get("referenceDate")
+    try:
+        if (
+            not isinstance(reference_date, str)
+            or re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", reference_date) is None
+        ):
+            raise ValueError
+        datetime.strptime(reference_date, "%Y-%m-%d")
+    except ValueError as error:
+        raise ProductPrototypeError("C4 workbook identity is invalid") from error
+    year = entry.get("year")
+    byte_length = entry.get("byteLength")
+    replay_byte_length = replay.get("byteLength")
+    ordinal = entry.get("downloadOrdinal")
+    protocol = replay.get("recipeProtocol")
+    if (
+        cohort.get("publicationId") != "recorded-crime-offenders"
+        or isinstance(year, bool)
+        or not isinstance(year, int)
+        or not 1900 <= year <= 2100
+        or any(
+            not isinstance(entry.get(field), str) or not entry[field]
+            for field in ("path", "sheet", "cubeId", "tableNamespace")
+        )
+        or not isinstance(entry.get("contentDigest"), str)
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", entry["contentDigest"]) is None
+        or isinstance(byte_length, bool)
+        or not isinstance(byte_length, int)
+        or byte_length < 1
+        or not isinstance(entry.get("releaseId"), str)
+        or re.fullmatch(r"20[0-9]{2}-[0-9]{2}", entry["releaseId"]) is None
+        or isinstance(ordinal, bool)
+        or not isinstance(ordinal, int)
+        or not 1 <= ordinal <= 9
+        or any(
+            not isinstance(replay.get(field), str) or not replay[field]
+            for field in ("path", "historicalModel")
+        )
+        or not isinstance(replay.get("contentDigest"), str)
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", replay["contentDigest"]) is None
+        or isinstance(replay_byte_length, bool)
+        or not isinstance(replay_byte_length, int)
+        or replay_byte_length < 1
+        or protocol not in _C4_REPLAY_MODELS
+        or replay.get("historicalModel") not in _C4_REPLAY_MODELS.get(protocol, ())
+    ):
+        raise ProductPrototypeError("C4 workbook metadata is invalid")
 
 
 def _cohort_worker_limits(cohort: dict[str, Any]) -> dict[str, int]:
@@ -2202,6 +2326,9 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         "measures",
         "expectedWarningCountsByYear",
         "expectedRecipeDigestsByYear",
+        "expectedRecipeProtocolsByYear",
+        "expectedReplayMapDigestsByYear",
+        "expectedC3RowTraceDigestsByYear",
         "excludedDimensionCodes",
         "dimensionHeaders",
         "referenceDateDimension",
@@ -2356,6 +2483,32 @@ def _validate_contract(value: dict[str, Any], cohort: dict[str, Any]) -> None:
         )
     ):
         raise ProductPrototypeError("Acceptance recipe digest pins are invalid")
+    for pin_name in (
+        "expectedReplayMapDigestsByYear",
+        "expectedC3RowTraceDigestsByYear",
+    ):
+        pins = value.get(pin_name)
+        if pins is not None and (
+            value.get("schemaVersion") != ACCEPTANCE_SCHEMA_V2
+            or not isinstance(pins, dict)
+            or set(pins) != years
+            or any(
+                not isinstance(digest, str) or _SHA256_DIGEST.fullmatch(digest) is None
+                for digest in pins.values()
+            )
+        ):
+            raise ProductPrototypeError(f"Acceptance {pin_name} pins are invalid")
+    recipe_protocols = value.get("expectedRecipeProtocolsByYear")
+    if recipe_protocols is not None and (
+        value.get("schemaVersion") != ACCEPTANCE_SCHEMA_V2
+        or not isinstance(recipe_protocols, dict)
+        or set(recipe_protocols) != years
+        or any(
+            protocol not in {"RecipeV01", "TargetScopedRecipeV02"}
+            for protocol in recipe_protocols.values()
+        )
+    ):
+        raise ProductPrototypeError("Acceptance recipe protocol pins are invalid")
     warning_counts = value.get("expectedWarningCountsByYear")
     if warning_counts is not None and (
         not isinstance(warning_counts, dict)

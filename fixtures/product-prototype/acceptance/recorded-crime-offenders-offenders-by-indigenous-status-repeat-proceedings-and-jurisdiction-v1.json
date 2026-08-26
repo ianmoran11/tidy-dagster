@@ -1,0 +1,402 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction-v1",
+  "tableFamilyId": "offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 420,
+        "2022": 420,
+        "2023": 420,
+        "2024": 420
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "times_proceeded": [
+            "1_6b86b273",
+            "2_d4735e3a",
+            "3_4e074085",
+            "4_4b227777",
+            "5_OR_MORE_1cef4ac9",
+            "MEAN_ded31581",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2022": {
+          "times_proceeded": [
+            "1_6b86b273",
+            "2_d4735e3a",
+            "3_4e074085",
+            "4_4b227777",
+            "5_OR_MORE_1cef4ac9",
+            "MEAN_ded31581",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2023": {
+          "times_proceeded": [
+            "1_6b86b273",
+            "2_d4735e3a",
+            "3_4e074085",
+            "4_4b227777",
+            "5_OR_MORE_1cef4ac9",
+            "MEAN_ded31581",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2024": {
+          "times_proceeded": [
+            "1_6b86b273",
+            "2_d4735e3a",
+            "3_4e074085",
+            "4_4b227777",
+            "5_OR_MORE_1cef4ac9",
+            "MEAN_ded31581",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:1e2c7e6e401ce050ff747d386c013f82c5b002acffbe7b6d580980d7e9904274",
+        "2022": "sha256:f5ae0d5046ec538a138e3b36313f0b272b206db071aaa0cf575bb8b58ebfaed4",
+        "2023": "sha256:8862b36d4c5b691568f11dd692ebfa0a52b30a8cfa7c305b879ab544ffd5b373",
+        "2024": "sha256:61e7960e9e3a358da4cd7c5818855c848f6965f4af07cf1988f37975c0b3664f"
+      },
+      "missingValues": {
+        "na": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "times_proceeded",
+    "jurisdiction",
+    "observation_period",
+    "indigenous_status",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "times_proceeded": [
+      "times\\ proceeded"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "indigenous_status": [
+      "indigenous\\ status"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "times_proceeded": {
+      "1": "1_6b86b273",
+      "2": "2_d4735e3a",
+      "3": "3_4e074085",
+      "4": "4_4b227777",
+      "5 or more": "5_OR_MORE_1cef4ac9",
+      "Total": "TOTAL_ab2882c8",
+      "Mean": "MEAN_ded31581"
+    },
+    "jurisdiction": {
+      "New South Wales(d)": "NEW_SOUTH_WALES_92f089b8",
+      "Queensland": "QUEENSLAND_8f0791ed",
+      "South Australia(e)": "SOUTH_AUSTRALIA_0abd141a",
+      "Northern Territory": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "New South Wales(d)(e)(f)": "NEW_SOUTH_WALES_92f089b8",
+      "South Australia(g)": "SOUTH_AUSTRALIA_0abd141a",
+      "Northern Territory(h)(i)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(i)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "New South Wales(d)(e)": "NEW_SOUTH_WALES_92f089b8",
+      "South Australia(f)": "SOUTH_AUSTRALIA_0abd141a",
+      "Northern Territory(g)(h)": "NORTHERN_TERRITORY_a1d418fe"
+    },
+    "observation_period": {
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2022–23": "2022_23_0d9e498b",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Total(c)": "TOTAL_ab2882c8"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Proportion (%)": "PROPORTION_13745b70"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:36d6ea6c374ce19d230be5a5de6c4c2883fe02e945c4923451d43013d525bad9",
+    "2022": "sha256:f28da5709951014d842b54c96334e03c9cbbdce90c1ab1f55a666a67307fdf67",
+    "2023": "sha256:8aa949dee15e4f96003c398f69cb1a7bc0e1e61ab2a71ff0f088dabd4419f9c3",
+    "2024": "sha256:6ae2b43b69ce9b6d8a08f987e2ed88e5d67f75d26e9f0e91a7c147eb75e60992"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:867e0f02c4339c4317b23c48cf4958d861d4042a1e9c65a45635edbe78ddac9f",
+    "2022": "sha256:81b24f64b6ea598524fba5cbad8b2fbef771bd141a34615a257f9afd50dfb7da",
+    "2023": "sha256:50b31e40240e13dc89c4cc338572aada9d1c391edaa61dc01c0c2e6bb5161202",
+    "2024": "sha256:dd09e39dbdbab3631aa9eb727e2710498f7832e09c637f0136f33426b46a8823"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:a002573c21e75da9a05f26f507b1ff8da5dea0ab6f706fea7d9ea665d31511e8",
+    "2022": "sha256:a43e7b1191a456aa0b2f77a675c74e80beffd0caffb57eb1f69708bee4ca00fc",
+    "2023": "sha256:fb07e8496d1f48bbf62a0d3890fe4e88633111e7ba95270837e3488e573b7cf7",
+    "2024": "sha256:d7c1c693a43c4da13e6163cbcc515a1367590d48e6dd26a9d743af06b851c401"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "times_proceeded_id",
+    "jurisdiction_id",
+    "observation_period_id",
+    "indigenous_status_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 420,
+    "maximumRows": 420,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "timesProceededByYear": {
+      "2021": [
+        "1_6b86b273",
+        "2_d4735e3a",
+        "3_4e074085",
+        "4_4b227777",
+        "5_OR_MORE_1cef4ac9",
+        "MEAN_ded31581",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "1_6b86b273",
+        "2_d4735e3a",
+        "3_4e074085",
+        "4_4b227777",
+        "5_OR_MORE_1cef4ac9",
+        "MEAN_ded31581",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "1_6b86b273",
+        "2_d4735e3a",
+        "3_4e074085",
+        "4_4b227777",
+        "5_OR_MORE_1cef4ac9",
+        "MEAN_ded31581",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "1_6b86b273",
+        "2_d4735e3a",
+        "3_4e074085",
+        "4_4b227777",
+        "5_OR_MORE_1cef4ac9",
+        "MEAN_ded31581",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33"
+      ],
+      "2024": [
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

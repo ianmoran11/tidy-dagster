@@ -6,6 +6,7 @@ import csv
 import io
 import json
 import re
+import runpy
 import subprocess
 import sys
 import tempfile
@@ -19,6 +20,11 @@ from .artifacts import (
     canonical_json_bytes,
     domain_digest,
     sha256_digest,
+)
+from .offenders_acceptance import (
+    OffendersAcceptanceError,
+    c4_shared_access,
+    validate_offenders_remaining_cohort,
 )
 from .product_prototype import (
     ACCEPTANCE_SCHEMA_V2,
@@ -38,6 +44,10 @@ NORMALIZATION_SCHEMA = "tidy.product-prototype-workbook-normalization/v1"
 PRISONERS_NORMALIZATION_SCHEMA = "tidy.prisoners-remaining-workbook-normalization/v1"
 PRISONERS_NORMALIZATION_PATH = (
     "fixtures/product-prototype/prisoners-remaining-workbook-normalization-v1.json"
+)
+OFFENDERS_NORMALIZATION_SCHEMA = "tidy.offenders-remaining-workbook-normalization/v1"
+OFFENDERS_NORMALIZATION_PATH = (
+    "fixtures/product-prototype/offenders-remaining-workbook-normalization-v1.json"
 )
 REGISTRY_PATH = "fixtures/product-prototype/large-batch-assets-v1.json"
 _DIGEST = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -93,6 +103,7 @@ class LargeBatchSpec:
     preserves_publication_vintage: bool
     acceptance_policy_version: str
     replay_recorded_at: str | None
+    replay_engine: str | None = None
 
 
 @dataclass(frozen=True)
@@ -155,7 +166,7 @@ def _run_authority_claims_are_safe(run: Any) -> bool:
     )
 
 
-def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
+def _load_large_batch_registry_unlocked(project_root: Path) -> LargeBatchRegistry:
     project = project_root.resolve()
     value = _load_object(project / REGISTRY_PATH, "large-batch registry")
     if (
@@ -216,7 +227,7 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
         item_keys = set(item)
         if (
             policy_version not in ACCEPTANCE_SCHEMAS
-            or item_keys - {"replayRecordedAt"} != expected_keys
+            or item_keys - {"replayRecordedAt", "replayEngine"} != expected_keys
             or (policy_version == ACCEPTANCE_SCHEMA_V2) != ("replayRecordedAt" in item)
         ):
             raise LargeBatchError("Large-batch entry shape is invalid")
@@ -275,6 +286,10 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
             or len(manual_years) != len(set(manual_years))
             or not isinstance(item.get("preservesPublicationVintage"), bool)
             or (
+                "replayEngine" in item
+                and item.get("replayEngine") != "offenders-remaining-c4-v1"
+            )
+            or (
                 policy_version == ACCEPTANCE_SCHEMA_V2
                 and (
                     not isinstance(item.get("replayRecordedAt"), str)
@@ -311,6 +326,7 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
                 preserves_publication_vintage=item["preservesPublicationVintage"],
                 acceptance_policy_version=policy_version,
                 replay_recorded_at=item.get("replayRecordedAt"),
+                replay_engine=item.get("replayEngine"),
             )
         )
     for attribute in (
@@ -335,6 +351,12 @@ def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
         normalization_manifest_path=value["normalizationManifestPath"],
         entries=tuple(entries),
     )
+
+
+def load_large_batch_registry(project_root: Path) -> LargeBatchRegistry:
+    """Load the registry under a shared C4 installation lease."""
+    with c4_shared_access(project_root):
+        return _load_large_batch_registry_unlocked(project_root)
 
 
 def _valid_correction_claim(value: Any) -> bool:
@@ -522,7 +544,128 @@ def _verify_prisoners_remaining_normalization(
     return outputs
 
 
-def verify_batch_normalization(
+def _verify_offenders_remaining_normalization(
+    project: Path,
+) -> dict[str, tuple[str, int, str, int]]:
+    path = _safe_path(
+        project, OFFENDERS_NORMALIZATION_PATH, "Offenders normalization manifest"
+    )
+    manifest = _load_object(path, "Offenders normalization manifest")
+    expected_keys = {
+        "schemaVersion",
+        "recordedAt",
+        "generatorPath",
+        "generatorDigest",
+        "entries",
+        "manifestDigest",
+    }
+    semantic = dict(manifest)
+    manifest_digest = semantic.pop("manifestDigest", None)
+    if (
+        set(manifest) != expected_keys
+        or manifest.get("schemaVersion") != OFFENDERS_NORMALIZATION_SCHEMA
+        or manifest.get("recordedAt") != "2026-08-25T12:00:00+00:00"
+        or manifest_digest != domain_digest(OFFENDERS_NORMALIZATION_SCHEMA, semantic)
+        or not isinstance(manifest.get("entries"), list)
+        or len(manifest["entries"]) != 6
+    ):
+        raise LargeBatchError("Offenders normalization manifest header is invalid")
+    generator = _safe_path(
+        project, manifest.get("generatorPath"), "Offenders normalization generator"
+    )
+    if (
+        generator.is_symlink()
+        or not generator.is_file()
+        or sha256_digest(generator.read_bytes()) != manifest.get("generatorDigest")
+    ):
+        raise LargeBatchError("Offenders normalization generator digest mismatch")
+    module = runpy.run_path(str(generator))
+    specs = module.get("SPECS")
+    if not isinstance(specs, dict) or len(specs) != 6:
+        raise LargeBatchError("Offenders normalization generator closure is invalid")
+    entry_keys = {
+        "normalization",
+        "sourcePath",
+        "sourceDigest",
+        "sourceByteLength",
+        "outputPath",
+        "outputDigest",
+        "outputByteLength",
+        "retainedRanges",
+        "reviewedArtifacts",
+        "coordinateValueFormulaParity",
+    }
+    expected_by_source = {
+        f"fixtures/product-prototype/workbooks/{name}": spec
+        for name, spec in specs.items()
+    }
+    outputs: dict[str, tuple[str, int, str, int]] = {}
+    for entry in manifest["entries"]:
+        if (
+            not isinstance(entry, dict)
+            or set(entry) != entry_keys
+            or entry.get("normalization")
+            != "digest-pinned-bounded-offenders-remaining-v1"
+            or entry.get("coordinateValueFormulaParity") is not True
+            or _DIGEST.fullmatch(str(entry.get("sourceDigest"))) is None
+            or _DIGEST.fullmatch(str(entry.get("outputDigest"))) is None
+        ):
+            raise LargeBatchError("Offenders normalization entry is invalid")
+        spec = expected_by_source.get(entry.get("sourcePath"))
+        if (
+            not isinstance(spec, dict)
+            or entry.get("retainedRanges") != spec.get("ranges")
+            or entry.get("reviewedArtifacts") != spec.get("artifacts")
+            or entry.get("outputPath")
+            != f"fixtures/product-prototype/workbooks/{spec.get('output')}"
+        ):
+            raise LargeBatchError("Offenders normalization declaration drift")
+        for prefix in ("source", "output"):
+            workbook = _safe_path(
+                project, entry.get(f"{prefix}Path"), f"Offenders {prefix} workbook"
+            )
+            length = entry.get(f"{prefix}ByteLength")
+            if (
+                workbook.is_symlink()
+                or not workbook.is_file()
+                or isinstance(length, bool)
+                or not isinstance(length, int)
+                or length <= 0
+            ):
+                raise LargeBatchError("Offenders normalization file is invalid")
+            data = workbook.read_bytes()
+            if len(data) != length or sha256_digest(data) != entry[f"{prefix}Digest"]:
+                raise LargeBatchError("Offenders normalization digest mismatch")
+        source_name = Path(entry["sourcePath"]).name
+        match = re.search(r"-(20[0-9]{2})-[0-9]{2}-cube-", source_name)
+        if match is None or entry["outputPath"] in outputs:
+            raise LargeBatchError("Offenders normalization output identity is invalid")
+        outputs[entry["outputPath"]] = (
+            entry["normalization"],
+            int(match.group(1)),
+            entry["outputDigest"],
+            entry["outputByteLength"],
+        )
+    if set(expected_by_source) != {
+        entry["sourcePath"] for entry in manifest["entries"]
+    }:
+        raise LargeBatchError("Offenders normalization source closure is invalid")
+    completed = subprocess.run(
+        [sys.executable, str(generator), "--check"],
+        cwd=project,
+        capture_output=True,
+        text=True,
+        timeout=180,
+    )
+    if completed.returncode != 0:
+        raise LargeBatchError(
+            "Offenders normalization reproduction failed: "
+            f"{completed.stderr.strip() or completed.stdout.strip()}"
+        )
+    return outputs
+
+
+def _verify_batch_normalization_unlocked(
     project_root: Path,
     registry: LargeBatchRegistry,
 ) -> dict[str, Any]:
@@ -746,8 +889,15 @@ def verify_batch_normalization(
         raise LargeBatchError("Normalization in-range value-change claim is invalid")
 
     prisoners_outputs = _verify_prisoners_remaining_normalization(project)
+    has_c4 = any(
+        spec.replay_engine == "offenders-remaining-c4-v1" for spec in registry.entries
+    )
+    offenders_outputs = (
+        _verify_offenders_remaining_normalization(project) if has_c4 else {}
+    )
     used_outputs: set[str] = set()
     used_prisoners_outputs: set[str] = set()
+    used_offenders_outputs: set[str] = set()
     for spec in registry.entries:
         cohort_path = _safe_path(project, spec.cohort_path, "cohort")
         cohort = _load_object(cohort_path, "large-batch cohort")
@@ -764,7 +914,11 @@ def verify_batch_normalization(
             )
             relative_output = output.relative_to(project).as_posix()
             if workbook.get("normalization") is None:
-                if relative_output in outputs or relative_output in prisoners_outputs:
+                if (
+                    relative_output in outputs
+                    or relative_output in prisoners_outputs
+                    or relative_output in offenders_outputs
+                ):
                     raise LargeBatchError(
                         "Normalized workbook is missing its normalization declaration"
                     )
@@ -777,6 +931,8 @@ def verify_batch_normalization(
             expected = outputs.get(relative_output)
             if expected is None:
                 expected = prisoners_outputs.get(relative_output)
+            if expected is None:
+                expected = offenders_outputs.get(relative_output)
             observed = (
                 workbook["normalization"],
                 workbook.get("year"),
@@ -789,6 +945,8 @@ def verify_batch_normalization(
                 )
             if relative_output in prisoners_outputs:
                 used_prisoners_outputs.add(relative_output)
+            elif relative_output in offenders_outputs:
+                used_offenders_outputs.add(relative_output)
             else:
                 used_outputs.add(relative_output)
     if used_outputs != set(outputs):
@@ -797,7 +955,19 @@ def verify_batch_normalization(
         raise LargeBatchError(
             "Prisoners normalization manifest contains unused outputs"
         )
+    if used_offenders_outputs != set(offenders_outputs):
+        raise LargeBatchError(
+            "Offenders normalization manifest contains unused outputs"
+        )
     return manifest
+
+
+def verify_batch_normalization(
+    project_root: Path,
+    registry: LargeBatchRegistry,
+) -> dict[str, Any]:
+    with c4_shared_access(project_root):
+        return _verify_batch_normalization_unlocked(project_root, registry)
 
 
 def _verify_declared_file(root: Path, entry: Any) -> str:
@@ -864,7 +1034,7 @@ def _verify_canonical_csv_projection(
         raise LargeBatchError("Canonical CSV rows do not match JSON projection")
 
 
-def verify_large_batch_evidence(
+def _verify_large_batch_evidence_unlocked(
     project_root: Path,
     spec: LargeBatchSpec,
 ) -> dict[str, Any]:
@@ -894,7 +1064,7 @@ def verify_large_batch_evidence(
         "runDigest",
         "files",
     }
-    optional_header = {"warningCountsByYear"}
+    optional_header = {"warningCountsByYear", "replayEngine"}
     if (
         not required_header <= set(manifest) <= required_header | optional_header
         or manifest.get("schemaVersion") != EVIDENCE_SCHEMA
@@ -903,6 +1073,7 @@ def verify_large_batch_evidence(
         or not isinstance(manifest.get("recordedAt"), str)
         or not manifest["recordedAt"]
         or manifest.get("mode") != "replay"
+        or manifest.get("replayEngine") != spec.replay_engine
         or manifest.get("providerCalls") != 0
         or manifest.get("acceptedWorkbookCount") != len(spec.expected_years)
         or manifest.get("exceptionWorkbookCount") != 0
@@ -958,8 +1129,11 @@ def verify_large_batch_evidence(
     if sha256_digest(cohort_bytes) != manifest.get("cohortDigest"):
         raise LargeBatchError("Evidence cohort digest does not match")
     try:
-        _validate_cohort(cohort)
-    except ProductPrototypeError as error:
+        if spec.replay_engine == "offenders-remaining-c4-v1":
+            validate_offenders_remaining_cohort(cohort)
+        else:
+            _validate_cohort(cohort)
+    except (ProductPrototypeError, OffendersAcceptanceError) as error:
         raise LargeBatchError("Evidence cohort is invalid") from error
     contract_relative = str(
         Path(spec.cohort_path).parent / cohort["acceptanceContract"]
@@ -1094,6 +1268,8 @@ def verify_large_batch_evidence(
     expected_check_keys = set(BASE_ACCEPTANCE_CHECK_KEYS)
     if expected_warning_counts is not None:
         expected_check_keys.add("warningCount")
+    if spec.replay_engine == "offenders-remaining-c4-v1":
+        expected_check_keys.update({"c3Proof", "routeProtocol", "sourceCustody"})
     run_workbook_identities = (
         [
             (
@@ -1267,6 +1443,24 @@ def verify_large_batch_evidence(
                 raise LargeBatchError(
                     "V2 canonical recipe identity does not match contract pin"
                 )
+            if spec.replay_engine == "offenders-remaining-c4-v1":
+                year = str(workbook["year"])
+                if (
+                    {row.get("recipe_protocol") for row in rows_by_source[identity]}
+                    != {contract["expectedRecipeProtocolsByYear"][year]}
+                    or {
+                        row.get("replay_map_digest") for row in rows_by_source[identity]
+                    }
+                    != {contract["expectedReplayMapDigestsByYear"][year]}
+                    or {
+                        row.get("c3_row_trace_digest")
+                        for row in rows_by_source[identity]
+                    }
+                    != {contract["expectedC3RowTraceDigestsByYear"][year]}
+                ):
+                    raise LargeBatchError(
+                        "C4 canonical route proof does not match contract pins"
+                    )
             expected_decision = DecisionRecord.create(
                 subject_id=pinned_recipe_digest,
                 decision_type="prototype_auto_accepted",
@@ -1291,7 +1485,15 @@ def verify_large_batch_evidence(
     return manifest
 
 
-def verify_large_batch_complete_reproduction(
+def verify_large_batch_evidence(
+    project_root: Path,
+    spec: LargeBatchSpec,
+) -> dict[str, Any]:
+    with c4_shared_access(project_root):
+        return _verify_large_batch_evidence_unlocked(project_root, spec)
+
+
+def _verify_large_batch_complete_reproduction_unlocked(
     project_root: Path,
     spec: LargeBatchSpec,
     generated_bundle_root: Path,
@@ -1347,7 +1549,18 @@ def verify_large_batch_complete_reproduction(
     return manifest
 
 
-def verify_large_batch_reproduction(
+def verify_large_batch_complete_reproduction(
+    project_root: Path,
+    spec: LargeBatchSpec,
+    generated_bundle_root: Path,
+) -> dict[str, Any]:
+    with c4_shared_access(project_root):
+        return _verify_large_batch_complete_reproduction_unlocked(
+            project_root, spec, generated_bundle_root
+        )
+
+
+def _verify_large_batch_reproduction_unlocked(
     project_root: Path,
     spec: LargeBatchSpec,
     output_root: Path,
@@ -1387,3 +1600,14 @@ def verify_large_batch_reproduction(
                 f"Generated reproduction differs from checked evidence: {filename}"
             )
     return manifest
+
+
+def verify_large_batch_reproduction(
+    project_root: Path,
+    spec: LargeBatchSpec,
+    output_root: Path,
+) -> dict[str, Any]:
+    with c4_shared_access(project_root):
+        return _verify_large_batch_reproduction_unlocked(
+            project_root, spec, output_root
+        )

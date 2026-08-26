@@ -83,9 +83,21 @@
               "isolate-repeated-total-label-formatting-v1",
               "trim-pathological-full-width-formatting-merge-v1",
               "trim-pathological-styled-blank-cells-v1",
-              "trim-table-37-and-isolate-repeated-total-label-formatting-v1"
+              "trim-table-37-and-isolate-repeated-total-label-formatting-v1",
+              "digest-pinned-bounded-offenders-remaining-v1"
             ]
           },
+          "releaseId": {
+            "type": "string",
+            "pattern": "^20[0-9]{2}-[0-9]{2}$"
+          },
+          "downloadOrdinal": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          },
+          "cubeId": { "type": "string", "minLength": 1 },
+          "tableNamespace": { "type": "string", "minLength": 1 },
           "replayResponse": {
             "type": "object",
             "additionalProperties": false,
@@ -104,11 +116,140 @@
               },
               "byteLength": { "type": "integer", "minimum": 1 },
               "historicalModel": { "type": "string", "minLength": 1 },
-              "acceptanceAuthority": { "const": false }
+              "acceptanceAuthority": { "const": false },
+              "recipeProtocol": {
+                "enum": ["RecipeV01", "TargetScopedRecipeV02"]
+              }
             }
           }
+        },
+        "allOf": [
+          {
+            "if": {
+              "anyOf": [
+                { "required": ["releaseId"] },
+                { "required": ["downloadOrdinal"] },
+                { "required": ["cubeId"] },
+                { "required": ["tableNamespace"] },
+                {
+                  "required": ["replayResponse"],
+                  "properties": {
+                    "replayResponse": {
+                      "required": ["historicalModel"],
+                      "properties": {
+                        "historicalModel": {
+                          "pattern": "^provider-free/offenders-c4/"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "required": ["normalization"],
+                  "properties": {
+                    "normalization": {
+                      "const": "digest-pinned-bounded-offenders-remaining-v1"
+                    }
+                  }
+                },
+                {
+                  "required": ["replayResponse"],
+                  "properties": {
+                    "replayResponse": { "required": ["recipeProtocol"] }
+                  }
+                }
+              ]
+            },
+            "then": {
+              "required": [
+                "releaseId",
+                "downloadOrdinal",
+                "cubeId",
+                "tableNamespace"
+              ],
+              "properties": {
+                "replayResponse": {
+                  "required": ["recipeProtocol"],
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "recipeProtocol": { "const": "RecipeV01" },
+                        "historicalModel": {
+                          "enum": [
+                            "provider-free/offenders-c4/semantic-map-v1-recipe-v01",
+                            "provider-free/offenders-c4/semantic-map-v2-recipe-v01"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "recipeProtocol": {
+                          "const": "TargetScopedRecipeV02"
+                        },
+                        "historicalModel": {
+                          "const": "provider-free/offenders-c4/target-scoped-recipe-v02"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "workbooks": {
+            "contains": {
+              "anyOf": [
+                { "required": ["releaseId"] },
+                { "required": ["downloadOrdinal"] },
+                { "required": ["cubeId"] },
+                { "required": ["tableNamespace"] },
+                {
+                  "required": ["replayResponse"],
+                  "properties": {
+                    "replayResponse": {
+                      "required": ["historicalModel"],
+                      "properties": {
+                        "historicalModel": {
+                          "pattern": "^provider-free/offenders-c4/"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "required": ["normalization"],
+                  "properties": {
+                    "normalization": {
+                      "const": "digest-pinned-bounded-offenders-remaining-v1"
+                    }
+                  }
+                },
+                {
+                  "required": ["replayResponse"],
+                  "properties": {
+                    "replayResponse": { "required": ["recipeProtocol"] }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "required": ["workbooks"]
+      },
+      "then": {
+        "properties": {
+          "publicationId": { "const": "recorded-crime-offenders" }
         }
       }
     }
-  }
+  ]
 }

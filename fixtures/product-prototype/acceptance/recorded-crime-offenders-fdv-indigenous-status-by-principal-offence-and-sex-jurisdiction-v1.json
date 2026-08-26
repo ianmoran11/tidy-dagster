@@ -1,0 +1,406 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction-v1",
+  "tableFamilyId": "fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 630,
+        "2022": 630,
+        "2023": 630,
+        "2024": 630
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:0b27d25d0a2bb8d72bb4b85ebeb4eec373f8652205ae3edc8fe071706f63ae73",
+        "2022": "sha256:0b27d25d0a2bb8d72bb4b85ebeb4eec373f8652205ae3edc8fe071706f63ae73",
+        "2023": "sha256:0b27d25d0a2bb8d72bb4b85ebeb4eec373f8652205ae3edc8fe071706f63ae73",
+        "2024": "sha256:0b27d25d0a2bb8d72bb4b85ebeb4eec373f8652205ae3edc8fe071706f63ae73"
+      },
+      "missingValues": {}
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "indigenous_status",
+    "sex",
+    "jurisdiction",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "principal\\ offence"
+    ],
+    "indigenous_status": [
+      "indigenous\\ status"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "05 Abduction/harassment": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "121 Property damage": "121_PROPERTY_DAMAGE_72667e1c",
+      "153 Breach of violence and non-violence orders": "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+      "Total": "TOTAL_ab2882c8"
+    },
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Total(g)": "TOTAL_ab2882c8"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons(e)": "PERSONS_4d6dccab",
+      "Persons(d)": "PERSONS_4d6dccab"
+    },
+    "jurisdiction": {
+      "New South Wales(f)": "NEW_SOUTH_WALES_92f089b8",
+      "Queensland(h)": "QUEENSLAND_8f0791ed",
+      "South Australia": "SOUTH_AUSTRALIA_0abd141a",
+      "Northern Territory": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Queensland": "QUEENSLAND_8f0791ed",
+      "Northern Territory(h)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(h)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "New South Wales(e)(f)": "NEW_SOUTH_WALES_92f089b8",
+      "Australian Capital Territory(i)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Offender rate(c)": "OFFENDER_RATE_bf190e83",
+      "Offender rate(a)": "OFFENDER_RATE_bf190e83"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:f179fee2ac6f372dc11e392bc6965c7a31d1449c96b4f160c49501adc343d65e",
+    "2022": "sha256:7010733f807f2199b93bea534744da78045524f8cc2546d64450d77bdff0f9d3",
+    "2023": "sha256:d3b7df65299572ab0cc8f8c906b6db00a944a6fb9043adc981cce9ac20eb0c03",
+    "2024": "sha256:048cdb9e299d6b704e1a72f8d3cf0be8f636b2e481a2196cbd19f737007e7932"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:3284fa978508853eb6669ea348c250f6ff114b64107d0a915d861ef06e95d0c6",
+    "2022": "sha256:1a004efefd02dc543d5df86143b02d59abde4bfc73a298f35206a84a58f3d737",
+    "2023": "sha256:238912e4b01281b2875ef651ceb132b66a8162ad923a9db49d44e3240c191866",
+    "2024": "sha256:1e4d6578d2128d46aedf15c615af88458a60cd7ad480035c2d6d702087ac32a3"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:0b0462493ef298bf68e8764025be5c211b2faf0544cc16060326fc69f5bb2b50",
+    "2022": "sha256:92d285507515dd3eb87272e06001f8215c6785b9a815ee9e11a3a66c74ade5cc",
+    "2023": "sha256:fd95c3d616df5c785378f237da7bfc6e66a71f1fa1fa1e7082d753334e2966a1",
+    "2024": "sha256:fc7b0a128dead50055a1ac2f635c5a309df2d861dc8529701b08d992a58e0180"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "indigenous_status_id",
+    "sex_id",
+    "jurisdiction_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 630,
+    "maximumRows": 630,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2022": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2023": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2024": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

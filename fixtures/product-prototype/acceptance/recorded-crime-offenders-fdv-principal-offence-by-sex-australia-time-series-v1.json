@@ -1,0 +1,434 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-fdv-principal-offence-by-sex-australia-time-series-v1",
+  "tableFamilyId": "fdv-principal-offence-by-sex-australia-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 270,
+        "2022": 360,
+        "2023": 450,
+        "2024": 540
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "011_MURDER_2011d70f",
+            "012_ATTEMPTED_MURDER_38346658",
+            "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "021_ASSAULT_17d406a6",
+            "0291_STALKING_ec7e072a",
+            "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "031_SEXUAL_ASSAULT_b4e47807",
+            "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2019_20_b5ba4945",
+            "2020_21_1ec8ed0a",
+            "2021_22_98fc83da"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "011_MURDER_2011d70f",
+            "012_ATTEMPTED_MURDER_38346658",
+            "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "021_ASSAULT_17d406a6",
+            "0291_STALKING_ec7e072a",
+            "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "031_SEXUAL_ASSAULT_b4e47807",
+            "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2019_20_b5ba4945",
+            "2020_21_1ec8ed0a",
+            "2021_22_98fc83da",
+            "2022_23_819e8237"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "011_MURDER_2011d70f",
+            "012_ATTEMPTED_MURDER_38346658",
+            "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "021_ASSAULT_17d406a6",
+            "0291_STALKING_ec7e072a",
+            "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "031_SEXUAL_ASSAULT_b4e47807",
+            "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2019_20_b5ba4945",
+            "2020_21_1ec8ed0a",
+            "2021_22_98fc83da",
+            "2022_23_819e8237",
+            "2023_24_cb6f8507"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "011_MURDER_2011d70f",
+            "012_ATTEMPTED_MURDER_38346658",
+            "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "021_ASSAULT_17d406a6",
+            "0291_STALKING_ec7e072a",
+            "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "031_SEXUAL_ASSAULT_b4e47807",
+            "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:c0d31cda5fb94dbc20e84f13cfec2b2214ced4a21967bc94f736ef0aea89ae5a",
+        "2022": "sha256:06e74257758636281f98c5e577d99d8e19bd9c2b25f367f967c30c69ed0b3ef6",
+        "2023": "sha256:4770ee8c91aa525264453aa27e4a593cd0a2f9a7cc3a0f43fccba2a73a1a27a6",
+        "2024": "sha256:97152167999c27ea102865673a7278e471bc2e30976d4678bc0c17fbeb10c72d"
+      },
+      "missingValues": {}
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "sex",
+    "observation_period",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "principal\\ offence"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences(d)": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "011 Murder": "011_MURDER_2011d70f",
+      "012 Attempted murder": "012_ATTEMPTED_MURDER_38346658",
+      "013 Manslaughter and driving causing death": "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+      "02 Acts intended to cause injury(e)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "021 Assault": "021_ASSAULT_17d406a6",
+      "029 Other acts intended to cause injury(f)": "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+      "0291 Stalking": "0291_STALKING_ec7e072a",
+      "03 Sexual assault and related offences(g)": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "031 Sexual assault": "031_SEXUAL_ASSAULT_b4e47807",
+      "032 Non-assaultive sexual offences": "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+      "05 Abduction/harassment": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "121 Property damage": "121_PROPERTY_DAMAGE_72667e1c",
+      "153 Breach of violence and non-violence orders": "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+      "Total": "TOTAL_ab2882c8",
+      "01 Homicide and related offences(e)": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury(f)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "029 Other acts intended to cause injury(g)": "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+      "03 Sexual assault and related offences(h)": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "01 Homicide and related offences(c)": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury(d)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "029 Other acts intended to cause injury(e)": "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+      "03 Sexual assault and related offences(f)": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons(h)": "PERSONS_4d6dccab",
+      "Persons(i)": "PERSONS_4d6dccab",
+      "Persons(g)": "PERSONS_4d6dccab"
+    },
+    "observation_period": {
+      "2019-20": "2019_20_b5ba4945",
+      "2020-21": "2020_21_1ec8ed0a",
+      "2021-22": "2021_22_98fc83da",
+      "2022-23": "2022_23_819e8237",
+      "2023-24": "2023_24_cb6f8507",
+      "2019-20(d)": "2019_20_b5ba4945",
+      "2020-21(d)": "2020_21_1ec8ed0a",
+      "2019–20": "2019_20_6d3dcb6c",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2022–23": "2022_23_0d9e498b",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Offender rate(b)": "OFFENDER_RATE_bf190e83",
+      "Offender rate(a)": "OFFENDER_RATE_bf190e83"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:fca76477d527345694f6877bb7f2d0305d4afcd25382e06ba45308b819b8ea08",
+    "2022": "sha256:3bebb3b8541960389795885b58a568bf84b6ed50c803f2d9be5119be202d103b",
+    "2023": "sha256:8660954b1b465c5cb0bdf97bc612e8079a8e1d8462228b392548fc1b9ef26711",
+    "2024": "sha256:85a23fc2a786245bf479fee78a1f6747dd128e13c95a0d9a7b38fc4dd8992248"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:8d7304f57f28793b40e75b0a585e9b91d9cd76b822b7f272d8f3136e7a3aa7d5",
+    "2022": "sha256:c7577799fe789d9d1cb93d0e9b4f99ddb35307525c315146d40c4b3f13a3bf19",
+    "2023": "sha256:41608b42530deb6cc00750bd6eb9ca527f06a139ce99ce9168372a2e56b8a015",
+    "2024": "sha256:8f47b47f30912696a146e3dc4aa9889344d3acc471030357191b15361dd446ca"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:569616ae4d9879c6eb179965a5eaeff3d904023b8213bd6c8988df1f2cf4e0bb",
+    "2022": "sha256:30fe8ac5ee1afa54c0c8de931f6ac11ca4bbb2a12c1d42a3dde4668662f0a99a",
+    "2023": "sha256:9f66101359240fce1e39df68ac6826062d221173cbb0044472934edc35626af9",
+    "2024": "sha256:4cb125b94f60115fb8afe237a46846e8bfaa4b5dee48fbd24358dccbd387426d"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "sex_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 270,
+    "maximumRows": 540,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "011_MURDER_2011d70f",
+        "012_ATTEMPTED_MURDER_38346658",
+        "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "021_ASSAULT_17d406a6",
+        "0291_STALKING_ec7e072a",
+        "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "031_SEXUAL_ASSAULT_b4e47807",
+        "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "011_MURDER_2011d70f",
+        "012_ATTEMPTED_MURDER_38346658",
+        "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "021_ASSAULT_17d406a6",
+        "0291_STALKING_ec7e072a",
+        "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "031_SEXUAL_ASSAULT_b4e47807",
+        "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "011_MURDER_2011d70f",
+        "012_ATTEMPTED_MURDER_38346658",
+        "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "021_ASSAULT_17d406a6",
+        "0291_STALKING_ec7e072a",
+        "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "031_SEXUAL_ASSAULT_b4e47807",
+        "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "011_MURDER_2011d70f",
+        "012_ATTEMPTED_MURDER_38346658",
+        "013_MANSLAUGHTER_AND_DRIVING_CAUSING_DEATH_e275929b",
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "021_ASSAULT_17d406a6",
+        "0291_STALKING_ec7e072a",
+        "029_OTHER_ACTS_INTENDED_TO_CAUSE_INJURY_545c83e6",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "031_SEXUAL_ASSAULT_b4e47807",
+        "032_NON_ASSAULTIVE_SEXUAL_OFFENCES_10013bca",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2022": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2023": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2024": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2019_20_b5ba4945",
+        "2020_21_1ec8ed0a",
+        "2021_22_98fc83da"
+      ],
+      "2022": [
+        "2019_20_b5ba4945",
+        "2020_21_1ec8ed0a",
+        "2021_22_98fc83da",
+        "2022_23_819e8237"
+      ],
+      "2023": [
+        "2019_20_b5ba4945",
+        "2020_21_1ec8ed0a",
+        "2021_22_98fc83da",
+        "2022_23_819e8237",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

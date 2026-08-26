@@ -1,0 +1,1537 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:24fb4782134164d40697c931f0277cff34421f397d9ed8e38be505e2c2b73560"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders fdv-summary-characteristics 2024-25",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R13C10"
+            },
+            {
+              "range": "R16C2:R17C10"
+            },
+            {
+              "range": "R20C2:R26C10"
+            },
+            {
+              "range": "R29C2:R33C10"
+            },
+            {
+              "range": "R36C2:R37C10"
+            },
+            {
+              "range": "R39C2:R39C10"
+            },
+            {
+              "range": "R42C2:R43C10"
+            },
+            {
+              "range": "R46C2:R52C10"
+            },
+            {
+              "range": "R55C2:R59C10"
+            },
+            {
+              "range": "R62C2:R64C10"
+            },
+            {
+              "range": "R66C2:R66C10"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "characteristic category"
+      },
+      {
+        "id": "d02",
+        "name": "characteristic group"
+      },
+      {
+        "id": "d03",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R16C2:R17C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R16C1:R17C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R15C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R42C2:R43C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R42C1:R43C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R36C2:R37C2"
+            },
+            {
+              "address": "R39C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R36C1:R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R39C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R35C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R62C2:R64C2"
+            },
+            {
+              "address": "R66C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R62C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R66C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R61C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R29C2:R33C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R29C1:R33C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R55C2:R59C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R55C1:R59C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R54C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R13C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R8C1:R13C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R7C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R20C2:R26C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "range": "R22C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R20C1:R21C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R19C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R46C2:R52C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "range": "R48C1:R52C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R46C1:R47C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R45C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-010",
+      "order": 10,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p10",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R16C3:R17C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R16C1:R17C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R15C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-011",
+      "order": 11,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p11",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R42C3:R43C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R42C1:R43C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-012",
+      "order": 12,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p12",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R36C3:R37C10"
+            },
+            {
+              "range": "R39C3:R39C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R36C1:R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R39C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R35C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-013",
+      "order": 13,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p13",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R62C3:R64C10"
+            },
+            {
+              "range": "R66C3:R66C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R62C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R66C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R61C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-014",
+      "order": 14,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p14",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R29C3:R33C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R29C1:R33C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-015",
+      "order": 15,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p15",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R55C3:R59C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R55C1:R59C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R54C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-016",
+      "order": 16,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p16",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C3:R13C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R8C1:R13C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R7C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-017",
+      "order": 17,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p17",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R20C3:R26C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "range": "R22C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R20C1:R21C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R19C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-018",
+      "order": 18,
+      "tableName": "Offenders fdv-summary-characteristics 2024-25 p18",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R46C3:R52C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "range": "R48C1:R52C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R46C1:R47C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R45C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R5C3:R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R40C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2415 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:2e7b761474e951fbd1730cd3a6def354fd98bf97fcb42a0b6011e95844225a3e"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R8C2:R23C14"
+            },
+            {
+              "range": "R25C2:R40C14"
+            },
+            {
+              "range": "R42C2:R57C14"
+            },
+            {
+              "range": "R59C2:R74C14"
+            },
+            {
+              "range": "R76C2:R91C14"
+            },
+            {
+              "range": "R93C2:R108C14"
+            },
+            {
+              "range": "R110C2:R125C14"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "age group"
+      },
+      {
+        "id": "d02",
+        "name": "times proceeded"
+      },
+      {
+        "id": "d03",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p1",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R93C2:R108C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R94C1:R95C1"
+                },
+                {
+                  "range": "R97C1:R107C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R93C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R96C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R108C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R92C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p2",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R8C2:R23C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R23C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p3",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R110C2:R125C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R111C1:R112C1"
+                },
+                {
+                  "range": "R114C1:R124C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R110C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R113C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R125C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p4",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R25C2:R40C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R26C1:R27C1"
+                },
+                {
+                  "range": "R29C1:R39C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R25C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R40C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R24C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p5",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R42C2:R57C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R43C1:R44C1"
+                },
+                {
+                  "range": "R46C1:R56C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R45C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R57C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p6",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R59C2:R74C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R60C1:R61C1"
+                },
+                {
+                  "range": "R63C1:R73C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R74C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R58C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p7",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R76C2:R91C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R77C1:R78C1"
+                },
+                {
+                  "range": "R80C1:R90C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R76C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R79C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R91C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p8",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R93C9:R108C14"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R94C1:R95C1"
+                },
+                {
+                  "range": "R97C1:R107C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R93C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R96C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R108C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C12"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R6C13:R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R92C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C9"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p9",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R93C3:R108C8"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R94C1:R95C1"
+                },
+                {
+                  "range": "R97C1:R107C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R93C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R96C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R108C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C5"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R92C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-010",
+      "order": 10,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p10",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R8C9:R23C14"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R23C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C12"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R6C13:R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C9"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-011",
+      "order": 11,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p11",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R8C3:R23C8"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R23C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C5"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-012",
+      "order": 12,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p12",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R110C9:R125C14"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R111C1:R112C1"
+                },
+                {
+                  "range": "R114C1:R124C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R110C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R113C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R125C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C12"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R6C13:R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C9"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-013",
+      "order": 13,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p13",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R110C3:R125C8"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R111C1:R112C1"
+                },
+                {
+                  "range": "R114C1:R124C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R110C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R113C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R125C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C5"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-014",
+      "order": 14,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p14",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R25C9:R40C14"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R26C1:R27C1"
+                },
+                {
+                  "range": "R29C1:R39C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R25C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R40C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C12"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R6C13:R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R24C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C9"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-015",
+      "order": 15,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p15",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R25C3:R40C8"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R26C1:R27C1"
+                },
+                {
+                  "range": "R29C1:R39C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R25C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R40C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C5"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R24C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-016",
+      "order": 16,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p16",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R42C9:R57C14"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R43C1:R44C1"
+                },
+                {
+                  "range": "R46C1:R56C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R45C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R57C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C12"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R6C13:R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C9"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-017",
+      "order": 17,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p17",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R42C3:R57C8"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R43C1:R44C1"
+                },
+                {
+                  "range": "R46C1:R56C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R45C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R57C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C5"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-018",
+      "order": 18,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p18",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R59C9:R74C14"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R60C1:R61C1"
+                },
+                {
+                  "range": "R63C1:R73C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R74C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C12"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R6C13:R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R58C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C9"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-019",
+      "order": 19,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p19",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R59C3:R74C8"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R60C1:R61C1"
+                },
+                {
+                  "range": "R63C1:R73C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R74C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C5"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R58C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-020",
+      "order": 20,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p20",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R76C9:R91C14"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R77C1:R78C1"
+                },
+                {
+                  "range": "R80C1:R90C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R76C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R79C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R91C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C12"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "range": "R6C13:R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C9"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-021",
+      "order": 21,
+      "tableName": "Offenders offenders-by-age-times-proceeded-and-jurisdiction 2023-24 p21",
+      "target": [
+        {
+          "regionId": "region-002",
+          "selectors": [
+            {
+              "range": "R76C3:R91C8"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "range": "R77C1:R78C1"
+                },
+                {
+                  "range": "R80C1:R90C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R76C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R79C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R91C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-003",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C5"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

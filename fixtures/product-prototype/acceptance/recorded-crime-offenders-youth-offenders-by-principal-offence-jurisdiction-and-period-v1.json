@@ -1,0 +1,627 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-youth-offenders-by-principal-offence-jurisdiction-and-period-v1",
+  "tableFamilyId": "youth-offenders-by-principal-offence-jurisdiction-and-period",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 3920,
+        "2022": 4200,
+        "2023": 4480,
+        "2024": 4760
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "ALL_OFFENDERS_7a1c1a72",
+            "FARE_EVASION_ea4f796c",
+            "YOUTH_OFFENDERS_985dc3ce"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "ALL_OFFENDERS_7a1c1a72",
+            "FARE_EVASION_ea4f796c",
+            "YOUTH_OFFENDERS_985dc3ce"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "ALL_OFFENDERS_7a1c1a72",
+            "FARE_EVASION_ea4f796c",
+            "YOUTH_OFFENDERS_985dc3ce"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_819e8237",
+            "2023_24_cb6f8507"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "06_ROBBERY_EXTORTION_4b18f837",
+            "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+            "08_THEFT_eba67dd5",
+            "09_FRAUD_DECEPTION_82cf4169",
+            "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+            "11_WEAPONS_EXPLOSIVES_70c89162",
+            "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+            "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+            "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+            "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+            "ALL_OFFENDERS_7a1c1a72",
+            "FARE_EVASION_ea4f796c",
+            "YOUTH_OFFENDERS_985dc3ce"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_c9bc4445",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:ffd5c04ebfd916ae1f5fe2b7acb4d9738cfc6d3d97159772871c38c4187f1f78",
+        "2022": "sha256:82aff4314bcada209813e5d03b2b9dfe2da5f5ca93cdafd581887ad44ba9e14e",
+        "2023": "sha256:068fc1e93d3e20b2ca0d78c8403d37044d08804befa3199a79c231759dc3aaab",
+        "2024": "sha256:3fa5aca4f1e1d4a320cf1cfc1bed453c003bcef54d9c95665a4626eb60fd984e"
+      },
+      "missingValues": {
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "observation_period",
+    "jurisdiction",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "principal\\ offence"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury(d)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "04 Dangerous/negligent acts(e)": "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+      "05 Abduction/harassment(d)": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "06 Robbery/extortion": "06_ROBBERY_EXTORTION_4b18f837",
+      "07 Unlawful entry with intent": "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+      "08 Theft(f)": "08_THEFT_eba67dd5",
+      "Fare evasion": "FARE_EVASION_ea4f796c",
+      "09 Fraud/deception": "09_FRAUD_DECEPTION_82cf4169",
+      "10 Illicit drug offences": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+      "11 Weapons/explosives": "11_WEAPONS_EXPLOSIVES_70c89162",
+      "12 Property damage and environmental pollution": "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+      "13 Public order offences": "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+      "15 Offences against justice(g)": "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+      "16 Miscellaneous offences": "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+      "Youth offenders(h)(i)": "YOUTH_OFFENDERS_985dc3ce",
+      "All offenders": "ALL_OFFENDERS_7a1c1a72",
+      "02 Acts intended to cause injury": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "05 Abduction/harassment": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "08 Theft(j)": "08_THEFT_eba67dd5",
+      "10 Illicit drug offences(m)": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+      "08 Theft": "08_THEFT_eba67dd5",
+      "Youth offenders(h)": "YOUTH_OFFENDERS_985dc3ce",
+      "02 Acts intended to cause injury(e)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "04 Dangerous/negligent acts(f)": "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+      "05 Abduction/harassment(e)": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "08 Theft(g)": "08_THEFT_eba67dd5",
+      "15 Offences against justice(h)": "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+      "Youth offenders(i)(j)": "YOUTH_OFFENDERS_985dc3ce",
+      "02 Acts intended to cause injury(k)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "05 Abduction/harassment(k)": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "08 Theft(l)": "08_THEFT_eba67dd5",
+      "10 Illicit drug offences(o)": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+      "Youth offenders(i)": "YOUTH_OFFENDERS_985dc3ce",
+      "02 Acts intended to cause injury(j)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "05 Abduction/harassment(j)": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "08 Theft(k)": "08_THEFT_eba67dd5",
+      "10 Illicit drug offences(n)": "10_ILLICIT_DRUG_OFFENCES_5c8ebb12"
+    },
+    "observation_period": {
+      "2008–09": "2008_09_f695681e",
+      "2009–10": "2009_10_d4eb8e50",
+      "2010–11": "2010_11_bcb455ae",
+      "2011–12": "2011_12_dd65d86c",
+      "2012–13": "2012_13_94552411",
+      "2013–14": "2013_14_4115b20a",
+      "2014–15": "2014_15_392dc544",
+      "2015–16": "2015_16_ecc4ae2a",
+      "2016–17": "2016_17_14c8c17c",
+      "2017–18": "2017_18_e0619229",
+      "2018–19": "2018_19_3fe15a03",
+      "2019–20": "2019_20_6d3dcb6c",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2022–23": "2022_23_0d9e498b",
+      "2022-23": "2022_23_819e8237",
+      "2023-24": "2023_24_cb6f8507",
+      "2016–17(d)": "2016_17_14c8c17c",
+      "2017–18(d)": "2017_18_e0619229",
+      "2018–19(d)": "2018_19_3fe15a03",
+      "2019–20(d)": "2019_20_6d3dcb6c",
+      "2020–21(d)": "2020_21_d6db3b1d",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "jurisdiction": {
+      "New South Wales": "NEW_SOUTH_WALES_92f089b8",
+      "Victoria": "VICTORIA_8abba993",
+      "Queensland(k)": "QUEENSLAND_8f0791ed",
+      "South Australia(l)": "SOUTH_AUSTRALIA_0abd141a",
+      "Western Australia(n)": "WESTERN_AUSTRALIA_74f6e5af",
+      "Tasmania": "TASMANIA_412e51e6",
+      "Northern Territory": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Queensland(m)": "QUEENSLAND_8f0791ed",
+      "South Australia(n)": "SOUTH_AUSTRALIA_0abd141a",
+      "Western Australia(p)": "WESTERN_AUSTRALIA_74f6e5af",
+      "Northern Territory(q)(r)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(r)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Queensland(l)": "QUEENSLAND_8f0791ed",
+      "South Australia(m)": "SOUTH_AUSTRALIA_0abd141a",
+      "Western Australia(o)": "WESTERN_AUSTRALIA_74f6e5af",
+      "Northern Territory(p)(q)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory®": "AUSTRALIAN_CAPITAL_TERRITORY_c9bc4445"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Offender rate(a)": "OFFENDER_RATE_bf190e83"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:c2976867e0e7539b6dcb15cc7ece378d11407bc54cdf265a0cc2a33d28af637e",
+    "2022": "sha256:282f5e7763afcf86a7e8d41fb505ad099fbd804dcf449c137b39945e865c40b5",
+    "2023": "sha256:048b7dea7c14a4009bbdafeec368e5a9a6323c4a21e6e07101cc1adc64b73134",
+    "2024": "sha256:4d41c200b34a1a597ea5428327dca7180e712881d1ac9cde55ac78c6c449fb7c"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:d10c91d5e40f1484ae2bbca3625d85f18644e1a7a264b80ca92ab4b6747a1fbf",
+    "2022": "sha256:e93c78d8055cfc540856f73020c670e02a12ae8adc6e9f5cdbee38aaa173ced5",
+    "2023": "sha256:16f62bbdc5edf225346f2e2db5d2d58c1a4539fd261363b48c8f197a0372f655",
+    "2024": "sha256:e7e3394f0c26c2fe8cbf723e588bd67931a1b476478087ed901ae40f20ff5e9c"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:2bd59402fdfe913b5dfd5afa4a2f0941dea568322bdf62d7baf80122a5548b3c",
+    "2022": "sha256:6c6fbeb10b6ed1f337a6fb2218cb29e9d9acea722d2412c2cd45ab732cba76ec",
+    "2023": "sha256:a6a7a0f6a4d07ca4eef49b62faff8b0913b3b2752bf5d39b542e9f13bec6ea70",
+    "2024": "sha256:2e007b775a2f369c265f342d16c6430b9427ceb98975750cc188c198d6e44973"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "observation_period_id",
+    "jurisdiction_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 3920,
+    "maximumRows": 4760,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "ALL_OFFENDERS_7a1c1a72",
+        "FARE_EVASION_ea4f796c",
+        "YOUTH_OFFENDERS_985dc3ce"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "ALL_OFFENDERS_7a1c1a72",
+        "FARE_EVASION_ea4f796c",
+        "YOUTH_OFFENDERS_985dc3ce"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "ALL_OFFENDERS_7a1c1a72",
+        "FARE_EVASION_ea4f796c",
+        "YOUTH_OFFENDERS_985dc3ce"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "04_DANGEROUS_NEGLIGENT_ACTS_0b720a2b",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "06_ROBBERY_EXTORTION_4b18f837",
+        "07_UNLAWFUL_ENTRY_WITH_INTENT_1d22d901",
+        "08_THEFT_eba67dd5",
+        "09_FRAUD_DECEPTION_82cf4169",
+        "10_ILLICIT_DRUG_OFFENCES_5c8ebb12",
+        "11_WEAPONS_EXPLOSIVES_70c89162",
+        "12_PROPERTY_DAMAGE_AND_ENVIRONMENTAL_POLLUTION_3892e97e",
+        "13_PUBLIC_ORDER_OFFENCES_42cc3a0d",
+        "15_OFFENCES_AGAINST_JUSTICE_f7d7e7df",
+        "16_MISCELLANEOUS_OFFENCES_ec4f4c4a",
+        "ALL_OFFENDERS_7a1c1a72",
+        "FARE_EVASION_ea4f796c",
+        "YOUTH_OFFENDERS_985dc3ce"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_819e8237",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_c9bc4445",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

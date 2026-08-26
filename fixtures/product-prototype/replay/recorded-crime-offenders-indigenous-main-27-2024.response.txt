@@ -1,0 +1,1036 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:c84ae543902fc2785acdb1231797dfb00a1feaf3bd4e1647189fcb8387774019"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R16C16"
+            },
+            {
+              "range": "R18C2:R26C16"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "observation period"
+      },
+      {
+        "id": "d02",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d03",
+        "name": "indigenous status"
+      },
+      {
+        "id": "d04",
+        "name": "rate basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R16C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R8C1:R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R18C2:R26C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R18C1:R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R17C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C3:R16C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R8C1:R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R18C3:R26C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R18C1:R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R17C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C11:R16C13"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R8C1:R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C11"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R6C11:R6C13"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C14:R16C16"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R8C1:R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R5C14"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C15:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C5:R16C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R8C1:R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R6C5"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C8:R16C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R8C1:R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R5C8"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R18C11:R26C13"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R18C1:R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C11"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R6C11:R6C13"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R17C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-010",
+      "order": 10,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p10",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R18C14:R26C16"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R18C1:R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R5C14"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C15:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R6C14"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R17C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-011",
+      "order": 11,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p11",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R18C5:R26C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R18C1:R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C6:R6C7"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R6C5"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R17C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-012",
+      "order": 12,
+      "tableName": "Offenders offender-rates-by-indigenous-status-rate-type-and-jurisdiction 2024-25 p12",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R18C8:R26C10"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-004",
+              "selectors": [
+                {
+                  "range": "R18C1:R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R5C8"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C10"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R17C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

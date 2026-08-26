@@ -1,0 +1,840 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:717d89fe94794b873021fb09d14ce14aa30dadd3e406c243fce53f7bd72baf7f"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders offenders-by-sex-and-principal-offence-victoria 2023-24",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R24C33"
+            },
+            {
+              "range": "R26C2:R42C33"
+            },
+            {
+              "range": "R44C2:R60C33"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "principal offence"
+      },
+      {
+        "id": "d02",
+        "name": "observation period"
+      },
+      {
+        "id": "d03",
+        "name": "sex"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R24C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R8C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C2:R42C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R26C1:R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C2:R60C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R44C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C3:R24C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R8C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C3:R42C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R26C1:R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C3:R60C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R44C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C18:R24C33"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R8C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C18:R6C33"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R5C18"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C18:R42C33"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R26C1:R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C18:R6C33"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R5C18"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders offenders-by-sex-and-principal-offence-victoria 2023-24 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C18:R60C33"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R44C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C18:R6C33"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R5C18"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

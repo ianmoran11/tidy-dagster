@@ -37,6 +37,7 @@ from .large_batch import (
     verify_large_batch_reproduction,
 )
 from .product_prototype import run_product_prototype, verify_live_evidence
+from .offenders_acceptance import run_offenders_remaining_family
 from .work_units import (
     MAX_ACTIVE_WORK_UNITS,
     PROCESSING_PROFILE_DIGEST,
@@ -742,15 +743,25 @@ def _materialize_large_batch_cohort(
     recorded_at: str,
 ) -> MaterializeResult:
     output_root = runtime.project() / ".product-prototype" / spec.output_directory
-    result = run_product_prototype(
-        repository=runtime.repository(),
-        project_root=runtime.project(),
-        cohort_path=runtime.project() / spec.cohort_path,
-        output_root=output_root,
-        mode="replay",
-        recorded_at=recorded_at,
-    )
-    report = result.report
+    if spec.replay_engine == "offenders-remaining-c4-v1":
+        report = run_offenders_remaining_family(
+            project_root=runtime.project(),
+            cohort_path=runtime.project() / spec.cohort_path,
+            output_root=output_root,
+            recorded_at=recorded_at,
+        )
+        run_content_digest = report["runDigest"]
+    else:
+        result = run_product_prototype(
+            repository=runtime.repository(),
+            project_root=runtime.project(),
+            cohort_path=runtime.project() / spec.cohort_path,
+            output_root=output_root,
+            mode="replay",
+            recorded_at=recorded_at,
+        )
+        report = result.report
+        run_content_digest = result.run.content_digest
     rows = json.loads((output_root / "canonical-observations.json").read_text())
     return MaterializeResult(
         metadata={
@@ -771,9 +782,9 @@ def _materialize_large_batch_cohort(
             "manual_replay_years": list(spec.expected_manual_replay_years),
             "workbooks": report["workbooks"],
             "collation_report_path": str(output_root / "collation-report.json"),
-            "artifact_uri": f"artifact://{result.run.content_digest}",
+            "artifact_uri": f"artifact://{run_content_digest}",
         },
-        data_version=DataVersion(result.run.content_digest),
+        data_version=DataVersion(run_content_digest),
     )
 
 

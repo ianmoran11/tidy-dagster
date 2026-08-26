@@ -1,0 +1,301 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-youth-offenders-by-repeat-proceedings-age-and-jurisdiction-v1",
+  "tableFamilyId": "youth-offenders-by-repeat-proceedings-age-and-jurisdiction",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2022": 280,
+        "2023": 279,
+        "2024": 280
+      },
+      "expectedDimensionsByYear": {
+        "2022": {
+          "times_proceeded": [
+            "1_6b86b273",
+            "2_OR_MORE_80b0f8ac",
+            "MEAN_ded31581",
+            "TOTAL_ab2882c8"
+          ],
+          "age_group": [
+            "10_11_YEARS_ee891258",
+            "12_13_YEARS_2b7fd564",
+            "14_17_YEARS_d542002c",
+            "ALL_OFFENDERS_7a1c1a72",
+            "YOUTH_OFFENDERS_985dc3ce"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2023": {
+          "times_proceeded": [
+            "1_6b86b273",
+            "2_OR_MORE_80b0f8ac",
+            "MEAN_ded31581",
+            "TOTAL_ab2882c8"
+          ],
+          "age_group": [
+            "10_11_YEARS_ee891258",
+            "12_13_YEARS_2b7fd564",
+            "14_17_YEARS_d542002c",
+            "ALL_OFFENDERS_7a1c1a72",
+            "YOUTH_OFFENDERS_985dc3ce"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        },
+        "2024": {
+          "times_proceeded": [
+            "1_6b86b273",
+            "2_OR_MORE_80b0f8ac",
+            "MEAN_ded31581",
+            "TOTAL_ab2882c8"
+          ],
+          "age_group": [
+            "10_11_YEARS_ee891258",
+            "12_13_YEARS_2b7fd564",
+            "14_17_YEARS_d542002c",
+            "ALL_OFFENDERS_7a1c1a72",
+            "YOUTH_OFFENDERS_985dc3ce"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:df83c2653768b010ff2c047ae6f714c3ebc426e15d2641dfc1ef86aac5d7abfc",
+        "2023": "sha256:cb5e629015856c0334124d7d2cefda226d307ed4ae915e4b062e90288cb4876e",
+        "2024": "sha256:df83c2653768b010ff2c047ae6f714c3ebc426e15d2641dfc1ef86aac5d7abfc"
+      },
+      "missingValues": {
+        "na": "not_available",
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "times_proceeded",
+    "age_group",
+    "jurisdiction",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "times_proceeded": [
+      "times\\ proceeded"
+    ],
+    "age_group": [
+      "age\\ group"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "times_proceeded": {
+      "1": "1_6b86b273",
+      "2 or more": "2_OR_MORE_80b0f8ac",
+      "Total": "TOTAL_ab2882c8",
+      "Mean": "MEAN_ded31581"
+    },
+    "age_group": {
+      "10–11 years": "10_11_YEARS_ee891258",
+      "12–13 years": "12_13_YEARS_2b7fd564",
+      "14–17 years": "14_17_YEARS_d542002c",
+      "Youth offenders": "YOUTH_OFFENDERS_985dc3ce",
+      "All offenders(a)": "ALL_OFFENDERS_7a1c1a72"
+    },
+    "jurisdiction": {
+      "New South Wales": "NEW_SOUTH_WALES_92f089b8",
+      "Victoria": "VICTORIA_8abba993",
+      "Queensland": "QUEENSLAND_8f0791ed",
+      "South Australia": "SOUTH_AUSTRALIA_0abd141a",
+      "Tasmania": "TASMANIA_412e51e6",
+      "Northern Territory": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Northern Territory(b)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(b)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Australian Capital Territory(c)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Proportion (%)": "PROPORTION_13745b70"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2022": "sha256:d509872d8a2f6767ad5e1148adf20ed88802634578172cd7463354764395ae78",
+    "2023": "sha256:de92f5ef3243b9583facc27b047f5d1b19c3a6be7ca20fca73a0f28535ea2190",
+    "2024": "sha256:18662b8b207c4c37bf8e38e3674f13f105399ee3d39542174a38444d03de8bcf"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2022": "sha256:c02838a49f4e1767f4c6fdbc4b999b8f78c9345c29575f1f7f304191d35412ca",
+    "2023": "sha256:cb8d32cc350558cfadfcb8581ff0f4e341395e0155faef82c5a517b959db58b8",
+    "2024": "sha256:c5e95e2e83f8c911d2af76937e4ed1f4312c53b9e3acb78ab9a610cf64adcafa"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2022": "sha256:25b7b19bfd63985e7a3ab794f7850b925a4a7fa480984012867d0aa9014fd50f",
+    "2023": "sha256:002ae3f247cbc45c6cdf32fb0ce862c7ad1e63d2531ae2af022911050c386a71",
+    "2024": "sha256:dd228a1061df882a2e89e9b91372f5c84e1c40dbfc737e13e7480b1aaa600e6c"
+  },
+  "expectedWarningCountsByYear": {
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "times_proceeded_id",
+    "age_group_id",
+    "jurisdiction_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 279,
+    "maximumRows": 280,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "timesProceededByYear": {
+      "2022": [
+        "1_6b86b273",
+        "2_OR_MORE_80b0f8ac",
+        "MEAN_ded31581",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "1_6b86b273",
+        "2_OR_MORE_80b0f8ac",
+        "MEAN_ded31581",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "1_6b86b273",
+        "2_OR_MORE_80b0f8ac",
+        "MEAN_ded31581",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "ageGroupsByYear": {
+      "2022": [
+        "10_11_YEARS_ee891258",
+        "12_13_YEARS_2b7fd564",
+        "14_17_YEARS_d542002c",
+        "ALL_OFFENDERS_7a1c1a72",
+        "YOUTH_OFFENDERS_985dc3ce"
+      ],
+      "2023": [
+        "10_11_YEARS_ee891258",
+        "12_13_YEARS_2b7fd564",
+        "14_17_YEARS_d542002c",
+        "ALL_OFFENDERS_7a1c1a72",
+        "YOUTH_OFFENDERS_985dc3ce"
+      ],
+      "2024": [
+        "10_11_YEARS_ee891258",
+        "12_13_YEARS_2b7fd564",
+        "14_17_YEARS_d542002c",
+        "ALL_OFFENDERS_7a1c1a72",
+        "YOUTH_OFFENDERS_985dc3ce"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2022": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

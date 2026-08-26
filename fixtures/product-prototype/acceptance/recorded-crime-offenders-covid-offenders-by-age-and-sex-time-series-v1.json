@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-covid-offenders-by-age-and-sex-time-series-v1",
+  "tableFamilyId": "covid-offenders-by-age-and-sex-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 2,
+      "expectedCombinationCountsByYear": {
+        "2021": 162
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "age_group": [
+            "10_19_YEARS_76bd9fd0",
+            "20_29_YEARS_94af50b7",
+            "30_39_YEARS_a220d4f9",
+            "40_49_YEARS_aca42295",
+            "50_59_YEARS_1dd59963",
+            "60_YEARS_AND_OVER_c2241c0a",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2019_20_b5ba4945",
+            "2020_21_1ec8ed0a",
+            "2021_22_98fc83da"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "PROPORTION_13745b70"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:7045f6c096c5e51ba2801ec681b297a39f78482fff611fa925aeb0df205d2c3d"
+      },
+      "missingValues": {
+        "na": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "age_group",
+    "sex",
+    "observation_period",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "age_group": [
+      "age\\ group"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "age_group": {
+      "10–19 years": "10_19_YEARS_76bd9fd0",
+      "20–29 years": "20_29_YEARS_94af50b7",
+      "30–39 years": "30_39_YEARS_a220d4f9",
+      "40–49 years": "40_49_YEARS_aca42295",
+      "50–59 years": "50_59_YEARS_1dd59963",
+      "60 years and over": "60_YEARS_AND_OVER_c2241c0a",
+      "Total(b)": "TOTAL_ab2882c8",
+      "Mean age (years)": "MEAN_AGE_YEARS_54827fe2",
+      "Median age (years)": "MEDIAN_AGE_YEARS_ada3abad"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons(c)": "PERSONS_4d6dccab"
+    },
+    "observation_period": {
+      "2019-20": "2019_20_b5ba4945",
+      "2020-21": "2020_21_1ec8ed0a",
+      "2021-22": "2021_22_98fc83da"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Proportion (%)": "PROPORTION_13745b70"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:50511de9eb8ed54d2df952846789eae1d5ca76536ed88090eac4bcdeebb6589b"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "TargetScopedRecipeV02"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:f7e44305329e97bd886b8468e70ef4353aa7fccf2da30be32e4190bd8c9329dc"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:f4ec27a73b7fd86ef1e002a295bf1493c3e39a5b0785523cd690b4f52d8a82df"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "age_group_id",
+    "sex_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 162,
+    "maximumRows": 162,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "ageGroupsByYear": {
+      "2021": [
+        "10_19_YEARS_76bd9fd0",
+        "20_29_YEARS_94af50b7",
+        "30_39_YEARS_a220d4f9",
+        "40_49_YEARS_aca42295",
+        "50_59_YEARS_1dd59963",
+        "60_YEARS_AND_OVER_c2241c0a",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2019_20_b5ba4945",
+        "2020_21_1ec8ed0a",
+        "2021_22_98fc83da"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "PROPORTION_13745b70"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

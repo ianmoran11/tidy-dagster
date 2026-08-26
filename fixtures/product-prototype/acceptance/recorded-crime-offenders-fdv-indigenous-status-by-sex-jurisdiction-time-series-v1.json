@@ -1,0 +1,437 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-fdv-indigenous-status-by-sex-jurisdiction-time-series-v1",
+  "tableFamilyId": "fdv-indigenous-status-by-sex-jurisdiction-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 6,
+      "expectedCombinationCountsByYear": {
+        "2021": 540,
+        "2022": 630,
+        "2023": 720,
+        "2024": 810
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "MALE_9050711d",
+            "PERSONS_4d6dccab"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2022": {
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "MALE_9050711d",
+            "PERSONS_4d6dccab"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2023": {
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "MALE_9050711d",
+            "PERSONS_4d6dccab"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_819e8237",
+            "2023_24_cb6f8507"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2024": {
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "MALE_9050711d",
+            "PERSONS_4d6dccab"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_ab2882c8"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:2f872841fa378c7a557977d4e400adb0207bb3d361b3c3347ec3af285258ac3d",
+        "2022": "sha256:18ee01202034651e83f668b300b8d75ae130ae797df0a864f6c36f9fc9d1f07a",
+        "2023": "sha256:64547639863f779fbd4a2a64960eb3b0b64013609bbb55b75ac4637196c19f98",
+        "2024": "sha256:1ce6f939ee75696a4efe4f6bffedbe7ed60f88361821f3e7fd2b86758c33afb2"
+      },
+      "missingValues": {
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "sex",
+    "indigenous_status",
+    "jurisdiction",
+    "observation_period",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "sex": [
+      "sex"
+    ],
+    "indigenous_status": [
+      "indigenous\\ status"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons(e)": "PERSONS_4d6dccab",
+      "Male": "MALE_9050711d",
+      "Persons(f)": "PERSONS_4d6dccab"
+    },
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Total(f)": "TOTAL_ab2882c8",
+      "Total(g)": "TOTAL_ab2882c8"
+    },
+    "jurisdiction": {
+      "New South Wales(d)": "NEW_SOUTH_WALES_92f089b8",
+      "Queensland(g)(h)": "QUEENSLAND_8f0791ed",
+      "South Australia(i)": "SOUTH_AUSTRALIA_0abd141a",
+      "Northern Territory": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Queensland(g)(h)(i)": "QUEENSLAND_8f0791ed",
+      "South Australia(j)": "SOUTH_AUSTRALIA_0abd141a",
+      "New South Wales(e)": "NEW_SOUTH_WALES_92f089b8",
+      "Queensland(h)(i)(j)": "QUEENSLAND_8f0791ed",
+      "South Australia(k)": "SOUTH_AUSTRALIA_0abd141a",
+      "Northern Territory(l)(m)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(m)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "New South Wales(c)(d)": "NEW_SOUTH_WALES_92f089b8",
+      "Northern Territory(k)(l)": "NORTHERN_TERRITORY_a1d418fe"
+    },
+    "observation_period": {
+      "2016–17": "2016_17_14c8c17c",
+      "2017–18": "2017_18_e0619229",
+      "2018–19": "2018_19_3fe15a03",
+      "2019–20": "2019_20_6d3dcb6c",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2022–23": "2022_23_0d9e498b",
+      "2022-23": "2022_23_819e8237",
+      "2023-24": "2023_24_cb6f8507",
+      "2016–17(d)": "2016_17_14c8c17c",
+      "2017–18(d)": "2017_18_e0619229",
+      "2018–19(d)": "2018_19_3fe15a03",
+      "2019–20(d)": "2019_20_6d3dcb6c",
+      "2020–21(d)": "2020_21_d6db3b1d",
+      "2021–22(d)": "2021_22_dd8903a1",
+      "2022-23(d)": "2022_23_819e8237",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Offender rate(c)": "OFFENDER_RATE_bf190e83",
+      "Offender rate(b)": "OFFENDER_RATE_bf190e83"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:48afa4ed165c2a95cbf35d6002fd8e69fee635bf45138e55aaa393258ef9596e",
+    "2022": "sha256:e52a70573ce63c57ba68190a867de4067e5489b65344d74d660280764c5b7030",
+    "2023": "sha256:89dd7b3b315dc25d32a4ed96958cc5d901ea553a60120dd1258f0220cde5eab7",
+    "2024": "sha256:0cef3c1e176a3fb23dc0c3066bad177de82401d6c1cf336ffc7f4c5af73d6d79"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:23607f3abf92e85655e6b791e8e6af7552ef23a17dccd56df5d9d32fe925ee6f",
+    "2022": "sha256:783d8e4bdb320ac72016000daf6ed3aaf2ae985d1dc7129c9b05945c82e4fd83",
+    "2023": "sha256:84dee4e1de67f8e0491052838950bc1e246935929079a825bc376de493ae138b",
+    "2024": "sha256:11e55b33f6c2e8e273506998339c9c10ec0b9b593cc3dbc518b012de97457be2"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:36bc30167cfad86ff0baea7dc306b44d3e1584c1e6dbd2ffef48610039399c3d",
+    "2022": "sha256:3ee067844ad3b70344688455ade71c5089f884770f8f455b1a5f0c1dd077ecf8",
+    "2023": "sha256:3b962be847aed470c02e71fd3b8b15cde03ce93705ba0c78d489d3303994e686",
+    "2024": "sha256:0b7704595fb66607f20e5a00ace427528bb145c6e8f4d17056a0b80da4d7af27"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "sex_id",
+    "indigenous_status_id",
+    "jurisdiction_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 540,
+    "maximumRows": 810,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "MALE_9050711d",
+        "PERSONS_4d6dccab"
+      ],
+      "2022": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "MALE_9050711d",
+        "PERSONS_4d6dccab"
+      ],
+      "2023": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "MALE_9050711d",
+        "PERSONS_4d6dccab"
+      ],
+      "2024": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "MALE_9050711d",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_819e8237",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

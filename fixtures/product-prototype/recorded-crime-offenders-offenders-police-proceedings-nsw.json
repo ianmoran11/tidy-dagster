@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-offenders-police-proceedings-nsw",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "offenders-police-proceedings-nsw",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-offenders-police-proceedings-nsw-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/recorded-crime-offenders-2021-22-cube-5-source.xlsx",
+      "contentDigest": "sha256:e62c23e9b7d18328fd8ee5df896b49ee47224e750bc76a6adf1e5610b23a27aa",
+      "byteLength": 118787,
+      "sheet": "Table 27",
+      "releaseId": "2021-22",
+      "downloadOrdinal": 5,
+      "cubeId": "police-proceedings",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-police-proceedings-main-27-2021.response.txt",
+        "contentDigest": "sha256:4501d2d1fb4d177c47c1c1fc74c8a69c7277c9cb194c88ce9e76e2c043c049b8",
+        "byteLength": 23133,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/recorded-crime-offenders-2022-23-cube-5-source.xlsx",
+      "contentDigest": "sha256:ecbd2d1831740942b0b5d50179421c43fe86171ef217cbf75292fa07e3c096ae",
+      "byteLength": 125342,
+      "sheet": "Table 30",
+      "releaseId": "2022-23",
+      "downloadOrdinal": 5,
+      "cubeId": "police-proceedings",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-police-proceedings-main-30-2022.response.txt",
+        "contentDigest": "sha256:2d8c40774eab97e4cf57c93e7df6472d3ba183a820c6b175a02fe98449540ff7",
+        "byteLength": 23136,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/recorded-crime-offenders-2023-24-cube-5-source.xlsx",
+      "contentDigest": "sha256:819a9038c8be9315cb2867209e217e00161bb816287bdf3af3a65e24635c6650",
+      "byteLength": 123822,
+      "sheet": "Table 30",
+      "releaseId": "2023-24",
+      "downloadOrdinal": 5,
+      "cubeId": "police-proceedings",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-police-proceedings-main-30-2023.response.txt",
+        "contentDigest": "sha256:58a09bfd2585435e2ed291aaf16c049089e5e9c3283c3184d24c2fd398bbab3f",
+        "byteLength": 23133,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/recorded-crime-offenders-2024-25-cube-5-source.xlsx",
+      "contentDigest": "sha256:48315b65389ee058f4c7adb30c5c7a50893eda9bd3d34e705d75bff5ac25d3b6",
+      "byteLength": 128640,
+      "sheet": "Table 30",
+      "releaseId": "2024-25",
+      "downloadOrdinal": 5,
+      "cubeId": "police-proceedings",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-police-proceedings-main-30-2024.response.txt",
+        "contentDigest": "sha256:020375ddc7b49467230a6ab8d29e966a57995e66b3efdb22202ba8e466d33bfe",
+        "byteLength": 23694,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    }
+  ]
+}

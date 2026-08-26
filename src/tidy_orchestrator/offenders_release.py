@@ -10,6 +10,8 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 from xml.etree import ElementTree as ET
 
+from .offenders_acceptance import c4_shared_access
+
 DOWNLOAD_SCHEMA = "tidy.offenders-release-downloads/v1"
 CROSSWALK_SCHEMA = "tidy.offenders-release-family-crosswalk/v1"
 INVENTORY_SCHEMA = "tidy.offenders-release-source-inventory/v1"
@@ -823,7 +825,22 @@ def _registered_members(
         fixture_root / "batch-workbook-normalization-v1.json", "normalization registry"
     )
     source_by_output: dict[str, tuple[str, str]] = {}
-    for entry in normalization.get("entries", []):
+    normalization_entries = list(normalization.get("entries", []))
+    offenders_normalization_path = (
+        fixture_root / "offenders-remaining-workbook-normalization-v1.json"
+    )
+    if offenders_normalization_path.is_file():
+        offenders_normalization = _load(
+            offenders_normalization_path, "Offenders normalization registry"
+        )
+        if (
+            offenders_normalization.get("schemaVersion")
+            != "tidy.offenders-remaining-workbook-normalization/v1"
+            or len(offenders_normalization.get("entries", [])) != 6
+        ):
+            raise OffendersReleaseError("Offenders normalization registry is invalid")
+        normalization_entries.extend(offenders_normalization["entries"])
+    for entry in normalization_entries:
         output = entry.get("outputPath")
         source = entry.get("sourcePath")
         source_digest = entry.get("sourceDigest")
@@ -851,6 +868,9 @@ def _registered_members(
         ): key
         for key, member in source_members.items()
     }
+    all_family_ids = {family["familyId"] for family in membership["families"]}
+    if len(all_family_ids) != 52 or not all_family_ids > REGISTERED_FAMILY_IDS:
+        raise OffendersReleaseError("Offenders family registration boundary is invalid")
     registered: set[tuple[str, int, str]] = set()
     registered_families: set[str] = set()
     for declaration in status.get("cohorts", []):
@@ -863,7 +883,7 @@ def _registered_members(
         if cohort.get("publicationId") != PUBLICATION_ID:
             continue
         family_id = cohort.get("tableFamilyId")
-        if not isinstance(family_id, str) or family_id not in REGISTERED_FAMILY_IDS:
+        if not isinstance(family_id, str) or family_id not in all_family_ids:
             raise OffendersReleaseError("registered family identity is invalid")
         if family_id in registered_families:
             raise OffendersReleaseError("registered family is duplicated")
@@ -876,7 +896,16 @@ def _registered_members(
             output = f"fixtures/product-prototype/{relative_output}"
             normalized = source_by_output.get(output)
             if normalized is None:
-                raise OffendersReleaseError("registered workbook has no source custody")
+                direct_key = by_source_sheet.get((output, sheet))
+                direct_member = source_members.get(direct_key) if direct_key else None
+                if (
+                    direct_member is None
+                    or workbook.get("contentDigest") != direct_member["sourceDigest"]
+                ):
+                    raise OffendersReleaseError(
+                        "registered workbook has no source custody"
+                    )
+                normalized = (output, direct_member["sourceDigest"])
             source_path, source_digest = normalized
             key = by_source_sheet.get((source_path, sheet))
             if key is None:
@@ -894,13 +923,18 @@ def _registered_members(
             if key in registered:
                 raise OffendersReleaseError("registered workbook is duplicated")
             registered.add(key)
-    if registered_families != REGISTERED_FAMILY_IDS or len(registered) != 20:
-        raise OffendersReleaseError("registered Offenders closure is invalid")
+    closure = (frozenset(registered_families), len(registered))
+    if closure not in {
+        (frozenset(REGISTERED_FAMILY_IDS), 20),
+        (frozenset(all_family_ids), 190),
+    }:
+        raise OffendersReleaseError(
+            "registered Offenders closure is partial or invalid"
+        )
     return registered
 
 
-def verify_offenders_release(project_root: Path) -> dict[str, Any]:
-    """Verify exact downloads, sheet inventory, family cover, and registration."""
+def _verify_offenders_release_unlocked(project_root: Path) -> dict[str, Any]:
     project = project_root.resolve()
     fixture_root = project / "fixtures" / "product-prototype"
     generated_inventory = build_source_inventory(project)
@@ -933,8 +967,10 @@ def verify_offenders_release(project_root: Path) -> dict[str, Any]:
     if not registered <= source_keys:
         raise OffendersReleaseError("registered Offenders coverage escapes membership")
     pending = len(source_keys) - len(registered)
-    if pending != 170:
-        raise OffendersReleaseError("pending semantic-contract closure is invalid")
+    if pending not in {170, 0}:
+        raise OffendersReleaseError(
+            "pending semantic-contract closure is partial or invalid"
+        )
     return {
         "verified": True,
         "releaseCount": len(RELEASES),
@@ -949,3 +985,9 @@ def verify_offenders_release(project_root: Path) -> dict[str, Any]:
         "inventoryDigest": inventory["inventoryDigest"],
         "membershipDigest": membership["membershipDigest"],
     }
+
+
+def verify_offenders_release(project_root: Path) -> dict[str, Any]:
+    """Verify source and registration closure under a shared installation lease."""
+    with c4_shared_access(project_root):
+        return _verify_offenders_release_unlocked(project_root)

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-youth-offenders-by-principal-offence-age-and-jurisdiction",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "youth-offenders-by-principal-offence-age-and-jurisdiction",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 6,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-youth-offenders-by-principal-offence-age-and-jurisdiction-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/recorded-crime-offenders-2022-23-cube-3-source.xlsx",
+      "contentDigest": "sha256:4b906c84f813b08f14be349eac33c8db3c5d7002310195c4cc39a3ac9d28efd5",
+      "byteLength": 151486,
+      "sheet": "Table 21",
+      "releaseId": "2022-23",
+      "downloadOrdinal": 3,
+      "cubeId": "youth",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-youth-main-21-2022.response.txt",
+        "contentDigest": "sha256:f001a23daf63494a80ca0ded775f2c204d35397c8b994d6a96f2c50bdc7d3805",
+        "byteLength": 58224,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/recorded-crime-offenders-2023-24-cube-3-remaining-bounded.xlsx",
+      "contentDigest": "sha256:81adef0c7e5c764dcc4d1a1e2edfac745880b435924112663c1ed43adb51060b",
+      "byteLength": 130413,
+      "sheet": "Table 21",
+      "releaseId": "2023-24",
+      "downloadOrdinal": 3,
+      "cubeId": "youth",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-youth-main-21-2023.response.txt",
+        "contentDigest": "sha256:d630e60ca3e882a30875578916264cd1e1fd9855d1eed6fa770a86789858f8b3",
+        "byteLength": 58221,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      },
+      "normalization": "digest-pinned-bounded-offenders-remaining-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/recorded-crime-offenders-2024-25-cube-3-remaining-bounded.xlsx",
+      "contentDigest": "sha256:425ef30215df3e269584b40e010e31a29dd96a2ba744d96e4c5c5c528ae7134e",
+      "byteLength": 133557,
+      "sheet": "Table 21",
+      "releaseId": "2024-25",
+      "downloadOrdinal": 3,
+      "cubeId": "youth",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-youth-main-21-2024.response.txt",
+        "contentDigest": "sha256:a9867192aa553bfeb5cc0cf36f0c51ec3bc00f4c467c7f2402bccfb77cd13d77",
+        "byteLength": 58221,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      },
+      "normalization": "digest-pinned-bounded-offenders-remaining-v1"
+    }
+  ]
+}

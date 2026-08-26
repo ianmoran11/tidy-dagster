@@ -1,0 +1,2276 @@
+{
+  "schemaVersion": "tidy.offenders-semantic-generation-authorization/v1",
+  "authorizedForVersionedMapGeneration": true,
+  "acceptanceAuthority": false,
+  "trainingEligibility": false,
+  "productionAcceptance": false,
+  "promotionAuthorization": false,
+  "authorizationBoundary": "Exact reviewed semantic/custody inputs for non-authoritative phased map generation only.",
+  "canary": {
+    "manifestPath": ".product-prototype/offenders-remaining-phase1/source-partition-canary/run-a-remediated/manifest.json",
+    "manifestByteLength": 104866,
+    "manifestSha256": "sha256:36105ed0df04f12e9ab56ae656eabb62b247bafa08795c37cba96ed43f957509",
+    "outputRootDigest": "sha256:5cccf69f9762d97d2a4ef3028f563eb229589e0198764583f69e1aecfccf7d4d",
+    "promotionAuthorization": "pending-independent-review"
+  },
+  "reviewedSemanticStatus": {
+    "methodCorrections": 25544,
+    "nullRepairs": 26823,
+    "totalAuthorizedFieldChanges": 52367,
+    "methodAnchors": 72,
+    "candidateCorrectionCases": 8,
+    "families": 47,
+    "members": 170,
+    "rows": 224997
+  },
+  "runtimeSourceClosure": [
+    {
+      "path": "apps/domain-worker/src/address.ts",
+      "byteLength": 7352,
+      "sha256": "sha256:96f47918661401b0fea8d4e39c4c247ffe19580ff7309b5436e4623e8d56f3e4"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/cell-role-sketch-v02.ts",
+      "byteLength": 33316,
+      "sha256": "sha256:973791b0e57eef1fa044a566faeefdbcc5591df8b8cc53f6f32d24eb79b71b34"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/compiler-v02.ts",
+      "byteLength": 19248,
+      "sha256": "sha256:79924b56df328b89579762dff0aa0aaafba69dded3394a209385cc3acbe95388"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/format-aware-region-catalog-v2.ts",
+      "byteLength": 14816,
+      "sha256": "sha256:bcdb4d13ff063bc1e97cc50b0ab7292ed21dd70f2a9d2fad81b686644d2e9435"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/geometry-v02.ts",
+      "byteLength": 18692,
+      "sha256": "sha256:a298d6a375fbbd166d1490074ae9168202fcfa649a90ac7064cc32233f711480"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/role-aware-region-catalog-v5.ts",
+      "byteLength": 64454,
+      "sha256": "sha256:4e0e5655c76855da770188d8dabe673f4af5d544dbab18546289516a5e515b49"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/semantic-gold-schema.ts",
+      "byteLength": 13715,
+      "sha256": "sha256:0ead782472e4361b4269b1f24aa1cd208698918f410d125cda226f782e280ed9"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/semantic-map-v1.ts",
+      "byteLength": 25504,
+      "sha256": "sha256:d7704cd4680d3613987d41493413db10ff777779d32e4b29e125ec7f9c5d78d4"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/semantic-map-v2.ts",
+      "byteLength": 81185,
+      "sha256": "sha256:846ed95fc03ba533b829a390bc59432742e2c5d39e8f4f747c60ad1ee798be6a"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/types.ts",
+      "byteLength": 344,
+      "sha256": "sha256:d82bb1790736c38d73e636ffb0562d391250b25b449b4008028f1fcbd00b2a8f"
+    },
+    {
+      "path": "apps/domain-worker/src/context/compactContext.ts",
+      "byteLength": 16711,
+      "sha256": "sha256:2b327fcbb21c2f876af04f801cf56f15e0ee250bae8f1cd93d9f157c03e74583"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/directions.ts",
+      "byteLength": 3790,
+      "sha256": "sha256:b073e6409e77f050279ea8d90e1be6bbed48877ed9f98bf0486d7787eb9e46d7"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/executeRecipe.ts",
+      "byteLength": 10258,
+      "sha256": "sha256:9566d1c5812aa5df8de0701763c697ac5aa896fddc921996482a9efcda30009b"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/relationshipResolution.ts",
+      "byteLength": 8214,
+      "sha256": "sha256:3e64fa228ef0b835b85d8af6dd062c2635acdd3e2e60ff9087fbcf8d73f00395"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/types.ts",
+      "byteLength": 1860,
+      "sha256": "sha256:c222106053fc1f01c68bb43c143d06e7825898cfa3c72d6ddb4c5aa20233f8f1"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/resolveSelectors.ts",
+      "byteLength": 5594,
+      "sha256": "sha256:a75bc4c483b7582567dfe5c1659ae0d973865d1c5ec430f5745c9979cc6783ba"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/schema.ts",
+      "byteLength": 7855,
+      "sha256": "sha256:433b16cf37dab93f4070a743da6696bee261fefd34a2d841a66dcf27cbd27e0c"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/styleFingerprint.ts",
+      "byteLength": 765,
+      "sha256": "sha256:0e0d289e7c3d39a18dfdd02aa2fcecc8e5de6bb3e996c1e0749c11f8a267341c"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/types.ts",
+      "byteLength": 994,
+      "sha256": "sha256:51d6758727821ab9a66a1296152e223438a80efdb199212b25fcd3b301d95518"
+    },
+    {
+      "path": "apps/domain-worker/src/workbook/parseWorkbook.ts",
+      "byteLength": 13654,
+      "sha256": "sha256:1d06c99a4ea7f9f630b60fa9b4f8150a4ca5541e6129df48ac95aa80807cc07b"
+    },
+    {
+      "path": "apps/domain-worker/src/workbook/types.ts",
+      "byteLength": 1644,
+      "sha256": "sha256:e9007fcf381a92af7f347371f3c28e6f7b9085d796dc07b16ee50760a415c0a4"
+    },
+    {
+      "path": "scripts/compile-offenders-remaining.ts",
+      "byteLength": 25123,
+      "sha256": "sha256:adc32d7393144050c0b6e5829a974e92c5357af569f7d24f1a6914f647a95822"
+    },
+    {
+      "path": "scripts/offenders-phased-safety.ts",
+      "byteLength": 7978,
+      "sha256": "sha256:a9374e4e165fd48a27be21be42e6603804e4db4bc099bd383faa9558b32da0ab"
+    }
+  ],
+  "inputs": [
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_10.json",
+      "byteLength": 143028,
+      "sha256": "sha256:81e5dbee49f84377973a36302a29e74faf1d828bf7c713693734ae30d88901e0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_11.json",
+      "byteLength": 132914,
+      "sha256": "sha256:c33f50a67c2395c0dfbf3cb6608715825ca31c04a56285536c7b12e9728ab3e5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_12.json",
+      "byteLength": 134442,
+      "sha256": "sha256:3240ef4cd4d3e6337b414c73896284033a6fe6e956a5c8660f5844e1814b8774"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_13.json",
+      "byteLength": 133496,
+      "sha256": "sha256:d7b0b3da12db012daf333b5aad0a85149ed71839e8dcb2d7d57fe54d9deb2c48"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_14.json",
+      "byteLength": 139298,
+      "sha256": "sha256:9bf2fd2c0489acf7aba641b2ed82bb76a7364ce4b7cb6024e4a85836dce284d2"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_15.json",
+      "byteLength": 132070,
+      "sha256": "sha256:3c5d83b6e2e073064cf066c0e3f37dd813078e0a83528fc62d02ad9b5a21b46a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_16.json",
+      "byteLength": 116182,
+      "sha256": "sha256:f37371746ec6afdafba0159e2c961336637f8d0b63d22906c7cb591f9525ad1c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_17.json",
+      "byteLength": 133640,
+      "sha256": "sha256:68bd20b3ff235ba8571ecdbd5e06a27dc6f13672347969f3d7b2c4c5432d9990"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_6.json",
+      "byteLength": 190005,
+      "sha256": "sha256:f32ebaeee0749e823132e0d7260fc485aa1f87951f56b58d538a8461ec5f3b2d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_7.json",
+      "byteLength": 146151,
+      "sha256": "sha256:9cfbdb4fac1f2411dcfdbc34696a1bbe37396f5942f09a393e9be19be95f1da9"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_8.json",
+      "byteLength": 142776,
+      "sha256": "sha256:bdd49a8827c255604f24b1134b721f4d50e5bba2492ded460aaeca87168fb312"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-2-Table_9.json",
+      "byteLength": 131268,
+      "sha256": "sha256:6c80ab3ce969105dff9743ea2359bcc58f741225bb9b69f65d5e064a1f09384f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-3-Table_18.json",
+      "byteLength": 137285,
+      "sha256": "sha256:f390e08e352cbbbccac214d2ccc6366ada77b80b2bf57f5e6f4e750e613df386"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-3-Table_19.json",
+      "byteLength": 136071,
+      "sha256": "sha256:ab3d1c26e24faf6138ff1a8a11516af4665da8dd03e17d2548f30d93462ee8f9"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-3-Table_20.json",
+      "byteLength": 240530,
+      "sha256": "sha256:f63019bdba923ced4b7126cd7201efad07a723c6e59666671651fb5c2bb4cefa"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-3-Table_21.json",
+      "byteLength": 119315,
+      "sha256": "sha256:4eb5b6bfd328f44c6fe20e3abadf73012f999f8956434879d1db202e7d13e55e"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-3-Table_22.json",
+      "byteLength": 90125,
+      "sha256": "sha256:835a895a08f7ccccbeedddd304c4c41972e11d03ef50e72b98df38341d2ce5cd"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-4-Table_23.json",
+      "byteLength": 420682,
+      "sha256": "sha256:39729ea6c328abb1fa00735735e6a04976f9cb10eaed89774c68a204bf476bc8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-4-Table_24.json",
+      "byteLength": 96845,
+      "sha256": "sha256:3f50d057a4aafb9a5167c66eba4b5f797ce2e94e5642c42d6805b5dafb3b06df"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-4-Table_25.json",
+      "byteLength": 339293,
+      "sha256": "sha256:8569d891e472a3c82632dbd4dd85a84bb9a2a2837f5e7d5b21fd37a65324002b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-4-Table_26.json",
+      "byteLength": 95666,
+      "sha256": "sha256:a589cad6152f4945fe36677171ce1d101ab1c891481577de3ee438dd0c3ff442"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-5-Table_27.json",
+      "byteLength": 126353,
+      "sha256": "sha256:d1032d6018b013083e0fee058ce18fc4541e6ba3e40fce53dfc6f5b3da8cfa6d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-5-Table_28.json",
+      "byteLength": 127349,
+      "sha256": "sha256:d22ae8fa676e7660a2caae0a13b64b7be6db5b1be7f5f1a07c32e26ce5f2bb6c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-5-Table_29.json",
+      "byteLength": 127658,
+      "sha256": "sha256:4444ed4af3d4c52b370bd8475da8586b9ad33f5e05459837820d8a1242242af2"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-5-Table_30.json",
+      "byteLength": 133749,
+      "sha256": "sha256:1fb58fa2fd6faa9aa456f1ca8363b44328642b999bdfbde52f15295f966b0b44"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-5-Table_31.json",
+      "byteLength": 121252,
+      "sha256": "sha256:ed5d231e7ac736962800b1717ef38c5d74e539ec42616c36049ffe566323bcae"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-5-Table_32.json",
+      "byteLength": 69500,
+      "sha256": "sha256:90a0f2ab92f1fb0c83adf6473d3f5b29e58eb805d1c27401ab2a5fe0fab75d27"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-5-Table_33.json",
+      "byteLength": 118716,
+      "sha256": "sha256:f5eb8973dc807214822236ba7348c377ed4146a9a4da1aea0eea1c67195c964c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_1.json",
+      "byteLength": 108985,
+      "sha256": "sha256:4116daea0db82c6110157211f52c278b96a34b682d0275668cda2b64af796a9a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_10.json",
+      "byteLength": 33313,
+      "sha256": "sha256:0d24f3ee2ca4d4c23709805b194d913fe72bc4aa35076039c6ed7bd281f734f3"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_11.json",
+      "byteLength": 159796,
+      "sha256": "sha256:5e61592be1a640b2e1c4d2c59d4cb7a722222b7f5f50be2db2e74b6a862351dc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_2.json",
+      "byteLength": 123503,
+      "sha256": "sha256:9c6687f92ca89a76f818dcd8313b719619f9be47e31fe967b8f31f5744b5e81b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_3.json",
+      "byteLength": 104392,
+      "sha256": "sha256:f402f6b115182d3160c6e6a8b4670414708ee44b465fd1627d07c371bdc46044"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_4.json",
+      "byteLength": 270887,
+      "sha256": "sha256:ac1ea122e7b518d7bf365e9f0f9978291f3192e4692fa922df546c6abd192292"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_5.json",
+      "byteLength": 196225,
+      "sha256": "sha256:3da6dd904d0e50eafbe74a705da15a900f8cc68351d00d8e5d7502c7fdc692a3"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_6.json",
+      "byteLength": 122538,
+      "sha256": "sha256:e1e0479883b4a2891636e91690990693f0838711a09de2a857596bd17180ade8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_7.json",
+      "byteLength": 182847,
+      "sha256": "sha256:6a73fe63402367be595fe28d2af006f879748e435f693745be47d2bb4cb178de"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_8.json",
+      "byteLength": 155334,
+      "sha256": "sha256:0392b273069e1d2ff4462cffb56360988b561df051c4fc5707548068afacf9ef"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-6-Table_9.json",
+      "byteLength": 123598,
+      "sha256": "sha256:56a9a94dde64464df256453e16f7faffe1569ab2f89a771792abec34f0e6d08b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-7-Table_1_.json",
+      "byteLength": 69638,
+      "sha256": "sha256:1256d94940f5ad0d464991762de82fcf3851d020021f084e6be50062aa65f444"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-7-Table_2.json",
+      "byteLength": 264936,
+      "sha256": "sha256:2c49bd519cce4c3949bb88833ff68d6ac4028ccea236d6b47378ddf4dafe24f3"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2021-22-7-Table_3.json",
+      "byteLength": 93394,
+      "sha256": "sha256:f8cd10d728d925c1d6cd9743c0327540ea7d83ba3d99fd501cc6be733c6a1d64"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_10.json",
+      "byteLength": 148173,
+      "sha256": "sha256:b484e8e292345e3e52300a0216bf70a6a1a99d36522a3463acb75d7e4a8407ee"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_11.json",
+      "byteLength": 139386,
+      "sha256": "sha256:2d4d3e24392df265e4f18c083bf201783af2fa68372d6022a6c2c800cd010e77"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_12.json",
+      "byteLength": 140686,
+      "sha256": "sha256:86819d030ffc46d6ae3601788117e6cb24cf23aba97eaa6fb97a11a5ae6c4090"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_13.json",
+      "byteLength": 139756,
+      "sha256": "sha256:a7abdf55d51d75503ac3bfff3bbbde089cd3fb918b626b4abf23f35eda2e821d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_14.json",
+      "byteLength": 147890,
+      "sha256": "sha256:c4a35439ba7d466b732b51b76cb208946235962fee4f4bd9c1d432b1edb37eb3"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_15.json",
+      "byteLength": 156389,
+      "sha256": "sha256:60067a0ed26227631669051d5f938facdab5c644611a4fea70e8d71266bc004d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_16.json",
+      "byteLength": 103365,
+      "sha256": "sha256:444ac57633e9353e500f8f77ef69decb241145f36ff80a204aee6d1286306122"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_17.json",
+      "byteLength": 159122,
+      "sha256": "sha256:78c6f3445cf1932ca8006fa20a0500a5f719a180b156ca8999adfa44fe024999"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_6.json",
+      "byteLength": 192004,
+      "sha256": "sha256:cc66cb6fcfba3245deb392aa1ce9b6e638fe8023e5d43bf267ceaac0e36213b1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_7.json",
+      "byteLength": 153100,
+      "sha256": "sha256:2ca8cc2c94b356e2ae8ef94996da060bd328c9e17519fe66408349f3250fa67c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_8.json",
+      "byteLength": 148235,
+      "sha256": "sha256:c85f55beff5e7bd1f36e853df5b0eda4898fba0e74961c43e556173c8e7c5b8b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-2-Table_9.json",
+      "byteLength": 132680,
+      "sha256": "sha256:4fcdf82f4e1eb08646f383b39853fb34a72693b267fa373695811bd891514247"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_18.json",
+      "byteLength": 141772,
+      "sha256": "sha256:ec0e8fadf337c050ef060dc82ada1044c96a5b7a828d72003c6652facc73a98a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_19.json",
+      "byteLength": 148465,
+      "sha256": "sha256:48fc886f99ddc4b010b86971c5c8f749cd5065c54fbd075bb6140a60fe0e553d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_20.json",
+      "byteLength": 246825,
+      "sha256": "sha256:9bab620070af854be021d315681b8a4a6fd27791b1098a42ddb2ef81ba6a7f40"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_21.json",
+      "byteLength": 230020,
+      "sha256": "sha256:c57d7fdcf36772eae35fa4db51e78d121fff85a6e885f8efae8261fa2fbb1939"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_22.json",
+      "byteLength": 164463,
+      "sha256": "sha256:bc05c88d7648eba36a52c71cd21918bbfa3dba7b5c7c6df0bbc0ce6a32be67e7"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_23.json",
+      "byteLength": 76514,
+      "sha256": "sha256:d24384e2bc3451be0ecf97d7620b37e733bac6ddb724ca322af36da9c468e2ec"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_24.json",
+      "byteLength": 97848,
+      "sha256": "sha256:e487f67f2fc38db8d4ed65320afbc6f4575d8280b0af5ba5d129737940e682c4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-3-Table_25.json",
+      "byteLength": 108272,
+      "sha256": "sha256:2eb5393cd43f544a78980de07785625ae12ecbe3a16ee9f3de70ce177d02cdfb"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-4-Table_26.json",
+      "byteLength": 432362,
+      "sha256": "sha256:d65d4d83eb63f7d89c0f16608c4e8e466c54e550fc8b4506385d8cacafb27942"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-4-Table_27.json",
+      "byteLength": 101107,
+      "sha256": "sha256:5905b3bcbb4f14c417c0e312731b27ec1e24af5a3cd3f80b0d8a4e83c6364c75"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-4-Table_28.json",
+      "byteLength": 326072,
+      "sha256": "sha256:0ef1b94cd777044d6fe17f0c3d13eed6165a092136707a1b2ece1c6049423b02"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-4-Table_29.json",
+      "byteLength": 98004,
+      "sha256": "sha256:1862cfab914a191986692371a18600afc47ba2135506843d29635be48eeb888f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-5-Table_30.json",
+      "byteLength": 132161,
+      "sha256": "sha256:7a466d60fb6851cc022f1209f589ce6277e1275afb1144bebb521d9c475f459d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-5-Table_31.json",
+      "byteLength": 130380,
+      "sha256": "sha256:c2d87ae6003df89063d54af36757cc5293ac8801b66284c39e3232266c2b651e"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-5-Table_32.json",
+      "byteLength": 129757,
+      "sha256": "sha256:e8086a0e824938ce281c8b9c506211f99fc262b07c013919e10a46cd767a9b4c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-5-Table_33.json",
+      "byteLength": 136508,
+      "sha256": "sha256:af0d2928fce3b347683cb40dd7ba6c3376e7bc006e51c684b6691eb471c215e1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-5-Table_34.json",
+      "byteLength": 123703,
+      "sha256": "sha256:2a8dad052da81b5f0966ced536bb353552fa782991d536a72ed1d38b95253ed8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-5-Table_35.json",
+      "byteLength": 72985,
+      "sha256": "sha256:9c944fa025596b95173e4fe27e01377b361221f9ca9527c8f2fc3ee84f66466c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-5-Table_36.json",
+      "byteLength": 121175,
+      "sha256": "sha256:4872ff6b542a5a801edaf99068bf2683ca56499e3d06655333761d0bea4c0bf0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_37.json",
+      "byteLength": 151945,
+      "sha256": "sha256:b9430c3001f1244bf9ee1eddd2741495961420fc6573c29af0b781f1e4294c07"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_38.json",
+      "byteLength": 119931,
+      "sha256": "sha256:750bdeb676001e3dbf2b3a1c9db2e94e2f801672c76115c8b0e9cac82349578f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_39.json",
+      "byteLength": 114418,
+      "sha256": "sha256:37363db18b0efce880782f0698d340c49ab63478fffff23ee2a41363daea6f4d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_40.json",
+      "byteLength": 280514,
+      "sha256": "sha256:0d8e1980ecf9b451f3341580549e6661ebe6b5124fc2312b564e9f9b1b629ee4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_41.json",
+      "byteLength": 207178,
+      "sha256": "sha256:798a2b7b9f167453e1b8cb427198b3fa99891fb63a9d6efb29b6dddb683f60b0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_42.json",
+      "byteLength": 126501,
+      "sha256": "sha256:5e37b17c8e7a69779b9ddcd8da66d9549532f8f3ada2aadd829b681cd8731e41"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_43.json",
+      "byteLength": 205731,
+      "sha256": "sha256:3c7ab29ac4eccfaf502698292a3872198852eaf28f97314a30472939f38e9ed0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_44.json",
+      "byteLength": 156243,
+      "sha256": "sha256:9d6bdfb4c6f0997e906cf27e3d27c7dba890fdb36f18dd7d96f55c2ab9edec8a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_45.json",
+      "byteLength": 123538,
+      "sha256": "sha256:333407a4ef2a507ee79e5fd260b0dca37f86bdd79ae0e6e5810f257e8d905e8a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_46.json",
+      "byteLength": 35992,
+      "sha256": "sha256:3dc18ae5dae6ce07f6583bd32a577084f38095b630607ece4624d02d2a4bba2d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2022-23-6-Table_47.json",
+      "byteLength": 173337,
+      "sha256": "sha256:af44b4d4f81a2c7128f43708ebc082ee28d6953e8d44fef97778d06fbab6bbef"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_10.json",
+      "byteLength": 148514,
+      "sha256": "sha256:dda3dc6d046e5bd239718e90229d415cfa1e374f6c03f0c15aeae4051c291e61"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_11.json",
+      "byteLength": 143288,
+      "sha256": "sha256:0e713a038b0d9abcbdaa050a95aef69720b5beafc3afeaa159cd6027dc076a56"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_12.json",
+      "byteLength": 143288,
+      "sha256": "sha256:4c0b57fefe914a5642374eb68041fc78705aeb6546685ef45d902a5507783caf"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_13.json",
+      "byteLength": 145122,
+      "sha256": "sha256:713656e7534977eb6a1785b7da09f2200b51610a6135f49111ce17dae7fe41ce"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_14.json",
+      "byteLength": 151294,
+      "sha256": "sha256:02b2d6a4308bcc6674a32b8e32c213ebdd3f664d5ee90b01afe753cedd387719"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_15.json",
+      "byteLength": 152778,
+      "sha256": "sha256:f797c56bea2b48a3b9dc803fd475389ae9cda192d44c3b5f41cfa8af317a13d8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_16.json",
+      "byteLength": 103476,
+      "sha256": "sha256:3c5a9405a83632b9e235e21528094c61fcd51a8ad7dd80bb3de756d150411d41"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_17.json",
+      "byteLength": 157226,
+      "sha256": "sha256:a523f60ba9e1e414e6b60e6128a5032267aab25842196b9dfeb365dd1d046ae5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_6.json",
+      "byteLength": 191679,
+      "sha256": "sha256:d27633eb62983334c94d3b7d7ff4fd3be277b397257b6cb5738fd2a8bfe6e95a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_7.json",
+      "byteLength": 147422,
+      "sha256": "sha256:49a5536adbd155dec6c2270efbd10f6d92462e5e2591c143c0f4899bce99dba2"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_8.json",
+      "byteLength": 145290,
+      "sha256": "sha256:3c5652c000043e7143e3ba3c8741ce63daa0a45e8c4b9cd359ebb089023c90ed"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-2-Table_9.json",
+      "byteLength": 140982,
+      "sha256": "sha256:be11933946d8b0a5c8bf529b54a43602e8c1f76557687d8e1a2732825fa3f564"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_18.json",
+      "byteLength": 141643,
+      "sha256": "sha256:6b0680b26c98334a64ed388c8adaa2f20ae3cc31496c258fd078ca4c6a3e165a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_19.json",
+      "byteLength": 149249,
+      "sha256": "sha256:774c2cf2a8377244fb2beca244c5cfc1f1a6b3b542fdff43cb5d8e3a2d18c374"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_20.json",
+      "byteLength": 258872,
+      "sha256": "sha256:795789f653120db7e47625ad6d964bdff931aa2e7a4f4524afc8a0f7cb89129d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_21.json",
+      "byteLength": 181454,
+      "sha256": "sha256:33f1944941e088c8e54ba3426759585cbd60f94ed95a7267d0074c36c939230c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_22.json",
+      "byteLength": 163103,
+      "sha256": "sha256:21accff29657ad5617b04186fe508d5fa1b365f072aeb479f9ba0e5846546c45"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_23.json",
+      "byteLength": 80009,
+      "sha256": "sha256:29849ad3698ab4e14fbc6db0a9f28d7b8d3609962e34993c260978a8cca73753"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_24.json",
+      "byteLength": 99783,
+      "sha256": "sha256:1380685043e3a0d746548d9259f6ca856aa0122602f03ea355e4b8095f6ce7f8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-3-Table_25.json",
+      "byteLength": 108497,
+      "sha256": "sha256:0c3a167952e11eb3744989e14aabd7145204dc895574472d96645d0b341036ea"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-4-Table_26.json",
+      "byteLength": 396599,
+      "sha256": "sha256:c2f1ee06c22072cf59687ec5b0d754c38426e312c1c33c0f34d6c3921d2a1d80"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-4-Table_27.json",
+      "byteLength": 85181,
+      "sha256": "sha256:cba332ff625e800b285c734c7f9c83b0faff9f19bfd7a18b03f0ce90631e1bbc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-4-Table_28.json",
+      "byteLength": 332142,
+      "sha256": "sha256:c045320bec3c7191e1ae4357baf7bb7e0127972b7aeb7c10aeb45988f034dc1b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-4-Table_29.json",
+      "byteLength": 101064,
+      "sha256": "sha256:d965870b7f77c0faa0860d9f61a7f560b2236031e2e8d84cf7cde31af4028bb8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-5-Table_30.json",
+      "byteLength": 138781,
+      "sha256": "sha256:33b329f952005e82f1c3ccbe2b898b480bce93b3e72520f49e65cf5849819732"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-5-Table_31.json",
+      "byteLength": 137492,
+      "sha256": "sha256:8a3b8de70465cb79a9cec8d0acf16ed004e705f45daf2ffe4cf144274e9686cc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-5-Table_32.json",
+      "byteLength": 136376,
+      "sha256": "sha256:44f76d97899648f410577fb543f3bb64c8fe5bc6f5afac0b92bd174e3a12783d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-5-Table_33.json",
+      "byteLength": 139279,
+      "sha256": "sha256:8ac8ee4d335b01743017ef70761cc575db9be0e8a9a0ff1c4c2693bd34d812ca"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-5-Table_34.json",
+      "byteLength": 129859,
+      "sha256": "sha256:59ba340bfed43b11e5521b5f6f6e4d10fa9c026010677ec17ef02e6b022a7509"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-5-Table_35.json",
+      "byteLength": 79164,
+      "sha256": "sha256:a3966854b8956066504c5c2f449ee847e1671dcbc647e531cb2bf7964398bb06"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-5-Table_36.json",
+      "byteLength": 129788,
+      "sha256": "sha256:3da78b95e8c091a392021706117e7a27e33c3cc6b5d1abde2a76f8b60ae190f7"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_37.json",
+      "byteLength": 150730,
+      "sha256": "sha256:a3f58149d7bc9bf1cf7cd846a128983f051dee2a021fe88b109b6026c2baca16"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_38.json",
+      "byteLength": 118576,
+      "sha256": "sha256:04ca3e4e27c4389aedb97bb007a7853afb238bcbbda78bde76918175ce12e6d0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_39.json",
+      "byteLength": 111628,
+      "sha256": "sha256:f4081a2a7fca1f02a36cb69f6c9d80e41c649810f2a097dd5f847a23bc70491f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_40.json",
+      "byteLength": 293745,
+      "sha256": "sha256:cde98eb91615264b91698226b92f835e66a57741ef301e698a74e29400ec98f0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_41.json",
+      "byteLength": 202789,
+      "sha256": "sha256:88c93893b9c8d0d3e784797027557cee9211bfb15bcac4b2819721adad09e799"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_42.json",
+      "byteLength": 131610,
+      "sha256": "sha256:1a0b7f4296cd83ecb16a31c948312f0d247f54984acea3d218e29663a9d7d249"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_43.json",
+      "byteLength": 205539,
+      "sha256": "sha256:d3cb9c8cc63d2b57f4af4c46464b08c5f8895c62faa7e19aaf46735c94c47bc3"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_44.json",
+      "byteLength": 156113,
+      "sha256": "sha256:88f6b5ee460147dce3d09c6780a1021646a899b8f29fe1adf0af6642b28b4d75"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_45.json",
+      "byteLength": 139493,
+      "sha256": "sha256:35ac55077b7de2afa940d298e5e585a96225de332dc3cdfb10b0e1d316ffb43d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_46.json",
+      "byteLength": 37994,
+      "sha256": "sha256:a23da8f3048f475f8e7c733bcab241f568bd430eae96aafa8ec38ddd525e10e6"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-6-Table_47.json",
+      "byteLength": 173527,
+      "sha256": "sha256:d51648bb92cee5b407b1a23ee2d50a90eb3ae1037af3e28c50b87593af236aee"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2023-24-7-Table_1.json",
+      "byteLength": 33695,
+      "sha256": "sha256:26c658f631a05b5d6c4d63819db8fe19deff833e5a942afc8ca344c5e628dd1b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_10.json",
+      "byteLength": 146307,
+      "sha256": "sha256:6c6f36179359528e0e09d69b082c9da76916f60c784c450b4ed4d27def326659"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_11.json",
+      "byteLength": 143382,
+      "sha256": "sha256:641c05b4151a3fa637b838feb010f0134c55959d5e2efed90574ee21872867fa"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_12.json",
+      "byteLength": 140207,
+      "sha256": "sha256:13e8750998d072832a382a3229ddbeb7e6a38000d9378444fa2ce5335988bb23"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_13.json",
+      "byteLength": 144347,
+      "sha256": "sha256:7ec0184efab832ce0643edd46c62bf84554aa51d7f03d50cc19fd42e1d4aefd1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_14.json",
+      "byteLength": 149758,
+      "sha256": "sha256:6dda2f8bc7db4a87446555874253c2b87067969d1eb47f5b7a822c81efb18483"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_15.json",
+      "byteLength": 156149,
+      "sha256": "sha256:44bfc9dcdcaffc0a987e94bdd7c9321b476f4e4308a720a47f8060d82bd287b6"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_16.json",
+      "byteLength": 106470,
+      "sha256": "sha256:ce9e95d8bdb82872b8724491c40e39a0aa96ca0afa1de3e5117853dc68c1eaa5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_17.json",
+      "byteLength": 156614,
+      "sha256": "sha256:cd247e7e0658b65bf84653a6267cad043c31f7af723bbec572475c22314b0eec"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_6.json",
+      "byteLength": 192172,
+      "sha256": "sha256:29c475d1824db73b5fd174ea2e94cf0ec8c03b10f631b94868738af15c8f7d90"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_7.json",
+      "byteLength": 142714,
+      "sha256": "sha256:ae010b7e9b99bf10d063bec8b8b6924c3ea7fb35e75725d329624f70021d89de"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_8.json",
+      "byteLength": 140407,
+      "sha256": "sha256:bd82be5a2b02952e08545e10945ee8a3888d51ec49b417d4575c657ce0969543"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-2-Table_9.json",
+      "byteLength": 137651,
+      "sha256": "sha256:ad897df907e6b808d17c77a07312f5077868bc163f596557d4b4cef8d5b30c12"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_18.json",
+      "byteLength": 145313,
+      "sha256": "sha256:e7a4d13d21f3661ec6e571fcfe70ea496e97964c1ce1b4a65a892040db4885cb"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_19.json",
+      "byteLength": 146747,
+      "sha256": "sha256:db323d7a65a0fdc412f1b5a7f347a0268e017c7c4ce4519f3715766873bf8456"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_20.json",
+      "byteLength": 259767,
+      "sha256": "sha256:dee27c2238bb3e90acaf73e7b54e067ddda7082821721b452fab9de9701315d6"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_21.json",
+      "byteLength": 186894,
+      "sha256": "sha256:8f7e690fe38657f7ac04f5bf55c40d387519206280669d2edb090e1926ac3d71"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_22.json",
+      "byteLength": 162573,
+      "sha256": "sha256:464731f23d6112e0fc2de8bd9ead98df6eb5851f09b2542252d6510e991032fd"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_23.json",
+      "byteLength": 83301,
+      "sha256": "sha256:150e1d61e5fd6f31f74390dd408de7819f835b29636740aabd2d06caaa57ca66"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_24.json",
+      "byteLength": 104460,
+      "sha256": "sha256:e961419486c2130945363929e851084dee0e5e6407bf67f752c9869d8c6ef9de"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-3-Table_25.json",
+      "byteLength": 105203,
+      "sha256": "sha256:5f265019ac3f838547be5360b4fc96d1f7a1d772689ce09939a66d860942a702"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-4-Table_26.json",
+      "byteLength": 408975,
+      "sha256": "sha256:8364707f975c209dd8e877825c37d9b8761eea0449a9f8efb1d12848f008b840"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-4-Table_27.json",
+      "byteLength": 89644,
+      "sha256": "sha256:cc78553208d2b3aed86a95e816357581f348d0005230335b0bfac5c32595f543"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-4-Table_28.json",
+      "byteLength": 345213,
+      "sha256": "sha256:efaaca3a85fe4fbf06b9aad1ce7f4081fc9bc6f98831c299ebeed5339b110e2b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-4-Table_29.json",
+      "byteLength": 109929,
+      "sha256": "sha256:f24eca9d1f1d8145fcbb8bfc77e7235ee7070fc6f731c3635dcc1caafc7fd6cc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-5-Table_30.json",
+      "byteLength": 138923,
+      "sha256": "sha256:f7dc8a993117c33f2a743a781a0227c11663ea615a89b31a7714ad6db7cf8b74"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-5-Table_31.json",
+      "byteLength": 139555,
+      "sha256": "sha256:601c75ee6a07790eebb6708e3a1e7a41aa6f1c800d93fea4d8e3f4338f4eb8ae"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-5-Table_32.json",
+      "byteLength": 139251,
+      "sha256": "sha256:63a00e3272219241380cf338a23cf027f3208671479d48945cc660b623581b35"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-5-Table_33.json",
+      "byteLength": 138865,
+      "sha256": "sha256:ac48fdce467799076e170b36cb9e78e233fd7f2902c1b39787a479a8fad65dfe"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-5-Table_34.json",
+      "byteLength": 129213,
+      "sha256": "sha256:406c55d90d6c07b34aa06a1545c86a2bec263bce2138fffcfef684fabe25e550"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-5-Table_35.json",
+      "byteLength": 82572,
+      "sha256": "sha256:fc1e1e486d371bc982550bdd89bfb7e83283e56e0aec35ec021a6cefedee320c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-5-Table_36.json",
+      "byteLength": 130577,
+      "sha256": "sha256:e932c9411bdf44578f455ac0dbf7d38131a4ddeea956bf6b25982f73fb9f9287"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_37.json",
+      "byteLength": 154097,
+      "sha256": "sha256:9202de8cff299e09477ca03cf2444d8f3b82bb324218614caf7f81e8638d47bf"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_38.json",
+      "byteLength": 115933,
+      "sha256": "sha256:4bada4109bd4abab2461604c88ab56048c7f3ebfb1e05cb1536870996c76ded6"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_39.json",
+      "byteLength": 111644,
+      "sha256": "sha256:62fea38957a9e7298766cd0f6a90c9ec1c7ccd314d22dfc7723d58f5f1c135db"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_40.json",
+      "byteLength": 300321,
+      "sha256": "sha256:c3fdf80364dae04745d265639d40bcab8d411ac14c9c3982e5083d99e321345a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_41.json",
+      "byteLength": 202987,
+      "sha256": "sha256:be93930db533f0180f5796473e4c1820109cfd0f0a3060eddcb73db4f6e29a39"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_42.json",
+      "byteLength": 134324,
+      "sha256": "sha256:b969789b5448abeb1c1b27b1480f4de19ed5d290fdbe16165a07170e837688fb"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_43.json",
+      "byteLength": 206684,
+      "sha256": "sha256:43bc09a8008862baa9f3e6e6dce3e726bf03578e0a97fb791a4ac3a39e589ef9"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_44.json",
+      "byteLength": 157691,
+      "sha256": "sha256:fc5ca4f0cceccbb5d6f035829a89192dfc5a46a316f23f25f0ae91646caee6db"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_45.json",
+      "byteLength": 135830,
+      "sha256": "sha256:019d19cbceafd3bb6ff285c26e661ee9b4d7316de849d6cf927c3ff51f236871"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_46.json",
+      "byteLength": 40480,
+      "sha256": "sha256:67bbdfe3437f7f3a9c54486174c4bdf6127dc12e71944e5b014f3ecf55e36146"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-6-Table_47.json",
+      "byteLength": 174629,
+      "sha256": "sha256:1c10a4a0e81cd762b3def69ccabea1a64fec01eb687bc81108f2561b654fab01"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/catalogs/2024-25-7-Table_1.json",
+      "byteLength": 35874,
+      "sha256": "sha256:1d425b8f7f6f87eb2fde7463571e3c13b1e02497b904cc57a83f6d40a8fa82d8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/covid-proceedings-by-method-jurisdiction-time-series/2021.json",
+      "byteLength": 323782,
+      "sha256": "sha256:cc2a6c7aef3eb8f8490143bfca83b30ac84555a518a32d995f6e81db3695b799"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-breach-order-offenders-by-jurisdiction-time-series/2021.json",
+      "byteLength": 107067,
+      "sha256": "sha256:0e5c02d506450b3ee31282c84b5895078c4cb971bbd9d3da760097ca598f4658"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-breach-order-offenders-by-jurisdiction-time-series/2022.json",
+      "byteLength": 124230,
+      "sha256": "sha256:d232341bdf6d9203d86acfacce8b322e866ecb8e719d90144ba96fc114bdb78c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-breach-order-offenders-by-jurisdiction-time-series/2023.json",
+      "byteLength": 141385,
+      "sha256": "sha256:094f16b1748e74a07378fdbff165ab29bd0ccc27564e5ab3eb5017966dab4fb2"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-breach-order-offenders-by-jurisdiction-time-series/2024.json",
+      "byteLength": 158642,
+      "sha256": "sha256:54966f7ddfa7103257937e1d9c0652943764cadf82707c4e571d1c63c42c1520"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2021.json",
+      "byteLength": 1769090,
+      "sha256": "sha256:8702791b449b22a77e70f7ca62c0f0b683bc472e36fd04dd8261f4896b0aaa95"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2022.json",
+      "byteLength": 1769987,
+      "sha256": "sha256:7736a532945e718d36edafbbfe1f90b6e335a00220f6f2353a626b3940480f5b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2023.json",
+      "byteLength": 1771251,
+      "sha256": "sha256:528c61dbf9ddb9541a19732120c2420f3a96281444d711432748f8f6892a9b8c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2024.json",
+      "byteLength": 1772807,
+      "sha256": "sha256:fd8cc31722ffbdf936e655ee3638f8cc8de9e9a811d00183f5669844f1361188"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-and-age-jurisdiction/2021.json",
+      "byteLength": 2230364,
+      "sha256": "sha256:0872f0333abe5513c066c3b439c87cf7a59beb3fbdb5bceb1cbf75e8e03f4848"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-and-age-jurisdiction/2022.json",
+      "byteLength": 2484860,
+      "sha256": "sha256:dde70c9a364eea674eeb1590d1572b51cab028c23d69441d3485c712a6ed64a0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-and-age-jurisdiction/2023.json",
+      "byteLength": 2486689,
+      "sha256": "sha256:5494792cc34debfcae71ef6b6583c2cb6941d1af01c7b3c42083fceadeedd85b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-and-age-jurisdiction/2024.json",
+      "byteLength": 2488463,
+      "sha256": "sha256:9e7a9ff5e84196de24ebcecbcfa5acc456a96d946ec9dffcde78677ae576b4b1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-jurisdiction-time-series/2021.json",
+      "byteLength": 1504826,
+      "sha256": "sha256:e605a19973299e62480a12865e29e821e9b04a41b66274541319fec4fc1f7b58"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-jurisdiction-time-series/2022.json",
+      "byteLength": 1758094,
+      "sha256": "sha256:2d300afaaa17bc701d5e2f1df98b6d9f952d5f12d31c15cb395e3d7f11816bd4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-jurisdiction-time-series/2023.json",
+      "byteLength": 2013892,
+      "sha256": "sha256:fac439361c8af00de08d7d04f5e39ea67fb320d370febfa2d9a22b89c8b13339"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-indigenous-status-by-sex-jurisdiction-time-series/2024.json",
+      "byteLength": 2265210,
+      "sha256": "sha256:d175186cbad0dbcafe3da1372f8eba23f287003d9ee6eaaa54a6939fa5ea8336"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-and-age-australia/2021.json",
+      "byteLength": 1462351,
+      "sha256": "sha256:221ea0223eb2e99fca6fb85a2e307bd4a084b48384bc3e92274b6abc6313ca04"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-and-age-australia/2022.json",
+      "byteLength": 1758511,
+      "sha256": "sha256:e3d219aaa504fa8f50a8d3bf890dbcb2cb9019155c0180ea937d88dfd2927a55"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-and-age-australia/2023.json",
+      "byteLength": 1758023,
+      "sha256": "sha256:2546cdb6130a0192512dbbd115eb886441c02baf7caebe73d3c26aa178170180"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-and-age-australia/2024.json",
+      "byteLength": 1758045,
+      "sha256": "sha256:28c2d75a86ecfc2ec71bbcf4fb2951125fc9f06ac5d4e47357763c73dbb8748b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-australia-time-series/2021.json",
+      "byteLength": 631629,
+      "sha256": "sha256:18768576255cacc6ca44a6fdfae7bcced183988316b52cc193fc927f0ef9c470"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-australia-time-series/2022.json",
+      "byteLength": 841548,
+      "sha256": "sha256:1c2f96d78cf27d411f94926e0b00f554733b6359061090f8fbf4d3208f77d37f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-australia-time-series/2023.json",
+      "byteLength": 1051647,
+      "sha256": "sha256:79c7bf7c227a4a4634656132f2f6b74117e9d08d3a0dd7d8061ad8b52fe716d0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-principal-offence-by-sex-australia-time-series/2024.json",
+      "byteLength": 1262257,
+      "sha256": "sha256:5ff492efa1b6f92792cf884640b4c486f187ad62f913ff68ce75c7bd13ed692c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2021.json",
+      "byteLength": 2126030,
+      "sha256": "sha256:f518768c027df7dc5b4df501571e38367d69b22bb34d86d4a57131b0e00186b2"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2022.json",
+      "byteLength": 2484029,
+      "sha256": "sha256:f114ef92ed5896ea34423d66be75c3e3ab34cc82b16ddad5f3b96b5e8881d5d9"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2023.json",
+      "byteLength": 2843450,
+      "sha256": "sha256:222bc4aaed5fcdc2f40657d953a77a3ea1a6fb6dd59f04bec1612da395cd8748"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2024.json",
+      "byteLength": 3207102,
+      "sha256": "sha256:65461fd559fdbcca37cd3d4f85f053b7657168e0866d9f81b544e74fa8df4264"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-summary-characteristics/2021.json",
+      "byteLength": 854596,
+      "sha256": "sha256:fc46b622d31011d1f03497b429319cf5cb92dee9bc1a4784fe1a31680c02e1ee"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-summary-characteristics/2022.json",
+      "byteLength": 899128,
+      "sha256": "sha256:05117701c3ad1801d29b3a0760499abba821590b660e3e96200fbfa2f47694c6"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-summary-characteristics/2023.json",
+      "byteLength": 899005,
+      "sha256": "sha256:e72078df1e42162c59ca80c72354124b7f0861b32246dd55bf5ad11911125c7d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/fdv-summary-characteristics/2024.json",
+      "byteLength": 899650,
+      "sha256": "sha256:ebd43d8b501b6d20e77510afddad2f7ab18af1df2df8ae42775a07e4d8d0b0cf"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2021.json",
+      "byteLength": 988404,
+      "sha256": "sha256:e88b7d5311432a014d4d48daccaf99b02a3dacd2196132f308bf0b35bafdf364"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2022.json",
+      "byteLength": 1058921,
+      "sha256": "sha256:b4439d99040c7181966c01d956e7c11fc5cdb94af19cfffc329f40e308d21fec"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2023.json",
+      "byteLength": 573343,
+      "sha256": "sha256:80eced30a0937697e02e05f4d97baac85378f87fd6770b44e1f69d020b852db5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2024.json",
+      "byteLength": 643280,
+      "sha256": "sha256:78b4068eeaaa40e80e87ae3aa7d49670de66826289478555dcbbf067a076ec6c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-age-times-proceeded-and-jurisdiction/2021.json",
+      "byteLength": 2545422,
+      "sha256": "sha256:f428e099fb88d090854f86572953af84b60ed2927e41cca5521bf6fbe3d46bc6"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-age-times-proceeded-and-jurisdiction/2022.json",
+      "byteLength": 3269288,
+      "sha256": "sha256:db2df33a8bbfdfa2d1cf7c56a5e0c15870de6d0d062609156f8656c085267833"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-age-times-proceeded-and-jurisdiction/2023.json",
+      "byteLength": 3268755,
+      "sha256": "sha256:5138e6d15ba028dc33ac8146b256c4a10b72fdcd271ae55cac599b13ebd1c6db"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-age-times-proceeded-and-jurisdiction/2024.json",
+      "byteLength": 3271991,
+      "sha256": "sha256:a1be76f6f34013bc26de63876f9499c195ea78af0532f4a9c6e539bdbb78e51c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2021.json",
+      "byteLength": 19256555,
+      "sha256": "sha256:62205c18d9cf1385afb84466a1e7bbc5f5a205cff80ab25b8f95a7c30ac66839"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2022.json",
+      "byteLength": 20635152,
+      "sha256": "sha256:ee7abfbb3bc6c21da2feb0245e57d5c61640cc33dd66253ee44b53d777e31088"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2023.json",
+      "byteLength": 16533332,
+      "sha256": "sha256:10451e7c3b2ac6534c50ced219ad206893a556e2d592434ca5bc7c79dc1627e6"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2024.json",
+      "byteLength": 17902071,
+      "sha256": "sha256:83778e3f991ee69222b7bc81cf6e2061d8f2e9f2f8388a95a7df5e0301c0d8ef"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2021.json",
+      "byteLength": 1180234,
+      "sha256": "sha256:e22e5b8db4911d274d3d5851286759086e31f4572caa9badb3b7f39b5370517d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2022.json",
+      "byteLength": 1180743,
+      "sha256": "sha256:cf48a2f250b135736cdf563da14c9373fff1805d8c047b9ba8c43b36474b835a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2023.json",
+      "byteLength": 1183692,
+      "sha256": "sha256:f8a5eef3025cecc502c3afe2dfe6efb5e1119652182ca4c9ee2dfb80dc33d35e"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2024.json",
+      "byteLength": 1183418,
+      "sha256": "sha256:82b9b1ae18b8bc555503cd34048a050277f80c0bd2239b1b5d3a9e6840784a63"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction/2023.json",
+      "byteLength": 249393,
+      "sha256": "sha256:80b3e45fdd507f6a2dfd8e62e5afefd84abe0aee4f82f8141285f6d0386774a8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction/2024.json",
+      "byteLength": 249950,
+      "sha256": "sha256:042e9a0ff75097958645cab90f5b482f402c5b6f76689a1a9eec30e9118dab0f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-principal-offence-and-jurisdiction-snapshot/2021.json",
+      "byteLength": 2945105,
+      "sha256": "sha256:eb08cd00688247fb6f493d474193698b82a9f1ebd82db0fa6a5c3be29ac09dd0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-principal-offence-and-jurisdiction-snapshot/2022.json",
+      "byteLength": 2943638,
+      "sha256": "sha256:18a2ffc0f0bf7adefc575c589b11bc13a43db1cae749f75407862f0a271bc2de"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-principal-offence-and-jurisdiction-snapshot/2023.json",
+      "byteLength": 2949522,
+      "sha256": "sha256:016c57535808fa65468bcec4b1fe07e989068a51d675c4404c3f33a9eaf3883c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-principal-offence-and-jurisdiction-snapshot/2024.json",
+      "byteLength": 2950610,
+      "sha256": "sha256:93538fb61d04ffac51fe0d926a00fcc303c1c1f57c017b702693b8462605518f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-age-and-jurisdiction-snapshot/2021.json",
+      "byteLength": 3903823,
+      "sha256": "sha256:9d881ac005b9d3650c5bbf572556b7583858144424222b470267105368baf6bf"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-age-and-jurisdiction-snapshot/2022.json",
+      "byteLength": 4687761,
+      "sha256": "sha256:6f923752b25532775e237c9337835df93c93299989118f625fbae16d624dc60b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-age-and-jurisdiction-snapshot/2023.json",
+      "byteLength": 4694059,
+      "sha256": "sha256:347bb97ffc51abc762efb47f225e2e604a6d7d6d90fb75bbfb62604ee61a23a1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-age-and-jurisdiction-snapshot/2024.json",
+      "byteLength": 4702004,
+      "sha256": "sha256:d0d83f79a45d38e777f5fa674bdd1f0fa26fa663b939c381ff94f15f501e7921"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-act/2021.json",
+      "byteLength": 3137903,
+      "sha256": "sha256:c7919387ab4591d826b8b2532bba7677a43e437784d6d87a1b8e100cc99aa72a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-act/2022.json",
+      "byteLength": 3362640,
+      "sha256": "sha256:cdbdeb4783dfc97cb96685b0631575b32453198c5542e58269abc8aa370c7694"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-act/2023.json",
+      "byteLength": 3587977,
+      "sha256": "sha256:3f1d32a77a37823354f54dc656c013d95002acaead719f22d78664c62363f360"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-act/2024.json",
+      "byteLength": 3811095,
+      "sha256": "sha256:48063c01735f5f5261c622f336c30f5e4e8ccb09dba26e1b6a89c876b75b732c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-northern-territory/2021.json",
+      "byteLength": 3139653,
+      "sha256": "sha256:b75a293cc95ef72099be025e185c0dabab4c9564ee150b28607e2279287d66b5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-northern-territory/2022.json",
+      "byteLength": 3364488,
+      "sha256": "sha256:b5dfccedb6b8357e9eed77ba2aa916645a1fafb6f85386fe49fe2061a1e346a3"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-northern-territory/2023.json",
+      "byteLength": 3590629,
+      "sha256": "sha256:c9d7ed80d7c1d97e2ba391dcc38d8f9ca8b21ce7e545a4597b5090271bf23488"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-northern-territory/2024.json",
+      "byteLength": 3814125,
+      "sha256": "sha256:ff9f0b7366ec2aa81a388bb345ae0ca519ae8c3e2c1544a8af15690bc1f2ec8e"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-nsw/2021.json",
+      "byteLength": 3333532,
+      "sha256": "sha256:7ae083b5120d3a817bd7d4d6a1ab782e6d3c34090a07ee9bf6556a3d710cabb2"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-nsw/2022.json",
+      "byteLength": 3572190,
+      "sha256": "sha256:6f3e347c740f4148a1c5912d64999a13f74dcac20d66b3fde761b453bd5536c1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-nsw/2023.json",
+      "byteLength": 3810742,
+      "sha256": "sha256:50f274c2f6e2bf26ca890e85b3d268939f6f0b935fbafb1f2fd3f231eff15687"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-nsw/2024.json",
+      "byteLength": 4047907,
+      "sha256": "sha256:87ef7e957af424e5ef50e40b199754e22eb34a5911d3b81a7cf9b7522129c9c1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-queensland/2021.json",
+      "byteLength": 3332883,
+      "sha256": "sha256:89f2e936cc078f18caa1f6d541cbcf0c38200ab5f57e396e4f5cf0f92db898cd"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-queensland/2022.json",
+      "byteLength": 3571458,
+      "sha256": "sha256:0fbf8d93dc28d260b17e6d7b8a41782d746065e32f46898312eeda9f92c19bb7"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-queensland/2023.json",
+      "byteLength": 3809674,
+      "sha256": "sha256:61b4f26e4e8b51f06b20d094bd3179ac9cf0d99e4edf955a1a7c2d2bd54fcd82"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-queensland/2024.json",
+      "byteLength": 4046582,
+      "sha256": "sha256:a02941ad72d3f88a70e66835f7ba11fc51ffc410ec11b2f85053377ffbf3000f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-south-australia/2021.json",
+      "byteLength": 3336274,
+      "sha256": "sha256:2226fe86a2b081e9c98ddc3939547cc3c6000b6f01d5e7b218c6ddf6e2d42d3b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-south-australia/2022.json",
+      "byteLength": 3575573,
+      "sha256": "sha256:58e4b9394030f4337022b7e7335e9748bb1f39aa1f54608164674060a8235164"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-south-australia/2023.json",
+      "byteLength": 3813999,
+      "sha256": "sha256:f13b66e967c7b4d5cc89cffca2e87aecd84af21869a707422a09e675e43b3ce4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-south-australia/2024.json",
+      "byteLength": 4051152,
+      "sha256": "sha256:13cbebc2c4b52d00b1df3fa1ea81ee57f1d9150a14302fd6e91e5e689bbd0b13"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-tasmania/2021.json",
+      "byteLength": 3139094,
+      "sha256": "sha256:beb56d0c2678a60f04272c310b2dc9df59a86925d9429e3147bb99831cf1faed"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-tasmania/2022.json",
+      "byteLength": 3363675,
+      "sha256": "sha256:f70214c51df7947b0ca72afae659dd2a6bd401fc58cf0a5d10aeeb0a4c64acfd"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-tasmania/2023.json",
+      "byteLength": 3588286,
+      "sha256": "sha256:17e27f8a26cdfa44b1870cad803a319bf6218bfa3988f5c369815c591826fba5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-tasmania/2024.json",
+      "byteLength": 3811472,
+      "sha256": "sha256:773657af9ae9d2012c7ff284637c33f4cf40c4597a32b05f729cc78236258131"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-victoria/2021.json",
+      "byteLength": 3332103,
+      "sha256": "sha256:c3faf09edd4f2cb34c14836b50d3ec8f202ab64755cf25da7eba67cd7fe7ef08"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-victoria/2022.json",
+      "byteLength": 3570674,
+      "sha256": "sha256:4633da71cbb738871830c15d0b6464d84cea40b2e4768f8893bd1ec8936a824e"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-victoria/2023.json",
+      "byteLength": 3810439,
+      "sha256": "sha256:3cbc7a3fa34cf5143eb165cc32a2f273f3227f4f371306e8e55935631538066f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-victoria/2024.json",
+      "byteLength": 4047439,
+      "sha256": "sha256:3c330d608257d03cd573ef178dc617009a93dec89c62b05d9e54dad7ae948e08"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-western-australia/2021.json",
+      "byteLength": 3141088,
+      "sha256": "sha256:1e038a600a5d1b21a21647b21d0307341b2d7460abb6892ddd91ca05eb2e5949"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-western-australia/2022.json",
+      "byteLength": 3365970,
+      "sha256": "sha256:783c6cbdfe4a95f27faa939cc89e5500ade9fc0601fbc12c62690dc8f2d91477"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-western-australia/2023.json",
+      "byteLength": 3590473,
+      "sha256": "sha256:0e726eff213137081e23b996a80957de288e8dd876a2f5f9781bc4ca7e524ab8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-and-principal-offence-western-australia/2024.json",
+      "byteLength": 3813771,
+      "sha256": "sha256:e5a5061118fe5d11e28d4ee6db4933de4e4d1e5fc0d04c039c252694415f0ecd"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2021.json",
+      "byteLength": 1591098,
+      "sha256": "sha256:338a5056aba97f14b07ecec6901607df30caaa2315111f7598b6764054fdbfc9"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2022.json",
+      "byteLength": 1591706,
+      "sha256": "sha256:2f2c4250a6051f77c8807b103263804a1237cfbc93a5f7d76da7c5c73125f492"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2023.json",
+      "byteLength": 1594194,
+      "sha256": "sha256:316cd2918218a64f0996a0b6480addd9ff91ed77347974ddf5318bd8e32b4033"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2024.json",
+      "byteLength": 1597638,
+      "sha256": "sha256:c86eacc55ff4b8ec2acdcc5ca0a8180a238d0929ffbadbdb1f02ed0603a37d18"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-act/2021.json",
+      "byteLength": 3166161,
+      "sha256": "sha256:8e7533d97c33d07bc1e6b97e30a820ea655c9e63f83deba6f58740fae6f57155"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-act/2022.json",
+      "byteLength": 3392664,
+      "sha256": "sha256:8a40607e15fb782785b369cf2d3d80e76bf8d98036326973a897887710626b04"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-act/2023.json",
+      "byteLength": 3618136,
+      "sha256": "sha256:b0b10a48441aeca23c2329b840ae95f32d13db14734a361b7b82d0e4a1fc2f41"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-act/2024.json",
+      "byteLength": 3844606,
+      "sha256": "sha256:af861b123242ba734a670ec7f0564f26657512fccd4910b06140db333fa06f64"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-northern-territory/2021.json",
+      "byteLength": 856654,
+      "sha256": "sha256:42a6e699419cb229770e890432316a90214ea4573702ffaff5166b1f01f9141b"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-northern-territory/2022.json",
+      "byteLength": 918087,
+      "sha256": "sha256:25067a19865d526fdb5c1aaf35a0b3119c0e8c7f3b420b836555680d17660313"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-northern-territory/2023.json",
+      "byteLength": 979098,
+      "sha256": "sha256:839107bd3cfdfef7f4ef020cfff1f9a69eeb832ba2f0405d3fa4948cd1805ead"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-northern-territory/2024.json",
+      "byteLength": 1040366,
+      "sha256": "sha256:c724222d0949453c321385c31663ecaa763987197609c8df5867618d2dafd6bc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-nsw/2021.json",
+      "byteLength": 3365626,
+      "sha256": "sha256:3e674059788853631019ba85759bdef36021940255f7a51012590b1450f13c2a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-nsw/2022.json",
+      "byteLength": 3606293,
+      "sha256": "sha256:4b55234ea684ad6092a5fe719ac3c43d1be79e9105b7c41add4a38802450bc04"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-nsw/2023.json",
+      "byteLength": 3844969,
+      "sha256": "sha256:4ff48fdeda3d7a5bf8d0f6346a88fdcc871b88000eabf7ee2fd4ba1037569e63"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-nsw/2024.json",
+      "byteLength": 4085898,
+      "sha256": "sha256:34ac74833098d9a5647c30ab4f289fa621067356c7d77310cebca9fe9968e498"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-queensland/2021.json",
+      "byteLength": 3365185,
+      "sha256": "sha256:6437105eab88fd362f46cc6ca047dc448f9cf642c52782334e4c8c74e980bd96"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-queensland/2022.json",
+      "byteLength": 3605783,
+      "sha256": "sha256:546fc6a739870732009552001ca80d9dfa1003b0bab8cdf83c9e4782bfb9ace8"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-queensland/2023.json",
+      "byteLength": 3844373,
+      "sha256": "sha256:378231eb037732452a53c4d9fbb2bc096972063a36e5aa6d222d59f4b0bb3ccc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-queensland/2024.json",
+      "byteLength": 4085012,
+      "sha256": "sha256:16320369fa881b3822706f979ca83d7d5c71920480c1f3c3762429b67eb77e10"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-south-australia/2021.json",
+      "byteLength": 3367818,
+      "sha256": "sha256:d149dc38b8f40a993edacc9ac324221f72729416aaaaa244204f8cb4a465feb7"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-south-australia/2022.json",
+      "byteLength": 3610501,
+      "sha256": "sha256:5d11382b2bfb1e09746f19da28faa8b0d1a06349b2a48f12b2346f6fe9d43932"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-south-australia/2023.json",
+      "byteLength": 3849071,
+      "sha256": "sha256:1d508c08b19bcc64030301f91b22ca5da224a3d8f0984df1bcd46066ab41b052"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-south-australia/2024.json",
+      "byteLength": 4088710,
+      "sha256": "sha256:0eb8d55b16a6e6eeed22f73862b7a188212a135ca03f667e18c6eeb901cd2688"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-tasmania/2021.json",
+      "byteLength": 3167350,
+      "sha256": "sha256:0164545802d2c9cf582a6999f7474f1160b147efe39780e4cc9d9af1fa742316"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-tasmania/2022.json",
+      "byteLength": 3393571,
+      "sha256": "sha256:a24d33d9f7b730ba968bb21c61ecf192430fa55f6ddffe24808e404f56a0390a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-tasmania/2023.json",
+      "byteLength": 3618085,
+      "sha256": "sha256:516a6f380d0979188adf48b27a1f3e02b4ab46a4a2a85775a0a13ea11c67a810"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-tasmania/2024.json",
+      "byteLength": 3844603,
+      "sha256": "sha256:231f85198eec796e19447e7c2879d92c530fc21109674c3b7c31ca94fa365bb9"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-victoria/2021.json",
+      "byteLength": 3364297,
+      "sha256": "sha256:d72b537a396d972f8b349b1942894ce39c8e9d8777e6ddd0f91acdcb0afad823"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-victoria/2022.json",
+      "byteLength": 3604899,
+      "sha256": "sha256:f982315dcd192c67846626dabf26098132b06e8b9579f4b5bb43b08a4f2b3eb1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-victoria/2023.json",
+      "byteLength": 3845046,
+      "sha256": "sha256:b743608b6a2402cbfa4fce76c8ef6e332001eea452a34e8032efac9dd3a37134"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/offenders-police-proceedings-victoria/2024.json",
+      "byteLength": 4085755,
+      "sha256": "sha256:ff2db6f8ec1fc29f327ac10b7e82f2258d65090fbe3342254875cbbfeb5c5868"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-age-sex-and-period-australia/2022.json",
+      "byteLength": 827512,
+      "sha256": "sha256:0c04432d866a362d1075d00d2d95be1ad1b2fdff6db69604de20fd67b3a13ec5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-age-sex-and-period-australia/2023.json",
+      "byteLength": 883080,
+      "sha256": "sha256:f5a24025f14385a147fb25519f4232ee00bc648eae4978e16bd9e6c668a75755"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-age-sex-and-period-australia/2024.json",
+      "byteLength": 937158,
+      "sha256": "sha256:76f199c230ae6824f71c35f46c62cacea3e8407fbdf3ab691fbaf95466c83a77"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-age-and-jurisdiction/2022.json",
+      "byteLength": 3106222,
+      "sha256": "sha256:06c16255a1ac716dffefed0275349fce4fabca008a5d18b6b45880e9d36445c5"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-age-and-jurisdiction/2023.json",
+      "byteLength": 3107744,
+      "sha256": "sha256:45c7dc8bc3b6e414095378828a27e6afced301246025504b0316080eb3e4714f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-age-and-jurisdiction/2024.json",
+      "byteLength": 3108709,
+      "sha256": "sha256:1e7c6ab0ef9174f6d53e32925224f6690ef4009f9d78d6b329cefd4b513cb720"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-and-period/2021.json",
+      "byteLength": 2066163,
+      "sha256": "sha256:fea350c0263a3b23ff523fa3fa64282216200955bc7d63f08aa697dd39aa9910"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-and-period/2022.json",
+      "byteLength": 2213815,
+      "sha256": "sha256:1bb6a5c08cdaefec41ae374756af1192d2f43db6f48f115c9cd7e95bc171d6f4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-and-period/2023.json",
+      "byteLength": 2360950,
+      "sha256": "sha256:5c31a7ca95f68e7f4430b7ed8d6853b26ebc589dbab30f79a91cfdb10a38b919"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-and-period/2024.json",
+      "byteLength": 2507237,
+      "sha256": "sha256:e960a081f7657ff4ffd20f76037fffb68445235100ec3f81caf401e7cc1ae11c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-jurisdiction-and-period/2021.json",
+      "byteLength": 9327390,
+      "sha256": "sha256:4ebd7789e9f3157dbe230518fe17e6a896040a5d187b4dfb73c3c9551f457c95"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-jurisdiction-and-period/2022.json",
+      "byteLength": 9995164,
+      "sha256": "sha256:c3633ade2cc035713f59b595fad8bf0af1e2ae069643fd3b23c0632c73e7adfc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-jurisdiction-and-period/2023.json",
+      "byteLength": 10674310,
+      "sha256": "sha256:b8c8d7d50da69615a41d5da330d1a667ab3dacd8dc382eca50d13317033dbff1"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-principal-offence-jurisdiction-and-period/2024.json",
+      "byteLength": 11343227,
+      "sha256": "sha256:42420ceabb20ade3dc2cdc85d765c8f93a49c17281a67775ad60b981b6b2e69a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-repeat-proceedings-age-and-jurisdiction/2022.json",
+      "byteLength": 649396,
+      "sha256": "sha256:cc2cb39a25de03cd9ef48c33e2c49b17da320a8840e9bf11ecde5361cda923a0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-repeat-proceedings-age-and-jurisdiction/2023.json",
+      "byteLength": 647289,
+      "sha256": "sha256:95e461bc85efa992c544f18e8c991c37e8dd0d227fb69b530e3dae0c6fb30b9f"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-repeat-proceedings-age-and-jurisdiction/2024.json",
+      "byteLength": 650178,
+      "sha256": "sha256:5b4fb5083239f321c451d3689286548281cae9b857ec045471dda4c0513703fc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-age-and-jurisdiction-snapshot/2022.json",
+      "byteLength": 1039628,
+      "sha256": "sha256:6a929ae1f3a5f39412ad54b047a9a9f44903cfdd388770f10f572729e0f805f0"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-age-and-jurisdiction-snapshot/2023.json",
+      "byteLength": 1040092,
+      "sha256": "sha256:6407ca44f53d3e29f79f03c67b27ecb668c3da1c111dcfcbcfa8e830adf70435"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-age-and-jurisdiction-snapshot/2024.json",
+      "byteLength": 1042357,
+      "sha256": "sha256:5845739797ca79fae0c4b59ef6c911095fa57b07e83af96eb8c669e447adfd7e"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-and-repeat-proceedings-jurisdiction/2021.json",
+      "byteLength": 1139386,
+      "sha256": "sha256:ed8fddd11c37e291ffe79dea9df557c3d76e098e294813c710f89867f8636cd4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-age-australia/2021.json",
+      "byteLength": 2215694,
+      "sha256": "sha256:144adf14e249384657f2d0c6cd76ba8fd922850303ead628b8951f1070945fb7"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-age-australia/2022.json",
+      "byteLength": 2217041,
+      "sha256": "sha256:b7236a68ea914a2c723f57bd639d15b733cf883d51dd2fdf3ac6389ad5d3fda7"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-age-australia/2023.json",
+      "byteLength": 2218089,
+      "sha256": "sha256:96c46f2bddd8b90c8cbc65eed7469fa06b395854acacb8c0359afc0036294a2c"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-age-australia/2024.json",
+      "byteLength": 2216561,
+      "sha256": "sha256:7a1346e742628ff71bddb1469d2ec6418ce4dce952010049e146cf0e38f8fd03"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-period/2021.json",
+      "byteLength": 3335007,
+      "sha256": "sha256:48602aa5b81842973090e44c47472edacd230cc533aa70fc942758ce52ef62fc"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-period/2022.json",
+      "byteLength": 3573756,
+      "sha256": "sha256:6b3f8e1539891ed5f5c9304a75b672fa490896517d7838c411eb232e894f69b4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-period/2023.json",
+      "byteLength": 3812208,
+      "sha256": "sha256:e21583f645360ab9d3a968265c85d82b9e6ba8711488364a9320c37036665164"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/direct/youth-offenders-by-sex-principal-offence-and-period/2024.json",
+      "byteLength": 4049446,
+      "sha256": "sha256:73de7037c755c269aed3448edef6afbf31e6569a6a10dbf5535b083f08b5bbc7"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/multi-panel-b2a/measurement/exact-ownership-measurement.json",
+      "byteLength": 26202103,
+      "sha256": "sha256:40c1ae487058c13aff3e2c1ec4d9549d1c9e1f95a02a68ff7f28341774ab1537"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/source-partition-canary/candidate-correction-allowlist-v1.json",
+      "byteLength": 28621,
+      "sha256": "sha256:f9724dba9f37444881cf694eb9f89dfaefa92da0335331a637d908342550046d"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/source-partition-canary/method-anchor-allowlist-v1.json",
+      "byteLength": 52568,
+      "sha256": "sha256:53344100a199f88475a61136f376e5d39627495ec29ed017f8f005b67acb04fe"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/source-partition-canary/run-a-remediated/collision-ledger.json",
+      "byteLength": 413020,
+      "sha256": "sha256:b8f19c61e5b85b45e6cfe7750c397246587b5305eef5bc875de44827ab0c5a7a"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/source-partition-canary/run-a-remediated/discrepancy-ledger.json",
+      "byteLength": 99412048,
+      "sha256": "sha256:2a5efea1ed2b9e7e2f616c4ec6237ee625646ff80c0464d1b9e9f49a4a249bf4"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/source-partition-canary/run-a-remediated/manifest.json",
+      "byteLength": 104866,
+      "sha256": "sha256:36105ed0df04f12e9ab56ae656eabb62b247bafa08795c37cba96ed43f957509"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/source-partition-canary/run-a-remediated/partition-manifest.json",
+      "byteLength": 362270944,
+      "sha256": "sha256:f8b15cff3272b53b014f6072150b9d97370badf1a0469b197f75f6554a74e627"
+    },
+    {
+      "path": ".product-prototype/offenders-remaining-phase1/source-partition-canary/run-a-remediated/temporary-maps-recipes.json",
+      "byteLength": 26024387,
+      "sha256": "sha256:d9b26eba899305ce18e1de10c11e5eba98a0fb3cf96dd789afe40f4e3ccc0641"
+    },
+    {
+      "path": "apps/domain-worker/src/address.ts",
+      "byteLength": 7352,
+      "sha256": "sha256:96f47918661401b0fea8d4e39c4c247ffe19580ff7309b5436e4623e8d56f3e4"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/cell-role-sketch-v02.ts",
+      "byteLength": 33316,
+      "sha256": "sha256:973791b0e57eef1fa044a566faeefdbcc5591df8b8cc53f6f32d24eb79b71b34"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/compiler-v02.ts",
+      "byteLength": 19248,
+      "sha256": "sha256:79924b56df328b89579762dff0aa0aaafba69dded3394a209385cc3acbe95388"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/format-aware-region-catalog-v2.ts",
+      "byteLength": 14816,
+      "sha256": "sha256:bcdb4d13ff063bc1e97cc50b0ab7292ed21dd70f2a9d2fad81b686644d2e9435"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/geometry-v02.ts",
+      "byteLength": 18692,
+      "sha256": "sha256:a298d6a375fbbd166d1490074ae9168202fcfa649a90ac7064cc32233f711480"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/role-aware-region-catalog-v5.ts",
+      "byteLength": 64454,
+      "sha256": "sha256:4e0e5655c76855da770188d8dabe673f4af5d544dbab18546289516a5e515b49"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/semantic-gold-schema.ts",
+      "byteLength": 13715,
+      "sha256": "sha256:0ead782472e4361b4269b1f24aa1cd208698918f410d125cda226f782e280ed9"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/semantic-map-v1.ts",
+      "byteLength": 25504,
+      "sha256": "sha256:d7704cd4680d3613987d41493413db10ff777779d32e4b29e125ec7f9c5d78d4"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/semantic-map-v2.ts",
+      "byteLength": 81185,
+      "sha256": "sha256:846ed95fc03ba533b829a390bc59432742e2c5d39e8f4f747c60ad1ee798be6a"
+    },
+    {
+      "path": "apps/domain-worker/src/catalog/types.ts",
+      "byteLength": 344,
+      "sha256": "sha256:d82bb1790736c38d73e636ffb0562d391250b25b449b4008028f1fcbd00b2a8f"
+    },
+    {
+      "path": "apps/domain-worker/src/context/compactContext.ts",
+      "byteLength": 16711,
+      "sha256": "sha256:2b327fcbb21c2f876af04f801cf56f15e0ee250bae8f1cd93d9f157c03e74583"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/directions.ts",
+      "byteLength": 3790,
+      "sha256": "sha256:b073e6409e77f050279ea8d90e1be6bbed48877ed9f98bf0486d7787eb9e46d7"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/executeRecipe.ts",
+      "byteLength": 10258,
+      "sha256": "sha256:9566d1c5812aa5df8de0701763c697ac5aa896fddc921996482a9efcda30009b"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/relationshipResolution.ts",
+      "byteLength": 8214,
+      "sha256": "sha256:3e64fa228ef0b835b85d8af6dd062c2635acdd3e2e60ff9087fbcf8d73f00395"
+    },
+    {
+      "path": "apps/domain-worker/src/executor/types.ts",
+      "byteLength": 1860,
+      "sha256": "sha256:c222106053fc1f01c68bb43c143d06e7825898cfa3c72d6ddb4c5aa20233f8f1"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/resolveSelectors.ts",
+      "byteLength": 5594,
+      "sha256": "sha256:a75bc4c483b7582567dfe5c1659ae0d973865d1c5ec430f5745c9979cc6783ba"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/schema.ts",
+      "byteLength": 7855,
+      "sha256": "sha256:433b16cf37dab93f4070a743da6696bee261fefd34a2d841a66dcf27cbd27e0c"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/styleFingerprint.ts",
+      "byteLength": 765,
+      "sha256": "sha256:0e0d289e7c3d39a18dfdd02aa2fcecc8e5de6bb3e996c1e0749c11f8a267341c"
+    },
+    {
+      "path": "apps/domain-worker/src/recipe/types.ts",
+      "byteLength": 994,
+      "sha256": "sha256:51d6758727821ab9a66a1296152e223438a80efdb199212b25fcd3b301d95518"
+    },
+    {
+      "path": "apps/domain-worker/src/workbook/parseWorkbook.ts",
+      "byteLength": 13654,
+      "sha256": "sha256:1d06c99a4ea7f9f630b60fa9b4f8150a4ca5541e6129df48ac95aa80807cc07b"
+    },
+    {
+      "path": "apps/domain-worker/src/workbook/types.ts",
+      "byteLength": 1644,
+      "sha256": "sha256:e9007fcf381a92af7f347371f3c28e6f7b9085d796dc07b16ee50760a415c0a4"
+    },
+    {
+      "path": "fixtures/product-prototype/offenders-release-family-membership-v1.json",
+      "byteLength": 152941,
+      "sha256": "sha256:f67455d47923a782afde41842fa1682d7fa2ed5ee39c72f2c8e7d280e4a4378b"
+    },
+    {
+      "path": "fixtures/product-prototype/offenders-release-source-inventory-v1.json",
+      "byteLength": 170248,
+      "sha256": "sha256:931cb41fc6c6eb34bbb1f872e4eb98290812e2498d786189d077cd61fdf67a90"
+    },
+    {
+      "path": "fixtures/product-prototype/offenders-remaining-semantic-map-plan-v1.json",
+      "byteLength": 386464,
+      "sha256": "sha256:95f7cc1fd92a20c60c4ba33e5e5c4a6b7e762fd2a56e8a0043ce0b3875b2af50"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-covid-offenders-by-age-and-sex-time-series.json",
+      "byteLength": 1538,
+      "sha256": "sha256:d57be68b571540b487701f4e91f0c5b5a05683aa5d92dd7b8c7a74e5d1a574af"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-covid-offenders-selected-characteristics-jurisdiction-time-series.json",
+      "byteLength": 1606,
+      "sha256": "sha256:cdfe0a989331f9d829bcb43a90a2753d0b0b7d91e2b1f2c1fb1c93d45badd3d3"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-covid-proceedings-by-method-jurisdiction-time-series.json",
+      "byteLength": 1567,
+      "sha256": "sha256:842ea7afe5307e535c4618e807fba96751a468c2d6263c1b0f9f1c2fd77f10a6"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-breach-order-offenders-by-jurisdiction-time-series.json",
+      "byteLength": 4181,
+      "sha256": "sha256:44c4f2de47b6d82886a0fc8e2264a698d59f93811077775ade29f029699122e4"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-breach-order-offenders-selected-characteristics-jurisdiction.json",
+      "byteLength": 4211,
+      "sha256": "sha256:c892d34a24968bc32f204b27fa57673977e5e46d9d28d36b539ef7f4b1cefb49"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction.json",
+      "byteLength": 4206,
+      "sha256": "sha256:89d8404470617e9e9c6c5f3a48608c59d7101a11096fe0e1a869db572e021769"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-indigenous-status-by-sex-and-age-jurisdiction.json",
+      "byteLength": 4164,
+      "sha256": "sha256:dd47b2cc7721053858a92abcd3d9aabbdc7107a08f64cab48d0255cefbc6b767"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-indigenous-status-by-sex-jurisdiction-time-series.json",
+      "byteLength": 4176,
+      "sha256": "sha256:4c5bb7f8b274d0eb111d638affbce371d9e20fc18744d6e1170d0a25d8ef90b5"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-principal-offence-by-sex-and-age-australia.json",
+      "byteLength": 4155,
+      "sha256": "sha256:3186b288ebc28246bd8d8842234445a618a341d79782a4f6186695f42d18ac73"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-principal-offence-by-sex-australia-time-series.json",
+      "byteLength": 4167,
+      "sha256": "sha256:48f65739aca3809e1228949133131b70fb5d08b0fd86db8504ac88a946cfe46f"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-principal-offence-by-sex-jurisdiction-time-series.json",
+      "byteLength": 4176,
+      "sha256": "sha256:1c4bef3cb61de4fc4c55c7fa2c892a95cc156f9fae1df69a8bb9e0d7bd10d3f4"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-proceedings-by-principal-offence-method-jurisdiction-time-series.json",
+      "byteLength": 4221,
+      "sha256": "sha256:932cd085aed17ac897ffaef433c5a169445acbe2e79cfc11fd9d0437f340862a"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-selected-characteristics-by-sex-jurisdiction.json",
+      "byteLength": 4161,
+      "sha256": "sha256:86e102b29e863c90c936ce982803e7e3502765ad63034ad7fb21a278f764eea7"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-fdv-summary-characteristics.json",
+      "byteLength": 4098,
+      "sha256": "sha256:361e7de220a862c8eb1f01e6cf0fed6a603dbdc7ad4b4653e20f4ed05663c39d"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offender-rates-by-indigenous-status-rate-type-and-jurisdiction.json",
+      "byteLength": 4015,
+      "sha256": "sha256:a8c691b7b60388109f30fb409e5368a1f6814e599496dd94985771a4a9e54105"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-age-times-proceeded-and-jurisdiction.json",
+      "byteLength": 4040,
+      "sha256": "sha256:a89aaaae0f8b063b3d80f2786f1dd3b9285285e03b49f89949051c7bcd8dd390"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-indigenous-status-principal-offence-and-jurisdiction.json",
+      "byteLength": 4024,
+      "sha256": "sha256:9f34c283f7463eb9659319ca9e7c589b7d52315741bec80eb818d10e07b50ca3"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction.json",
+      "byteLength": 4027,
+      "sha256": "sha256:00c98f99108373a40ea9e9f8386a558e87dca5601a20c881568a41708e243120"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-indigenous-status-sex-age-and-jurisdiction.json",
+      "byteLength": 3994,
+      "sha256": "sha256:d5f5a9f36001fa2d47812a6c4d49844088ac943881e829626d8e706bfe64037a"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction.json",
+      "byteLength": 2688,
+      "sha256": "sha256:71813d402778b49b04293f1d274a414bbfa0a712452338b1a80e6325f4d76fe4"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-principal-offence-and-jurisdiction-snapshot.json",
+      "byteLength": 4053,
+      "sha256": "sha256:5a99c0b05296bc3e6d7624260b7ebcdc42f9d060cb401d811040cae3dfe33624"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-age-and-jurisdiction-snapshot.json",
+      "byteLength": 4031,
+      "sha256": "sha256:6e48ebcda6d995ab26e7ef04cdc2bbc964dd23733494d052b012ccaa1b150701"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-act.json",
+      "byteLength": 4019,
+      "sha256": "sha256:f5a1b7f38925f919b3a7dfa64fa163fa5fedf387ec8cfb953ffa0d6b8ff9d442"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-northern-territory.json",
+      "byteLength": 4064,
+      "sha256": "sha256:8a45f9ffeb2d11d7d100369dcc5e68522b80357f692a9ff9510385aa36a3ab07"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-nsw.json",
+      "byteLength": 4011,
+      "sha256": "sha256:9b5f0f4d4848a41619275210ea5dcc7f2b7f933e7b3bf3d22fcfe465279ab8eb"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-queensland.json",
+      "byteLength": 4032,
+      "sha256": "sha256:5f619c1cd3335c91de0209aa71553a6447a24d49ad1f45e37cacb231c1b44a77"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-south-australia.json",
+      "byteLength": 4055,
+      "sha256": "sha256:9dfc4e44907d5f88af77db943ce4c68021a4b6366faf9b96dd1dfd58d82f7da7"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-tasmania.json",
+      "byteLength": 4034,
+      "sha256": "sha256:3694fe00c4fbc10d9f30a94faca3d2f15a43ac6734074a2b2277173c9715797a"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-victoria.json",
+      "byteLength": 4026,
+      "sha256": "sha256:952d7ef5686798c84be66b82f495b194d122579fac1a335f400f3a7ca2560976"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-and-principal-offence-western-australia.json",
+      "byteLength": 4061,
+      "sha256": "sha256:3c25df7f3e5c988b3ec398c4821cf624d85253b6adc173bc7fd25c1e04f7c018"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-by-sex-times-proceeded-and-jurisdiction-snapshot.json",
+      "byteLength": 4067,
+      "sha256": "sha256:d9481b5fa7b566471efa8d9d7254b285c16ffa4406aa400102b160ee69bc56c4"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-police-proceedings-act.json",
+      "byteLength": 3907,
+      "sha256": "sha256:be54dcbf45593ede25b5556f6549e437c136fffe38297c0725a09301c031b447"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-police-proceedings-northern-territory.json",
+      "byteLength": 3952,
+      "sha256": "sha256:5c9eac7ecc5536de54c5fee8ea5b235636ce1676e66ad27a9d5c5f98f818e006"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-police-proceedings-nsw.json",
+      "byteLength": 3907,
+      "sha256": "sha256:4a48b5f54f300d17709cb15aa6b2272e09751029b0d3fdb0f7a3a642207e0bc2"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-police-proceedings-queensland.json",
+      "byteLength": 3928,
+      "sha256": "sha256:632a81979afb0b4f6e239c9b4a0437d4cbccf686bd5636ccffa2df044d530e73"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-police-proceedings-south-australia.json",
+      "byteLength": 3943,
+      "sha256": "sha256:333f3db942a5af3381ffd617e86fcd206ffe7dbe8af6f40a750ceff63c595a26"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-police-proceedings-tasmania.json",
+      "byteLength": 3922,
+      "sha256": "sha256:9bb979fd739869c3863638e83754a57b13ab4c2273366a27eb997c0d56d86af5"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-offenders-police-proceedings-victoria.json",
+      "byteLength": 3922,
+      "sha256": "sha256:dff60369bd0fa18c5d3fd24855e4ed47c372832768d4e7e50865f58bc8baad1e"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-age-sex-and-period-australia.json",
+      "byteLength": 3243,
+      "sha256": "sha256:0fc9cc304c05b85e0dd2ba51c61d115f21822f8c2f6a0ecb3598073bed9d633d"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-principal-offence-age-and-jurisdiction.json",
+      "byteLength": 3273,
+      "sha256": "sha256:80d713b2d611dc91696d3f4f3bf2d919182b8b71af00c11dcbb6d88c77657da3"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-principal-offence-and-period.json",
+      "byteLength": 4012,
+      "sha256": "sha256:fa187e2cce5605517d8f74ad0c2939c53c2bb24511787504476c28e05fbb8a62"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-principal-offence-jurisdiction-and-period.json",
+      "byteLength": 4051,
+      "sha256": "sha256:665a00b0e80e53515553c85e17ccba2985ed644aed5df9c3802375e9226c8ba4"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-repeat-proceedings-age-and-jurisdiction.json",
+      "byteLength": 3276,
+      "sha256": "sha256:54b0f2e06df358b9dede5392c6a2a6d506dd72c1bc43b0531868ffc118a5a691"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-sex-age-and-jurisdiction-snapshot.json",
+      "byteLength": 3258,
+      "sha256": "sha256:53ed091912e6d12aa8117c0031814e81b97ae580c9fa7bea894291ce6c7fa7a1"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-sex-and-repeat-proceedings-jurisdiction.json",
+      "byteLength": 1574,
+      "sha256": "sha256:b216cceeb1d0f4552e75548a5c5e3ce7ffbcf0ce61001c4342f724eb38f587b7"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-sex-principal-offence-and-age-australia.json",
+      "byteLength": 4045,
+      "sha256": "sha256:7444ff40c3f9ca532b96f2c4a93d8318faaea4c85fa7c20a55a998cddd72b8f7"
+    },
+    {
+      "path": "fixtures/product-prototype/recorded-crime-offenders-youth-offenders-by-sex-principal-offence-and-period.json",
+      "byteLength": 4024,
+      "sha256": "sha256:cdb6fd02c533b60cc6c701ba4e1923303ea6ab1829be63d51f05ca642af556d2"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-cube-2-source.xlsx",
+      "byteLength": 199709,
+      "sha256": "sha256:c73c68dc7f5b4441b8814152684a2dc817d0bf2489ae65d8d39da99ae805cf66"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-cube-3-source.xlsx",
+      "byteLength": 113711,
+      "sha256": "sha256:40fbc8c1a5d578ba7910a267b21ddababd16d6e434db4bb9ae9612f1ee6c0590"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-cube-4-source.xlsx",
+      "byteLength": 133903,
+      "sha256": "sha256:5dbd0ac29918698496cae3946ba62b1a4a9b5048501806013b5aabbc0a127f0d"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-cube-5-source.xlsx",
+      "byteLength": 118787,
+      "sha256": "sha256:e62c23e9b7d18328fd8ee5df896b49ee47224e750bc76a6adf1e5610b23a27aa"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-cube-6-source.xlsx",
+      "byteLength": 146454,
+      "sha256": "sha256:4b804c75ca8d586ea9607a6bfd676b40a1f83d8b557bbee07155faefda958228"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2021-22-cube-7-source.xlsx",
+      "byteLength": 60227,
+      "sha256": "sha256:005dbd4e167303d479a4de43ffa7eb91f3db31103b0430622fdc467c2a66d1c1"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-cube-2-source.xlsx",
+      "byteLength": 212963,
+      "sha256": "sha256:33195499e9b74131265781522d87366049161f76b60971aa8a212dff7d3b10c3"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-cube-3-source.xlsx",
+      "byteLength": 151486,
+      "sha256": "sha256:4b906c84f813b08f14be349eac33c8db3c5d7002310195c4cc39a3ac9d28efd5"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-cube-4-remaining-bounded.xlsx",
+      "byteLength": 121893,
+      "sha256": "sha256:b2af5d2171d5bea1f2749083987667d79db74962555e67ac6abb99750691e93e"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-cube-5-source.xlsx",
+      "byteLength": 125342,
+      "sha256": "sha256:ecbd2d1831740942b0b5d50179421c43fe86171ef217cbf75292fa07e3c096ae"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2022-23-cube-6-source.xlsx",
+      "byteLength": 159246,
+      "sha256": "sha256:7d8841f4bf6fd62436867bbd7ab8bd2b34388e347587ff9ebb8bec5aaa303268"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-cube-2-remaining-bounded.xlsx",
+      "byteLength": 187690,
+      "sha256": "sha256:92cba4125ecf582e789ca66fe42b4eeeb7e007924b80e6ad5265ab62a34a3e48"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-cube-3-remaining-bounded.xlsx",
+      "byteLength": 130413,
+      "sha256": "sha256:81adef0c7e5c764dcc4d1a1e2edfac745880b435924112663c1ed43adb51060b"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-cube-4-source.xlsx",
+      "byteLength": 123351,
+      "sha256": "sha256:c018378fcb2b8f3ce9659b0c407839f3e6283da705cd02c26abe1e1b29815df9"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-cube-5-source.xlsx",
+      "byteLength": 123822,
+      "sha256": "sha256:819a9038c8be9315cb2867209e217e00161bb816287bdf3af3a65e24635c6650"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-cube-6-source.xlsx",
+      "byteLength": 155459,
+      "sha256": "sha256:91db681481764fc676f68e4bff041e97f144b087f3b9657085d1189a3502de5f"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2023-24-cube-7-remaining-bounded.xlsx",
+      "byteLength": 46737,
+      "sha256": "sha256:b9d9d841856feb7d173280f9c204179054b1366cca827825ed65c50431bd5e9a"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-cube-2-source.xlsx",
+      "byteLength": 216593,
+      "sha256": "sha256:b945e14a3266f51d5496b8fe3d559c7b8c48a5933706760052f51a2cebcac64e"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-cube-3-remaining-bounded.xlsx",
+      "byteLength": 133557,
+      "sha256": "sha256:425ef30215df3e269584b40e010e31a29dd96a2ba744d96e4c5c5c528ae7134e"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-cube-4-source.xlsx",
+      "byteLength": 128737,
+      "sha256": "sha256:f14925d613520577a372ff739cbd530bdab623219101843b4ce47957edd7627d"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-cube-5-source.xlsx",
+      "byteLength": 128640,
+      "sha256": "sha256:48315b65389ee058f4c7adb30c5c7a50893eda9bd3d34e705d75bff5ac25d3b6"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-cube-6-source.xlsx",
+      "byteLength": 161422,
+      "sha256": "sha256:148f2cd4cf216c15177ac398e3d79480a2bdd4816d311269e3ec8a8bb5eac5cc"
+    },
+    {
+      "path": "fixtures/product-prototype/workbooks/recorded-crime-offenders-2024-25-cube-7-remaining-bounded.xlsx",
+      "byteLength": 46997,
+      "sha256": "sha256:2742387c0a2acf2fd9e32c3498de595c19e788a231763772864965343dcae4cd"
+    },
+    {
+      "path": "scripts/compile-offenders-remaining.ts",
+      "byteLength": 25123,
+      "sha256": "sha256:adc32d7393144050c0b6e5829a974e92c5357af569f7d24f1a6914f647a95822"
+    },
+    {
+      "path": "scripts/offenders-phased-safety.ts",
+      "byteLength": 7978,
+      "sha256": "sha256:a9374e4e165fd48a27be21be42e6603804e4db4bc099bd383faa9558b32da0ab"
+    }
+  ],
+  "reviewStatus": "pending-independent-review"
+}

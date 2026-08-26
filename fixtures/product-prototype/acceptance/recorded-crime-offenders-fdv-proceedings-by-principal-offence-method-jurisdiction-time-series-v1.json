@@ -1,0 +1,453 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-fdv-proceedings-by-principal-offence-method-jurisdiction-time-series-v1",
+  "tableFamilyId": "fdv-proceedings-by-principal-offence-method-jurisdiction-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 882,
+        "2022": 1029,
+        "2023": 1176,
+        "2024": 1323
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_1ec8ed0a",
+            "2020_21_d6db3b1d",
+            "2021_22_98fc83da",
+            "2021_22_dd8903a1"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_1ec8ed0a",
+            "2020_21_d6db3b1d",
+            "2021_22_98fc83da",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_1ec8ed0a",
+            "2020_21_d6db3b1d",
+            "2021_22_98fc83da",
+            "2021_22_dd8903a1",
+            "2022_23_819e8237",
+            "2023_24_cb6f8507"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "method_of_proceeding": [
+            "COURT_ACTION_f2f508e1",
+            "NON_COURT_ACTION_7d43f004",
+            "TOTAL_PROCEEDINGS_53c1eee4"
+          ],
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:bc24fa7fde92c2c438f199e60bac3b215c43280e8257eb02afb0700f38d669c3",
+        "2022": "sha256:3dac9e438aeb1f8b8dac86a6606912ecb8a75192c94972871dc7f8d6dfb9b60d",
+        "2023": "sha256:f7852989a9f564dcf7b9882b1a6ba07db425eaa76b2895f82da1f91e1d59aed7",
+        "2024": "sha256:a9f22998700cf80aa96033fa036b6d876dc311b3235ba8c598c4043b9ba7e8ab"
+      },
+      "missingValues": {
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "method_of_proceeding",
+    "jurisdiction",
+    "observation_period"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "principal\\ offence"
+    ],
+    "method_of_proceeding": [
+      "method\\ of\\ proceeding"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "05 Abduction/harassment": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "121 Property damage": "121_PROPERTY_DAMAGE_72667e1c",
+      "153 Breach of violence and non-violence orders": "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+      "Total": "TOTAL_ab2882c8",
+      "02 Acts intended to cause injury(f)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "05 Abduction/harassment(f)": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "02 Acts intended to cause injury(e)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "05 Abduction/harassment(e)": "05_ABDUCTION_HARASSMENT_619e6edd"
+    },
+    "method_of_proceeding": {
+      "Court action": "COURT_ACTION_f2f508e1",
+      "Non-court action": "NON_COURT_ACTION_7d43f004",
+      "Total proceedings(c)": "TOTAL_PROCEEDINGS_53c1eee4",
+      "Court action(a)": "COURT_ACTION_f2f508e1",
+      "Non-court action(a)": "NON_COURT_ACTION_7d43f004",
+      "Total proceedings(a)(b)": "TOTAL_PROCEEDINGS_53c1eee4"
+    },
+    "jurisdiction": {
+      "New South Wales(e)": "NEW_SOUTH_WALES_92f089b8",
+      "Victoria": "VICTORIA_8abba993",
+      "Queensland(f)(g)": "QUEENSLAND_8f0791ed",
+      "South Australia(h)(i)": "SOUTH_AUSTRALIA_0abd141a",
+      "Tasmania(j)": "TASMANIA_412e51e6",
+      "Northern Territory(k)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Queensland(f)(g)(h)": "QUEENSLAND_8f0791ed",
+      "South Australia(i)(j)": "SOUTH_AUSTRALIA_0abd141a",
+      "Tasmania(k)": "TASMANIA_412e51e6",
+      "Northern Territory(l)": "NORTHERN_TERRITORY_a1d418fe",
+      "Queensland(g)(h)(i)": "QUEENSLAND_8f0791ed",
+      "South Australia(j)(k)(l)": "SOUTH_AUSTRALIA_0abd141a",
+      "Tasmania(m)": "TASMANIA_412e51e6",
+      "Northern Territory(n)(o)(p)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(p)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "New South Wales(d)": "NEW_SOUTH_WALES_92f089b8",
+      "Northern Territory(l)(m)(n)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(o)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a"
+    },
+    "observation_period": {
+      "2016–17": "2016_17_14c8c17c",
+      "2017–18": "2017_18_e0619229",
+      "2018–19": "2018_19_3fe15a03",
+      "2019–20": "2019_20_6d3dcb6c",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2020-21": "2020_21_1ec8ed0a",
+      "2021-22": "2021_22_98fc83da",
+      "2022–23": "2022_23_0d9e498b",
+      "2022-23": "2022_23_819e8237",
+      "2023-24": "2023_24_cb6f8507",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:63cfe1ec1ab1045f8bf4fb34d788430495e234ea051d18d526bd8f4667fd7a8c",
+    "2022": "sha256:01660b5628273d14a050bda7394640f94643693447bfb70d0ae145f1bb9a6be4",
+    "2023": "sha256:e03878f054ff96982846d0ee93a19e33e0007d1b0260f26b293624da5afb4c2e",
+    "2024": "sha256:e891e2317786c392d28e2d45aa612b1ae98b72527de4124157babc0b15f9a200"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:989d87cf5f9f32b472dae99c17020962c8e9d292f6a8ba021afbc20f07b94ae4",
+    "2022": "sha256:2fbca2de1836fbdd1a99c746286f4fa33628cb8c0421b9a455ef6fbd7874c695",
+    "2023": "sha256:04b71eec5bd763aba9562e3e38755d9901a99d4499a0194e9da305f1c4493b3d",
+    "2024": "sha256:27b46752c7b54aab62c88ae8ef70aaed2d333ea7e005b758e8ffb36cb6e9eeeb"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:9dff54b431bb12f36771c0b9fd89827fbf7982054563881a351f3693e5d9e157",
+    "2022": "sha256:bfeb340aa0f667cc9fb6bd820580018dbb148a6e58f3fd4a8e7a85c7842edacb",
+    "2023": "sha256:7e468ae15a83b93222dc9630415bbe073e4a4b82c3facc02c37210a36186e75e",
+    "2024": "sha256:ac092f51513d0c187487d1aa17ae61de10d0fa5f16dbd0854222a9cb66d41585"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "method_of_proceeding_id",
+    "jurisdiction_id",
+    "observation_period_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 882,
+    "maximumRows": 1323,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "methodsOfProceedingByYear": {
+      "2021": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ],
+      "2022": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ],
+      "2023": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ],
+      "2024": [
+        "COURT_ACTION_f2f508e1",
+        "NON_COURT_ACTION_7d43f004",
+        "TOTAL_PROCEEDINGS_53c1eee4"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993"
+      ],
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_1ec8ed0a",
+        "2020_21_d6db3b1d",
+        "2021_22_98fc83da",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_1ec8ed0a",
+        "2020_21_d6db3b1d",
+        "2021_22_98fc83da",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_1ec8ed0a",
+        "2020_21_d6db3b1d",
+        "2021_22_98fc83da",
+        "2021_22_dd8903a1",
+        "2022_23_819e8237",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

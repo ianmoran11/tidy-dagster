@@ -1,0 +1,356 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-youth-offenders-by-age-sex-and-period-australia-v1",
+  "tableFamilyId": "youth-offenders-by-age-sex-and-period-australia",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 81,
+      "expectedCombinationCountsByYear": {
+        "2022": 360,
+        "2023": 384,
+        "2024": 408
+      },
+      "expectedDimensionsByYear": {
+        "2022": {
+          "age_group": [
+            "10_11_YEARS_ee891258",
+            "12_13_YEARS_2b7fd564",
+            "14_17_YEARS_d542002c",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_819e8237"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2023": {
+          "age_group": [
+            "10_11_YEARS_ee891258",
+            "12_13_YEARS_2b7fd564",
+            "14_17_YEARS_d542002c",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_819e8237",
+            "2023_24_cb6f8507"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2024": {
+          "age_group": [
+            "10_11_YEARS_ee891258",
+            "12_13_YEARS_2b7fd564",
+            "14_17_YEARS_d542002c",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2022": "sha256:eb4677d65e49908b232687c984a299d31b4d2413d51ab6ba44079dae37acae25",
+        "2023": "sha256:c3891fa13430ec58400f93245f78c7e4e1d154d4c56d502e0bfc6c70cda8b5bb",
+        "2024": "sha256:5c516c106e13d7b78d0f53721ff9e3ed77b11786dfcf1fa28c677e4600c1a0bb"
+      },
+      "missingValues": {}
+    }
+  ],
+  "requiredDimensions": [
+    "age_group",
+    "sex",
+    "observation_period",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "age_group": [
+      "age\\ group"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "age_group": {
+      "10–11 years": "10_11_YEARS_ee891258",
+      "12–13 years": "12_13_YEARS_2b7fd564",
+      "14–17 years": "14_17_YEARS_d542002c",
+      "Total": "TOTAL_ab2882c8",
+      "10–11 years(c)": "10_11_YEARS_ee891258"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons(b)": "PERSONS_4d6dccab",
+      "Persons(d)": "PERSONS_4d6dccab",
+      "Persons(c)": "PERSONS_4d6dccab"
+    },
+    "observation_period": {
+      "2008–09": "2008_09_f695681e",
+      "2009–10": "2009_10_d4eb8e50",
+      "2010–11": "2010_11_bcb455ae",
+      "2011–12": "2011_12_dd65d86c",
+      "2012–13": "2012_13_94552411",
+      "2013–14": "2013_14_4115b20a",
+      "2014–15": "2014_15_392dc544",
+      "2015–16": "2015_16_ecc4ae2a",
+      "2016–17": "2016_17_14c8c17c",
+      "2017–18": "2017_18_e0619229",
+      "2018–19": "2018_19_3fe15a03",
+      "2019–20": "2019_20_6d3dcb6c",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22(b)": "2021_22_dd8903a1",
+      "2022-23": "2022_23_819e8237",
+      "2021–22": "2021_22_dd8903a1",
+      "2023-24": "2023_24_cb6f8507",
+      "2016–17(b)": "2016_17_14c8c17c",
+      "2017–18(b)": "2017_18_e0619229",
+      "2018–19(b)": "2018_19_3fe15a03",
+      "2019–20(b)": "2019_20_6d3dcb6c",
+      "2020–21(b)": "2020_21_d6db3b1d",
+      "2022–23": "2022_23_0d9e498b",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Offender rate(a)": "OFFENDER_RATE_bf190e83"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2022": "sha256:97fee957d1ed9d8b1b7e4185e14b4db738f6f33c72d8dcbd504619e39dd80fea",
+    "2023": "sha256:b391d5420b01176fa6de201727ba3496b3248222153a8ff0f304a7c7bc8d9524",
+    "2024": "sha256:837c53aedf85e350451d7e46d84c636b7a666363802fd65a66bcf80892524bbf"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2022": "sha256:9178f1c1f4d782170b280409ab3a55c4f9993b6f99075569a03e006d437c65ed",
+    "2023": "sha256:e5d8cead80f69e2a6034360c1ef453ae3c4fa1cc0a680fcc1a9679feb0f6e3d1",
+    "2024": "sha256:89914b2cc516b55ba5d97668644eb2ba28a4b334c3527983412aeaa327cea83e"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2022": "sha256:2b78efc7bd467cefb58f849776b19927f2e777191a3531aa1995854f901f488a",
+    "2023": "sha256:6b4de97d4a9de3ba78b6ccd9e84b9c1d9b2af60f11a0a242b3085c6284777f03",
+    "2024": "sha256:397e7b09832e6b1280d266c0efa57f7edbf592da9454917017bdf82c0bdbe95f"
+  },
+  "expectedWarningCountsByYear": {
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "age_group_id",
+    "sex_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 360,
+    "maximumRows": 408,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "ageGroupsByYear": {
+      "2022": [
+        "10_11_YEARS_ee891258",
+        "12_13_YEARS_2b7fd564",
+        "14_17_YEARS_d542002c",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "10_11_YEARS_ee891258",
+        "12_13_YEARS_2b7fd564",
+        "14_17_YEARS_d542002c",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "10_11_YEARS_ee891258",
+        "12_13_YEARS_2b7fd564",
+        "14_17_YEARS_d542002c",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "sexesByYear": {
+      "2022": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2023": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2024": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2022": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_819e8237"
+      ],
+      "2023": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_819e8237",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2022": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

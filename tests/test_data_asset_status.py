@@ -23,6 +23,7 @@ from tidy_orchestrator.data_asset_status import (
     snapshot_matches,
 )
 from tidy_orchestrator.large_batch import load_large_batch_registry
+from tidy_orchestrator.offenders_acceptance import c4_exclusive_access
 
 PROJECT = Path(__file__).parents[1]
 
@@ -30,6 +31,7 @@ PROJECT = Path(__file__).parents[1]
 def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> None:
     status = build_dashboard(PROJECT)
     assert status.title == "Tidy Data Asset Status"
+    full_c4 = len(status.cohorts) == 293
     assert [
         (
             publication.publication_id,
@@ -39,12 +41,11 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
         for publication in status.publications
     ] == [
         ("prisoners-australia", "calendar-year", 48),
-        ("recorded-crime-offenders", "fiscal-year", 5),
+        ("recorded-crime-offenders", "fiscal-year", 52 if full_c4 else 5),
         ("criminal-courts-australia", "fiscal-year", 193),
     ]
-    assert len(status.cohorts) == 246
-    assert len(status.assets) == 653
-    assert status.physical_workbook_count == 91
+    assert (len(status.cohorts), len(status.assets)) in {(246, 653), (293, 823)}
+    assert status.physical_workbook_count == (114 if full_c4 else 91)
     assert {asset.year for asset in status.assets} == set(range(2021, 2026))
     assert all(
         stage == "yes" for asset in status.assets for stage in asset.stages.values()
@@ -52,15 +53,19 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
     assert all(asset.checks_state == "pass" for asset in status.assets)
     assert all(not asset.issues for asset in status.assets)
     assert all(asset.csv_route for asset in status.assets)
-    assert len({asset.csv_route for asset in status.assets}) == 653
-    assert sum(asset.canonical_count or 0 for asset in status.assets) == 526240
+    assert len({asset.csv_route for asset in status.assets}) == len(status.assets)
+    assert sum(asset.canonical_count or 0 for asset in status.assets) == (
+        751237 if full_c4 else 526240
+    )
     offenders = [
         asset
         for asset in status.assets
         if asset.publication_id == "recorded-crime-offenders"
     ]
-    assert len(offenders) == 20
-    assert sum(asset.canonical_count or 0 for asset in offenders) == 21268
+    assert len(offenders) == (190 if full_c4 else 20)
+    assert sum(asset.canonical_count or 0 for asset in offenders) == (
+        246265 if full_c4 else 21268
+    )
     assert all(
         asset.publication_label == "Recorded Crime — Offenders" for asset in offenders
     )
@@ -128,13 +133,10 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
             reversed(spec.expected_year_counts)
         )
     normalized = [asset for asset in status.assets if asset.normalization]
-    assert Counter(asset.year for asset in normalized) == {
-        2021: 85,
-        2022: 93,
-        2023: 138,
-        2024: 90,
-        2025: 32,
-    }
+    assert Counter(asset.year for asset in normalized) in (
+        Counter({2021: 85, 2022: 93, 2023: 138, 2024: 90, 2025: 32}),
+        Counter({2021: 85, 2022: 97, 2023: 159, 2024: 99, 2025: 32}),
+    )
     live = [asset for asset in status.assets if asset.live_evidence_path]
     assert {(asset.year, asset.sheet) for asset in live} == {
         (2023, "Table_30"),
@@ -144,20 +146,27 @@ def test_current_dashboard_reports_publication_grouped_clean_sheet_assets() -> N
 
 
 def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None:
-    rendered = render_dashboard(build_dashboard(PROJECT)).decode()
+    status = build_dashboard(PROJECT)
+    rendered = render_dashboard(status).decode()
+    assets = len(status.assets)
+    cohorts = len(status.cohorts)
     assert rendered.startswith("<!doctype html>")
-    assert rendered.count('class="asset-pair"') == 653
-    assert rendered.count('class="detail-toggle"') == 653
-    assert rendered.count('class="button csv-link"') == 653
-    assert rendered.count("Open CSV") == 653
+    assert rendered.count('class="asset-pair"') == assets
+    assert rendered.count('class="detail-toggle"') == assets
+    assert rendered.count('class="button csv-link"') == assets
+    assert rendered.count("Open CSV") == assets
     assert rendered.count('class="coverage-publication publication-group"') == 3
     assert rendered.count('class="assets-publication publication-group"') == 3
-    assert rendered.count('class="coverage-row"') == 246
-    assert rendered.count('class="coverage-cell coverage-complete"') == 653
+    assert rendered.count('class="coverage-row"') == cohorts
+    assert rendered.count('class="coverage-cell coverage-complete"') == assets
     assert rendered.count('class="coverage-meter"') == 6
-    assert rendered.count("<strong>653/653</strong>") == 6
+    assert rendered.count(f"<strong>{assets}/{assets}</strong>") == 6
     assert "max-height:min(54vh,620px)" in rendered
     assert "position:sticky" in rendered
+    asset_summary = (
+        f"{assets} sheet-assets across "
+        f"{status.physical_workbook_count} physical workbooks"
+    )
     assert all(
         value in rendered
         for value in (
@@ -175,7 +184,7 @@ def test_html_is_single_file_safe_and_interactive_without_dependencies() -> None
             'class="sort"',
             "Automated checks",
             "Flagged issues",
-            "653 sheet-assets across 91 physical workbooks",
+            asset_summary,
             "Registered asset coverage",
             "Recorded Crime — Offenders",
             "2021\u201322",
@@ -212,34 +221,39 @@ def test_coverage_matrix_keeps_multiple_assets_in_one_year_compact() -> None:
     expanded_cohort = replace(cohort, assets=(*cohort.assets, duplicate))
     expanded = replace(status, cohorts=(expanded_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(expanded).decode()
-    assert rendered.count('class="coverage-row"') == 246
-    assert rendered.count("data-target-year=") == 653
+    assert rendered.count('class="coverage-row"') == len(status.cohorts)
+    assert rendered.count("data-target-year=") == len(status.assets)
     assert (
         rendered.count('class="coverage-cell coverage-complete coverage-multiple"') == 1
     )
     assert "<small>2</small>" in rendered
     assert "2 registered assets" in rendered
     assert "Select to view all 2 assets" in rendered
-    assert rendered.count("<strong>654/654</strong>") == 6
+    expected = len(status.assets) + 1
+    assert rendered.count(f"<strong>{expected}/{expected}</strong>") == 6
 
 
 def test_coverage_matrix_distinguishes_not_registered_cells() -> None:
     status = build_dashboard(PROJECT)
+    baseline_rendered = render_dashboard(status).decode()
     cohort = status.cohorts[0]
     reduced_cohort = replace(cohort, assets=cohort.assets[1:])
     reduced = replace(status, cohorts=(reduced_cohort, *status.cohorts[1:]))
     rendered = render_dashboard(reduced).decode()
-    assert rendered.count('class="coverage-cell coverage-absent"') == 380
-    assert rendered.count('class="coverage-cell coverage-complete"') == 652
+    assert rendered.count('class="coverage-cell coverage-absent"') == (
+        baseline_rendered.count('class="coverage-cell coverage-absent"') + 1
+    )
+    expected = len(status.assets) - 1
+    assert rendered.count('class="coverage-cell coverage-complete"') == expected
     assert "Not registered in this prototype scope" in rendered
-    assert rendered.count("<strong>652/652</strong>") == 6
+    assert rendered.count(f"<strong>{expected}/{expected}</strong>") == 6
 
 
 @pytest.mark.timeout(180)
 def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
     status = build_dashboard(PROJECT)
     payloads = build_asset_csv_payloads(PROJECT, status)
-    assert len(payloads) == 653
+    assert len(payloads) == len(status.assets)
     observed_rows = 0
     for asset in status.assets:
         assert asset.csv_route is not None
@@ -254,7 +268,7 @@ def test_each_asset_csv_route_contains_only_that_assets_rows() -> None:
             row.get("publication_vintage_date") or row["reference_date"] for row in rows
         } == {asset.reference_date}
         observed_rows += len(rows)
-    assert observed_rows == 526240
+    assert observed_rows == sum(asset.canonical_count or 0 for asset in status.assets)
 
 
 def test_committed_snapshot_matches_current_evidence() -> None:
@@ -437,17 +451,20 @@ def test_server_exposes_only_page_health_and_declared_asset_csvs(
 ) -> None:
     page = tmp_path / "index.html"
     page.write_text("<!doctype html><title>Status</title>")
+    captured_page = page.read_bytes()
     csv_body = b"year,value\n2025,42\n"
     server = make_status_server(
         "127.0.0.1", 0, page, {"/csv/example-asset.csv": csv_body}
     )
+    with c4_exclusive_access(tmp_path):
+        page.write_text("<!doctype html><title>New installation</title>")
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     port = server.server_address[1]
     try:
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/") as response:
             assert response.status == 200
-            assert response.read() == page.read_bytes()
+            assert response.read() == captured_page
             assert response.headers["Cache-Control"] == "no-store"
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/healthz") as response:
             assert response.read() == b'{"status":"ok"}\n'

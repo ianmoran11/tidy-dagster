@@ -1,0 +1,2023 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:6118f60c7c3c4d168a0c8b85bf61324cf17bcd2171c7672010d72100131d4b4f"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R12C11"
+            },
+            {
+              "range": "R14C2:R17C11"
+            },
+            {
+              "range": "R19C2:R22C11"
+            },
+            {
+              "range": "R24C2:R27C11"
+            },
+            {
+              "range": "R29C2:R32C11"
+            },
+            {
+              "range": "R34C2:R37C11"
+            },
+            {
+              "range": "R39C2:R42C11"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "times proceeded"
+      },
+      {
+        "id": "d02",
+        "name": "age group"
+      },
+      {
+        "id": "d03",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R12C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                },
+                {
+                  "address": "R12C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R8C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R14C2:R17C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R14C1:R15C1"
+                },
+                {
+                  "address": "R17C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R13C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R19C2:R22C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R19C1:R20C1"
+                },
+                {
+                  "address": "R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R21C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R18C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R24C2:R27C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R24C1:R25C1"
+                },
+                {
+                  "address": "R27C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R23C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R29C2:R32C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R29C1:R30C1"
+                },
+                {
+                  "address": "R32C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R31C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R28C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R34C2:R37C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R34C1:R35C1"
+                },
+                {
+                  "address": "R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R36C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R33C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R39C2:R42C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R39C1:R40C1"
+                },
+                {
+                  "address": "R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R38C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C3:R12C6"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                },
+                {
+                  "address": "R12C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C6"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R8C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R14C3:R17C6"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R14C1:R15C1"
+                },
+                {
+                  "address": "R17C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C6"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R13C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-010",
+      "order": 10,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p10",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R19C3:R22C6"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R19C1:R20C1"
+                },
+                {
+                  "address": "R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R21C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C6"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R18C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-011",
+      "order": 11,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p11",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R24C3:R27C6"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R24C1:R25C1"
+                },
+                {
+                  "address": "R27C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C6"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R23C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-012",
+      "order": 12,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p12",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R29C3:R32C6"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R29C1:R30C1"
+                },
+                {
+                  "address": "R32C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R31C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C6"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R28C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-013",
+      "order": 13,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p13",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R34C3:R37C6"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R34C1:R35C1"
+                },
+                {
+                  "address": "R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R36C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C6"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R33C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-014",
+      "order": 14,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p14",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R39C3:R42C6"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R39C1:R40C1"
+                },
+                {
+                  "address": "R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C6"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R38C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-015",
+      "order": 15,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p15",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C7:R12C11"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                },
+                {
+                  "address": "R12C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C8:R7C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-033",
+              "selectors": [
+                {
+                  "address": "R7C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R8C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-016",
+      "order": 16,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p16",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R14C7:R17C11"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R14C1:R15C1"
+                },
+                {
+                  "address": "R17C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C8:R7C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-033",
+              "selectors": [
+                {
+                  "address": "R7C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R13C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-017",
+      "order": 17,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p17",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R19C7:R22C11"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R19C1:R20C1"
+                },
+                {
+                  "address": "R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R21C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C8:R7C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-033",
+              "selectors": [
+                {
+                  "address": "R7C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R18C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-018",
+      "order": 18,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p18",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R24C7:R27C11"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R24C1:R25C1"
+                },
+                {
+                  "address": "R27C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R26C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C8:R7C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-033",
+              "selectors": [
+                {
+                  "address": "R7C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R23C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-019",
+      "order": 19,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p19",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R29C7:R32C11"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R29C1:R30C1"
+                },
+                {
+                  "address": "R32C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R31C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C8:R7C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-033",
+              "selectors": [
+                {
+                  "address": "R7C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R28C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-020",
+      "order": 20,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p20",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R34C7:R37C11"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R34C1:R35C1"
+                },
+                {
+                  "address": "R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R36C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C8:R7C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-033",
+              "selectors": [
+                {
+                  "address": "R7C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R33C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-021",
+      "order": 21,
+      "tableName": "Offenders youth-offenders-by-repeat-proceedings-age-and-jurisdiction 2022-23 p21",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R39C7:R42C11"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "range": "R39C1:R40C1"
+                },
+                {
+                  "address": "R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "range": "R7C8:R7C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-033",
+              "selectors": [
+                {
+                  "address": "R7C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R38C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

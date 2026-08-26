@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 4,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/recorded-crime-offenders-2023-24-cube-7-remaining-bounded.xlsx",
+      "contentDigest": "sha256:b9d9d841856feb7d173280f9c204179054b1366cca827825ed65c50431bd5e9a",
+      "byteLength": 46737,
+      "sheet": "Table 1",
+      "releaseId": "2023-24",
+      "downloadOrdinal": 7,
+      "cubeId": "preliminary-anzsoc-2023",
+      "tableNamespace": "preliminary-anzsoc-2023",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-preliminary-anzsoc-2023-preliminary-anzsoc-2023-1-2023.response.txt",
+        "contentDigest": "sha256:5fd35274cc9ae4c35a37418fcc35b48e15b391fc38e69f975486e44605467a62",
+        "byteLength": 898,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v1-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      },
+      "normalization": "digest-pinned-bounded-offenders-remaining-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/recorded-crime-offenders-2024-25-cube-7-remaining-bounded.xlsx",
+      "contentDigest": "sha256:2742387c0a2acf2fd9e32c3498de595c19e788a231763772864965343dcae4cd",
+      "byteLength": 46997,
+      "sheet": "Table 1",
+      "releaseId": "2024-25",
+      "downloadOrdinal": 7,
+      "cubeId": "preliminary-anzsoc-2023",
+      "tableNamespace": "preliminary-anzsoc-2023",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-preliminary-anzsoc-2023-preliminary-anzsoc-2023-1-2024.response.txt",
+        "contentDigest": "sha256:b7e173d871e180940dae3d34fd4159c531ab586dbacb952934db34e31b8fed77",
+        "byteLength": 898,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v1-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      },
+      "normalization": "digest-pinned-bounded-offenders-remaining-v1"
+    }
+  ]
+}

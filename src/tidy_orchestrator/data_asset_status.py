@@ -14,6 +14,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from .offenders_acceptance import c4_shared_access
+
 # The generated single-file interface embeds intentionally compact HTML, CSS, and JS.
 
 REGISTRY_SCHEMA = "tidy.data-asset-status-registry/v1"
@@ -355,11 +357,20 @@ def _validate_cohort(value: dict[str, Any], expected_id: str) -> None:
         "sheet",
         "replayResponse",
     }
+    c4_workbook_metadata = {
+        "releaseId",
+        "downloadOrdinal",
+        "cubeId",
+        "tableNamespace",
+    }
     for workbook in workbooks:
+        keys = set(workbook) if isinstance(workbook, dict) else set()
+        extras = keys - required_workbook - {"normalization"}
+        is_c4 = extras == c4_workbook_metadata
         if (
             not isinstance(workbook, dict)
-            or not required_workbook <= set(workbook)
-            or set(workbook) - required_workbook - {"normalization"}
+            or not required_workbook <= keys
+            or (extras and not is_c4)
         ):
             raise DataAssetStatusError(
                 f"Cohort {expected_id} has an invalid workbook entry"
@@ -399,6 +410,37 @@ def _validate_cohort(value: dict[str, Any], expected_id: str) -> None:
             raise DataAssetStatusError(
                 f"Cohort {expected_id} has invalid replay provenance"
             )
+        if is_c4:
+            expected_replay_keys = {
+                "path",
+                "contentDigest",
+                "byteLength",
+                "historicalModel",
+                "acceptanceAuthority",
+                "recipeProtocol",
+            }
+            if (
+                value.get("publicationId") != "recorded-crime-offenders"
+                or set(replay) != expected_replay_keys
+                or replay.get("acceptanceAuthority") is not False
+                or replay.get("recipeProtocol")
+                not in {"RecipeV01", "TargetScopedRecipeV02"}
+                or not replay["historicalModel"].startswith(
+                    "provider-free/offenders-c4/"
+                )
+                or not isinstance(workbook.get("releaseId"), str)
+                or not re.fullmatch(r"20[0-9]{2}-[0-9]{2}", workbook["releaseId"])
+                or isinstance(workbook.get("downloadOrdinal"), bool)
+                or not isinstance(workbook.get("downloadOrdinal"), int)
+                or workbook["downloadOrdinal"] <= 0
+                or any(
+                    not isinstance(workbook.get(field), str) or not workbook[field]
+                    for field in ("cubeId", "tableNamespace")
+                )
+            ):
+                raise DataAssetStatusError(
+                    f"Cohort {expected_id} has invalid C4 metadata"
+                )
 
 
 def _read_json_for_evidence(
@@ -882,7 +924,7 @@ def _derive_asset(
     )
 
 
-def build_dashboard(
+def _build_dashboard_unlocked(
     project_root: Path | None = None,
     registry_relative: Path = DEFAULT_REGISTRY,
 ) -> DashboardStatus:
@@ -1025,12 +1067,21 @@ def build_dashboard(
     )
 
 
-def build_asset_csv_payloads(
+def build_dashboard(
+    project_root: Path | None = None,
+    registry_relative: Path = DEFAULT_REGISTRY,
+) -> DashboardStatus:
+    root = (project_root or default_project_root()).resolve()
+    with c4_shared_access(root):
+        return _build_dashboard_unlocked(root, registry_relative)
+
+
+def _build_asset_csv_payloads_unlocked(
     project_root: Path | None = None,
     status: DashboardStatus | None = None,
 ) -> dict[str, bytes]:
     root = (project_root or default_project_root()).resolve()
-    dashboard = status or build_dashboard(root)
+    dashboard = status or _build_dashboard_unlocked(root)
     grouped: dict[str, list[AssetStatus]] = {}
     routes = [asset.csv_route for asset in dashboard.assets if asset.csv_route]
     if len(routes) != len(set(routes)):
@@ -1121,6 +1172,15 @@ def build_asset_csv_payloads(
     if set(payloads) != set(routes):
         raise DataAssetStatusError("Asset CSV route payloads are incomplete")
     return payloads
+
+
+def build_asset_csv_payloads(
+    project_root: Path | None = None,
+    status: DashboardStatus | None = None,
+) -> dict[str, bytes]:
+    root = (project_root or default_project_root()).resolve()
+    with c4_shared_access(root):
+        return _build_asset_csv_payloads_unlocked(root, status)
 
 
 def _e(value: Any) -> str:
@@ -1859,12 +1919,21 @@ footer dl {{ margin-top:10px; }}
     return document.encode()
 
 
+def _expected_snapshot_unlocked(
+    project_root: Path,
+    registry_relative: Path = DEFAULT_REGISTRY,
+) -> tuple[DashboardStatus, bytes]:
+    status = _build_dashboard_unlocked(project_root, registry_relative)
+    return status, render_dashboard(status)
+
+
 def expected_snapshot(
     project_root: Path | None = None,
     registry_relative: Path = DEFAULT_REGISTRY,
 ) -> tuple[DashboardStatus, bytes]:
-    status = build_dashboard(project_root, registry_relative)
-    return status, render_dashboard(status)
+    root = (project_root or default_project_root()).resolve()
+    with c4_shared_access(root):
+        return _expected_snapshot_unlocked(root, registry_relative)
 
 
 def refresh_snapshot(
@@ -1872,16 +1941,17 @@ def refresh_snapshot(
     registry_relative: Path = DEFAULT_REGISTRY,
 ) -> tuple[DashboardStatus, Path, bool]:
     root = (project_root or default_project_root()).resolve()
-    status, rendered = expected_snapshot(root, registry_relative)
-    output = _safe_relative_path(root, status.output_path, "status output")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    changed = not output.is_file() or output.read_bytes() != rendered
-    if changed:
-        temporary = output.with_name(f".{output.name}.tmp")
-        temporary.write_bytes(rendered)
-        temporary.chmod(0o644)
-        temporary.replace(output)
-    return status, output, changed
+    with c4_shared_access(root):
+        status, rendered = _expected_snapshot_unlocked(root, registry_relative)
+        output = _safe_relative_path(root, status.output_path, "status output")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        changed = not output.is_file() or output.read_bytes() != rendered
+        if changed:
+            temporary = output.with_name(f".{output.name}.tmp")
+            temporary.write_bytes(rendered)
+            temporary.chmod(0o644)
+            temporary.replace(output)
+        return status, output, changed
 
 
 def snapshot_matches(
@@ -1889,13 +1959,14 @@ def snapshot_matches(
     registry_relative: Path = DEFAULT_REGISTRY,
 ) -> tuple[bool, Path, str, str | None]:
     root = (project_root or default_project_root()).resolve()
-    status, rendered = expected_snapshot(root, registry_relative)
-    output = _safe_relative_path(root, status.output_path, "status output")
-    expected = sha256_digest(rendered)
-    if not output.is_file():
-        return False, output, expected, None
-    actual_data = output.read_bytes()
-    return actual_data == rendered, output, expected, sha256_digest(actual_data)
+    with c4_shared_access(root):
+        status, rendered = _expected_snapshot_unlocked(root, registry_relative)
+        output = _safe_relative_path(root, status.output_path, "status output")
+        expected = sha256_digest(rendered)
+        if not output.is_file():
+            return False, output, expected, None
+        actual_data = output.read_bytes()
+        return actual_data == rendered, output, expected, sha256_digest(actual_data)
 
 
 class StatusPageServer(ThreadingHTTPServer):
@@ -1904,9 +1975,13 @@ class StatusPageServer(ThreadingHTTPServer):
 
 
 def status_handler(
-    page_path: Path,
+    page: Path | bytes,
     csv_payloads: dict[str, bytes] | None = None,
 ) -> type[BaseHTTPRequestHandler]:
+    try:
+        page_body = page if isinstance(page, bytes) else page.read_bytes()
+    except OSError as error:
+        raise DataAssetStatusError("Status HTML snapshot is unreadable") from error
     payloads = dict(csv_payloads or {})
     if any(
         re.fullmatch(r"/csv/[a-z0-9-]+\.csv", route) is None
@@ -1949,12 +2024,7 @@ def status_handler(
             if path not in {"/", "/index.html"}:
                 self.send_error(HTTPStatus.NOT_FOUND)
                 return
-            try:
-                body = page_path.read_bytes()
-            except OSError:
-                self.send_error(HTTPStatus.INTERNAL_SERVER_ERROR)
-                return
-            self._send(HTTPStatus.OK, body, "text/html; charset=utf-8", head)
+            self._send(HTTPStatus.OK, page_body, "text/html; charset=utf-8", head)
 
         def _send(
             self,
@@ -1986,9 +2056,9 @@ def status_handler(
 def make_status_server(
     host: str,
     port: int,
-    page_path: Path,
+    page: Path | bytes,
     csv_payloads: dict[str, bytes] | None = None,
 ) -> StatusPageServer:
     if host != "127.0.0.1":
         raise DataAssetStatusError("Status server must bind exactly to 127.0.0.1")
-    return StatusPageServer((host, port), status_handler(page_path, csv_payloads))
+    return StatusPageServer((host, port), status_handler(page, csv_payloads))

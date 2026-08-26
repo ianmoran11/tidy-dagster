@@ -1,0 +1,1389 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:17329af1cb8d4bdf56d94d6eb5663ef9fb6edaabf5a9d6742cfb60f6cfd63325"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R11C7"
+            },
+            {
+              "range": "R13C2:R16C7"
+            },
+            {
+              "range": "R18C2:R20C7"
+            },
+            {
+              "range": "R22C2:R22C7"
+            },
+            {
+              "range": "R24C2:R24C7"
+            },
+            {
+              "range": "R26C2:R26C7"
+            },
+            {
+              "range": "R28C2:R28C7"
+            },
+            {
+              "range": "R30C2:R33C7"
+            },
+            {
+              "range": "R35C2:R38C7"
+            },
+            {
+              "range": "R40C2:R42C7"
+            },
+            {
+              "range": "R44C2:R44C7"
+            },
+            {
+              "range": "R46C2:R46C7"
+            },
+            {
+              "range": "R48C2:R48C7"
+            },
+            {
+              "range": "R50C2:R50C7"
+            },
+            {
+              "range": "R52C2:R55C7"
+            },
+            {
+              "range": "R57C2:R60C7"
+            },
+            {
+              "range": "R62C2:R64C7"
+            },
+            {
+              "range": "R66C2:R66C7"
+            },
+            {
+              "range": "R68C2:R68C7"
+            },
+            {
+              "range": "R70C2:R70C7"
+            },
+            {
+              "range": "R72C2:R72C7"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "principal offence"
+      },
+      {
+        "id": "d02",
+        "name": "sex"
+      },
+      {
+        "id": "d03",
+        "name": "observation period"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R11C2"
+            },
+            {
+              "range": "R13C2:R16C2"
+            },
+            {
+              "range": "R18C2:R20C2"
+            },
+            {
+              "address": "R22C2"
+            },
+            {
+              "address": "R24C2"
+            },
+            {
+              "address": "R26C2"
+            },
+            {
+              "address": "R28C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R9C1:R11C1"
+                },
+                {
+                  "range": "R14C1:R15C1"
+                },
+                {
+                  "range": "R19C1:R20C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                },
+                {
+                  "address": "R13C1"
+                },
+                {
+                  "address": "R18C1"
+                },
+                {
+                  "address": "R22C1"
+                },
+                {
+                  "address": "R24C1"
+                },
+                {
+                  "address": "R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R30C2:R33C2"
+            },
+            {
+              "range": "R35C2:R38C2"
+            },
+            {
+              "range": "R40C2:R42C2"
+            },
+            {
+              "address": "R44C2"
+            },
+            {
+              "address": "R46C2"
+            },
+            {
+              "address": "R48C2"
+            },
+            {
+              "address": "R50C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R31C1:R33C1"
+                },
+                {
+                  "range": "R36C1:R37C1"
+                },
+                {
+                  "range": "R41C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                },
+                {
+                  "address": "R35C1"
+                },
+                {
+                  "address": "R40C1"
+                },
+                {
+                  "address": "R44C1"
+                },
+                {
+                  "address": "R46C1"
+                },
+                {
+                  "address": "R48C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R38C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R29C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R52C2:R55C2"
+            },
+            {
+              "range": "R57C2:R60C2"
+            },
+            {
+              "range": "R62C2:R64C2"
+            },
+            {
+              "address": "R66C2"
+            },
+            {
+              "address": "R68C2"
+            },
+            {
+              "address": "R70C2"
+            },
+            {
+              "address": "R72C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R53C1:R55C1"
+                },
+                {
+                  "range": "R58C1:R59C1"
+                },
+                {
+                  "range": "R63C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R52C1"
+                },
+                {
+                  "address": "R57C1"
+                },
+                {
+                  "address": "R62C1"
+                },
+                {
+                  "address": "R66C1"
+                },
+                {
+                  "address": "R68C1"
+                },
+                {
+                  "address": "R70C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R72C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R51C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C3:R11C4"
+            },
+            {
+              "range": "R13C3:R16C4"
+            },
+            {
+              "range": "R18C3:R20C4"
+            },
+            {
+              "range": "R22C3:R22C4"
+            },
+            {
+              "range": "R24C3:R24C4"
+            },
+            {
+              "range": "R26C3:R26C4"
+            },
+            {
+              "range": "R28C3:R28C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R9C1:R11C1"
+                },
+                {
+                  "range": "R14C1:R15C1"
+                },
+                {
+                  "range": "R19C1:R20C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                },
+                {
+                  "address": "R13C1"
+                },
+                {
+                  "address": "R18C1"
+                },
+                {
+                  "address": "R22C1"
+                },
+                {
+                  "address": "R24C1"
+                },
+                {
+                  "address": "R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R30C3:R33C4"
+            },
+            {
+              "range": "R35C3:R38C4"
+            },
+            {
+              "range": "R40C3:R42C4"
+            },
+            {
+              "range": "R44C3:R44C4"
+            },
+            {
+              "range": "R46C3:R46C4"
+            },
+            {
+              "range": "R48C3:R48C4"
+            },
+            {
+              "range": "R50C3:R50C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R31C1:R33C1"
+                },
+                {
+                  "range": "R36C1:R37C1"
+                },
+                {
+                  "range": "R41C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                },
+                {
+                  "address": "R35C1"
+                },
+                {
+                  "address": "R40C1"
+                },
+                {
+                  "address": "R44C1"
+                },
+                {
+                  "address": "R46C1"
+                },
+                {
+                  "address": "R48C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R38C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R29C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R52C3:R55C4"
+            },
+            {
+              "range": "R57C3:R60C4"
+            },
+            {
+              "range": "R62C3:R64C4"
+            },
+            {
+              "range": "R66C3:R66C4"
+            },
+            {
+              "range": "R68C3:R68C4"
+            },
+            {
+              "range": "R70C3:R70C4"
+            },
+            {
+              "range": "R72C3:R72C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R53C1:R55C1"
+                },
+                {
+                  "range": "R58C1:R59C1"
+                },
+                {
+                  "range": "R63C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R52C1"
+                },
+                {
+                  "address": "R57C1"
+                },
+                {
+                  "address": "R62C1"
+                },
+                {
+                  "address": "R66C1"
+                },
+                {
+                  "address": "R68C1"
+                },
+                {
+                  "address": "R70C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R72C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R51C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-031",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-029",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C5:R11C7"
+            },
+            {
+              "range": "R13C5:R16C7"
+            },
+            {
+              "range": "R18C5:R20C7"
+            },
+            {
+              "range": "R22C5:R22C7"
+            },
+            {
+              "range": "R24C5:R24C7"
+            },
+            {
+              "range": "R26C5:R26C7"
+            },
+            {
+              "range": "R28C5:R28C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R9C1:R11C1"
+                },
+                {
+                  "range": "R14C1:R15C1"
+                },
+                {
+                  "range": "R19C1:R20C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                },
+                {
+                  "address": "R13C1"
+                },
+                {
+                  "address": "R18C1"
+                },
+                {
+                  "address": "R22C1"
+                },
+                {
+                  "address": "R24C1"
+                },
+                {
+                  "address": "R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-032",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R30C5:R33C7"
+            },
+            {
+              "range": "R35C5:R38C7"
+            },
+            {
+              "range": "R40C5:R42C7"
+            },
+            {
+              "range": "R44C5:R44C7"
+            },
+            {
+              "range": "R46C5:R46C7"
+            },
+            {
+              "range": "R48C5:R48C7"
+            },
+            {
+              "range": "R50C5:R50C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R31C1:R33C1"
+                },
+                {
+                  "range": "R36C1:R37C1"
+                },
+                {
+                  "range": "R41C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                },
+                {
+                  "address": "R35C1"
+                },
+                {
+                  "address": "R40C1"
+                },
+                {
+                  "address": "R44C1"
+                },
+                {
+                  "address": "R46C1"
+                },
+                {
+                  "address": "R48C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R38C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R29C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders fdv-principal-offence-by-sex-australia-time-series 2021-22 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R52C5:R55C7"
+            },
+            {
+              "range": "R57C5:R60C7"
+            },
+            {
+              "range": "R62C5:R64C7"
+            },
+            {
+              "range": "R66C5:R66C7"
+            },
+            {
+              "range": "R68C5:R68C7"
+            },
+            {
+              "range": "R70C5:R70C7"
+            },
+            {
+              "range": "R72C5:R72C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "range": "R53C1:R55C1"
+                },
+                {
+                  "range": "R58C1:R59C1"
+                },
+                {
+                  "range": "R63C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R52C1"
+                },
+                {
+                  "address": "R57C1"
+                },
+                {
+                  "address": "R62C1"
+                },
+                {
+                  "address": "R66C1"
+                },
+                {
+                  "address": "R68C1"
+                },
+                {
+                  "address": "R70C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-027",
+              "selectors": [
+                {
+                  "address": "R72C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-028",
+              "selectors": [
+                {
+                  "address": "R51C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-030",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

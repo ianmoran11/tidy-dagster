@@ -1,0 +1,5431 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:a56bb86e45b597071ee47612853ee2f1829ce7abbee939fc9a3f413beb6d043b"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R18C7"
+            },
+            {
+              "range": "R20C2:R29C7"
+            },
+            {
+              "range": "R31C2:R40C7"
+            },
+            {
+              "range": "R43C2:R52C7"
+            },
+            {
+              "range": "R54C2:R63C7"
+            },
+            {
+              "range": "R65C2:R74C7"
+            },
+            {
+              "range": "R77C2:R86C7"
+            },
+            {
+              "range": "R88C2:R97C7"
+            },
+            {
+              "range": "R99C2:R108C7"
+            },
+            {
+              "range": "R111C2:R120C7"
+            },
+            {
+              "range": "R122C2:R131C7"
+            },
+            {
+              "range": "R133C2:R142C7"
+            },
+            {
+              "range": "R145C2:R154C7"
+            },
+            {
+              "range": "R156C2:R165C7"
+            },
+            {
+              "range": "R167C2:R176C7"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "age group"
+      },
+      {
+        "id": "d02",
+        "name": "indigenous status"
+      },
+      {
+        "id": "d03",
+        "name": "sex"
+      },
+      {
+        "id": "d04",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d05",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R99C2:R108C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R101C1:R105C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R99C1:R100C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R107C1:R108C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R106C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R98C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R18C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R11C1:R15C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R17C1:R18C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R111C2:R120C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R113C1:R117C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R111C1:R112C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R119C1:R120C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R118C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R110C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R122C2:R131C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R124C1:R128C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R122C1:R123C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R130C1:R131C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R129C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R121C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R133C2:R142C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R135C1:R139C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R133C1:R134C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R141C1:R142C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R140C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R132C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R145C2:R154C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R147C1:R151C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R145C1:R146C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R153C1:R154C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R152C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R144C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R156C2:R165C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R158C1:R162C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R156C1:R157C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R164C1:R165C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R163C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R155C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R167C2:R176C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R169C1:R173C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R167C1:R168C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R175C1:R176C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R174C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R166C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R20C2:R29C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R22C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R20C1:R21C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R28C1:R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R27C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R19C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-010",
+      "order": 10,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p10",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R31C2:R40C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R33C1:R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R31C1:R32C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R39C1:R40C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R38C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-011",
+      "order": 11,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p11",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R43C2:R52C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R45C1:R49C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R43C1:R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R51C1:R52C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-012",
+      "order": 12,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p12",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R54C2:R63C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R56C1:R60C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R54C1:R55C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R62C1:R63C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R61C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R53C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-013",
+      "order": 13,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p13",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R65C2:R74C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R67C1:R71C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R65C1:R66C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R73C1:R74C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R72C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R64C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-014",
+      "order": 14,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p14",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R77C2:R86C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R79C1:R83C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R77C1:R78C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R85C1:R86C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R84C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R76C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-015",
+      "order": 15,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p15",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R88C2:R97C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R90C1:R94C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R88C1:R89C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R96C1:R97C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R95C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R87C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-016",
+      "order": 16,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p16",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R99C3:R108C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R101C1:R105C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R99C1:R100C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R107C1:R108C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R106C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R98C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-017",
+      "order": 17,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p17",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C3:R18C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R11C1:R15C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R17C1:R18C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-018",
+      "order": 18,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p18",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R111C3:R120C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R113C1:R117C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R111C1:R112C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R119C1:R120C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R118C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R110C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-019",
+      "order": 19,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p19",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R122C3:R131C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R124C1:R128C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R122C1:R123C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R130C1:R131C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R129C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R121C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-020",
+      "order": 20,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p20",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R133C3:R142C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R135C1:R139C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R133C1:R134C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R141C1:R142C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R140C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R132C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-021",
+      "order": 21,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p21",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R145C3:R154C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R147C1:R151C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R145C1:R146C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R153C1:R154C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R152C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R144C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-022",
+      "order": 22,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p22",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R156C3:R165C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R158C1:R162C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R156C1:R157C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R164C1:R165C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R163C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R155C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-023",
+      "order": 23,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p23",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R167C3:R176C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R169C1:R173C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R167C1:R168C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R175C1:R176C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R174C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R166C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-024",
+      "order": 24,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p24",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R20C3:R29C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R22C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R20C1:R21C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R28C1:R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R27C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R19C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-025",
+      "order": 25,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p25",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R31C3:R40C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R33C1:R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R31C1:R32C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R39C1:R40C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R38C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-026",
+      "order": 26,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p26",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R43C3:R52C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R45C1:R49C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R43C1:R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R51C1:R52C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-027",
+      "order": 27,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p27",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R54C3:R63C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R56C1:R60C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R54C1:R55C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R62C1:R63C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R61C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R53C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-028",
+      "order": 28,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p28",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R65C3:R74C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R67C1:R71C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R65C1:R66C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R73C1:R74C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R72C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R64C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-029",
+      "order": 29,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p29",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R77C3:R86C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R79C1:R83C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R77C1:R78C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R85C1:R86C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R84C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R76C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-030",
+      "order": 30,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p30",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R88C3:R97C4"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R90C1:R94C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R88C1:R89C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R96C1:R97C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R95C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R87C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-024",
+              "selectors": [
+                {
+                  "address": "R6C3"
+                }
+              ]
+            },
+            {
+              "regionId": "region-025",
+              "selectors": [
+                {
+                  "address": "R6C4"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-031",
+      "order": 31,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p31",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R99C5:R108C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R101C1:R105C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R99C1:R100C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R107C1:R108C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R106C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R98C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-032",
+      "order": 32,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p32",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C5:R18C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R11C1:R15C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R9C1:R10C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R17C1:R18C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R16C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-033",
+      "order": 33,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p33",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R111C5:R120C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R113C1:R117C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R111C1:R112C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R119C1:R120C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R118C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R110C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-034",
+      "order": 34,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p34",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R122C5:R131C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R124C1:R128C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R122C1:R123C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R130C1:R131C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R129C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R121C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-035",
+      "order": 35,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p35",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R133C5:R142C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R135C1:R139C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R133C1:R134C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R141C1:R142C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R140C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R132C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R109C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-036",
+      "order": 36,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p36",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R145C5:R154C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R147C1:R151C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R145C1:R146C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R153C1:R154C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R152C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R144C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-037",
+      "order": 37,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p37",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R156C5:R165C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R158C1:R162C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R156C1:R157C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R164C1:R165C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R163C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R155C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-038",
+      "order": 38,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p38",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R167C5:R176C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R169C1:R173C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R167C1:R168C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R175C1:R176C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R174C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R166C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R143C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-039",
+      "order": 39,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p39",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R20C5:R29C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R22C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R20C1:R21C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R28C1:R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R27C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R19C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-040",
+      "order": 40,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p40",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R31C5:R40C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R33C1:R37C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R31C1:R32C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R39C1:R40C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R38C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R30C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-041",
+      "order": 41,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p41",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R43C5:R52C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R45C1:R49C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R43C1:R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R51C1:R52C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-042",
+      "order": 42,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p42",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R54C5:R63C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R56C1:R60C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R54C1:R55C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R62C1:R63C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R61C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R53C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-043",
+      "order": 43,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p43",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R65C5:R74C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R67C1:R71C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R65C1:R66C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R73C1:R74C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R72C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R64C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R41C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-044",
+      "order": 44,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p44",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R77C5:R86C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R79C1:R83C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R77C1:R78C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R85C1:R86C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R84C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R76C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-045",
+      "order": 45,
+      "tableName": "Offenders fdv-indigenous-status-by-sex-and-age-jurisdiction 2023-24 p45",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R88C5:R97C7"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "range": "R90C1:R94C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "range": "R88C1:R89C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-019",
+              "selectors": [
+                {
+                  "range": "R96C1:R97C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-020",
+              "selectors": [
+                {
+                  "address": "R95C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-026",
+              "selectors": [
+                {
+                  "address": "R87C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-022",
+              "selectors": [
+                {
+                  "range": "R6C5:R6C7"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-021",
+              "selectors": [
+                {
+                  "address": "R75C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-023",
+              "selectors": [
+                {
+                  "address": "R5C5"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

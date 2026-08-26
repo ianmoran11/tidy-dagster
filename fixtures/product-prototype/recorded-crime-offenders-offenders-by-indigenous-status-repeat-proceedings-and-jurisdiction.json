@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/recorded-crime-offenders-2021-22-cube-4-source.xlsx",
+      "contentDigest": "sha256:5dbd0ac29918698496cae3946ba62b1a4a9b5048501806013b5aabbc0a127f0d",
+      "byteLength": 133903,
+      "sheet": "Table 26",
+      "releaseId": "2021-22",
+      "downloadOrdinal": 4,
+      "cubeId": "indigenous",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-indigenous-main-26-2021.response.txt",
+        "contentDigest": "sha256:867e0f02c4339c4317b23c48cf4958d861d4042a1e9c65a45635edbe78ddac9f",
+        "byteLength": 59681,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/recorded-crime-offenders-2022-23-cube-4-remaining-bounded.xlsx",
+      "contentDigest": "sha256:b2af5d2171d5bea1f2749083987667d79db74962555e67ac6abb99750691e93e",
+      "byteLength": 121893,
+      "sheet": "Table 29",
+      "releaseId": "2022-23",
+      "downloadOrdinal": 4,
+      "cubeId": "indigenous",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-indigenous-main-29-2022.response.txt",
+        "contentDigest": "sha256:81b24f64b6ea598524fba5cbad8b2fbef771bd141a34615a257f9afd50dfb7da",
+        "byteLength": 59692,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      },
+      "normalization": "digest-pinned-bounded-offenders-remaining-v1"
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/recorded-crime-offenders-2023-24-cube-4-source.xlsx",
+      "contentDigest": "sha256:c018378fcb2b8f3ce9659b0c407839f3e6283da705cd02c26abe1e1b29815df9",
+      "byteLength": 123351,
+      "sheet": "Table 29",
+      "releaseId": "2023-24",
+      "downloadOrdinal": 4,
+      "cubeId": "indigenous",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-indigenous-main-29-2023.response.txt",
+        "contentDigest": "sha256:50b31e40240e13dc89c4cc338572aada9d1c391edaa61dc01c0c2e6bb5161202",
+        "byteLength": 59681,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/recorded-crime-offenders-2024-25-cube-4-source.xlsx",
+      "contentDigest": "sha256:f14925d613520577a372ff739cbd530bdab623219101843b4ce47957edd7627d",
+      "byteLength": 128737,
+      "sheet": "Table 29",
+      "releaseId": "2024-25",
+      "downloadOrdinal": 4,
+      "cubeId": "indigenous",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-indigenous-main-29-2024.response.txt",
+        "contentDigest": "sha256:dd09e39dbdbab3631aa9eb727e2710498f7832e09c637f0136f33426b46a8823",
+        "byteLength": 59681,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    }
+  ]
+}

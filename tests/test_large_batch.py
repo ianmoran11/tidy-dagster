@@ -9,6 +9,7 @@ import re
 import runpy
 import shutil
 import subprocess
+import uuid
 import zipfile
 from collections import Counter
 from collections.abc import Callable
@@ -66,10 +67,12 @@ def ensure_domain_worker_is_built() -> None:
 
 def test_large_batch_registry_and_all_evidence_close() -> None:
     registry = load_large_batch_registry(PROJECT)
-    assert registry.batch_id == "justice-six-hundred-twenty-eight-worksheets-v1"
-    assert registry.worksheet_count == 628
+    closure = (registry.batch_id, registry.worksheet_count, len(registry.entries))
+    assert closure in {
+        ("justice-six-hundred-twenty-eight-worksheets-v1", 628, 241),
+        ("justice-seven-hundred-ninety-eight-worksheets-v1", 798, 288),
+    }
     assert registry.provider_calls == 0
-    assert len(registry.entries) == 241
     normalization = verify_batch_normalization(PROJECT, registry)
     assert len(normalization["entries"]) == 64
     assert "normalization" not in normalization
@@ -115,9 +118,14 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     manifests = [
         verify_large_batch_evidence(PROJECT, spec) for spec in registry.entries
     ]
-    assert sum(item["acceptedWorkbookCount"] for item in manifests) == 628
+    assert (
+        sum(item["acceptedWorkbookCount"] for item in manifests)
+        == registry.worksheet_count
+    )
     assert sum(item["exceptionWorkbookCount"] for item in manifests) == 0
-    assert sum(item["canonicalObservationCount"] for item in manifests) == 512957
+    assert sum(item["canonicalObservationCount"] for item in manifests) == sum(
+        spec.expected_canonical_count for spec in registry.entries
+    )
     assert sum(item["providerCalls"] for item in manifests) == 0
     criminal_specs = [
         spec
@@ -127,9 +135,24 @@ def test_large_batch_registry_and_all_evidence_close() -> None:
     assert len(criminal_specs) == 193
     assert sum(len(spec.expected_years) for spec in criminal_specs) == 430
     assert sum(spec.expected_canonical_count for spec in criminal_specs) == 422_103
-    assert Counter(spec.acceptance_policy_version for spec in registry.entries) == {
-        "tidy.table-family-acceptance/v1": 125,
-        "tidy.table-family-acceptance/v2": 116,
+    policy_counts = Counter(spec.acceptance_policy_version for spec in registry.entries)
+    assert policy_counts in (
+        Counter(
+            {
+                "tidy.table-family-acceptance/v1": 125,
+                "tidy.table-family-acceptance/v2": 116,
+            }
+        ),
+        Counter(
+            {
+                "tidy.table-family-acceptance/v1": 125,
+                "tidy.table-family-acceptance/v2": 163,
+            }
+        ),
+    )
+    assert sum(spec.expected_canonical_count for spec in registry.entries) in {
+        512_957,
+        737_954,
     }
     nt_manifests = [
         item
@@ -270,6 +293,121 @@ def test_large_batch_cohorts_and_contracts_validate() -> None:
         )
 
 
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "partial-workbook-metadata",
+        "partial-replay-protocol",
+        "foreign-publication",
+        "wrong-protocol",
+        "wrong-model-for-protocol",
+        "invalid-download-ordinal",
+        "historical-model-only-downgrade",
+        "unknown-c4-model-foreign-publication",
+    ],
+)
+def test_c4_cohort_extension_rejects_partial_or_mismatched_metadata(
+    mutation: str,
+) -> None:
+    route = json.loads(
+        (
+            PROJECT
+            / "fixtures/product-prototype/offenders-remaining-c4-route-manifest-v1.json"
+        ).read_text()
+    )
+    cohort = json.loads((PROJECT / route["members"][0]["cohortPath"]).read_text())
+    workbook = cohort["workbooks"][0]
+    replay = workbook["replayResponse"]
+    if mutation == "partial-workbook-metadata":
+        workbook.pop("cubeId")
+    elif mutation == "partial-replay-protocol":
+        replay.pop("recipeProtocol")
+    elif mutation == "foreign-publication":
+        cohort["publicationId"] = "foreign-publication"
+    elif mutation == "wrong-protocol":
+        replay["recipeProtocol"] = "RecipeV03"
+    elif mutation == "wrong-model-for-protocol":
+        replay["recipeProtocol"] = "TargetScopedRecipeV02"
+        replay["historicalModel"] = (
+            "provider-free/offenders-c4/semantic-map-v2-recipe-v01"
+        )
+    elif mutation == "invalid-download-ordinal":
+        workbook["downloadOrdinal"] = 10
+    elif mutation in {
+        "historical-model-only-downgrade",
+        "unknown-c4-model-foreign-publication",
+    }:
+        assert "normalization" not in workbook
+        for field in ("releaseId", "downloadOrdinal", "cubeId", "tableNamespace"):
+            workbook.pop(field)
+        replay.pop("recipeProtocol")
+        if mutation == "unknown-c4-model-foreign-publication":
+            replay["historicalModel"] = "provider-free/offenders-c4/undeclared"
+            cohort["publicationId"] = "foreign-publication"
+    else:  # pragma: no cover - parametrization is closed above
+        raise AssertionError(mutation)
+
+    schema = json.loads(
+        (PROJECT / "contracts/product-prototype/v1/cohort.schema.json").read_text()
+    )
+    validator = jsonschema.Draft202012Validator(
+        schema,
+        format_checker=jsonschema.FormatChecker(),
+    )
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(cohort)
+    with pytest.raises(ProductPrototypeError):
+        _validate_cohort(cohort)
+
+
+@pytest.mark.parametrize("replay_response", ["x", ["x"], 1])
+def test_cohort_rejects_non_object_replay_response(
+    replay_response: object,
+) -> None:
+    route = json.loads(
+        (
+            PROJECT
+            / "fixtures/product-prototype/offenders-remaining-c4-route-manifest-v1.json"
+        ).read_text()
+    )
+    cohort = json.loads((PROJECT / route["members"][0]["cohortPath"]).read_text())
+    cohort["workbooks"][0]["replayResponse"] = replay_response
+    schema = json.loads(
+        (PROJECT / "contracts/product-prototype/v1/cohort.schema.json").read_text()
+    )
+    validator = jsonschema.Draft202012Validator(
+        schema,
+        format_checker=jsonschema.FormatChecker(),
+    )
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(cohort)
+    with pytest.raises(ProductPrototypeError):
+        _validate_cohort(cohort)
+
+
+@pytest.mark.parametrize("workbook", ["x", ["x"], 1])
+def test_cohort_rejects_non_object_workbook_entry(workbook: object) -> None:
+    route = json.loads(
+        (
+            PROJECT
+            / "fixtures/product-prototype/offenders-remaining-c4-route-manifest-v1.json"
+        ).read_text()
+    )
+    cohort = json.loads((PROJECT / route["members"][0]["cohortPath"]).read_text())
+    cohort["workbooks"][0] = workbook
+    schema = json.loads(
+        (PROJECT / "contracts/product-prototype/v1/cohort.schema.json").read_text()
+    )
+    validator = jsonschema.Draft202012Validator(
+        schema,
+        format_checker=jsonschema.FormatChecker(),
+    )
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(cohort)
+    with pytest.raises(ProductPrototypeError):
+        _validate_cohort(cohort)
+
+
 def _write_registry(tmp_path: Path, value: dict[str, object]) -> None:
     registry_path = tmp_path / "fixtures/product-prototype/large-batch-assets-v1.json"
     registry_path.parent.mkdir(parents=True)
@@ -295,17 +433,18 @@ def test_registry_pins_acceptance_policy_and_v2_replay_timestamp() -> None:
         if spec.acceptance_policy_version == "tidy.table-family-acceptance/v2"
     ]
     assert len(v1) == 125
-    assert len(v2) == 116
+    assert len(v2) in {116, 163}
     assert all(spec.replay_recorded_at is None for spec in v1)
-    assert Counter(spec.replay_recorded_at for spec in v2) == {
+    expected_timestamps = {
         "2026-08-15T09:00:00+00:00": 9,
         "2026-08-21T09:00:00+00:00": 9,
         "2026-08-22T09:00:00+00:00": 10,
         "2026-08-23T09:00:00+00:00": 18,
         "2026-08-24T09:00:00+00:00": 18,
         "2026-08-25T09:00:00+00:00": 31,
-        "2026-08-25T12:00:00+00:00": 21,
+        "2026-08-25T12:00:00+00:00": 21 if len(v2) == 116 else 68,
     }
+    assert Counter(spec.replay_recorded_at for spec in v2) == expected_timestamps
 
 
 @pytest.mark.parametrize("mutation", ["missing-policy", "v2-missing-timestamp"])
@@ -2007,27 +2146,39 @@ def test_western_australia_criminal_courts_cluster_is_source_bound_and_closed() 
 
 @pytest.mark.timeout(900)
 def test_all_large_batch_cohorts_replay_cleanly(tmp_path: Path) -> None:
-    report = run_batch(PROJECT, tmp_path / "batch", concurrency=3)
-    assert report["passed"] is True
-    assert report["providerCalls"] == 0
-    assert report["acceptedWorksheetCount"] == 628
-    assert report["exceptionWorksheetCount"] == 0
-    assert report["canonicalObservationCount"] == 512957
-    assert {item["familyId"] for item in report["cohorts"]} == {
-        item.family_id for item in load_large_batch_registry(PROJECT).entries
-    }
-    expected_workbooks = {
-        item.family_id: len(item.expected_years)
-        for item in load_large_batch_registry(PROJECT).entries
-    }
-    assert all(
-        item["passed"] is True
-        and item["acceptedWorkbookCount"] == expected_workbooks[item["familyId"]]
-        and item["exceptionWorkbookCount"] == 0
-        and item["providerCalls"] == 0
-        and item["crossYearIssues"] == []
-        for item in report["cohorts"]
-    )
+    token = hashlib.sha256(
+        f"{tmp_path.resolve()}:{uuid.uuid4()}".encode()
+    ).hexdigest()
+    output = PROJECT / ".product-prototype" / f"all-cohorts-{token}"
+    try:
+        report = run_batch(PROJECT, output, concurrency=3)
+        assert report["passed"] is True
+        assert report["providerCalls"] == 0
+        registry = load_large_batch_registry(PROJECT)
+        assert report["acceptedWorksheetCount"] == registry.worksheet_count
+        assert report["exceptionWorksheetCount"] == 0
+        assert report["canonicalObservationCount"] == sum(
+            spec.expected_canonical_count for spec in registry.entries
+        )
+        assert {item["familyId"] for item in report["cohorts"]} == {
+            item.family_id for item in registry.entries
+        }
+        expected_workbooks = {
+            item.family_id: len(item.expected_years)
+            for item in load_large_batch_registry(PROJECT).entries
+        }
+        assert all(
+            item["passed"] is True
+            and item["acceptedWorkbookCount"]
+            == expected_workbooks[item["familyId"]]
+            and item["exceptionWorkbookCount"] == 0
+            and item["providerCalls"] == 0
+            and item["crossYearIssues"] == []
+            for item in report["cohorts"]
+        )
+    finally:
+        if output.exists():
+            shutil.rmtree(output, ignore_errors=False)
 
 
 def test_workbook_format_trim_is_deterministic(tmp_path: Path) -> None:
@@ -3677,11 +3828,14 @@ def test_large_batch_cli_verifies_committed_evidence() -> None:
     )
     assert completed.returncode == 0, completed.stderr
     report = json.loads(completed.stdout)
+    registry = load_large_batch_registry(PROJECT)
     assert report == {
-        "batchId": "justice-six-hundred-twenty-eight-worksheets-v1",
-        "worksheetCount": 628,
-        "cohortCount": 241,
-        "canonicalObservationCount": 512957,
+        "batchId": registry.batch_id,
+        "worksheetCount": registry.worksheet_count,
+        "cohortCount": len(registry.entries),
+        "canonicalObservationCount": sum(
+            spec.expected_canonical_count for spec in registry.entries
+        ),
         "providerCalls": 0,
         "verified": True,
     }

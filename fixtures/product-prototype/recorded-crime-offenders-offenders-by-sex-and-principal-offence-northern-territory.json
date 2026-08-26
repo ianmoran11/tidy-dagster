@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-offenders-by-sex-and-principal-offence-northern-territory",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "offenders-by-sex-and-principal-offence-northern-territory",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-offenders-by-sex-and-principal-offence-northern-territory-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/recorded-crime-offenders-2021-22-cube-2-source.xlsx",
+      "contentDigest": "sha256:c73c68dc7f5b4441b8814152684a2dc817d0bf2489ae65d8d39da99ae805cf66",
+      "byteLength": 199709,
+      "sheet": "Table 13",
+      "releaseId": "2021-22",
+      "downloadOrdinal": 2,
+      "cubeId": "states-territories",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-states-territories-main-13-2021.response.txt",
+        "contentDigest": "sha256:9c6a23b88c75ab46363a246014e503f85fdd4ac07e5a234e8de8919bf562d625",
+        "byteLength": 18605,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/recorded-crime-offenders-2022-23-cube-2-source.xlsx",
+      "contentDigest": "sha256:33195499e9b74131265781522d87366049161f76b60971aa8a212dff7d3b10c3",
+      "byteLength": 212963,
+      "sheet": "Table 13",
+      "releaseId": "2022-23",
+      "downloadOrdinal": 2,
+      "cubeId": "states-territories",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-states-territories-main-13-2022.response.txt",
+        "contentDigest": "sha256:5a87daf48ce75d77a09d9ccadee4c09d911a3771502c01886b3fdf2a424061a7",
+        "byteLength": 18605,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/recorded-crime-offenders-2023-24-cube-2-remaining-bounded.xlsx",
+      "contentDigest": "sha256:92cba4125ecf582e789ca66fe42b4eeeb7e007924b80e6ad5265ab62a34a3e48",
+      "byteLength": 187690,
+      "sheet": "Table 13",
+      "releaseId": "2023-24",
+      "downloadOrdinal": 2,
+      "cubeId": "states-territories",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-states-territories-main-13-2023.response.txt",
+        "contentDigest": "sha256:37ac4eeed456de8ff60466143f486673d0dd0c7e13c71fbf0f27c5e90694d5d4",
+        "byteLength": 19166,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      },
+      "normalization": "digest-pinned-bounded-offenders-remaining-v1"
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/recorded-crime-offenders-2024-25-cube-2-source.xlsx",
+      "contentDigest": "sha256:b945e14a3266f51d5496b8fe3d559c7b8c48a5933706760052f51a2cebcac64e",
+      "byteLength": 216593,
+      "sheet": "Table 13",
+      "releaseId": "2024-25",
+      "downloadOrdinal": 2,
+      "cubeId": "states-territories",
+      "tableNamespace": "main",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-states-territories-main-13-2024.response.txt",
+        "contentDigest": "sha256:aae20859fe2ba3b47dd36472d9dc37959ee8ed70b202ec630576c320002a8d17",
+        "byteLength": 19166,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    }
+  ]
+}

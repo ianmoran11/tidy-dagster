@@ -1,0 +1,2398 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:49b47b1d936cabbbabacddaf5ff865eeb48f678367c1db72c16a76650c04ebbc"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R26C17"
+            },
+            {
+              "range": "R28C2:R45C17"
+            },
+            {
+              "range": "R47C2:R64C17"
+            },
+            {
+              "range": "R67C2:R84C17"
+            },
+            {
+              "range": "R86C2:R103C17"
+            },
+            {
+              "range": "R105C2:R122C17"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "age group"
+      },
+      {
+        "id": "d02",
+        "name": "sex"
+      },
+      {
+        "id": "d03",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      },
+      {
+        "id": "d05",
+        "name": "observation period"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R86C2:R103C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R87C1:R88C1"
+                },
+                {
+                  "range": "R90C1:R100C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R102C1:R103C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R86C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R89C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R101C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R85C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R105C2:R122C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R106C1:R107C1"
+                },
+                {
+                  "range": "R109C1:R119C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R121C1:R122C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R105C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R108C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R120C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R104C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R26C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R10C1:R11C1"
+                },
+                {
+                  "range": "R13C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R25C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R9C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R12C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R28C2:R45C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R29C1:R30C1"
+                },
+                {
+                  "range": "R32C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R44C1:R45C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R31C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R43C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R27C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R47C2:R64C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R48C1:R49C1"
+                },
+                {
+                  "range": "R51C1:R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R63C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R46C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R67C2:R84C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R68C1:R69C1"
+                },
+                {
+                  "range": "R71C1:R81C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R83C1:R84C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R67C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R70C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R82C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R66C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R86C3:R103C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R87C1:R88C1"
+                },
+                {
+                  "range": "R90C1:R100C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R102C1:R103C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R86C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R89C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R101C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R85C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R105C3:R122C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R106C1:R107C1"
+                },
+                {
+                  "range": "R109C1:R119C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R121C1:R122C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R105C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R108C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R120C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R104C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C3:R26C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R10C1:R11C1"
+                },
+                {
+                  "range": "R13C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R25C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R9C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R12C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-010",
+      "order": 10,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p10",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R28C3:R45C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R29C1:R30C1"
+                },
+                {
+                  "range": "R32C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R44C1:R45C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R31C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R43C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R27C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-011",
+      "order": 11,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p11",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R47C3:R64C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R48C1:R49C1"
+                },
+                {
+                  "range": "R51C1:R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R63C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R46C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-012",
+      "order": 12,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p12",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R67C3:R84C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R68C1:R69C1"
+                },
+                {
+                  "range": "R71C1:R81C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R83C1:R84C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R67C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R70C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R82C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R66C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-013",
+      "order": 13,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p13",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R86C10:R103C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R87C1:R88C1"
+                },
+                {
+                  "range": "R90C1:R100C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R102C1:R103C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R86C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R89C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R101C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R85C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-014",
+      "order": 14,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p14",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R105C10:R122C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R106C1:R107C1"
+                },
+                {
+                  "range": "R109C1:R119C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R121C1:R122C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R105C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R108C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R120C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R104C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-015",
+      "order": 15,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p15",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C10:R26C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R10C1:R11C1"
+                },
+                {
+                  "range": "R13C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R25C1:R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R9C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R12C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-016",
+      "order": 16,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p16",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R28C10:R45C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R29C1:R30C1"
+                },
+                {
+                  "range": "R32C1:R42C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R44C1:R45C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R28C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R31C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R43C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R27C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-017",
+      "order": 17,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p17",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R47C10:R64C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R48C1:R49C1"
+                },
+                {
+                  "range": "R51C1:R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R63C1:R64C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R50C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R46C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-016",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-018",
+      "order": 18,
+      "tableName": "Offenders offenders-by-sex-age-and-jurisdiction-snapshot 2023-24 p18",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R67C10:R84C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R68C1:R69C1"
+                },
+                {
+                  "range": "R71C1:R81C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "range": "R83C1:R84C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R67C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R70C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R82C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-018",
+              "selectors": [
+                {
+                  "address": "R66C1"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d05",
+          "source": [
+            {
+              "regionId": "region-017",
+              "selectors": [
+                {
+                  "address": "R65C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

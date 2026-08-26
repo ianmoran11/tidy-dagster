@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-covid-offenders-selected-characteristics-jurisdiction-time-series",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "covid-offenders-selected-characteristics-jurisdiction-time-series",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-covid-offenders-selected-characteristics-jurisdiction-time-series-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/recorded-crime-offenders-2021-22-cube-7-source.xlsx",
+      "contentDigest": "sha256:005dbd4e167303d479a4de43ffa7eb91f3db31103b0430622fdc467c2a66d1c1",
+      "byteLength": 60227,
+      "sheet": "Table 2",
+      "releaseId": "2021-22",
+      "downloadOrdinal": 7,
+      "cubeId": "covid-19",
+      "tableNamespace": "covid-19",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-covid-19-covid-19-2-2021.response.txt",
+        "contentDigest": "sha256:b55492506b3971d1efabe43644648c42fc8392a269cae65a3a2f8707b40e9fc8",
+        "byteLength": 321449,
+        "historicalModel": "provider-free/offenders-c4/target-scoped-recipe-v02",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "TargetScopedRecipeV02"
+      }
+    }
+  ]
+}

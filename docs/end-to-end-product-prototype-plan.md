@@ -772,10 +772,15 @@ same-span panel immediately precedes a marker run with an identical style
 vector. Detached, merged, unlabelled, or style-mismatched runs are rejected;
 all 503 previously accepted worksheet catalogs remained byte-identical.
 
-The combined registered batch now contains 241 cohorts and 628 worksheets with
-512,957 canonical observations. The dashboard projects three publications, 246
+The installed baseline batch contains 241 cohorts and 628 worksheets with
+512,957 canonical observations. Its dashboard projects three publications, 246
 cohorts, 653 worksheet-assets, and 526,240 canonical observations through 653
-verified CSV routes across 91 physical workbooks. Prisoners in Australia is
+verified CSV routes across 91 physical workbooks. The separately reviewed
+remaining-Offenders C4 proposal, only after exact external authorization and an
+atomic journaled swap, closes at 288 batch cohorts / 798 worksheets / 737,954
+rows and 293 status cohorts / 823 worksheet-assets / 751,237 rows. The full
+status snapshot is generated, digest-authorized, and swapped in that same
+transaction; baseline and full tests reject every partial boundary. Prisoners in Australia is
 complete at 48 cohorts, 203/203 worksheets, and 82,869 observations; the final
 21-family atomic boundary contributes 69 worksheets and 34,837 rows with zero
 providers, warnings, issues, exclusions, or exceptions. The complete New South Wales,

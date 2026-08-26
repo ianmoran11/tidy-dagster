@@ -16,6 +16,7 @@ from .large_batch import (
     verify_large_batch_evidence,
     verify_large_batch_reproduction,
 )
+from .offenders_acceptance import c4_shared_access, run_offenders_remaining_family
 from .product_prototype import run_product_prototype
 
 BATCH_RUN_SCHEMA = "tidy.product-prototype-large-batch-run/v1"
@@ -28,15 +29,23 @@ def _run_one(
     recorded_at: str,
 ) -> dict[str, Any]:
     cohort_output = output / spec.family_id
-    result = run_product_prototype(
-        repository=LocalArtifactRepository(cohort_output / "repository"),
-        project_root=project,
-        cohort_path=project / spec.cohort_path,
-        output_root=cohort_output,
-        mode="replay",
-        recorded_at=recorded_at,
-    )
-    report = result.report
+    if spec.replay_engine == "offenders-remaining-c4-v1":
+        report = run_offenders_remaining_family(
+            project_root=project,
+            cohort_path=project / spec.cohort_path,
+            output_root=cohort_output,
+            recorded_at=recorded_at,
+        )
+    else:
+        result = run_product_prototype(
+            repository=LocalArtifactRepository(cohort_output / "repository"),
+            project_root=project,
+            cohort_path=project / spec.cohort_path,
+            output_root=cohort_output,
+            mode="replay",
+            recorded_at=recorded_at,
+        )
+        report = result.report
     verify_large_batch_reproduction(project, spec, cohort_output)
     passed = (
         report["providerCalls"] == 0
@@ -66,7 +75,7 @@ def _run_one(
     }
 
 
-def run_batch(
+def _run_batch_unlocked(
     project: Path,
     output: Path,
     *,
@@ -128,7 +137,17 @@ def run_batch(
     return report
 
 
-def verify_batch(project: Path) -> dict[str, Any]:
+def run_batch(
+    project: Path,
+    output: Path,
+    *,
+    concurrency: int,
+) -> dict[str, Any]:
+    with c4_shared_access(project):
+        return _run_batch_unlocked(project, output, concurrency=concurrency)
+
+
+def _verify_batch_unlocked(project: Path) -> dict[str, Any]:
     registry = load_large_batch_registry(project)
     verify_batch_normalization(project, registry)
     manifests = [
@@ -144,6 +163,11 @@ def verify_batch(project: Path) -> dict[str, Any]:
         "providerCalls": sum(item["providerCalls"] for item in manifests),
         "verified": True,
     }
+
+
+def verify_batch(project: Path) -> dict[str, Any]:
+    with c4_shared_access(project):
+        return _verify_batch_unlocked(project)
 
 
 def main() -> int:

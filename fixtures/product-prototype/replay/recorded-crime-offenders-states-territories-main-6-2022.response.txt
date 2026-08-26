@@ -1,0 +1,1408 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:594c9847339f4e6fa4d786bf860c5a411e1209ad572f5efc20efa1abdb28092d"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders offenders-by-principal-offence-and-jurisdiction-snapshot 2022-23",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R12C17"
+            },
+            {
+              "range": "R14C2:R16C17"
+            },
+            {
+              "range": "R18C2:R20C17"
+            },
+            {
+              "range": "R22C2:R22C17"
+            },
+            {
+              "range": "R24C2:R24C17"
+            },
+            {
+              "range": "R26C2:R26C17"
+            },
+            {
+              "range": "R28C2:R28C17"
+            },
+            {
+              "range": "R30C2:R33C17"
+            },
+            {
+              "range": "R35C2:R35C17"
+            },
+            {
+              "range": "R37C2:R41C17"
+            },
+            {
+              "range": "R43C2:R46C17"
+            },
+            {
+              "range": "R48C2:R48C17"
+            },
+            {
+              "range": "R50C2:R50C17"
+            },
+            {
+              "range": "R52C2:R55C17"
+            },
+            {
+              "range": "R57C2:R59C17"
+            },
+            {
+              "range": "R61C2:R62C17"
+            },
+            {
+              "range": "R64C2:R67C17"
+            },
+            {
+              "range": "R69C2:R71C17"
+            },
+            {
+              "range": "R73C2:R75C17"
+            },
+            {
+              "range": "R77C2:R77C17"
+            },
+            {
+              "range": "R79C2:R79C17"
+            },
+            {
+              "range": "R81C2:R81C17"
+            },
+            {
+              "range": "R83C2:R83C17"
+            },
+            {
+              "range": "R85C2:R88C17"
+            },
+            {
+              "range": "R90C2:R90C17"
+            },
+            {
+              "range": "R92C2:R96C17"
+            },
+            {
+              "range": "R98C2:R101C17"
+            },
+            {
+              "range": "R103C2:R103C17"
+            },
+            {
+              "range": "R105C2:R105C17"
+            },
+            {
+              "range": "R107C2:R110C17"
+            },
+            {
+              "range": "R112C2:R114C17"
+            },
+            {
+              "range": "R116C2:R117C17"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "principal offence"
+      },
+      {
+        "id": "d02",
+        "name": "jurisdiction"
+      },
+      {
+        "id": "d03",
+        "name": "statistic basis"
+      },
+      {
+        "id": "d04",
+        "name": "observation period"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders offenders-by-principal-offence-and-jurisdiction-snapshot 2022-23 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R64C2:R67C2"
+            },
+            {
+              "range": "R69C2:R71C2"
+            },
+            {
+              "range": "R73C2:R75C2"
+            },
+            {
+              "address": "R77C2"
+            },
+            {
+              "address": "R79C2"
+            },
+            {
+              "address": "R81C2"
+            },
+            {
+              "address": "R83C2"
+            },
+            {
+              "range": "R85C2:R88C2"
+            },
+            {
+              "address": "R90C2"
+            },
+            {
+              "range": "R92C2:R96C2"
+            },
+            {
+              "range": "R98C2:R101C2"
+            },
+            {
+              "address": "R103C2"
+            },
+            {
+              "address": "R105C2"
+            },
+            {
+              "range": "R107C2:R110C2"
+            },
+            {
+              "range": "R112C2:R114C2"
+            },
+            {
+              "range": "R116C2:R117C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-034",
+              "selectors": [
+                {
+                  "range": "R65C1:R67C1"
+                },
+                {
+                  "range": "R70C1:R71C1"
+                },
+                {
+                  "range": "R74C1:R75C1"
+                },
+                {
+                  "range": "R86C1:R88C1"
+                },
+                {
+                  "range": "R93C1:R96C1"
+                },
+                {
+                  "range": "R99C1:R101C1"
+                },
+                {
+                  "range": "R108C1:R110C1"
+                },
+                {
+                  "range": "R113C1:R114C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-035",
+              "selectors": [
+                {
+                  "address": "R64C1"
+                },
+                {
+                  "address": "R69C1"
+                },
+                {
+                  "address": "R73C1"
+                },
+                {
+                  "address": "R77C1"
+                },
+                {
+                  "address": "R79C1"
+                },
+                {
+                  "address": "R81C1"
+                },
+                {
+                  "address": "R83C1"
+                },
+                {
+                  "address": "R85C1"
+                },
+                {
+                  "address": "R92C1"
+                },
+                {
+                  "address": "R98C1"
+                },
+                {
+                  "address": "R103C1"
+                },
+                {
+                  "address": "R105C1"
+                },
+                {
+                  "address": "R107C1"
+                },
+                {
+                  "address": "R112C1"
+                },
+                {
+                  "address": "R116C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-038",
+              "selectors": [
+                {
+                  "address": "R90C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-039",
+              "selectors": [
+                {
+                  "address": "R117C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-036",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-037",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-042",
+              "selectors": [
+                {
+                  "address": "R63C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders offenders-by-principal-offence-and-jurisdiction-snapshot 2022-23 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C2:R12C2"
+            },
+            {
+              "range": "R14C2:R16C2"
+            },
+            {
+              "range": "R18C2:R20C2"
+            },
+            {
+              "address": "R22C2"
+            },
+            {
+              "address": "R24C2"
+            },
+            {
+              "address": "R26C2"
+            },
+            {
+              "address": "R28C2"
+            },
+            {
+              "range": "R30C2:R33C2"
+            },
+            {
+              "address": "R35C2"
+            },
+            {
+              "range": "R37C2:R41C2"
+            },
+            {
+              "range": "R43C2:R46C2"
+            },
+            {
+              "address": "R48C2"
+            },
+            {
+              "address": "R50C2"
+            },
+            {
+              "range": "R52C2:R55C2"
+            },
+            {
+              "range": "R57C2:R59C2"
+            },
+            {
+              "range": "R61C2:R62C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-034",
+              "selectors": [
+                {
+                  "range": "R10C1:R12C1"
+                },
+                {
+                  "range": "R15C1:R16C1"
+                },
+                {
+                  "range": "R19C1:R20C1"
+                },
+                {
+                  "range": "R31C1:R33C1"
+                },
+                {
+                  "range": "R38C1:R41C1"
+                },
+                {
+                  "range": "R44C1:R46C1"
+                },
+                {
+                  "range": "R53C1:R55C1"
+                },
+                {
+                  "range": "R58C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-035",
+              "selectors": [
+                {
+                  "address": "R9C1"
+                },
+                {
+                  "address": "R14C1"
+                },
+                {
+                  "address": "R18C1"
+                },
+                {
+                  "address": "R22C1"
+                },
+                {
+                  "address": "R24C1"
+                },
+                {
+                  "address": "R26C1"
+                },
+                {
+                  "address": "R28C1"
+                },
+                {
+                  "address": "R30C1"
+                },
+                {
+                  "address": "R37C1"
+                },
+                {
+                  "address": "R43C1"
+                },
+                {
+                  "address": "R48C1"
+                },
+                {
+                  "address": "R50C1"
+                },
+                {
+                  "address": "R52C1"
+                },
+                {
+                  "address": "R57C1"
+                },
+                {
+                  "address": "R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-038",
+              "selectors": [
+                {
+                  "address": "R35C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-039",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-036",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-037",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-041",
+              "selectors": [
+                {
+                  "address": "R8C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders offenders-by-principal-offence-and-jurisdiction-snapshot 2022-23 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R64C3:R67C9"
+            },
+            {
+              "range": "R69C3:R71C9"
+            },
+            {
+              "range": "R73C3:R75C9"
+            },
+            {
+              "range": "R77C3:R77C9"
+            },
+            {
+              "range": "R79C3:R79C9"
+            },
+            {
+              "range": "R81C3:R81C9"
+            },
+            {
+              "range": "R83C3:R83C9"
+            },
+            {
+              "range": "R85C3:R88C9"
+            },
+            {
+              "range": "R90C3:R90C9"
+            },
+            {
+              "range": "R92C3:R96C9"
+            },
+            {
+              "range": "R98C3:R101C9"
+            },
+            {
+              "range": "R103C3:R103C9"
+            },
+            {
+              "range": "R105C3:R105C9"
+            },
+            {
+              "range": "R107C3:R110C9"
+            },
+            {
+              "range": "R112C3:R114C9"
+            },
+            {
+              "range": "R116C3:R117C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-034",
+              "selectors": [
+                {
+                  "range": "R65C1:R67C1"
+                },
+                {
+                  "range": "R70C1:R71C1"
+                },
+                {
+                  "range": "R74C1:R75C1"
+                },
+                {
+                  "range": "R86C1:R88C1"
+                },
+                {
+                  "range": "R93C1:R96C1"
+                },
+                {
+                  "range": "R99C1:R101C1"
+                },
+                {
+                  "range": "R108C1:R110C1"
+                },
+                {
+                  "range": "R113C1:R114C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-035",
+              "selectors": [
+                {
+                  "address": "R64C1"
+                },
+                {
+                  "address": "R69C1"
+                },
+                {
+                  "address": "R73C1"
+                },
+                {
+                  "address": "R77C1"
+                },
+                {
+                  "address": "R79C1"
+                },
+                {
+                  "address": "R81C1"
+                },
+                {
+                  "address": "R83C1"
+                },
+                {
+                  "address": "R85C1"
+                },
+                {
+                  "address": "R92C1"
+                },
+                {
+                  "address": "R98C1"
+                },
+                {
+                  "address": "R103C1"
+                },
+                {
+                  "address": "R105C1"
+                },
+                {
+                  "address": "R107C1"
+                },
+                {
+                  "address": "R112C1"
+                },
+                {
+                  "address": "R116C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-038",
+              "selectors": [
+                {
+                  "address": "R90C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-039",
+              "selectors": [
+                {
+                  "address": "R117C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-036",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-040",
+              "selectors": [
+                {
+                  "address": "R7C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-037",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-042",
+              "selectors": [
+                {
+                  "address": "R63C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders offenders-by-principal-offence-and-jurisdiction-snapshot 2022-23 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C3:R12C9"
+            },
+            {
+              "range": "R14C3:R16C9"
+            },
+            {
+              "range": "R18C3:R20C9"
+            },
+            {
+              "range": "R22C3:R22C9"
+            },
+            {
+              "range": "R24C3:R24C9"
+            },
+            {
+              "range": "R26C3:R26C9"
+            },
+            {
+              "range": "R28C3:R28C9"
+            },
+            {
+              "range": "R30C3:R33C9"
+            },
+            {
+              "range": "R35C3:R35C9"
+            },
+            {
+              "range": "R37C3:R41C9"
+            },
+            {
+              "range": "R43C3:R46C9"
+            },
+            {
+              "range": "R48C3:R48C9"
+            },
+            {
+              "range": "R50C3:R50C9"
+            },
+            {
+              "range": "R52C3:R55C9"
+            },
+            {
+              "range": "R57C3:R59C9"
+            },
+            {
+              "range": "R61C3:R62C9"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-034",
+              "selectors": [
+                {
+                  "range": "R10C1:R12C1"
+                },
+                {
+                  "range": "R15C1:R16C1"
+                },
+                {
+                  "range": "R19C1:R20C1"
+                },
+                {
+                  "range": "R31C1:R33C1"
+                },
+                {
+                  "range": "R38C1:R41C1"
+                },
+                {
+                  "range": "R44C1:R46C1"
+                },
+                {
+                  "range": "R53C1:R55C1"
+                },
+                {
+                  "range": "R58C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-035",
+              "selectors": [
+                {
+                  "address": "R9C1"
+                },
+                {
+                  "address": "R14C1"
+                },
+                {
+                  "address": "R18C1"
+                },
+                {
+                  "address": "R22C1"
+                },
+                {
+                  "address": "R24C1"
+                },
+                {
+                  "address": "R26C1"
+                },
+                {
+                  "address": "R28C1"
+                },
+                {
+                  "address": "R30C1"
+                },
+                {
+                  "address": "R37C1"
+                },
+                {
+                  "address": "R43C1"
+                },
+                {
+                  "address": "R48C1"
+                },
+                {
+                  "address": "R50C1"
+                },
+                {
+                  "address": "R52C1"
+                },
+                {
+                  "address": "R57C1"
+                },
+                {
+                  "address": "R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-038",
+              "selectors": [
+                {
+                  "address": "R35C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-039",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-036",
+              "selectors": [
+                {
+                  "range": "R7C3:R7C8"
+                }
+              ]
+            },
+            {
+              "regionId": "region-040",
+              "selectors": [
+                {
+                  "address": "R7C9"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-037",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-041",
+              "selectors": [
+                {
+                  "address": "R8C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders offenders-by-principal-offence-and-jurisdiction-snapshot 2022-23 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R64C10:R67C17"
+            },
+            {
+              "range": "R69C10:R71C17"
+            },
+            {
+              "range": "R73C10:R75C17"
+            },
+            {
+              "range": "R77C10:R77C17"
+            },
+            {
+              "range": "R79C10:R79C17"
+            },
+            {
+              "range": "R81C10:R81C17"
+            },
+            {
+              "range": "R83C10:R83C17"
+            },
+            {
+              "range": "R85C10:R88C17"
+            },
+            {
+              "range": "R90C10:R90C17"
+            },
+            {
+              "range": "R92C10:R96C17"
+            },
+            {
+              "range": "R98C10:R101C17"
+            },
+            {
+              "range": "R103C10:R103C17"
+            },
+            {
+              "range": "R105C10:R105C17"
+            },
+            {
+              "range": "R107C10:R110C17"
+            },
+            {
+              "range": "R112C10:R114C17"
+            },
+            {
+              "range": "R116C10:R117C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-034",
+              "selectors": [
+                {
+                  "range": "R65C1:R67C1"
+                },
+                {
+                  "range": "R70C1:R71C1"
+                },
+                {
+                  "range": "R74C1:R75C1"
+                },
+                {
+                  "range": "R86C1:R88C1"
+                },
+                {
+                  "range": "R93C1:R96C1"
+                },
+                {
+                  "range": "R99C1:R101C1"
+                },
+                {
+                  "range": "R108C1:R110C1"
+                },
+                {
+                  "range": "R113C1:R114C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-035",
+              "selectors": [
+                {
+                  "address": "R64C1"
+                },
+                {
+                  "address": "R69C1"
+                },
+                {
+                  "address": "R73C1"
+                },
+                {
+                  "address": "R77C1"
+                },
+                {
+                  "address": "R79C1"
+                },
+                {
+                  "address": "R81C1"
+                },
+                {
+                  "address": "R83C1"
+                },
+                {
+                  "address": "R85C1"
+                },
+                {
+                  "address": "R92C1"
+                },
+                {
+                  "address": "R98C1"
+                },
+                {
+                  "address": "R103C1"
+                },
+                {
+                  "address": "R105C1"
+                },
+                {
+                  "address": "R107C1"
+                },
+                {
+                  "address": "R112C1"
+                },
+                {
+                  "address": "R116C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-038",
+              "selectors": [
+                {
+                  "address": "R90C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-039",
+              "selectors": [
+                {
+                  "address": "R117C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-036",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-037",
+              "selectors": [
+                {
+                  "address": "R6C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-042",
+              "selectors": [
+                {
+                  "address": "R63C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders offenders-by-principal-offence-and-jurisdiction-snapshot 2022-23 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R9C10:R12C17"
+            },
+            {
+              "range": "R14C10:R16C17"
+            },
+            {
+              "range": "R18C10:R20C17"
+            },
+            {
+              "range": "R22C10:R22C17"
+            },
+            {
+              "range": "R24C10:R24C17"
+            },
+            {
+              "range": "R26C10:R26C17"
+            },
+            {
+              "range": "R28C10:R28C17"
+            },
+            {
+              "range": "R30C10:R33C17"
+            },
+            {
+              "range": "R35C10:R35C17"
+            },
+            {
+              "range": "R37C10:R41C17"
+            },
+            {
+              "range": "R43C10:R46C17"
+            },
+            {
+              "range": "R48C10:R48C17"
+            },
+            {
+              "range": "R50C10:R50C17"
+            },
+            {
+              "range": "R52C10:R55C17"
+            },
+            {
+              "range": "R57C10:R59C17"
+            },
+            {
+              "range": "R61C10:R62C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-034",
+              "selectors": [
+                {
+                  "range": "R10C1:R12C1"
+                },
+                {
+                  "range": "R15C1:R16C1"
+                },
+                {
+                  "range": "R19C1:R20C1"
+                },
+                {
+                  "range": "R31C1:R33C1"
+                },
+                {
+                  "range": "R38C1:R41C1"
+                },
+                {
+                  "range": "R44C1:R46C1"
+                },
+                {
+                  "range": "R53C1:R55C1"
+                },
+                {
+                  "range": "R58C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-035",
+              "selectors": [
+                {
+                  "address": "R9C1"
+                },
+                {
+                  "address": "R14C1"
+                },
+                {
+                  "address": "R18C1"
+                },
+                {
+                  "address": "R22C1"
+                },
+                {
+                  "address": "R24C1"
+                },
+                {
+                  "address": "R26C1"
+                },
+                {
+                  "address": "R28C1"
+                },
+                {
+                  "address": "R30C1"
+                },
+                {
+                  "address": "R37C1"
+                },
+                {
+                  "address": "R43C1"
+                },
+                {
+                  "address": "R48C1"
+                },
+                {
+                  "address": "R50C1"
+                },
+                {
+                  "address": "R52C1"
+                },
+                {
+                  "address": "R57C1"
+                },
+                {
+                  "address": "R61C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-038",
+              "selectors": [
+                {
+                  "address": "R35C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-039",
+              "selectors": [
+                {
+                  "address": "R62C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-036",
+              "selectors": [
+                {
+                  "range": "R7C10:R7C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-037",
+              "selectors": [
+                {
+                  "address": "R6C10"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-041",
+              "selectors": [
+                {
+                  "address": "R8C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

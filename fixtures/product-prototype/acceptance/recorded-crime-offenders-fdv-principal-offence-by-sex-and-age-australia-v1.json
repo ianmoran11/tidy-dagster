@@ -1,0 +1,464 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-fdv-principal-offence-by-sex-and-age-australia-v1",
+  "tableFamilyId": "fdv-principal-offence-by-sex-and-age-australia",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 630,
+        "2022": 756,
+        "2023": 756,
+        "2024": 756
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "15_19_YEARS_3e4c0dd0",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2022": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "15_17_YEARS_80d81828",
+            "18_19_YEARS_86019305",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_10_17_YEARS_8c31c950",
+            "TOTAL_18_YEARS_AND_OVER_6054f36a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2023": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "15_17_YEARS_80d81828",
+            "18_19_YEARS_86019305",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_10_17_YEARS_8c31c950",
+            "TOTAL_18_YEARS_AND_OVER_6054f36a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        },
+        "2024": {
+          "principal_offence": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "15_17_YEARS_80d81828",
+            "18_19_YEARS_86019305",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_10_17_YEARS_8c31c950",
+            "TOTAL_18_YEARS_AND_OVER_6054f36a",
+            "TOTAL_ab2882c8"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:b5a7e22c2e3a4b0835fa30f5296d17e2bf5f1f76f2f9f7f18d8bac75a83f5068",
+        "2022": "sha256:dd08a1df635c57ac7c772664de0c17724682807ad64621b995d5df351dcde907",
+        "2023": "sha256:dd08a1df635c57ac7c772664de0c17724682807ad64621b995d5df351dcde907",
+        "2024": "sha256:dd08a1df635c57ac7c772664de0c17724682807ad64621b995d5df351dcde907"
+      },
+      "missingValues": {
+        "na": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "principal_offence",
+    "sex",
+    "age_group",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "principal_offence": [
+      "principal\\ offence"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "age_group": [
+      "age\\ group"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "principal_offence": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "05 Abduction/harassment": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "121 Property damage": "121_PROPERTY_DAMAGE_72667e1c",
+      "153 Breach of violence and non-violence orders": "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+      "Total": "TOTAL_ab2882c8"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons(d)": "PERSONS_4d6dccab",
+      "Persons(c)": "PERSONS_4d6dccab"
+    },
+    "age_group": {
+      "10–14 years": "10_14_YEARS_05581698",
+      "15–19 years": "15_19_YEARS_3e4c0dd0",
+      "20–24 years": "20_24_YEARS_2df2761c",
+      "25–29 years": "25_29_YEARS_d1e1fc9b",
+      "30–34 years": "30_34_YEARS_0a93b800",
+      "35–39 years": "35_39_YEARS_69a576ee",
+      "40–44 years": "40_44_YEARS_73d7663d",
+      "45–49 years": "45_49_YEARS_7d712677",
+      "50–54 years": "50_54_YEARS_e971eda4",
+      "55–59 years": "55_59_YEARS_6b99c17f",
+      "60–64 years": "60_64_YEARS_0f150066",
+      "65 years and over": "65_YEARS_AND_OVER_d27557e1",
+      "Total(c)": "TOTAL_ab2882c8",
+      "Mean age (years)": "MEAN_AGE_YEARS_54827fe2",
+      "Median age (years)": "MEDIAN_AGE_YEARS_ada3abad",
+      "15–17 years": "15_17_YEARS_80d81828",
+      "Total 10–17 years": "TOTAL_10_17_YEARS_8c31c950",
+      "18–19 years": "18_19_YEARS_86019305",
+      "Total 18 years and over": "TOTAL_18_YEARS_AND_OVER_6054f36a",
+      "Total(b)": "TOTAL_ab2882c8"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Offender rate(e)": "OFFENDER_RATE_bf190e83",
+      "Offender rate(d)": "OFFENDER_RATE_bf190e83"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:d205cdf9b36c3b972b677519bee4a163cafe0762ab18b060642f275431e22948",
+    "2022": "sha256:837c12cf40883ebd6f8312bb8abfc5c2cffb568a3b47cab15d9420031846a7d5",
+    "2023": "sha256:9d077d2ed579ff74d6b429631075bf3feabf92e72e917fd2f5cac8b4f97ca03b",
+    "2024": "sha256:ba1a06074b16a2f1ac952467e73fbc1b0610fdb302de444c0780e101955f5567"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:b94deba9f78d1276e22199c725268620a98bd067ceef6ebc9e07ba6ba73ecf37",
+    "2022": "sha256:52c9df4da4dfd0cba23b180925a1f9371b0904a1126eadca470b133afbff82fd",
+    "2023": "sha256:508fd8b7f57c1ad6e6ff2c35e98636a5986c229b347c6663c8d9caeed3e4706e",
+    "2024": "sha256:dfeed2d2de234708b157c19741ab8130e0ea01f3c776cafa49e86194f648734e"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:137848c23f0e1f8c33a26707f71374aa89de2e33b402afc5fd70d7bc4b2207a3",
+    "2022": "sha256:0f0b0b827d91a3ce1ec6ce382f95948996d8448e1e175ea2582931b7cfd1ac59",
+    "2023": "sha256:0cd3f3933cb7ba0aea181605ead6fb29bf10059f5a851a14bc0b2608c14fddc7",
+    "2024": "sha256:4123f8785b7222a99651d62605a7695d2d4e037778ad188598db190b2aa33fba"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "principal_offence_id",
+    "sex_id",
+    "age_group_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 630,
+    "maximumRows": 756,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "principalOffencesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2022": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2023": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2024": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "ageGroupsByYear": {
+      "2021": [
+        "10_14_YEARS_05581698",
+        "15_19_YEARS_3e4c0dd0",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "10_14_YEARS_05581698",
+        "15_17_YEARS_80d81828",
+        "18_19_YEARS_86019305",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_10_17_YEARS_8c31c950",
+        "TOTAL_18_YEARS_AND_OVER_6054f36a",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "10_14_YEARS_05581698",
+        "15_17_YEARS_80d81828",
+        "18_19_YEARS_86019305",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_10_17_YEARS_8c31c950",
+        "TOTAL_18_YEARS_AND_OVER_6054f36a",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "10_14_YEARS_05581698",
+        "15_17_YEARS_80d81828",
+        "18_19_YEARS_86019305",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_10_17_YEARS_8c31c950",
+        "TOTAL_18_YEARS_AND_OVER_6054f36a",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

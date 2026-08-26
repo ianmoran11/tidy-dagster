@@ -1,0 +1,1083 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:32a2f3742031f5ad7d1447824a02fd354534639f37a853d976fbb504c0417de2"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R24C33"
+            },
+            {
+              "range": "R26C2:R42C33"
+            },
+            {
+              "range": "R44C2:R60C33"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "principal offence"
+      },
+      {
+        "id": "d02",
+        "name": "observation period"
+      },
+      {
+        "id": "d03",
+        "name": "sex"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R24C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R8C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C2:R42C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R26C1:R28C1"
+                },
+                {
+                  "range": "R30C1:R40C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C2:R60C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R44C1:R46C1"
+                },
+                {
+                  "range": "R48C1:R58C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C3:R24C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R8C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C3:R42C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R26C1:R28C1"
+                },
+                {
+                  "range": "R30C1:R40C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C3:R60C17"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R44C1:R46C1"
+                },
+                {
+                  "range": "R48C1:R58C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C9"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C10:R6C16"
+                }
+              ]
+            },
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R6C17"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C18:R24C33"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R8C1:R10C1"
+                },
+                {
+                  "range": "R12C1:R22C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C18:R6C25"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C27:R6C33"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C26"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C18"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C18:R42C33"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R26C1:R28C1"
+                },
+                {
+                  "range": "R30C1:R40C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C18:R6C25"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C27:R6C33"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C26"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C18"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders youth-offenders-by-sex-principal-offence-and-period 2023-24 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C18:R60C33"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R44C1:R46C1"
+                },
+                {
+                  "range": "R48C1:R58C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C18:R6C25"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C27:R6C33"
+                }
+              ]
+            },
+            {
+              "regionId": "region-015",
+              "selectors": [
+                {
+                  "address": "R6C26"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C18"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

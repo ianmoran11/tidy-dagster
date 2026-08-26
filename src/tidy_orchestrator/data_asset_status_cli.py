@@ -13,6 +13,7 @@ from .data_asset_status import (
     refresh_snapshot,
     snapshot_matches,
 )
+from .offenders_acceptance import c4_shared_access
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -68,11 +69,15 @@ def main(argv: list[str] | None = None) -> int:
                 return 1
             print(f"Status snapshot matches evidence: {output} ({expected}).")
             return 0
-        status, output, _changed = refresh_snapshot(
-            arguments.project_root, arguments.registry
+        with c4_shared_access(arguments.project_root):
+            status, output, _changed = refresh_snapshot(
+                arguments.project_root, arguments.registry
+            )
+            csv_payloads = build_asset_csv_payloads(arguments.project_root, status)
+            html_payload = output.read_bytes()
+        server = make_status_server(
+            status.host, status.port, html_payload, csv_payloads
         )
-        csv_payloads = build_asset_csv_payloads(arguments.project_root, status)
-        server = make_status_server(status.host, status.port, output, csv_payloads)
         print(
             f"Tidy Data Asset Status: http://{status.host}:{status.port}/ "
             f"({len(csv_payloads)} asset CSV routes)"

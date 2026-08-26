@@ -1,0 +1,1101 @@
+{
+  "version": "semantic-table-map-v2",
+  "catalog": {
+    "version": "semantic-region-catalog-v5-adjacent-year-aware",
+    "digest": "sha256:e76a4bc1b32a32a798b6e11784e17625f6523b5d18690985ef2a8bf19dcad3a2"
+  },
+  "logicalTable": {
+    "id": "observations",
+    "name": "Recorded Crime Offenders offenders-police-proceedings-victoria 2024-25",
+    "values": {
+      "id": "published-value",
+      "name": "published value",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R24C35"
+            },
+            {
+              "range": "R26C2:R42C35"
+            },
+            {
+              "range": "R44C2:R60C35"
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions": [
+      {
+        "id": "d01",
+        "name": "principal offence"
+      },
+      {
+        "id": "d02",
+        "name": "method of proceeding"
+      },
+      {
+        "id": "d03",
+        "name": "observation period"
+      },
+      {
+        "id": "d04",
+        "name": "statistic basis"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "panel-001",
+      "order": 1,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p1",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C2:R24C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R12C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R9C1:R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-002",
+      "order": 2,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p2",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C2:R42C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R30C1:R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R27C1:R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-003",
+      "order": 3,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p3",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C2:R60C2"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R48C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R45C1:R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C2"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-004",
+      "order": 4,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p4",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C3:R24C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R12C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R9C1:R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C10"
+                },
+                {
+                  "range": "R6C12:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                },
+                {
+                  "address": "R6C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-005",
+      "order": 5,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p5",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C3:R42C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R30C1:R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R27C1:R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C10"
+                },
+                {
+                  "range": "R6C12:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                },
+                {
+                  "address": "R6C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-006",
+      "order": 6,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p6",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C3:R60C18"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R48C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R45C1:R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "range": "R6C9:R6C10"
+                },
+                {
+                  "range": "R6C12:R6C17"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C3:R6C8"
+                },
+                {
+                  "address": "R6C11"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R6C18"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-013",
+              "selectors": [
+                {
+                  "address": "R5C2"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-007",
+      "order": 7,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p7",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R8C19:R24C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R12C1:R23C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R9C1:R11C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R8C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R24C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R7C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C19"
+                },
+                {
+                  "range": "R6C26:R6C27"
+                },
+                {
+                  "range": "R6C29:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C20:R6C25"
+                },
+                {
+                  "address": "R6C28"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-008",
+      "order": 8,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p8",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R26C19:R42C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R30C1:R41C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R27C1:R29C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R26C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R42C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R25C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C19"
+                },
+                {
+                  "range": "R6C26:R6C27"
+                },
+                {
+                  "range": "R6C29:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C20:R6C25"
+                },
+                {
+                  "address": "R6C28"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    },
+    {
+      "id": "panel-009",
+      "order": 9,
+      "tableName": "Offenders offenders-police-proceedings-victoria 2024-25 p9",
+      "target": [
+        {
+          "regionId": "region-001",
+          "selectors": [
+            {
+              "range": "R44C19:R60C35"
+            }
+          ]
+        }
+      ],
+      "dimensions": [
+        {
+          "id": "d01",
+          "source": [
+            {
+              "regionId": "region-005",
+              "selectors": [
+                {
+                  "range": "R48C1:R59C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-008",
+              "selectors": [
+                {
+                  "range": "R45C1:R47C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-010",
+              "selectors": [
+                {
+                  "address": "R44C1"
+                }
+              ]
+            },
+            {
+              "regionId": "region-011",
+              "selectors": [
+                {
+                  "address": "R60C1"
+                }
+              ]
+            }
+          ],
+          "direction": "W",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d02",
+          "source": [
+            {
+              "regionId": "region-009",
+              "selectors": [
+                {
+                  "address": "R43C2"
+                }
+              ]
+            }
+          ],
+          "direction": "WNW",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d03",
+          "source": [
+            {
+              "regionId": "region-006",
+              "selectors": [
+                {
+                  "address": "R6C19"
+                },
+                {
+                  "range": "R6C26:R6C27"
+                },
+                {
+                  "range": "R6C29:R6C34"
+                }
+              ]
+            },
+            {
+              "regionId": "region-007",
+              "selectors": [
+                {
+                  "range": "R6C20:R6C25"
+                },
+                {
+                  "address": "R6C28"
+                }
+              ]
+            },
+            {
+              "regionId": "region-012",
+              "selectors": [
+                {
+                  "address": "R6C35"
+                }
+              ]
+            }
+          ],
+          "direction": "N",
+          "allowSharedSource": true
+        },
+        {
+          "id": "d04",
+          "source": [
+            {
+              "regionId": "region-014",
+              "selectors": [
+                {
+                  "address": "R5C19"
+                }
+              ]
+            }
+          ],
+          "direction": "NNW",
+          "allowSharedSource": true
+        }
+      ]
+    }
+  ]
+}

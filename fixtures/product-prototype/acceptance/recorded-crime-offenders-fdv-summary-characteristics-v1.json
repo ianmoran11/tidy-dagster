@@ -1,0 +1,564 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-fdv-summary-characteristics-v1",
+  "tableFamilyId": "fdv-summary-characteristics",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 0,
+      "expectedCombinationCountsByYear": {
+        "2021": 351,
+        "2022": 369,
+        "2023": 369,
+        "2024": 369
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "characteristic_category": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "10_19_YEARS_76bd9fd0",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "1_6b86b273",
+            "20_29_YEARS_94af50b7",
+            "2_d4735e3a",
+            "30_39_YEARS_a220d4f9",
+            "3_4e074085",
+            "40_49_YEARS_aca42295",
+            "4_4b227777",
+            "50_59_YEARS_1dd59963",
+            "5_OR_MORE_1cef4ac9",
+            "60_YEARS_AND_OVER_c2241c0a",
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+            "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+          ],
+          "characteristic_group": [
+            "AGE_ab864bbd",
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "PRINCIPAL_OFFENCE_9c769d8b",
+            "SEX_b4bed028",
+            "TIMES_PROCEEDED_AGAINST_96334248"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+            "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+          ]
+        },
+        "2022": {
+          "characteristic_category": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "10_17_YEARS_af629b7c",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "18_29_YEARS_e671e713",
+            "18_YEARS_AND_OVER_07b34b43",
+            "1_6b86b273",
+            "2_d4735e3a",
+            "30_39_YEARS_a220d4f9",
+            "3_4e074085",
+            "40_49_YEARS_aca42295",
+            "4_4b227777",
+            "50_59_YEARS_1dd59963",
+            "5_OR_MORE_1cef4ac9",
+            "60_YEARS_AND_OVER_c2241c0a",
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+            "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+          ],
+          "characteristic_group": [
+            "AGE_ab864bbd",
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "PRINCIPAL_OFFENCE_9c769d8b",
+            "SEX_b4bed028",
+            "TIMES_PROCEEDED_AGAINST_96334248"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+            "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+          ]
+        },
+        "2023": {
+          "characteristic_category": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "10_17_YEARS_af629b7c",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "18_29_YEARS_e671e713",
+            "18_YEARS_AND_OVER_07b34b43",
+            "1_6b86b273",
+            "2_d4735e3a",
+            "30_39_YEARS_a220d4f9",
+            "3_4e074085",
+            "40_49_YEARS_aca42295",
+            "4_4b227777",
+            "50_59_YEARS_1dd59963",
+            "5_OR_MORE_1cef4ac9",
+            "60_YEARS_AND_OVER_c2241c0a",
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+            "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+          ],
+          "characteristic_group": [
+            "AGE_ab864bbd",
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "PRINCIPAL_OFFENCE_9c769d8b",
+            "SEX_b4bed028",
+            "TIMES_PROCEEDED_AGAINST_96334248"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+            "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+          ]
+        },
+        "2024": {
+          "characteristic_category": [
+            "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+            "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+            "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+            "05_ABDUCTION_HARASSMENT_619e6edd",
+            "10_17_YEARS_af629b7c",
+            "121_PROPERTY_DAMAGE_72667e1c",
+            "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+            "18_29_YEARS_e671e713",
+            "18_YEARS_AND_OVER_07b34b43",
+            "1_6b86b273",
+            "2_d4735e3a",
+            "30_39_YEARS_a220d4f9",
+            "3_4e074085",
+            "40_49_YEARS_aca42295",
+            "4_4b227777",
+            "50_59_YEARS_1dd59963",
+            "5_OR_MORE_1cef4ac9",
+            "60_YEARS_AND_OVER_c2241c0a",
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "NON_INDIGENOUS_2f231fea",
+            "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+            "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+          ],
+          "characteristic_group": [
+            "AGE_ab864bbd",
+            "INDIGENOUS_STATUS_4f4c3e8b",
+            "PRINCIPAL_OFFENCE_9c769d8b",
+            "SEX_b4bed028",
+            "TIMES_PROCEEDED_AGAINST_96334248"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "AUST_895ceebd",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+            "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:54a2b5138f84bf8c58a5a509b67ef629cfed47fbcf1a21d7b190bd2bdf34a619",
+        "2022": "sha256:94f96c645e8d23a55908ef40193ce9ec2e1daaae7828675f7c8ccefffe33066d",
+        "2023": "sha256:94f96c645e8d23a55908ef40193ce9ec2e1daaae7828675f7c8ccefffe33066d",
+        "2024": "sha256:94f96c645e8d23a55908ef40193ce9ec2e1daaae7828675f7c8ccefffe33066d"
+      },
+      "missingValues": {
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "characteristic_category",
+    "characteristic_group",
+    "jurisdiction",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "characteristic_category": [
+      "characteristic\\ category"
+    ],
+    "characteristic_group": [
+      "characteristic\\ group"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "characteristic_category": {
+      "01 Homicide and related offences": "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+      "02 Acts intended to cause injury(f)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "03 Sexual assault and related offences": "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+      "05 Abduction/harassment(f)": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "121 Property damage": "121_PROPERTY_DAMAGE_72667e1c",
+      "153 Breach of violence and non-violence orders": "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "10–19 years": "10_19_YEARS_76bd9fd0",
+      "20–29 years": "20_29_YEARS_94af50b7",
+      "30–39 years": "30_39_YEARS_a220d4f9",
+      "40–49 years": "40_49_YEARS_aca42295",
+      "50–59 years": "50_59_YEARS_1dd59963",
+      "60 years and over": "60_YEARS_AND_OVER_c2241c0a",
+      "1": "1_6b86b273",
+      "2": "2_d4735e3a",
+      "3": "3_4e074085",
+      "4": "4_4b227777",
+      "5 or more": "5_OR_MORE_1cef4ac9",
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Total offenders of family and domestic violence(g)": "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8",
+      "Total (excluding penalty notices)(i)": "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+      "02 Acts intended to cause injury(e)": "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+      "05 Abduction/harassment(e)": "05_ABDUCTION_HARASSMENT_619e6edd",
+      "10–17 years": "10_17_YEARS_af629b7c",
+      "18 years and over": "18_YEARS_AND_OVER_07b34b43",
+      "18–29 years": "18_29_YEARS_e671e713",
+      "Total offenders of family and domestic violence(f)": "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8",
+      "Total (excluding penalty notices)(h)": "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+      "Total (excluding penalty notices)(h)(i)": "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04"
+    },
+    "characteristic_group": {
+      "Principal offence(d)(e)": "PRINCIPAL_OFFENCE_9c769d8b",
+      "Sex": "SEX_b4bed028",
+      "Age": "AGE_ab864bbd",
+      "Times proceeded against": "TIMES_PROCEEDED_AGAINST_96334248",
+      "Indigenous status": "INDIGENOUS_STATUS_4f4c3e8b",
+      "Principal offence(d)": "PRINCIPAL_OFFENCE_9c769d8b"
+    },
+    "jurisdiction": {
+      "NSW": "NSW_647faf01",
+      "Vic.": "VIC_c5916b82",
+      "Qld": "QLD_cfd8a309",
+      "SA": "SA_360bf3a8",
+      "WA": "WA_d8689b62",
+      "Tas.(b)": "TAS_71b7c8af",
+      "NT": "NT_ff9ec9f7",
+      "ACT": "ACT_ee71241e",
+      "Aust.": "AUST_895ceebd",
+      "NSW(a)": "NSW_647faf01"
+    },
+    "statistic_basis": {
+      "Proportion of FDV offenders (%)(c)": "PROPORTION_OF_FDV_OFFENDERS_ef48049c",
+      "Offenders of FDV as a proportion of all offenders (%)(h)": "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+      "Offenders of FDV as a proportion of all offenders (%)(g)": "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:a12b1219af872b0345c4a417b11dcf8c3395a2ab6a9a399083227563105d2deb",
+    "2022": "sha256:d6d60edab0e1c62b9cb0076c5cd60a1123d3215f5dd5610ce7583f1bf4a2bccf",
+    "2023": "sha256:69b63442e6ac7f193070994ef65f30bdd00405cb68dc36a959ccc568917a7d9d",
+    "2024": "sha256:695c538ec7b2a5b8eb6f6c461951a41738a04871007d700eefff8dcbb4241d65"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:4eec83fb55c4cb57dfd4f2669395ccbf5dfd7515193212205e31f1da17f9d84e",
+    "2022": "sha256:24f86e662f44f55fabf8f2705eed09c22d503398da821b7fcf3c8e63cfa9c361",
+    "2023": "sha256:efe76289327681464f62e57be39bbf1dcc2c0faee1a2f53d6e2c8dd7c5033020",
+    "2024": "sha256:1db057af5e5364bfb623485ecfd432dd68b640ed6967509c006c065b9b60d704"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:91964c8585b716aa15edc3eeaba308410eb19e296986dfb0f118d24e8825aae2",
+    "2022": "sha256:869511c3745c42519445637dc15204eb8609c5757147cdaba0402df5f58df7f3",
+    "2023": "sha256:528e0043b3d7cad73065a35fadc5347efee14e95cfd276e8433a466b2c013b18",
+    "2024": "sha256:5fd0781fccdf90fdbca8b910240e49db557dbefa982072cf904cfb55618cece3"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "characteristic_category_id",
+    "characteristic_group_id",
+    "jurisdiction_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 351,
+    "maximumRows": 369,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "characteristicCategoriesByYear": {
+      "2021": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "10_19_YEARS_76bd9fd0",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "1_6b86b273",
+        "20_29_YEARS_94af50b7",
+        "2_d4735e3a",
+        "30_39_YEARS_a220d4f9",
+        "3_4e074085",
+        "40_49_YEARS_aca42295",
+        "4_4b227777",
+        "50_59_YEARS_1dd59963",
+        "5_OR_MORE_1cef4ac9",
+        "60_YEARS_AND_OVER_c2241c0a",
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+        "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+      ],
+      "2022": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "10_17_YEARS_af629b7c",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "18_29_YEARS_e671e713",
+        "18_YEARS_AND_OVER_07b34b43",
+        "1_6b86b273",
+        "2_d4735e3a",
+        "30_39_YEARS_a220d4f9",
+        "3_4e074085",
+        "40_49_YEARS_aca42295",
+        "4_4b227777",
+        "50_59_YEARS_1dd59963",
+        "5_OR_MORE_1cef4ac9",
+        "60_YEARS_AND_OVER_c2241c0a",
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+        "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+      ],
+      "2023": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "10_17_YEARS_af629b7c",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "18_29_YEARS_e671e713",
+        "18_YEARS_AND_OVER_07b34b43",
+        "1_6b86b273",
+        "2_d4735e3a",
+        "30_39_YEARS_a220d4f9",
+        "3_4e074085",
+        "40_49_YEARS_aca42295",
+        "4_4b227777",
+        "50_59_YEARS_1dd59963",
+        "5_OR_MORE_1cef4ac9",
+        "60_YEARS_AND_OVER_c2241c0a",
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+        "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+      ],
+      "2024": [
+        "01_HOMICIDE_AND_RELATED_OFFENCES_eaa3e291",
+        "02_ACTS_INTENDED_TO_CAUSE_INJURY_149975bf",
+        "03_SEXUAL_ASSAULT_AND_RELATED_OFFENCES_ca5a55bd",
+        "05_ABDUCTION_HARASSMENT_619e6edd",
+        "10_17_YEARS_af629b7c",
+        "121_PROPERTY_DAMAGE_72667e1c",
+        "153_BREACH_OF_VIOLENCE_AND_NON_VIOLENCE_ORDERS_d3529032",
+        "18_29_YEARS_e671e713",
+        "18_YEARS_AND_OVER_07b34b43",
+        "1_6b86b273",
+        "2_d4735e3a",
+        "30_39_YEARS_a220d4f9",
+        "3_4e074085",
+        "40_49_YEARS_aca42295",
+        "4_4b227777",
+        "50_59_YEARS_1dd59963",
+        "5_OR_MORE_1cef4ac9",
+        "60_YEARS_AND_OVER_c2241c0a",
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "NON_INDIGENOUS_2f231fea",
+        "TOTAL_EXCLUDING_PENALTY_NOTICES_d557bf04",
+        "TOTAL_OFFENDERS_OF_FAMILY_AND_DOMESTIC_VIOLENCE_1b3d57c8"
+      ]
+    },
+    "characteristicGroupsByYear": {
+      "2021": [
+        "AGE_ab864bbd",
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "PRINCIPAL_OFFENCE_9c769d8b",
+        "SEX_b4bed028",
+        "TIMES_PROCEEDED_AGAINST_96334248"
+      ],
+      "2022": [
+        "AGE_ab864bbd",
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "PRINCIPAL_OFFENCE_9c769d8b",
+        "SEX_b4bed028",
+        "TIMES_PROCEEDED_AGAINST_96334248"
+      ],
+      "2023": [
+        "AGE_ab864bbd",
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "PRINCIPAL_OFFENCE_9c769d8b",
+        "SEX_b4bed028",
+        "TIMES_PROCEEDED_AGAINST_96334248"
+      ],
+      "2024": [
+        "AGE_ab864bbd",
+        "INDIGENOUS_STATUS_4f4c3e8b",
+        "PRINCIPAL_OFFENCE_9c769d8b",
+        "SEX_b4bed028",
+        "TIMES_PROCEEDED_AGAINST_96334248"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2022": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2023": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2024": [
+        "ACT_ee71241e",
+        "AUST_895ceebd",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+        "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+      ],
+      "2022": [
+        "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+        "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+      ],
+      "2023": [
+        "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+        "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+      ],
+      "2024": [
+        "OFFENDERS_OF_FDV_AS_A_PROPORTION_OF_ALL_OFFENDERS_b7a54694",
+        "PROPORTION_OF_FDV_OFFENDERS_ef48049c"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

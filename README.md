@@ -141,13 +141,21 @@ order-breach, and FDV-offence clusters. Accepting the final FDV-offence boundary
 brings five previously unregistered Cube workbook byte identities into checked
 asset coverage. The completed Prisoners boundary adds seven source workbook
 identities and raises the dashboard total from 84 to 91 physical workbooks. The
-combined 628-worksheet batch contains 512,957 canonical observations with zero
-exceptions, cross-period issues, or provider calls. The national snapshot
+installed baseline batch contains 628 worksheets and 512,957 canonical
+observations with zero exceptions, cross-period issues, or provider calls. The
+separately reviewed remaining-Offenders C4 boundary, when atomically authorized
+and installed, raises that registry to 288 cohorts, 798 worksheets, and 737,954
+observations; its status projection is 293 cohorts, 823 worksheet-assets, and
+751,237 observations. Baseline and complete closures are explicit, and partial
+registration is rejected. The national snapshot
 cluster contributes 6,695 rows and bounds
 2025 Tables 7/8 to A:R without changing nonblank or formula payload. The state
 cluster contributes 8,406 rows; its corrected 2025 Table 16 uses all ten B:K
-measures and contributes 900. The status dashboard now exposes 653 deterministic
-per-asset CSV routes and 526,240 canonical observations. Table 27
+measures and contributes 900. Before the independently authorized C4 swap, the
+status dashboard exposes 653 deterministic per-asset CSV routes and 526,240
+canonical observations. The C4 snapshot is generated and digest-authorized in
+the same journaled transaction as its registry, yielding 823 routes and 751,237
+rows only after full-boundary validation. Table 27
 preserves publication vintage and observation period separately; 40
 published `np`/`n.p.` values remain explicit suppressed nulls. Two missing
 historical maps were replaced by checked human-authored adjacent-year maps,

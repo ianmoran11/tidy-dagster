@@ -1,0 +1,407 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-offender-rates-by-indigenous-status-rate-type-and-jurisdiction-v1",
+  "tableFamilyId": "offender-rates-by-indigenous-status-rate-type-and-jurisdiction",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 4,
+      "expectedCombinationCountsByYear": {
+        "2021": 420,
+        "2022": 450,
+        "2023": 240,
+        "2024": 270
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "RATIO_393f0dca"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED_RATE_81289a4f",
+            "CRUDE_RATE_6a584428"
+          ]
+        },
+        "2022": {
+          "observation_period": [
+            "2008_09_f695681e",
+            "2009_10_d4eb8e50",
+            "2010_11_bcb455ae",
+            "2011_12_dd65d86c",
+            "2012_13_94552411",
+            "2013_14_4115b20a",
+            "2014_15_392dc544",
+            "2015_16_ecc4ae2a",
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "RATIO_393f0dca"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED_RATE_81289a4f",
+            "CRUDE_RATE_6a584428"
+          ]
+        },
+        "2023": {
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_cb6f8507"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "RATIO_393f0dca"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED_RATE_81289a4f",
+            "CRUDE_RATE_6a584428"
+          ]
+        },
+        "2024": {
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8"
+          ],
+          "indigenous_status": [
+            "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+            "NON_INDIGENOUS_2f231fea",
+            "RATIO_393f0dca"
+          ],
+          "rate_basis": [
+            "AGE_STANDARDISED_RATE_81289a4f",
+            "CRUDE_RATE_6a584428"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:327c784d845c1a4c7c6e5ccf32ed438f70b6e1c652c995e37ff4a5122a47ed5a",
+        "2022": "sha256:178fabc0ab303f670230526e82f96219378b8608ce800f43142dbb803c0bdeba",
+        "2023": "sha256:1b3f61d7cf46154938c1cc367fd9685980d018cd2a53aa85a56dfc3607bb0160",
+        "2024": "sha256:5a03fa5806627a63ee0f9091536f626c2718f343fa57de0fcbb92a2a0a1f1230"
+      },
+      "missingValues": {
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "observation_period",
+    "jurisdiction",
+    "indigenous_status",
+    "rate_basis"
+  ],
+  "dimensionHeaders": {
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "indigenous_status": [
+      "indigenous\\ status"
+    ],
+    "rate_basis": [
+      "rate\\ basis"
+    ]
+  },
+  "aliases": {
+    "observation_period": {
+      "2008–09": "2008_09_f695681e",
+      "2009–10": "2009_10_d4eb8e50",
+      "2010–11": "2010_11_bcb455ae",
+      "2011–12": "2011_12_dd65d86c",
+      "2012–13": "2012_13_94552411",
+      "2013–14": "2013_14_4115b20a",
+      "2014–15": "2014_15_392dc544",
+      "2015–16": "2015_16_ecc4ae2a",
+      "2016–17": "2016_17_14c8c17c",
+      "2017–18": "2017_18_e0619229",
+      "2018–19": "2018_19_3fe15a03",
+      "2019–20": "2019_20_6d3dcb6c",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2022–23": "2022_23_0d9e498b",
+      "2023-24": "2023_24_cb6f8507",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "jurisdiction": {
+      "NSW(d)": "NSW_647faf01",
+      "Qld(e)": "QLD_cfd8a309",
+      "SA(f)": "SA_360bf3a8",
+      "NT": "NT_ff9ec9f7",
+      "ACT": "ACT_ee71241e",
+      "NSW(d)(e)": "NSW_647faf01",
+      "Qld(f)": "QLD_cfd8a309",
+      "SA(g)": "SA_360bf3a8",
+      "NT(h)(i)": "NT_ff9ec9f7",
+      "ACT(i)": "ACT_ee71241e",
+      "ACT(j)": "ACT_ee71241e"
+    },
+    "indigenous_status": {
+      "Aboriginal and Torres Strait Islander": "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+      "Non-Indigenous": "NON_INDIGENOUS_2f231fea",
+      "Ratio(g)": "RATIO_393f0dca",
+      "Ratio(j)": "RATIO_393f0dca",
+      "Ratio(k)": "RATIO_393f0dca"
+    },
+    "rate_basis": {
+      "Crude rate": "CRUDE_RATE_6a584428",
+      "Age standardised rate(h)": "AGE_STANDARDISED_RATE_81289a4f",
+      "Crude rate(k)(l)": "CRUDE_RATE_6a584428",
+      "Age standardised rate(l)(m)": "AGE_STANDARDISED_RATE_81289a4f",
+      "Crude rate(l)": "CRUDE_RATE_6a584428"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:7212b1a0eae95c67cd2df73149d116d5f224b91188cc80ffd2cbecfd66541b6c",
+    "2022": "sha256:5e34491990a3e8ca3757d1383837af25944d86ec2251389fa5a896efe8ba0ce1",
+    "2023": "sha256:f761229357242879b53949f27a152fb8e5285772c7ce77fd5c4318e2e35d2343",
+    "2024": "sha256:3d3bdaecc6f7e28292326e98a4347be324fe31e5853aeb4ff21c62e8b3ceb32f"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:56fee8303fa4b7a7f58824db1487c4a227c6ba28aa3c6dce135203aaf3ba5904",
+    "2022": "sha256:5ccd4ddffe32cd6095d422a1c877ef99325015b8501a8291b3323727c6e762c9",
+    "2023": "sha256:c93e2bc0485543f497fd16e08f460b54b352d96441d3a0fba13aa490a668612f",
+    "2024": "sha256:7d74830f68c282d5d992e5f58b50b0b46ad3a28480b9ee86698ddbe965b9bcc1"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:36f048c7138f3818e1f642f7c99aa500d37e84454859aa79d567b47bffb0ff8a",
+    "2022": "sha256:0f065219368c864b61d9027cd21e6449924a29c190023966fc52d3a03c0cc2e2",
+    "2023": "sha256:70f9d3e8e872b462850ee174253d605d79e430d689ca809f306be412aae871ac",
+    "2024": "sha256:6bfc0b761d10ca34f3c6cd4d42da1ad01cca59a40bf198a447d328b51dc85167"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "observation_period_id",
+    "jurisdiction_id",
+    "indigenous_status_id",
+    "rate_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 240,
+    "maximumRows": 450,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2008_09_f695681e",
+        "2009_10_d4eb8e50",
+        "2010_11_bcb455ae",
+        "2011_12_dd65d86c",
+        "2012_13_94552411",
+        "2013_14_4115b20a",
+        "2014_15_392dc544",
+        "2015_16_ecc4ae2a",
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8"
+      ],
+      "2022": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8"
+      ],
+      "2023": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8"
+      ],
+      "2024": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8"
+      ]
+    },
+    "indigenousStatusesByYear": {
+      "2021": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "RATIO_393f0dca"
+      ],
+      "2022": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "RATIO_393f0dca"
+      ],
+      "2023": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "RATIO_393f0dca"
+      ],
+      "2024": [
+        "ABORIGINAL_AND_TORRES_STRAIT_ISLANDER_99ff1289",
+        "NON_INDIGENOUS_2f231fea",
+        "RATIO_393f0dca"
+      ]
+    },
+    "rateBasesByYear": {
+      "2021": [
+        "AGE_STANDARDISED_RATE_81289a4f",
+        "CRUDE_RATE_6a584428"
+      ],
+      "2022": [
+        "AGE_STANDARDISED_RATE_81289a4f",
+        "CRUDE_RATE_6a584428"
+      ],
+      "2023": [
+        "AGE_STANDARDISED_RATE_81289a4f",
+        "CRUDE_RATE_6a584428"
+      ],
+      "2024": [
+        "AGE_STANDARDISED_RATE_81289a4f",
+        "CRUDE_RATE_6a584428"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

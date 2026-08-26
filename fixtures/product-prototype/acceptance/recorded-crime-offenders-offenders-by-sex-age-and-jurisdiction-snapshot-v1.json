@@ -1,0 +1,524 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-offenders-by-sex-age-and-jurisdiction-snapshot-v1",
+  "tableFamilyId": "offenders-by-sex-age-and-jurisdiction-snapshot",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 3,
+      "expectedCombinationCountsByYear": {
+        "2021": 1440,
+        "2022": 1728,
+        "2023": 1728,
+        "2024": 1728
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "15_19_YEARS_3e4c0dd0",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ],
+          "observation_period": [
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1"
+          ]
+        },
+        "2022": {
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "10_17_YEARS_af629b7c",
+            "15_17_YEARS_80d81828",
+            "18_19_YEARS_86019305",
+            "18_YEARS_AND_OVER_07b34b43",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ],
+          "observation_period": [
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ]
+        },
+        "2023": {
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "10_17_YEARS_af629b7c",
+            "15_17_YEARS_80d81828",
+            "18_19_YEARS_86019305",
+            "18_YEARS_AND_OVER_07b34b43",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ],
+          "observation_period": [
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33"
+          ]
+        },
+        "2024": {
+          "age_group": [
+            "10_14_YEARS_05581698",
+            "10_17_YEARS_af629b7c",
+            "15_17_YEARS_80d81828",
+            "18_19_YEARS_86019305",
+            "18_YEARS_AND_OVER_07b34b43",
+            "20_24_YEARS_2df2761c",
+            "25_29_YEARS_d1e1fc9b",
+            "30_34_YEARS_0a93b800",
+            "35_39_YEARS_69a576ee",
+            "40_44_YEARS_73d7663d",
+            "45_49_YEARS_7d712677",
+            "50_54_YEARS_e971eda4",
+            "55_59_YEARS_6b99c17f",
+            "60_64_YEARS_0f150066",
+            "65_YEARS_AND_OVER_d27557e1",
+            "MEAN_AGE_YEARS_54827fe2",
+            "MEDIAN_AGE_YEARS_ada3abad",
+            "TOTAL_ab2882c8"
+          ],
+          "sex": [
+            "FEMALES_29864773",
+            "MALES_66d5f994",
+            "PERSONS_4d6dccab"
+          ],
+          "jurisdiction": [
+            "ACT_ee71241e",
+            "NSW_647faf01",
+            "NT_ff9ec9f7",
+            "QLD_cfd8a309",
+            "SA_360bf3a8",
+            "TAS_71b7c8af",
+            "VIC_c5916b82",
+            "WA_d8689b62"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b",
+            "OFFENDER_RATE_bf190e83"
+          ],
+          "observation_period": [
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:59ad93d6f171dc0437a91d69ee37dedc9eb49429c02ee4f356dceb1968d5a006",
+        "2022": "sha256:afe39c6f4426c744b95cb9d53fada8c7585bd4c6b7b6200779bca72442ddb96d",
+        "2023": "sha256:53af8c9167d8d632c0f39b9978bbe910ca1af0a9e9e22b245eb95e01436d192a",
+        "2024": "sha256:98b56a4b16c792aceabf1279ccc08b7c6d449ba27bdbcdcd381cb0e870b55105"
+      },
+      "missingValues": {
+        "na": "not_available"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "age_group",
+    "sex",
+    "jurisdiction",
+    "statistic_basis",
+    "observation_period"
+  ],
+  "dimensionHeaders": {
+    "age_group": [
+      "age\\ group"
+    ],
+    "sex": [
+      "sex"
+    ],
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ]
+  },
+  "aliases": {
+    "age_group": {
+      "10–14 years": "10_14_YEARS_05581698",
+      "15–19 years": "15_19_YEARS_3e4c0dd0",
+      "20–24 years": "20_24_YEARS_2df2761c",
+      "25–29 years": "25_29_YEARS_d1e1fc9b",
+      "30–34 years": "30_34_YEARS_0a93b800",
+      "35–39 years": "35_39_YEARS_69a576ee",
+      "40–44 years": "40_44_YEARS_73d7663d",
+      "45–49 years": "45_49_YEARS_7d712677",
+      "50–54 years": "50_54_YEARS_e971eda4",
+      "55–59 years": "55_59_YEARS_6b99c17f",
+      "60–64 years": "60_64_YEARS_0f150066",
+      "65 years and over": "65_YEARS_AND_OVER_d27557e1",
+      "Total(b)": "TOTAL_ab2882c8",
+      "Mean age (years)": "MEAN_AGE_YEARS_54827fe2",
+      "Median age (years)": "MEDIAN_AGE_YEARS_ada3abad",
+      "10–17 years": "10_17_YEARS_af629b7c",
+      "15–17 years": "15_17_YEARS_80d81828",
+      "18 years and over": "18_YEARS_AND_OVER_07b34b43",
+      "18–19 years": "18_19_YEARS_86019305",
+      "Total(d)": "TOTAL_ab2882c8",
+      "Total(e)": "TOTAL_ab2882c8"
+    },
+    "sex": {
+      "Males": "MALES_66d5f994",
+      "Females": "FEMALES_29864773",
+      "Persons(c)": "PERSONS_4d6dccab",
+      "Persons(e)": "PERSONS_4d6dccab",
+      "Persons(f)": "PERSONS_4d6dccab"
+    },
+    "jurisdiction": {
+      "NSW": "NSW_647faf01",
+      "Vic.": "VIC_c5916b82",
+      "Qld": "QLD_cfd8a309",
+      "SA": "SA_360bf3a8",
+      "WA": "WA_d8689b62",
+      "Tas.": "TAS_71b7c8af",
+      "NT": "NT_ff9ec9f7",
+      "ACT": "ACT_ee71241e",
+      "NT(b)": "NT_ff9ec9f7",
+      "NT(b)(c)": "NT_ff9ec9f7",
+      "ACT(d)": "ACT_ee71241e"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b",
+      "Offender rate(a)": "OFFENDER_RATE_bf190e83"
+    },
+    "observation_period": {
+      "2021–22": "2021_22_dd8903a1",
+      "2020–21": "2020_21_d6db3b1d",
+      "2022–23": "2022_23_0d9e498b",
+      "2023–24(c)": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178",
+      "2023–24(c)(d)": "2023_24_275b6c33"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:99c90b1f70b936250102a8d5b2a24c22cc429f1f3408f93e348c72494bc8dd44",
+    "2022": "sha256:0c809e558e626ad350056566f8fcc255ea78a434b4f46f1d51d465cabae7e14c",
+    "2023": "sha256:1891e974a7724ce1bf59a6e3ebae143e3e27a5c8d8698e431d9d42a484c179ad",
+    "2024": "sha256:6b99d9bc2b04d8c67a27b0dc6765fde874c9260748b4a4d7e5f2170de7babcd1"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:254e110b23c78cba3d9b46522b475521544edfd5358e51dc27722ad1f47c1748",
+    "2022": "sha256:74ec5c8a364097c1cd686648a7c00670cd3c678f0059e98fcd5074c98b48e002",
+    "2023": "sha256:db5c9b1901e3da5ecd1a9fef1d85954c13756d9eb74a1216ad3d0753d90b671d",
+    "2024": "sha256:22d64c15688f54b3332d2a1c3da2a97ec53e838e1772dda3d666c0d7a3e7a629"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:19665e2c48722e9c40eda4f5fb9c02c44b1f18f8a3d40a376949278530421892",
+    "2022": "sha256:e5bbf7ad850b7f19d934be72bddfd78e30d6756e2b1cfa2661c987d606b18400",
+    "2023": "sha256:af9db80babfd048a0329b7ad2284a1ed156b13811aebf5f87313b478a177ebd4",
+    "2024": "sha256:82042c21a4ed8b782a200066495f8fa57ca28410de5ff580042fa4b1ee06847e"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "age_group_id",
+    "sex_id",
+    "jurisdiction_id",
+    "statistic_basis_id",
+    "observation_period_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 1440,
+    "maximumRows": 1728,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "ageGroupsByYear": {
+      "2021": [
+        "10_14_YEARS_05581698",
+        "15_19_YEARS_3e4c0dd0",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_ab2882c8"
+      ],
+      "2022": [
+        "10_14_YEARS_05581698",
+        "10_17_YEARS_af629b7c",
+        "15_17_YEARS_80d81828",
+        "18_19_YEARS_86019305",
+        "18_YEARS_AND_OVER_07b34b43",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_ab2882c8"
+      ],
+      "2023": [
+        "10_14_YEARS_05581698",
+        "10_17_YEARS_af629b7c",
+        "15_17_YEARS_80d81828",
+        "18_19_YEARS_86019305",
+        "18_YEARS_AND_OVER_07b34b43",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_ab2882c8"
+      ],
+      "2024": [
+        "10_14_YEARS_05581698",
+        "10_17_YEARS_af629b7c",
+        "15_17_YEARS_80d81828",
+        "18_19_YEARS_86019305",
+        "18_YEARS_AND_OVER_07b34b43",
+        "20_24_YEARS_2df2761c",
+        "25_29_YEARS_d1e1fc9b",
+        "30_34_YEARS_0a93b800",
+        "35_39_YEARS_69a576ee",
+        "40_44_YEARS_73d7663d",
+        "45_49_YEARS_7d712677",
+        "50_54_YEARS_e971eda4",
+        "55_59_YEARS_6b99c17f",
+        "60_64_YEARS_0f150066",
+        "65_YEARS_AND_OVER_d27557e1",
+        "MEAN_AGE_YEARS_54827fe2",
+        "MEDIAN_AGE_YEARS_ada3abad",
+        "TOTAL_ab2882c8"
+      ]
+    },
+    "sexesByYear": {
+      "2021": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2022": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2023": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ],
+      "2024": [
+        "FEMALES_29864773",
+        "MALES_66d5f994",
+        "PERSONS_4d6dccab"
+      ]
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2022": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2023": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ],
+      "2024": [
+        "ACT_ee71241e",
+        "NSW_647faf01",
+        "NT_ff9ec9f7",
+        "QLD_cfd8a309",
+        "SA_360bf3a8",
+        "TAS_71b7c8af",
+        "VIC_c5916b82",
+        "WA_d8689b62"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2022": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2023": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ],
+      "2024": [
+        "NUMBER_a081e07b",
+        "OFFENDER_RATE_bf190e83"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33"
+      ],
+      "2024": [
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}

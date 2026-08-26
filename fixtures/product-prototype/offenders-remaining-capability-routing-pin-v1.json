@@ -1,0 +1,3482 @@
+{
+  "schemaVersion": "tidy.offenders-capability-routing-pin/v1",
+  "authorizedForPhasedEngineering": true,
+  "acceptanceAuthority": false,
+  "trainingEligibility": false,
+  "productionAcceptance": false,
+  "promotionAuthorization": false,
+  "semanticGenerationAuthorizationPath": "fixtures/product-prototype/offenders-remaining-semantic-generation-authorization-v1.json",
+  "semanticGenerationAuthorizationSha256": "sha256:13624947ec0620b0b48b64ef1cd9126a62fada7adad458f64be2598b8d7f4d6a",
+  "routingManifest": {
+    "byteLength": 369869,
+    "sha256": "sha256:c4945bb612f323d4b13ba784d863649e01fa7cd89cb0c2fe44bf0460e33dd243"
+  },
+  "expectedSummary": {
+    "families": 47,
+    "members": 170,
+    "rows": 224997,
+    "capableMembers": 152,
+    "capableFamilies": 41,
+    "capableRows": 196316,
+    "technicalRowCoverage": 0.8725271892514123,
+    "v1Members": 14,
+    "b1Members": 138,
+    "targetScopedRequiredMembers": 18,
+    "targetScopedRequiredFamilies": 6,
+    "targetScopedRequiredRows": 28681,
+    "maxCapablePanelsPerMember": 45,
+    "providerCalls": 0,
+    "capableAuthorizedFieldChanges": 49628,
+    "reasonCounts": [
+      {
+        "reason": "geometry:SKETCH_BYTE_RESOURCE_LIMIT",
+        "members": 4
+      },
+      {
+        "reason": "geometry:SKETCH_RESOURCE_LIMIT",
+        "members": 1
+      },
+      {
+        "reason": "schema:SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "members": 13
+      }
+    ]
+  },
+  "expectedTargetScopedFamilies": [
+    "covid-offenders-by-age-and-sex-time-series",
+    "covid-offenders-selected-characteristics-jurisdiction-time-series",
+    "fdv-breach-order-offenders-selected-characteristics-jurisdiction",
+    "fdv-principal-offence-by-sex-jurisdiction-time-series",
+    "fdv-selected-characteristics-by-sex-jurisdiction",
+    "offenders-by-indigenous-status-sex-age-and-jurisdiction"
+  ],
+  "members": [
+    {
+      "familyId": "covid-offenders-by-age-and-sex-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "target-scoped-required",
+      "rows": 162,
+      "failure": {
+        "stage": "geometry",
+        "code": "SKETCH_RESOURCE_LIMIT",
+        "message": "Sketch object contains noncanonical or inconsistent derived content.",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "covid-offenders-selected-characteristics-jurisdiction-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "target-scoped-required",
+      "rows": 793,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels.72.order: Too big: expected number to be <=64; panels.73.order: Too big: expected number to be <=64; panels.74.order: Too big: expected number to be <=64; panels.75.order: Too big: expected number to be <=64; panels.76.order: Too big: expected number to be <=64; panels.77.order: Too big: expected number to be <=64; panels.78.order: Too big: expected number to be <=64; panels.79.order: Too big: expected number to be <=64; panels.80.order: Too big: expected number to be <=64; panels.81.order: Too big: expected number to be <=64; panels.82.order: Too big: expected number to be <=64; panels.83.order: Too big: expected number to be <=64; panels.84.order: Too big: expected number to be <=64; panels.85.order: Too big: expected number to be <=64; panels.86.order: Too big: expected number to be <=64; panels.87.order: Too big: expected number to be <=64; panels.88.order: Too big: expected number to be <=64; panels.89.order: Too big: expected number to be <=64; panels.90.order: Too big: expected number to be <=64; panels.91.order: Too big: expected number to be <=64; panels.92.order: Too big: expected number to be <=64; panels.93.order: Too big: expected number to be <=64; panels.94.order: Too big: expected number to be <=64; panels.95.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "covid-proceedings-by-method-jurisdiction-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 132,
+      "mapPath": "replay/recorded-crime-offenders-covid-19-covid-19-3-2021.response.txt",
+      "mapDigest": "sha256:99cf02e4f31aa7d45adb90d491a44b5ae5619721dfff546222b8ff7abad5be28",
+      "recipeDigest": "sha256:ad3a0b5b8d639a2b49f2b6edd82e8f00358078058195099597aac1b7c26188d3",
+      "trustedEnvelopeDigest": "sha256:475b16a998852ba0b13fda7daa76183eb22a5e59f21c41510c10717601ddf6ba",
+      "memberArtifactPath": "members/covid-proceedings-by-method-jurisdiction-time-series/2021.json",
+      "memberArtifactDigest": "sha256:35ca9afdf24fd37cbc7ae574a84a4c2422cc545f454e4dfc2812eeb15da6d224",
+      "changedFields": 22,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-by-jurisdiction-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 54,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-10-2021.response.txt",
+      "mapDigest": "sha256:9246f8598c6534146dc750c63a44985c30073ac282068a2d6b9499013496299c",
+      "recipeDigest": "sha256:9543baa64eb5cffc2facd32d179238e95a0c076fdc4fe0650362afb3db361afa",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/fdv-breach-order-offenders-by-jurisdiction-time-series/2021.json",
+      "memberArtifactDigest": "sha256:8079610ee81b911cefbc7dcd600e0770e4d2b32c93d222e0e1a97b65aa065040",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-by-jurisdiction-time-series",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 63,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-46-2022.response.txt",
+      "mapDigest": "sha256:b1237a559510295d2659316f2469445229b7982e05602574bef64c90b5b16ff2",
+      "recipeDigest": "sha256:14ed8bbe10badbc3c3d6727192355b798aa3ae65dcd2fef7608450edb11d951c",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/fdv-breach-order-offenders-by-jurisdiction-time-series/2022.json",
+      "memberArtifactDigest": "sha256:95c14e23ffb5399e00baddb528f054aacf250075617d006574f876a2d826ab7c",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-by-jurisdiction-time-series",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 72,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-46-2023.response.txt",
+      "mapDigest": "sha256:bfaa38f26edaaba726f161138e1152cb47aa9f998ab719c4bcdaf70fdfb94c07",
+      "recipeDigest": "sha256:4ce942ca503cab96a0855b43ea2d0c1cffcbd33d9e47fcf0aef49f61fbda4c8d",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/fdv-breach-order-offenders-by-jurisdiction-time-series/2023.json",
+      "memberArtifactDigest": "sha256:8d27ac7dcead02ed97c31a2a11b27591522c57ec51fb54adc4ec7031274ab4bb",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-by-jurisdiction-time-series",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 81,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-46-2024.response.txt",
+      "mapDigest": "sha256:0aa72919653717bf31a5e7842d3b1884c07a5debf1592cc085e2371f6d06e061",
+      "recipeDigest": "sha256:b197b240e4f4bad703d56aa5131fcdc9052ad7c63bbb8575608c2cf615478ac1",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/fdv-breach-order-offenders-by-jurisdiction-time-series/2024.json",
+      "memberArtifactDigest": "sha256:d29fbd6658aa92bad3efa83e9c229851b40ccb36ecd1463eacd80468017c62e6",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-selected-characteristics-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "target-scoped-required",
+      "rows": 546,
+      "failure": {
+        "stage": "geometry",
+        "code": "SKETCH_BYTE_RESOURCE_LIMIT",
+        "message": "Canonical XML is 148423 bytes and exceeds 131072 bytes.",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-selected-characteristics-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "target-scoped-required",
+      "rows": 600,
+      "failure": {
+        "stage": "geometry",
+        "code": "SKETCH_BYTE_RESOURCE_LIMIT",
+        "message": "Canonical XML is 152803 bytes and exceeds 131072 bytes.",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-selected-characteristics-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "target-scoped-required",
+      "rows": 600,
+      "failure": {
+        "stage": "geometry",
+        "code": "SKETCH_BYTE_RESOURCE_LIMIT",
+        "message": "Canonical XML is 152785 bytes and exceeds 131072 bytes.",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-breach-order-offenders-selected-characteristics-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "target-scoped-required",
+      "rows": 600,
+      "failure": {
+        "stage": "geometry",
+        "code": "SKETCH_BYTE_RESOURCE_LIMIT",
+        "message": "Canonical XML is 152785 bytes and exceeds 131072 bytes.",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 630,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-8-2021.response.txt",
+      "mapDigest": "sha256:3284fa978508853eb6669ea348c250f6ff114b64107d0a915d861ef06e95d0c6",
+      "recipeDigest": "sha256:f179fee2ac6f372dc11e392bc6965c7a31d1449c96b4f160c49501adc343d65e",
+      "trustedEnvelopeDigest": "sha256:ca1247dfcb57b8e1b43df4a9c9028b0e12336c18870c157b92a3391ca73a44a5",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2021.json",
+      "memberArtifactDigest": "sha256:c2ffaffe6e0ebb64e91ba6d8bf2330c4593b3f91b79e247885f916dc0f6d0fd0",
+      "changedFields": 105,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 630,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-44-2022.response.txt",
+      "mapDigest": "sha256:1a004efefd02dc543d5df86143b02d59abde4bfc73a298f35206a84a58f3d737",
+      "recipeDigest": "sha256:7010733f807f2199b93bea534744da78045524f8cc2546d64450d77bdff0f9d3",
+      "trustedEnvelopeDigest": "sha256:70316109a7f51463ff82055feda88541d31de55813f6e0e6adbf1970dd29b77f",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:92809f26901a1890468b33dc1e83c6af6ff21398019725f34a392b40b852745f",
+      "changedFields": 105,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 630,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-44-2023.response.txt",
+      "mapDigest": "sha256:238912e4b01281b2875ef651ceb132b66a8162ad923a9db49d44e3240c191866",
+      "recipeDigest": "sha256:d3b7df65299572ab0cc8f8c906b6db00a944a6fb9043adc981cce9ac20eb0c03",
+      "trustedEnvelopeDigest": "sha256:5bca68c654c264632622bb2ae4f5714841f8301946682029b5e35ecbd39e2eed",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:f32c95a37ef9ecb52562affe9c6e5cfc8b26bed93ecbfc246adfc08f4384d9e0",
+      "changedFields": 105,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 630,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-44-2024.response.txt",
+      "mapDigest": "sha256:1e4d6578d2128d46aedf15c615af88458a60cd7ad480035c2d6d702087ac32a3",
+      "recipeDigest": "sha256:048cdb9e299d6b704e1a72f8d3cf0be8f636b2e481a2196cbd19f737007e7932",
+      "trustedEnvelopeDigest": "sha256:35af3d230d26393f8c1d8518c8c34df2e627093f3b838f30f3f52be5f3403216",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-principal-offence-and-sex-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:fd39cd82a68d4101881a6d7fb39363b5daa6ed64ae669c19991885e003afded6",
+      "changedFields": 105,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-and-age-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 810,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-7-2021.response.txt",
+      "mapDigest": "sha256:3644615e684a6ad758bcfc756f6b3909cd4dcac7de3a96a0a31ec62132c255c1",
+      "recipeDigest": "sha256:09f2172e0429c51fef979d430b5bacf3b3b4524d122d28b4fffa4f2943523893",
+      "trustedEnvelopeDigest": "sha256:a55015795c997c0c55497e8667093cd941054b40d431f0f90914c85aaa31757b",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-and-age-jurisdiction/2021.json",
+      "memberArtifactDigest": "sha256:719e7d32b45a7cfbdb19fc87095238a52c9580b747ca61b860e9b6602fec2b99",
+      "changedFields": 135,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-and-age-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 900,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-43-2022.response.txt",
+      "mapDigest": "sha256:dcef7839c10696e9f47a2dd42ebad1b23a3087d775948a30204f06d913c65ab4",
+      "recipeDigest": "sha256:7498460cb523cb241ccf33d7924a914a516daaf4e4368662bf34c7e626bd2f51",
+      "trustedEnvelopeDigest": "sha256:315130e4d716b7948951d5e66827192b10ba7f6b30152a32915ace96c32242ce",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-and-age-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:c7582fb95fa1295670de1afe8b3f7b631017efece293baf2ad4a6903b899865d",
+      "changedFields": 150,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-and-age-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 900,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-43-2023.response.txt",
+      "mapDigest": "sha256:dba19b357f48c01f824c153c764b59be61ba04d4a1f158383c0327581cb6ff91",
+      "recipeDigest": "sha256:eb6b5817bb677c846e88b4a59a50345f55bc614afa61d31e3b5f8c03960b7831",
+      "trustedEnvelopeDigest": "sha256:c08f1c557e330f51b155465cc9ae199aac861bc2c5d99f30467aa28038125d56",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-and-age-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:ae542d32a71a9b63dc18a870546dff176e6b81445e200429c99411e79ef6b6c0",
+      "changedFields": 150,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-and-age-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 900,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-43-2024.response.txt",
+      "mapDigest": "sha256:248e7a9031f435ad6975fcfa3a5bf24b7726367ffa743802bb03c36c55a647ba",
+      "recipeDigest": "sha256:c983d4712106d474376c1cf6863c4aae2ade33a0cc266bf350b9e2a788b53ec5",
+      "trustedEnvelopeDigest": "sha256:0c7da507971a090c46e0df0252653ce3c9baebea69a4fb5a00644d5406631aaa",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-and-age-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:fa408c3d9f09ee52f35ad42f5a61ae443df280130794fd862e249e17b52f88ee",
+      "changedFields": 150,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-jurisdiction-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 540,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-6-2021.response.txt",
+      "mapDigest": "sha256:23607f3abf92e85655e6b791e8e6af7552ef23a17dccd56df5d9d32fe925ee6f",
+      "recipeDigest": "sha256:48afa4ed165c2a95cbf35d6002fd8e69fee635bf45138e55aaa393258ef9596e",
+      "trustedEnvelopeDigest": "sha256:bf08fcee9424380f176dd64320af2dde12a90471ed4e05011fd81a9d8e3b9e9d",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-jurisdiction-time-series/2021.json",
+      "memberArtifactDigest": "sha256:482a77e27eff96d492541728e8c38463c983324b27ac636f1207345e232be0b1",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-jurisdiction-time-series",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 630,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-42-2022.response.txt",
+      "mapDigest": "sha256:783d8e4bdb320ac72016000daf6ed3aaf2ae985d1dc7129c9b05945c82e4fd83",
+      "recipeDigest": "sha256:e52a70573ce63c57ba68190a867de4067e5489b65344d74d660280764c5b7030",
+      "trustedEnvelopeDigest": "sha256:1e12968806a4e1292cf866ca1f435c44500852987e669328cc4a67ec47191556",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-jurisdiction-time-series/2022.json",
+      "memberArtifactDigest": "sha256:e8a73eea8de5acc4fd48254f0e1c89d2d84dfc19fb12fd268766260f0db3cff8",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-jurisdiction-time-series",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 720,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-42-2023.response.txt",
+      "mapDigest": "sha256:84dee4e1de67f8e0491052838950bc1e246935929079a825bc376de493ae138b",
+      "recipeDigest": "sha256:89dd7b3b315dc25d32a4ed96958cc5d901ea553a60120dd1258f0220cde5eab7",
+      "trustedEnvelopeDigest": "sha256:0b7176065ff4c1598a29c5d07e734382bee0c4b8590373130f53afa066e91d3b",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-jurisdiction-time-series/2023.json",
+      "memberArtifactDigest": "sha256:4dc7eb04d8502c25360b3688dff2967b4bf189722dea18f21cb025b0b127f3de",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-indigenous-status-by-sex-jurisdiction-time-series",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 810,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-42-2024.response.txt",
+      "mapDigest": "sha256:11e55b33f6c2e8e273506998339c9c10ec0b9b593cc3dbc518b012de97457be2",
+      "recipeDigest": "sha256:0cef3c1e176a3fb23dc0c3066bad177de82401d6c1cf336ffc7f4c5af73d6d79",
+      "trustedEnvelopeDigest": "sha256:17af685ea1a8c695257f58de75f59ace545861008b4573c334495fc095adefe5",
+      "memberArtifactPath": "members/fdv-indigenous-status-by-sex-jurisdiction-time-series/2024.json",
+      "memberArtifactDigest": "sha256:c485ecc73ecfa211bfa711f8492f9f92fa51cd18843741ea5c89fecbd3267466",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-and-age-australia",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 630,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-3-2021.response.txt",
+      "mapDigest": "sha256:b94deba9f78d1276e22199c725268620a98bd067ceef6ebc9e07ba6ba73ecf37",
+      "recipeDigest": "sha256:d205cdf9b36c3b972b677519bee4a163cafe0762ab18b060642f275431e22948",
+      "trustedEnvelopeDigest": "sha256:18dbc914cc5d245c7e2f3c7510b85dcd6bf9daa8cb4b397a3377d24d62e23cb3",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-and-age-australia/2021.json",
+      "memberArtifactDigest": "sha256:7535238021e78498b441883d3f447fd458e9177c75cff0f6400a0bef97044093",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-and-age-australia",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 756,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-39-2022.response.txt",
+      "mapDigest": "sha256:52c9df4da4dfd0cba23b180925a1f9371b0904a1126eadca470b133afbff82fd",
+      "recipeDigest": "sha256:837c12cf40883ebd6f8312bb8abfc5c2cffb568a3b47cab15d9420031846a7d5",
+      "trustedEnvelopeDigest": "sha256:310f029fe21e1cbf1007b76ecdc9a669de2b98e81634b30b47de60e6fb0956c7",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-and-age-australia/2022.json",
+      "memberArtifactDigest": "sha256:ef5bad804744a597581dd4e995cfaa03eb6bb33c9d5d519abbbc2fdd85a0ec89",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-and-age-australia",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 756,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-39-2023.response.txt",
+      "mapDigest": "sha256:508fd8b7f57c1ad6e6ff2c35e98636a5986c229b347c6663c8d9caeed3e4706e",
+      "recipeDigest": "sha256:9d077d2ed579ff74d6b429631075bf3feabf92e72e917fd2f5cac8b4f97ca03b",
+      "trustedEnvelopeDigest": "sha256:bb89ec97a1bb6a4f13c4b17d78e90119557daa3bda0498a1fd86861c8f69e8ae",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-and-age-australia/2023.json",
+      "memberArtifactDigest": "sha256:0243d6d6defc930b2626c3c5d5b56e53aa30d255bf21d8e99f47ee0fe2a8cbac",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-and-age-australia",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 756,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-39-2024.response.txt",
+      "mapDigest": "sha256:dfeed2d2de234708b157c19741ab8130e0ea01f3c776cafa49e86194f648734e",
+      "recipeDigest": "sha256:ba1a06074b16a2f1ac952467e73fbc1b0610fdb302de444c0780e101955f5567",
+      "trustedEnvelopeDigest": "sha256:767f04709297a26572f30e9486227f20aadcb199c01d43c3b1926b052d974ee1",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-and-age-australia/2024.json",
+      "memberArtifactDigest": "sha256:5cd7f7acc41ab25f7cada7494deb6f114d613a112187d1f2d7c5d2bc73e11d88",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-australia-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 270,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-2-2021.response.txt",
+      "mapDigest": "sha256:8d7304f57f28793b40e75b0a585e9b91d9cd76b822b7f272d8f3136e7a3aa7d5",
+      "recipeDigest": "sha256:fca76477d527345694f6877bb7f2d0305d4afcd25382e06ba45308b819b8ea08",
+      "trustedEnvelopeDigest": "sha256:90d7fa9a17c2856a5d2dcdb4429154c306b6946523fcf49a1e0ae7af8146dd05",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-australia-time-series/2021.json",
+      "memberArtifactDigest": "sha256:4a21169afdd56fd775f2eb50028daff94ba0cdcd2a570f9fad4fc08f52259a61",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-australia-time-series",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 360,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-38-2022.response.txt",
+      "mapDigest": "sha256:c7577799fe789d9d1cb93d0e9b4f99ddb35307525c315146d40c4b3f13a3bf19",
+      "recipeDigest": "sha256:3bebb3b8541960389795885b58a568bf84b6ed50c803f2d9be5119be202d103b",
+      "trustedEnvelopeDigest": "sha256:57ad0fb8a139e77836f6fbf946115dc4312ead4f5dbd5a13598e0398a414ddd6",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-australia-time-series/2022.json",
+      "memberArtifactDigest": "sha256:40dc894bfbf7d341f559184efbf4f164e4284b10b1f5092028e1ee4a297a6356",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-australia-time-series",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 450,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-38-2023.response.txt",
+      "mapDigest": "sha256:41608b42530deb6cc00750bd6eb9ca527f06a139ce99ce9168372a2e56b8a015",
+      "recipeDigest": "sha256:8660954b1b465c5cb0bdf97bc612e8079a8e1d8462228b392548fc1b9ef26711",
+      "trustedEnvelopeDigest": "sha256:3228d261a89cad304bc72da4b20f3d176779c40cf50871e73de389fbbc94bc3c",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-australia-time-series/2023.json",
+      "memberArtifactDigest": "sha256:3d88588265f588ec9bd81f9f6c27054ca02042a03e9fb29976156a0a6cbf159a",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-australia-time-series",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 540,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-38-2024.response.txt",
+      "mapDigest": "sha256:8f47b47f30912696a146e3dc4aa9889344d3acc471030357191b15361dd446ca",
+      "recipeDigest": "sha256:85a23fc2a786245bf479fee78a1f6747dd128e13c95a0d9a7b38fc4dd8992248",
+      "trustedEnvelopeDigest": "sha256:167852c047605124033b0872b2003e5956b9e4279848b6ea0ec4a379f7d97d77",
+      "memberArtifactPath": "members/fdv-principal-offence-by-sex-australia-time-series/2024.json",
+      "memberArtifactDigest": "sha256:1694aaf9dfaa3768e980891ce14e20d4bf1b1c6f74b5b715a30697016f07fdc1",
+      "changedFields": 45,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-jurisdiction-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "target-scoped-required",
+      "rows": 2016,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-jurisdiction-time-series",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "target-scoped-required",
+      "rows": 2352,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-jurisdiction-time-series",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "target-scoped-required",
+      "rows": 2688,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-principal-offence-by-sex-jurisdiction-time-series",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "target-scoped-required",
+      "rows": 3024,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-proceedings-by-principal-offence-method-jurisdiction-time-series",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 882,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-9-2021.response.txt",
+      "mapDigest": "sha256:989d87cf5f9f32b472dae99c17020962c8e9d292f6a8ba021afbc20f07b94ae4",
+      "recipeDigest": "sha256:63cfe1ec1ab1045f8bf4fb34d788430495e234ea051d18d526bd8f4667fd7a8c",
+      "trustedEnvelopeDigest": "sha256:a3599666ace56017dc204442143a62fbf8ead065bf0cce0cfa2e1db16d52aedc",
+      "memberArtifactPath": "members/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2021.json",
+      "memberArtifactDigest": "sha256:25fb5148fdc65b75bbfa47309cb71907926fbc2cd49093352b824c124909b2dd",
+      "changedFields": 49,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-proceedings-by-principal-offence-method-jurisdiction-time-series",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1029,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-45-2022.response.txt",
+      "mapDigest": "sha256:2fbca2de1836fbdd1a99c746286f4fa33628cb8c0421b9a455ef6fbd7874c695",
+      "recipeDigest": "sha256:01660b5628273d14a050bda7394640f94643693447bfb70d0ae145f1bb9a6be4",
+      "trustedEnvelopeDigest": "sha256:169a36c836fe248ef382b9421a60042f09e64a905ebbe23b5d9f5f25a5d4e155",
+      "memberArtifactPath": "members/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2022.json",
+      "memberArtifactDigest": "sha256:bc1616569f15c14628cb6d426f8198e25c429d686b9182fab4731d7bf4f17a8b",
+      "changedFields": 49,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-proceedings-by-principal-offence-method-jurisdiction-time-series",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1176,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-45-2023.response.txt",
+      "mapDigest": "sha256:04b71eec5bd763aba9562e3e38755d9901a99d4499a0194e9da305f1c4493b3d",
+      "recipeDigest": "sha256:e03878f054ff96982846d0ee93a19e33e0007d1b0260f26b293624da5afb4c2e",
+      "trustedEnvelopeDigest": "sha256:6e828969e1480d9871b3a8e96b462be19019f3cf3ce68939920fb7c120da621c",
+      "memberArtifactPath": "members/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2023.json",
+      "memberArtifactDigest": "sha256:02854471c2249daa89e3bab44cd27d00c0513957dfe9642b30405b1c37b16665",
+      "changedFields": 49,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-proceedings-by-principal-offence-method-jurisdiction-time-series",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1323,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-45-2024.response.txt",
+      "mapDigest": "sha256:27b46752c7b54aab62c88ae8ef70aaed2d333ea7e005b758e8ffb36cb6e9eeeb",
+      "recipeDigest": "sha256:e891e2317786c392d28e2d45aa612b1ae98b72527de4124157babc0b15f9a200",
+      "trustedEnvelopeDigest": "sha256:e3ba833db61c275cb85bfe239fe7340281f73493e7d7e141eb3298d3a7232a75",
+      "memberArtifactPath": "members/fdv-proceedings-by-principal-offence-method-jurisdiction-time-series/2024.json",
+      "memberArtifactDigest": "sha256:0ac584b5f97e5b83fe94a9dd5979224bb1e90fdab90cd3a92b2c8a120cb5d996",
+      "changedFields": 49,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-selected-characteristics-by-sex-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "target-scoped-required",
+      "rows": 684,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-selected-characteristics-by-sex-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "target-scoped-required",
+      "rows": 732,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-selected-characteristics-by-sex-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "target-scoped-required",
+      "rows": 732,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-selected-characteristics-by-sex-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "target-scoped-required",
+      "rows": 732,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "fdv-summary-characteristics",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 351,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-1-2021.response.txt",
+      "mapDigest": "sha256:4eec83fb55c4cb57dfd4f2669395ccbf5dfd7515193212205e31f1da17f9d84e",
+      "recipeDigest": "sha256:a12b1219af872b0345c4a417b11dcf8c3395a2ab6a9a399083227563105d2deb",
+      "trustedEnvelopeDigest": "sha256:4cb159c608a463d05c47c9e04352d7a25cb713d32a43a5ce5c59baed8926bbed",
+      "memberArtifactPath": "members/fdv-summary-characteristics/2021.json",
+      "memberArtifactDigest": "sha256:95cfd36143bac5d5fd972a37428290fbe371b267f16e8d90c59264daf2cc595f",
+      "changedFields": 39,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-summary-characteristics",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 369,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-37-2022.response.txt",
+      "mapDigest": "sha256:24f86e662f44f55fabf8f2705eed09c22d503398da821b7fcf3c8e63cfa9c361",
+      "recipeDigest": "sha256:d6d60edab0e1c62b9cb0076c5cd60a1123d3215f5dd5610ce7583f1bf4a2bccf",
+      "trustedEnvelopeDigest": "sha256:5f832e518edea93a6ce402fc5e8d1fca72d9eb8a80a804e6bec1fd2aba06d2c6",
+      "memberArtifactPath": "members/fdv-summary-characteristics/2022.json",
+      "memberArtifactDigest": "sha256:a3817165a9e16ed4ca8b3b8e8cbc734ec6edddb6ca4e3ac3f9afd82e5728b586",
+      "changedFields": 41,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-summary-characteristics",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 369,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-37-2023.response.txt",
+      "mapDigest": "sha256:efe76289327681464f62e57be39bbf1dcc2c0faee1a2f53d6e2c8dd7c5033020",
+      "recipeDigest": "sha256:69b63442e6ac7f193070994ef65f30bdd00405cb68dc36a959ccc568917a7d9d",
+      "trustedEnvelopeDigest": "sha256:d7305792de1ec8b7bece1f6998bc8087f29589230e37a71b45348a20fecb6127",
+      "memberArtifactPath": "members/fdv-summary-characteristics/2023.json",
+      "memberArtifactDigest": "sha256:c4a147b2d4e20274dc388f8c5032785e1321784ba62e41ad49fbecd57ec24cb2",
+      "changedFields": 41,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "fdv-summary-characteristics",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 369,
+      "mapPath": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-37-2024.response.txt",
+      "mapDigest": "sha256:1db057af5e5364bfb623485ecfd432dd68b640ed6967509c006c065b9b60d704",
+      "recipeDigest": "sha256:695c538ec7b2a5b8eb6f6c461951a41738a04871007d700eefff8dcbb4241d65",
+      "trustedEnvelopeDigest": "sha256:f3ee22b75088318ba381f955976a67fbf7aa6c4ed0ed964485f90f8d5b7f914a",
+      "memberArtifactPath": "members/fdv-summary-characteristics/2024.json",
+      "memberArtifactDigest": "sha256:fa1e81d9976d9134fa7ddfb5abf5be11bf7d9c81c265991485738f538d508a8d",
+      "changedFields": 41,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offender-rates-by-indigenous-status-rate-type-and-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 420,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-24-2021.response.txt",
+      "mapDigest": "sha256:56fee8303fa4b7a7f58824db1487c4a227c6ba28aa3c6dce135203aaf3ba5904",
+      "recipeDigest": "sha256:7212b1a0eae95c67cd2df73149d116d5f224b91188cc80ffd2cbecfd66541b6c",
+      "trustedEnvelopeDigest": "sha256:ce90005010dfb0db5b7d69886db2b83e8c667fcfdfb9cf0eff831487a5d8c47b",
+      "memberArtifactPath": "members/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2021.json",
+      "memberArtifactDigest": "sha256:7a557e33ed782d24133a57efb079df5e3408eec5291e92f9bf3ba651aa9eec3c",
+      "changedFields": 28,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offender-rates-by-indigenous-status-rate-type-and-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 450,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-27-2022.response.txt",
+      "mapDigest": "sha256:5ccd4ddffe32cd6095d422a1c877ef99325015b8501a8291b3323727c6e762c9",
+      "recipeDigest": "sha256:5e34491990a3e8ca3757d1383837af25944d86ec2251389fa5a896efe8ba0ce1",
+      "trustedEnvelopeDigest": "sha256:dbdd7374e3b581df9a4f5efdc2e7cd2e85c8c84940588d555b9bda7fba6030a0",
+      "memberArtifactPath": "members/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:381ed675cc63fda2296c8701d2414cf984601c74d89d88ed26b22747615ac5c7",
+      "changedFields": 30,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offender-rates-by-indigenous-status-rate-type-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 240,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-27-2023.response.txt",
+      "mapDigest": "sha256:c93e2bc0485543f497fd16e08f460b54b352d96441d3a0fba13aa490a668612f",
+      "recipeDigest": "sha256:f761229357242879b53949f27a152fb8e5285772c7ce77fd5c4318e2e35d2343",
+      "trustedEnvelopeDigest": "sha256:f6454e1ba1bc9c32e06c0a8c72322928db1109134a84d199c830d17d5b03b2f0",
+      "memberArtifactPath": "members/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:e1d510fb0fd630ebbbbc2d2dbbe31133f26f036f7b32703e6c0fe9bcaadc0464",
+      "changedFields": 16,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offender-rates-by-indigenous-status-rate-type-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 270,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-27-2024.response.txt",
+      "mapDigest": "sha256:7d74830f68c282d5d992e5f58b50b0b46ad3a28480b9ee86698ddbe965b9bcc1",
+      "recipeDigest": "sha256:3d3bdaecc6f7e28292326e98a4347be324fe31e5853aeb4ff21c62e8b3ceb32f",
+      "trustedEnvelopeDigest": "sha256:bb98267db99934820745b4fbba430879457c2de83cfe3b06c6169991877dcb98",
+      "memberArtifactPath": "members/offender-rates-by-indigenous-status-rate-type-and-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:196c68861735ebbfe42cbe8cc33a09a751828a1db41c523776a2432f1e684632",
+      "changedFields": 18,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-age-times-proceeded-and-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1183,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-17-2021.response.txt",
+      "mapDigest": "sha256:06e4feab7b6d61fba8691609cf1764cd8c03ec419ce79f19adeed472f851ba13",
+      "recipeDigest": "sha256:7fa4e9daf4b6703772868864d1f7275bbc598cf7adedd3388f00ecfaafc8d7d3",
+      "trustedEnvelopeDigest": "sha256:c361110539a4885e3d859318ef5021cf7390a35b6c4c9d7640c488d8bd2c2d38",
+      "memberArtifactPath": "members/offenders-by-age-times-proceeded-and-jurisdiction/2021.json",
+      "memberArtifactDigest": "sha256:be1f406ba50fa9e49221f14c88427dfab3d51f58f76d5599ee08e94daf4571fc",
+      "changedFields": 1911,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-age-times-proceeded-and-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1456,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-17-2022.response.txt",
+      "mapDigest": "sha256:c3d87881675a1bf87913785eac9bdba3d4a00cf55397c3bcbffad6207b52d590",
+      "recipeDigest": "sha256:32da8c8d2378c37f9389b98a07687e710d369ad7247829227ecf1a3b1c8efba0",
+      "trustedEnvelopeDigest": "sha256:517c13921019c6afba5bbe009501e7030be9016e67764bdfe33f76af924b35c9",
+      "memberArtifactPath": "members/offenders-by-age-times-proceeded-and-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:d6deeee4e0fa2230f410fe9046806d55daded0bd8b6fe6846f745ca764b6dc77",
+      "changedFields": 1008,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-age-times-proceeded-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1456,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-17-2023.response.txt",
+      "mapDigest": "sha256:226b7d3ce85f48003ac80f6d5765d7254e6e7770fd4e85e0e82824277bad224e",
+      "recipeDigest": "sha256:866e4ae4bde0713633d458ce5ee6bd2baf868fcd34d50b208c4169df452cdd05",
+      "trustedEnvelopeDigest": "sha256:404ef3c8be6cbdb2d4ea86c29361133dc2ceb2ac1401717470f41a12468d7412",
+      "memberArtifactPath": "members/offenders-by-age-times-proceeded-and-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:8483e199781e3f8ae25fee491589bfafb88177fc55a53b97638f7783c4fc5571",
+      "changedFields": 1008,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-age-times-proceeded-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1456,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-17-2024.response.txt",
+      "mapDigest": "sha256:9285301029e0d6605a5859f95f36c4b621b282ba6a9e5ef57054fc7f67e00bc0",
+      "recipeDigest": "sha256:7ae65cecb1d0ab5ca10b1ac8b20b5d1a11618629d6620ed18f71f9c30c86b307",
+      "trustedEnvelopeDigest": "sha256:3b2fa304427e0b7e5c48322ab121ce77e094ded0de2ae1f8c45941e27e2e93fb",
+      "memberArtifactPath": "members/offenders-by-age-times-proceeded-and-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:1a603a0c096ab98dc22ec43654f731bbc5ad51d2855577c6f573433326075047",
+      "changedFields": 1008,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-principal-offence-and-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 6720,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-23-2021.response.txt",
+      "mapDigest": "sha256:a3f13d212b8d8792943cf1152a391fa77580259f3fea3c2ae1f2e1a0aa75a444",
+      "recipeDigest": "sha256:c818312bd0860151f8fac15c4de9fb329628296403b596d15dbaa26de46f84d8",
+      "trustedEnvelopeDigest": "sha256:aae8ea1d2a65d05b51e190ea47292c8b4299abc7e6f9a06d2e97a9b4f9ab73d5",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2021.json",
+      "memberArtifactDigest": "sha256:2ff277b0cad79ac8957a3894fe24005f858bb15d246bdfd372f7e68a1fd99db6",
+      "changedFields": 240,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-principal-offence-and-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 7200,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-26-2022.response.txt",
+      "mapDigest": "sha256:6adc4187c0ec8bf92bfbe4bbe2c8ca6b26ae459ec087b3f9128fd148087b83f0",
+      "recipeDigest": "sha256:4aceb1483cf9b9ad499f2ed9fa96cc73acbbd5bd4f023985075664cc3b5f8b19",
+      "trustedEnvelopeDigest": "sha256:3bfc7ee557f4712f42605510201656ae7a66bfd38f562aa660d45fc0eb1ac08e",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:21cf014d484a605f351e8735600fbadb1eec17cc189cc2e9dd56166fa91333d0",
+      "changedFields": 240,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-principal-offence-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 5760,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-26-2023.response.txt",
+      "mapDigest": "sha256:27a9cb34e122589a6dd7e7d71dc189d2868d6d9f8c679b6ffbce066a5ffc74ce",
+      "recipeDigest": "sha256:81d7b87b2391da77672cf49ac80b361186aa6ec307271dae4db352998accacb6",
+      "trustedEnvelopeDigest": "sha256:78948d2d25b0d3939198d5476f522f23face36bada41ad2040cacc4a60fbd6cd",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:1341448d1a1b67337d59fb47ce690f87e6d9eb8bb6951e2266b0420df65671a9",
+      "changedFields": 240,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-principal-offence-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 6240,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-26-2024.response.txt",
+      "mapDigest": "sha256:ef2f68924292a59358cedc0afba5610beb5f924eb2981f22118c069a913476f0",
+      "recipeDigest": "sha256:2888701a2927eedc7f4aac6cc68e12304f6aeb7341c5c3932de336bf487c30df",
+      "trustedEnvelopeDigest": "sha256:9bdd61dbc33e716044a681913f696890146fd2792c347bf791f8492259b70868",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-principal-offence-and-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:3e853ed7e72fa2ae9b70dcf91346b9a5a681bdc08cf9447b3d4aef41c552ff54",
+      "changedFields": 240,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 420,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-26-2021.response.txt",
+      "mapDigest": "sha256:867e0f02c4339c4317b23c48cf4958d861d4042a1e9c65a45635edbe78ddac9f",
+      "recipeDigest": "sha256:36d6ea6c374ce19d230be5a5de6c4c2883fe02e945c4923451d43013d525bad9",
+      "trustedEnvelopeDigest": "sha256:7fb6767e800c27ef196265aca775fd19e1d3b3caed548e5d9cf9919a87aca178",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2021.json",
+      "memberArtifactDigest": "sha256:3d684df6e365529491d62cab1eab90156e7e670e663a64f117eb60d4b815de5f",
+      "changedFields": 35,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 420,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-29-2022.response.txt",
+      "mapDigest": "sha256:81b24f64b6ea598524fba5cbad8b2fbef771bd141a34615a257f9afd50dfb7da",
+      "recipeDigest": "sha256:f28da5709951014d842b54c96334e03c9cbbdce90c1ab1f55a666a67307fdf67",
+      "trustedEnvelopeDigest": "sha256:20b0c5a2403472312548ee16047d6a68ec1bbec6565dfc4d9a3b662a6ea92b15",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:aeea0e9c75a0f9671de0cd3b45f2f62782ccb9c634527e7e5f8c3d53a1775e00",
+      "changedFields": 35,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 420,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-29-2023.response.txt",
+      "mapDigest": "sha256:50b31e40240e13dc89c4cc338572aada9d1c391edaa61dc01c0c2e6bb5161202",
+      "recipeDigest": "sha256:8aa949dee15e4f96003c398f69cb1a7bc0e1e61ab2a71ff0f088dabd4419f9c3",
+      "trustedEnvelopeDigest": "sha256:d0f580a87a54543d0f85ab1def6de7b2f4b09c52825de010b722c5d2d498a18c",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:a7314f0fdf124247d84305cacbaa571a6e0bc8a4004b8c537b3b2c4fc067733e",
+      "changedFields": 35,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 420,
+      "mapPath": "replay/recorded-crime-offenders-indigenous-main-29-2024.response.txt",
+      "mapDigest": "sha256:dd09e39dbdbab3631aa9eb727e2710498f7832e09c637f0136f33426b46a8823",
+      "recipeDigest": "sha256:6ae2b43b69ce9b6d8a08f987e2ed88e5d67f75d26e9f0e91a7c147eb75e60992",
+      "trustedEnvelopeDigest": "sha256:9cb0568d180e38fa4a0d80569bf1c17c4a57c2848cd5d316ae28dd2dc8b006e1",
+      "memberArtifactPath": "members/offenders-by-indigenous-status-repeat-proceedings-and-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:0d214f2ea3e8b69eaef89a39aa3cb3933a9cca6861f50d47fcf8934e5e62c4e3",
+      "changedFields": 35,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-sex-age-and-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "target-scoped-required",
+      "rows": 2700,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels.72.order: Too big: expected number to be <=64; panels.73.order: Too big: expected number to be <=64; panels.74.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-sex-age-and-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "target-scoped-required",
+      "rows": 3240,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels.72.order: Too big: expected number to be <=64; panels.73.order: Too big: expected number to be <=64; panels.74.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-sex-age-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "target-scoped-required",
+      "rows": 3240,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels.72.order: Too big: expected number to be <=64; panels.73.order: Too big: expected number to be <=64; panels.74.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "offenders-by-indigenous-status-sex-age-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "target-scoped-required",
+      "rows": 3240,
+      "failure": {
+        "stage": "schema",
+        "code": "SEMANTIC_MAP_V2_SCHEMA_INVALID",
+        "message": "panels.64.order: Too big: expected number to be <=64; panels.65.order: Too big: expected number to be <=64; panels.66.order: Too big: expected number to be <=64; panels.67.order: Too big: expected number to be <=64; panels.68.order: Too big: expected number to be <=64; panels.69.order: Too big: expected number to be <=64; panels.70.order: Too big: expected number to be <=64; panels.71.order: Too big: expected number to be <=64; panels.72.order: Too big: expected number to be <=64; panels.73.order: Too big: expected number to be <=64; panels.74.order: Too big: expected number to be <=64; panels: Too big: expected array to have <=64 items",
+        "diagnostics": null
+      }
+    },
+    {
+      "familyId": "offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 126,
+      "mapPath": "replay/recorded-crime-offenders-preliminary-anzsoc-2023-preliminary-anzsoc-2023-1-2023.response.txt",
+      "mapDigest": "sha256:5fd35274cc9ae4c35a37418fcc35b48e15b391fc38e69f975486e44605467a62",
+      "recipeDigest": "sha256:b62dbf7ad3a033ff497e7f9bc1247b45ca2e30548306765275e15cca4d7a4904",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:5b0e556175e1d71ec21446668d56fc0e90f4248538c3e8ed6bd63c578731ed9c",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 126,
+      "mapPath": "replay/recorded-crime-offenders-preliminary-anzsoc-2023-preliminary-anzsoc-2023-1-2024.response.txt",
+      "mapDigest": "sha256:b7e173d871e180940dae3d34fd4159c531ab586dbacb952934db34e31b8fed77",
+      "recipeDigest": "sha256:27d9ba3d0064c9ccbe22675a8300a19b2d4a55bb783e7348ef73d850cba68ce6",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/offenders-by-preliminary-anzsoc-2023-principal-offence-and-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:8e20d6005bef57a827e7d2d49dcb1a530c848576b705a05656331e2cc5d84eb6",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-principal-offence-and-jurisdiction-snapshot",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1248,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-6-2021.response.txt",
+      "mapDigest": "sha256:c7eeacde1cdd2fc4191e074ccb8ceb125d4330b9cca00541519cd5fd31bbd71d",
+      "recipeDigest": "sha256:86949b9f18fda81e4c8916e543aec0b3db94393922e57cec562026d0375fa52c",
+      "trustedEnvelopeDigest": "sha256:e1b6d624852bacb495a3158d1a63ca831bfc11475af625545ac10e0f96abc0ba",
+      "memberArtifactPath": "members/offenders-by-principal-offence-and-jurisdiction-snapshot/2021.json",
+      "memberArtifactDigest": "sha256:d74c9b34f4909220405ddfee38fe61f46a134f2b605c1687bf60f364cec289cd",
+      "changedFields": 78,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-principal-offence-and-jurisdiction-snapshot",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1248,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-6-2022.response.txt",
+      "mapDigest": "sha256:d27f2076814eb1856a957a8577b3dbbc484c66cb9608d4eb75cdc6b672dc3255",
+      "recipeDigest": "sha256:993ff09ce7cb9532f806475f28153f0dcd4f11809c03c0809ae25b139ed92e14",
+      "trustedEnvelopeDigest": "sha256:1005d086b5e690e3c61b98cad11630aeff3de6a13fd79a829708a4b6f2d8f025",
+      "memberArtifactPath": "members/offenders-by-principal-offence-and-jurisdiction-snapshot/2022.json",
+      "memberArtifactDigest": "sha256:d19740e5a8038dd1376162f2672816392aa489aee946f3e462d554ed39c56863",
+      "changedFields": 78,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-principal-offence-and-jurisdiction-snapshot",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1248,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-6-2023.response.txt",
+      "mapDigest": "sha256:b61b2bec682a5aafc087db347ba21487f4912ddd7a0327dd024082c94399dec6",
+      "recipeDigest": "sha256:7dc9509d3188f139ec212480ab5a54ef892056b5392d0b894eac4e4af8e02823",
+      "trustedEnvelopeDigest": "sha256:a64b1d85d47dd53be6ce20d56282edbb0336ba8468668ff1a17a6c9f1ff692c2",
+      "memberArtifactPath": "members/offenders-by-principal-offence-and-jurisdiction-snapshot/2023.json",
+      "memberArtifactDigest": "sha256:42bf4731eed551aea7d43a23ebedf598ce69dfac55e768383227f21c67b28e5e",
+      "changedFields": 78,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-principal-offence-and-jurisdiction-snapshot",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1248,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-6-2024.response.txt",
+      "mapDigest": "sha256:1a8a69a125a866e11b74fa2b76554b9605002a624682836df642c89513ec0830",
+      "recipeDigest": "sha256:8bce3d679c4b562da7b987a4a219e88d600f0f6fd0ce2f343b2710cf2d538d03",
+      "trustedEnvelopeDigest": "sha256:bbc9af8681129cb4542af12fc1bc7615a09b38b639351d39af444a35791f3b8d",
+      "memberArtifactPath": "members/offenders-by-principal-offence-and-jurisdiction-snapshot/2024.json",
+      "memberArtifactDigest": "sha256:dffe957f9f37205463c4a88732bc2512e5f2dff3ce15d72429cfacb26a2f4228",
+      "changedFields": 78,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-age-and-jurisdiction-snapshot",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1440,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-15-2021.response.txt",
+      "mapDigest": "sha256:254e110b23c78cba3d9b46522b475521544edfd5358e51dc27722ad1f47c1748",
+      "recipeDigest": "sha256:99c90b1f70b936250102a8d5b2a24c22cc429f1f3408f93e348c72494bc8dd44",
+      "trustedEnvelopeDigest": "sha256:0096539a1ce22dc3f32d9f98bc24ea6c7eb386a13020d92d5f48aa323e5b20da",
+      "memberArtifactPath": "members/offenders-by-sex-age-and-jurisdiction-snapshot/2021.json",
+      "memberArtifactDigest": "sha256:6922e0b2bc8d6e50620698d9f007c6757009417e1408b53e2fe6b0b5116cea18",
+      "changedFields": 90,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-age-and-jurisdiction-snapshot",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1728,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-15-2022.response.txt",
+      "mapDigest": "sha256:74ec5c8a364097c1cd686648a7c00670cd3c678f0059e98fcd5074c98b48e002",
+      "recipeDigest": "sha256:0c809e558e626ad350056566f8fcc255ea78a434b4f46f1d51d465cabae7e14c",
+      "trustedEnvelopeDigest": "sha256:2da1aa84ae567bc0d4a623e44804a97b862715426ea1d4c4ea104aa701f3004e",
+      "memberArtifactPath": "members/offenders-by-sex-age-and-jurisdiction-snapshot/2022.json",
+      "memberArtifactDigest": "sha256:8a02aaf4be26de205955910196624e387ac1ac7709e864a79080d414ed178c5f",
+      "changedFields": 108,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-age-and-jurisdiction-snapshot",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1728,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-15-2023.response.txt",
+      "mapDigest": "sha256:db5c9b1901e3da5ecd1a9fef1d85954c13756d9eb74a1216ad3d0753d90b671d",
+      "recipeDigest": "sha256:1891e974a7724ce1bf59a6e3ebae143e3e27a5c8d8698e431d9d42a484c179ad",
+      "trustedEnvelopeDigest": "sha256:c9a7e5b102af9353c6ae09881d00d701be87c8afd87ae9f4b6b7414ae640f6b5",
+      "memberArtifactPath": "members/offenders-by-sex-age-and-jurisdiction-snapshot/2023.json",
+      "memberArtifactDigest": "sha256:334a9d2e1a79b283c6c734e424bed5e85a54f0b8a6fd185cc25cedb5a5bd4eff",
+      "changedFields": 108,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-age-and-jurisdiction-snapshot",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1728,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-15-2024.response.txt",
+      "mapDigest": "sha256:22d64c15688f54b3332d2a1c3da2a97ec53e838e1772dda3d666c0d7a3e7a629",
+      "recipeDigest": "sha256:6b99d9bc2b04d8c67a27b0dc6765fde874c9260748b4a4d7e5f2170de7babcd1",
+      "trustedEnvelopeDigest": "sha256:f769b163d0659ac9db673c3aa706c108cead7d2685acf7611db5948f4741d96f",
+      "memberArtifactPath": "members/offenders-by-sex-age-and-jurisdiction-snapshot/2024.json",
+      "memberArtifactDigest": "sha256:d1fc2425cc6f33ea05b2a9de975bf963ef89e9f9a96b6bced61e9fcdae1b7727",
+      "changedFields": 108,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-act",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1344,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-14-2021.response.txt",
+      "mapDigest": "sha256:e03d6a03f6cd229e9b57337bd54b0e69ab8eee3538012d5fe7c4c75c964a002d",
+      "recipeDigest": "sha256:2c2e157bee49d0020aead58f66db8f0f20e8430dd1c9c7ebcb49702094f3ef61",
+      "trustedEnvelopeDigest": "sha256:88b87135dc5f0e0c984b22e815fa5ad4f0aa03e04279b6c979e3d0918a7274b1",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-act/2021.json",
+      "memberArtifactDigest": "sha256:4ac1eb5a43a35a6f2b359435fbae66e963e63490a4930c6b800771ff624a9281",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-act",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1440,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-14-2022.response.txt",
+      "mapDigest": "sha256:128c6017589703e725dc985dbda2b7a133b6141f3a37de8d9a700ccbde932334",
+      "recipeDigest": "sha256:d59c568b1bf9bd05a388b1d173077e55aabddfb8e562df54941c702131714c42",
+      "trustedEnvelopeDigest": "sha256:9de352f71c5f0ca4a0f0e9a54b40389469e83e54f115e67b067fb6aa33650988",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-act/2022.json",
+      "memberArtifactDigest": "sha256:56492fa5e6c4284d5c1e53eb18357c2e2a63c4dbb89a368d568e82baa2b58f27",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-act",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1536,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-14-2023.response.txt",
+      "mapDigest": "sha256:9d5b9454fb5166dad7426c4a97de0d2768d6332ab3d75566664900bc64a723b6",
+      "recipeDigest": "sha256:2945819502bbacbae9a8d32eb31822617985fd028681dc90855f07ac56546fc7",
+      "trustedEnvelopeDigest": "sha256:a79eb6382e8ea7d9cda9a2076a6ce44a0d23f48dec91e77438d2377a22e059df",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-act/2023.json",
+      "memberArtifactDigest": "sha256:fba1d766b92e9bc6c10cb2eec4b6538360653ad6c64f9c2bc98f38715038581b",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-act",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-14-2024.response.txt",
+      "mapDigest": "sha256:4c4c26e008abad6eada94a11e06688affbe537787bbca773d4fd1751f06c1aaf",
+      "recipeDigest": "sha256:ae76e5953c68186ded7b5dac86f2ef265cf0cb96bdbc4c7acb694d390d027ab8",
+      "trustedEnvelopeDigest": "sha256:7bf2baa49d26538f4c289c9bb65256933154f123947b2983129ffc7114997ea6",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-act/2024.json",
+      "memberArtifactDigest": "sha256:90b87b8262379a8bdb187f5bfab7e32e63744e7175899423adedd562d445a0de",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-northern-territory",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1344,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-13-2021.response.txt",
+      "mapDigest": "sha256:9c6a23b88c75ab46363a246014e503f85fdd4ac07e5a234e8de8919bf562d625",
+      "recipeDigest": "sha256:41fe8e116cf8bd538589aec568bedde42a879d691378e147d256cff0365bdd66",
+      "trustedEnvelopeDigest": "sha256:1f7ae6655fe637533316c9c6da83ef218b0e62aeca7f74bf0d32b7389f4ed9fa",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-northern-territory/2021.json",
+      "memberArtifactDigest": "sha256:44e30219bd015dbb240dec471177e215d95c1fdaf3f116b41530bca01569ec57",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-northern-territory",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1440,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-13-2022.response.txt",
+      "mapDigest": "sha256:5a87daf48ce75d77a09d9ccadee4c09d911a3771502c01886b3fdf2a424061a7",
+      "recipeDigest": "sha256:2a9072076bf7f5ba084dbe306158b83cc5c871e9a14ee8182a7d228513f75e9a",
+      "trustedEnvelopeDigest": "sha256:0e3421b03bf6476228e3fe04d188a7cb417f5ef86669f4a0296ffaae2b8a1e8d",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-northern-territory/2022.json",
+      "memberArtifactDigest": "sha256:bb1c5e18f84107dbf5b88933af7c5f056099cbd16c1c1cccdcb54e1561375d85",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-northern-territory",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1536,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-13-2023.response.txt",
+      "mapDigest": "sha256:37ac4eeed456de8ff60466143f486673d0dd0c7e13c71fbf0f27c5e90694d5d4",
+      "recipeDigest": "sha256:73e6002a01b3c754f6502d18110ceec92d6b91f0588f7a35cad57ed3933dcf10",
+      "trustedEnvelopeDigest": "sha256:69b9ae62a23091fbf9d333722937c2c9b538cd55fc52a4e90da4b00066ed05d6",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-northern-territory/2023.json",
+      "memberArtifactDigest": "sha256:35476d483215917a4de04dd24aa3acafd5469bf0fa420674d3ff490f39efc06e",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-northern-territory",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-13-2024.response.txt",
+      "mapDigest": "sha256:aae20859fe2ba3b47dd36472d9dc37959ee8ed70b202ec630576c320002a8d17",
+      "recipeDigest": "sha256:7fe3697a856f1ca1fe605be4af94728eec7183aaec9d7d85095848550dad3ab2",
+      "trustedEnvelopeDigest": "sha256:e5bc401e4bac89f8a5ef2f445cb1ebd264cd150c6717479eb5a99a27528745d0",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-northern-territory/2024.json",
+      "memberArtifactDigest": "sha256:ba01aa9970ecce4f3f64f964235320dd4f8e83c38fb16f6d5d74f954a4cc5629",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-nsw",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-7-2021.response.txt",
+      "mapDigest": "sha256:96b10cd0b5d11e0c0af23adade3d591c77d61e80f40b8936819c17c2441a7c38",
+      "recipeDigest": "sha256:1d6190643d53a5dedb5b98f9cb176c1f27f60e98b43c5f087c67a2ab5c3462dd",
+      "trustedEnvelopeDigest": "sha256:c03f30a165356a8df5139b160887c814f8eace3ce1ba68ec364bf4889ab27e45",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-nsw/2021.json",
+      "memberArtifactDigest": "sha256:c66f7a208fbbb726826fbdb7b9308944182434274ad2151dd82ba27965490fe7",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-nsw",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-7-2022.response.txt",
+      "mapDigest": "sha256:7c2d556e461bfe4125f09fc3db44bb4b301a0ccc1317ef3e487e2fa3abb9c6cb",
+      "recipeDigest": "sha256:ed47ed4b2f12c82c8a330b8d5659f9ffdb3c05c8b5cd3ad0df4f28505c4be788",
+      "trustedEnvelopeDigest": "sha256:818d883af44b1ea62c5ecd40780f8f180bb1ee1ce93b0e46b0ab8b0cb34eb54e",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-nsw/2022.json",
+      "memberArtifactDigest": "sha256:f0de802a717a353367d3278a779a3a08831ee4c84b81802f83d237a5713dd745",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-nsw",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-7-2023.response.txt",
+      "mapDigest": "sha256:abe12b51ec73145904259cc64ab110e57f0df83b0eac5c9fca6e2ba891c10319",
+      "recipeDigest": "sha256:f2112bcc6c69101ada5b41f9800f63acfb26d49b5af79ca421fb61113906b9d7",
+      "trustedEnvelopeDigest": "sha256:b3ec15e0dde1021d7db469da81d5f0f4acb6fe46f8c9d3cc26ecb0ca8eaee2a4",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-nsw/2023.json",
+      "memberArtifactDigest": "sha256:1807027cda30d1133572971ca4eb11e09d72d5e17e3a2111285af120ce2eaaab",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-nsw",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-7-2024.response.txt",
+      "mapDigest": "sha256:449bb29793bcdec71d7f347697d1458b921feed553ed270f423543cfee0df70d",
+      "recipeDigest": "sha256:15a48bef78f54935e8959b3215d5768939d8bca62817213ef16c4cafc04feba5",
+      "trustedEnvelopeDigest": "sha256:bc6f297f5a58f84b8ef5fcd7c520daacf59174bdea3d76718b12abf25eb031c6",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-nsw/2024.json",
+      "memberArtifactDigest": "sha256:367f357947a56f66d8e8cfffea7bff95a8e7685b81750ac1b853e98f792e2a28",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-queensland",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-9-2021.response.txt",
+      "mapDigest": "sha256:9b08b54aaaefa41509f2befd07e7e20b60595088edf5509d55dc9e687631203f",
+      "recipeDigest": "sha256:47dd8810eb41a8043bd661be973757707482821d7407cb62510fddc83d3cd520",
+      "trustedEnvelopeDigest": "sha256:185fd50a6b2afd0ce97569bd4f2786ca05e0e599c96b730bcf7b8a50e795e306",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-queensland/2021.json",
+      "memberArtifactDigest": "sha256:e996dd2d82652f8299a764bb77e7fccebc03c1c23c959c35f64ccfe4fc2a9576",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-queensland",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-9-2022.response.txt",
+      "mapDigest": "sha256:03a13fc9ee6c015e0540a9864ca4429decbc1da84b68d3eea86c3897800f3e42",
+      "recipeDigest": "sha256:6a64e22f5215c0fd74adfec987eb5c3744426076a3a4852c9afb919d98548f4c",
+      "trustedEnvelopeDigest": "sha256:6c4912d138c9d164bea2025d1872652bef94f41dfadb30acda4477a17e9e972a",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-queensland/2022.json",
+      "memberArtifactDigest": "sha256:2aac19cce47fbc44314a8f8d91fac60fef73e4d8e5f1adc579a642ebceaa64ce",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-queensland",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-9-2023.response.txt",
+      "mapDigest": "sha256:38450bf781bbd25aea6cfd221a6d76a7dac283beb660df29ee85dac49ed870da",
+      "recipeDigest": "sha256:cdedf20ba38a966b6fd3936b9714c3aca1cd987bb67896614d318a911aa1e0e2",
+      "trustedEnvelopeDigest": "sha256:404204306d20736f90c311831db053193d876df69dd370513536ec6adc62e597",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-queensland/2023.json",
+      "memberArtifactDigest": "sha256:42dacfd4f75d3bba1e5f665faa9360c44f5b8e569607955e85d8b098e6975477",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-queensland",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-9-2024.response.txt",
+      "mapDigest": "sha256:d9639655e1c02e2312f030f7c415b6265befcb89c6469c48473b63fdbd0a084d",
+      "recipeDigest": "sha256:8e766bdc3dff208d0c7750b9f68353a5e26d60bf1bf18633031b14993d473e8c",
+      "trustedEnvelopeDigest": "sha256:fb84869c085b211beba7130bd4c1644af13ea5bd784f234125eb3eae4c037fb3",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-queensland/2024.json",
+      "memberArtifactDigest": "sha256:e58eb03cb8323bd14e4daf1d5b3ddf3125a15f6b28b1dfdc9126b92a78129e0f",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-south-australia",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-10-2021.response.txt",
+      "mapDigest": "sha256:709037da8643d336a64dc4f0e5841e71d702611b8c749ffde512ef4a518fb4c4",
+      "recipeDigest": "sha256:b3a1f0f27a84956ad3befaa0db18bc9811a3537b3803a57efa46ed1b76ac4ba6",
+      "trustedEnvelopeDigest": "sha256:a6fbbfe94b767d5efdc7065253e77b43a1c933609ee8df9e7b47784cbbfce8c3",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-south-australia/2021.json",
+      "memberArtifactDigest": "sha256:802026708744d2e4338f9b389186c7be69ed3ee24fc1a4524f7ea35506cde42b",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-south-australia",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-10-2022.response.txt",
+      "mapDigest": "sha256:460418c9e7754ac2ddba30231ec4ad1c79e53360b344fae0b7ff0a5d279570c2",
+      "recipeDigest": "sha256:a2421c5beec40a242afa00a9945f32cb197dcccd247173b42d738462da4c0536",
+      "trustedEnvelopeDigest": "sha256:2f79d41c693140932897d0ef384e9679068b697492ea987c3e1953adc7137d94",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-south-australia/2022.json",
+      "memberArtifactDigest": "sha256:63050e689f2b169bf099364a2f1d93a97880b3dcfa56772a311759645af9b36f",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-south-australia",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-10-2023.response.txt",
+      "mapDigest": "sha256:2e946ca7b4d54c679b87eb27e5abdcb6279249899684db2093621b1fc8885e04",
+      "recipeDigest": "sha256:9f4a0958fc6840bca076b84b0cac8fd96183e82ed6f7f088ddd4e24b1438cd82",
+      "trustedEnvelopeDigest": "sha256:c0a2415e69450ee7d52259d354359654fa79a5e973eaf4f4a8ccb1341bc1b439",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-south-australia/2023.json",
+      "memberArtifactDigest": "sha256:6e43cfed7b90167b5a28d3ce7fd467c2d0298696b86229867a21089a3dd17a30",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-south-australia",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-10-2024.response.txt",
+      "mapDigest": "sha256:ea1dc2f1793ca903a340dfad69cbbcd431bd751b12c84397062d4adf4561be2d",
+      "recipeDigest": "sha256:c4d498c9ba2fae7bff4c333e013cae445c9f8f82bdd99d14d5b1789c9457279f",
+      "trustedEnvelopeDigest": "sha256:df213b7e2fc408072470657913eee12e78165e95500af155dd3f00ec33f29eaf",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-south-australia/2024.json",
+      "memberArtifactDigest": "sha256:edb05b8b6f9211b8507c74f78b42a6517d5d6359dd36ba90df6eddc153dea8a8",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-tasmania",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1344,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-12-2021.response.txt",
+      "mapDigest": "sha256:5080069eda24d55fe6b244845ef57d856f747f23c0d66bfb4dda7c776ea18ddb",
+      "recipeDigest": "sha256:1d34c96c8ded043891e73f54a20db1212611d9be28acec4e3df7e7891855f678",
+      "trustedEnvelopeDigest": "sha256:9f83b3d23d7e3f38ae1ec1ce1733283293449b0933db959d34d9ce1ad8f0f73f",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-tasmania/2021.json",
+      "memberArtifactDigest": "sha256:e7897d8bc8865de04a93e4cee92250574b719123f24bd901cf942ca25a8b1002",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-tasmania",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1440,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-12-2022.response.txt",
+      "mapDigest": "sha256:4465448d66ce3376a084d2538024e3a4c579b6e0274fd830fcddaccd71ecffeb",
+      "recipeDigest": "sha256:88de75582f9b4071f290c1c24596ba53108428527e306d5c78db0ea438ab76d4",
+      "trustedEnvelopeDigest": "sha256:7de0bc9b75e3222b4b6efc055f06a23caa89bacf52950d3f40daa099d134746e",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-tasmania/2022.json",
+      "memberArtifactDigest": "sha256:56ed5211e92f58e7c848c7e1fe637cfe88c2a388270259d42d8df043fbabb6f9",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-tasmania",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1536,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-12-2023.response.txt",
+      "mapDigest": "sha256:c38b038a968378ee243a105151a2dc94e591fe94c0d27cd13ab6d6d9e6ff7d21",
+      "recipeDigest": "sha256:08c8166b434f0d08a971658ea437f07914072ad8b7e90ffeea09334c282e356c",
+      "trustedEnvelopeDigest": "sha256:d366d76e5616ef3730d294526602c8adc65ea71206dbfb7911dae41309230248",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-tasmania/2023.json",
+      "memberArtifactDigest": "sha256:0b16ef93f7474e88d480d0dc9e82d7180a0de9ec14f8dce425a91fc228a471be",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-tasmania",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-12-2024.response.txt",
+      "mapDigest": "sha256:e0f657d62bf388dda9889ed9554ee81a5b4b78dfc3ecaf737cb2d54ecf6bfc14",
+      "recipeDigest": "sha256:5f5258c1bbbe6792e3f9018acfb6c27763588bd7bac139c4530b579c2dd204aa",
+      "trustedEnvelopeDigest": "sha256:a45b53e0538cf28f3eeb50e4e11291ab3f92b24952fca061e750a1d7a6c7e2e7",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-tasmania/2024.json",
+      "memberArtifactDigest": "sha256:6eb812c69fcf09ff1a6238bf6671224d682daf8daf717dbc38018343352b6374",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-victoria",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-8-2021.response.txt",
+      "mapDigest": "sha256:feeb63787537e3d12979b45fd6f3332ed0742cd074a032736e209b860b64a407",
+      "recipeDigest": "sha256:87514c204651afe6379eca7af4f03301708faeff512b918d04c7e1585a7fa8a6",
+      "trustedEnvelopeDigest": "sha256:a5d233060368382bdfa5f8e70413996bb76cce54cff5bcd4162c61a95633d15b",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-victoria/2021.json",
+      "memberArtifactDigest": "sha256:9242fcbcf512c4a726711f2cc692e32e816bd6314162f2be14055aa23a5258ac",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-victoria",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-8-2022.response.txt",
+      "mapDigest": "sha256:ea821d34f32cc11eeebbaaa1a2e32e7a99c47bd0e8512b7e3a1d40405717d57a",
+      "recipeDigest": "sha256:afa0720f6bf758129cd940b18927a5436a327a0730486b8bf8fbefda44efd718",
+      "trustedEnvelopeDigest": "sha256:24dc76e09a64628442baf08903e19aa6e374691520a2cd1dedb5a10e74706cfb",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-victoria/2022.json",
+      "memberArtifactDigest": "sha256:0b7b27c9898b9a5fa942d8457355e69a035506c5d75e3bf04cd068adada1eaab",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-victoria",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-8-2023.response.txt",
+      "mapDigest": "sha256:063c764c5044c4b4d61a897b94eab3b777ec7bbbc7b375918f970df5a4801ca8",
+      "recipeDigest": "sha256:287f79d706ba998deb8e13025a304e497da01afd52dc28c5ea13e7674702dd45",
+      "trustedEnvelopeDigest": "sha256:0fa61e9c616608eb6d680ae1ad3194f1611ec05a5e403787deedbb069a71f338",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-victoria/2023.json",
+      "memberArtifactDigest": "sha256:f2c7a00a71f9f16276af5e31272791108989e54c19950b4e8d794c602091e4a1",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-victoria",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-8-2024.response.txt",
+      "mapDigest": "sha256:fa36a2c209b8161a3b74d667f8e17406cff6616cb8487dc9a8a05c114d07b7d5",
+      "recipeDigest": "sha256:7a0468e3e77891b1972fa10125ba1887c78a5b913d80ab867359c9aa8f74e736",
+      "trustedEnvelopeDigest": "sha256:163b8636769c8be998921daa3c51cfa1f37e67f9b0e26a65a69ff19dcd84265c",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-victoria/2024.json",
+      "memberArtifactDigest": "sha256:ac72143109e059559af7d694b6889e780a8d3c3820013fa440be1afbb0a2d362",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-western-australia",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1344,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-11-2021.response.txt",
+      "mapDigest": "sha256:c3f92496241db35c7c533e234d680e501b53171cc1b9ee5509c7f6076ac6fdbf",
+      "recipeDigest": "sha256:1bb2dfaa4ca6ddbb45246f2ba578f8f7435c86e196a658d1f51e77242905efb0",
+      "trustedEnvelopeDigest": "sha256:a656a4decda667b8a511fb80397072a276f43ab1030e5aa6f1dea51d23d44cc4",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-western-australia/2021.json",
+      "memberArtifactDigest": "sha256:fe7f14ed157ae381713e17016859cec7a1aed511df535b63c339e8a55f2c39bf",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-western-australia",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1440,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-11-2022.response.txt",
+      "mapDigest": "sha256:80557a50fcfe24e8403945a12bb3431f8f428ac084cf1a86150d0b8780cdeed3",
+      "recipeDigest": "sha256:093e379c0f542775e48bf09c89a225e86e71fd224646fb024d252908b507b2b8",
+      "trustedEnvelopeDigest": "sha256:de9b71e5dc9ccfd2c8405ced488538056e77e023996edb8abbe3aba2a1c0d6f5",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-western-australia/2022.json",
+      "memberArtifactDigest": "sha256:3abda8e84d04e536674df3112c60c5fcb86ec27103e7527ef479165ec006c73c",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-western-australia",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1536,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-11-2023.response.txt",
+      "mapDigest": "sha256:c8ffbab7a53cd8fab8c881b25e17c084df0c0002cad37f61107f46992a89604a",
+      "recipeDigest": "sha256:6c89b9b06f61531a3ccdc688b1a5a0b0ed6a8805a3a73b049242010d8e14fe2f",
+      "trustedEnvelopeDigest": "sha256:47dd16c5ea2312a3ff07be5daf7b416c8f4ebb6b5cd234d1b470fba1fcce58ee",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-western-australia/2023.json",
+      "memberArtifactDigest": "sha256:57fb21222b39a949dfb85302201f99efc09d33e82ea08a9104054e9c1c5b05d7",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-and-principal-offence-western-australia",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-11-2024.response.txt",
+      "mapDigest": "sha256:e0b3b4ba7ed88013a1f842998b54a7fd5a9db1586701a5acddf296cc4407b55a",
+      "recipeDigest": "sha256:b29bdf75d023a5242330941464435278bb8bb3622755eadfc9f32a58972a56fb",
+      "trustedEnvelopeDigest": "sha256:37cc8c5e3ada9f0581081b7967ed6629b221b835608367ca2810f8dbf6198711",
+      "memberArtifactPath": "members/offenders-by-sex-and-principal-offence-western-australia/2024.json",
+      "memberArtifactDigest": "sha256:d32887b44b84800182c45af0af126edaa64cdb45cd793da8066ed5ebca07a461",
+      "changedFields": 48,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-times-proceeded-and-jurisdiction-snapshot",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 588,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-16-2021.response.txt",
+      "mapDigest": "sha256:0dbe6c656bd973f81220d14340bed288feeb59274b776556b88e46920bbbd50c",
+      "recipeDigest": "sha256:7182aeea0df1781e07fc6dc0941606527aa3e7c54134467bbfb1e602574ee82d",
+      "trustedEnvelopeDigest": "sha256:f1647d1d13733af76296d04b19ee7310a029ddbeed6b98ef4b6f4cd9f837f144",
+      "memberArtifactPath": "members/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2021.json",
+      "memberArtifactDigest": "sha256:262971dc1cc26349b8034fb684c458d4047dde6c67ab2f0a1201f8ed39005152",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-times-proceeded-and-jurisdiction-snapshot",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 588,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-16-2022.response.txt",
+      "mapDigest": "sha256:ae5e3559adcb8a933051daddf783b95f817500c6820f0aa9bb61051904b9eba8",
+      "recipeDigest": "sha256:47f412240ec74d2ba8a033544a7c8f68794625f41eb474b05022188a45776d30",
+      "trustedEnvelopeDigest": "sha256:eb8dee0c9ab772b26dffec7dc7b710f3bc68101380d8b31b1d82036fa675ed20",
+      "memberArtifactPath": "members/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2022.json",
+      "memberArtifactDigest": "sha256:b4e44bddc9595da6514218d219a35c77ed73b9de172ed8aa5769013d1c41344d",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-times-proceeded-and-jurisdiction-snapshot",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 588,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-16-2023.response.txt",
+      "mapDigest": "sha256:37968db2fe09ec3251a9eb346f65a9e5445960eb8f34cd3476f8af83ae7ae966",
+      "recipeDigest": "sha256:6949843eddb9942450866710f64a06742be6bfb16d219d8e1600bc4047dfcab6",
+      "trustedEnvelopeDigest": "sha256:9e35ce39a60763730acbab7b38f2015ecff160f5912e1d1e1c4013e1ff48154b",
+      "memberArtifactPath": "members/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2023.json",
+      "memberArtifactDigest": "sha256:99f8a63acdb249ac06bdfd395767688a0e5676554ed8009b46dd32da7e4b7666",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-by-sex-times-proceeded-and-jurisdiction-snapshot",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 588,
+      "mapPath": "replay/recorded-crime-offenders-states-territories-main-16-2024.response.txt",
+      "mapDigest": "sha256:7e1d728470e1db7657cdcb2d1d3bafd50f2e10152a9387cd1f56e4649a699c9f",
+      "recipeDigest": "sha256:43572199246834fd12b7921ae9f9fec601eade2c437632c646ef6f06272ee2cf",
+      "trustedEnvelopeDigest": "sha256:832842f085e4af90f32f6930d89b24322dfd7d5933c69ab56d7a44ab7e574cce",
+      "memberArtifactPath": "members/offenders-by-sex-times-proceeded-and-jurisdiction-snapshot/2024.json",
+      "memberArtifactDigest": "sha256:6877fdab5f31f2df873001b834b73462e0d5c47f20ee1ddcf3523895250a9120",
+      "changedFields": 42,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-act",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1344,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-33-2021.response.txt",
+      "mapDigest": "sha256:daa85b31356c6e328c0c4f39f8a0149b6a96493dd86369b3ce24c879b76a1887",
+      "recipeDigest": "sha256:649bb1f1de5ce8a6637b8132617e22b9b25dd30cee4c27436ae0cfe9be9a3d0d",
+      "trustedEnvelopeDigest": "sha256:9e46cbb81ac4a8331ef4c888b43ad144326252e1ead244126d2c91c8b24944ea",
+      "memberArtifactPath": "members/offenders-police-proceedings-act/2021.json",
+      "memberArtifactDigest": "sha256:b22ff91ac07334c6c7a8c38584019b9f2171b895dc500b08790b04663786077f",
+      "changedFields": 1344,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-act",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1440,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-36-2022.response.txt",
+      "mapDigest": "sha256:5652e69dfdd6bea47ccaa49ebd19e54d467f326af2eb8406672ce3759dc1bfe7",
+      "recipeDigest": "sha256:a3d1716673ce00ea37cacafb24b56dc96e7370bfa2906a4a6f1f943d4ba818b4",
+      "trustedEnvelopeDigest": "sha256:6a935042b846792b7802878393c5494abd826f9781e42f668d9ff27abdd8aa09",
+      "memberArtifactPath": "members/offenders-police-proceedings-act/2022.json",
+      "memberArtifactDigest": "sha256:8f44228c3489d4a5a61f3617130a190386338d7bda7acf35bcc93ffbae1fd147",
+      "changedFields": 1440,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-act",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1536,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-36-2023.response.txt",
+      "mapDigest": "sha256:11f917726aa5739b36af918c56c0b86f4128542b46ecbfdaeea1dd92dfce2e1d",
+      "recipeDigest": "sha256:26f2161851d014526fd5f0d61d302d9176715c7ad025220c4572eef379e35c92",
+      "trustedEnvelopeDigest": "sha256:c8901c5524615a8585d4b0dd993a050b2499b070c9f06df1ae300aea5da4af5c",
+      "memberArtifactPath": "members/offenders-police-proceedings-act/2023.json",
+      "memberArtifactDigest": "sha256:b05ddd96e65fc04158fbfa808d29020053346eeacf29fa3e82e26d0c613357b0",
+      "changedFields": 1536,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-act",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-36-2024.response.txt",
+      "mapDigest": "sha256:9c13abf7615ab2f85c46a2efd64ea5708da2e3cbc86712c97dfb6b58dbf90433",
+      "recipeDigest": "sha256:e5d25e66e4a310610915b44565ebe1e5f94121b8d07a3e76f22c6186e3defccd",
+      "trustedEnvelopeDigest": "sha256:64395d38659a6970eaf5a4579cadffde1eded7fe64f84b1982dc60e353cbf989",
+      "memberArtifactPath": "members/offenders-police-proceedings-act/2024.json",
+      "memberArtifactDigest": "sha256:3d7c88cf384044a030e5098570c777ff4fda045ce02cb52bc4ebb795c4693667",
+      "changedFields": 1632,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-northern-territory",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 448,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-32-2021.response.txt",
+      "mapDigest": "sha256:64ee24affeb38c5870c5134bc404c9b6b33dd417d0f4cd11e06cc788f3be84de",
+      "recipeDigest": "sha256:9d5d2faab3a18d562d9e51cf9d16157bf49db3b7c0ddfb47078a84e9ca167747",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/offenders-police-proceedings-northern-territory/2021.json",
+      "memberArtifactDigest": "sha256:179daaab9be19b3ba34bab60ddcb9d1409df5ae765b4e76c7ea726fa5965034a",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-northern-territory",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 480,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-35-2022.response.txt",
+      "mapDigest": "sha256:b087ca8f610e1125e9f13a796b8802b5fb0a6e8dc653d44ec251fa20b33a9b41",
+      "recipeDigest": "sha256:efd9f3ea03c2c0cb722524f90661422302e266509f0ba2bbef3122c84e39c78e",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/offenders-police-proceedings-northern-territory/2022.json",
+      "memberArtifactDigest": "sha256:b0ec456bcdfeedab6418dafc43fad9bbc591dd003401be2c12cae48b3edca71a",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-northern-territory",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 512,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-35-2023.response.txt",
+      "mapDigest": "sha256:83440370b14ea7b2f05f0125c1d068f5d392f827092d14472e959400063b12e5",
+      "recipeDigest": "sha256:3330a7c4f5ca0827b0f0fce819bfafcb1fb44b011d0ed863637ea02a769c156d",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/offenders-police-proceedings-northern-territory/2023.json",
+      "memberArtifactDigest": "sha256:d10357a6ebfdb870fea3514348c18344a80654e73e780bfef547da4b60644fda",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-northern-territory",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 544,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-35-2024.response.txt",
+      "mapDigest": "sha256:af1f9afd560671a9d62f979ac44acdb7c78b25b30b5e99dfa42704914f602c67",
+      "recipeDigest": "sha256:ae6fa6c3c543f06ecbc85c93ceedb5149e1f5adef846896b35951f9f7bca1dfc",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/offenders-police-proceedings-northern-territory/2024.json",
+      "memberArtifactDigest": "sha256:c3887d6d4040a44f6b4d2d86c61daba404770c786cdc0e5fd66bed919215b4e7",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-nsw",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-27-2021.response.txt",
+      "mapDigest": "sha256:4501d2d1fb4d177c47c1c1fc74c8a69c7277c9cb194c88ce9e76e2c043c049b8",
+      "recipeDigest": "sha256:12d276c76ad1a2d4d244120c5c56e790d57a6baa323de2edf1936f8bdd0003c6",
+      "trustedEnvelopeDigest": "sha256:7793eb5539b61c63f992e8d53beac742cd76dc689a3d2daf30d184628cccf06d",
+      "memberArtifactPath": "members/offenders-police-proceedings-nsw/2021.json",
+      "memberArtifactDigest": "sha256:f64d9f085cdaabbfd65843b3e7411175814393bd973a7e04df7b4181b951d6e9",
+      "changedFields": 1428,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-nsw",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-30-2022.response.txt",
+      "mapDigest": "sha256:2d8c40774eab97e4cf57c93e7df6472d3ba183a820c6b175a02fe98449540ff7",
+      "recipeDigest": "sha256:16359bce409ed657d3a08d900d0b7f3a4ccc9ba1b5a23fb1faa462c0da8d7c64",
+      "trustedEnvelopeDigest": "sha256:d3c5b0276121144f0f319370d8ecea9200174d70bf740c5cee94e364532f4594",
+      "memberArtifactPath": "members/offenders-police-proceedings-nsw/2022.json",
+      "memberArtifactDigest": "sha256:32be3de8c8ab1f39df7af0138b70b4bb7af9a6e3d766cc7a390829500712d7be",
+      "changedFields": 1530,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-nsw",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-30-2023.response.txt",
+      "mapDigest": "sha256:58a09bfd2585435e2ed291aaf16c049089e5e9c3283c3184d24c2fd398bbab3f",
+      "recipeDigest": "sha256:a4675ee0b7c583bf269af3a4077b851f8ce449257b26b9c0bcf6606782efc9a3",
+      "trustedEnvelopeDigest": "sha256:ee7a5d22d2640a9894d443e13c5cefbd3105662ffa0837a0592e723e66614288",
+      "memberArtifactPath": "members/offenders-police-proceedings-nsw/2023.json",
+      "memberArtifactDigest": "sha256:4d44e78b288628e7ec850539deb268b8b7643108439017ad00136fe50c798ee7",
+      "changedFields": 1632,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-nsw",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-30-2024.response.txt",
+      "mapDigest": "sha256:020375ddc7b49467230a6ab8d29e966a57995e66b3efdb22202ba8e466d33bfe",
+      "recipeDigest": "sha256:c90ea5099a22f1c73514d785a59015ac3d60b1c3feaff4878f66d6dedd2b8d44",
+      "trustedEnvelopeDigest": "sha256:fd0185645f7aa4c09c9c42f8c9c84f46bf2991e1579c75293e053dc45187a695",
+      "memberArtifactPath": "members/offenders-police-proceedings-nsw/2024.json",
+      "memberArtifactDigest": "sha256:51abe5d1f2d226d5abdff9c7f34e1dab95599e9a842cc66e27c6aa9b0aeb7cd7",
+      "changedFields": 1734,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-queensland",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-29-2021.response.txt",
+      "mapDigest": "sha256:c89dba4323e8fb61976f01299bf6fff5d85487de7d1cb8b7ea22130cdf0d29e4",
+      "recipeDigest": "sha256:a1149b220fe6e9f2d13a9e8429027870a0bf53e6586fa09cdac1a20b612ed694",
+      "trustedEnvelopeDigest": "sha256:2cc03c848f69322cece9d0aa53085e493ffa19bd8a1789566e5f9dac41dc9891",
+      "memberArtifactPath": "members/offenders-police-proceedings-queensland/2021.json",
+      "memberArtifactDigest": "sha256:9a2cd55eaf2ec83dcec4366958d2297f31475d3de4a5ba8689ae8d32c218a260",
+      "changedFields": 1428,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-queensland",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-32-2022.response.txt",
+      "mapDigest": "sha256:5c3a29a73e411cc8763ecb62c1d54a3371536841814126464a206112b16ebaeb",
+      "recipeDigest": "sha256:ab2fe1a780d3ddebd9866517bf0ca6482aae02e39a20e6dc92269b05534cece1",
+      "trustedEnvelopeDigest": "sha256:c7102dcb985bbeee65bc0f8df1ef074cdf0fdff231a2402be4ae631240ab9767",
+      "memberArtifactPath": "members/offenders-police-proceedings-queensland/2022.json",
+      "memberArtifactDigest": "sha256:47f7fd65b838ab021e81de41b3fefa1942fb1c167f20fbacbf3b8925240567df",
+      "changedFields": 1530,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-queensland",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-32-2023.response.txt",
+      "mapDigest": "sha256:cc63fdf7b2d05c6f86fa6d4b9284ccf6841056dc14105d8a687b4ffdba857b44",
+      "recipeDigest": "sha256:9a9813ab5933350a6808fd9fbbd04be8f0c2046943b026cf7ce8985b3db7a7f4",
+      "trustedEnvelopeDigest": "sha256:d38aa31ec2984fc6c0e79888ea16fb7a9d9948dbca2d392748105b9c278ea4de",
+      "memberArtifactPath": "members/offenders-police-proceedings-queensland/2023.json",
+      "memberArtifactDigest": "sha256:5bfa1adc38e5fbeaf23ca0173521903aa5a856206171580f3e5cb489afc352bd",
+      "changedFields": 1632,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-queensland",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-32-2024.response.txt",
+      "mapDigest": "sha256:722eb18307f50cbdd11a91b33a3477b0769af0cd66a967b40c54bad5fcf43035",
+      "recipeDigest": "sha256:e493cf62a12536a98e6ecbce22ec3d3e801767fb059472bc7a225fe39602b603",
+      "trustedEnvelopeDigest": "sha256:fdd1ee979b264f4cd65a3d677287d0b37306948b676c617dc1b1b87cc2031a2b",
+      "memberArtifactPath": "members/offenders-police-proceedings-queensland/2024.json",
+      "memberArtifactDigest": "sha256:6c267b75d7023be8f31c3e0830620c70286b565508a2092c8aa6362d4dc1b551",
+      "changedFields": 1734,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-south-australia",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-30-2021.response.txt",
+      "mapDigest": "sha256:32b850cb2d88eb7a4811f63ea5d57908aeabb2214843b4915d115c2241035b71",
+      "recipeDigest": "sha256:91362710e0ec1123f283f84c64cbbef2d5f03bee063b24edd629c3464ee85d90",
+      "trustedEnvelopeDigest": "sha256:dbbebf383323d10c8c520f101e4afd396f44c4baae6fdc552c8d06574f335222",
+      "memberArtifactPath": "members/offenders-police-proceedings-south-australia/2021.json",
+      "memberArtifactDigest": "sha256:2c8fa5c2207716672742d2a1b2ad02a70100ec44f4941a6f48a843bf53239b0a",
+      "changedFields": 1428,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-south-australia",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-33-2022.response.txt",
+      "mapDigest": "sha256:8a7144e7b660c1d0b9f2f0bf53628592093c8c0ba6901f9ae4b7ac813353e487",
+      "recipeDigest": "sha256:a0095fa71b59fc48e72e9ab83bf1634484f6a7ba5cc64669b56ec41a7e1dad09",
+      "trustedEnvelopeDigest": "sha256:68c545d41ba8755f5ee6788f545fb3e395f5559a76458b5909834ef0648671f8",
+      "memberArtifactPath": "members/offenders-police-proceedings-south-australia/2022.json",
+      "memberArtifactDigest": "sha256:c20586bb334ee84310194eca80d371933f56a4cf9b0a88bd5286daa0793d234a",
+      "changedFields": 1530,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-south-australia",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-33-2023.response.txt",
+      "mapDigest": "sha256:4abf566ca5337a52c00ab4fdd9080ab0483d55c2dedce127bfefe9d7efb76778",
+      "recipeDigest": "sha256:50d8d5a56cd3dea343eca04b3c61d1ee10dc8a9e8bcb4d98fdcc25068e09660c",
+      "trustedEnvelopeDigest": "sha256:1dca0b3594bf4b17246edc5dc9f7f64f0bc0f149e1540a395cb672423b789c51",
+      "memberArtifactPath": "members/offenders-police-proceedings-south-australia/2023.json",
+      "memberArtifactDigest": "sha256:d0c0ea1d2c0834576600f218e814346de95d14dff60627fd81f316fc2eb4edcf",
+      "changedFields": 1632,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-south-australia",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-33-2024.response.txt",
+      "mapDigest": "sha256:af9e5bebefba302e81ed29f67e33673313a7323ba6b630c321c30a5e17b6abca",
+      "recipeDigest": "sha256:1e5a36f7c4d7332cc3dac7ee2c2bb4cc94884f9c34996b42cafe4aaa87494041",
+      "trustedEnvelopeDigest": "sha256:34c6a638480f62c239e510d0d8aad713a1dbdb794bc748824d4bd1f4a18ddafa",
+      "memberArtifactPath": "members/offenders-police-proceedings-south-australia/2024.json",
+      "memberArtifactDigest": "sha256:b128d4b579f71d2d31c1847a8d5d6415b9d85d0b30514e3fd6754871615dd7ec",
+      "changedFields": 1734,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-tasmania",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1344,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-31-2021.response.txt",
+      "mapDigest": "sha256:025efd464d8c76cfd96593e7c8eb475cb2d61f316d0cbcbf29bbd08aeee79a32",
+      "recipeDigest": "sha256:6c75d4456c2f3d758bcbf1f4fd7f181ba30661d68a3f7e057549377fb826d5c1",
+      "trustedEnvelopeDigest": "sha256:68773f0ed08b350fb283aa7fef527702332e64e2469be0192edbe7d25c59200b",
+      "memberArtifactPath": "members/offenders-police-proceedings-tasmania/2021.json",
+      "memberArtifactDigest": "sha256:59d89cc378630ab7caa83780c296a357213cf4fa4ef135d646f2a1f988383af3",
+      "changedFields": 1344,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-tasmania",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1440,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-34-2022.response.txt",
+      "mapDigest": "sha256:dc5e7afa044398da38807c41a435ac543cc3a343af75331fd1462a52c8588ded",
+      "recipeDigest": "sha256:b06e0a052cb770f6c7bd4a64b9b6e9981793d5760bc4659d52e8329e54ad15a0",
+      "trustedEnvelopeDigest": "sha256:d0d78f736871fbce9143dab7ca97bdd0b2ef0fcbd27835da2d102359297ab8ff",
+      "memberArtifactPath": "members/offenders-police-proceedings-tasmania/2022.json",
+      "memberArtifactDigest": "sha256:38486ec9a6760487fc05c9438958753403a2e3651b909410d559c58be7abb9a7",
+      "changedFields": 1440,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-tasmania",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1536,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-34-2023.response.txt",
+      "mapDigest": "sha256:c9270772d558125b3d5a28ebb47c3cc874a97a30c8ac0230f8ec6eaf0f9f2838",
+      "recipeDigest": "sha256:1da170b93dd51fc186c827294da9ac73fb4107fb69d86776638553c9d8652dd8",
+      "trustedEnvelopeDigest": "sha256:73c8e320214f894021eac3f27a6d8120f0eb7409b30e54a88ff7dd2cf26c2b94",
+      "memberArtifactPath": "members/offenders-police-proceedings-tasmania/2023.json",
+      "memberArtifactDigest": "sha256:f6f3ee37eeed049023d07b382451129a9733652b3b6e25ae15d5b79465ade0dc",
+      "changedFields": 1536,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-tasmania",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-34-2024.response.txt",
+      "mapDigest": "sha256:ffaf04c58a8d5560994da60d6d7da68c47a5fe1e85ce6ab4b9c0325c1264a72b",
+      "recipeDigest": "sha256:cd1b13cc9578d219bebc95d570f55358a32641d8b8a3a188b17899a53410c948",
+      "trustedEnvelopeDigest": "sha256:14905eeecce4298ace877e69f70aa8b373736c1546bd5a1142cd2737d74f4b80",
+      "memberArtifactPath": "members/offenders-police-proceedings-tasmania/2024.json",
+      "memberArtifactDigest": "sha256:8f1bdc77f6fb7766a1cde00993fe41b657f4c00cf3f56590ef027bd9b22d8978",
+      "changedFields": 1632,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-victoria",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-28-2021.response.txt",
+      "mapDigest": "sha256:9752a4124283380a1ff8bb5e24f6dbd53e340a6fb83b50858cd6487864eb0e7c",
+      "recipeDigest": "sha256:e6b96813a29e044f2c295915dd35a0531911011d9b3026787d35ee3b59dbb3fc",
+      "trustedEnvelopeDigest": "sha256:8844e1cc8e782a6b7eb8d57f4c1fb5b36591b8753a1b1709bc49a88cd31f53a3",
+      "memberArtifactPath": "members/offenders-police-proceedings-victoria/2021.json",
+      "memberArtifactDigest": "sha256:b33a7f59c354b9d3aa7b0d78c2b64a9704a9f8dc9f9f7d5bc759247a8dbb3c05",
+      "changedFields": 1428,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-victoria",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-31-2022.response.txt",
+      "mapDigest": "sha256:e399d3237b2eff98b862b1688c98ccbd0c848a1a6b237ff8e44848d2169991d9",
+      "recipeDigest": "sha256:d114f6f254e2e297df33ee8d2c44d363fbfecc2a917dd3d917ba9dfd0cc3b949",
+      "trustedEnvelopeDigest": "sha256:53166197d043535f3731cccd58a9ddcdfc1d0406de7fc3fc015df214cac2f16a",
+      "memberArtifactPath": "members/offenders-police-proceedings-victoria/2022.json",
+      "memberArtifactDigest": "sha256:c1372dac5cbd293b0f266d0c069dcb2f2406fe956ed925f63b9b25b663e671e5",
+      "changedFields": 1530,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-victoria",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-31-2023.response.txt",
+      "mapDigest": "sha256:dcfc348c45e64a2ffb67689cb139a05fdc986b3f75fd0e4fe2b058f6b5d17ab9",
+      "recipeDigest": "sha256:0244873e2c144bb514f446ba08bddb8a7e9a3317c4c4807edd5eb44f31b610d3",
+      "trustedEnvelopeDigest": "sha256:e9717a7d8dc005e06aefdbb7bd27b4c65b0596431cbbd3d3733aa0f5a7ba0134",
+      "memberArtifactPath": "members/offenders-police-proceedings-victoria/2023.json",
+      "memberArtifactDigest": "sha256:8c03c182e122b9d2a70b70ef1d555d2be257b50d61743e6cbdf160a422218fe0",
+      "changedFields": 1632,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "offenders-police-proceedings-victoria",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-police-proceedings-main-31-2024.response.txt",
+      "mapDigest": "sha256:abb3159f4d47bd2143eece7ebe2affee3501bf68e8ae829d266eef8f3e6209c4",
+      "recipeDigest": "sha256:7398116565fc52c0df92e61438b4afd10f90d29631253e48029f48fb1f4944ed",
+      "trustedEnvelopeDigest": "sha256:2adfffe72bd67a6b89a3759ab565c590fa35e524c8b08a5f4a0b553127725b92",
+      "memberArtifactPath": "members/offenders-police-proceedings-victoria/2024.json",
+      "memberArtifactDigest": "sha256:62e0a1870263afcbf5ea11a495cd0ac839416a6e6053cf88fe43d3e0fca0a74f",
+      "changedFields": 1734,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-age-sex-and-period-australia",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 360,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-23-2022.response.txt",
+      "mapDigest": "sha256:9178f1c1f4d782170b280409ab3a55c4f9993b6f99075569a03e006d437c65ed",
+      "recipeDigest": "sha256:97fee957d1ed9d8b1b7e4185e14b4db738f6f33c72d8dcbd504619e39dd80fea",
+      "trustedEnvelopeDigest": "sha256:e57755a947bb01c03b621bc9cd3a952b325031d57fbdd3bf8f485e9d15303ba4",
+      "memberArtifactPath": "members/youth-offenders-by-age-sex-and-period-australia/2022.json",
+      "memberArtifactDigest": "sha256:033c059186289677ca187e67c541f3fe57a3f561d1755a27d2b36c890a169d89",
+      "changedFields": 12,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-age-sex-and-period-australia",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 384,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-23-2023.response.txt",
+      "mapDigest": "sha256:e5d8cead80f69e2a6034360c1ef453ae3c4fa1cc0a680fcc1a9679feb0f6e3d1",
+      "recipeDigest": "sha256:b391d5420b01176fa6de201727ba3496b3248222153a8ff0f304a7c7bc8d9524",
+      "trustedEnvelopeDigest": "sha256:37a0b01d0a4f174ff0a2a0455cd62ebcbdff2d9312267eb125612ee6b9563673",
+      "memberArtifactPath": "members/youth-offenders-by-age-sex-and-period-australia/2023.json",
+      "memberArtifactDigest": "sha256:5d816f27c73b61f866cb2a79eb8eb4b69b649377a72f4c1e421847ca63545824",
+      "changedFields": 12,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-age-sex-and-period-australia",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 408,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-23-2024.response.txt",
+      "mapDigest": "sha256:89914b2cc516b55ba5d97668644eb2ba28a4b334c3527983412aeaa327cea83e",
+      "recipeDigest": "sha256:837c53aedf85e350451d7e46d84c636b7a666363802fd65a66bcf80892524bbf",
+      "trustedEnvelopeDigest": "sha256:05978aed07a73975d926b43dd3d4edcc1c6d96c77a0777feb3d47b2cc556af48",
+      "memberArtifactPath": "members/youth-offenders-by-age-sex-and-period-australia/2024.json",
+      "memberArtifactDigest": "sha256:ad8a50b5e2a0fc5f305db64acedc19ad6243a178a2708b6f40dd013e960e1db0",
+      "changedFields": 12,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-age-and-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1320,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-21-2022.response.txt",
+      "mapDigest": "sha256:f001a23daf63494a80ca0ded775f2c204d35397c8b994d6a96f2c50bdc7d3805",
+      "recipeDigest": "sha256:64eeaa3235bddcf2da8787d8d67cd7fac6b2d4d78ac92c1cb6978de9a8c5ccda",
+      "trustedEnvelopeDigest": "sha256:0100719aac5625331b15b024ca066da1a6704a58d89b4833b34990eb4768bd0f",
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-age-and-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:a488282abcf86e8737a9d332ea1b68a9611b8c59072109482897a37f2e0eca04",
+      "changedFields": 132,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-age-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1320,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-21-2023.response.txt",
+      "mapDigest": "sha256:d630e60ca3e882a30875578916264cd1e1fd9855d1eed6fa770a86789858f8b3",
+      "recipeDigest": "sha256:6602b086470751db495411437c5d0f0b65e270a295b5a6bb0978354fd6e0f274",
+      "trustedEnvelopeDigest": "sha256:b37d27d59a19ddc8266621b011358918ec45de3adc88124e95761b645dc3cf1c",
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-age-and-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:c4fca9afdd08955195754ef64df8f092c76d1e57259ef61d32882055c37f08fd",
+      "changedFields": 132,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-age-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1320,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-21-2024.response.txt",
+      "mapDigest": "sha256:a9867192aa553bfeb5cc0cf36f0c51ec3bc00f4c467c7f2402bccfb77cd13d77",
+      "recipeDigest": "sha256:b40085653bcaa9c20b1541bebe44da62afe2c9cd49df663c8c4a8f49a4b9d4b0",
+      "trustedEnvelopeDigest": "sha256:1f850962e39e718204af95cd57abd2960d89f72ced5015bfc5ccd91c606bffb7",
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-age-and-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:dd794fdddd5dbcfb49f3afc6b7f1e4ff28893a7251cf5a87fd9d2ce14bd2423b",
+      "changedFields": 132,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-and-period",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 1064,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-18-2021.response.txt",
+      "mapDigest": "sha256:adb1527c6723e676091405ec74f1ed807fda385ff1810c13aae9e5a03e0edc27",
+      "recipeDigest": "sha256:de24412c68aa9b46d2101580eebfdef425991b745e894f3fa006b90fb42129e7",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-and-period/2021.json",
+      "memberArtifactDigest": "sha256:01e506a5747146bebe51b60041a8741dc568239361618333a1d06948f3db0337",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-and-period",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 1140,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-18-2022.response.txt",
+      "mapDigest": "sha256:8d145aaf852ff735e2f576e301e7c5739e8243f4597abde2c27b27039e398344",
+      "recipeDigest": "sha256:70a3fa073d0e137d4c95b560bede1b59c60903207f77b7ba4c9ea644e29dea77",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-and-period/2022.json",
+      "memberArtifactDigest": "sha256:25eaa3a24b91783bbd1bda73c980b00006b24cd7161fd047fd0c59f46b36247a",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-and-period",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 1216,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-18-2023.response.txt",
+      "mapDigest": "sha256:7399c08b6b662c8f95c3f05857cb7ed85ea15414b468440d1f86290565ee0222",
+      "recipeDigest": "sha256:49530f211eb8650f00cfd2f00e58a1b21b38a35344f650381ecd7c53be3d73bb",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-and-period/2023.json",
+      "memberArtifactDigest": "sha256:01cc9bb035c53a12ad50f7d0c34d51a1a003dd00478a9e9bcd75c009264f577a",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-and-period",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-map-v1",
+      "rows": 1292,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-18-2024.response.txt",
+      "mapDigest": "sha256:27e30b3e0d869ea017742500ca8e6b1bb1417dc30c16010bba7b8110538f24fa",
+      "recipeDigest": "sha256:935b8ee89eddd38227b0571c057f62cf3d971362abcb58f8c8aa3dafada26229",
+      "trustedEnvelopeDigest": null,
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-and-period/2024.json",
+      "memberArtifactDigest": "sha256:9e584ba9560bc0c87a41a7e589e9fb24b857d511e5518d829db307aadb7f1ab8",
+      "changedFields": 0,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-jurisdiction-and-period",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 3920,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-20-2021.response.txt",
+      "mapDigest": "sha256:d10c91d5e40f1484ae2bbca3625d85f18644e1a7a264b80ca92ab4b6747a1fbf",
+      "recipeDigest": "sha256:c2976867e0e7539b6dcb15cc7ece378d11407bc54cdf265a0cc2a33d28af637e",
+      "trustedEnvelopeDigest": "sha256:90ea2577f3eba203dd0e0c206ab6ab6991a9da635d1f170ebd56225dc1bd56e5",
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-jurisdiction-and-period/2021.json",
+      "memberArtifactDigest": "sha256:8035bb628f19d76b465232b6a5bc3c2431ae9cd9427bb911fcb59865a2822f06",
+      "changedFields": 140,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-jurisdiction-and-period",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 4200,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-20-2022.response.txt",
+      "mapDigest": "sha256:e93c78d8055cfc540856f73020c670e02a12ae8adc6e9f5cdbee38aaa173ced5",
+      "recipeDigest": "sha256:282f5e7763afcf86a7e8d41fb505ad099fbd804dcf449c137b39945e865c40b5",
+      "trustedEnvelopeDigest": "sha256:1cd872d70d8b8a2fc2026609a0b0dbbc96c54b05e2028249d443a63801e3630e",
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-jurisdiction-and-period/2022.json",
+      "memberArtifactDigest": "sha256:cc97067bae0beed90d6523744e27105d7b332157b7a133112460d3874e4b2d48",
+      "changedFields": 140,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-jurisdiction-and-period",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 4480,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-20-2023.response.txt",
+      "mapDigest": "sha256:16f62bbdc5edf225346f2e2db5d2d58c1a4539fd261363b48c8f197a0372f655",
+      "recipeDigest": "sha256:048b7dea7c14a4009bbdafeec368e5a9a6323c4a21e6e07101cc1adc64b73134",
+      "trustedEnvelopeDigest": "sha256:4691fe4edec0d5fd9880090f16b6c8865f483f2a8bb7254d501a5d20d9b8262c",
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-jurisdiction-and-period/2023.json",
+      "memberArtifactDigest": "sha256:fdb8c2627cefc09232d923d503ce7487a329d915a03219f3d824468cc17253b4",
+      "changedFields": 140,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-principal-offence-jurisdiction-and-period",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 4760,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-20-2024.response.txt",
+      "mapDigest": "sha256:e7e3394f0c26c2fe8cbf723e588bd67931a1b476478087ed901ae40f20ff5e9c",
+      "recipeDigest": "sha256:4d41c200b34a1a597ea5428327dca7180e712881d1ac9cde55ac78c6c449fb7c",
+      "trustedEnvelopeDigest": "sha256:4340f6fc1bd82cb3c19291ac38fa7769d45925ed960e69e9fa4ba10d17b9826e",
+      "memberArtifactPath": "members/youth-offenders-by-principal-offence-jurisdiction-and-period/2024.json",
+      "memberArtifactDigest": "sha256:477e61c99ad0fe2568c56ad7c43446b15350918f6f4798a19d6299271cd611fc",
+      "changedFields": 140,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-repeat-proceedings-age-and-jurisdiction",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 280,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-25-2022.response.txt",
+      "mapDigest": "sha256:c02838a49f4e1767f4c6fdbc4b999b8f78c9345c29575f1f7f304191d35412ca",
+      "recipeDigest": "sha256:d509872d8a2f6767ad5e1148adf20ed88802634578172cd7463354764395ae78",
+      "trustedEnvelopeDigest": "sha256:bcbb03cbe1f1027db8eb55e5e82c4e4ae420ff583c0242745a639a6e11a00e35",
+      "memberArtifactPath": "members/youth-offenders-by-repeat-proceedings-age-and-jurisdiction/2022.json",
+      "memberArtifactDigest": "sha256:57e14666bf660b784d60a391a2fd08e7321e951959c6679d8bec310f7d2469ea",
+      "changedFields": 28,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-repeat-proceedings-age-and-jurisdiction",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 279,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-25-2023.response.txt",
+      "mapDigest": "sha256:cb8d32cc350558cfadfcb8581ff0f4e341395e0155faef82c5a517b959db58b8",
+      "recipeDigest": "sha256:de92f5ef3243b9583facc27b047f5d1b19c3a6be7ca20fca73a0f28535ea2190",
+      "trustedEnvelopeDigest": "sha256:aa246e9743247125a03f59eb3b2923bc055d8ea07692e05ca7fafc9ddcd30d00",
+      "memberArtifactPath": "members/youth-offenders-by-repeat-proceedings-age-and-jurisdiction/2023.json",
+      "memberArtifactDigest": "sha256:ed0f33674cb7ad25950817f7df25f730319faa09a8d9f51378cf287093e14d07",
+      "changedFields": 28,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-repeat-proceedings-age-and-jurisdiction",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 280,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-25-2024.response.txt",
+      "mapDigest": "sha256:c5e95e2e83f8c911d2af76937e4ed1f4312c53b9e3acb78ab9a610cf64adcafa",
+      "recipeDigest": "sha256:18662b8b207c4c37bf8e38e3674f13f105399ee3d39542174a38444d03de8bcf",
+      "trustedEnvelopeDigest": "sha256:f4bbee17e83502a4347f2631e5470aa097d2ed5fb69e506fca9111b7f7b32b37",
+      "memberArtifactPath": "members/youth-offenders-by-repeat-proceedings-age-and-jurisdiction/2024.json",
+      "memberArtifactDigest": "sha256:9f9d0d700fd408c32853fdfb74f91b46c0cbc34c412b5647761fc58f36a74419",
+      "changedFields": 28,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-age-and-jurisdiction-snapshot",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 384,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-24-2022.response.txt",
+      "mapDigest": "sha256:03be7522e5475682ebf92e04767d85d4122a7fdd53afca89ec6b201663365ca4",
+      "recipeDigest": "sha256:8111d9799b577223e6b76e5610ef862beeecd40605e2d0216de5e2cc615a5394",
+      "trustedEnvelopeDigest": "sha256:9b056b15ac6304f2ff4fb67eed3c8820d7e5128eae65e613a52474261c64c6f2",
+      "memberArtifactPath": "members/youth-offenders-by-sex-age-and-jurisdiction-snapshot/2022.json",
+      "memberArtifactDigest": "sha256:b56cadc417943ea3f392eacf11ead41e38a4b22dbbd089e8929010e008379155",
+      "changedFields": 72,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-age-and-jurisdiction-snapshot",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 384,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-24-2023.response.txt",
+      "mapDigest": "sha256:3085908462f38a8d7254e548fa7ffcc914c97a082f6d6c499b5bf4011e645810",
+      "recipeDigest": "sha256:50a37735af7874900c91b67749f46f3cf3313ca357ea54b2e28f5a656f8f2194",
+      "trustedEnvelopeDigest": "sha256:00caf94a1d28c372aa1f610455adb938a4c1e495cdd565c871a3d426295c21e3",
+      "memberArtifactPath": "members/youth-offenders-by-sex-age-and-jurisdiction-snapshot/2023.json",
+      "memberArtifactDigest": "sha256:b3807a2c90e7c0c8e4e5cdc57310143dc24267ab95119f05ea253ae020b20941",
+      "changedFields": 72,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-age-and-jurisdiction-snapshot",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 384,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-24-2024.response.txt",
+      "mapDigest": "sha256:f945a143cf202a6917162b9b165dd15d4be42f2310b1d80776ba0edb19bf7314",
+      "recipeDigest": "sha256:02ba88902ab7cf4b6856a0dfe5ebbcd48f810ee15bd2ff47fe6d962a797660b4",
+      "trustedEnvelopeDigest": "sha256:55d9d868172c2fd4d1c20f35ef6a877aeed0b198598ff98070408969949c369d",
+      "memberArtifactPath": "members/youth-offenders-by-sex-age-and-jurisdiction-snapshot/2024.json",
+      "memberArtifactDigest": "sha256:a78c6f2f7b2165aa0427e4413c082e0cb463f1508771d86fede477ec0a1fe37c",
+      "changedFields": 72,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-and-repeat-proceedings-jurisdiction",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 420,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-22-2021.response.txt",
+      "mapDigest": "sha256:41e4a975bec50760611e70984a3d5c2689a4545477414bdba1d931a721d6a141",
+      "recipeDigest": "sha256:31111203122d9691cb7462521f7eb260cb5a5d9b15f15a3ac2d2dda4d6422df6",
+      "trustedEnvelopeDigest": "sha256:3547c59b6572ecd39debcae6ace2abb73ec67f820943a1b395a59c9745bd50a9",
+      "memberArtifactPath": "members/youth-offenders-by-sex-and-repeat-proceedings-jurisdiction/2021.json",
+      "memberArtifactDigest": "sha256:7ef69cac5a157d5febaaf09707a46163554a4f1d860f6238c8b55c52e91f0597",
+      "changedFields": 30,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-age-australia",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 960,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-21-2021.response.txt",
+      "mapDigest": "sha256:ed691e845bab7fabe8d2262132765cbd98679a29eb73aa2d511ad1f145a7d151",
+      "recipeDigest": "sha256:30e939bfc0c6ced06e0e98c33aefd6f72482641a8de65006ea48fb2cc5261f16",
+      "trustedEnvelopeDigest": "sha256:d53aebfdad0eab23a81c8f47b8f5f6a8430d2ef958b8cb7139878bda4bb01b9d",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-age-australia/2021.json",
+      "memberArtifactDigest": "sha256:511e125b3c957a0f85bffc4f82e0fccbb7ee3039d40d135a5a87529f02ffd095",
+      "changedFields": 96,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-age-australia",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 960,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-22-2022.response.txt",
+      "mapDigest": "sha256:c1dab3b971de0431e227716d84ccd2ead781e937ec92401e3159e26d6fc00c3a",
+      "recipeDigest": "sha256:8072949f77c095d611cb3659e91d6e78fa431fc8b7a1a9cccc30460cb480d342",
+      "trustedEnvelopeDigest": "sha256:63eb28eba4eb2e78c401acdd30c0694b51ce50426e9b0eea5e1f6421945f9e08",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-age-australia/2022.json",
+      "memberArtifactDigest": "sha256:a7d31c828fe0ce1d034d1cd8bd47c2fb7f74a2a4d749d805b817eee2f94f1e17",
+      "changedFields": 96,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-age-australia",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 960,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-22-2023.response.txt",
+      "mapDigest": "sha256:0e68eefa8fa616e29d9f27d021c81e9572219c062127e1aa0f436860ed665d1f",
+      "recipeDigest": "sha256:4caf6eec731bf8b756581017d550a6af522c44fa246911c933532a20e6cf0ffa",
+      "trustedEnvelopeDigest": "sha256:f5689eba326773855e8d6049012ec00cb0eb1c336cae76f90a476eaf233f7e7d",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-age-australia/2023.json",
+      "memberArtifactDigest": "sha256:6fd39537cd8021b641f5ef1330ededb0ef6fdf43f7c4627d0adf9cbb0721af7c",
+      "changedFields": 96,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-age-australia",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 960,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-22-2024.response.txt",
+      "mapDigest": "sha256:fb8d34d0ebf9449d19e507b964cfef7a900289755129430c28b2be2cb3ac1a28",
+      "recipeDigest": "sha256:4aa40cf40dfda02689a7e71af6439883b3d539eda2c6d7d24e73da5e9acca18e",
+      "trustedEnvelopeDigest": "sha256:b23b8599a724b50d6533ca82df610eb29a8abeaec3cddafded3a084b9b70bf0e",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-age-australia/2024.json",
+      "memberArtifactDigest": "sha256:d3e04fd2fe5ada3cdadc6946a7fff348c1ef8137b7584875ca7281b4595b11db",
+      "changedFields": 96,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-period",
+      "year": 2021,
+      "releaseId": "2021-22",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1428,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-19-2021.response.txt",
+      "mapDigest": "sha256:f5fdd15569bae639f4e754e9f7b19cc9e4defc2ebddc7778b914d23c6c1a1d7c",
+      "recipeDigest": "sha256:60f174e45d85d81daf05e01a8ce378794d52cd0759d186883d187cb9aa0ef3a9",
+      "trustedEnvelopeDigest": "sha256:23be7ead4abe34a4190120559af00cef35f0a8e83b424336ac2fedb8c7959f37",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-period/2021.json",
+      "memberArtifactDigest": "sha256:135da8c3b4736d44b04f5a2d7bde47287c53b6a99ce49cabbe654bcdcfdb0085",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-period",
+      "year": 2022,
+      "releaseId": "2022-23",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1530,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-19-2022.response.txt",
+      "mapDigest": "sha256:2599022f149f5aac10c2849958d6657a9cb1ae425e94e6e85157c9c4546c067b",
+      "recipeDigest": "sha256:0549783a32212e1849f2e35ce80fa43bfb7c80d0738d02eb9e8bfb0b49e18fcc",
+      "trustedEnvelopeDigest": "sha256:5382cc130b07b55745a410d710590a0014e629f9d340abd2e61f44bbf5c0e8de",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-period/2022.json",
+      "memberArtifactDigest": "sha256:f5ce15623d7763197f2b791e5930d9031b720c6225a2ce4c65789c195979c038",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-period",
+      "year": 2023,
+      "releaseId": "2023-24",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1632,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-19-2023.response.txt",
+      "mapDigest": "sha256:ae54615ac28af689724535fcc6bd65770b206ba89face68e4534977ae0ecd3cd",
+      "recipeDigest": "sha256:4830450b897ab38ade4812af1f44ac3cc0a39f3e348fbfb20152ed149b1cd8d7",
+      "trustedEnvelopeDigest": "sha256:6c1f4d4636a020df5b55ccbc7cc0b1a1a64e002727041dc59b9c9b93bef0395c",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-period/2023.json",
+      "memberArtifactDigest": "sha256:acc409c1b5317945da3669c4f14f2623a292a0f7313f15cd48520f30b3604d1e",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    },
+    {
+      "familyId": "youth-offenders-by-sex-principal-offence-and-period",
+      "year": 2024,
+      "releaseId": "2024-25",
+      "status": "multi-table-v1-capable",
+      "mode": "semantic-table-map-v2-recipe-v1",
+      "rows": 1734,
+      "mapPath": "replay/recorded-crime-offenders-youth-main-19-2024.response.txt",
+      "mapDigest": "sha256:61139dca61274328e7de10cc6d7a794075af5b67c04db8869bec362f4ba3a6a3",
+      "recipeDigest": "sha256:e2c4e3fff6f9ee5ca98ed5fe55e4df31717b49ceace614f4b9187a664baf18ab",
+      "trustedEnvelopeDigest": "sha256:c71759c33b90886dfd84d74f13350b0ddee8252633a575aa4999a8477d2034eb",
+      "memberArtifactPath": "members/youth-offenders-by-sex-principal-offence-and-period/2024.json",
+      "memberArtifactDigest": "sha256:d15680ddd724bbd6e3e2d314136f7f685b6155f6b01722bebf6856899bef665b",
+      "changedFields": 51,
+      "keyAudit": {
+        "exactDuplicateExcess": 0,
+        "normalizedDuplicateExcess": 0,
+        "canonicalDuplicateExcess": 0,
+        "aliasCollisions": 0
+      }
+    }
+  ],
+  "reviewStatus": "pending-independent-review"
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-covid-offenders-by-age-and-sex-time-series",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "covid-offenders-by-age-and-sex-time-series",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 2,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-covid-offenders-by-age-and-sex-time-series-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/recorded-crime-offenders-2021-22-cube-7-source.xlsx",
+      "contentDigest": "sha256:005dbd4e167303d479a4de43ffa7eb91f3db31103b0430622fdc467c2a66d1c1",
+      "byteLength": 60227,
+      "sheet": "Table 1 ",
+      "releaseId": "2021-22",
+      "downloadOrdinal": 7,
+      "cubeId": "covid-19",
+      "tableNamespace": "covid-19",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-covid-19-covid-19-1-2021.response.txt",
+        "contentDigest": "sha256:f7e44305329e97bd886b8468e70ef4353aa7fccf2da30be32e4190bd8c9329dc",
+        "byteLength": 64541,
+        "historicalModel": "provider-free/offenders-c4/target-scoped-recipe-v02",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "TargetScopedRecipeV02"
+      }
+    }
+  ]
+}

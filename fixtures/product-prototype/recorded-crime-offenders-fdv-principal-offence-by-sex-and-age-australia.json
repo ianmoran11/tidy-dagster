@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "tidy.product-prototype-cohort/v1",
+  "cohortId": "recorded-crime-offenders-fdv-principal-offence-by-sex-and-age-australia",
+  "publicationId": "recorded-crime-offenders",
+  "tableFamilyId": "fdv-principal-offence-by-sex-and-age-australia",
+  "generation": {
+    "provider": "openai-codex",
+    "model": "openai-codex/gpt-5.6-luna",
+    "reasoning": "high",
+    "promptContract": "cell-role-semantic-map-v13-adjacent-year-aware",
+    "maximumCalls": 8,
+    "maximumCostUsd": 2.0,
+    "correctionPolicy": "one-pre-execution-compilation-correction-only"
+  },
+  "acceptanceContract": "acceptance/recorded-crime-offenders-fdv-principal-offence-by-sex-and-age-australia-v1.json",
+  "workerLimits": {
+    "maxWarnings": 100000
+  },
+  "workbooks": [
+    {
+      "year": 2021,
+      "referenceDate": "2022-06-30",
+      "path": "workbooks/recorded-crime-offenders-2021-22-cube-6-source.xlsx",
+      "contentDigest": "sha256:4b804c75ca8d586ea9607a6bfd676b40a1f83d8b557bbee07155faefda958228",
+      "byteLength": 146454,
+      "sheet": "Table 3",
+      "releaseId": "2021-22",
+      "downloadOrdinal": 6,
+      "cubeId": "family-domestic-violence",
+      "tableNamespace": "family-domestic-violence",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-3-2021.response.txt",
+        "contentDigest": "sha256:b94deba9f78d1276e22199c725268620a98bd067ceef6ebc9e07ba6ba73ecf37",
+        "byteLength": 23733,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2022,
+      "referenceDate": "2023-06-30",
+      "path": "workbooks/recorded-crime-offenders-2022-23-cube-6-source.xlsx",
+      "contentDigest": "sha256:7d8841f4bf6fd62436867bbd7ab8bd2b34388e347587ff9ebb8bec5aaa303268",
+      "byteLength": 159246,
+      "sheet": "Table 39",
+      "releaseId": "2022-23",
+      "downloadOrdinal": 6,
+      "cubeId": "family-domestic-violence",
+      "tableNamespace": "family-domestic-violence",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-39-2022.response.txt",
+        "contentDigest": "sha256:52c9df4da4dfd0cba23b180925a1f9371b0904a1126eadca470b133afbff82fd",
+        "byteLength": 23738,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2023,
+      "referenceDate": "2024-06-30",
+      "path": "workbooks/recorded-crime-offenders-2023-24-cube-6-source.xlsx",
+      "contentDigest": "sha256:91db681481764fc676f68e4bff041e97f144b087f3b9657085d1189a3502de5f",
+      "byteLength": 155459,
+      "sheet": "Table 39",
+      "releaseId": "2023-24",
+      "downloadOrdinal": 6,
+      "cubeId": "family-domestic-violence",
+      "tableNamespace": "family-domestic-violence",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-39-2023.response.txt",
+        "contentDigest": "sha256:508fd8b7f57c1ad6e6ff2c35e98636a5986c229b347c6663c8d9caeed3e4706e",
+        "byteLength": 23733,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    },
+    {
+      "year": 2024,
+      "referenceDate": "2025-06-30",
+      "path": "workbooks/recorded-crime-offenders-2024-25-cube-6-source.xlsx",
+      "contentDigest": "sha256:148f2cd4cf216c15177ac398e3d79480a2bdd4816d311269e3ec8a8bb5eac5cc",
+      "byteLength": 161422,
+      "sheet": "Table 39",
+      "releaseId": "2024-25",
+      "downloadOrdinal": 6,
+      "cubeId": "family-domestic-violence",
+      "tableNamespace": "family-domestic-violence",
+      "replayResponse": {
+        "path": "replay/recorded-crime-offenders-family-domestic-violence-family-domestic-violence-39-2024.response.txt",
+        "contentDigest": "sha256:dfeed2d2de234708b157c19741ab8130e0ea01f3c776cafa49e86194f648734e",
+        "byteLength": 23733,
+        "historicalModel": "provider-free/offenders-c4/semantic-map-v2-recipe-v01",
+        "acceptanceAuthority": false,
+        "recipeProtocol": "RecipeV01"
+      }
+    }
+  ]
+}

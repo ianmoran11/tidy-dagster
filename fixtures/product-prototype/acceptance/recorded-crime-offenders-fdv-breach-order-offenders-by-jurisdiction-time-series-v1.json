@@ -1,0 +1,339 @@
+{
+  "schemaVersion": "tidy.table-family-acceptance/v2",
+  "contractId": "recorded-crime-offenders-fdv-breach-order-offenders-by-jurisdiction-time-series-v1",
+  "tableFamilyId": "fdv-breach-order-offenders-by-jurisdiction-time-series",
+  "measures": [
+    {
+      "id": "published-value",
+      "unitId": "published-unit",
+      "numeric": true,
+      "minimum": 98,
+      "expectedCombinationCountsByYear": {
+        "2021": 54,
+        "2022": 63,
+        "2023": 72,
+        "2024": 81
+      },
+      "expectedDimensionsByYear": {
+        "2021": {
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "AUSTRALIA_80f94363",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b"
+          ]
+        },
+        "2022": {
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "AUSTRALIA_80f94363",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b"
+          ]
+        },
+        "2023": {
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "AUSTRALIA_80f94363",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_819e8237",
+            "2023_24_cb6f8507"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b"
+          ]
+        },
+        "2024": {
+          "jurisdiction": [
+            "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+            "AUSTRALIA_80f94363",
+            "NEW_SOUTH_WALES_92f089b8",
+            "NORTHERN_TERRITORY_a1d418fe",
+            "QUEENSLAND_8f0791ed",
+            "SOUTH_AUSTRALIA_0abd141a",
+            "TASMANIA_412e51e6",
+            "VICTORIA_8abba993",
+            "WESTERN_AUSTRALIA_74f6e5af"
+          ],
+          "observation_period": [
+            "2016_17_14c8c17c",
+            "2017_18_e0619229",
+            "2018_19_3fe15a03",
+            "2019_20_6d3dcb6c",
+            "2020_21_d6db3b1d",
+            "2021_22_dd8903a1",
+            "2022_23_0d9e498b",
+            "2023_24_275b6c33",
+            "2024_25_a2e07178"
+          ],
+          "statistic_basis": [
+            "NUMBER_a081e07b"
+          ]
+        }
+      },
+      "expectedCombinationDigestsByYear": {
+        "2021": "sha256:e7d51b8a88c04cc3c125a8671f5610cc3e5ee9c3b1dddabecfa4e9fb65ea56e8",
+        "2022": "sha256:7563dbe33ed9c32482f461ba9b2b7e090107ca9fba4c0218d966416bd19cc38c",
+        "2023": "sha256:15a3f66ff999eb31ebe9662ffb7134a1263884951656aa14ca7cadb8ca945e77",
+        "2024": "sha256:5bf1f3a698abfbba9c39a3a909e8f64ca946021fc3d363051ec9728970a4926f"
+      },
+      "missingValues": {
+        "np": "suppressed"
+      }
+    }
+  ],
+  "requiredDimensions": [
+    "jurisdiction",
+    "observation_period",
+    "statistic_basis"
+  ],
+  "dimensionHeaders": {
+    "jurisdiction": [
+      "jurisdiction"
+    ],
+    "observation_period": [
+      "observation\\ period"
+    ],
+    "statistic_basis": [
+      "statistic\\ basis"
+    ]
+  },
+  "aliases": {
+    "jurisdiction": {
+      "New South Wales": "NEW_SOUTH_WALES_92f089b8",
+      "Victoria": "VICTORIA_8abba993",
+      "Queensland(b)(c)": "QUEENSLAND_8f0791ed",
+      "South Australia(d)": "SOUTH_AUSTRALIA_0abd141a",
+      "Western Australia": "WESTERN_AUSTRALIA_74f6e5af",
+      "Tasmania(e)": "TASMANIA_412e51e6",
+      "Northern Territory": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Australia(f)": "AUSTRALIA_80f94363",
+      "Northern Territory(f)(g)": "NORTHERN_TERRITORY_a1d418fe",
+      "Australian Capital Territory(g)": "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+      "Australia(h)": "AUSTRALIA_80f94363",
+      "Queensland(a)(b)": "QUEENSLAND_8f0791ed",
+      "South Australia(c)": "SOUTH_AUSTRALIA_0abd141a",
+      "Tasmania(d)": "TASMANIA_412e51e6",
+      "Northern Territory(e)(f)": "NORTHERN_TERRITORY_a1d418fe"
+    },
+    "observation_period": {
+      "2016–17": "2016_17_14c8c17c",
+      "2017–18": "2017_18_e0619229",
+      "2018–19": "2018_19_3fe15a03",
+      "2019–20": "2019_20_6d3dcb6c",
+      "2020–21": "2020_21_d6db3b1d",
+      "2021–22": "2021_22_dd8903a1",
+      "2022–23": "2022_23_0d9e498b",
+      "2022-23": "2022_23_819e8237",
+      "2023-24": "2023_24_cb6f8507",
+      "2023–24": "2023_24_275b6c33",
+      "2024–25": "2024_25_a2e07178"
+    },
+    "statistic_basis": {
+      "Number": "NUMBER_a081e07b"
+    }
+  },
+  "strictAliasMatching": true,
+  "decisionIdentityVersion": "v2-reference-date-v1",
+  "expectedRecipeDigestsByYear": {
+    "2021": "sha256:9543baa64eb5cffc2facd32d179238e95a0c076fdc4fe0650362afb3db361afa",
+    "2022": "sha256:14ed8bbe10badbc3c3d6727192355b798aa3ae65dcd2fef7608450edb11d951c",
+    "2023": "sha256:4ce942ca503cab96a0855b43ea2d0c1cffcbd33d9e47fcf0aef49f61fbda4c8d",
+    "2024": "sha256:b197b240e4f4bad703d56aa5131fcdc9052ad7c63bbb8575608c2cf615478ac1"
+  },
+  "expectedRecipeProtocolsByYear": {
+    "2021": "RecipeV01",
+    "2022": "RecipeV01",
+    "2023": "RecipeV01",
+    "2024": "RecipeV01"
+  },
+  "expectedReplayMapDigestsByYear": {
+    "2021": "sha256:9246f8598c6534146dc750c63a44985c30073ac282068a2d6b9499013496299c",
+    "2022": "sha256:b1237a559510295d2659316f2469445229b7982e05602574bef64c90b5b16ff2",
+    "2023": "sha256:bfaa38f26edaaba726f161138e1152cb47aa9f998ab719c4bcdaf70fdfb94c07",
+    "2024": "sha256:0aa72919653717bf31a5e7842d3b1884c07a5debf1592cc085e2371f6d06e061"
+  },
+  "expectedC3RowTraceDigestsByYear": {
+    "2021": "sha256:862b3feeddea978aeef6935a5d9c8dda4fd2caacbbd1e7e2a225f8f51cafffa0",
+    "2022": "sha256:d9049f1dead5a38558bd2b69ac170bfbd7e973e374292d6c27c75adea41da486",
+    "2023": "sha256:fbdda7098eadeae65ec34dfb567d1a9049cc630864d748b48698c7f76d8f7db0",
+    "2024": "sha256:80b4e39aaad3491eabd275f744d78fff6555460b65dd7751d1a236c2ca887fa8"
+  },
+  "expectedWarningCountsByYear": {
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "uniqueKey": [
+    "publication_vintage_date",
+    "reference_date",
+    "jurisdiction_id",
+    "observation_period_id",
+    "statistic_basis_id",
+    "measure_id"
+  ],
+  "expected": {
+    "minimumRows": 54,
+    "maximumRows": 81,
+    "sourceColumns": {
+      "minimum": 1,
+      "maximum": 200
+    },
+    "jurisdictionsByYear": {
+      "2021": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "AUSTRALIA_80f94363",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2022": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "AUSTRALIA_80f94363",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2023": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "AUSTRALIA_80f94363",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ],
+      "2024": [
+        "AUSTRALIAN_CAPITAL_TERRITORY_8af3780a",
+        "AUSTRALIA_80f94363",
+        "NEW_SOUTH_WALES_92f089b8",
+        "NORTHERN_TERRITORY_a1d418fe",
+        "QUEENSLAND_8f0791ed",
+        "SOUTH_AUSTRALIA_0abd141a",
+        "TASMANIA_412e51e6",
+        "VICTORIA_8abba993",
+        "WESTERN_AUSTRALIA_74f6e5af"
+      ]
+    },
+    "observationPeriodsByYear": {
+      "2021": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1"
+      ],
+      "2022": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b"
+      ],
+      "2023": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_819e8237",
+        "2023_24_cb6f8507"
+      ],
+      "2024": [
+        "2016_17_14c8c17c",
+        "2017_18_e0619229",
+        "2018_19_3fe15a03",
+        "2019_20_6d3dcb6c",
+        "2020_21_d6db3b1d",
+        "2021_22_dd8903a1",
+        "2022_23_0d9e498b",
+        "2023_24_275b6c33",
+        "2024_25_a2e07178"
+      ]
+    },
+    "statisticBasesByYear": {
+      "2021": [
+        "NUMBER_a081e07b"
+      ],
+      "2022": [
+        "NUMBER_a081e07b"
+      ],
+      "2023": [
+        "NUMBER_a081e07b"
+      ],
+      "2024": [
+        "NUMBER_a081e07b"
+      ]
+    }
+  },
+  "allowedExecutionWarnings": [],
+  "totalEquations": [],
+  "totalValidation": "not_applicable",
+  "automaticAcceptance": true,
+  "trainingEligibility": false,
+  "preservePublicationVintage": true,
+  "preserveRawValueText": true
+}
