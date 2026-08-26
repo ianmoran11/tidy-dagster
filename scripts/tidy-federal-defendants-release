@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec uv run --project "$ROOT" python -m tidy_orchestrator.federal_defendants_release_cli \
+  --project-root "$ROOT" "$@"
