@@ -354,7 +354,37 @@ export type FederalDefendantsGroupedRecipeV1 = {
   vectors: FederalDefendantsGroupedSemanticMapV1["vectors"];
   provenanceProfiles: FederalDefendantsGroupedSemanticMapV1["provenanceProfiles"];
   targets: FederalDefendantsGroupedSemanticMapV1["targets"];
+  targetProofs: FederalDefendantsTargetCellProof[];
 };
+
+const coordinateCellProofSchema = z
+  .object({
+    sheet: z.string().min(1),
+    address: addressSchema,
+    row: z.number().int().positive(),
+    col: z.number().int().positive(),
+    data_type: z.enum([
+      "blank",
+      "string",
+      "numeric",
+      "boolean",
+      "date",
+      "error",
+    ]),
+    formula: z.string().nullable(),
+    formatted: z.string().nullable(),
+    comment: z.string().nullable(),
+  })
+  .strict();
+
+const targetCellProofSchema = coordinateCellProofSchema.extend({
+  rawValue: z.union([z.string(), z.number().finite(), z.null()]),
+  rawLexeme: z.string().nullable(),
+  dataType: z.enum(["number", "string", "blank"]),
+  styleIndex: z.number().int().nonnegative(),
+  numberFormat: z.string().min(1),
+  cellProofDigest: digestSchema,
+});
 
 const recipeSchema: z.ZodType<FederalDefendantsGroupedRecipeV1> = z
   .object({
@@ -436,6 +466,7 @@ const recipeSchema: z.ZodType<FederalDefendantsGroupedRecipeV1> = z
       .array(z.object({ id: idSchema, values: provenanceSchema }).strict())
       .min(1),
     targets: z.array(targetSchema).min(1),
+    targetProofs: z.array(targetCellProofSchema).min(1),
   })
   .strict();
 
@@ -532,7 +563,7 @@ export type FederalDefendantsGroupedExecutionV1 = {
     trace: {
       value_cells: Array<{
         panelId: string;
-        target: CellProof;
+        target: FederalDefendantsTargetCellProof;
         rawValue: string | number | null;
         valueStatus: FederalValueStatus;
         markerSource: FederalMarkerSource;
@@ -571,6 +602,22 @@ type CellProof = {
   formatted: string | null;
   comment: string | null;
 };
+
+export type FederalDefendantsOracleSourceProof = {
+  rawValue: string | number | null;
+  rawLexeme: string | null;
+  dataType: "number" | "string" | "blank";
+  formula: string | null;
+  formatted: string | null;
+  comment: string | null;
+  styleIndex: number;
+  numberFormat: string;
+};
+
+export type FederalDefendantsTargetCellProof = CellProof &
+  FederalDefendantsOracleSourceProof & {
+    cellProofDigest: string;
+  };
 export type FederalMarkerSource = "cell-value" | "cell-comment" | null;
 export type FederalValueStatus =
   | "observed"
@@ -908,6 +955,7 @@ function compileOrThrow(input: {
   const usedProfiles = new Set<string>();
   const usedUniverseAddresses = new Map<string, Set<string>>();
   const attachmentProof: FederalDefendantsGroupedAttachmentProof[] = [];
+  const targetProofs: FederalDefendantsTargetCellProof[] = [];
   let markerCount = 0;
   let notPublishedCount = 0;
   let zeroCount = 0;
@@ -923,6 +971,10 @@ function compileOrThrow(input: {
     usedVectors.add(target.vectorId);
     usedProfiles.add(target.provenanceProfileId);
     const targetCell = bounded.byAddress.get(target.address);
+    if (targetCell === undefined)
+      fail("source-proof", "FEDERAL_TARGET_SOURCE_PROOF_MISSING");
+    const targetProof = federalDefendantsTargetCellProof(targetCell);
+    targetProofs.push(targetProof);
     const observation = classifyTargetObservation(targetCell, target);
     if (observation.valueStatus !== "observed") markerCount += 1;
     if (observation.valueStatus === "not-published") notPublishedCount += 1;
@@ -1045,6 +1097,7 @@ function compileOrThrow(input: {
       structuredClone(entry),
     ),
     targets: map.targets.map((entry) => ({ ...entry })),
+    targetProofs: targetProofs.map((entry) => structuredClone(entry)),
   };
   validateRecipe(recipe);
   const execution = executeRecipe(recipe, bounded.sheet);
@@ -1217,12 +1270,31 @@ function executeRecipe(
       leftOrder - rightOrder || compareAddresses(left.address, right.address)
     );
   });
+  if (recipe.targetProofs.length !== targets.length)
+    throw new Error("FEDERAL_RECIPE_TARGET_SOURCE_PROOF_COVERAGE_DRIFT");
+  const expectedTargetProofs = new Map<
+    string,
+    FederalDefendantsTargetCellProof
+  >();
+  for (const proof of recipe.targetProofs) {
+    if (expectedTargetProofs.has(proof.address))
+      throw new Error("FEDERAL_RECIPE_TARGET_SOURCE_PROOF_DUPLICATE");
+    expectedTargetProofs.set(proof.address, proof);
+  }
   const rows: Array<Record<string, unknown>> = [];
   const trace: FederalDefendantsGroupedExecutionV1["tables"][0]["trace"]["value_cells"] =
     [];
   for (const target of targets) {
     const targetCell = cells.get(target.address);
     if (!targetCell) throw new Error("FEDERAL_RECIPE_TARGET_MISSING");
+    const targetProof = federalDefendantsTargetCellProof(targetCell);
+    const expectedTargetProof = expectedTargetProofs.get(target.address);
+    if (
+      !expectedTargetProof ||
+      digestFederalDefendantsCanonical(expectedTargetProof) !==
+        digestFederalDefendantsCanonical(targetProof)
+    )
+      throw new Error("FEDERAL_RECIPE_TARGET_SOURCE_PROOF_DRIFT");
     const observation = classifyTargetObservation(targetCell, target);
     const vector = vectors.get(target.vectorId);
     const profile = profiles.get(target.provenanceProfileId);
@@ -1289,7 +1361,7 @@ function executeRecipe(
     rows.push(row);
     trace.push({
       panelId: panel.id,
-      target: cellProof(targetCell),
+      target: targetProof,
       rawValue: observation.rawValue,
       valueStatus: observation.valueStatus,
       markerSource: observation.markerSource,
@@ -2085,6 +2157,267 @@ function cellProof(cell: TidyCell): CellProof {
     comment: cell.comment ?? null,
   };
 }
+
+export function digestFederalDefendantsOracleSourceProof(
+  proof: FederalDefendantsOracleSourceProof,
+): string {
+  return digestFederalDefendantsBytes(
+    `${canonicalFederalDefendantsOracleSourceProof(proof)}\n`,
+  );
+}
+
+export function federalDefendantsTargetCellProof(
+  cell: TidyCell,
+): FederalDefendantsTargetCellProof {
+  const rawProof = (
+    cell as TidyCell & {
+      federalDefendantsRawSourceProof?: {
+        rawLexeme: string | null;
+        styleIndex: number;
+        numberFormat: string;
+      };
+    }
+  ).federalDefendantsRawSourceProof;
+  if (!rawProof) fail("source-proof", "FEDERAL_TARGET_SOURCE_PROOF_MISSING");
+  if (
+    cell.data_type !== "numeric" &&
+    cell.data_type !== "string" &&
+    cell.data_type !== "blank"
+  )
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_DATA_TYPE_UNSUPPORTED");
+  if (
+    (cell.data_type === "numeric" &&
+      (typeof cell.value !== "number" || !Number.isFinite(cell.value))) ||
+    (cell.data_type === "string" && typeof cell.value !== "string") ||
+    (cell.data_type === "blank" && cell.value !== null)
+  )
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_VALUE_UNSUPPORTED");
+  if (
+    !Number.isSafeInteger(rawProof.styleIndex) ||
+    rawProof.styleIndex < 0 ||
+    rawProof.numberFormat.length === 0
+  )
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_STYLE_PROOF_INVALID");
+  const dataType =
+    cell.data_type === "numeric"
+      ? "number"
+      : cell.data_type === "string"
+        ? "string"
+        : "blank";
+  let sourceValue = cell.value as string | number | null;
+  if (dataType === "number")
+    sourceValue = normalizeFederalDefendantsOracleNumber(
+      sourceValue as number,
+      rawProof.rawLexeme,
+    );
+  const sourceProof: FederalDefendantsOracleSourceProof = {
+    rawValue: sourceValue,
+    rawLexeme: rawProof.rawLexeme,
+    dataType,
+    formula: cell.formula ?? null,
+    formatted: formatFederalDefendantsOracleValue(
+      sourceValue,
+      dataType,
+      rawProof.rawLexeme,
+      rawProof.numberFormat,
+    ),
+    comment: cell.comment ?? null,
+    styleIndex: rawProof.styleIndex,
+    numberFormat: rawProof.numberFormat,
+  };
+  return {
+    sheet: cell.sheet,
+    address: cell.address,
+    row: cell.row,
+    col: cell.col,
+    data_type: cell.data_type,
+    ...sourceProof,
+    cellProofDigest: digestFederalDefendantsOracleSourceProof(sourceProof),
+  };
+}
+
+function formatFederalDefendantsOracleValue(
+  value: string | number | null,
+  dataType: FederalDefendantsOracleSourceProof["dataType"],
+  rawLexeme: string | null,
+  numberFormat: string,
+): string | null {
+  if (dataType !== "number") return value === null ? null : String(value);
+  if (typeof value !== "number" || rawLexeme === null)
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID");
+  if (numberFormat === "General" || numberFormat === "0") return rawLexeme;
+  if (numberFormat === "#,##0") return formatFixedFederalNumber(value, 0, true);
+  if (numberFormat === "#,##0.0")
+    return formatFixedFederalNumber(value, 1, true);
+  if (numberFormat === "0.0") return formatFixedFederalNumber(value, 1, false);
+  if (numberFormat === "0.00") return formatFixedFederalNumber(value, 2, false);
+  fail("source-proof", "FEDERAL_TARGET_NUMBER_FORMAT_UNSUPPORTED");
+}
+
+function formatFixedFederalNumber(
+  value: number,
+  decimalPlaces: number,
+  grouped: boolean,
+): string {
+  const { negative, rounded } = roundFederalDefendantsBinary64HalfEven(
+    value,
+    decimalPlaces,
+  );
+  let digits = rounded.toString();
+  if (decimalPlaces > 0) digits = digits.padStart(decimalPlaces + 1, "0");
+  const integer =
+    decimalPlaces === 0 ? digits : digits.slice(0, -decimalPlaces);
+  const fraction = decimalPlaces === 0 ? null : digits.slice(-decimalPlaces);
+  const groupedInteger = grouped
+    ? integer.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : integer;
+  return `${negative ? "-" : ""}${groupedInteger}${
+    fraction === null ? "" : `.${fraction}`
+  }`;
+}
+
+function roundFederalDefendantsBinary64HalfEven(
+  value: number,
+  decimalPlaces: number,
+): { negative: boolean; rounded: bigint } {
+  if (!Number.isFinite(value) || decimalPlaces < 0)
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID");
+  const view = new DataView(new ArrayBuffer(8));
+  view.setFloat64(0, value, false);
+  const bits = view.getBigUint64(0, false);
+  const negative = bits >> 63n === 1n;
+  const exponentBits = Number((bits >> 52n) & 0x7ffn);
+  const fractionBits = bits & ((1n << 52n) - 1n);
+  const mantissa =
+    exponentBits === 0 ? fractionBits : (1n << 52n) + fractionBits;
+  const binaryExponent = exponentBits === 0 ? -1074 : exponentBits - 1023 - 52;
+  let numerator = mantissa * 5n ** BigInt(decimalPlaces);
+  const scaledBinaryExponent = binaryExponent + decimalPlaces;
+  if (scaledBinaryExponent >= 0)
+    return {
+      negative,
+      rounded: numerator << BigInt(scaledBinaryExponent),
+    };
+  const denominator = 1n << BigInt(-scaledBinaryExponent);
+  const quotient = numerator / denominator;
+  const remainder = numerator % denominator;
+  const twiceRemainder = remainder * 2n;
+  numerator =
+    twiceRemainder > denominator ||
+    (twiceRemainder === denominator && quotient % 2n === 1n)
+      ? quotient + 1n
+      : quotient;
+  return { negative, rounded: numerator };
+}
+
+const PYTHON_ORACLE_NUMBER =
+  /^[+-]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:[eE][+-]?\d+)?$/;
+
+function normalizeFederalDefendantsOracleNumber(
+  value: number,
+  rawLexeme: string | null,
+): number {
+  if (
+    rawLexeme === null ||
+    !PYTHON_ORACLE_NUMBER.test(rawLexeme) ||
+    !Number.isFinite(value)
+  )
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID");
+  const parsed = Number(rawLexeme);
+  if (!Number.isFinite(parsed) || parsed !== value)
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID");
+  if (Number.isInteger(parsed)) {
+    if (!Number.isSafeInteger(parsed))
+      fail("source-proof", "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID");
+    // Boundary 1 parses through CPython float and then converts integral values
+    // to int, which both erases lexical float/exponent typing and normalizes -0.
+    return parsed === 0 ? 0 : parsed;
+  }
+  return parsed;
+}
+
+function pythonFederalDefendantsFloatRepr(value: number): string {
+  if (!Number.isFinite(value))
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID");
+  if (Object.is(value, -0)) return "-0.0";
+  if (value === 0) return "0.0";
+  const absolute = Math.abs(value);
+  if (absolute < 1e-4 || absolute >= 1e16) {
+    const [coefficient, rawExponent] = value.toExponential().split("e");
+    const exponent = Number(rawExponent);
+    if (!coefficient || !Number.isSafeInteger(exponent))
+      fail("source-proof", "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID");
+    const sign = exponent < 0 ? "-" : "+";
+    return `${coefficient}e${sign}${Math.abs(exponent)
+      .toString()
+      .padStart(2, "0")}`;
+  }
+  const rendered = value.toString();
+  return rendered.includes(".") ? rendered : `${rendered}.0`;
+}
+
+function jsonFederalDefendantsOracleString(value: string): string {
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index);
+    if (code >= 0xd800 && code <= 0xdbff) {
+      const next = value.charCodeAt(index + 1);
+      if (!Number.isInteger(next) || next < 0xdc00 || next > 0xdfff)
+        fail("source-proof", "FEDERAL_TARGET_SOURCE_STRING_PROOF_INVALID");
+      index += 1;
+    } else if (code >= 0xdc00 && code <= 0xdfff) {
+      fail("source-proof", "FEDERAL_TARGET_SOURCE_STRING_PROOF_INVALID");
+    }
+  }
+  return JSON.stringify(value);
+}
+
+function jsonFederalDefendantsOracleNullableString(
+  value: string | null,
+): string {
+  return value === null ? "null" : jsonFederalDefendantsOracleString(value);
+}
+
+function canonicalFederalDefendantsOracleSourceProof(
+  proof: FederalDefendantsOracleSourceProof,
+): string {
+  if (
+    !Number.isSafeInteger(proof.styleIndex) ||
+    proof.styleIndex < 0 ||
+    (proof.rawValue !== null &&
+      typeof proof.rawValue !== "string" &&
+      typeof proof.rawValue !== "number")
+  )
+    fail("source-proof", "FEDERAL_TARGET_SOURCE_PROOF_INVALID");
+  let rawValue: string;
+  if (typeof proof.rawValue === "number") {
+    const normalized = normalizeFederalDefendantsOracleNumber(
+      proof.rawValue,
+      proof.rawLexeme,
+    );
+    rawValue = Number.isInteger(normalized)
+      ? String(normalized)
+      : pythonFederalDefendantsFloatRepr(normalized);
+  } else {
+    rawValue =
+      proof.rawValue === null
+        ? "null"
+        : jsonFederalDefendantsOracleString(proof.rawValue);
+  }
+  return `{"comment":${jsonFederalDefendantsOracleNullableString(
+    proof.comment,
+  )},"dataType":${jsonFederalDefendantsOracleString(
+    proof.dataType,
+  )},"formatted":${jsonFederalDefendantsOracleNullableString(
+    proof.formatted,
+  )},"formula":${jsonFederalDefendantsOracleNullableString(
+    proof.formula,
+  )},"numberFormat":${jsonFederalDefendantsOracleString(
+    proof.numberFormat,
+  )},"rawLexeme":${jsonFederalDefendantsOracleNullableString(
+    proof.rawLexeme,
+  )},"rawValue":${rawValue},"styleIndex":${proof.styleIndex}}`;
+}
+
 function sourceCoordinates(cell: TidyCell): {
   sheet: string;
   address: string;

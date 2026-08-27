@@ -31,6 +31,16 @@ import type {
   WorkbookParseResult,
 } from "./types.js";
 
+export type FederalDefendantsRawSourceProof = {
+  rawLexeme: string | null;
+  styleIndex: number;
+  numberFormat: string;
+};
+
+type FederalDefendantsProofCell = TidyCell & {
+  federalDefendantsRawSourceProof: FederalDefendantsRawSourceProof;
+};
+
 export const FEDERAL_DEFENDANTS_PATHOLOGICAL_WORKBOOK_DIGEST =
   "sha256:75ea565770a4234b1e67a187e2d277708038bcc8a04263a19ab646e339d196f0" as const;
 export const FEDERAL_DEFENDANTS_PATHOLOGICAL_WORKBOOK_BYTES = 212_799;
@@ -77,8 +87,254 @@ const MAX_BOUNDED_XML_CELLS = 100_000;
 const MAX_BOUNDED_XML_MERGES = 10_000;
 const MAX_TEST_AUTHORITY_CELLS = 10_000;
 
-const routes = [
+export const FEDERAL_DEFENDANTS_BOUNDED_ROUTES = [
   {
+    memberId: "2021-22-federal-offence-group-table-5",
+    workbookDigest:
+      "sha256:d789d903022183f7905fe5c2b9aa3b0be8421412e63150ef7ee305e259d3d6a7",
+    workbookBytes: 84_314,
+    physicalSheet: "Table 5",
+    authoritativeRange: "R1C1:R92C7",
+    a1Range: "A1:G92",
+    expectedWorksheetEntry: "xl/worksheets/sheet2.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2021-22-federal-offence-group-table-6",
+    workbookDigest:
+      "sha256:d789d903022183f7905fe5c2b9aa3b0be8421412e63150ef7ee305e259d3d6a7",
+    workbookBytes: 84_314,
+    physicalSheet: "Table 6",
+    authoritativeRange: "R1C1:R65C10",
+    a1Range: "A1:J65",
+    expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2021-22-federal-offence-group-table-7",
+    workbookDigest:
+      "sha256:d789d903022183f7905fe5c2b9aa3b0be8421412e63150ef7ee305e259d3d6a7",
+    workbookBytes: 84_314,
+    physicalSheet: "Table 7",
+    authoritativeRange: "R1C1:R93C9",
+    a1Range: "A1:I93",
+    expectedWorksheetEntry: "xl/worksheets/sheet4.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2021-22-federal-offence-group-table-8",
+    workbookDigest:
+      "sha256:d789d903022183f7905fe5c2b9aa3b0be8421412e63150ef7ee305e259d3d6a7",
+    workbookBytes: 84_314,
+    physicalSheet: "Table 8",
+    authoritativeRange: "R1C1:R64C9",
+    a1Range: "A1:I64",
+    expectedWorksheetEntry: "xl/worksheets/sheet5.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2021-22-national-table-1",
+    workbookDigest:
+      "sha256:98f9d61eb88c443370ef7d33c09aad6872fba569a3ce5cfcafed7e27f38f6a7e",
+    workbookBytes: 85_040,
+    physicalSheet: "Table 1",
+    authoritativeRange: "R1C1:R64C13",
+    a1Range: "A1:M64",
+    expectedWorksheetEntry: "xl/worksheets/sheet2.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2021-22-national-table-2",
+    workbookDigest:
+      "sha256:98f9d61eb88c443370ef7d33c09aad6872fba569a3ce5cfcafed7e27f38f6a7e",
+    workbookBytes: 85_040,
+    physicalSheet: "Table 2",
+    authoritativeRange: "R1C1:R60C13",
+    a1Range: "A1:M60",
+    expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2021-22-national-table-3",
+    workbookDigest:
+      "sha256:98f9d61eb88c443370ef7d33c09aad6872fba569a3ce5cfcafed7e27f38f6a7e",
+    workbookBytes: 85_040,
+    physicalSheet: "Table 3",
+    authoritativeRange: "R1C1:R74C9",
+    a1Range: "A1:I74",
+    expectedWorksheetEntry: "xl/worksheets/sheet4.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2021-22-national-table-4",
+    workbookDigest:
+      "sha256:98f9d61eb88c443370ef7d33c09aad6872fba569a3ce5cfcafed7e27f38f6a7e",
+    workbookBytes: 85_040,
+    physicalSheet: "Table 4",
+    authoritativeRange: "R1C1:R69C10",
+    a1Range: "A1:J69",
+    expectedWorksheetEntry: "xl/worksheets/sheet5.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-federal-offence-group-table-10",
+    workbookDigest:
+      "sha256:53f1ad72587a0769aef06d82b123b40f9ce921a6e2607e506b56853e848e4fed",
+    workbookBytes: 101_012,
+    physicalSheet: "Table 10",
+    authoritativeRange: "R1C1:R92C10",
+    a1Range: "A1:J92",
+    expectedWorksheetEntry: "xl/worksheets/sheet6.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-federal-offence-group-table-6",
+    workbookDigest:
+      "sha256:53f1ad72587a0769aef06d82b123b40f9ce921a6e2607e506b56853e848e4fed",
+    workbookBytes: 101_012,
+    physicalSheet: "Table 6",
+    authoritativeRange: "R1C1:R148C7",
+    a1Range: "A1:G148",
+    expectedWorksheetEntry: "xl/worksheets/sheet2.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-federal-offence-group-table-7",
+    workbookDigest:
+      "sha256:53f1ad72587a0769aef06d82b123b40f9ce921a6e2607e506b56853e848e4fed",
+    workbookBytes: 101_012,
+    physicalSheet: "Table 7",
+    authoritativeRange: "R1C1:R65C10",
+    a1Range: "A1:J65",
+    expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-federal-offence-group-table-8",
+    workbookDigest:
+      "sha256:53f1ad72587a0769aef06d82b123b40f9ce921a6e2607e506b56853e848e4fed",
+    workbookBytes: 101_012,
+    physicalSheet: "Table 8",
+    authoritativeRange: "R1C1:R92C10",
+    a1Range: "A1:J92",
+    expectedWorksheetEntry: "xl/worksheets/sheet4.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-federal-offence-group-table-9",
+    workbookDigest:
+      "sha256:53f1ad72587a0769aef06d82b123b40f9ce921a6e2607e506b56853e848e4fed",
+    workbookBytes: 101_012,
+    physicalSheet: "Table 9",
+    authoritativeRange: "R1C1:R64C10",
+    a1Range: "A1:J64",
+    expectedWorksheetEntry: "xl/worksheets/sheet5.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-national-table-1",
+    workbookDigest:
+      "sha256:1a952ec28789752ca7af0ad084545776c936dd0f3948dc0f6dd009528e14abf3",
+    workbookBytes: 95_984,
+    physicalSheet: "Table 1",
+    authoritativeRange: "R1C1:R64C14",
+    a1Range: "A1:N64",
+    expectedWorksheetEntry: "xl/worksheets/sheet2.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-national-table-2",
+    workbookDigest:
+      "sha256:1a952ec28789752ca7af0ad084545776c936dd0f3948dc0f6dd009528e14abf3",
+    workbookBytes: 95_984,
+    physicalSheet: "Table 2",
+    authoritativeRange: "R1C1:R59C14",
+    a1Range: "A1:N59",
+    expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-national-table-3",
+    workbookDigest:
+      "sha256:1a952ec28789752ca7af0ad084545776c936dd0f3948dc0f6dd009528e14abf3",
+    workbookBytes: 95_984,
+    physicalSheet: "Table 3",
+    authoritativeRange: "R1C1:R75C10",
+    a1Range: "A1:J75",
+    expectedWorksheetEntry: "xl/worksheets/sheet4.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-national-table-4",
+    workbookDigest:
+      "sha256:1a952ec28789752ca7af0ad084545776c936dd0f3948dc0f6dd009528e14abf3",
+    workbookBytes: 95_984,
+    physicalSheet: "Table 4",
+    authoritativeRange: "R1C1:R68C10",
+    a1Range: "A1:J68",
+    expectedWorksheetEntry: "xl/worksheets/sheet5.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2022-23-national-table-5",
+    workbookDigest:
+      "sha256:1a952ec28789752ca7af0ad084545776c936dd0f3948dc0f6dd009528e14abf3",
+    workbookBytes: 95_984,
+    physicalSheet: "Table 5",
+    authoritativeRange: "R1C1:R49C14",
+    a1Range: "A1:N49",
+    expectedWorksheetEntry: "xl/worksheets/sheet6.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2023-24-federal-offence-group-table-6",
+    workbookDigest:
+      "sha256:8e371130b71e5f8235ef67a1338f0bec56eac9c7d8e409173b59c84f757516b8",
+    workbookBytes: 84_056,
+    physicalSheet: "Table 6",
+    authoritativeRange: "R1C1:R98C7",
+    a1Range: "A1:G98",
+    expectedWorksheetEntry: "xl/worksheets/sheet2.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2023-24-federal-offence-group-table-7",
+    workbookDigest:
+      "sha256:8e371130b71e5f8235ef67a1338f0bec56eac9c7d8e409173b59c84f757516b8",
+    workbookBytes: 84_056,
+    physicalSheet: "Table 7",
+    authoritativeRange: "R1C1:R71C10",
+    a1Range: "A1:J71",
+    expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2023-24-federal-offence-group-table-8",
+    workbookDigest:
+      "sha256:8e371130b71e5f8235ef67a1338f0bec56eac9c7d8e409173b59c84f757516b8",
+    workbookBytes: 84_056,
+    physicalSheet: "Table 8",
+    authoritativeRange: "R1C1:R99C10",
+    a1Range: "A1:J99",
+    expectedWorksheetEntry: "xl/worksheets/sheet4.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2023-24-federal-offence-group-table-9",
+    workbookDigest:
+      "sha256:8e371130b71e5f8235ef67a1338f0bec56eac9c7d8e409173b59c84f757516b8",
+    workbookBytes: 84_056,
+    physicalSheet: "Table 9",
+    authoritativeRange: "R1C1:R69C10",
+    a1Range: "A1:J69",
+    expectedWorksheetEntry: "xl/worksheets/sheet5.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2023-24-national-table-1",
+    workbookDigest:
+      "sha256:75ea565770a4234b1e67a187e2d277708038bcc8a04263a19ab646e339d196f0",
+    workbookBytes: 212_799,
     physicalSheet: "Table 1",
     authoritativeRange: "R1C1:R69C15",
     a1Range: "A1:O69",
@@ -86,6 +342,10 @@ const routes = [
     excludedNonblankCellCount: 21,
   },
   {
+    memberId: "2023-24-national-table-2",
+    workbookDigest:
+      "sha256:75ea565770a4234b1e67a187e2d277708038bcc8a04263a19ab646e339d196f0",
+    workbookBytes: 212_799,
     physicalSheet: "Table 2",
     authoritativeRange: "R1C1:R64C15",
     a1Range: "A1:O64",
@@ -93,6 +353,10 @@ const routes = [
     excludedNonblankCellCount: 0,
   },
   {
+    memberId: "2023-24-national-table-3",
+    workbookDigest:
+      "sha256:75ea565770a4234b1e67a187e2d277708038bcc8a04263a19ab646e339d196f0",
+    workbookBytes: 212_799,
     physicalSheet: "Table 3",
     authoritativeRange: "R1C1:R86C10",
     a1Range: "A1:J86",
@@ -100,6 +364,10 @@ const routes = [
     excludedNonblankCellCount: 1_020,
   },
   {
+    memberId: "2023-24-national-table-4",
+    workbookDigest:
+      "sha256:75ea565770a4234b1e67a187e2d277708038bcc8a04263a19ab646e339d196f0",
+    workbookBytes: 212_799,
     physicalSheet: "Table 4",
     authoritativeRange: "R1C1:R74C10",
     a1Range: "A1:J74",
@@ -107,13 +375,118 @@ const routes = [
     excludedNonblankCellCount: 0,
   },
   {
+    memberId: "2023-24-national-table-5",
+    workbookDigest:
+      "sha256:75ea565770a4234b1e67a187e2d277708038bcc8a04263a19ab646e339d196f0",
+    workbookBytes: 212_799,
     physicalSheet: "Table 5",
     authoritativeRange: "R1C1:R56C15",
     a1Range: "A1:O56",
     expectedWorksheetEntry: "xl/worksheets/sheet6.xml",
     excludedNonblankCellCount: 0,
   },
+  {
+    memberId: "2024-25-federal-offence-group-table-6",
+    workbookDigest:
+      "sha256:e813cd80e101c4ade831dc5dbbf501beebbe05e3286b521a7c13ec99c5a4043d",
+    workbookBytes: 70_342,
+    physicalSheet: "Table 6",
+    authoritativeRange: "R1C1:R68C7",
+    a1Range: "A1:G68",
+    expectedWorksheetEntry: "xl/worksheets/sheet2.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-federal-offence-group-table-7",
+    workbookDigest:
+      "sha256:e813cd80e101c4ade831dc5dbbf501beebbe05e3286b521a7c13ec99c5a4043d",
+    workbookBytes: 70_342,
+    physicalSheet: "Table 7",
+    authoritativeRange: "R1C1:R70C10",
+    a1Range: "A1:J70",
+    expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-federal-offence-group-table-8",
+    workbookDigest:
+      "sha256:e813cd80e101c4ade831dc5dbbf501beebbe05e3286b521a7c13ec99c5a4043d",
+    workbookBytes: 70_342,
+    physicalSheet: "Table 8",
+    authoritativeRange: "R1C1:R67C10",
+    a1Range: "A1:J67",
+    expectedWorksheetEntry: "xl/worksheets/sheet4.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-federal-offence-group-table-9",
+    workbookDigest:
+      "sha256:e813cd80e101c4ade831dc5dbbf501beebbe05e3286b521a7c13ec99c5a4043d",
+    workbookBytes: 70_342,
+    physicalSheet: "Table 9",
+    authoritativeRange: "R1C1:R67C10",
+    a1Range: "A1:J67",
+    expectedWorksheetEntry: "xl/worksheets/sheet5.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-national-table-1",
+    workbookDigest:
+      "sha256:4977db0a41599562826cf6c8c98976cc78c8d5f56c9d4a5cb743313d248900e4",
+    workbookBytes: 81_804,
+    physicalSheet: "Table 1",
+    authoritativeRange: "R1C1:R66C16",
+    a1Range: "A1:P66",
+    expectedWorksheetEntry: "xl/worksheets/sheet2.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-national-table-2",
+    workbookDigest:
+      "sha256:4977db0a41599562826cf6c8c98976cc78c8d5f56c9d4a5cb743313d248900e4",
+    workbookBytes: 81_804,
+    physicalSheet: "Table 2",
+    authoritativeRange: "R1C1:R81C10",
+    a1Range: "A1:J81",
+    expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-national-table-3",
+    workbookDigest:
+      "sha256:4977db0a41599562826cf6c8c98976cc78c8d5f56c9d4a5cb743313d248900e4",
+    workbookBytes: 81_804,
+    physicalSheet: "Table 3",
+    authoritativeRange: "R1C1:R65C16",
+    a1Range: "A1:P65",
+    expectedWorksheetEntry: "xl/worksheets/sheet4.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-national-table-4",
+    workbookDigest:
+      "sha256:4977db0a41599562826cf6c8c98976cc78c8d5f56c9d4a5cb743313d248900e4",
+    workbookBytes: 81_804,
+    physicalSheet: "Table 4",
+    authoritativeRange: "R1C1:R49C10",
+    a1Range: "A1:J49",
+    expectedWorksheetEntry: "xl/worksheets/sheet5.xml",
+    excludedNonblankCellCount: 0,
+  },
+  {
+    memberId: "2024-25-national-table-5",
+    workbookDigest:
+      "sha256:4977db0a41599562826cf6c8c98976cc78c8d5f56c9d4a5cb743313d248900e4",
+    workbookBytes: 81_804,
+    physicalSheet: "Table 5",
+    authoritativeRange: "R1C1:R58C16",
+    a1Range: "A1:P58",
+    expectedWorksheetEntry: "xl/worksheets/sheet6.xml",
+    excludedNonblankCellCount: 0,
+  },
 ] as const;
+
+const routes = FEDERAL_DEFENDANTS_BOUNDED_ROUTES;
 
 export type FederalDefendantsBoundedRoute = (typeof routes)[number];
 
@@ -135,9 +508,8 @@ export class FederalDefendantsBoundedWorkbookError extends Error {
 
 /**
  * Preflight a Federal workbook manifest before reading or parsing workbook
- * bytes. A source-context mismatch for any Federal grouped map is fatal. The
- * bounded route is available only to the one immutable pathological workbook
- * and its five committed sheet/range authorities.
+ * bytes. Every grouped Federal source must match one of the 36 immutable
+ * digest/length/sheet/range/worksheet-entry custody routes.
  */
 export function preflightFederalDefendantsWorkbookRoute(input: {
   source: FederalDefendantsSourceContext;
@@ -160,15 +532,20 @@ export function preflightFederalDefendantsWorkbookRoute(input: {
         "Federal source and execution context must match the exact declared raw workbook and requested sheet.",
     };
 
+  const workbookRoutes = routes.filter(
+    (candidate) => candidate.workbookDigest === source.sourceWorkbookDigest,
+  );
+  if (!workbookRoutes.length)
+    return {
+      ok: false,
+      code: "FEDERAL_BOUNDED_WORKBOOK_CUSTODY_MISMATCH",
+      stage: "source",
+      message: "The Federal workbook digest is outside immutable custody.",
+    };
   if (
-    source.sourceWorkbookDigest !==
-    FEDERAL_DEFENDANTS_PATHOLOGICAL_WORKBOOK_DIGEST
-  )
-    return { ok: true, bounded: false };
-
-  if (
-    input.declaredWorkbookBytes !==
-    FEDERAL_DEFENDANTS_PATHOLOGICAL_WORKBOOK_BYTES
+    workbookRoutes.some(
+      (candidate) => candidate.workbookBytes !== input.declaredWorkbookBytes,
+    )
   )
     return {
       ok: false,
@@ -177,7 +554,7 @@ export function preflightFederalDefendantsWorkbookRoute(input: {
       message: "The bounded Federal workbook byte length is not custodied.",
     };
 
-  const route = routes.find(
+  const route = workbookRoutes.find(
     (candidate) =>
       candidate.physicalSheet === source.physicalSheet &&
       candidate.authoritativeRange === source.authoritativeRange,
@@ -188,15 +565,15 @@ export function preflightFederalDefendantsWorkbookRoute(input: {
       code: "FEDERAL_BOUNDED_WORKBOOK_ROUTE_MISMATCH",
       stage: "source",
       message:
-        "The pathological Federal workbook is accepted only for its exact custodied sheet/range pairs.",
+        "The Federal workbook is accepted only for its exact custodied sheet/range pair.",
     };
   return { ok: true, bounded: true, route };
 }
 
 /**
- * Parse the exact custodied pathological Federal workbook directly from raw
- * OOXML into one bounded ParsedSheet. This never writes an execution workbook
- * or worksheet derivative and never instantiates ExcelJS worksheet geometry.
+ * Parse an exact custodied Federal workbook directly from raw OOXML into one
+ * bounded ParsedSheet. This never writes an execution workbook or worksheet
+ * derivative and never instantiates ExcelJS worksheet geometry.
  */
 export async function parseFederalDefendantsBoundedRawWorkbook(input: {
   bytes: Uint8Array;
@@ -228,7 +605,7 @@ export async function parseFederalDefendantsBoundedRawWorkbook(input: {
   const actualDigest = digestBytes(input.bytes);
   if (
     actualDigest !== input.declaredWorkbookDigest ||
-    actualDigest !== FEDERAL_DEFENDANTS_PATHOLOGICAL_WORKBOOK_DIGEST
+    actualDigest !== preflight.route.workbookDigest
   )
     throw new FederalDefendantsBoundedWorkbookError(
       "FEDERAL_BOUNDED_WORKBOOK_DIGEST_MISMATCH",
@@ -347,7 +724,11 @@ type WorksheetMetadata = {
 
 type StyleManager = {
   parseStream(stream: AsyncIterable<Uint8Array>): Promise<void>;
-  getStyleModel(index: number): Record<string, unknown> | undefined;
+  getStyleModel(index: number): Record<string, unknown> | null | undefined;
+};
+
+type FederalDefendantsStyleAuthority = {
+  numberFormats: string[];
 };
 
 type ContentTypes = {
@@ -484,7 +865,9 @@ async function parseBoundedRawXlsxSheet(
   const sharedStrings = commonEntries.has(SHARED_STRINGS_XML)
     ? parseSharedStrings(required(commonEntries, SHARED_STRINGS_XML), limits)
     : [];
-  const styleManager = await parseStyles(required(commonEntries, STYLES_XML));
+  const stylesBytes = required(commonEntries, STYLES_XML);
+  const styleAuthority = parseFederalDefendantsStyleAuthority(stylesBytes);
+  const styleManager = await parseStyles(stylesBytes);
   const hyperlinkTargets = hyperlinkRelationshipTargets(
     worksheetRelationships,
     worksheetEntry,
@@ -502,14 +885,17 @@ async function parseBoundedRawXlsxSheet(
     const parsed = parseA1Cell(raw.a1Address);
     const address = formatCell(parsed);
     const merge = mergeIndex.byAddress.get(address) ?? null;
-    const styleModel =
-      raw.styleId === null
-        ? undefined
-        : styleManager.getStyleModel(raw.styleId);
-    if (raw.styleId !== null && styleModel === undefined)
+    const styleIndex = raw.styleId ?? 0;
+    const numberFormat = styleAuthority.numberFormats[styleIndex];
+    const styleModel = styleManager.getStyleModel(styleIndex);
+    if (
+      numberFormat === undefined ||
+      styleModel === undefined ||
+      styleModel === null
+    )
       throw parseError(
         "FEDERAL_BOUNDED_STYLE_INVALID",
-        `Style ID ${raw.styleId} at ${raw.a1Address} is out of bounds.`,
+        `Style ID ${styleIndex} at ${raw.a1Address} is out of bounds.`,
       );
     const content = parseRawCell(
       raw,
@@ -519,11 +905,9 @@ async function parseBoundedRawXlsxSheet(
       sharedFormulaMasters,
     );
     const style =
-      raw.styleId === null || raw.styleId === 0
-        ? undefined
-        : summarizeBoundedStyle(styleModel);
+      styleIndex === 0 ? undefined : summarizeBoundedStyle(styleModel);
     const hyperlink = hyperlinks.get(address) ?? null;
-    const cell: TidyCell = {
+    const cell: FederalDefendantsProofCell = {
       sheet: route.physicalSheet,
       address,
       row: parsed.row,
@@ -541,6 +925,11 @@ async function parseBoundedRawXlsxSheet(
       hyperlink,
       style,
       merge,
+      federalDefendantsRawSourceProof: {
+        rawLexeme: raw.valueText,
+        styleIndex,
+        numberFormat,
+      },
     };
     if (isMeaningful(cell)) cells.set(address, cell);
   }
@@ -1336,6 +1725,190 @@ function parseComments(
   return comments;
 }
 
+const FEDERAL_DEFENDANTS_BUILTIN_NUMBER_FORMATS = new Map<number, string>([
+  [0, "General"],
+  [1, "0"],
+  [2, "0.00"],
+  [3, "#,##0"],
+  [4, "#,##0.00"],
+  [9, "0%"],
+  [10, "0.00%"],
+  [11, "0.00E+00"],
+  [12, "# ?/?"],
+  [13, "# ??/??"],
+  [14, "mm-dd-yy"],
+  [15, "d-mmm-yy"],
+  [16, "d-mmm"],
+  [17, "mmm-yy"],
+  [18, "h:mm AM/PM"],
+  [19, "h:mm:ss AM/PM"],
+  [20, "h:mm"],
+  [21, "h:mm:ss"],
+  [22, 'm/d/yy "h":mm'],
+  [37, "#,##0 ;(#,##0)"],
+  [38, "#,##0 ;[Red](#,##0)"],
+  [39, "#,##0.00 ;(#,##0.00)"],
+  [40, "#,##0.00 ;[Red](#,##0.00)"],
+  [45, "mm:ss"],
+  [46, "[h]:mm:ss"],
+  [47, "mmss.0"],
+  [48, "##0.0E+0"],
+  [49, "@"],
+]);
+const MAX_FEDERAL_DEFENDANTS_STYLES = 100_000;
+
+function parseFederalDefendantsStyleAuthority(
+  bytes: Buffer,
+): FederalDefendantsStyleAuthority {
+  const customFormats = new Map<number, string>();
+  const numberFormatIds: number[] = [];
+  const stack: string[] = [];
+  let numFmtsSeen = false;
+  let cellXfsSeen = false;
+  let declaredNumFmtCount: number | null = null;
+  let declaredCellXfCount: number | null = null;
+  const parser = xmlParser();
+  parser.on("opentag", (node) => {
+    const name = localName(node.name);
+    const parent = stack.at(-1);
+    stack.push(name);
+    if (name === "numFmts" && parent === "styleSheet") {
+      if (numFmtsSeen)
+        throw parseError(
+          "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+          "Styles contain duplicate numFmts collections.",
+        );
+      numFmtsSeen = true;
+      declaredNumFmtCount = parseFederalDefendantsStyleCount(
+        xmlAttribute(node, "count"),
+        "number format",
+      );
+      return;
+    }
+    if (name === "numFmt" && parent === "numFmts") {
+      const id = parseFederalDefendantsStyleId(
+        xmlAttribute(node, "numFmtId"),
+        "number format",
+      );
+      const formatCode = xmlAttribute(node, "formatCode");
+      if (!formatCode || customFormats.has(id))
+        throw parseError(
+          "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+          "A custom number format is empty or duplicates an ID.",
+        );
+      customFormats.set(id, formatCode);
+      if (customFormats.size > MAX_FEDERAL_DEFENDANTS_STYLES)
+        throw parseError(
+          "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+          "The custom number-format count exceeds the fixed bound.",
+        );
+      return;
+    }
+    if (name === "cellXfs" && parent === "styleSheet") {
+      if (cellXfsSeen)
+        throw parseError(
+          "FEDERAL_BOUNDED_STYLE_INVALID",
+          "Styles contain duplicate cellXfs collections.",
+        );
+      cellXfsSeen = true;
+      declaredCellXfCount = parseFederalDefendantsStyleCount(
+        xmlAttribute(node, "count"),
+        "cell style",
+      );
+      return;
+    }
+    if (name === "xf" && parent === "cellXfs") {
+      const rawId = xmlAttribute(node, "numFmtId") ?? "0";
+      numberFormatIds.push(
+        parseFederalDefendantsStyleId(rawId, "cell style number format"),
+      );
+      if (numberFormatIds.length > MAX_FEDERAL_DEFENDANTS_STYLES)
+        throw parseError(
+          "FEDERAL_BOUNDED_STYLE_INVALID",
+          "The cell-style count exceeds the fixed bound.",
+        );
+    }
+  });
+  parser.on("closetag", () => {
+    stack.pop();
+  });
+  parseXml(parser, bytes);
+  if (
+    !cellXfsSeen ||
+    declaredCellXfCount !== numberFormatIds.length ||
+    numberFormatIds.length === 0 ||
+    numberFormatIds[0] !== 0
+  )
+    throw parseError(
+      "FEDERAL_BOUNDED_STYLE_INVALID",
+      "The cellXfs count or required General style zero is missing or inconsistent.",
+    );
+  if (
+    (numFmtsSeen && declaredNumFmtCount !== customFormats.size) ||
+    (!numFmtsSeen && customFormats.size !== 0)
+  )
+    throw parseError(
+      "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      "The numFmts count is missing or inconsistent.",
+    );
+  const numberFormats = numberFormatIds.map((id) => {
+    const numberFormat =
+      customFormats.get(id) ??
+      FEDERAL_DEFENDANTS_BUILTIN_NUMBER_FORMATS.get(id);
+    if (numberFormat === undefined)
+      throw parseError(
+        "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+        `Cell style references unresolved number-format ID ${id}.`,
+      );
+    return numberFormat;
+  });
+  return { numberFormats };
+}
+
+function parseFederalDefendantsStyleCount(
+  raw: string | undefined,
+  kind: string,
+): number {
+  if (raw === undefined || !/^(0|[1-9][0-9]*)$/.test(raw))
+    throw parseError(
+      kind === "cell style"
+        ? "FEDERAL_BOUNDED_STYLE_INVALID"
+        : "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      `The ${kind} count is invalid.`,
+    );
+  const value = Number(raw);
+  if (!Number.isSafeInteger(value) || value > MAX_FEDERAL_DEFENDANTS_STYLES)
+    throw parseError(
+      kind === "cell style"
+        ? "FEDERAL_BOUNDED_STYLE_INVALID"
+        : "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      `The ${kind} count exceeds the fixed bound.`,
+    );
+  return value;
+}
+
+function parseFederalDefendantsStyleId(
+  raw: string | undefined,
+  kind: string,
+): number {
+  if (raw === undefined || !/^(0|[1-9][0-9]*)$/.test(raw))
+    throw parseError(
+      kind.startsWith("cell style")
+        ? "FEDERAL_BOUNDED_STYLE_INVALID"
+        : "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      `The ${kind} ID is invalid.`,
+    );
+  const value = Number(raw);
+  if (!Number.isSafeInteger(value) || value > MAX_FEDERAL_DEFENDANTS_STYLES)
+    throw parseError(
+      kind.startsWith("cell style")
+        ? "FEDERAL_BOUNDED_STYLE_INVALID"
+        : "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      `The ${kind} ID exceeds the fixed bound.`,
+    );
+  return value;
+}
+
 async function parseStyles(bytes: Buffer): Promise<StyleManager> {
   // StylesXform parses its own stream rather than using parseXml below, so run
   // the identical fatal UTF-8 and forbidden declaration gate first.
@@ -1488,8 +2061,8 @@ function expandHyperlinks(
   // consequently drops it when reconciling individual cells. This bounded
   // parser instead retains the exact parsed raw range until here, then attaches
   // its target to every in-authority cell. Cumulative cardinality is checked
-  // before allocation. The five immutable production routes currently contain
-  // only single-cell refs; range behavior is explicitly regression-tested.
+  // before allocation. Identical overlapping declarations are idempotent;
+  // conflicting targets for one cell remain fatal.
   const result = new Map<string, string>();
   let expansion = 0;
   for (const entry of entries) {
@@ -1516,10 +2089,11 @@ function expandHyperlinks(
     for (let row = startRow; row <= endRow; row += 1)
       for (let col = startCol; col <= endCol; col += 1) {
         const address = formatCell({ row, col });
-        if (result.has(address))
+        const existing = result.get(address);
+        if (existing !== undefined && existing !== target)
           throw parseError(
             "FEDERAL_BOUNDED_DUPLICATE_HYPERLINK",
-            `Duplicate hyperlink at ${address}.`,
+            `Conflicting duplicate hyperlink at ${address}.`,
           );
         result.set(address, target);
       }

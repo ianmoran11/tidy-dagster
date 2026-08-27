@@ -15,6 +15,8 @@ import {
   compileFederalDefendantsGroupedRecipeV1,
   digestFederalDefendantsBytes,
   digestFederalDefendantsCanonical,
+  digestFederalDefendantsEnvelopeV1,
+  digestFederalDefendantsOracleSourceProof,
   executeFederalDefendantsGroupedRecipeV1,
   FEDERAL_DEFENDANTS_GROUPED_EXECUTION_V1,
   FEDERAL_DEFENDANTS_GROUPED_RECIPE_V1,
@@ -30,15 +32,21 @@ import {
   parseFederalDefendantsGroupedSemanticMapV1,
   type FederalDefendantsGeometryAuthorityV1,
   type FederalDefendantsGroupedSemanticMapV1,
+  federalDefendantsTargetCellProof,
   type FederalTargetProvenance,
 } from "../src/catalog/federal-defendants-grouped-recipe-v1.js";
+import { formatCell, parseA1Cell } from "../src/address.js";
 import { parseSemanticTableMapJson } from "../src/catalog/semantic-map-v1.js";
 import { parseSemanticTableMapV2Json } from "../src/catalog/semantic-map-v2.js";
 import { parseTargetScopedSemanticMapV1 } from "../src/catalog/target-scoped-recipe-v02.js";
 import { rowsToCsv } from "../src/export/formatters.js";
 import type { PrototypeWorkerRequest } from "../src/protocol/prototype.js";
 import { runPrototypeAwareWorker } from "../src/protocol/prototypeSchema.js";
-import { parseWorkbook } from "../src/workbook/parseWorkbook.js";
+import type { WorkerLimits } from "../src/protocol/resourceLimits.js";
+import {
+  FEDERAL_DEFENDANTS_BOUNDED_ROUTES,
+  parseFederalDefendantsBoundedRawWorkbook,
+} from "../src/workbook/parseFederalDefendantsBoundedWorkbook.js";
 import type { ParsedSheet, TidyCell } from "../src/workbook/types.js";
 
 const roots: string[] = [];
@@ -50,11 +58,37 @@ afterEach(async () => {
 
 const fakeDigest = (digit: string) => `sha256:${digit.repeat(64)}`;
 
+type FederalProofCell = TidyCell & {
+  federalDefendantsRawSourceProof?: {
+    rawLexeme: string | null;
+    styleIndex: number;
+    numberFormat: string;
+  };
+};
+const federalCell = (value: TidyCell): FederalProofCell =>
+  value as FederalProofCell;
+
+const federalParserLimits: WorkerLimits = {
+  timeoutMs: 300_000,
+  maxInputBytes: 50_000_000,
+  maxOutputBytes: 50_000_000,
+  maxWorkbookCompressedBytes: 25_000_000,
+  maxZipEntries: 10_000,
+  maxZipEntryUncompressedBytes: 50_000_000,
+  maxZipTotalUncompressedBytes: 200_000_000,
+  maxSheets: 256,
+  maxCells: 1_000_000,
+  maxMerges: 100_000,
+  maxMergeExpansionCells: 1_000_000,
+  maxSelectorCells: 1_000_000,
+  maxOutputRows: 1_000_000,
+};
+
 function cell(
   address: string,
   value: TidyCell["value"],
   extra: Partial<TidyCell> = {},
-): TidyCell {
+): FederalProofCell {
   const match = /^R(\d+)C(\d+)$/.exec(address)!;
   return {
     sheet: "Table 7",
@@ -70,6 +104,25 @@ function cell(
           : typeof value === "boolean"
             ? "boolean"
             : "string",
+    federalDefendantsRawSourceProof: {
+      rawLexeme:
+        value === null
+          ? null
+          : typeof value === "number"
+            ? String(value)
+            : typeof value === "string"
+              ? "0"
+              : value
+                ? "1"
+                : "0",
+      styleIndex: 0,
+      numberFormat:
+        typeof value === "number"
+          ? Number.isInteger(value)
+            ? "#,##0"
+            : "0.0"
+          : "General",
+    },
     ...extra,
   };
 }
@@ -470,6 +523,11 @@ function multiRowWestFixture(direction: "W" | "WNW") {
   const target = sheet.cells.find((entry) => entry.address === "R5C2")!;
   target.value = 2;
   target.data_type = "numeric";
+  federalCell(target).federalDefendantsRawSourceProof = {
+    rawLexeme: "2",
+    styleIndex: 0,
+    numberFormat: "#,##0",
+  };
   map.panels.find((entry) => entry.id === "current")!.selectors = [
     { range: "R4C2:R5C4" },
   ];
@@ -978,12 +1036,17 @@ async function realFixture() {
     semanticCellDigest: REAL_TABLE7_SEMANTIC_DIGEST,
     worksheetStructureDigest: REAL_TABLE7_STRUCTURE_DIGEST,
   });
-  const parsed = await parseWorkbook(bytes);
-  if (!parsed.ok) throw new Error(parsed.errors[0].message);
-  const sheet = parsed.workbook.sheets.find(
-    (entry) => entry.name === "Table 7",
-  )!;
   const map = realCanaryMap(digest);
+  const parsed = await parseFederalDefendantsBoundedRawWorkbook({
+    bytes,
+    source: map.source,
+    requestedSheet: "Table 7",
+    declaredWorkbookDigest: digest,
+    declaredWorkbookBytes: bytes.byteLength,
+    limits: federalParserLimits,
+  });
+  if (!parsed.ok) throw new Error(parsed.errors[0].message);
+  const sheet = parsed.workbook.sheets[0];
   const raw = `${JSON.stringify(map)}\n`;
   return { bytes, digest, sheet, map, raw };
 }
@@ -993,11 +1056,17 @@ async function commentStatusFixture() {
   const digest = `sha256:${createHash("sha256").update(bytes).digest("hex")}`;
   expect(bytes.byteLength).toBe(COMMENT_STATUS_WORKBOOK_BYTES);
   expect(digest).toBe(COMMENT_STATUS_WORKBOOK_DIGEST);
-  const parsed = await parseWorkbook(bytes);
+  const map = realCommentStatusMap(digest);
+  const parsed = await parseFederalDefendantsBoundedRawWorkbook({
+    bytes,
+    source: map.source,
+    requestedSheet: "Table 7",
+    declaredWorkbookDigest: digest,
+    declaredWorkbookBytes: bytes.byteLength,
+    limits: federalParserLimits,
+  });
   if (!parsed.ok) throw new Error(parsed.errors[0].message);
-  const sheet = parsed.workbook.sheets.find(
-    (entry) => entry.name === "Table 7",
-  )!;
+  const sheet = parsed.workbook.sheets[0];
   for (const address of commentStatusAddresses)
     expect(
       sheet.cells.find((entry) => entry.address === address),
@@ -1006,7 +1075,6 @@ async function commentStatusFixture() {
       data_type: "blank",
       comment: "not published\n",
     });
-  const map = realCommentStatusMap(digest);
   const raw = `${JSON.stringify(map)}\n`;
   return { bytes, digest, sheet, map, raw };
 }
@@ -1169,6 +1237,15 @@ describe("Federal Defendants grouped RecipeV1", () => {
     expect(execution.acceptanceAuthority).toBe(false);
     expect(execution.trainingEligibility).toBe(false);
     expect(execution.tables[0].rows).toHaveLength(5);
+    expect(result.envelope.recipe.targetProofs).toEqual(
+      execution.tables[0].trace.value_cells.map((entry) => entry.target),
+    );
+    expect(result.envelope.recipeDigest).toBe(
+      digestFederalDefendantsCanonical(result.envelope.recipe),
+    );
+    expect(result.envelope.envelopeDigest).toBe(
+      digestFederalDefendantsEnvelopeV1(result.envelope),
+    );
     expect(execution.tables[0].rows[0]).toMatchObject({
       "published value": 0,
       "published value numeric": 0,
@@ -1308,6 +1385,278 @@ describe("Federal Defendants grouped RecipeV1", () => {
         trustedEnvelopeDigest: firstResult.envelope.envelopeDigest,
       }),
     ).toThrow("FEDERAL_ENVELOPE_DIGEST_MISMATCH");
+  });
+
+  it("binds missing, duplicate, extra, and mutated target proofs into the recipe and envelope", () => {
+    const compiled = compile(baseMap());
+    expect(compiled.result.ok).toBe(true);
+    if (!compiled.result.ok) return;
+    const baseline = compiled.result.envelope;
+    const executeTampered = (mutate: (candidate: typeof baseline) => void) => {
+      const candidate = structuredClone(baseline);
+      mutate(candidate);
+      expect(candidate.recipe).not.toEqual(baseline.recipe);
+      expect(digestFederalDefendantsCanonical(candidate.recipe)).not.toBe(
+        baseline.recipeDigest,
+      );
+      expect(digestFederalDefendantsEnvelopeV1(candidate)).not.toBe(
+        baseline.envelopeDigest,
+      );
+      expect(() =>
+        executeFederalDefendantsGroupedRecipeV1(candidate, {
+          mapRaw: compiled.raw,
+          sheet: syntheticSheet(),
+          expectedExecutionWorkbookDigest: fakeDigest("1"),
+          expectedSourceWorkbookDigest: fakeDigest("1"),
+          trustedEnvelopeDigest: baseline.envelopeDigest,
+        }),
+      ).toThrow("FEDERAL_ENVELOPE_DIGEST_MISMATCH");
+    };
+    executeTampered((candidate) => {
+      candidate.recipe.targetProofs.pop();
+    });
+    executeTampered((candidate) => {
+      candidate.recipe.targetProofs[1] = structuredClone(
+        candidate.recipe.targetProofs[0],
+      );
+    });
+    executeTampered((candidate) => {
+      candidate.recipe.targetProofs.push(
+        structuredClone(candidate.recipe.targetProofs[0]),
+      );
+    });
+    for (const mutateProof of [
+      (proof: (typeof baseline.recipe.targetProofs)[number]) => {
+        proof.rawLexeme = `${proof.rawLexeme ?? ""}0`;
+      },
+      (proof: (typeof baseline.recipe.targetProofs)[number]) => {
+        proof.styleIndex += 1;
+      },
+      (proof: (typeof baseline.recipe.targetProofs)[number]) => {
+        proof.numberFormat = "General";
+      },
+      (proof: (typeof baseline.recipe.targetProofs)[number]) => {
+        proof.comment = "mutated\n";
+      },
+      (proof: (typeof baseline.recipe.targetProofs)[number]) => {
+        proof.formula = "1+1";
+      },
+      (proof: (typeof baseline.recipe.targetProofs)[number]) => {
+        proof.cellProofDigest = fakeDigest("9");
+      },
+    ])
+      executeTampered((candidate) => {
+        mutateProof(candidate.recipe.targetProofs[0]);
+      });
+  });
+
+  it("matches CPython Boundary-1 numeric JSON and round-half-even vectors", () => {
+    const vectors = [
+      {
+        value: 1e-7,
+        rawLexeme: "1e-7",
+        numberFormat: "General",
+        formatted: "1e-7",
+        comment: null,
+        digest:
+          "sha256:2e6aa4b5ef86235cfdb57b954e070b8fd753886faf0821e526a368162963d839",
+      },
+      {
+        value: 1e-6,
+        rawLexeme: "1e-6",
+        numberFormat: "General",
+        formatted: "1e-6",
+        comment: "Unicode Ω\n",
+        digest:
+          "sha256:86d4a5aa4205faf4f1ea4bad011651763e6526c9ca257dd5e74ee7861f9ff80f",
+      },
+      {
+        value: 2.5,
+        rawLexeme: "2.5",
+        numberFormat: "#,##0",
+        formatted: "2",
+        comment: null,
+        digest:
+          "sha256:3e4f31f55dcaed261d3eb3d99da9cc005267823f8cd4e8fc6c78685e83fc3175",
+      },
+      {
+        value: -2.5,
+        rawLexeme: "-2.5",
+        numberFormat: "#,##0",
+        formatted: "-2",
+        comment: null,
+        digest:
+          "sha256:bf13395bd1786db1746854eb5fff636cec97b2c3c9c216adbde93355f4d3cd94",
+      },
+      {
+        value: 1,
+        rawLexeme: "1.0",
+        numberFormat: "0.0",
+        formatted: "1.0",
+        expectedRawValue: 1,
+        comment: null,
+        digest:
+          "sha256:a5df970b74f8e5d2568e0d1a74bbf4274cee6154397e55ae5eb56a53ad019d31",
+      },
+      {
+        value: 1,
+        rawLexeme: "1e0",
+        numberFormat: "General",
+        formatted: "1e0",
+        expectedRawValue: 1,
+        comment: null,
+        digest:
+          "sha256:fa0bc7b81129d21710a5839ba552c75aca3c728b82e4bbf44ac321bbcaa7f9a1",
+      },
+      {
+        value: 1,
+        rawLexeme: "+1",
+        numberFormat: "General",
+        formatted: "+1",
+        expectedRawValue: 1,
+        comment: null,
+        digest:
+          "sha256:fc9ab4f4f1f60f6526e0cbbff0faa34a31ab431b416653ffb777709b9a06e49b",
+      },
+      {
+        value: -0,
+        rawLexeme: "-0.0",
+        numberFormat: "0.00",
+        formatted: "0.00",
+        expectedRawValue: 0,
+        comment: null,
+        digest:
+          "sha256:63da4f2fdde815eedc5d9e13dc8072d14a20c6f3c12d6e0d732272e3547674eb",
+      },
+      {
+        value: 1250.25,
+        rawLexeme: "1250.25",
+        numberFormat: "#,##0.0",
+        formatted: "1,250.2",
+        comment: null,
+        digest:
+          "sha256:d87c62bac5897dc2e21857403aedf6a713c00532f66d7d68d81ec4c5bb3160bb",
+      },
+      {
+        value: 1.25,
+        rawLexeme: "1.25",
+        numberFormat: "0.0",
+        formatted: "1.2",
+        comment: null,
+        digest:
+          "sha256:4d16aa68a75650ef2e6ca055d0da10eaeb1fea5700ffa3647485bc3795303bf0",
+      },
+      {
+        value: 1.235,
+        rawLexeme: "1.235",
+        numberFormat: "0.00",
+        formatted: "1.24",
+        comment: null,
+        digest:
+          "sha256:c704c30f81e28fd901496b44cbb3c781b0970604b401f7e373281c92ef228955",
+      },
+      {
+        value: 42,
+        rawLexeme: "42",
+        numberFormat: "0",
+        formatted: "42",
+        comment: null,
+        digest:
+          "sha256:0c977dfab736a6cdde909fb33006b96bac8b02a2998c2017e6cfe7edf3ede593",
+      },
+    ] as const;
+    for (const vector of vectors) {
+      const source = cell("R1C1", vector.value, { comment: vector.comment });
+      source.federalDefendantsRawSourceProof = {
+        rawLexeme: vector.rawLexeme,
+        styleIndex: 7,
+        numberFormat: vector.numberFormat,
+      };
+      const proof = federalDefendantsTargetCellProof(source);
+      expect(proof.formatted, vector.rawLexeme).toBe(vector.formatted);
+      if ("expectedRawValue" in vector)
+        expect(proof.rawValue, vector.rawLexeme).toBe(vector.expectedRawValue);
+      expect(proof.cellProofDigest, vector.rawLexeme).toBe(vector.digest);
+      const {
+        rawValue,
+        rawLexeme,
+        dataType,
+        formula,
+        formatted,
+        comment,
+        styleIndex,
+        numberFormat,
+      } = proof;
+      expect(
+        digestFederalDefendantsOracleSourceProof({
+          rawValue,
+          rawLexeme,
+          dataType,
+          formula,
+          formatted,
+          comment,
+          styleIndex,
+          numberFormat,
+        }),
+      ).toBe(vector.digest);
+    }
+
+    for (const [value, rawLexeme] of [
+      [1, "0x1"],
+      [1, "++1"],
+      [1, "2"],
+      [Number.MAX_SAFE_INTEGER + 1, "9007199254740992"],
+      [1e16, "1e16"],
+      [1, "1e999"],
+    ] as const) {
+      const source = cell("R1C1", value);
+      source.federalDefendantsRawSourceProof!.rawLexeme = rawLexeme;
+      expect(() => federalDefendantsTargetCellProof(source)).toThrow(
+        "FEDERAL_TARGET_SOURCE_NUMERIC_PROOF_INVALID",
+      );
+    }
+    const invalidUnicode = cell("R1C1", 1, { comment: "\ud800" });
+    expect(() => federalDefendantsTargetCellProof(invalidUnicode)).toThrow(
+      "FEDERAL_TARGET_SOURCE_STRING_PROOF_INVALID",
+    );
+  });
+
+  it("fails closed when target raw proof is absent, unsupported, or drifts after compilation", () => {
+    const baseline = compile(baseMap());
+    expect(baseline.result.ok).toBe(true);
+    if (!baseline.result.ok) return;
+    const baselineEnvelope = baseline.result.envelope;
+
+    const missing = syntheticSheet();
+    delete federalCell(missing.cells.find((cell) => cell.address === "R4C2")!)
+      .federalDefendantsRawSourceProof;
+    expect(compile(baseMap(), missing).result).toMatchObject({
+      ok: false,
+      code: "FEDERAL_TARGET_SOURCE_PROOF_MISSING",
+    });
+
+    const unsupported = syntheticSheet();
+    federalCell(
+      unsupported.cells.find((cell) => cell.address === "R4C2")!,
+    ).federalDefendantsRawSourceProof!.numberFormat = "0.000";
+    expect(compile(baseMap(), unsupported).result).toMatchObject({
+      ok: false,
+      code: "FEDERAL_TARGET_NUMBER_FORMAT_UNSUPPORTED",
+    });
+
+    const drifted = syntheticSheet();
+    federalCell(
+      drifted.cells.find((cell) => cell.address === "R4C2")!,
+    ).federalDefendantsRawSourceProof!.rawLexeme = "00";
+    expect(() =>
+      executeFederalDefendantsGroupedRecipeV1(baselineEnvelope, {
+        mapRaw: baseline.raw,
+        sheet: drifted,
+        expectedExecutionWorkbookDigest: fakeDigest("1"),
+        expectedSourceWorkbookDigest: fakeDigest("1"),
+        trustedEnvelopeDigest: baselineEnvelope.envelopeDigest,
+      }),
+    ).toThrow("FEDERAL_ENVELOPE_REPRODUCTION_MISMATCH");
   });
 
   it("requires complete target-level provenance and mutually rejects existing formats", () => {
@@ -1617,6 +1966,15 @@ describe("Federal Defendants grouped RecipeV1", () => {
     );
     expect(execution.geometryAuthorityDigest).toBe(map.geometryAuthorityDigest);
     expect(execution.tables[0].rows).toHaveLength(486);
+    expect(first.envelope.recipe.targetProofs).toEqual(
+      execution.tables[0].trace.value_cells.map((entry) => entry.target),
+    );
+    expect(first.envelope.recipeDigest).toBe(
+      digestFederalDefendantsCanonical(first.envelope.recipe),
+    );
+    expect(first.envelope.envelopeDigest).toBe(
+      digestFederalDefendantsEnvelopeV1(first.envelope),
+    );
     expect(execution.tables[0].rows[0]).toMatchObject({
       "principal federal offence group raw": "Aviation",
       "sex raw": "Males",
@@ -1981,6 +2339,175 @@ describe("Federal Defendants grouped RecipeV1", () => {
         trustedEnvelopeDigest: baseline.envelope.envelopeDigest,
       }),
     ).toThrow("FEDERAL_COMMENT_STATUS_AUTHORITY_MISMATCH");
+  });
+
+  it("matches all 18,793 digest-pinned oracle target proofs across all 36 routes deterministically", async () => {
+    const plan = JSON.parse(
+      await readFile(
+        path.resolve(
+          "fixtures/product-prototype/federal-defendants-semantic-plan-v1.json",
+        ),
+        "utf8",
+      ),
+    ) as {
+      members: Array<{
+        memberId: string;
+        sourcePath: string;
+        sourceDigest: string;
+        sourceByteLength: number;
+        sheet: string;
+        authoritativeRange: string;
+      }>;
+    };
+    expect(plan.members).toHaveLength(36);
+    expect(FEDERAL_DEFENDANTS_BOUNDED_ROUTES).toHaveLength(36);
+    let targetCount = 0;
+    let notPublishedCount = 0;
+    let npCount = 0;
+    let commentStatusCount = 0;
+    let zeroCount = 0;
+    let formulaCount = 0;
+    const runDigests: string[][] = [[], []];
+
+    for (const member of plan.members) {
+      const route = FEDERAL_DEFENDANTS_BOUNDED_ROUTES.find(
+        (candidate) => candidate.memberId === member.memberId,
+      );
+      expect(route, member.memberId).toBeDefined();
+      if (!route) continue;
+      expect(route).toMatchObject({
+        workbookDigest: member.sourceDigest,
+        workbookBytes: member.sourceByteLength,
+        physicalSheet: member.sheet,
+        a1Range: member.authoritativeRange,
+      });
+      const bytes = await readFile(
+        path.resolve("fixtures/product-prototype", member.sourcePath),
+      );
+      expect(bytes.byteLength).toBe(route.workbookBytes);
+      expect(digestFederalDefendantsBytes(bytes)).toBe(route.workbookDigest);
+      const oracle = JSON.parse(
+        await readFile(
+          path.resolve(
+            "fixtures/product-prototype/federal-defendants-source-coordinate-semantic-oracle-v1",
+            `${member.memberId}.json`,
+          ),
+          "utf8",
+        ),
+      ) as {
+        records: Array<{
+          sourceIdentity: { address: string };
+          sourceProof: {
+            rawValue: string | number | null;
+            rawLexeme: string | null;
+            dataType: "number" | "string" | "blank";
+            formula: string | null;
+            formatted: string | null;
+            comment: string | null;
+            styleIndex: number;
+            numberFormat: string;
+            cellProofDigest: string;
+          };
+          valueState: { valueStatus: string; markerSource: string | null };
+        }>;
+      };
+      for (let run = 0; run < 2; run += 1) {
+        const parsed = await parseFederalDefendantsBoundedRawWorkbook({
+          bytes,
+          source: {
+            version: FEDERAL_DEFENDANTS_SOURCE_CONTEXT_V1,
+            sourceWorkbookDigest: route.workbookDigest,
+            executionWorkbookDigest: route.workbookDigest,
+            physicalSheet: route.physicalSheet,
+            authoritativeRange: route.authoritativeRange,
+          },
+          requestedSheet: route.physicalSheet,
+          declaredWorkbookDigest: route.workbookDigest,
+          declaredWorkbookBytes: route.workbookBytes,
+          limits: federalParserLimits,
+        });
+        expect(parsed.ok, member.memberId).toBe(true);
+        if (!parsed.ok) continue;
+        const byAddress = new Map(
+          parsed.workbook.sheets[0].cells.map((entry) => [
+            entry.address,
+            entry,
+          ]),
+        );
+        const proofs = oracle.records.map((record) => {
+          const address = formatCell(
+            parseA1Cell(record.sourceIdentity.address),
+          );
+          const sourceCell = byAddress.get(address);
+          expect(sourceCell, `${member.memberId}:${address}`).toBeDefined();
+          if (!sourceCell) throw new Error("oracle source cell missing");
+          const actual = federalDefendantsTargetCellProof(sourceCell);
+          const {
+            rawValue,
+            rawLexeme,
+            dataType,
+            formula,
+            formatted,
+            comment,
+            styleIndex,
+            numberFormat,
+            cellProofDigest,
+          } = actual;
+          expect(
+            {
+              rawValue,
+              rawLexeme,
+              dataType,
+              formula,
+              formatted,
+              comment,
+              styleIndex,
+              numberFormat,
+              cellProofDigest,
+            },
+            `${member.memberId}:${address}`,
+          ).toEqual(record.sourceProof);
+          return cellProofDigest;
+        });
+        runDigests[run].push(digestFederalDefendantsCanonical(proofs));
+      }
+      targetCount += oracle.records.length;
+      notPublishedCount += oracle.records.filter(
+        (record) => record.valueState.valueStatus === "not-published",
+      ).length;
+      npCount += oracle.records.filter(
+        (record) => record.sourceProof.rawValue === "np",
+      ).length;
+      commentStatusCount += oracle.records.filter(
+        (record) =>
+          record.sourceProof.rawValue === null &&
+          record.sourceProof.comment === "not published\n" &&
+          record.valueState.markerSource === "cell-comment",
+      ).length;
+      zeroCount += oracle.records.filter(
+        (record) => record.sourceProof.rawValue === 0,
+      ).length;
+      formulaCount += oracle.records.filter(
+        (record) => record.sourceProof.formula !== null,
+      ).length;
+    }
+
+    expect(runDigests[1]).toEqual(runDigests[0]);
+    expect({
+      targetCount,
+      notPublishedCount,
+      npCount,
+      commentStatusCount,
+      zeroCount,
+      formulaCount,
+    }).toEqual({
+      targetCount: 18_793,
+      notPublishedCount: 54,
+      npCount: 46,
+      commentStatusCount: 8,
+      zeroCount: 3_378,
+      formulaCount: 0,
+    });
   });
 
   it("rejects malformed and node-oversized Federal maps before workbook parsing", async () => {

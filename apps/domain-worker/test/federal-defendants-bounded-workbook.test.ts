@@ -21,6 +21,7 @@ import { parseA1Cell, parseA1Range } from "../src/address.js";
 import {
   digestFederalDefendantsCanonical,
   encodeFederalPanelKeySourceValue,
+  federalDefendantsTargetCellProof,
   FEDERAL_DEFENDANTS_GEOMETRY_AUTHORITY_V1,
   FEDERAL_DEFENDANTS_GROUPED_SEMANTIC_MAP_V1,
   FEDERAL_DEFENDANTS_SOURCE_CONTEXT_V1,
@@ -37,6 +38,7 @@ import {
 import {
   FEDERAL_DEFENDANTS_BOUNDED_EXCLUSION_LEDGER_AUTHORITY_DIGEST,
   FEDERAL_DEFENDANTS_BOUNDED_EXCLUSION_LEDGER_BYTES_DIGEST,
+  FEDERAL_DEFENDANTS_BOUNDED_ROUTES,
   FEDERAL_DEFENDANTS_PATHOLOGICAL_WORKBOOK_BYTES,
   FEDERAL_DEFENDANTS_PATHOLOGICAL_WORKBOOK_DIGEST,
   FederalDefendantsBoundedWorkbookError,
@@ -45,7 +47,21 @@ import {
   preflightFederalDefendantsWorkbookRoute,
 } from "../src/workbook/parseFederalDefendantsBoundedWorkbook.js";
 import { parseWorkbook } from "../src/workbook/parseWorkbook.js";
-import type { ParsedSheet } from "../src/workbook/types.js";
+import type { ParsedSheet, TidyCell } from "../src/workbook/types.js";
+
+type FederalProofCell = TidyCell & {
+  federalDefendantsRawSourceProof?: {
+    rawLexeme: string | null;
+    styleIndex: number;
+    numberFormat: string;
+  };
+};
+
+function withoutFederalProof(cell: TidyCell): TidyCell {
+  const { federalDefendantsRawSourceProof: _proof, ...historical } =
+    cell as FederalProofCell;
+  return historical;
+}
 
 const rawWorkbookPath = path.resolve(
   "fixtures/product-prototype/workbooks/federal-defendants-australia-2023-24-national-source.xlsx",
@@ -802,6 +818,7 @@ describe("Federal Defendants bounded raw XLSX parser", () => {
     expect(
       direct.cells
         .filter((cell) => cell.address !== "R2C4" && cell.address !== "R2C5")
+        .map(withoutFederalProof)
         .map((cell) => ({ ...cell, comment: null })),
     ).toEqual(
       historical.cells.filter((cell) => cell.row <= 5 && cell.col <= 7),
@@ -907,7 +924,9 @@ describe("Federal Defendants bounded raw XLSX parser", () => {
     const full = await parseWorkbook(bytes);
     expect(full.ok).toBe(true);
     if (!full.ok) return;
-    expect(direct.cells).toEqual(full.workbook.sheets[0].cells);
+    expect(direct.cells.map(withoutFederalProof)).toEqual(
+      full.workbook.sheets[0].cells,
+    );
     expect(direct.cells.map((cell) => cell.value)).toEqual(["inline only", 7]);
   });
 
@@ -1114,7 +1133,7 @@ describe("Federal Defendants bounded raw XLSX parser", () => {
     const historical = full.workbook.sheets.find(
       (sheet) => sheet.name === "Table 7",
     )!;
-    expect(direct.cells).toEqual(
+    expect(direct.cells.map(withoutFederalProof)).toEqual(
       historical.cells.filter((cell) => cell.row <= 70 && cell.col <= 10),
     );
     expect(direct.merges).toEqual(
@@ -1208,7 +1227,7 @@ describe("Federal Defendants bounded raw XLSX parser", () => {
     ).toMatchObject({ ok: false, code: "FEDERAL_SOURCE_CONTEXT_MISMATCH" });
   });
 
-  it("leaves non-pathological Federal sources on the historical full-parser route", async () => {
+  it("routes every custodied Federal source through the bounded raw parser", async () => {
     const bytes = await readFile(ordinaryWorkbookPath);
     const digest = sha256(bytes);
     expect(
@@ -1224,7 +1243,107 @@ describe("Federal Defendants bounded raw XLSX parser", () => {
         declaredWorkbookDigest: digest,
         declaredWorkbookBytes: bytes.byteLength,
       }),
-    ).toEqual({ ok: true, bounded: false });
+    ).toMatchObject({
+      ok: true,
+      bounded: true,
+      route: {
+        workbookDigest: digest,
+        workbookBytes: bytes.byteLength,
+        physicalSheet: "Table 7",
+        authoritativeRange: "R1C1:R70C10",
+        expectedWorksheetEntry: "xl/worksheets/sheet3.xml",
+      },
+    });
+  });
+
+  it("pins all 36 member routes and rejects digest, length, sheet, and range drift", () => {
+    expect(FEDERAL_DEFENDANTS_BOUNDED_ROUTES).toHaveLength(36);
+    expect(
+      new Set(
+        FEDERAL_DEFENDANTS_BOUNDED_ROUTES.map((route) => route.workbookDigest),
+      ).size,
+    ).toBe(8);
+    for (const route of FEDERAL_DEFENDANTS_BOUNDED_ROUTES) {
+      const source = {
+        version: FEDERAL_DEFENDANTS_SOURCE_CONTEXT_V1,
+        sourceWorkbookDigest: route.workbookDigest,
+        executionWorkbookDigest: route.workbookDigest,
+        physicalSheet: route.physicalSheet,
+        authoritativeRange: route.authoritativeRange,
+      };
+      expect(
+        preflightFederalDefendantsWorkbookRoute({
+          source,
+          requestedSheet: route.physicalSheet,
+          declaredWorkbookDigest: route.workbookDigest,
+          declaredWorkbookBytes: route.workbookBytes,
+        }),
+        route.memberId,
+      ).toEqual({ ok: true, bounded: true, route });
+      expect(
+        preflightFederalDefendantsWorkbookRoute({
+          source,
+          requestedSheet: route.physicalSheet,
+          declaredWorkbookDigest: route.workbookDigest,
+          declaredWorkbookBytes: route.workbookBytes + 1,
+        }),
+      ).toMatchObject({
+        ok: false,
+        code: "FEDERAL_BOUNDED_WORKBOOK_LENGTH_MISMATCH",
+      });
+      expect(
+        preflightFederalDefendantsWorkbookRoute({
+          source: { ...source, authoritativeRange: "R1C1:R1C1" },
+          requestedSheet: route.physicalSheet,
+          declaredWorkbookDigest: route.workbookDigest,
+          declaredWorkbookBytes: route.workbookBytes,
+        }),
+      ).toMatchObject({
+        ok: false,
+        code: "FEDERAL_BOUNDED_WORKBOOK_ROUTE_MISMATCH",
+      });
+      expect(
+        preflightFederalDefendantsWorkbookRoute({
+          source,
+          requestedSheet: `${route.physicalSheet} drift`,
+          declaredWorkbookDigest: route.workbookDigest,
+          declaredWorkbookBytes: route.workbookBytes,
+        }),
+      ).toMatchObject({ ok: false, code: "FEDERAL_SOURCE_CONTEXT_MISMATCH" });
+    }
+    const unknownDigest = `sha256:${"f".repeat(64)}`;
+    expect(
+      preflightFederalDefendantsWorkbookRoute({
+        source: {
+          version: FEDERAL_DEFENDANTS_SOURCE_CONTEXT_V1,
+          sourceWorkbookDigest: unknownDigest,
+          executionWorkbookDigest: unknownDigest,
+          physicalSheet: "Table 1",
+          authoritativeRange: "R1C1:R1C1",
+        },
+        requestedSheet: "Table 1",
+        declaredWorkbookDigest: unknownDigest,
+        declaredWorkbookBytes: 1,
+      }),
+    ).toMatchObject({
+      ok: false,
+      code: "FEDERAL_BOUNDED_WORKBOOK_CUSTODY_MISMATCH",
+    });
+  });
+
+  it("keeps Federal raw proof metadata out of generic workbook parsing", async () => {
+    const parsed = await parseWorkbook(await readFile(ordinaryWorkbookPath));
+    expect(parsed.ok).toBe(true);
+    if (!parsed.ok) return;
+    expect(
+      parsed.workbook.sheets.some((sheet) =>
+        sheet.cells.some(
+          (cell) =>
+            (cell as FederalProofCell).federalDefendantsRawSourceProof !==
+            undefined,
+        ),
+      ),
+    ).toBe(false);
   });
 
   it("rejects an invalid bounded route before attempting to read workbook bytes", async () => {
@@ -1273,6 +1392,128 @@ describe("Federal Defendants bounded raw XLSX parser", () => {
       },
     });
     expect(await readdir(root.output)).toEqual([]);
+  });
+
+  it("validates exact style and number-format authority before ExcelJS normalization", async () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Data");
+    worksheet.getCell("A1").value = 1;
+    worksheet.getCell("A1").numFmt = "0.0";
+    worksheet.getCell("B1").value = 2;
+    const original = Buffer.from(await workbook.xlsx.writeBuffer());
+    const parse = (bytes: Buffer) =>
+      parseBoundedRawXlsxSheetForParity({
+        bytes,
+        physicalSheet: "Data",
+        authoritativeRange: "R1C1:R1C2",
+        limits,
+      });
+    const baseline = await parse(original);
+    expect(
+      (
+        baseline.cells.find(
+          (entry) => entry.address === "R1C2",
+        )! as FederalProofCell
+      ).federalDefendantsRawSourceProof,
+    ).toEqual({ rawLexeme: "2", styleIndex: 0, numberFormat: "General" });
+
+    const mutations: Array<{
+      entry: string;
+      mutate: (xml: string) => string;
+      code: string;
+    }> = [
+      {
+        entry: "xl/styles.xml",
+        mutate: (xml) =>
+          xml.replace(
+            /<cellXfs count="2">.*?<\/cellXfs>/,
+            '<cellXfs count="0"></cellXfs>',
+          ),
+        code: "FEDERAL_BOUNDED_STYLE_INVALID",
+      },
+      {
+        entry: "xl/styles.xml",
+        mutate: (xml) =>
+          xml.replace(
+            /(<cellXfs count="2">)<xf numFmtId="0"/,
+            '$1<xf numFmtId="164"',
+          ),
+        code: "FEDERAL_BOUNDED_STYLE_INVALID",
+      },
+      {
+        entry: "xl/worksheets/sheet1.xml",
+        mutate: (xml) => xml.replace('<c r="A1" s="1">', '<c r="A1" s="999">'),
+        code: "FEDERAL_BOUNDED_STYLE_INVALID",
+      },
+      {
+        entry: "xl/styles.xml",
+        mutate: (xml) =>
+          xml.replace(
+            /<xf numFmtId="164"([^>]*applyNumberFormat="1"[^>]*)\/>/,
+            '<xf numFmtId="999"$1/>',
+          ),
+        code: "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      },
+      {
+        entry: "xl/styles.xml",
+        mutate: (xml) =>
+          xml.replace(
+            '<numFmts count="1"><numFmt numFmtId="164" formatCode="0.0"/></numFmts>',
+            '<numFmts count="2"><numFmt numFmtId="164" formatCode="0.0"/><numFmt numFmtId="164" formatCode="0.00"/></numFmts>',
+          ),
+        code: "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      },
+      {
+        entry: "xl/styles.xml",
+        mutate: (xml) =>
+          xml.replace('<numFmts count="1">', '<numFmts count="100001">'),
+        code: "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      },
+      {
+        entry: "xl/styles.xml",
+        mutate: (xml) => xml.replace('numFmtId="164"', 'numFmtId="-1"'),
+        code: "FEDERAL_BOUNDED_NUMBER_FORMAT_INVALID",
+      },
+    ];
+    for (const mutation of mutations) {
+      const mutated = await mutateXlsxEntry(
+        original,
+        mutation.entry,
+        mutation.mutate,
+      );
+      await expect(parse(mutated), mutation.entry).rejects.toMatchObject({
+        code: mutation.code,
+        stage: "parse",
+      });
+    }
+  });
+
+  it("fails comment-relationship cells without worksheet cell proof closed", async () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Data");
+    worksheet.getCell("A1").value = null;
+    worksheet.getCell("A1").note = "not published\n";
+    const original = Buffer.from(await workbook.xlsx.writeBuffer());
+    const withoutCell = await mutateXlsxEntry(
+      original,
+      "xl/worksheets/sheet1.xml",
+      (xml) => xml.replace(/<c r="A1"[^>]*(?:\/>|>.*?<\/c>)/, ""),
+    );
+    const parsed = await parseBoundedRawXlsxSheetForParity({
+      bytes: withoutCell,
+      physicalSheet: "Data",
+      authoritativeRange: "R1C1:R1C1",
+      limits,
+    });
+    const commentCell = parsed.cells.find((entry) => entry.address === "R1C1");
+    expect(commentCell).toMatchObject({
+      value: null,
+      data_type: "blank",
+      comment: "not published\n",
+    });
+    expect(() => federalDefendantsTargetCellProof(commentCell!)).toThrow(
+      "FEDERAL_TARGET_SOURCE_PROOF_MISSING",
+    );
   });
 
   it("rejects mutated/malformed bytes and bounded resource under-runs atomically", async () => {
