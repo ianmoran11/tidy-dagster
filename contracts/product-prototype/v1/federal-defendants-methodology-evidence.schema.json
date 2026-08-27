@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://tidycell.dev/contracts/product-prototype/v1/federal-defendants-methodology-evidence.schema.json",
+  "title":"Federal Defendants pinned methodology evidence",
+  "type":"object","additionalProperties":false,
+  "required":["schemaVersion","publicationId","documents","claims"],
+  "properties":{
+    "schemaVersion":{"const":"tidy.federal-defendants-methodology-evidence/v1"},
+    "publicationId":{"const":"federal-defendants-australia"},
+    "documents":{"type":"array","minItems":2,"items":{"type":"object","additionalProperties":false,"required":["path","digest","byteLength","role"],"properties":{"path":{"type":"string","minLength":1},"digest":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"byteLength":{"type":"integer","minimum":1},"role":{"type":"string","minLength":1}}}},
+    "claims":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["claimId","value","evidenceDocument","exactExcerpt"],"properties":{"claimId":{"type":"string","pattern":"^[a-z0-9-]+$"},"value":{"type":["string","boolean"]},"evidenceDocument":{"type":"string","minLength":1},"exactExcerpt":{"type":"string","minLength":1}}}}
+  }
+}
